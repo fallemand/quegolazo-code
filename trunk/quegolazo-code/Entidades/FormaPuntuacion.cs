@@ -12,5 +12,7 @@ namespace Entidades
         public int ganado { get; set; }
         public int empatado { get; set; }
         public int perdido { get; set; }
+
+     
     }
 }

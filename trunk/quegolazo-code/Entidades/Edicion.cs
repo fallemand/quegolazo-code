@@ -10,12 +10,12 @@ namespace Entidades
     {
         public int idEdicion { get; set; }
         public string nombre { get; set; }
-        public int tiempoJuego { get; set; }
         public TamanioCancha tamanioCancha { get; set; }
         public FormaPuntuacion formaPuntuacion { get; set; }
         public TipoSuperficie tipoSuperficie { get; set; }
         public List<Fase> fases { get; set; }
         public Estado estado { get; set; }
         public List<Cancha> cancha { get; set; }
+        public Torneo torneo { get; set; }
     }
 }

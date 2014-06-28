@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AccesoADatos
 {
-    public class DAOCampeonato
+    class DAOTipoSuperficie
     {
     }
 }
