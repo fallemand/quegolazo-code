@@ -18,8 +18,8 @@ namespace AccesoADatos
         /// Obtiene todos los Torneos de un Usuario
         /// </summary>
         /// <parameters>id de Usuario</parameters>
-        /// <returns>Lista genérica de Campeonatos</returns>
-        public List<Torneo> obtenerTodos(int idUsuario)
+        /// <returns>Lista genérica de Torneos</returns>
+        public List<Torneo> obtenerTorneosDeUnUsuario(int idUsuario)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -44,7 +44,7 @@ namespace AccesoADatos
                 while (dr.Read())
                 {
                     int idTorneo = Int32.Parse(dr["idCampeonato"].ToString());
-                    Torneo t = buscarTorneoPorId(idTorneo);
+                    Torneo t = obtenerTorneoPorId(idTorneo);
                     campeonatos.Add(t);
                 }
 
@@ -65,7 +65,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idTorneo"> Id del Torneo que se quiere buscar </param>
         /// <returns>Un objeto Torneo, o null si no encuentra el Torneo.</returns>
-        public Torneo buscarTorneoPorId(int idTorneo)
+        public Torneo obtenerTorneoPorId(int idTorneo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -87,7 +87,8 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
                 cmd.CommandText = sql;
                 SqlDataReader dr = cmd.ExecuteReader();
-           
+
+                DAOUsuario gestorUsuario = new DAOUsuario();
              
                 while (dr.Read())
                 {
@@ -96,7 +97,7 @@ namespace AccesoADatos
                         idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         nick = dr["nick"].ToString(),
-                        usuario = obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
+                        usuario = gestorUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
                    
                     };
                 }
@@ -140,117 +141,5 @@ namespace AccesoADatos
 //            }
 //        }
 
-
-
-        /// <summary>
-        /// Busca un Usuario con un Id determinado en la base de datos.
-        /// </summary>
-        /// <param name="idUsuario"> Id del Usuario que se quiere buscar </param>
-        /// <returns>Un objeto Torneo, o null si no encuentra el Torneo.</returns>
-        public Usuario obtenerUsuarioPorId(int idUsuario)
-        {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();
-
-
-            Usuario  respuesta = null;
-            try
-            {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                    cmd.Connection = con;
-                }
-
-                string sql = @"SELECT *
-                                FROM Usuarios
-                                WHERE idUsuario = @idUsuario";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
-                cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
-
-
-                while (dr.Read())
-                {
-                    respuesta = new Usuario();
-                    respuesta.idUsuario = Int32.Parse(dr["idUsuario"].ToString());
-                    respuesta.nombre = dr["nombre"].ToString();
-                    respuesta.apellido = dr["apellido"].ToString();
-                    respuesta.email = dr["email"].ToString();
-                    respuesta.telefono = dr["telefono"].ToString();
-                    respuesta.contrasenia = dr["contrasenia"].ToString();
-
-                    if(dr["esActivo"].ToString().Equals("0"))
-                       respuesta.esActivo = false;
-                    else
-                       respuesta.esActivo = true;
-
-                    respuesta.codigo = dr["codigo"].ToString();
-                    int idTipoUsuario = Int32.Parse(dr["idTipoUsuario"].ToString());
-                    respuesta.tipoUsuario = obtenerTipoUsuarioPorId(idTipoUsuario);
-                        
-
-                }
-                return respuesta;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error al intentar recuperar el usuario: " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
-
-        public TipoUsuario obtenerTipoUsuarioPorId(int idTipoUsuario) 
-        {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();
-
-
-            TipoUsuario respuesta = null;
-            try
-            {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                    cmd.Connection = con;
-                }
-
-                string sql = @"SELECT *
-                                FROM TiposUsuario
-                                WHERE idTipoUsuario = @idTipoUsuario";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idTipoUsuario", idTipoUsuario);
-                cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
-
-
-                while (dr.Read())
-                {
-                    respuesta = new TipoUsuario()
-                    {
-                        idTipoUsuario = Int32.Parse(dr["idTipoUsuario"].ToString()),
-                        nombre = dr["nombre"].ToString(),
-                        
-                    };
-                }
-                return respuesta;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error al intentar recuperar el tipo de usuario: " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-
-        }
     }
 }

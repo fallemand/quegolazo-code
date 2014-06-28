@@ -160,6 +160,71 @@ namespace AccesoADatos
             
         }
 
+        /// <summary>
+        /// Busca un Usuario con un Id determinado en la base de datos.
+        /// </summary>
+        /// <param name="idUsuario"> Id del Usuario que se quiere buscar </param>
+        /// <returns>Un objeto Usuario, o null si no encuentra el Usuario.</returns>
+        public Usuario obtenerUsuarioPorId(int idUsuario)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+
+
+            Usuario usuario = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                string sql = @"SELECT *
+                                FROM Usuarios
+                                WHERE idUsuario = @idUsuario";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                cmd.CommandText = sql;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                DAOTipoUsuario gestorTipoUsuario = new DAOTipoUsuario();
+
+                while (dr.Read())
+                {
+                    usuario = new Usuario();
+                    usuario.idUsuario = Int32.Parse(dr["idUsuario"].ToString());
+                    usuario.nombre = dr["nombre"].ToString();
+                    usuario.apellido = dr["apellido"].ToString();
+                    usuario.email = dr["email"].ToString();
+                    usuario.telefono = dr["telefono"].ToString();
+                    usuario.contrasenia = dr["contrasenia"].ToString();
+
+                    if (dr["esActivo"].ToString().Equals("0"))
+                        usuario.esActivo = false;
+                    else
+                        usuario.esActivo = true;
+
+                    usuario.codigo = dr["codigo"].ToString();
+                    usuario.tipoUsuario = gestorTipoUsuario.obtenerTipoUsuarioPorId(Int32.Parse(dr["idTipoUsuario"].ToString()));
+
+
+                }
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al intentar recuperar el usuario: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+
 
     }
 }
