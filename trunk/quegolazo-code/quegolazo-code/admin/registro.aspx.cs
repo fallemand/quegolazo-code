@@ -13,5 +13,15 @@ namespace quegolazo_code.admin
         {
 
         }
+
+        protected void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            System.Threading.Thread.Sleep(5000);
+            bool registroExitoso = true;
+            if (registroExitoso)
+                panExito.Visible = true;
+            else
+                panFracaso.Visible = true;
+        }
     }
 }

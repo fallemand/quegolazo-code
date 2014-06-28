@@ -27,6 +27,10 @@ body {
   margin: 0 auto -192px; /* the bottom margin is the negative value of the footer's height */
 }
 
+.wrapper .container {
+    padding-bottom:30px;
+}
+
 /* unset bs3 setting */
 .modal-open {
  overflow: auto;

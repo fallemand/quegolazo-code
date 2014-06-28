@@ -69,6 +69,7 @@
     <Content Include="resources\fonts\flaticon.svg" />
     <Content Include="resources\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="resources\img\theme\body-bg.png" />
+    <Content Include="resources\img\theme\load.gif" />
     <Content Include="resources\img\theme\logo-default.png" />
     <Content Include="resources\img\theme\logo.png" />
     <Content Include="resources\img\theme\stripe.png" />
