@@ -13,6 +13,11 @@ namespace AccesoADatos
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
 
+        /// <summary>
+        /// Obtiene el Tipo Usuario por id de Tipo usuario
+        /// </summary>
+        /// <param name="idTipoUsuario">id de Tipo usuario que se desea buscar</param>
+        /// <returns>Un Objeto Tipo Usuario, o null sino lo encuentra</returns>
         public TipoUsuario obtenerTipoUsuarioPorId(int idTipoUsuario)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -59,5 +64,6 @@ namespace AccesoADatos
             }
 
         }
-    }
+
+     }
 }
