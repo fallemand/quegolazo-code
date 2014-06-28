@@ -8,31 +8,31 @@
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-              <input type="text" class="form-control" name="nombre" minlength="3" maxlength="60" required="true" placeholder="Nombre" />
+              <input type="text" runat="server" class="form-control" id="txtNombre"  minlength="3" maxlength="60" required="true" placeholder="Nombre" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-              <input type="text" class="form-control" name="apellido" minlength="3" maxlength="60" required="true" placeholder="Apellido" />
+              <input type="text" runat="server" class="form-control" id="txtApellido"  minlength="3" maxlength="60" required="true" placeholder="Apellido" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-              <input type="text" class="form-control" name="email" minlength="5" maxlength="60" required="true" placeholder="Email" />
+              <input type="text" runat="server" class="form-control" id="txtEmail"  minlength="5" mail="true" maxlength="60" required="true" placeholder="Email" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-              <input type="text" class="form-control" id="clave" name="clave" minlength="4" maxlength="20" required="true" placeholder="Contraseña" />
+              <input type="password" runat="server" class="form-control" id="txtClave"  minlength="4" maxlength="20" required="true" placeholder="Contraseña" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                <input type="text" class="form-control" name="repClave" minlength="4" maxlength="20" required="true" equalTo="#clave" placeholder="Repita Contraseña" />
+                <input type="password" runat="server" class="form-control"  minlength="4" maxlength="20" required="true" equalTo="#ContentAdmin_txtClave" placeholder="Repita Contraseña" />
             </div>
           </div>
           <div class="row margin-top">
@@ -63,8 +63,8 @@
                             <img src="/resources/img/theme/load.gif" class="img-responsive center-block"/>
                         </ProgressTemplate>
                     </asp:UpdateProgress>
-                    <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success" Visible="False"><strong>Se ha registrado con éxito!</strong> <br />Revise su casilla de correo para activar su cuenta</asp:Panel>
-                    <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False"><strong>Se ha registrado con éxito!</strong> Será redirigido al login en unos instantes</asp:Panel>
+                    <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success" Visible="False"><strong><asp:Literal ID="litMensaje" runat="server"></asp:Literal></strong> <br />Revise su casilla de correo para activar su cuenta</asp:Panel>
+                    <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False"><strong><asp:Literal ID="litError" runat="server"></asp:Literal></strong></asp:Panel>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </fieldset>

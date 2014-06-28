@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GestorDeArchivos.cs" />
+    <Compile Include="GestorMails.cs" />
     <Compile Include="OperacionesAccesoADatos.cs" />
     <Compile Include="GestorDropDownLists.cs" />
     <Compile Include="GestorColeccioness.cs" />
