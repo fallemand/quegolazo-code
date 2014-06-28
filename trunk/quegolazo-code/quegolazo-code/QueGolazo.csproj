@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\activar.usuario.aspx" />
     <Content Include="admin\index.aspx" />
     <Content Include="admin\login.aspx" />
     <Content Include="admin\mis-torneos.aspx" />
@@ -81,6 +82,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\activar.usuario.aspx.cs">
+      <DependentUpon>activar.usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\activar.usuario.aspx.designer.cs">
+      <DependentUpon>activar.usuario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\admin.Master.cs">
       <DependentUpon>admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
