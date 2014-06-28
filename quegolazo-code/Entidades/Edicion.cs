@@ -13,7 +13,7 @@ namespace Entidades
         public TamanioCancha tamanioCancha { get; set; }
         public FormaPuntuacion formaPuntuacion { get; set; }
         public TipoSuperficie tipoSuperficie { get; set; }
-        public List<Fase> fases { get; set; }
+       // public List<Fase> fases { get; set; }
         public Estado estado { get; set; }
         public List<Cancha> cancha { get; set; }
         public Torneo torneo { get; set; }
