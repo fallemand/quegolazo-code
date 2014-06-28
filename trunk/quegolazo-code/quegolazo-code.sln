@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quegolazo-code", "quegolazo-code\quegolazo-code.csproj", "{589F6508-62A6-4A2C-90D5-959B6AAF3B47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueGolazo", "quegolazo-code\QueGolazo.csproj", "{589F6508-62A6-4A2C-90D5-959B6AAF3B47}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
