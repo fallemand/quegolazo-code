@@ -121,7 +121,7 @@ namespace AccesoADatos
         private Entidades.Estado.enumAmbito obtenerAmbito(string ambito)
         {
             //seteamos la respuesta con cualquier valor
-            Estado.enumAmbito respuesta = Estado.enumAmbito.CAMPEONATO;
+            Estado.enumAmbito respuesta = Estado.enumAmbito.TORNEO;
             foreach (Estado.enumAmbito nombreDelEnumerado in Enum.GetValues(typeof(Estado.enumAmbito)))
             {
                 if (ambito.Equals(nombreDelEnumerado.ToString()))

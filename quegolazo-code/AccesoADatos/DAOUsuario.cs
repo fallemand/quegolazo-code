@@ -197,7 +197,6 @@ namespace AccesoADatos
                     usuario.nombre = dr["nombre"].ToString();
                     usuario.apellido = dr["apellido"].ToString();
                     usuario.email = dr["email"].ToString();
-                    usuario.telefono = dr["telefono"].ToString();
                     usuario.contrasenia = dr["contrasenia"].ToString();
 
                     if (dr["esActivo"].ToString().Equals("0"))

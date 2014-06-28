@@ -48,7 +48,7 @@ namespace AccesoADatos
                     {
                         idTamanioCancha = Int32.Parse(dr["idTamanioCancha"].ToString()),
                         nombre = dr["nombre"].ToString(),
-                        cantidadDeJugadores = Int32.Parse(dr["cantidadDeJugadores"].ToString())
+                        cantidadJugadores = Int32.Parse(dr["cantidadJugadores"].ToString())
 
                     };
                 }

@@ -98,7 +98,7 @@ namespace AccesoADatos
                 }
 
                 string sql = @"SELECT *
-                                FROM FormaPunteacion
+                                FROM FormasPuntuacion
                                 WHERE idFormaPuntuacion = @idFormaPuntuacion";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idFormaPuntuacion", idFormaPuntuacion);

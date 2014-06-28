@@ -18,6 +18,7 @@ namespace Entidades
         public enum enumNombre
         {
             REGISTRADO,
+            REGISTRADA,
             DIAGRAMADO,
             PROGRAMADA,
             INCOMPLETA,
@@ -31,7 +32,7 @@ namespace Entidades
         /// </summary>
         public enum enumAmbito
         {
-            PARTIDO, CAMPEONATO, FECHA, EDICION
+            PARTIDO, TORNEO, FECHA, EDICION
         }
     }
 }
