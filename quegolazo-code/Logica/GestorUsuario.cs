@@ -21,7 +21,7 @@ namespace Logica
         /// <param name="telefono"></param>
         /// <param name="contrasenia"></param>
         /// <returns>Usuario</returns>
-        public void registrarUsuario(string apellido, string nombre, string mail, string contrasenia)
+        public string registrarUsuario(string apellido, string nombre, string mail, string contrasenia)
         {
             try
             {
@@ -37,12 +37,13 @@ namespace Logica
 
                 DAOUsuario gestorBD = new DAOUsuario();
                 gestorBD.registrarUsuario(u);//guarda en la BD
+                return u.codigo;
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-
+            
             ;
         }
 
@@ -73,6 +74,29 @@ namespace Logica
             DAOUsuario gestorBD = new DAOUsuario();
             gestorBD.ActivarCuenta(IdUsuario);
         }
-         
+
+       /// <summary>
+       /// Metodo para crear co
+       /// </summary>
+       /// <param name="PasswordLength"></param>
+       /// <returns></returns>
+        public static string crearCodigo(int LargoClave)
+        {
+            string _allowedChars = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@$?";
+            Byte[] randomBytes = new Byte[LargoClave];
+            char[] chars = new char[LargoClave];
+            int allowedCharCount = _allowedChars.Length;
+
+            for (int i = 0; i < LargoClave; i++)
+            {
+                Random randomObj = new Random();
+                randomObj.NextBytes(randomBytes);
+                chars[i] = _allowedChars[(int)randomBytes[i] % allowedCharCount];
+            }
+
+            return new string(chars);
+        } 
+
+
     }
 }

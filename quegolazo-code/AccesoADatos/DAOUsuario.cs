@@ -32,8 +32,8 @@ namespace AccesoADatos
                     cmd.Connection = con;
                 }
 
-                string sql = @"INSERT INTO Usuarios (nombre, apellido, email, contrasenia, codigo, idTipoUsuario)
-                              VALUES (@nombre, @apellido, @email, @contrasenia, @codigo, @idTipoUsuario)";
+                string sql = @"INSERT INTO Usuarios (nombre, apellido, email, contrasenia, codigo, idTipoUsuario, esActivo)
+                              VALUES (@nombre, @apellido, @email, @contrasenia, @codigo, @idTipoUsuario, 0)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@nombre", usuarioNuevo.nombre));
                 cmd.Parameters.Add(new SqlParameter("@apellido", usuarioNuevo.apellido));
