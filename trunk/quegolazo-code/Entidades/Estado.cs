@@ -15,14 +15,21 @@ namespace Entidades
         /// <summary>
         /// Enumerado de nombres de estado, que corresponde a los nombres que se encuentran en los registros de la tabla Estados en la base de datos
         /// </summary>
-        enum enumNombre
+        public enum enumNombre
         {
+            REGISTRADO,
+            DIAGRAMADO,
+            PROGRAMADA,
+            INCOMPLETA,
+            COMPLETA,
+            JUGADO,
+            NO_JUGADO
             
         }
         /// <summary>
         /// Enumerado de ámbitos de estado, que corresponde a los ambitos que se encuentran en los registros de la tabla Estados en la base de datos
         /// </summary>
-        enum enumAmbito
+        public enum enumAmbito
         {
             PARTIDO, CAMPEONATO, FECHA, EDICION
         }
