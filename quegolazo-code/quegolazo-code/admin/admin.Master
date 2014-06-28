@@ -1,0 +1,153 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="admin.master.cs" Inherits="quegolazo_code.admin.admin" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Que Golazo! | Sistema de Gestión de Torneos de Fútbol</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/resources/css/bootstrap.css" />
+    <link rel="stylesheet" href="/resources/css/flaticon.css" />
+    <link rel="stylesheet" href="/resources/css/quegolazo.css" />
+    <link rel="shortcut icon" href="/resources/img/theme/favicon.ico" />
+    <!-- Archivos JavaScript -->
+    <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="/resources/js/messages_es_AR.js"></script>
+	<script type="text/javascript" src="/resources/js/file-input.min.js"></script>
+    <!-- Archivos JavaScript -->
+</head>
+<body>
+    <!-- Navbar superior -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Menú</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <img src="/resources/img/theme/logo.png" alt="logo" />
+            Que Golazo!
+          </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+          <p class="navbar-text">Bienvenido Gonzalo! <a class="dropdown-toggle badge" data-toggle="dropdown">3</a></p>
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <ul class="dropdown-menu">
+                <li><a href="#"><span class="glyphicon glyphicon-certificate"></span> Mis Torneos</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-certificate"></span> Mis Ediciones</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Mis Datos</a></li>
+              </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-cog"></span> Mi Cuenta <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><span class="glyphicon glyphicon-certificate"></span> Mis Torneos</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-certificate"></span> Mis Ediciones</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-user"></span> Mis Datos</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-info-sign"></span> Soporte <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Preguntas Frecuentes</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-comment"></span> Soporte</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="navbar-form navbar-right input-group-sm" role="search">
+              <div class="form-group">
+                <div class="col-xs-6 col-sm-6 col-md-9 nopadding-right">
+                  <input type="text" class="form-control input-sm" placeholder="Preguntas Frecuentes">
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <!-- Navbar superior -->
+
+     <!-- Contenido -->
+    <div class="wrapper bg-granulado">
+        <asp:ContentPlaceHolder ID="ContentAdmin" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        <div class="push"></div>
+    </div>
+    <!-- Contenido -->
+
+     <!-- Footer -->
+    <div class="footer">
+        <div class="footer-superior">
+            <div class="container">
+                <div class="col-md-2 col-md-offset-1">
+                    <h4>Que Golazo!</h4>
+                    <ul>
+                        <li><a href="javascript:;"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="javascript:;"><span class="glyphicon glyphicon-plus-sign"></span> Registrarse</a></li>
+                        <li><a href="javascript:;"><span class="glyphicon glyphicon-share-alt"></span> Ingresar</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h4>Nosotros</h4>
+                    <ul>
+                        <li><a href="javascript:;"><span class="glyphicon glyphicon-info-sign"></span> ¿Quienes Somos?</a></li>
+                        <li><a href="javascript:;"><span class="glyphicon glyphicon-briefcase"></span> Nuestros Servicios</a></li>
+                        <li><a href="javascript:;"><span class="glyphicon glyphicon-user"></span> Integrantes</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h4>Torneos</h4>
+                    <ul>
+                        <li><a href="javascript:;"><i class="flaticon-trophy4"></i> Listado de Torneos</a></li>
+                        <li><a href="javascript:;"><span class="flaticon-soccer18"></span> Listado de equipos</a></li>
+                        <li><a href="javascript:;"><span class="glyphicon glyphicon-stats"></span> Estadísticas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h4>Soporte y Ayuda</h4>
+                    <ul>
+                        <li><a href="javascript:;"><span class="glyphicon glyphicon-question-sign"></span> Preguntas Frecuentes</a></li>
+                        <li><a href="javascript:;"><span class="glyphicon glyphicon-plus-sign"></span> Realiza una pregunta</a></li>
+                        <li><a href="javascript:;"><span class="glyphicon glyphicon-facetime-video"></span> Video Tutoriales</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><span class="glyphicon glyphicon-home"></span> Hidalgo Palacios 7542</li>
+                        <li><span class="glyphicon glyphicon-earphone"></span> 0351-153160456</li>
+                        <li><span class="glyphicon glyphicon-envelope"></span> consultas@quegolazo.com</li>
+                        <li><a href="http://www.egrappler.com;"><span class="glyphicon glyphicon-cog"></span>Formulario de Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-inferior">
+            <div class="container">
+                <div class="pull-right"><a href="http://www.quegolazo.com/">Que Golazo!</a> | Todos los derechos reservados &copy; 2014 . </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+
+    <!-- Script -->
+    <script>
+        jQuery(document).ready(function () {
+            $('[rel="txtTooltip"]').tooltip();
+        });
+    </script>
+    <!-- Script -->
+  </body>
+</html>
