@@ -43,7 +43,7 @@ namespace AccesoADatos
 
                 while (dr.Read())
                 {
-                    int idTorneo = Int32.Parse(dr["idCampeonato"].ToString());
+                    int idTorneo = Int32.Parse(dr["idTorneo"].ToString());
                     Torneo t = obtenerTorneoPorId(idTorneo);
                     campeonatos.Add(t);
                 }
@@ -106,7 +106,7 @@ namespace AccesoADatos
             catch (Exception ex)
             {
 
-                throw new Exception("Error al intentar recuperar el campeonato: " + ex.Message);
+                throw new Exception("Error al intentar recuperar el torneo: " + ex.Message);
             }
             finally
             {

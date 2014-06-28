@@ -5,7 +5,9 @@
         <div class="row">
             <div class="container">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#registrarTorneo">Crear un Nuevo Torneo</button>
-                <div class="panel panel-default lista-torneos shadow-sm">
+                <asp:Repeater ID="rptTorneos" runat="server" OnItemDataBound="rptTorneosItemDataBound">
+                    <ItemTemplate>
+                        <div class="panel panel-default lista-torneos shadow-sm">
                     <div class="panel-heading header clearfix">
                         <div class="col-md-1">
                             <div class="thumbnail nomargin-bottom">
@@ -13,7 +15,7 @@
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <h3>Torneo Cuna Potrero</h3>
+                            <h3><%# Eval("nombre") %></h3>
                         </div>
                         <div class="col-md-6">
                             <div class="pull-right botones">
@@ -34,7 +36,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th class="col-md-1">Numero</th>
+                                    <th class="col-md-1">Número</th>
                                     <th class="col-md-4">Nombre</th>
                                     <th class="col-md-2">Tamaño</th>
                                     <th class="col-md-2">Superficie</th>
@@ -43,58 +45,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="en-curso">
-                                    <td>#4</td>
-                                    <td>Edición 2014 Categoría A</td>
-                                    <td>7vs7</td>
-                                    <td>Cesped Sintético</td>
-                                    <td>En Curso</td>
+                                <asp:Repeater ID="rptEdiciones" runat="server" >
+                                  <ItemTemplate>
+                                      <tr>
+                                        <td><%# Eval("idEdicion") %></td>
+                                        <td><%# Eval("nombre") %></td>
+                                        <td><%# Eval("tamanioCancha.nombre") %></td>
+                                        <td><%# Eval("tipoSuperficie.nombre") %></td>
+                                        <td><%# Eval("estado.nombre") %></td>
 
-                                    <td>
-                                        <a href="#" class="editar"><span class="glyphicon glyphicon-pencil" rel="txtTooltip" title="Editar Edición" data-toggle="tooltip" data-placement="top"></span></a>
-                                        <a href="#" class="editar"><span class="glyphicon glyphicon-remove eliminar" rel="txtTooltip" title="Eliminar Edición" data-toggle="tooltip" data-placement="top"></span></a>
-                                    </td>
-                                </tr>
-                                <tr class="en-curso">
-                                    <td>#3</td>
-                                    <td>Edición 2014 Categoría B</td>
-                                    <td>7vs7</td>
-                                    <td>Cesped Sintético</td>
-                                    <td>En Curso</td>
-
-                                    <td>
-                                        <a href="#" class="editar"><span class="glyphicon glyphicon-pencil" rel="txtTooltip" title="Editar Edición" data-toggle="tooltip" data-placement="top"></span></a>
-                                        <a href="#" class="editar"><span class="glyphicon glyphicon-remove eliminar" rel="txtTooltip" title="Eliminar Edición" data-toggle="tooltip" data-placement="top"></span></a>
-                                    </td>
-                                </tr>
-                                <tr class="finalizada">
-                                    <td>#2</td>
-                                    <td>Edición 2013 Categoría A</td>
-                                    <td>7vs7</td>
-                                    <td>Cesped Sintético</td>
-                                    <td>Finalizada</td>
-
-                                    <td>
-                                        <a href="#" class="editar"><span class="glyphicon glyphicon-pencil" rel="txtTooltip" title="Editar Edición" data-toggle="tooltip" data-placement="top"></span></a>
-                                        <a href="#" class="editar"><span class="glyphicon glyphicon-remove eliminar" rel="txtTooltip" title="Eliminar Edición" data-toggle="tooltip" data-placement="top"></span></a>
-                                    </td>
-                                </tr>
-                                <tr class="finalizada">
-                                    <td>#1</td>
-                                    <td>Edición 2013 Categoría B</td>
-                                    <td>7vs7</td>
-                                    <td>Cesped Sintético</td>
-                                    <td>Finalizada</td>
-
-                                    <td>
-                                        <a href="#" class="editar"><span class="glyphicon glyphicon-pencil" rel="txtTooltip" title="Editar Edición" data-toggle="tooltip" data-placement="top"></span></a>
-                                        <a href="#" class="editar"><span class="glyphicon glyphicon-remove eliminar" rel="txtTooltip" title="Eliminar Edición" data-toggle="tooltip" data-placement="top"></span></a>
-                                    </td>
-                                </tr>
+                                        <td>
+                                            <a href="#" class="editar"><span class="glyphicon glyphicon-pencil" rel="txtTooltip" title="Editar Edición" data-toggle="tooltip" data-placement="top"></span></a>
+                                            <a href="#" class="editar"><span class="glyphicon glyphicon-remove eliminar" rel="txtTooltip" title="Eliminar Edición" data-toggle="tooltip" data-placement="top"></span></a>
+                                        </td>
+                                    
+                                    </tr>
+                                  </ItemTemplate>
+                                      
+                                </asp:Repeater>
+                                
+                              
                             </tbody>
                         </table>
                     </div>
                 </div>
+                </ItemTemplate>
+              </asp:Repeater>
+                
             </div>
         </div>
     </div>
