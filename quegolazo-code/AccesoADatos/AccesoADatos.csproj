@@ -40,7 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAOCampeonato.cs" />
+    <Compile Include="DAOCancha.cs" />
+    <Compile Include="DAOEdicion.cs" />
+    <Compile Include="DAOEstado.cs" />
+    <Compile Include="DAOTipoSuperficie.cs" />
+    <Compile Include="DAOTipoUsuario.cs" />
     <Compile Include="DAOTorneo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

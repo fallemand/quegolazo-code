@@ -118,25 +118,27 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="torneoNuevo">El torneo que se va a registrar</param>
         /// <param name="usuario">El usuario al cual le pertenece el torneo</param>
-        public void registrarTorneo(Torneo torneoNuevo, Usuario usuario) { 
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();
-            try
-            {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                    cmd.Connection = con;
-                }
+//        public void registrarTorneo(Torneo torneoNuevo, Usuario usuario)
+//        {
+//            SqlConnection con = new SqlConnection(cadenaDeConexion);
+//            SqlCommand cmd = new SqlCommand();
+//            try
+//            {
+//                if (con.State == ConnectionState.Closed)
+//                {
+//                    con.Open();
+//                    cmd.Connection = con;
+//                }
 
-                string sql = @"INSERT INTO Torneos (nombre, descripcion
-                                    ";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
-                cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
-        
-        }  
+//                string sql = @"INSERT INTO Torneos (nombre, descripcion
+//                                    ";
+//                cmd.Parameters.Clear();
+//                cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
+//                cmd.CommandText = sql;
+//                SqlDataReader dr = cmd.ExecuteReader();
+
+//            }
+//        }
 
 
 

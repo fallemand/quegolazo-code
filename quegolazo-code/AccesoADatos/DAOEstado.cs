@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entidades
+namespace AccesoADatos
 {
-    public class TipoUsuario
+    class DAOEstado
     {
-        public int idTipoUsuario { get; set; }
-        public string nombre { get; set; }
-
     }
 }

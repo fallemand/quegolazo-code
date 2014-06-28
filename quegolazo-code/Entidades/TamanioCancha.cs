@@ -11,5 +11,6 @@ namespace Entidades
         public int idTamanioCancha { get; set; }
         public int cantidadDeJugadores { get; set; }
         public string nombre { get; set; }
+
     }
 }
