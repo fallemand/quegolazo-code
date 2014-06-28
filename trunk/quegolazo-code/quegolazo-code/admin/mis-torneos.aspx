@@ -107,8 +107,7 @@
                     <h4 class="modal-title" id="myModalLabel"><i class="flaticon-trophy5"></i>Registrar Nuevo Torneo</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal">
-                        <fieldset>
+                    <fieldset class="form-horizontal validationGroup">
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Nombre</label>
                                 <div class="col-lg-10">
@@ -118,7 +117,7 @@
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">URL</label>
                                 <div class="col-lg-10">
-                                    <input type="password" class="form-control" name="urlTorneo" placeholder="url-del-torneo">
+                                    <input type="text" class="form-control" name="urlTorneo"  minlength="3" maxlength="60" required="true" placeholder="url-del-torneo">
                                     <span class="help-block">Nombre de la url del torneo. No podrá cambiarlo. www.quegolazo.com/<b>url-del-torneo</b></span>
                                 </div>
                             </div>
@@ -150,13 +149,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </fieldset>
-                    </form>
+                    </fieldset>
                     <div id="panFracaso" class="alert alert-danger"><strong>Error</strong> Ya existe un torneo con esa url!</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success">Registrar</button>
+                    <button type="button" class="btn btn-success causesValidation">Registrar</button>
                 </div>
             </div>
         </div>
@@ -172,19 +170,18 @@
                     <h4 class="modal-title" id="H1"><i class="flaticon-trophy5"></i>Agregar Nueva Edición</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal">
-                        <fieldset>
+                    <fieldset class="validationGroup form-horizontal">
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Torneo</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" name="nombreTorneoEdicion" placeholder="Torneo Cuna Potrero" disabled>
+                                    <input type="text" class="form-control" name="nombreTorneoEdicion"  placeholder="Torneo Cuna Potrero" disabled>
                                     <span class="help-block">Torneo para el cual esta creando una nueva edición.</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Nombre</label>
                                 <div class="col-lg-10">
-                                    <input type="password" class="form-control" name="nombreEdicion" placeholder="Nombre de la Edición">
+                                    <input type="text" class="form-control" name="nombreEdicion" minlength="3" maxlength="60" required="true" placeholder="Nombre de la Edición">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -251,15 +248,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </fieldset>
-                    </form>
+                    </fieldset>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success">Registrar</button>
+                    <button type="button" class="btn btn-success causesValidation">Registrar</button>
                 </div>
             </div>
         </div>
-    </div>
+     </div>
     <!-- Modal Agregar Edicion -->
 </asp:Content>
