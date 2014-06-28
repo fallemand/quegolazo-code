@@ -46,7 +46,11 @@
     <Compile Include="DAOTipoSuperficie.cs" />
     <Compile Include="DAOTipoUsuario.cs" />
     <Compile Include="DAOTorneo.cs" />
+    <Compile Include="DAOUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
