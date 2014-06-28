@@ -31,7 +31,7 @@ namespace Logica
                     nombre = nombre,
                     email = mail,
                     contrasenia = encriptarContrasenia(contrasenia),
-                    codigo = "123456789",//Falta metodo para generar codigo único
+                    codigo = crearCodigo(),
                     tipoUsuario = new TipoUsuario { idTipoUsuario = 1, nombre = "Administrador" },
                 };
 
@@ -75,19 +75,21 @@ namespace Logica
             gestorBD.ActivarCuenta(IdUsuario);
         }
 
+
        /// <summary>
-       /// Metodo para crear co
+       /// Metodo para crear codigo de activación
+       /// autor=Flor
        /// </summary>
-       /// <param name="PasswordLength"></param>
+       /// <param name="Largo de la clave"></param>
        /// <returns></returns>
-        public static string crearCodigo(int LargoClave)
+        public static string crearCodigo()
         {
             string _allowedChars = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@$?";
-            Byte[] randomBytes = new Byte[LargoClave];
-            char[] chars = new char[LargoClave];
+            Byte[] randomBytes = new Byte[60];
+            char[] chars = new char[60];
             int allowedCharCount = _allowedChars.Length;
 
-            for (int i = 0; i < LargoClave; i++)
+            for (int i = 0; i < chars.Length; i++)
             {
                 Random randomObj = new Random();
                 randomObj.NextBytes(randomBytes);
