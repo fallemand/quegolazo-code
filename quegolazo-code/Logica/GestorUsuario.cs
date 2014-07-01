@@ -47,6 +47,7 @@ namespace Logica
             ;
         }
 
+
         /// <summary>
         /// Método para encriptar clave
         /// autor=Flor
@@ -69,10 +70,39 @@ namespace Logica
         /// </summary>
         /// <param name="claveSinencriptar"></param>
         /// <returns></returns>
-        public void activarUsuario(string codigo)
+        public int activarUsuario(string codigo)
+        {
+            try
+            {
+                DAOUsuario gestorBD = new DAOUsuario();
+                int idUsuario=gestorBD.ActivarCuenta(codigo);
+                return idUsuario;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+
+
+       /// <summary>
+       /// Metodo para obtener el usuario a partir del id
+       /// </summary>
+       /// <param name="idUsuario"></param>
+       /// <returns>Usuario</returns>
+        public Usuario obtenerUsuario(int idUsuario)
+        {
+            try
         {
             DAOUsuario gestorBD = new DAOUsuario();
-            gestorBD.ActivarCuenta(codigo);
+                Usuario usuario= gestorBD.obtenerUsuarioPorId(idUsuario);
+                return usuario;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
 
@@ -97,7 +127,7 @@ namespace Logica
             }
 
             return new string(chars);
-        }
+        } 
 
         /// <summary>
         /// Metodo para validar el usuario

@@ -20,6 +20,11 @@ namespace AccesoADatos
 
 
 
+      /// <summary>
+      /// autor=Flor
+      /// registra un nuevo usuario en la BD
+      /// </summary>
+      /// <param name="usuarioNuevo"></param>
         public void registrarUsuario(Usuario usuarioNuevo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -126,25 +131,37 @@ namespace AccesoADatos
 /// Metodo para activar cuenta
 /// autor: Flor
 /// </summary>
-/// <param name="IdUsuario"></param>
-        public void ActivarCuenta(int IdUsuario)
+/// <param name="codigo"></param>
+/// Retorna el id del usuario activado
+        public int ActivarCuenta(string codigo)
         {
            
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;
+
             try
             {
+                int idUsuario=0;
+
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
                     cmd.Connection = con;
                 }
 
-                if (IdUsuario != null)
-                {   
-                    string sql = "UPDATE Usuarios SET EsActivo=1 WHERE IdUsuario=@UserID";
+                if (codigo != string.Empty)
+                {
+                  
+                    trans = con.BeginTransaction();
+                    cmd.Connection = con;
+                    cmd.Transaction = trans;
+
+                    //Activación de Usuario
+                    string sql = @"UPDATE Usuarios SET EsActivo=1 
+                                    WHERE codigo=@UserCodigo";
                     cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@UserID", IdUsuario);
+                    cmd.Parameters.AddWithValue("@UserCodigo", codigo);
                     cmd.CommandText = sql;
 
                     if (con.State == ConnectionState.Closed)
@@ -152,16 +169,51 @@ namespace AccesoADatos
                         con.Open();
                     }
                     cmd.ExecuteNonQuery();
-                    
+
+
+                    //Obtener id de usuario
+                     sql = @"SELECT *
+                                FROM Usuarios
+                                WHERE codigo =@UserCodigo";
+                     cmd.CommandText = sql;
+                    SqlDataReader dr = cmd.ExecuteReader();
+                     while (dr.Read())
+                     {
+                         idUsuario= Int32.Parse(dr["idUsuario"].ToString());
+                     }
+                     dr.Close();
+
+                    //Borrar código de activación
+                    sql = @"UPDATE Usuarios SET codigo=@codigo
+                            WHERE idUsuario=@idUsuario";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@codigo", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@idUsuario",idUsuario);
+                    cmd.CommandText = sql;
+
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+                    cmd.ExecuteNonQuery();
+
+                    trans.Commit();
                 }
+                return idUsuario;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception("No se pudo activar su usuario. Comuníquese con nuestro soporte técnico.");
+                trans.Rollback();
+                throw new Exception("Ha ocurrido un problema y no se ha podido activar tu cuenta. Comunícate con nuestro soporte técnico.");
             }
             finally
             {
-                con.Close();
+
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                  
+                }
 
             }
             

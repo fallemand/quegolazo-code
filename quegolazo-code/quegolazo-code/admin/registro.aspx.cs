@@ -13,12 +13,15 @@ namespace quegolazo_code.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            ocultarPaneles();
         }
+
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             try{
+
+             ocultarPaneles();
 
             //Registro de usuario en bd
             GestorUsuario gestorUsuario = new GestorUsuario();
@@ -30,8 +33,8 @@ namespace quegolazo_code.admin
             string ActivationUrl = string.Empty;
             string mail=txtEmail.Value;
             string cuerpo=string.Empty;
-            //ActivationUrl = Server.HtmlEncode("http://www.gridovm.com/pedido-activarCuenta.aspx?UserCodigo=" + codigo);
-            ActivationUrl="www.google.com";
+            ActivationUrl = Server.HtmlEncode("http://localhost:12434/admin/activar.usuario.aspx?UserCode=" + codigo);
+            //ActivationUrl="www.google.com";
             cuerpo = "Gracias por registrarte en nuestro sistema de gestión de campeonatos <br />" +
                                   " Por favor, <a href='" + ActivationUrl + "'>haz click aquí</a> para activar tu cuenta y comenzar a disfrutar de nuestro servicio. <br />Que Golazo!";
 
@@ -39,7 +42,8 @@ namespace quegolazo_code.admin
             gestorMail.mandarMail(mail, "Activación de Cuenta", cuerpo);
 
             panExito.Visible = true;
-            litMensaje.Text = "Se resgistró exitosamente su usuario";
+            litMensaje.Text = "Se registró exitosamente su usuario.";
+            Response.AddHeader("REFRESH", "5;URL=login.aspx");
             }
             catch (Exception ex)
             {
@@ -49,5 +53,14 @@ namespace quegolazo_code.admin
             }
 
         }
+
+
+        private void ocultarPaneles()
+        {
+            panExito.Visible = false;
+            panFracaso.Visible = false;
+        }
+
+
     }
 }
