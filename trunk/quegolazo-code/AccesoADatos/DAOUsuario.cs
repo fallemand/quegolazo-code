@@ -225,5 +225,56 @@ namespace AccesoADatos
 
 
 
+        /// <summary>
+        /// Obtiene el usuario con ese mail y contraseña
+        /// </summary>
+        /// <parameters>email y contrasenia</parameters>
+        /// <returns>Usuario</returns>
+        public Usuario obtenerUsuarioPorEmailyContrasenia(string email, string contrasenia)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            Usuario usuario = null;
+            try
+            {
+                DAOTipoUsuario gestorTipoUsuario = new DAOTipoUsuario();
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+                string sql = @"SELECT * 
+                             FROM Usuarios
+                             WHERE email = @email AND contrasenia=@contrasenia";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@email", email));
+                cmd.Parameters.Add(new SqlParameter("@contrasenia", contrasenia));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    usuario = new Usuario()
+                    {
+                        nombre = dr["nombre"].ToString(),
+                        apellido = dr["apellido"].ToString(),
+                        email = dr["email"].ToString(),
+                        idUsuario = dr.GetInt32(dr.GetOrdinal("idUsuario")),
+                        tipoUsuario = gestorTipoUsuario.obtenerTipoUsuarioPorId(Int32.Parse(dr["idTipoUsuario"].ToString())),
+                        esActivo = bool.Parse(dr["esActivo"].ToString())
+                    };
+                }
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrio un error al obtener el usuario" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

@@ -62,6 +62,7 @@
     <Content Include="admin\login.aspx" />
     <Content Include="admin\mis-torneos.aspx" />
     <Content Include="admin\registro.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="resources\css\bootstrap.css" />
     <Content Include="resources\css\bootstrapValidator.css" />
     <Content Include="resources\css\flaticon.css" />
@@ -130,6 +131,9 @@
     </Compile>
     <Compile Include="admin\registro.aspx.designer.cs">
       <DependentUpon>registro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
