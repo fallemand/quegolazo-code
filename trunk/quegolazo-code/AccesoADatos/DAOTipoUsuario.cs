@@ -15,6 +15,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Obtiene el Tipo Usuario por id de Tipo usuario
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="idTipoUsuario">id de Tipo usuario que se desea buscar</param>
         /// <returns>Un Objeto Tipo Usuario, o null sino lo encuentra</returns>
@@ -60,7 +61,8 @@ namespace AccesoADatos
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
 
         }

@@ -16,6 +16,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Obtiene todos los Torneos de un Usuario
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <parameters>id de Usuario</parameters>
         /// <returns>Lista genérica de Torneos</returns>
@@ -85,6 +86,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Busca un Torneo con un Id determinado en la base de datos.
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="idTorneo"> Id del Torneo que se quiere buscar </param>
         /// <returns>Un objeto Torneo, o null si no encuentra el Torneo.</returns>
@@ -133,7 +135,8 @@ namespace AccesoADatos
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
         }
 

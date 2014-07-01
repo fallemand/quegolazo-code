@@ -15,6 +15,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Busca un TamanioCancha por su Id
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="idTamanioCancha">id del tamaño de cancha</param>
         /// <returns>objeto TamanioCancha, o null sino lo encuentra</returns>
@@ -61,7 +62,8 @@ namespace AccesoADatos
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
 
         }
@@ -69,6 +71,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Obtiene todas las canchas de una edición
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="idEdicion">id de la Edición</param>
         /// <returns>Lista de objeto Cancha, o null sino existen canchas de esa edición</returns>
@@ -118,7 +121,8 @@ namespace AccesoADatos
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
 
         }
