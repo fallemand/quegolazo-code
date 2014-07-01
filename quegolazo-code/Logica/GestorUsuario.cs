@@ -127,7 +127,7 @@ namespace Logica
             }
 
             return new string(chars);
-        } 
+        }
 
         /// <summary>
         /// Metodo para validar el usuario
@@ -137,7 +137,7 @@ namespace Logica
         /// <returns></returns>
         public Usuario validarUsuario(string email, string clave)
         {
-            clave=encriptarContrasenia(clave);
+            //clave=encriptarContrasenia(clave);
             DAOUsuario daoUsuario= new DAOUsuario();
             Usuario usuario= daoUsuario.obtenerUsuarioPorEmailyContrasenia(email, clave);
             if (usuario == null)
