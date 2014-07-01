@@ -97,8 +97,37 @@ namespace Logica
             }
 
             return new string(chars);
-        } 
+        }
 
+        /// <summary>
+        /// Metodo para validar el usuario
+        /// autor=Facu
+        /// </summary>
+        /// <param name="Largo de la clave"></param>
+        /// <returns></returns>
+        public Usuario validarUsuario(string email, string clave)
+        {
+            clave=encriptarContrasenia(clave);
+            DAOUsuario daoUsuario= new DAOUsuario();
+            Usuario usuario= daoUsuario.obtenerUsuarioPorEmailyContrasenia(email, clave);
+            if (usuario == null)
+                throw new Exception("No existe un usuario con ese email y contraseña");
+            if (usuario.esActivo == false)
+                throw new Exception("Debes activar tu cuenta para poder ingresar: <a href=''>Activar aquí</a>");
+            return usuario;
+        }
 
+        /// <summary>
+        /// Metodo para obtener los roles del suaruio
+        /// autor=Facu
+        /// </summary>
+        /// <param name="Largo de la clave"></param>
+        /// <returns></returns>
+        public string[] obtenerRolesDelUsuario(string email)
+        {
+            DAOUsuario daoUsuario=new DAOUsuario();
+            Usuario usuario = daoUsuario.buscarUsuarioPorEmail(email);
+            return new string[] { usuario.tipoUsuario.nombre };
+        }
     }
 }
