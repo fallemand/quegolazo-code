@@ -5,6 +5,7 @@
         <div class="row">
             <div class="container">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#registrarTorneo">Crear un Nuevo Torneo</button>
+                <asp:Label ID="lblMensajeTorneos" runat="server" Text=""></asp:Label>
                 <asp:Repeater ID="rptTorneos" runat="server" OnItemDataBound="rptTorneosItemDataBound">
                     <ItemTemplate>
                         <div class="panel panel-default lista-torneos shadow-sm">
@@ -44,7 +45,7 @@
                                     <th class="col-md-1"></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody>                               
                                 <asp:Repeater ID="rptEdiciones" runat="server" >
                                   <ItemTemplate>
                                       <tr>
@@ -60,13 +61,14 @@
                                         </td>
                                     
                                     </tr>
+                                                                        
                                   </ItemTemplate>
-                                      
-                                </asp:Repeater>
-                                
                               
+                                </asp:Repeater>
+                             
                             </tbody>
                         </table>
+                       <asp:Label ID="lblMensajeEdiciones" runat="server" Text=""></asp:Label>
                     </div>
                 </div>
                 </ItemTemplate>

@@ -18,18 +18,27 @@ namespace quegolazo_code.admin
         {
             if (!Page.IsPostBack)
             {
-                Usuario usuarioLogueado = null;
+               
+                try
+                {
+                    Usuario usuarioLogueado = null;
 
-                //if ((Usuario)Session["usuario"] != null)
-                // usuarioLogueado = (Usuario)Session["usuario"];
+                    //if ((Usuario)Session["usuario"] != null)
+                    // usuarioLogueado = (Usuario)Session["usuario"];
 
+
+                    gestorTorneo = new DAOTorneo();
+                    gestorEdicion = new DAOEdicion();
+
+                    //rptTorneos.DataSource = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
+                    rptTorneos.DataSource = gestorTorneo.obtenerTorneosDeUnUsuario(1003);
+                    rptTorneos.DataBind();
+                }
+                catch (Exception ex)
+                {
+                        lblMensajeTorneos.Text = ex.Message;
+                }
                 
-                gestorTorneo = new DAOTorneo();
-                gestorEdicion = new DAOEdicion();
-
-                //rptTorneos.DataSource = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
-                rptTorneos.DataSource = gestorTorneo.obtenerTorneosDeUnUsuario(2);
-                rptTorneos.DataBind();
                                                 
             }
 
@@ -41,13 +50,23 @@ namespace quegolazo_code.admin
         /// </summary>
           protected void rptTorneosItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            try
             {
-                Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
-                rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorIdTorneo(((Torneo)e.Item.DataItem).idTorneo);
-                rptEdiciones.DataBind();
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                {
+                    Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
+                    rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorIdTorneo(((Torneo)e.Item.DataItem).idTorneo);
+                    rptEdiciones.DataBind();
 
+                }
             }
+            catch (Exception ex)
+            {
+                Label lblMensajeEdiciones = (Label)e.Item.FindControl("lblMensajeEdiciones");
+                lblMensajeEdiciones.Text = ex.Message;
+            }
+              
+            
         }
     }
 }
