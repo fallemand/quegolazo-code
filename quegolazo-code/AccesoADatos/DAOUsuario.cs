@@ -172,9 +172,11 @@ namespace AccesoADatos
 
 
                     //Obtener id de usuario
-                     sql = @"SELECT *
+                     sql = @"SELECT idUsuario
                                 FROM Usuarios
-                                WHERE codigo =@UserCodigo";
+                                WHERE codigo=@UserCodigo";
+                     cmd.Parameters.Clear();
+                     cmd.Parameters.AddWithValue("@UserCodigo", codigo);
                      cmd.CommandText = sql;
                     SqlDataReader dr = cmd.ExecuteReader();
                      while (dr.Read())
