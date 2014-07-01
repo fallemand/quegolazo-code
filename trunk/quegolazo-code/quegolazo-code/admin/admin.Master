@@ -214,7 +214,6 @@
             //  event from triggering form submission.
             if (!isValid)
                 evt.preventDefault();
-
         }
         </script>
     <!-- Validar Form -->
@@ -224,6 +223,21 @@
         jQuery(document).ready(function () {
             $('[rel="txtTooltip"]').tooltip();
         });
+    </script>
+    <script type="text/javascript">
+        var pbControl = null;
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_beginRequest(BeginRequestHandler);
+        prm.add_endRequest(EndRequestHandler);
+        function BeginRequestHandler(sender, args) {
+            pbControl = args.get_postBackElement();  //the control causing the postback 
+            pbControl.disabled = true;
+            $("#ContentAdmin_panFracaso").hide();
+        }
+        function EndRequestHandler(sender, args) {
+            pbControl.disabled = false;
+            pbControl = null;
+        }
     </script>
     <!-- Script -->
     </form>
