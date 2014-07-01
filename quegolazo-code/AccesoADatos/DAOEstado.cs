@@ -15,6 +15,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Obtiene un estado de la base de datos
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="nombre">El nombre del estado</param>
         /// <param name="ambito">El ambito del estado</param>
@@ -60,12 +61,14 @@ namespace AccesoADatos
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
         }
 
         /// <summary>
         /// Obtiene un estado de la base de datos
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="idEstado">id del Estado</param>
         /// <returns>Un objeto de tipo Estado</returns>
@@ -109,12 +112,14 @@ namespace AccesoADatos
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
         }
 
         /// <summary>
         /// Devuelve el enumerado correspondiente al ambito del estado
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="ambito">El ambito del estado guardado en la base de datos</param>
         /// <returns>un objeto tipo Enum con el nombre del ambito</returns>

@@ -16,6 +16,7 @@ namespace AccesoADatos
 
       /// <summary>
         /// Obtiene una lista de ediciones de un determinado torneo
+        /// autor: Paula Pedrosa
       /// </summary>
       /// <param name="idTorneo">Id del torneo</param>
       /// <returns>Lista de Objeto Ediciones, o null sino existen ediciones de ese torneo</returns>
@@ -91,6 +92,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Busca una FormaPuntuacion por su id
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="idFormaPuntuacion">id de Forma puntuación</param>
         /// <returns>Objeto FormaPuntuacion, o null sino lo encuentra</returns>
@@ -135,7 +137,8 @@ namespace AccesoADatos
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
         }
     }

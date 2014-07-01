@@ -56,6 +56,12 @@ namespace AccesoADatos
 
         }
 
+        /// <summary>
+        /// Busca un Usuario con por un email determinado en la base de datos.
+        /// autor: Paula Pedrosa
+        /// </summary>
+        /// <param name="idUsuario"> Email del Usuario que se quiere buscar </param>
+        /// <returns>Un objeto Usuario, o null si no encuentra el Usuario.</returns>
         public Usuario buscarUsuarioPorEmail(string email)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -109,7 +115,8 @@ namespace AccesoADatos
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
         }
 
@@ -162,6 +169,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Busca un Usuario con un Id determinado en la base de datos.
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="idUsuario"> Id del Usuario que se quiere buscar </param>
         /// <returns>Un objeto Usuario, o null si no encuentra el Usuario.</returns>
@@ -218,7 +226,8 @@ namespace AccesoADatos
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
 
         }

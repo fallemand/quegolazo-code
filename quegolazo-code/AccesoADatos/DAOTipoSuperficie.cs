@@ -15,6 +15,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Ontiene un TipoSuperficie por su id
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="idTipoSuperficie">id del Tipo de Superficie</param>
         /// <returns>Un Objeto TipoSuperficie o null sino lo encuentra</returns>
@@ -60,7 +61,8 @@ namespace AccesoADatos
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
 
         }
