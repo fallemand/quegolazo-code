@@ -69,7 +69,7 @@
             </asp:UpdatePanel>
         </fieldset>
         <div class="center-block margin-top sub-login">
-          ¿Ya tenes una cuenta? - <a href="login.html" >Ingresar Aquí</a>
+          ¿Ya tenes una cuenta? - <a href="login.aspx" >Ingresar Aquí</a>
         </div>
       </div>
 </asp:Content>

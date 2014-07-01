@@ -4,11 +4,15 @@
     <div class="container">
         <div class="form-singin">
             <h2>Activación de Usuarios</h2>
-            <p>Activar el mail: facualle@hotmail.com</p>
-            <div id="panExito" class="alert alert-success"><strong>Exito!</strong> será redirigido al login en unos segundos</div>
-            <div id="panFracaso" class="alert alert-danger"><strong>Error</strong> Ya existe un torneo con esa url!</div>
+            <p>Tu cuenta es: <asp:Literal ID="LitEmail" runat="server"></asp:Literal></p>
+            <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success" Visible="False"><strong><asp:Literal ID="litMensaje" runat="server"></asp:Literal></strong> <br /></asp:Panel>
+            <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False"><strong><asp:Literal ID="litError" runat="server"></asp:Literal></strong></asp:Panel>
         </div>
 
+
+       
+
+         <asp:Panel ID="Panel1" runat="server" Visible="False">
         <fieldset class="form-singin validationGroup">
             <h2>Reenviar Activación</h2>
             <p>Si luego de unos minutos no recibe el mail de activación, busque en la carpeta de <strong>correo no deseado</strong> o <strong>spam</strong></p>
@@ -23,5 +27,11 @@
             <div id="Div1" class="alert alert-success"><strong>Exito!</strong> se ha enviado el mail de activación</div>
             <div id="Div2" class="alert alert-danger"><strong>Error</strong> Ya existe un torneo con esa url!</div>
         </fieldset>
+             </asp:Panel>
+
+          <div class="center-block margin-top sub-login">
+          Para ingresar a tu cuenta - <a href="login.aspx" >Haz click Aquí</a>
+        </div>
+
     </div>
 </asp:Content>
