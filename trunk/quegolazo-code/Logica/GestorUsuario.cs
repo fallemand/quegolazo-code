@@ -53,11 +53,11 @@ namespace Logica
         /// </summary>
         /// <param name="claveSinencriptar"></param>
         /// <returns></returns>
-        private string encriptarContrasenia(string claveSinencriptar)
+        public string encriptarContrasenia(string claveSinEncriptar)
         {
 
             string result = string.Empty;
-            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(claveSinencriptar);
+            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(claveSinEncriptar);
             result = Convert.ToBase64String(encryted);
             return result;
         }
@@ -69,10 +69,10 @@ namespace Logica
         /// </summary>
         /// <param name="claveSinencriptar"></param>
         /// <returns></returns>
-        public void activarUsuario(int IdUsuario)
+        public void activarUsuario(string codigo)
         {
             DAOUsuario gestorBD = new DAOUsuario();
-            gestorBD.ActivarCuenta(IdUsuario);
+            gestorBD.ActivarCuenta(codigo);
         }
 
 
