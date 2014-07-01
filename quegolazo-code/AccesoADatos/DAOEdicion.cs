@@ -27,6 +27,7 @@ namespace AccesoADatos
 
             List<Edicion> respuesta = new List<Edicion>();
             Edicion edicion = null;
+            bool b = false;
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -49,6 +50,12 @@ namespace AccesoADatos
                 DAOEstado gestorEstado = new DAOEstado();      
                 DAOTorneo gestorTorneo = new DAOTorneo();
 
+                if (!dr.HasRows)
+                {
+                    b = true;
+                    throw new Exception("No hay ediciones registradas");
+
+                }
 
                 while (dr.Read())
                 {
@@ -68,12 +75,16 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
+                if (!b)
+                    throw new Exception("Error al intentar recuperar las Ediciones de un Torneo: " + ex.Message);
+                else
+                    throw new Exception(ex.Message);
 
-                throw new Exception("Error al intentar recuperar las Ediciones de un Torneo: " + ex.Message);
             }
             finally
             {
-                con.Close();
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
 
         }

@@ -24,7 +24,10 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
-            List<Torneo> campeonatos = new List<Torneo>();
+            List<Torneo> torneos = new List<Torneo>();
+            Torneo respuesta = null;
+            
+            bool b = false;
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -41,22 +44,42 @@ namespace AccesoADatos
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
 
-                while (dr.Read())
+                if (!dr.HasRows)
                 {
-                    int idTorneo = Int32.Parse(dr["idTorneo"].ToString());
-                    Torneo t = obtenerTorneoPorId(idTorneo);
-                    campeonatos.Add(t);
+                    b = true;
+                    throw new Exception("No hay torneos registrados de ese usuario");
+                    
                 }
 
-                return campeonatos;
+                DAOUsuario gestorUsuario = new DAOUsuario();                
+                while (dr.Read())
+                {
+                    respuesta = new Torneo()
+                    {
+                        idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
+                        nombre = dr["nombre"].ToString(),
+                        nick = dr["nick"].ToString(),
+                        usuario = gestorUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
+
+                    };
+                    torneos.Add(respuesta);
+                    
+                }
+
+               
+                return torneos;
             }
             catch (Exception ex)
             {
-                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+                if(!b)
+                   throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+                else
+                    throw new Exception(ex.Message);
             }
             finally
             {
-                con.Close();
+               if(con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
         }
 
