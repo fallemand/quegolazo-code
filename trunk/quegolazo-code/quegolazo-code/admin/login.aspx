@@ -17,6 +17,7 @@
               <input type="password" id="txtContrasenia" class="form-control" placeholder="Contraseña" minlength="4" maxlength="20" required="true" runat="server" />
             </div>
           </div>
+          <div class="clearfix">
             <div class="col-xs-7">
               <label class="checkbox">
                 <input type="checkbox" id="noCerrarSesion" runat="server" /> No cerrar sesión
@@ -30,6 +31,7 @@
                     </ContentTemplate>
                  </asp:UpdatePanel>
             </div>
+           </div>
             <asp:UpdatePanel ID="pnlLoguear" runat="server">
                  <Triggers>
                     <asp:AsyncPostBackTrigger controlid="btnLoguearse" eventname="Click" />

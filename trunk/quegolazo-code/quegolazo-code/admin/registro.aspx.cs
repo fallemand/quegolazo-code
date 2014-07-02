@@ -28,12 +28,9 @@ namespace quegolazo_code.admin
             string mail=txtEmail.Value;
             string cuerpo=string.Empty;
             ActivationUrl = Server.HtmlEncode("http://localhost:12434/admin/activar.usuario.aspx?UserCode=" + codigo);
-            //ActivationUrl="www.google.com";
-            cuerpo = "Gracias por registrarte en nuestro sistema de gestión de campeonatos <br />" +
-                                  " Por favor, <a href='" + ActivationUrl + "'>haz click aquí</a> para activar tu cuenta y comenzar a disfrutar de nuestro servicio. <br />Que Golazo!";
 
             GestorMails gestorMail = new GestorMails();
-            gestorMail.mandarMail(mail, "Activación de Cuenta", cuerpo);
+            gestorMail.mandarMailActivacion(mail, "Activación de Cuenta", ActivationUrl);
 
             btnRegistrar.Enabled =false;
             panExito.Visible = true;

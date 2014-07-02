@@ -735,6 +735,9 @@ tr th:last-child {
 
 
 /*Alerts*/
+.alert {
+   margin-bottom: 8px;
+}
 .alert-success {
 background-color: #dff0d8;
 border-color: #d6e9c6;
