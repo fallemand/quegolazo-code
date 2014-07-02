@@ -20,7 +20,7 @@
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-              <input type="text" runat="server" class="form-control" id="txtEmail"  minlength="5" mail="true" maxlength="60" required="true" placeholder="Email" />
+              <input type="text" runat="server" class="form-control" id="txtEmail"  minlength="5" email="true" maxlength="60" required="true" placeholder="Email" />
             </div>
           </div>
           <div class="form-group">

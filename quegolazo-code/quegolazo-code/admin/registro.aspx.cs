@@ -13,21 +13,16 @@ namespace quegolazo_code.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ocultarPaneles();
         }
 
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             try{
-
-             ocultarPaneles();
-
+                ocultarPaneles();
             //Registro de usuario en bd
             GestorUsuario gestorUsuario = new GestorUsuario();
             string codigo= gestorUsuario.registrarUsuario(txtApellido.Value ,txtNombre.Value,txtEmail.Value,txtClave.Value);
-            
-
 
             //parámetros para mandar mail
             string ActivationUrl = string.Empty;
@@ -41,6 +36,7 @@ namespace quegolazo_code.admin
             GestorMails gestorMail = new GestorMails();
             gestorMail.mandarMail(mail, "Activación de Cuenta", cuerpo);
 
+            btnRegistrar.Enabled =false;
             panExito.Visible = true;
             litMensaje.Text = "Se registró exitosamente su usuario.";
             Response.AddHeader("REFRESH", "5;URL=login.aspx");
@@ -49,18 +45,14 @@ namespace quegolazo_code.admin
             {
                 panFracaso.Visible = true;
                 litError.Text = ex.Message;
-
             }
 
         }
-
 
         private void ocultarPaneles()
         {
             panExito.Visible = false;
             panFracaso.Visible = false;
         }
-
-
     }
 }
