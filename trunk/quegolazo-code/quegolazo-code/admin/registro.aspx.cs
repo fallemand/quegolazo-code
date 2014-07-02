@@ -15,7 +15,6 @@ namespace quegolazo_code.admin
         {
         }
 
-
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             try{
@@ -38,8 +37,7 @@ namespace quegolazo_code.admin
 
             btnRegistrar.Enabled =false;
             panExito.Visible = true;
-            litMensaje.Text = "Se registró exitosamente su usuario.";
-            Response.AddHeader("REFRESH", "5;URL=login.aspx");
+            litMensaje.Text = "<strong>Se registró exitosamente su usuario.</strong><br />Revise su casilla de correo para activar su cuenta";
             }
             catch (Exception ex)
             {
