@@ -27,6 +27,12 @@ body {
   margin: 0 auto -192px; /* the bottom margin is the negative value of the footer's height */
 }
 
+@media (max-width: 768px) {
+  .wrapper {
+		margin: 0 auto -39px; /* the bottom margin is the negative value of the footer's height */
+	}
+}
+
 #form1 {
   height: 100%;
 }
@@ -227,6 +233,12 @@ body {
 /* ---------------- Footer -------------------- */
 .footer, .push {
     height: 192px;
+}
+
+@media (max-width: 768px) {
+  .footer, .push {
+    height: 39px;
+  }
 }
 
 .footer {
