@@ -233,6 +233,7 @@
             pbControl = args.get_postBackElement();  //the control causing the postback 
             pbControl.disabled = true;
             $("#ContentAdmin_panFracaso").hide();
+            $("#ContentAdmin_panExito").hide();
         }
         function EndRequestHandler(sender, args) {
             pbControl.disabled = false;

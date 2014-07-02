@@ -27,6 +27,10 @@ body {
   margin: 0 auto -192px; /* the bottom margin is the negative value of the footer's height */
 }
 
+#form1 {
+  height: 100%;
+}
+
 .wrapper .container {
     padding-bottom:30px;
 }
@@ -322,6 +326,11 @@ body {
   color: #ffffff;
   background-color: #4F943F;
   border-color: #2b6e44;
+}
+
+.btn-success.disabled, .btn-success[disabled], fieldset[disabled] .btn-success, .btn-success.disabled:hover, .btn-success[disabled]:hover, fieldset[disabled] .btn-success:hover, .btn-success.disabled:focus, .btn-success[disabled]:focus, fieldset[disabled] .btn-success:focus, .btn-success.disabled:active, .btn-success[disabled]:active, fieldset[disabled] .btn-success:active, .btn-success.disabled.active, .btn-success[disabled].active, fieldset[disabled] .btn-success.active {
+    background-color: #5DA55A;
+    border-color:#579F43
 }
 
 /* --------------------- Márgenes ------------------------- */
