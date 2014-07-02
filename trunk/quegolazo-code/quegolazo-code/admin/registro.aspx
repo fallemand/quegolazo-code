@@ -36,20 +36,20 @@
             </div>
           </div>
             <div class="col-xs-7">
-              <div class="form-group">
-              <label class="checkbox nomargin-top">
+                <div class="form-group">
+                <label class="checkbox nomargin-top">
                 <input type="checkbox" id="cbTerminos" name="cbTerminos" required="true" value="remember-me" />
                     Acuerdo con los <a href="#">Términos y Condiciones</a>
-              </label>
+                </label>
                 </div>
             </div>
             <div class="col-xs-5">
-                 <asp:ScriptManager ID="MainScriptManager" runat="server" />
-                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <asp:ScriptManager ID="MainScriptManager" runat="server" />
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" OnClick="btnRegistrar_Click" CssClass="btn btn-success pull-right causesValidation" />
                     </ContentTemplate>
-                 </asp:UpdatePanel>
+                    </asp:UpdatePanel>
             </div>
           <asp:UpdatePanel ID="pnlRegistrar" runat="server">
                  <Triggers>
@@ -58,7 +58,9 @@
                 <ContentTemplate>
                     <asp:UpdateProgress runat="server" id="PageUpdateProgress">
                         <ProgressTemplate>
-                            <img src="/resources/img/theme/load.gif" class="img-responsive center-block"/>
+                            <div class="col-xs-12">
+                                    <img src="/resources/img/theme/load.gif" class="img-responsive center-block"/>
+                            </div>
                         </ProgressTemplate>
                     </asp:UpdateProgress>
                     <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success" Visible="False"><asp:Literal ID="litMensaje" runat="server"></asp:Literal></asp:Panel>

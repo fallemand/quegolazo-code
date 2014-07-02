@@ -37,7 +37,9 @@
                 <ContentTemplate>
                     <asp:UpdateProgress runat="server" id="PageUpdateProgress">
                         <ProgressTemplate>
-                            <img src="/resources/img/theme/load.gif" class="img-responsive center-block"/>
+                            <div class="col-xs-12">
+                                <img src="/resources/img/theme/load.gif" class="img-responsive center-block"/>
+                            </div>
                         </ProgressTemplate>
                     </asp:UpdateProgress>
                     <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success margin-top panelMensaje" Visible="False"><asp:Literal ID="litMensaje" runat="server"></asp:Literal> <br />Revise su casilla de correo para activar su cuenta</asp:Panel>
