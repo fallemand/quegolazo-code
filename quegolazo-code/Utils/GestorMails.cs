@@ -18,7 +18,7 @@ namespace Utils
         /// <param name="destinatario"></param>
         /// <param name="asunto"></param>
         /// <param name="cuerpo"></param>
-        public void mandarMail(string destinatario, string asunto, string cuerpo)
+        public void mandarMailActivacion(string destinatario, string asunto, string urlActivación)
         {
             MailMessage msg;
             string ActivationUrl = string.Empty;
@@ -29,7 +29,48 @@ namespace Utils
             //Receiver email address
             msg.To.Add(destinatario);
             msg.Subject = asunto;
-            msg.Body = cuerpo;
+            string body= @"
+                    <body bgcolor=""#f6f6f6"" style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; margin: 0; padding: 0;"">&#13;
+                    &#13;
+                    &#13;
+                    <table style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; width: 100%; margin: 0; padding: 20px;""><tr style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; color: #fff; display: block !important; max-width: 600px !important; clear: both !important; background-color: #60A64F; margin: 0 auto; padding: 15px 20px;"" bgcolor=""#60A64F""><td style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 18px; line-height: 1.6; margin: 0; padding: 0;"">Bienvenido a QueGolazo!</td></tr><tr style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;""><td bgcolor=""#FFFFFF"" style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto; padding: 10px 20px; border: 1px solid #f0f0f0;"">&#13;
+                    &#13;
+			        &#13;
+			        <div style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; max-width: 600px; display: block; margin: 0 auto; padding: 0;"">&#13;
+			        <table style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; width: 100%; margin: 0; padding: 0;""><tr style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;""><td style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;"">&#13;
+						        <p style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 5px; padding: 0;"">Has registrado una nueva cuenta en <a href=""http://www.quegolazo.com"" style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; color: #60A64F; margin: 0; padding: 0;"">QueGolazo.com</a></p>&#13;
+						        <p style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 5px; padding: 0;"">Para activar tu cuenta debes hacer clic en el enlace a continuación</p>&#13;
+						        <table style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; width: 100%; margin: 0; padding: 0;""><tr style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;""><td style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 10px 0;"">&#13;
+									        <p style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 5px; padding: 0;""><a href='";
+                    body+=urlActivación;
+                    body+=@"' style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 2; color: #FFF; text-decoration: none; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; background-color: #82b47b; margin: 0 10px 0 0; padding: 0; border-color: #82b47b; border-style: solid; border-width: 5px 10px;"">Activar Cuenta</a></p>&#13;
+								        </td>&#13;
+							        </tr></table><p style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; font-weight: normal; margin: 0 0 5px; padding: 0;"">Si tenes algún problema con botón, copiá el siguiente link: </p>&#13;
+						        <p style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 11px; line-height: 1.6; font-weight: normal; margin: 0 0 5px; padding: 0;"">";
+                    body+=urlActivación;
+                    body+=@" </p>&#13;
+					        </td>&#13;
+				        </tr></table></div>&#13;
+			        &#13;
+			        &#13;
+		            </td>&#13;
+		            <td style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;""></td>&#13;
+	                </tr></table><table style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; width: 100%; clear: both !important; margin: 0; padding: 0;""><tr style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;""><td style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;""></td>&#13;
+		            <td style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto; padding: 0;"">&#13;
+			        &#13;
+			        &#13;
+			        <div style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; max-width: 600px; display: block; margin: 0 auto; padding: 0;"">&#13;
+				        <table style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; width: 100%; margin: 0; padding: 0;""><tr style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;""><td align=""center"" style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;"">&#13;
+							        <p style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.6; color: #666; font-weight: normal; margin: 0 0 5px; padding: 0;"">No queres recibir más mails de QueGolazo? <a href="""" style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; color: #999; margin: 0; padding: 0;""><unsubscribe style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;"">Cancelar Subscripción</unsubscribe></a>.&#13;
+							        </p>&#13;
+						        </td>&#13;
+					        </tr></table></div>&#13;
+			        &#13;
+			        &#13;
+		            </td>&#13;
+		            <td style=""font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6; margin: 0; padding: 0;""></td>&#13;
+	                </tr></table></body>";
+            msg.Body =body;
             msg.IsBodyHtml = true;
             smtp.Port = 587;
             smtp.EnableSsl = true;

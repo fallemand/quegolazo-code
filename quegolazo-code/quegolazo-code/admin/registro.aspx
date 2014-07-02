@@ -35,6 +35,7 @@
                 <input type="password" runat="server" class="form-control"  minlength="4" maxlength="20" required="true" equalTo="#ContentAdmin_txtClave" placeholder="Repita Contraseña" />
             </div>
           </div>
+          <div class="clearfix">
             <div class="col-xs-7">
                 <div class="form-group">
                 <label class="checkbox nomargin-top">
@@ -51,6 +52,7 @@
                     </ContentTemplate>
                     </asp:UpdatePanel>
             </div>
+          </div>
           <asp:UpdatePanel ID="pnlRegistrar" runat="server">
                  <Triggers>
                     <asp:AsyncPostBackTrigger controlid="btnRegistrar" eventname="Click" />
