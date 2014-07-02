@@ -35,8 +35,7 @@
                 <input type="password" runat="server" class="form-control"  minlength="4" maxlength="20" required="true" equalTo="#ContentAdmin_txtClave" placeholder="Repita Contraseña" />
             </div>
           </div>
-          <div class="row margin-top">
-            <div class="col-md-6 col-md-offset-1">
+            <div class="col-xs-7">
               <div class="form-group">
               <label class="checkbox nomargin-top">
                 <input type="checkbox" id="cbTerminos" name="cbTerminos" required="true" value="remember-me" />
@@ -44,7 +43,7 @@
               </label>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-xs-5">
                  <asp:ScriptManager ID="MainScriptManager" runat="server" />
                  <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
@@ -52,7 +51,6 @@
                     </ContentTemplate>
                  </asp:UpdatePanel>
             </div>
-          </div>
           <asp:UpdatePanel ID="pnlRegistrar" runat="server">
                  <Triggers>
                     <asp:AsyncPostBackTrigger controlid="btnRegistrar" eventname="Click" />
