@@ -63,7 +63,7 @@
                             <img src="/resources/img/theme/load.gif" class="img-responsive center-block"/>
                         </ProgressTemplate>
                     </asp:UpdateProgress>
-                    <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success" Visible="False"><strong><asp:Literal ID="litMensaje" runat="server"></asp:Literal></strong> <br />Revise su casilla de correo para activar su cuenta</asp:Panel>
+                    <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success" Visible="False"><asp:Literal ID="litMensaje" runat="server"></asp:Literal></asp:Panel>
                     <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False"><strong><asp:Literal ID="litError" runat="server"></asp:Literal></strong></asp:Panel>
                 </ContentTemplate>
             </asp:UpdatePanel>

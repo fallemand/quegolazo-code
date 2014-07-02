@@ -22,7 +22,7 @@ namespace quegolazo_code.admin
 
                     LitEmail.Text = gestor.obtenerUsuario(idUsuario).email;
                     panExito.Visible = true;
-                    litMensaje.Text = "Tu cuenta ha sido activada.";
+                    litMensaje.Text = "Tu cuenta ha sido activada. <strong>Ingresa <a href='login.aspx'>Aquí</a></strong>";
 
 
                 }

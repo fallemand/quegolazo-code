@@ -21,18 +21,23 @@ namespace quegolazo_code.admin
         {
             try
             {
+                ocultarPaneles();
                 GestorUsuario gestorUsuario = new GestorUsuario();
                 Usuario u = gestorUsuario.validarUsuario(txtEmail.Value, txtContrasenia.Value);
                 Session["usuario"] = u;
                 FormsAuthentication.RedirectFromLoginPage(txtEmail.Value, noCerrarSesion.Checked);
-                panExito.Visible = true;
-                litMensaje.Text = "Usuario logueado con éxito";
             }
             catch (Exception ex)
             {
                 panFracaso.Visible = true;
                 litError.Text = ex.Message;
             }
+        }
+
+        private void ocultarPaneles()
+        {
+            panExito.Visible = false;
+            panFracaso.Visible = false;
         }
     }
 }
