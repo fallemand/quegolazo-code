@@ -143,7 +143,7 @@ namespace Logica
             if (usuario == null)
                 throw new Exception("No existe un usuario con ese email y contraseña");
             if (usuario.esActivo == false)
-                throw new Exception("Debes activar tu cuenta para poder ingresar: <a href=''>Activar aquí</a>");
+                throw new Exception("Debes activar tu cuenta para poder ingresar: <a href='activar.usuario.aspx'>Activar aquí</a>");
             return usuario;
         }
 
