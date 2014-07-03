@@ -142,7 +142,8 @@ namespace quegolazo_code.admin
               DAOTipoSuperficie gestorTipoSuperficie = new DAOTipoSuperficie();
               DAOEdicion gestorEdicion = new DAOEdicion();
               DAOTorneo gestorTorneo = new DAOTorneo();
-              DAOEstado gestorEstado = new DAOEstado();              
+              DAOEstado gestorEstado = new DAOEstado();
+              string idTorneo = btnRegistrarEdicion.CommandArgument.ToString();
               
               TamanioCancha tc = gestorCancha.obtenerTamanioCanchaPorId(Int32.Parse(ddlTamañoCancha.SelectedValue));
               TipoSuperficie ts = gestorTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(ddlTipoSuperficie.SelectedValue));
@@ -151,9 +152,12 @@ namespace quegolazo_code.admin
               int perdido = Int32.Parse(txtPuntosPorPerdes.Value);
               FormaPuntuacion fp = gestorEdicion.obtenerFormaPuntuacionPorGanadoEmpatadoPerdido(ganado, perdido, empatado);
               Estado e = gestorEstado.obtenerUnEstadoPorNombre("REGISTRADA", "EDICION");
-              Torneo t = gestorTorneo.obtenerTorneoPorNombreYUsuario("Los pibes", ((Usuario)Session["usuario"]).idUsuario);
+              
+              
+             
               //agrega siempre la edicion en ese torneo  
-            
+              Torneo t = gestorTorneo.obtenerTorneoPorNombreYUsuario("Los pibes", ((Usuario)Session["usuario"]).idUsuario);
+
               return new Edicion() { nombre = txtNombreEdicion.Value, tamanioCancha = tc , tipoSuperficie = ts, formaPuntuacion = fp, estado = e , torneo = t};
           }
 
@@ -179,6 +183,11 @@ namespace quegolazo_code.admin
                   panExito.Visible = false;
               }
 
+          }
+
+          protected void btnNuevaEdicion_Click(object sender, EventArgs e)
+          {
+              obtenerEdicionDelFormulario();
           }
 
        
