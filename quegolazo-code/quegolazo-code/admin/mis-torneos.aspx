@@ -171,13 +171,13 @@
                             <div class="form-group">
                                 <label for="select" class="col-lg-2 control-label">Tamaño</label>
                                 <div class="col-lg-10">
-                                    <asp:DropDownList ID="ddlTamañoCancha" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlTamañoCancha" runat="server" CssClass="form-control"></asp:DropDownList>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="select" class="col-lg-2 control-label">Superficie</label>
                                 <div class="col-lg-10">
-                                    <asp:DropDownList ID="ddlTipoSuperficie" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlTipoSuperficie" runat="server" CssClass="form-control"></asp:DropDownList>
                                 </div>
                             </div>
                             <div class="form-group">
