@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using AccesoADatos;
 using Entidades;
+using Utils;
 
 namespace quegolazo_code.admin
 {
@@ -13,7 +14,7 @@ namespace quegolazo_code.admin
     {
         private DAOTorneo gestorTorneo;
         private DAOEdicion gestorEdicion;
-
+        Usuario usuarioLogueado = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -21,8 +22,9 @@ namespace quegolazo_code.admin
                
                 try
                 {
-                    Usuario usuarioLogueado = null;
-
+                    
+                    panFracaso.Visible = false;
+                    panExito.Visible = false;
                     if ((Usuario)Session["usuario"] != null)
                     {
                         usuarioLogueado = (Usuario)Session["usuario"];
@@ -72,5 +74,45 @@ namespace quegolazo_code.admin
               
             
         }
+
+          protected void btnResgitrar_Click(object sender, EventArgs e)
+          {             
+         try 
+	       {	
+            GestorDeArchivos gestor = new GestorDeArchivos();
+            
+                DAOTorneo daoTorneo = new DAOTorneo();
+                Torneo torneoNuevo = obtenerTorneoDelFormulario();
+                torneoNuevo.idTorneo = daoTorneo.registrarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
+                if (imagenUpload.PostedFile.ContentLength > 0 && gestor.validarImagen(imagenUpload.PostedFile))
+                {  
+                gestor.guardarImagen(imagenUpload.PostedFile, Server.MapPath("/imagenes/torneos/"), torneoNuevo.idTorneo.ToString() +".png" );
+                }
+                panFracaso.Visible = false;
+                panExito.Visible = true;
+                txtUrlTorneo.Value = "";
+                txtNombreTorneo.Value = "";
+                txtDescripcion.Value = "";
+                rptTorneos.DataSource = daoTorneo.obtenerTorneosDeUnUsuario(((Usuario)Session["usuario"]).idUsuario);
+                rptTorneos.DataBind();
+	       }
+	     catch (Exception ex)
+	       {
+               lblError.InnerText = ex.Message;
+               panFracaso.Visible = true;
+               panExito.Visible = false;
+	       }
+
+            }
+
+        /// <summary>
+        /// Obtiene los datos del formulario y los encapsula en un objeto torneo.
+        /// </summary>
+        /// <returns></returns>
+          private Torneo obtenerTorneoDelFormulario()
+          {
+              return new Torneo() {nombre= txtNombreTorneo.Value, descripcion = txtDescripcion.Value, nick= txtUrlTorneo.Value.Replace(" ","-") };
+          }
+          
     }
 }

@@ -145,27 +145,41 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="torneoNuevo">El torneo que se va a registrar</param>
         /// <param name="usuario">El usuario al cual le pertenece el torneo</param>
-//        public void registrarTorneo(Torneo torneoNuevo, Usuario usuario)
-//        {
-//            SqlConnection con = new SqlConnection(cadenaDeConexion);
-//            SqlCommand cmd = new SqlCommand();
-//            try
-//            {
-//                if (con.State == ConnectionState.Closed)
-//                {
-//                    con.Open();
-//                    cmd.Connection = con;
-//                }
+        public int registrarTorneo(Torneo torneoNuevo, Usuario usuario)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
 
-//                string sql = @"INSERT INTO Torneos (nombre, descripcion
-//                                    ";
-//                cmd.Parameters.Clear();
-//                cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
-//                cmd.CommandText = sql;
-//                SqlDataReader dr = cmd.ExecuteReader();
+                string sql = @"INSERT INTO Torneos (nombre, descripcion, nick, idUsuario)
+                                              VALUES (@nombre, @descripcion, @nick, @idUsuario) SELECT SCOPE_IDENTITY()";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nombre", torneoNuevo.nombre);
+                cmd.Parameters.AddWithValue("@descripcion", torneoNuevo.descripcion);
+                cmd.Parameters.AddWithValue("@nick", torneoNuevo.nick);
+                cmd.Parameters.AddWithValue("@idUsuario", usuario.idUsuario);
+                cmd.CommandText = sql;
+                return int.Parse(cmd.ExecuteScalar().ToString());
 
-//            }
-//        }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("No se pudo registrar el campeonato: " + e.Message);
+            }
+            finally {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                    cmd.Connection = con;
+                }
+            }
+        }
 
     }
 }

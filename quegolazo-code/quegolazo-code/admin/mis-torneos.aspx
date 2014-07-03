@@ -90,20 +90,20 @@
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Nombre</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" name="nombreTorneo" placeholder="Nombre del Nuevo Torneo">
+                                    <input type="text" class="form-control" id="txtNombreTorneo" runat="server" name="nombreTorneo" placeholder="Nombre del Nuevo Torneo">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">URL</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" name="urlTorneo"  minlength="3" maxlength="60" required="true" placeholder="url-del-torneo">
+                                    <input type="text" class="form-control" name="urlTorneo" id="txtUrlTorneo" runat="server" minlength="3" maxlength="60" required="true" placeholder="url-del-torneo">
                                     <span class="help-block">Nombre de la url del torneo. No podrá cambiarlo. www.quegolazo.com/<b>url-del-torneo</b></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="textArea" class="col-lg-2 control-label">Descripción</label>
                                 <div class="col-lg-10">
-                                    <textarea class="form-control" rows="3" id="textArea"></textarea>
+                                    <textarea class="form-control" id="txtDescripcion" runat="server" rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -113,7 +113,7 @@
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
                                             <div class="fileinput-preview thumbnail" data-trigger="fileinput"></div>
                                             <div>
-                                                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="..."></span>
+                                                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><asp:FileUpload ID="imagenUpload" runat="server" /></span>
                                                 <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Eliminar</a>
                                             </div>
                                         </div>
@@ -129,11 +129,14 @@
                                 </div>
                             </div>
                     </fieldset>
-                    <div id="panFracaso" class="alert alert-danger"><strong>Error</strong> Ya existe un torneo con esa url!</div>
+                    <div id="panFracaso" runat="server" class="alert alert-danger"><strong>Error</strong> <label id="lblError" runat="server"></label></div>
+                    <div id="panExito" runat="server" class="alert alert-success"><strong> <label id="lblExito" runat="server">El torneo se registró con éxito!</label></strong></div>
+                
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success causesValidation">Registrar</button>
+                    <asp:Button ID="btnResgitrar" runat="server" CssClass="btn btn-success causesValidation" data-toggle="modal" data-target="#registrarTorneo" Text="Registrar" OnClick="btnResgitrar_Click" />
+                   
                 </div>
             </div>
         </div>
