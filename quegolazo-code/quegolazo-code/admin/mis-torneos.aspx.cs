@@ -190,7 +190,13 @@ namespace quegolazo_code.admin
               obtenerEdicionDelFormulario();
           }
 
-       
-          
+          protected void rptTorneos_ItemCommand(object source, RepeaterCommandEventArgs e)
+          {
+              if (e.CommandName == "agregarEdicion")
+              {
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+
+              }
+          }
     }
 }
