@@ -15,6 +15,7 @@ namespace quegolazo_code.admin
         private DAOTorneo gestorTorneo;
         private DAOEdicion gestorEdicion;
         Usuario usuarioLogueado = null;
+        private string idTorneo;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -143,7 +144,7 @@ namespace quegolazo_code.admin
               DAOEdicion gestorEdicion = new DAOEdicion();
               DAOTorneo gestorTorneo = new DAOTorneo();
               DAOEstado gestorEstado = new DAOEstado();
-              string idTorneo = btnRegistrarEdicion.CommandArgument.ToString();
+              string idTorneo = txtIdTorneo.Value;
               
               TamanioCancha tc = gestorCancha.obtenerTamanioCanchaPorId(Int32.Parse(ddlTamañoCancha.SelectedValue));
               TipoSuperficie ts = gestorTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(ddlTipoSuperficie.SelectedValue));
@@ -153,10 +154,7 @@ namespace quegolazo_code.admin
               FormaPuntuacion fp = gestorEdicion.obtenerFormaPuntuacionPorGanadoEmpatadoPerdido(ganado, perdido, empatado);
               Estado e = gestorEstado.obtenerUnEstadoPorNombre("REGISTRADA", "EDICION");
               
-              
-             
-              //agrega siempre la edicion en ese torneo  
-              Torneo t = gestorTorneo.obtenerTorneoPorNombreYUsuario("Los pibes", ((Usuario)Session["usuario"]).idUsuario);
+              Torneo t = gestorTorneo.obtenerTorneoPorIdYUsuario(Int32.Parse(idTorneo), ((Usuario)Session["usuario"]).idUsuario);
 
               return new Edicion() { nombre = txtNombreEdicion.Value, tamanioCancha = tc , tipoSuperficie = ts, formaPuntuacion = fp, estado = e , torneo = t};
           }
@@ -194,8 +192,14 @@ namespace quegolazo_code.admin
           {
               if (e.CommandName == "agregarEdicion")
               {
-                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                  DAOTorneo gestorTorneo = new DAOTorneo();
 
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                  idTorneo = e.CommandArgument.ToString();
+                  Torneo t = gestorTorneo.obtenerTorneoPorId(Int32.Parse(idTorneo));
+
+                  txtTorneoAsociado.Value = t.nombre;
+                  txtIdTorneo.Value = t.idTorneo.ToString();
               }
           }
     }

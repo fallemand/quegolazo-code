@@ -32,7 +32,8 @@
                             <h4>Ediciones</h4>
                         </div>
                         <div class="pull-right">
-                            <asp:LinkButton ID="lbAgregarEdicion" runat="server" data-toggle="modal" CommandName="agregarEdición" CommandArgument=<%# Eval("idTorneo") %> data-target="#agregarEdicion2" CssClass="btn btn-success btn-xs"><span class="glyphicon glyphicon-plus-sign"></span>Agregar Edición</asp:LinkButton>
+                            <asp:Button ID="btnAgregarEdicion" runat="server" Text="Agregar Edición"  CommandName="agregarEdicion" CommandArgument=<%# Eval("idTorneo") %> data-target="#agregarEdicion2" CssClass="btn btn-success btn-xs" />
+                         
                         </div>
                         <table class="table">
                             <thead>
@@ -157,6 +158,7 @@
                                 <label for="text" class="col-lg-2 control-label">Torneo</label>
                                 <div class="col-lg-10">
                                     <input type="text" class="form-control" id="txtTorneoAsociado" runat ="server" name="nombreTorneoEdicion"  placeholder="Torneo Cuna Potrero" disabled>
+                                      <input type="hidden" class="form-control" id="txtIdTorneo" runat ="server" >
                                     <span class="help-block">Torneo para el cual esta creando una nueva edición.</span>
                                 </div>
                             </div>
