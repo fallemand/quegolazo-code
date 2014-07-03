@@ -16,9 +16,7 @@
                             </div>
                         </div>
                         <div class="col-md-5">
-                           <h3>
-                              <asp:Label ID="lblTorneo" runat="server" Text=<%# Eval("nombre") %>></asp:Label>
-                           </h3>
+                           <h3><%# Eval("nombre") %></h3>
                         </div>
                         <div class="col-md-6">
                             <div class="pull-right botones">
@@ -34,7 +32,7 @@
                             <h4>Ediciones</h4>
                         </div>
                         <div class="pull-right">
-                            <asp:Button ID="btnNuevaEdicion" runat="server" Text="Agregar Edición" class="btn btn-success btn-xs"  data-toggle="modal" data-target="#agregarEdicion2" CommandArgument='<%# Eval("idTorneo") %>'/>
+                            <asp:Button ID="btnNuevaEdicion" runat="server" Text="Agregar Edición" class="btn btn-success btn-xs" OnClick="btnNuevaEdicion_Click" data-toggle="modal" data-target="#agregarEdicion2" CommandArgument='<%# Eval("idTorneo") %>'/>
                              <a href="#" class="btn btn-success btn-xs" data-toggle="modal" data-target="#agregarEdicion2" ><span class="glyphicon glyphicon-plus-sign" ></span>Agregar Edición</a>
                         </div>
                         <table class="table">
