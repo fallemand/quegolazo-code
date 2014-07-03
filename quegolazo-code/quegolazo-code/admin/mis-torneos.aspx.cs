@@ -23,16 +23,20 @@ namespace quegolazo_code.admin
                 {
                     Usuario usuarioLogueado = null;
 
-                    //if ((Usuario)Session["usuario"] != null)
-                    // usuarioLogueado = (Usuario)Session["usuario"];
+                    if ((Usuario)Session["usuario"] != null)
+                    {
+                        usuarioLogueado = (Usuario)Session["usuario"];
+                        gestorTorneo = new DAOTorneo();
+                        gestorEdicion = new DAOEdicion();
 
-
-                    gestorTorneo = new DAOTorneo();
-                    gestorEdicion = new DAOEdicion();
-
-                    //rptTorneos.DataSource = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
-                    rptTorneos.DataSource = gestorTorneo.obtenerTorneosDeUnUsuario(1003);
-                    rptTorneos.DataBind();
+                        rptTorneos.DataSource = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
+                        rptTorneos.DataBind();
+                    }
+                    else
+                    {
+                        Response.Redirect("/admin/login.aspx");
+                    }
+                                        
                 }
                 catch (Exception ex)
                 {
