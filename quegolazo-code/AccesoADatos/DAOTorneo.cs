@@ -141,6 +141,63 @@ namespace AccesoADatos
         }
 
         /// <summary>
+        /// Busca un Torneo por un nombre y usuario determinado en la base de datos.
+        /// autor: Paula Pedrosa
+        /// </summary>
+        /// <param name="idTorneo"> Id del Torneo que se quiere buscar </param>
+        /// <returns>Un objeto Torneo, o null si no encuentra el Torneo.</returns>
+        public Torneo obtenerTorneoPorNombreYUsuario(string nombre, int idUsuario)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+
+
+            Torneo respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                string sql = @"SELECT idTorneo, nombre, nick, idUsuario
+                                FROM Torneos
+                                WHERE idUsuario = @idUsuario AND nombre = @nombre";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.CommandText = sql;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                DAOUsuario gestorUsuario = new DAOUsuario();
+
+                while (dr.Read())
+                {
+                    respuesta = new Torneo()
+                    {
+                        idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
+                        nombre = dr["nombre"].ToString(),
+                        nick = dr["nick"].ToString(),
+                        usuario = gestorUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
+
+                    };
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al intentar recuperar el torneo: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
         /// Registra un torneo nuevo para un determinado usuario.
         /// </summary>
         /// <param name="torneoNuevo">El torneo que se va a registrar</param>

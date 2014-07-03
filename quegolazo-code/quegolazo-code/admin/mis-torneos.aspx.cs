@@ -25,6 +25,7 @@ namespace quegolazo_code.admin
                     
                     panFracaso.Visible = false;
                     panExito.Visible = false;
+                    cargarCombos();
                     if ((Usuario)Session["usuario"] != null)
                     {
                         usuarioLogueado = (Usuario)Session["usuario"];
@@ -50,18 +51,39 @@ namespace quegolazo_code.admin
 
         }
 
+        public void cargarCombos()
+        {
+            DAOCancha gestorCancha = new DAOCancha();
+            DAOTipoSuperficie gestorTipoSuperficie = new DAOTipoSuperficie();
+
+            ddlTamañoCancha.DataSource = gestorCancha.obtenerTodos();
+            ddlTamañoCancha.DataValueField = "idTamanioCancha";
+            ddlTamañoCancha.DataTextField = "nombre";
+            ddlTamañoCancha.DataBind();
+      
+
+
+            ddlTipoSuperficie.DataSource = gestorTipoSuperficie.obtenerTodos();
+            ddlTipoSuperficie.DataValueField = "idTipoSuperficie";
+            ddlTipoSuperficie.DataTextField = "nombre";
+            ddlTipoSuperficie.DataBind();
+         
+        }
+
 
         /// <summary>
         /// Carga las ediciones de un torneo en particular
         /// </summary>
           protected void rptTorneosItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+            
             try
             {
                 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
                 {
                     Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
-                    rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorIdTorneo(((Torneo)e.Item.DataItem).idTorneo);
+                    int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
+                    rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorIdTorneo(idTorneo);
                     rptEdiciones.DataBind();
 
                 }
@@ -93,8 +115,7 @@ namespace quegolazo_code.admin
                 txtUrlTorneo.Value = "";
                 txtNombreTorneo.Value = "";
                 txtDescripcion.Value = "";
-                rptTorneos.DataSource = daoTorneo.obtenerTorneosDeUnUsuario(((Usuario)Session["usuario"]).idUsuario);
-                rptTorneos.DataBind();
+                Response.Redirect("/admin/mis-torneos.aspx");
 	       }
 	     catch (Exception ex)
 	       {
@@ -113,6 +134,54 @@ namespace quegolazo_code.admin
           {
               return new Torneo() {nombre= txtNombreTorneo.Value, descripcion = txtDescripcion.Value, nick= txtUrlTorneo.Value.Replace(" ","-") };
           }
+
+
+          private Edicion obtenerEdicionDelFormulario()
+          {
+              DAOCancha gestorCancha = new DAOCancha();
+              DAOTipoSuperficie gestorTipoSuperficie = new DAOTipoSuperficie();
+              DAOEdicion gestorEdicion = new DAOEdicion();
+              DAOTorneo gestorTorneo = new DAOTorneo();
+              DAOEstado gestorEstado = new DAOEstado();              
+              
+              TamanioCancha tc = gestorCancha.obtenerTamanioCanchaPorId(Int32.Parse(ddlTamañoCancha.SelectedValue));
+              TipoSuperficie ts = gestorTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(ddlTipoSuperficie.SelectedValue));
+              int ganado = Int32.Parse(txtPuntosPorGanar.Value);
+              int empatado = Int32.Parse(txtPuntosPorEmpatar.Value);
+              int perdido = Int32.Parse(txtPuntosPorPerdes.Value);
+              FormaPuntuacion fp = gestorEdicion.obtenerFormaPuntuacionPorGanadoEmpatadoPerdido(ganado, perdido, empatado);
+              Estado e = gestorEstado.obtenerUnEstadoPorNombre("REGISTRADA", "EDICION");
+              Torneo t = gestorTorneo.obtenerTorneoPorNombreYUsuario("Los pibes", ((Usuario)Session["usuario"]).idUsuario);
+              //agrega siempre la edicion en ese torneo  
+            
+              return new Edicion() { nombre = txtNombreEdicion.Value, tamanioCancha = tc , tipoSuperficie = ts, formaPuntuacion = fp, estado = e , torneo = t};
+          }
+
+          protected void btnRegistrarEdicion_Click(object sender, EventArgs e)
+          {
+              try
+              {
+                  
+                  DAOEdicion daoEdicion= new DAOEdicion();
+                  DAOTorneo daoTorneo = new DAOTorneo();
+                  Edicion edicionNueva = obtenerEdicionDelFormulario();
+
+                  daoEdicion.registrarEdicion(edicionNueva);
+                  
+                  panFracaso.Visible = false;
+                  Response.Redirect("/admin/mis-torneos.aspx");
+
+              }
+              catch (Exception ex)
+              {
+                  lblError.InnerText = ex.Message;
+                  panFracaso.Visible = true;
+                  panExito.Visible = false;
+              }
+
+          }
+
+       
           
     }
 }

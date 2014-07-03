@@ -68,6 +68,60 @@ namespace AccesoADatos
 
         }
 
+        /// <summary>
+        /// Obtiene Todos los Tamaños de Cancha
+        /// autor: Paula Pedrosa
+        /// </summary>
+       /// <returns>Una lista de objeto TamanioCancha, o null sino lo encuentra</returns>
+        public List<TamanioCancha> obtenerTodos()
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            List<TamanioCancha> tamaniosCancha = new List<TamanioCancha>();
+
+
+            TamanioCancha respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                string sql = @"SELECT *
+                                FROM TamaniosCancha";
+                cmd.Parameters.Clear();
+                cmd.CommandText = sql;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+
+                while (dr.Read())
+                {
+                    respuesta = new TamanioCancha()
+                    {
+                        idTamanioCancha = Int32.Parse(dr["idTamanioCancha"].ToString()),
+                        nombre = dr["nombre"].ToString(),
+                        cantidadJugadores = Int32.Parse(dr["cantidadJugadores"].ToString())
+
+                    };
+                    tamaniosCancha.Add(respuesta);
+                }
+                return tamaniosCancha;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al intentar recuperar los tamaños de cancha: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+
+        }
+
 
         /// <summary>
         /// Obtiene todas las canchas de una edición

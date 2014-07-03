@@ -118,6 +118,60 @@ namespace AccesoADatos
         }
 
         /// <summary>
+        /// Obtiene un estado de la base de datos
+        /// autor: Paula Pedrosa
+        /// </summary>
+        /// <param name="idEstado">id del Estado</param>
+        /// <returns>Un objeto de tipo Estado</returns>
+        public Estado obtenerUnEstadoPorNombre(string nombre, string ambito)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                string sql = @"SELECT idEstado, nombre, ambito 
+                             FROM Estados
+                             WHERE nombre = @nombre AND ambito = @ambito";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@ambito", ambito);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                Estado respuesta = null;
+                while (dr.Read())
+                {
+                    Estado nuevoEstado = new Estado()
+                    {
+                        idEstado = Int32.Parse(dr["idEstado"].ToString()),
+                        ambito = obtenerAmbito(dr["ambito"].ToString()),
+                        nombre = obtenerNombre(dr["nombre"].ToString())
+                    };
+                    respuesta = nuevoEstado;
+                }
+                dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+
+
+        /// <summary>
         /// Devuelve el enumerado correspondiente al ambito del estado
         /// autor: Paula Pedrosa
         /// </summary>
