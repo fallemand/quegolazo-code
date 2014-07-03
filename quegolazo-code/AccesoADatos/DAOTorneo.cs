@@ -146,7 +146,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idTorneo"> Id del Torneo que se quiere buscar </param>
         /// <returns>Un objeto Torneo, o null si no encuentra el Torneo.</returns>
-        public Torneo obtenerTorneoPorNombreYUsuario(string nombre, int idUsuario)
+        public Torneo obtenerTorneoPorIdYUsuario(int idTorneo, int idUsuario)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -163,10 +163,10 @@ namespace AccesoADatos
 
                 string sql = @"SELECT idTorneo, nombre, nick, idUsuario
                                 FROM Torneos
-                                WHERE idUsuario = @idUsuario AND nombre = @nombre";
+                                WHERE idUsuario = @idUsuario AND idTorneo = @idTorneo";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
-                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
                 cmd.CommandText = sql;
                 SqlDataReader dr = cmd.ExecuteReader();
 
