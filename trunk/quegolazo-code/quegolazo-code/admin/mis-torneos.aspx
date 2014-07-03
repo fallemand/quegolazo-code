@@ -6,7 +6,7 @@
             <div class="container">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#registrarTorneo">Crear un Nuevo Torneo</button>
                 <asp:Label ID="lblMensajeTorneos" runat="server" Text=""></asp:Label>
-                <asp:Repeater ID="rptTorneos" runat="server" OnItemDataBound="rptTorneosItemDataBound">
+                <asp:Repeater ID="rptTorneos" runat="server" OnItemDataBound="rptTorneosItemDataBound" OnItemCommand="rptTorneos_ItemCommand">
                     <ItemTemplate>
                         <div class="panel panel-default lista-torneos shadow-sm">
                     <div class="panel-heading header clearfix">
@@ -32,8 +32,7 @@
                             <h4>Ediciones</h4>
                         </div>
                         <div class="pull-right">
-                            <asp:Button ID="btnNuevaEdicion" runat="server" Text="Agregar Edición" class="btn btn-success btn-xs" OnClick="btnNuevaEdicion_Click" data-toggle="modal" data-target="#agregarEdicion2" CommandArgument='<%# Eval("idTorneo") %>'/>
-                             <a href="#" class="btn btn-success btn-xs" data-toggle="modal" data-target="#agregarEdicion2" ><span class="glyphicon glyphicon-plus-sign" ></span>Agregar Edición</a>
+                            <asp:LinkButton ID="lbAgregarEdicion" runat="server" data-toggle="modal" CommandName="agregarEdición" CommandArgument=<%# Eval("idTorneo") %> data-target="#agregarEdicion2" CssClass="btn btn-success btn-xs"><span class="glyphicon glyphicon-plus-sign"></span>Agregar Edición</asp:LinkButton>
                         </div>
                         <table class="table">
                             <thead>
@@ -229,4 +228,10 @@
         </div>
      </div>
     <!-- Modal Agregar Edicion -->
+
+    <script type="text/javascript">
+        function openModal() {
+            $('#agregarEdicion2').modal('show');
+        }
+</script>
 </asp:Content>
