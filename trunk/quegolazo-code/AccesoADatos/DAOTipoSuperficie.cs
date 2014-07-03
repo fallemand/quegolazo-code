@@ -66,5 +66,58 @@ namespace AccesoADatos
             }
 
         }
+
+        /// <summary>
+        /// Ontiene todos los Tipos de Superficie
+        /// autor: Paula Pedrosa
+        /// </summary>
+        /// <returns>Una lista de Objeto TipoSuperficie o null sino lo encuentra</returns>
+        public List<TipoSuperficie> obtenerTodos()
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            List<TipoSuperficie> tiposSuperficie = new List<TipoSuperficie>();
+
+
+            TipoSuperficie respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                string sql = @"SELECT *
+                                FROM TiposSuperficie";
+ 
+                cmd.CommandText = sql;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+
+                while (dr.Read())
+                {
+                    respuesta = new TipoSuperficie()
+                    {
+                        idTipoSuperficie = Int32.Parse(dr["idTipoSuperficie"].ToString()),
+                        nombre = dr["nombre"].ToString()
+
+                    };
+                    tiposSuperficie.Add(respuesta);
+                }
+                return tiposSuperficie;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al intentar recuperar los Tipos de Superficie: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+
+        }
     }
 }

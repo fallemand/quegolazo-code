@@ -12,11 +12,13 @@
                     <div class="panel-heading header clearfix">
                         <div class="col-md-1">
                             <div class="thumbnail nomargin-bottom">
-                                <img src="http://www.micampeonato.com/images/campeonatos/8341614052275_244_logo_torneol.jpg" />
+                                <img src="/imagenes/torneos/<%# Eval("idTorneo") %>.png" />
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <h3><%# Eval("nombre") %></h3>
+                           <h3>
+                              <asp:Label ID="lblTorneo" runat="server" Text=<%# Eval("nombre") %>></asp:Label>
+                           </h3>
                         </div>
                         <div class="col-md-6">
                             <div class="pull-right botones">
@@ -32,7 +34,8 @@
                             <h4>Ediciones</h4>
                         </div>
                         <div class="pull-right">
-                            <a href="#" class="btn btn-success btn-xs" data-toggle="modal" data-target="#agregarEdicion2"><span class="glyphicon glyphicon-plus-sign"></span>Agregar Edición</a>
+                            <asp:Button ID="btnNuevaEdicion" runat="server" Text="Agregar Edición" class="btn btn-success btn-xs"  data-toggle="modal" data-target="#agregarEdicion2" CommandArgument='<%# Eval("idTorneo") %>'/>
+                             <a href="#" class="btn btn-success btn-xs" data-toggle="modal" data-target="#agregarEdicion2" ><span class="glyphicon glyphicon-plus-sign" ></span>Agregar Edición</a>
                         </div>
                         <table class="table">
                             <thead>
@@ -156,38 +159,26 @@
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Torneo</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" name="nombreTorneoEdicion"  placeholder="Torneo Cuna Potrero" disabled>
+                                    <input type="text" class="form-control" id="txtTorneoAsociado" runat ="server" name="nombreTorneoEdicion"  placeholder="Torneo Cuna Potrero" disabled>
                                     <span class="help-block">Torneo para el cual esta creando una nueva edición.</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Nombre</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" name="nombreEdicion" minlength="3" maxlength="60" required="true" placeholder="Nombre de la Edición">
+                                    <input type="text" class="form-control" id="txtNombreEdicion" runat="server" name="nombreEdicion" placeholder="Nombre de la Edición">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="select" class="col-lg-2 control-label">Tamaño</label>
                                 <div class="col-lg-10">
-                                    <select class="form-control" name="tamanioEquipos">
-                                        <option disabled selected>Seleccione el tamaño de los equipos</option>
-                                        <option>5 vs 5</option>
-                                        <option>7 vs 7</option>
-                                        <option>9 vs 9</option>
-                                        <option>11 vs 11</option>
-                                    </select>
+                                    <asp:DropDownList ID="ddlTamañoCancha" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="select" class="col-lg-2 control-label">Superficie</label>
                                 <div class="col-lg-10">
-                                    <select class="form-control" name="tipoSuperficie">
-                                        <option disabled selected>Seleccione el tipo de superficie</option>
-                                        <option>Cesped Sintético</option>
-                                        <option>Césped Natural</option>
-                                        <option>Tierra</option>
-                                        <option>Salón</option>
-                                    </select>
+                                    <asp:DropDownList ID="ddlTipoSuperficie" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -213,19 +204,19 @@
                                     <div class="col-lg-3">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
-                                            <input type="text" class="form-control" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3">
+                                            <input type="text" class="form-control" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="input-group">
                                             <span class="input-group-addon">=</span>
-                                            <input type="text" class="form-control" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1">
+                                            <input type="text" class="form-control" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
-                                            <input type="text" class="form-control" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0">
+                                            <input type="text" class="form-control" id="txtPuntosPorPerdes" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0">
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +225,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success causesValidation">Registrar</button>
+                    <asp:Button ID="btnRegistrarEdicion" runat="server" Text="Registrar" class="btn btn-success causesValidation" OnClick="btnRegistrarEdicion_Click" />
                 </div>
             </div>
         </div>
