@@ -24,7 +24,6 @@
               </label>
             </div>
             <div class="col-xs-5">
-                 <asp:ScriptManager ID="MainScriptManager" runat="server" />
                  <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <asp:Button ID="btnLoguearse" runat="server" Text="Loguearse" CssClass="btn btn-success pull-right causesValidation" OnClick="btnLoguearse_Click" />

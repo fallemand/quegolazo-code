@@ -19,6 +19,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <asp:ScriptManager ID="MainScriptManager" runat="server" />
     <!-- Navbar superior -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">

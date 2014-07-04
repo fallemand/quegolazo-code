@@ -20,36 +20,24 @@ namespace quegolazo_code.admin
         {
             if (!Page.IsPostBack)
             {
-               
                 try
                 {
-                    
-                    panFracaso.Visible = false;
-                    panExito.Visible = false;
                     cargarCombos();
-                    if ((Usuario)Session["usuario"] != null)
-                    {
-                        usuarioLogueado = (Usuario)Session["usuario"];
-                        gestorTorneo = new DAOTorneo();
-                        gestorEdicion = new DAOEdicion();
-
-                        rptTorneos.DataSource = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
-                        rptTorneos.DataBind();
-                    }
-                    else
-                    {
-                        Response.Redirect("/admin/login.aspx");
-                    }
-                                        
+                    cargarRepeaterTorneos();           
                 }
                 catch (Exception ex)
                 {
-                        lblMensajeTorneos.Text = ex.Message;
-                }
-                
-                                                
+                    lblMensajeTorneos.Text = ex.Message;
+                }                             
             }
+        }
 
+        private void cargarRepeaterTorneos()
+        {
+            gestorTorneo = new DAOTorneo();
+            usuarioLogueado = (Usuario)Session["usuario"];
+            rptTorneos.DataSource = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
+            rptTorneos.DataBind();
         }
 
         public void cargarCombos()
@@ -62,31 +50,26 @@ namespace quegolazo_code.admin
             ddlTamañoCancha.DataTextField = "nombre";
             ddlTamañoCancha.DataBind();
       
-
-
             ddlTipoSuperficie.DataSource = gestorTipoSuperficie.obtenerTodos();
             ddlTipoSuperficie.DataValueField = "idTipoSuperficie";
             ddlTipoSuperficie.DataTextField = "nombre";
             ddlTipoSuperficie.DataBind();
-         
         }
-
 
         /// <summary>
         /// Carga las ediciones de un torneo en particular
         /// </summary>
           protected void rptTorneosItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            
             try
             {
+                gestorEdicion = new DAOEdicion();
                 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
                 {
                     Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
                     int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
                     rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorIdTorneo(idTorneo);
                     rptEdiciones.DataBind();
-
                 }
             }
             catch (Exception ex)
@@ -94,38 +77,47 @@ namespace quegolazo_code.admin
                 Label lblMensajeEdiciones = (Label)e.Item.FindControl("lblMensajeEdiciones");
                 lblMensajeEdiciones.Text = ex.Message;
             }
-              
-            
         }
 
           protected void btnResgitrar_Click(object sender, EventArgs e)
           {             
-         try 
-	       {	
-            GestorDeArchivos gestor = new GestorDeArchivos();
-            
-                DAOTorneo daoTorneo = new DAOTorneo();
-                Torneo torneoNuevo = obtenerTorneoDelFormulario();
-                torneoNuevo.idTorneo = daoTorneo.registrarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
-                if (imagenUpload.PostedFile.ContentLength > 0 && gestor.validarImagen(imagenUpload.PostedFile))
-                {  
-                gestor.guardarImagen(imagenUpload.PostedFile, Server.MapPath("/imagenes/torneos/"), torneoNuevo.idTorneo.ToString() +".png" );
-                }
-                panFracaso.Visible = false;
-                panExito.Visible = true;
-                txtUrlTorneo.Value = "";
-                txtNombreTorneo.Value = "";
-                txtDescripcion.Value = "";
-                Response.Redirect("/admin/mis-torneos.aspx");
-	       }
-	     catch (Exception ex)
-	       {
-               lblError.InnerText = ex.Message;
-               panFracaso.Visible = true;
-               panExito.Visible = false;
-	       }
+            try 
+	           {
+                   limpiarPaneles();
+                    GestorDeArchivos gestor = new GestorDeArchivos();
+                    DAOTorneo daoTorneo = new DAOTorneo();
+                    Torneo torneoNuevo = obtenerTorneoDelFormulario();
+                    //if (imagenUpload.PostedFile.ContentLength > 0 && gestor.validarImagen(imagenUpload.PostedFile))
+                    //    gestor.guardarImagen(imagenUpload.PostedFile, Server.MapPath("/imagenes/torneos/"), torneoNuevo.idTorneo.ToString() +".png" );
+                    torneoNuevo.idTorneo = daoTorneo.registrarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
+                    limpiarModalTorneo();
+                    cargarRepeaterTorneos();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalTorneo();", true);
+                
+	           }
+	         catch (Exception ex)
+	           {
+                   litFracasoTorneo.Text = ex.Message;
+                   panFracasoTorneo.Visible = true;
+	           }
 
             }
+          protected void limpiarPaneles()
+          {
+              panFracasoTorneo.Visible = false;
+              panFracasoEdicion.Visible = false;
+          }
+          protected void limpiarModalTorneo()
+          {
+              txtUrlTorneo.Value = "";
+              txtNombreTorneo.Value = "";
+              txtDescripcion.Value = "";
+          }
+
+          protected void limpiarModalEdicion()
+          {
+              //aca hay que limpiar todos los campos de la edicion
+          }
 
         /// <summary>
         /// Obtiene los datos del formulario y los encapsula en un objeto torneo.
@@ -163,22 +155,18 @@ namespace quegolazo_code.admin
           {
               try
               {
-                  
                   DAOEdicion daoEdicion= new DAOEdicion();
-                  DAOTorneo daoTorneo = new DAOTorneo();
                   Edicion edicionNueva = obtenerEdicionDelFormulario();
-
                   daoEdicion.registrarEdicion(edicionNueva);
-                  
-                  panFracaso.Visible = false;
-                  Response.Redirect("/admin/mis-torneos.aspx");
+                  limpiarModalEdicion();
+                  cargarRepeaterTorneos();
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalEdicion();", true);
 
               }
               catch (Exception ex)
               {
-                  lblError.InnerText = ex.Message;
-                  panFracaso.Visible = true;
-                  panExito.Visible = false;
+                  litFracasoEdicion.Text = ex.Message;
+                  panFracasoEdicion.Visible = true;
               }
 
           }
@@ -193,13 +181,11 @@ namespace quegolazo_code.admin
               if (e.CommandName == "agregarEdicion")
               {
                   DAOTorneo gestorTorneo = new DAOTorneo();
-
-                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
                   idTorneo = e.CommandArgument.ToString();
                   Torneo t = gestorTorneo.obtenerTorneoPorId(Int32.Parse(idTorneo));
-
                   txtTorneoAsociado.Value = t.nombre;
                   txtIdTorneo.Value = t.idTorneo.ToString();
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalEdicion();", true);
               }
           }
     }
