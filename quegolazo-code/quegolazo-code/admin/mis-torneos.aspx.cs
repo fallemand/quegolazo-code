@@ -83,7 +83,7 @@ namespace quegolazo_code.admin
           {             
             try 
 	           {
-                   limpiarPaneles();
+                    limpiarPaneles();
                     GestorDeArchivos gestor = new GestorDeArchivos();
                     DAOTorneo daoTorneo = new DAOTorneo();
                     Torneo torneoNuevo = obtenerTorneoDelFormulario();
@@ -97,6 +97,7 @@ namespace quegolazo_code.admin
 	           }
 	         catch (Exception ex)
 	           {
+                   ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalTorneo();", true);
                    litFracasoTorneo.Text = ex.Message;
                    panFracasoTorneo.Visible = true;
 	           }

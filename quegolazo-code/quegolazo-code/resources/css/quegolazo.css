@@ -770,7 +770,3 @@ color: #a94442;
 .alert-danger a, .alert .alert-link {
     color: #a94442;
 }
-
-.updateProgressInline {
-    display:inline-block;
-}

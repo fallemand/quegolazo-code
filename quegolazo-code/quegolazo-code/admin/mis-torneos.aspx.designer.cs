@@ -112,13 +112,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnResgitrarTorneo;
         
         /// <summary>
-        /// Control PageUpdateProgress.
+        /// Control UpdateProgress2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress PageUpdateProgress;
+        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
         
         /// <summary>
         /// Control UpdatePanel3.

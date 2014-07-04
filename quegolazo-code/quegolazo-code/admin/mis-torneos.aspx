@@ -141,14 +141,18 @@
                                 </asp:Panel>
                                 </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation" data-toggle="modal" data-target="#registrarTorneo" Text="Registrar" OnClick="btnResgitrar_Click" />
-                            <asp:UpdateProgress runat="server" class="updateProgressInline" ID="PageUpdateProgress">
-                                <ProgressTemplate>
-                                    <img src="/resources/img/theme/load3.gif" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
-                        </div>
+                            <div class="col-xs-5 col-xs-offset-6">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation" data-toggle="modal" data-target="#registrarTorneo" Text="Registrar" OnClick="btnResgitrar_Click" />
+                            </div>
+                            <div class="col-xs-1">
+                                <asp:UpdateProgress runat="server" ID="UpdateProgress2">
+                                    <ProgressTemplate>
+                                        <img src="/resources/img/theme/load3.gif" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                            </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -250,13 +254,17 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <asp:Button ID="btnRegistrarEdicion" runat="server" Text="Registrar" class="btn btn-success causesValidation" OnClick="btnRegistrarEdicion_Click" />
-                        <asp:UpdateProgress runat="server" class="updateProgressInline" ID="UpdateProgress1">
+                        <div class="col-xs-5 col-xs-offset-6">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <asp:Button ID="btnRegistrarEdicion" runat="server" Text="Registrar" class="btn btn-success causesValidation" OnClick="btnRegistrarEdicion_Click" />
+                        </div>
+                        <div class="col-xs-1">
+                            <asp:UpdateProgress runat="server" ID="UpdateProgress1">
                                 <ProgressTemplate>
                                     <img src="/resources/img/theme/load3.gif" />
                                 </ProgressTemplate>
                             </asp:UpdateProgress>
+                        </div>
                     </div>
                 </fieldset>
             </div>
@@ -271,6 +279,10 @@
         function closeModalTorneo() {
             $('#registrarTorneo').modal('hide');
             $('#form1').resetForm();
+        }
+        function openModalTorneo() {
+            $('#registrarTorneo').removeClass("fade");
+            $('#registrarTorneo').modal('show');
         }
         function closeModalEdicion() {
             $('#agregarEdicion2').modal('hide');
