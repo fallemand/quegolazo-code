@@ -276,9 +276,18 @@
         $('.fileinput').on('change.bs.fileinput', function () {
             $('.fileinput-preview').css('background-image', 'none');
         });
+        $('#registrarTorneo').on('hidden.bs.modal', function () {
+            $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
+            $('.modal-body').find('div').removeClass('has-success has-error');
+            $('#form1').resetForm();
+        });
+        $('#agregarEdicion2').on('hidden.bs.modal', function () {
+            $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
+            $('.modal-body').find('div').removeClass('has-success has-error');
+            $('#form1').resetForm();
+        });
         function closeModalTorneo() {
             $('#registrarTorneo').modal('hide');
-            $('#form1').resetForm();
         }
         function openModalTorneo() {
             $('#registrarTorneo').removeClass("fade");
@@ -286,7 +295,6 @@
         }
         function closeModalEdicion() {
             $('#agregarEdicion2').modal('hide');
-            $('#form1').resetForm();
         }
         function openModalEdicion() {
             $('#agregarEdicion2').modal('show');
