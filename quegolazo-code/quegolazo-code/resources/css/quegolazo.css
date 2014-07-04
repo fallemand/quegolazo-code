@@ -406,6 +406,14 @@ color: #559645;
   border-color: #E27C6B;
 }
 
+.has-error .help-block {
+    color:#555;
+}
+
+.has-success .help-block {
+    color:#555;
+}
+
 /* --------------------- Panels ------------------------- */
 .panel .thumbnail {
   margin-bottom:0px;
@@ -761,4 +769,8 @@ color: #a94442;
 
 .alert-danger a, .alert .alert-link {
     color: #a94442;
+}
+
+.updateProgressInline {
+    display:inline-block;
 }

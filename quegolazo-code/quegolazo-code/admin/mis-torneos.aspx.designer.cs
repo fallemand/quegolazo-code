@@ -40,6 +40,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Repeater rptTorneos;
         
         /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// Control txtNombreTorneo.
         /// </summary>
         /// <remarks>
@@ -76,24 +85,6 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.FileUpload imagenUpload;
         
         /// <summary>
-        /// Control UpdatePanel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
-        /// <summary>
-        /// Control PageUpdateProgress.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress PageUpdateProgress;
-        
-        /// <summary>
         /// Control panFracasoTorneo.
         /// </summary>
         /// <remarks>
@@ -119,6 +110,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnResgitrarTorneo;
+        
+        /// <summary>
+        /// Control PageUpdateProgress.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress PageUpdateProgress;
         
         /// <summary>
         /// Control UpdatePanel3.
@@ -193,13 +193,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtPuntosPorEmpatar;
         
         /// <summary>
-        /// Control txtPuntosPorPerdes.
+        /// Control txtPuntosPorPerder.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPuntosPorPerdes;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPuntosPorPerder;
         
         /// <summary>
         /// Control UpdatePanel2.
@@ -236,5 +236,14 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRegistrarEdicion;
+        
+        /// <summary>
+        /// Control UpdateProgress1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
     }
 }

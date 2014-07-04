@@ -87,9 +87,9 @@ namespace quegolazo_code.admin
                     GestorDeArchivos gestor = new GestorDeArchivos();
                     DAOTorneo daoTorneo = new DAOTorneo();
                     Torneo torneoNuevo = obtenerTorneoDelFormulario();
-                    //if (imagenUpload.PostedFile.ContentLength > 0 && gestor.validarImagen(imagenUpload.PostedFile))
-                    //    gestor.guardarImagen(imagenUpload.PostedFile, Server.MapPath("/imagenes/torneos/"), torneoNuevo.idTorneo.ToString() +".png" );
                     torneoNuevo.idTorneo = daoTorneo.registrarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
+                    if (imagenUpload.PostedFile.ContentLength > 0 && gestor.validarImagen(imagenUpload.PostedFile))
+                        gestor.guardarImagen(imagenUpload.PostedFile, Server.MapPath("/imagenes/torneos/"), torneoNuevo.idTorneo.ToString() + ".png");
                     limpiarModalTorneo();
                     cargarRepeaterTorneos();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalTorneo();", true);
@@ -116,7 +116,14 @@ namespace quegolazo_code.admin
 
           protected void limpiarModalEdicion()
           {
-              //aca hay que limpiar todos los campos de la edicion
+              txtTorneoAsociado.Value = "Nombre del Torneo";
+              txtIdTorneo.Value = "";
+              txtNombreEdicion.Value = "";
+              ddlTamañoCancha.ClearSelection();
+              ddlTipoSuperficie.ClearSelection();
+              txtPuntosPorGanar.Value = "";
+              txtPuntosPorEmpatar.Value = "";
+              txtPuntosPorPerder.Value = "";
           }
 
         /// <summary>
@@ -142,7 +149,7 @@ namespace quegolazo_code.admin
               TipoSuperficie ts = gestorTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(ddlTipoSuperficie.SelectedValue));
               int ganado = Int32.Parse(txtPuntosPorGanar.Value);
               int empatado = Int32.Parse(txtPuntosPorEmpatar.Value);
-              int perdido = Int32.Parse(txtPuntosPorPerdes.Value);
+              int perdido = Int32.Parse(txtPuntosPorPerder.Value);
               FormaPuntuacion fp = gestorEdicion.obtenerFormaPuntuacionPorGanadoEmpatadoPerdido(ganado, perdido, empatado);
               Estado e = gestorEstado.obtenerUnEstadoPorNombre("REGISTRADA", "EDICION");
               

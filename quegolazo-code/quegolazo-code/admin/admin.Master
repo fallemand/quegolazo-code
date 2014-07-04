@@ -232,6 +232,9 @@
     <script>
         jQuery(document).ready(function () {
             $('[rel="txtTooltip"]').tooltip();
+            jQuery.validator.addMethod("noSpace", function (value, element) {
+                return value.indexOf(" ") < 0 && value != "";
+            }, "No se permiten espacios en blanco para este campo");
         });
     </script>
     <script type="text/javascript">
