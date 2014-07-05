@@ -15,6 +15,13 @@ namespace quegolazo_code.admin
         {
         }
 
+
+        /// <summary>
+        /// metodo de registro de usuarios
+        /// autor=Flor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             try{
@@ -44,6 +51,9 @@ namespace quegolazo_code.admin
 
         }
 
+        /// <summary>
+        /// ocultar Paneles de mensajes de exito o fracaso
+        /// </summary>
         private void ocultarPaneles()
         {
             panExito.Visible = false;

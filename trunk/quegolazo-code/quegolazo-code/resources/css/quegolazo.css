@@ -351,6 +351,8 @@ body {
 }
 .margin-top {
   margin-top: 20px;
+    top: 0px;
+    left: 0px;
 }
 .padding-top {
   padding-top: 20px;
