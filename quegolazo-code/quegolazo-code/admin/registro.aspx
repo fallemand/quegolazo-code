@@ -26,13 +26,13 @@
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-              <input type="password" runat="server" class="form-control" id="txtClave"  minlength="4" maxlength="20" required="true" placeholder="Contraseña" />
+              <input type="password" runat="server" class="form-control" id="txtClave"  minlength="6" maxlength="20" required="true" placeholder="Contraseña" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                <input type="password" runat="server" class="form-control"  minlength="4" maxlength="20" required="true" equalTo="#ContentAdmin_txtClave" placeholder="Repita Contraseña" />
+                <input type="password" runat="server" class="form-control"  minlength="6" maxlength="20" required="true" equalTo="#ContentAdmin_txtClave" placeholder="Repita Contraseña" />
             </div>
           </div>
           <div class="clearfix">

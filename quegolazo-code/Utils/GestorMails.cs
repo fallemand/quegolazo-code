@@ -21,7 +21,6 @@ namespace Utils
         public void mandarMailActivacion(string destinatario, string asunto, string urlActivación)
         {
             MailMessage msg;
-            string ActivationUrl = string.Empty;
             msg = new MailMessage();
             SmtpClient smtp = new SmtpClient("smtp.gmail.com");
             //sender email address

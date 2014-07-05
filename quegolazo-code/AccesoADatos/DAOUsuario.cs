@@ -56,6 +56,7 @@ namespace AccesoADatos
             }
             finally
             {
+                if (con != null && con.State == ConnectionState.Open)
                 con.Close();
             }
 
@@ -179,6 +180,7 @@ namespace AccesoADatos
                      cmd.Parameters.AddWithValue("@UserCodigo", codigo);
                      cmd.CommandText = sql;
                     SqlDataReader dr = cmd.ExecuteReader();
+                   
                      while (dr.Read())
                      {
                          idUsuario= Int32.Parse(dr["idUsuario"].ToString());
@@ -211,7 +213,7 @@ namespace AccesoADatos
             finally
             {
 
-                if (con.State == ConnectionState.Open)
+                if (con != null && con.State == ConnectionState.Open)
                 {
                     con.Close();
                   

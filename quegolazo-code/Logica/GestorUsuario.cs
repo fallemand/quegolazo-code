@@ -41,8 +41,16 @@ namespace Logica
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                if (e.Message.Contains("No se puede insertar una clave duplicada"))
+                {
+                    throw new Exception("El usuario con el mail: " + mail + " Ya se encuentra registrado. Por favor ingrese una cuenta de correo diferente.");
+                }
+                else
+                {
+                    throw new Exception(e.Message);
+                }
             }
+
             
             ;
         }
@@ -143,7 +151,7 @@ namespace Logica
             if (usuario == null)
                 throw new Exception("No existe un usuario con ese email y contraseña");
             if (usuario.esActivo == false)
-                throw new Exception("Debes activar tu cuenta para poder ingresar: <a href='activar.usuario.aspx'>Activar aquí</a>");
+                throw new Exception("Debes activar tu cuenta para poder ingresar: <a href='activar.usuario.aspx?idUsuario="+usuario.idUsuario+"'>Activar aquí</a>");
             return usuario;
         }
 
