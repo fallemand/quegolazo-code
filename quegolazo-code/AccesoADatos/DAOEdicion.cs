@@ -45,11 +45,11 @@ namespace AccesoADatos
                 cmd.CommandText = sql;
                 SqlDataReader dr = cmd.ExecuteReader();
 
-                DAOCancha gestorCancha = new DAOCancha();
-                DAOEdicion gestorEdicion = new DAOEdicion();
-                DAOTipoSuperficie gestorTipoSuperficie = new DAOTipoSuperficie();
-                DAOEstado gestorEstado = new DAOEstado();
-                DAOTorneo gestorTorneo = new DAOTorneo();
+                DAOCancha daoCancha = new DAOCancha();
+                DAOEdicion daoEdicion = new DAOEdicion();
+                DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
+                DAOEstado daoEstado = new DAOEstado();
+                DAOTorneo daoTorneo = new DAOTorneo();
 
                 if (!dr.HasRows)
                 {
@@ -63,12 +63,12 @@ namespace AccesoADatos
                     edicion = new Edicion();
                     edicion.idEdicion = Int32.Parse(dr["idEdicion"].ToString());
                     edicion.nombre = dr["nombre"].ToString();
-                    edicion.tamanioCancha = gestorCancha.obtenerTamanioCanchaPorId(Int32.Parse(dr["idTamanioCancha"].ToString()));
-                    edicion.formaPuntuacion = gestorEdicion.obtenerFormaPuntuacionPorId(Int32.Parse(dr["idFormaPuntuacion"].ToString()));
-                    edicion.tipoSuperficie = gestorTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(dr["idTipoSuperficie"].ToString()));
-                    edicion.estado = gestorEstado.obtenerUnEstadoPorId(Int32.Parse(dr["idEstado"].ToString()));
-                    edicion.cancha = gestorCancha.obtenerCanchasDeEdicion(Int32.Parse(dr["idEdicion"].ToString()));
-                    edicion.torneo = gestorTorneo.obtenerTorneoPorId(Int32.Parse(dr["idTorneo"].ToString()));
+                    edicion.tamanioCancha = daoCancha.obtenerTamanioCanchaPorId(Int32.Parse(dr["idTamanioCancha"].ToString()));
+                    edicion.formaPuntuacion = daoEdicion.obtenerFormaPuntuacionPorId(Int32.Parse(dr["idFormaPuntuacion"].ToString()));
+                    edicion.tipoSuperficie = daoTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(dr["idTipoSuperficie"].ToString()));
+                    edicion.estado = daoEstado.obtenerUnEstadoPorId(Int32.Parse(dr["idEstado"].ToString()));
+                    edicion.cancha = daoCancha.obtenerCanchasDeEdicion(Int32.Parse(dr["idEdicion"].ToString()));
+                    edicion.torneo = daoTorneo.obtenerTorneoPorId(Int32.Parse(dr["idTorneo"].ToString()));
                     respuesta.Add(edicion);
 
                 }
@@ -198,7 +198,11 @@ namespace AccesoADatos
             }
         }
 
-
+        /// <summary>
+        /// Registrar una Nueva Edición
+        /// autor: Paula Pedrosa
+        /// </summary>
+        /// <param name="edicionNueva">Objeto nueva Edición</param>
         public void registrarEdicion(Edicion edicionNueva)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);

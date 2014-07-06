@@ -113,7 +113,7 @@ namespace AccesoADatos
                 cmd.CommandText = sql;
                 SqlDataReader dr = cmd.ExecuteReader();
 
-                DAOUsuario gestorUsuario = new DAOUsuario();
+                DAOUsuario daoUsuario = new DAOUsuario();
              
                 while (dr.Read())
                 {
@@ -122,7 +122,7 @@ namespace AccesoADatos
                         idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         nick = dr["nick"].ToString(),
-                        usuario = gestorUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
+                        usuario = daoUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
                    
                     };
                 }
@@ -170,7 +170,7 @@ namespace AccesoADatos
                 cmd.CommandText = sql;
                 SqlDataReader dr = cmd.ExecuteReader();
 
-                DAOUsuario gestorUsuario = new DAOUsuario();
+                DAOUsuario daoUsuario = new DAOUsuario();
 
                 while (dr.Read())
                 {
@@ -179,7 +179,7 @@ namespace AccesoADatos
                         idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         nick = dr["nick"].ToString(),
-                        usuario = gestorUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
+                        usuario = daoUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
 
                     };
                 }
@@ -229,7 +229,8 @@ namespace AccesoADatos
             {
                 throw new Exception("No se pudo registrar el campeonato: " + e.Message);
             }
-            finally {
+            finally 
+            {
                 if (con.State == ConnectionState.Open)
                 {
                     con.Close();
