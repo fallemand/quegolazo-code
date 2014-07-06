@@ -39,6 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GestorCancha.cs" />
+    <Compile Include="GestorEdicion.cs" />
+    <Compile Include="GestorEstado.cs" />
+    <Compile Include="GestorTipoSuperficie.cs" />
+    <Compile Include="GestorTorneo.cs" />
     <Compile Include="GestorUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
