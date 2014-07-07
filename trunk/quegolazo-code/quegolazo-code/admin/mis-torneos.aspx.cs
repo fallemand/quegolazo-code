@@ -106,7 +106,8 @@ namespace quegolazo_code.admin
                     GestorTorneo gestorTorneo = new GestorTorneo();
                     Torneo torneoNuevo = obtenerTorneoDelFormulario();
                     torneoNuevo.idTorneo = gestorTorneo.registrarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
-                    if (imagenUpload.PostedFile.ContentLength > 0 && gestor.validarImagen(imagenUpload.PostedFile))
+                   //si la imagen esta ok, la guarda en el servidor. 
+                   if (imagenUpload.PostedFile.ContentLength > 0 && gestor.validarImagen(imagenUpload.PostedFile))
                         gestor.guardarImagen(imagenUpload.PostedFile, Server.MapPath("/imagenes/torneos/"), torneoNuevo.idTorneo.ToString() + ".png");
                     limpiarModalTorneo();
                     cargarRepeaterTorneos();
@@ -127,14 +128,20 @@ namespace quegolazo_code.admin
               panFracasoTorneo.Visible = false;
               panFracasoEdicion.Visible = false;
           }
+          
+        /// <summary>
+        /// setea vacias las cadenas del modal torneo.
+        /// </summary>
           protected void limpiarModalTorneo()
           {
               txtUrlTorneo.Value = "";
               txtNombreTorneo.Value = "";
               txtDescripcion.Value = "";
           }
-
-          protected void limpiarModalEdicion()
+        /// <summary>
+        /// setea vacias las cadenas de los inputs del modal de la edicion
+        /// </summary>
+        protected void limpiarModalEdicion()
           {
               txtTorneoAsociado.Value = "Nombre del Torneo";
               txtIdTorneo.Value = "";
@@ -177,7 +184,7 @@ namespace quegolazo_code.admin
               int perdido = Int32.Parse(txtPuntosPorPerder.Value);
 
               FormaPuntuacion formaPuntuacion = gestorEdicion.obtenerFormaPuntuacionPorGanadoEmpatadoPerdido(ganado, perdido, empatado);
-              Estado estado = gestorEstado.obtenerUnEstadoPorNombre("REGISTRADA", "EDICION");
+              Estado estado = gestorEstado.obtenerUnEstadoPorNombre(Estado.enumNombre.REGISTRADA, Estado.enumAmbito.EDICION);
               Torneo torneo = gestorTorneo.obtenerTorneoPorIdYUsuario(Int32.Parse(idTorneo), ((Usuario)Session["usuario"]).idUsuario);
 
               return new Edicion() { nombre = txtNombreEdicion.Value, tamanioCancha = tamanioCancha , tipoSuperficie = tipoSuperficie, formaPuntuacion = formaPuntuacion, estado = estado , torneo = torneo};
@@ -193,13 +200,13 @@ namespace quegolazo_code.admin
           {
               try
               {
-                  GestorEdicion gestorEdicion= new GestorEdicion();
-                  Edicion edicionNueva = obtenerEdicionDelFormulario();
-                  gestorEdicion.registrarEdicion(edicionNueva);
-                  limpiarModalEdicion();
-                  cargarRepeaterTorneos();
-                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalEdicion();", true);
-
+                      validarDatosDelFormulario();
+                      GestorEdicion gestorEdicion = new GestorEdicion();
+                      Edicion edicionNueva = obtenerEdicionDelFormulario();
+                      gestorEdicion.registrarEdicion(edicionNueva);
+                      limpiarModalEdicion();
+                      cargarRepeaterTorneos();
+                      ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalEdicion();", true);                               
               }
               catch (Exception ex)
               {
@@ -207,6 +214,31 @@ namespace quegolazo_code.admin
                   panFracasoEdicion.Visible = true;
               }
 
+          }
+          /// <summary>
+          /// valida si los datos introducidos en el formulario son correctos, si no lo son lanza excepciones con el mensaje correspondiente.
+          /// autor: Antonio Herrera
+          /// </summary>      
+          private void validarDatosDelFormulario()
+          {          
+              int ganado, empatado, perdido;
+              ValidacionDeTextos validador = new ValidacionDeTextos();
+              try 
+	            {
+                    ganado = int.Parse(txtPuntosPorGanar.Value);
+                    perdido = int.Parse(txtPuntosPorPerder.Value);
+                    empatado = int.Parse(txtPuntosPorEmpatar.Value);
+                    if (!(ganado > empatado && empatado > perdido) && (ganado*empatado*perdido) < 0) {
+                     throw new Exception("Los puntajes por ganar, empatar o perder son incorrectos.");
+                    }
+                    if(txtNombreEdicion.Value == "")
+                        throw new Exception("La edición no puede tener el nombre vacio.");
+                    
+                }
+	          catch (FormatException)
+	            {
+                    throw new Exception("Los campos de puntajes deben ser numeros enteros.");
+	            }              
           }
 
           protected void btnNuevaEdicion_Click(object sender, EventArgs e)

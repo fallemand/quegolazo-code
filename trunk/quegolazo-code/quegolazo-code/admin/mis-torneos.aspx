@@ -41,8 +41,7 @@
                                         </div>
                                         <table class="table">
                                             <thead>
-                                                <tr>
-                                                    <th class="col-md-1">Número</th>
+                                                <tr>                                                   
                                                     <th class="col-md-4">Nombre</th>
                                                     <th class="col-md-2">Tamaño</th>
                                                     <th class="col-md-2">Superficie</th>
@@ -54,8 +53,7 @@
 
                                                 <asp:Repeater ID="rptEdiciones" runat="server">
                                                     <ItemTemplate>
-                                                        <tr>
-                                                            <td><%# Eval("idEdicion") %></td>
+                                                        <tr>                                                            
                                                             <td><%# Eval("nombre") %></td>
                                                             <td><%# Eval("tamanioCancha.nombre") %></td>
                                                             <td><%# Eval("tipoSuperficie.nombre") %></td>
@@ -131,7 +129,7 @@
                                                 <strong>Formato admitido</strong><br />
                                                 PNG, JPEG, JPG, GIF<br />
                                                 <strong>Tamaño Máximo</strong><br />
-                                                512kb<br />
+                                                1 Mb<br />
                                             </p>
                                         </div>
                                     </div>
@@ -145,13 +143,13 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation" data-toggle="modal" data-target="#registrarTorneo" Text="Registrar" OnClick="btnResgitrar_Click" />
                             </div>
-                            <div class="col-xs-1">
+                         <%--   <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgress2">
                                     <ProgressTemplate>
                                         <img src="/resources/img/theme/load3.gif" />
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
-                            </div>
+                            </div>--%>
                             </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -222,19 +220,19 @@
                                         <div class="col-lg-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
-                                                <input type="text" class="form-control" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3">
+                                                <input type="number" class="form-control" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3" required="required">
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon">=</span>
-                                                <input type="text" class="form-control" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1">
+                                                <input type="number" class="form-control" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1" required="required">
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
-                                                <input type="text" class="form-control" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0">
+                                                <input type="number" class="form-control" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0" required="required">
                                             </div>
                                         </div>
                                     </div>
@@ -279,12 +277,14 @@
         $('#registrarTorneo').on('hidden.bs.modal', function () {
             $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
             $('.modal-body').find('div').removeClass('has-success has-error');
-            $('#form1').resetForm();
+            $('#ContentAdmin_panFracasoTorneo').css('display', 'none');
+            //$('form1').resetForm();
         });
         $('#agregarEdicion2').on('hidden.bs.modal', function () {
             $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
             $('.modal-body').find('div').removeClass('has-success has-error');
-            $('#form1').resetForm();
+            $('#ContentAdmin_panFracasoEdicion').css('display', 'none');
+           // $('form1').resetForm();
         });
         function closeModalTorneo() {
             $('#registrarTorneo').modal('hide');
@@ -300,4 +300,11 @@
             $('#agregarEdicion2').modal('show');
         }
     </script>
+
+    <%-- <script type="text/javascript">
+         function validarPuntajes() {
+             return parseInt($("#txtPuntosPorGanar").text()) > parseInt($("#txtPuntosPorEmpatar").text()) > parseInt($("#txtPuntosPorPerder").text());
+         };
+    </script>--%>
+
 </asp:Content>

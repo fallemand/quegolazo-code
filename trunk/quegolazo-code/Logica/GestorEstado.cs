@@ -17,13 +17,13 @@ namespace Logica
         /// <param name="nombre">Nombre del Estado</param>
         /// <param name="ambito">Nombre del Ámbito</param>
         /// <returns>Objeto Estado</returns>
-        public Estado obtenerUnEstadoPorNombre(string nombre, string ambito)
+        public Estado obtenerUnEstadoPorNombre(Estado.enumNombre nombre, Estado.enumAmbito ambito)
         {
             try
             {
                 DAOEstado daoEstado = new DAOEstado();
                 Estado estado = null;
-                estado = daoEstado.obtenerUnEstadoPorNombre(nombre, ambito);
+                estado = daoEstado.obtenerUnEstadoPorNombreYAmbito(nombre, ambito);
 
                 return estado;
             }

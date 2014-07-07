@@ -71,6 +71,9 @@ namespace Logica
             }
             catch (Exception ex)
             {
+                if (ex.Message.Contains("unique_nombre_torneo")) {
+                    throw new Exception("Ya existe una edición llamada " + edicionNueva.nombre + " para este campeonato. Por favor introduzca otro nombre.");
+                }
                throw new Exception(ex.Message);
             }
  
