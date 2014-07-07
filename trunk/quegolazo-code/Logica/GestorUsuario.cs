@@ -164,8 +164,27 @@ namespace Logica
         public string[] obtenerRolesDelUsuario(string email)
         {
             DAOUsuario daoUsuario=new DAOUsuario();
-            Usuario usuario = daoUsuario.buscarUsuarioPorEmail(email);
+            Usuario usuario = daoUsuario.obtenerUsuarioPorEmail(email);
             return new string[] { usuario.tipoUsuario.nombre };
+        }
+
+
+
+        public Usuario obtenerUsuario(string mail)
+        {
+            try
+            {
+                DAOUsuario gestorBD = new DAOUsuario();
+                Usuario usuario = gestorBD.obtenerUsuarioPorEmail(mail);
+                if(usuario==null)
+                throw new Exception("No se encuentra registrado ningún usuario con ese e-mail.");
+
+                return usuario;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

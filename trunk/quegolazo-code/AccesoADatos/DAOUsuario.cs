@@ -68,7 +68,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idUsuario"> Email del Usuario que se quiere buscar </param>
         /// <returns>Un objeto Usuario, o null si no encuentra el Usuario.</returns>
-        public Usuario buscarUsuarioPorEmail(string email)
+        public Usuario obtenerUsuarioPorEmail(string email)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -100,6 +100,7 @@ namespace AccesoADatos
                     respuesta.nombre = dr["nombre"].ToString();
                     respuesta.apellido = dr["apellido"].ToString();
                     respuesta.email = dr["email"].ToString();
+                    respuesta.codigo = dr["codigo"].ToString();
 
                     respuesta.contrasenia = dr["contrasenia"].ToString();
 
