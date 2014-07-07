@@ -64,6 +64,7 @@
     <Content Include="admin\registro.aspx" />
     <Content Include="admin\test.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="registrarEquipoByPau.aspx" />
     <Content Include="resources\css\bootstrap.css" />
     <Content Include="resources\css\bootstrapValidator.css" />
     <Content Include="resources\css\flaticon.css" />
@@ -146,6 +147,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="registrarEquipoByPau.aspx.cs">
+      <DependentUpon>registrarEquipoByPau.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="registrarEquipoByPau.aspx.designer.cs">
+      <DependentUpon>registrarEquipoByPau.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="resources\fonts\flaticon.eot" />

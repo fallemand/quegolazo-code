@@ -40,7 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GestorCancha.cs" />
+    <Compile Include="GestorDelegado.cs" />
     <Compile Include="GestorEdicion.cs" />
+    <Compile Include="GestorEquipo.cs" />
     <Compile Include="GestorEstado.cs" />
     <Compile Include="GestorTipoSuperficie.cs" />
     <Compile Include="GestorTorneo.cs" />
