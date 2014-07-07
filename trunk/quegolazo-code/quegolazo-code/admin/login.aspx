@@ -8,13 +8,13 @@
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-              <input type="text" id="txtEmail" class="form-control" placeholder="Email" minlength="5" email="true" maxlength="60" required="true" runat="server" />
+              <input type="text" id="txtEmail" class="form-control" placeholder="Email" email="true" rangelength="5, 100" required="true" runat="server" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-              <input type="password" id="txtContrasenia" class="form-control" placeholder="Contraseña" minlength="4" maxlength="20" required="true" runat="server" />
+              <input type="password" id="txtContrasenia" class="form-control" placeholder="Contraseña" rangelength="6, 16" required="true" runat="server" />
             </div>
           </div>
           <div class="clearfix">
