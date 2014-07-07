@@ -91,15 +91,21 @@ namespace quegolazo_code.admin
             }
         }
 
+        /// <summary>
+        /// Registra un nuevo torneo en la Base de datos
+        /// autor: Antonio Herrera
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
           protected void btnResgitrar_Click(object sender, EventArgs e)
           {             
             try 
 	           {
                     limpiarPaneles();
                     GestorDeArchivos gestor = new GestorDeArchivos();
-                    DAOTorneo daoTorneo = new DAOTorneo();
+                    GestorTorneo gestorTorneo = new GestorTorneo();
                     Torneo torneoNuevo = obtenerTorneoDelFormulario();
-                    torneoNuevo.idTorneo = daoTorneo.registrarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
+                    torneoNuevo.idTorneo = gestorTorneo.registrarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
                     if (imagenUpload.PostedFile.ContentLength > 0 && gestor.validarImagen(imagenUpload.PostedFile))
                         gestor.guardarImagen(imagenUpload.PostedFile, Server.MapPath("/imagenes/torneos/"), torneoNuevo.idTorneo.ToString() + ".png");
                     limpiarModalTorneo();

@@ -8,31 +8,31 @@
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-              <input type="text" runat="server" class="form-control" id="txtNombre"  minlength="3" maxlength="60" required="true" placeholder="Nombre" />
+              <input type="text" runat="server" class="form-control" id="txtNombre" rangelength="[3, 50]" required="true" placeholder="Nombre" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-              <input type="text" runat="server" class="form-control" id="txtApellido"  minlength="3" maxlength="60" required="true" placeholder="Apellido" />
+              <input type="text" runat="server" class="form-control" id="txtApellido"  rangelength="[3, 50]" required="true" placeholder="Apellido" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-              <input type="text" runat="server" class="form-control" id="txtEmail"  minlength="5" email="true" maxlength="60" required="true" placeholder="Email" />
+              <input type="text" runat="server" class="form-control" id="txtEmail" email="true" rangelength="[5, 100]" required="true" placeholder="Email" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-              <input type="password" runat="server" class="form-control" id="txtClave"  minlength="6" maxlength="20" required="true" placeholder="Contraseña" />
+              <input type="password" runat="server" class="form-control" id="txtClave" rangelength="[6, 16]" required="true" placeholder="Contraseña" />
             </div>
           </div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                <input type="password" runat="server" class="form-control"  minlength="6" maxlength="20" required="true" equalTo="#ContentAdmin_txtClave" placeholder="Repita Contraseña" />
+                <input type="password" runat="server" class="form-control"  rangelength="[6, 16]" required="true" equalTo="#ContentAdmin_txtClave" placeholder="Repita Contraseña" />
             </div>
           </div>
           <div class="clearfix">

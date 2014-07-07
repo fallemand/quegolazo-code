@@ -39,7 +39,8 @@ namespace AccesoADatos
 
                 string sql = @"SELECT *
                                 FROM Ediciones
-                                WHERE idTorneo = @idTorneo";
+                                WHERE idTorneo = @idTorneo
+                                ORDER BY idEdicion DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
                 cmd.CommandText = sql;

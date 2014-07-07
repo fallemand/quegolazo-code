@@ -80,5 +80,28 @@ namespace Logica
             }
         }
 
+
+        /// <summary>
+        /// Registra un nuevo Torneo 
+        /// </summary>
+        /// <param name="torneoNuevo">Objeto Torneo</param>
+        /// <param name="usuario">Objeto Usuario</param>
+        /// <returns>El id del torneo que se acaba de registrar</returns>
+        public int registrarTorneo(Torneo torneoNuevo, Usuario usuario)
+        {
+            try
+            {
+                DAOTorneo daoTorneo = new DAOTorneo();
+                int idTorneoRegistrado = daoTorneo.registrarTorneo(torneoNuevo, usuario);
+
+                return idTorneoRegistrado;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }
