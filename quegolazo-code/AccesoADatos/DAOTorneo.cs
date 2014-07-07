@@ -227,14 +227,23 @@ namespace AccesoADatos
             }
             catch (Exception e)
             {
-                throw new Exception("No se pudo registrar el campeonato: " + e.Message);
+                //Si ya existe un torneo con ese nombre
+                if(e.Message.Contains("unique_nombre"))
+                {                    
+                    throw new Exception("No se pudo registrar el torneo: Ya existe un torneo registrado con este nombre, por favor cambielo e intente nuevamente.");
+                }
+                //Si ya existe un torneo con ese nick
+                if (e.Message.Contains("unique_nick"))
+                {
+                    throw new Exception("No se pudo registrar el torneo: Ya existe un torneo registrado con esta URL, por favor cambiela e intente nuevamente.");
+                }
+                throw new Exception("No se pudo registrar el torneo: " + e.Message);
             }
             finally 
             {
                 if (con.State == ConnectionState.Open)
                 {
-                    con.Close();
-                    cmd.Connection = con;
+                    con.Close();                  
                 }
             }
         }

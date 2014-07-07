@@ -16,12 +16,14 @@ namespace Utils
     /// </summary>
     public static class GestorDropDownLists
     {
-        public static void cargarDropDownList(DataTable origenDeDatos, DropDownList ddlParaCargar, string valueField, string textField ) {
+        public static void cargarDropDownListDesdeTabla(DataTable origenDeDatos, DropDownList ddlParaCargar, string valueField, string textField ) {
             ddlParaCargar.DataSource = origenDeDatos;
             ddlParaCargar.DataValueField = valueField;
             ddlParaCargar.DataTextField = textField;
             ddlParaCargar.DataBind();
         }
+
+     
         
     }
 }

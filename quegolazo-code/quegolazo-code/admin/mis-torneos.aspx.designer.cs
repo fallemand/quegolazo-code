@@ -112,15 +112,6 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnResgitrarTorneo;
         
         /// <summary>
-        /// Control UpdateProgress2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
-        
-        /// <summary>
         /// Control UpdatePanel3.
         /// </summary>
         /// <remarks>
@@ -181,7 +172,7 @@ namespace quegolazo_code.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPuntosPorGanar;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPuntosPorGanar;
         
         /// <summary>
         /// Control txtPuntosPorEmpatar.
@@ -190,7 +181,7 @@ namespace quegolazo_code.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPuntosPorEmpatar;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPuntosPorEmpatar;
         
         /// <summary>
         /// Control txtPuntosPorPerder.
@@ -199,7 +190,7 @@ namespace quegolazo_code.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPuntosPorPerder;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPuntosPorPerder;
         
         /// <summary>
         /// Control UpdatePanel2.
