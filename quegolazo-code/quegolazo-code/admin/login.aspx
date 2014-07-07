@@ -49,7 +49,7 @@
             </asp:UpdatePanel>
         </fieldset>
         <div class="center-block margin-top sub-login">
-          <a href="#" >No recuerdo la contraseña</a> - <a href="registro.aspx" >Registrarme</a>
+          <a href="recuperar.aspx" >No recuerdo la contraseña</a> - <a href="registro.aspx" >Registrarme</a>
         </div>
       </div>
 </asp:Content>

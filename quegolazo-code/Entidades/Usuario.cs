@@ -15,6 +15,7 @@ namespace Entidades
         public string contrasenia { get; set; }
         public bool esActivo { get; set; }
         public string codigo { get; set; }
+        public string codigoRecuperacion { get; set; }
         public TipoUsuario tipoUsuario { get; set; }
     }
 }

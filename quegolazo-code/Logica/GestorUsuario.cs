@@ -11,6 +11,8 @@ namespace Logica
 {
    public class GestorUsuario
     {
+       public Usuario usuario;
+
         /// <summary>
         /// autor=Flor
         /// Método para tomar los datos de la pantalla y crear la entidad Usuario
@@ -120,7 +122,7 @@ namespace Logica
        /// </summary>
        /// <param name="Largo de la clave"></param>
        /// <returns></returns>
-        public static string crearCodigo()
+        public string crearCodigo()
         {
             string _allowedChars = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@$?";
             Byte[] randomBytes = new Byte[60];
@@ -169,7 +171,12 @@ namespace Logica
         }
 
 
-
+       /// <summary>
+       /// autor=Flor
+       /// metodo que trae un objeto usuario a partir de su e-mail
+       /// </summary>
+       /// <param name="mail"></param>
+       /// <returns></returns>
         public Usuario obtenerUsuario(string mail)
         {
             try
@@ -186,5 +193,33 @@ namespace Logica
                 throw new Exception(e.Message);
             }
         }
+
+
+
+        public string generarCodigoRecuperacion(string mail)
+        {
+            try
+            {
+                Usuario u = this.obtenerUsuario(mail);
+                if (u.esActivo)
+                {
+                    u.codigoRecuperacion = this.crearCodigo();
+                    DAOUsuario dUsuario = new DAOUsuario();
+                    dUsuario.registrarCodigoRecuperacion(u);
+
+                }
+                else
+                    throw new Exception("Debes activar tu cuenta para poder ingresar: <a href='activar.usuario.aspx?idUsuario=" + u.idUsuario + "'>Activar aquí</a>");
+
+                return u.codigoRecuperacion;
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+
+        }
+
     }
 }
