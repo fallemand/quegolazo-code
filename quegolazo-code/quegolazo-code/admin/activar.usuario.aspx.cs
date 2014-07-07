@@ -10,8 +10,10 @@ using Entidades;
 
 namespace quegolazo_code.admin
 {
+   
     public partial class activar_usuario : System.Web.UI.Page
     {
+        GestorUsuario gestorUsuario = new GestorUsuario();
         protected void Page_Load(object sender, EventArgs e)
         {
             string codigo = Request.QueryString["UserCode"];
@@ -27,14 +29,12 @@ namespace quegolazo_code.admin
                         int idUsuario = gestor.activarUsuario(codigo);
                         if (idUsuario == 0)
                         {
-                            throw new Exception("Su cuenta ya se encuentra activada.");
+                            throw new Exception("El código de activación no es válido o ya fue utilizado.");
                         }
 
                         LitEmail.Text = gestor.obtenerUsuario(idUsuario).email;
                         panExito.Visible = true;
                         litMensaje.Text = "Ha sido activada. <strong><a href='login.aspx'>Ingresa Aquí</a></strong>";
-
-
 
                     }
                     catch (Exception ex)
@@ -45,38 +45,54 @@ namespace quegolazo_code.admin
 
                     }
 
-
-
                 }
                 else
                 {
-                    panel_no_activacion.Visible = true;
-                    ocultarPaneles();
+                    try
+                    {
+                        panel_no_activacion.Visible = true;
+                        ocultarPaneles();
 
+                        if (Request.QueryString["idUsuario"] != null)
+                        {
+                            //Busco el usuario
+                            int idUsuario = Int32.Parse(Request.QueryString["idUsuario"]);
+                            Usuario u = gestorUsuario.obtenerUsuario(idUsuario);
+                            email.Value = u.email;
 
-   
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        panFracaso.Visible = true;
+                        litError.Text = ex.Message;
+                    }
+                
                 }
 
             }
         }
 
 
+        /// <summary>
+        /// metodo para renviar código de activación
+        /// autor: Flor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnEnviarMail_Click(object sender, EventArgs e)
         {
             try
             {
                 ocultarPaneles();
-                int idUsuario = Int32.Parse(Request.QueryString["idUsuario"]);
-                   
-                //Busco el usuario
-                    GestorUsuario gestorUsuario = new GestorUsuario();
-                    Usuario u = gestorUsuario.obtenerUsuario(idUsuario);
 
+               Usuario  usuario= gestorUsuario.obtenerUsuario(email.Value);
+                
                     //parámetros para mandar mail
                     string ActivationUrl = string.Empty;
                     string mail = email.Value;
                     string cuerpo = string.Empty;
-                    ActivationUrl = Server.HtmlEncode("http://localhost:12434/admin/activar.usuario.aspx?UserCode=" + u.codigo);
+                    ActivationUrl = Server.HtmlEncode("http://localhost:12434/admin/activar.usuario.aspx?UserCode=" + usuario.codigo);
 
                     GestorMails gestorMail = new GestorMails();
                     gestorMail.mandarMailActivacion(mail, "Activación de Cuenta", ActivationUrl);
@@ -90,6 +106,7 @@ namespace quegolazo_code.admin
                 LitError1.Text = ex.Message;
             }
         }
+
 
         private void ocultarPaneles()
         {
