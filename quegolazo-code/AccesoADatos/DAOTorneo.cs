@@ -39,7 +39,7 @@ namespace AccesoADatos
                 string sql = @"SELECT * 
                              FROM Torneos
                              WHERE idUsuario = @idUsuario
-                             ORDER BY nombre ASC";
+                             ORDER BY idTorneo DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idUsuario", idUsuario));
                 cmd.CommandText = sql;
