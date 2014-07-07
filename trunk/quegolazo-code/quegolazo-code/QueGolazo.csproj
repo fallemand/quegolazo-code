@@ -61,9 +61,11 @@
     <Content Include="admin\index.aspx" />
     <Content Include="admin\login.aspx" />
     <Content Include="admin\mis-torneos.aspx" />
+    <Content Include="admin\recuperar-contrasenia.aspx" />
     <Content Include="admin\registro.aspx" />
     <Content Include="admin\test.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="admin\recuperar.aspx" />
     <Content Include="registrarEquipoByPau.aspx" />
     <Content Include="resources\css\bootstrap.css" />
     <Content Include="resources\css\bootstrapValidator.css" />
@@ -129,6 +131,13 @@
     <Compile Include="admin\mis-torneos.aspx.designer.cs">
       <DependentUpon>mis-torneos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\recuperar-contrasenia.aspx.cs">
+      <DependentUpon>recuperar-contrasenia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\recuperar-contrasenia.aspx.designer.cs">
+      <DependentUpon>recuperar-contrasenia.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\registro.aspx.cs">
       <DependentUpon>registro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -145,6 +154,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="admin\recuperar.aspx.cs">
+      <DependentUpon>recuperar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\recuperar.aspx.designer.cs">
+      <DependentUpon>recuperar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="registrarEquipoByPau.aspx.cs">

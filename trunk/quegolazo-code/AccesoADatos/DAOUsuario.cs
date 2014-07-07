@@ -64,7 +64,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Busca un Usuario con por un email determinado en la base de datos.
-        /// autor: Paula Pedrosa
+        /// autor: Paula Pedrosa y Flor
         /// </summary>
         /// <param name="idUsuario"> Email del Usuario que se quiere buscar </param>
         /// <returns>Un objeto Usuario, o null si no encuentra el Usuario.</returns>
@@ -95,22 +95,14 @@ namespace AccesoADatos
 
                 while (dr.Read())
                 {
-                    respuesta = new Usuario();
-                    respuesta.idUsuario = Int32.Parse(dr["idUsuario"].ToString());
-                    respuesta.nombre = dr["nombre"].ToString();
-                    respuesta.apellido = dr["apellido"].ToString();
-                    respuesta.email = dr["email"].ToString();
-                    respuesta.codigo = dr["codigo"].ToString();
-
-                    respuesta.contrasenia = dr["contrasenia"].ToString();
-
-                    if (dr["esActivo"].ToString().Equals("1"))
-                        respuesta.esActivo = true;
-                    else
-                        respuesta.esActivo = false;
-
-                    respuesta.codigo = dr["codigo"].ToString();
-                    respuesta.tipoUsuario = gestorTipoUsuario.obtenerTipoUsuarioPorId(Int32.Parse(dr["idTipoUsuario"].ToString()));
+                    respuesta = new Usuario(){
+                    idUsuario = Int32.Parse(dr["idUsuario"].ToString()),
+                    nombre = dr["nombre"].ToString(),
+                    apellido = dr["apellido"].ToString(),
+                    email = dr["email"].ToString(),
+                    codigo = dr["codigo"].ToString(),
+                    esActivo = bool.Parse(dr["esActivo"].ToString()),
+                    tipoUsuario = gestorTipoUsuario.obtenerTipoUsuarioPorId(Int32.Parse(dr["idTipoUsuario"].ToString()))};
 
                 }
                 return respuesta;
@@ -340,6 +332,54 @@ namespace AccesoADatos
             {
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
+            }
+        }
+
+
+        public void registrarCodigoRecuperacion(Usuario u)
+        {
+
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+
+            try
+            {
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                cmd.Connection = con;
+                string sql = @"UPDATE Usuarios SET codigoRecuperacion=@codigo 
+                               WHERE idUsuario=@idUsuario";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@codigo", u.codigoRecuperacion);
+                cmd.Parameters.AddWithValue("@idUsuario", u.idUsuario);
+                cmd.CommandText = sql;
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                if (cmd.ExecuteNonQuery() == 0)
+                    throw new Exception();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ha ocurrido un problema y no se ha podido completar la operación");
+            }
+            finally
+            {
+
+                if (con != null && con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+
             }
         }
     }
