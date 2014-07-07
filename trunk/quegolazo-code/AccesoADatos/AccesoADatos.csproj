@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOCancha.cs" />
+    <Compile Include="DAODelegado.cs" />
     <Compile Include="DAOEdicion.cs" />
+    <Compile Include="DAOEquipo.cs" />
     <Compile Include="DAOEstado.cs" />
     <Compile Include="DAOTipoSuperficie.cs" />
     <Compile Include="DAOTipoUsuario.cs" />
