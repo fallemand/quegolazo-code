@@ -33,6 +33,24 @@
         Teléfono: <input type="text" class="form-control" id="txtTelefonoDelegadoPrincipal" runat="server" name="telefonoDelegadoPrincipal" required="true" placeholder="Telefono del Delegado Principal">
          <br />
         Domicilio: <input type="text" class="form-control" id="txtDomicilioDelegadoPrincipal" runat="server" name="domicilioDelegadoPrincipal" placeholder="Domicilio del Delegado Principal"><br />
+         <input type="hidden" class="form-control" id="txtDelegadoPrincipalAgregado" runat="server">
+         <asp:Button ID="btnAgregarDelegadoPrincipal" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegadoPrincipal_Click" CausesValidation="False" />
+
+         <br />
+
+         <br />
+        Delegado Opcional<br />
+         Nombre: <input type="text" class="form-control" id="txtNombreDelegadoOpcional" runat="server" name="nombreDelegadoOpcional" rangelength="3, 50" placeholder="Nombre del Delegado Opcional">
+         <br />
+        Email: <input type="text" class="form-control" id="txtEmailDelegadoOpcional" runat="server" name="emailDelegadoOpcional" rangelength="5, 100" placeholder="Email del Delegado Opcional">
+         <br />
+        Teléfono: <input type="text" class="form-control" id="txtTelefonoDelegadoOpcional" runat="server" name="telefonoDelegadoOpcional"  placeholder="Telefono del Delegado Opcional">
+         <br />
+        Domicilio: <input type="text" class="form-control" id="txtDomicilioDelegadoOpcional" runat="server" name="domicilioDelegadoOpcional" placeholder="Domicilio del Delegado Opcional"><br />
+        <input type="hidden" class="form-control" id="txtDelegadoOpcionalAgregado" runat="server"> 
+        <asp:Button ID="btnAgregarDelegadoOpcional" runat="server" Text="AgregarDelegado" OnClick="btnAgregarDelegadoOpcional_Click" />
+         <br />
+         <br />
 &nbsp;<asp:Button ID="btnRegistrarEquipo" runat="server" Text="Registrar Equipo" OnClick="btnRegistrarEquipo_Click" />
 
     </div>

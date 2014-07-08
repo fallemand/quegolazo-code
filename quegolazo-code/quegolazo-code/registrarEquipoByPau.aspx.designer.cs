@@ -112,6 +112,78 @@ namespace quegolazo_code {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtDomicilioDelegadoPrincipal;
         
         /// <summary>
+        /// Control txtDelegadoPrincipalAgregado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtDelegadoPrincipalAgregado;
+        
+        /// <summary>
+        /// Control btnAgregarDelegadoPrincipal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarDelegadoPrincipal;
+        
+        /// <summary>
+        /// Control txtNombreDelegadoOpcional.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNombreDelegadoOpcional;
+        
+        /// <summary>
+        /// Control txtEmailDelegadoOpcional.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtEmailDelegadoOpcional;
+        
+        /// <summary>
+        /// Control txtTelefonoDelegadoOpcional.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTelefonoDelegadoOpcional;
+        
+        /// <summary>
+        /// Control txtDomicilioDelegadoOpcional.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDomicilioDelegadoOpcional;
+        
+        /// <summary>
+        /// Control txtDelegadoOpcionalAgregado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtDelegadoOpcionalAgregado;
+        
+        /// <summary>
+        /// Control btnAgregarDelegadoOpcional.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarDelegadoOpcional;
+        
+        /// <summary>
         /// Control btnRegistrarEquipo.
         /// </summary>
         /// <remarks>
