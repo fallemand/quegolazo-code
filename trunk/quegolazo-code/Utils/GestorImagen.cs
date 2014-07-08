@@ -16,13 +16,18 @@ namespace Utils
         private static double tamanioMax = 1048576; // 1MB = 1048576bytes
         private static string extension = ".jpg";
         private static string pathTorneos = "torneos/";
+        private static string pathTemp = "temp/";
 
+        /// <summary>
+        /// Guarda las imágenes validándolas. Recibe por parámetro el archivo, el id, y que tipo de image es (torneo, equipo, etc)
+        /// autor: Facundo Allemand
+        /// </summary>
         public static bool guardarImagenTorneo(HttpPostedFile file, int idTorneo) {
-            if (!Directory.Exists(pathImagenes + "temp/"))
-                Directory.CreateDirectory(pathImagenes + "temp/");
-            if (!Directory.Exists(pathImagenes + "torneos/"))
-                Directory.CreateDirectory(pathImagenes + "torneos/");
-            string rutaImagenTemporal = pathImagenes + "temp/" + "img.temp";
+            if (!Directory.Exists(pathImagenes + pathTemp))
+                Directory.CreateDirectory(pathImagenes + pathTemp);
+            if (!Directory.Exists(pathImagenes + pathTorneos))
+                Directory.CreateDirectory(pathImagenes + pathTorneos);
+            string rutaImagenTemporal = pathImagenes + pathTemp + "img.temp";
             try
             {
                 if (file.ContentLength > tamanioMax)
@@ -52,6 +57,10 @@ namespace Utils
             }
         }
 
+        /// <summary>
+        /// Se encarga de borrar las imágenes. Recibe por parámetro elel id, y que tipo de image es (torneo, equipo, etc)
+        /// autor: Facundo Allemand
+        /// </summary>
         public static void borrrarImagenTorneo(int idTorneo)
         {
             try
@@ -71,6 +80,10 @@ namespace Utils
             }
         }
 
+        /// <summary>
+        /// Valida si un archivo es una imagen. No se fija en la extensión sino en el fichero.
+        /// autor: Facundo Allemand
+        /// </summary>
         public static void validarImagen(string rutaImagen)
         {
             Image img=null;
@@ -98,10 +111,13 @@ namespace Utils
             }
         }
 
+        /// <summary>
+        /// Crea una imagen del tamaño indicado a partir de otra imagen
+        /// autor: Facundo Allemand
+        /// </summary>
         public static Bitmap CrearImagen(string lcFilename, int lnWidth, int lnHeight)
         {
             System.Drawing.Bitmap bmpOut = null;
-
             try
             {
                 Bitmap loBMP = new Bitmap(lcFilename);
@@ -128,7 +144,6 @@ namespace Utils
                     decimal lnTemp = loBMP.Width * lnRatio;
                     lnNewWidth = (int)lnTemp;
                 }
-
                 bmpOut = new Bitmap(lnNewWidth, lnNewHeight);
                 Graphics g = Graphics.FromImage(bmpOut);
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
@@ -140,14 +155,18 @@ namespace Utils
 
                 loBMP.Dispose();
             }
-            catch
+            catch(Exception)
             {
-                return null;
+                throw;
             }
             return bmpOut;
         }
     }
 
+    /// <summary>
+    /// Struct que define la abreviación de la imagen, el ancho y el alto.
+    /// autor: Facundo Allemand
+    /// </summary>
     public struct Imagen
     {
         public string abreviacion;
