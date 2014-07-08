@@ -277,13 +277,11 @@
         $('#registrarTorneo').on('hidden.bs.modal', function () {
             $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
             $('.modal-body').find('div').removeClass('has-success has-error');
-            $('#ContentAdmin_panFracasoTorneo').css('display', 'none');
-            //$('form1').resetForm();
+           //$('form1').resetForm();
         });
         $('#agregarEdicion2').on('hidden.bs.modal', function () {
             $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
             $('.modal-body').find('div').removeClass('has-success has-error');
-            $('#ContentAdmin_panFracasoEdicion').css('display', 'none');
            // $('form1').resetForm();
         });
         function closeModalTorneo() {

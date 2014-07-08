@@ -148,9 +148,10 @@ namespace quegolazo_code.admin
               txtNombreEdicion.Value = "";
               ddlTamañoCancha.ClearSelection();
               ddlTipoSuperficie.ClearSelection();
-              txtPuntosPorGanar.Value = "";
-              txtPuntosPorEmpatar.Value = "";
-              txtPuntosPorPerder.Value = "";
+              txtPuntosPorGanar.Value = "3";
+              txtPuntosPorEmpatar.Value = "1";
+              txtPuntosPorPerder.Value = "0";
+              panFracasoEdicion.Visible = false;
           }
 
         /// <summary>
@@ -254,6 +255,7 @@ namespace quegolazo_code.admin
           {
               if (e.CommandName == "agregarEdicion")
               {
+                  limpiarModalEdicion();
                   GestorTorneo gestorTorneo = new GestorTorneo();
                   idTorneo = e.CommandArgument.ToString();
                   Torneo t = gestorTorneo.obtenerTorneoPorId(Int32.Parse(idTorneo));
