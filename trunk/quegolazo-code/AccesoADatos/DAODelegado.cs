@@ -61,5 +61,62 @@ namespace AccesoADatos
                 }
             }
         }
+
+        /// <summary>
+        /// Obtiene un Delegado por id
+        /// autor: Paula Pedrosa
+        /// </summary>
+        /// <param name="idDelegado">Id del delegado a obtener</param>
+        /// <returns>Objeto delegado</returns>
+        public Delegado obtenerDelegadoPorId(int idDelegado)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+
+
+            Delegado respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                string sql = @"SELECT *
+                                FROM Delegados
+                                WHERE idDelegado = @idDelegado";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idDelegado", idDelegado);
+                cmd.CommandText = sql;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    respuesta = new Delegado();
+                    respuesta.idDelegado = Int32.Parse(dr["idDelegado"].ToString());
+                    respuesta.nombre = dr["nombre"].ToString();
+                    respuesta.email = dr["email"].ToString();
+                    respuesta.telefono = dr["telefono"].ToString();
+
+                    if (dr["domicilio"] != System.DBNull.Value)
+                        respuesta.domicilio = dr["domicilio"].ToString();
+                    else
+                        respuesta.domicilio = null;
+                    
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al intentar recuperar el delegado: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
