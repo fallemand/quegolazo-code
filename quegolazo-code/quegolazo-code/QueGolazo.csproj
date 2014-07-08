@@ -86,7 +86,9 @@
     <Content Include="resources\js\jquery.min.js" />
     <Content Include="resources\js\jquery.validate.js" />
     <Content Include="resources\js\messages_es_AR.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\activar.usuario.aspx.cs">
