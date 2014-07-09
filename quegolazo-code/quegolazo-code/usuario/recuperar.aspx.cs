@@ -30,7 +30,7 @@ namespace quegolazo_code
                 string RecuperacionUrl = string.Empty;
                 string mail = email.Value;
                 string cuerpo = string.Empty;
-                RecuperacionUrl = Server.HtmlEncode("http://localhost:12434/admin/recuperar-contrasenia.aspx?Code=" + codigo);
+                RecuperacionUrl = Server.HtmlEncode("http://localhost:12434/usuario/recuperar-contrasenia.aspx?Code=" + codigo);
 
                 GestorMails gestorMail = new GestorMails();
                 gestorMail.mandarMailRecuperacion(mail, "Recuperación de Contraseña",RecuperacionUrl);
