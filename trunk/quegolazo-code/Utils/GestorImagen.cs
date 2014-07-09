@@ -12,10 +12,23 @@ namespace Utils
 {
     public class GestorImagen
     {
-        private static string pathImagenes = System.Web.HttpContext.Current.Server.MapPath("/resources/img/");
         private static double tamanioMax = 1048576; // 1MB = 1048576bytes
         private static string extension = ".jpg";
+
+        //Paths de Imágenes
+        private static string pathImagenes = System.Web.HttpContext.Current.Server.MapPath("/resources/img/");
         private static string pathTorneos = "torneos/";
+        private static string pathEquipos = "equipos/";
+        private static string pathComplejos = "complejos/";
+        private static string pathJugadores = "jugadores/";
+        private static string pathTemp = "temp/";
+
+        //Tipos de Imágenes
+        public const int TORNEO = 1;
+        public const int EQUIPO = 2;
+        public const int COMPLEJO = 3;
+        public const int JUGADOR = 4;
+
         /// <summary>
         /// Representa los 3 tamaños de imagenes que se guardan en el sistema.
         /// Autor: Antonio Herrera
@@ -24,17 +37,13 @@ namespace Utils
         {
             GRANDE, MEDIANA, CHICA
         }
-        private static string pathTemp = "temp/";
 
         /// <summary>
         /// Guarda las imágenes validándolas. Recibe por parámetro el archivo, el id, y que tipo de image es (torneo, equipo, etc)
         /// autor: Facundo Allemand
         /// </summary>
-        public static bool guardarImagenTorneo(HttpPostedFile file, int idTorneo) {
-            if (!Directory.Exists(pathImagenes + pathTemp))
-                Directory.CreateDirectory(pathImagenes + pathTemp);
-            if (!Directory.Exists(pathImagenes + pathTorneos))
-                Directory.CreateDirectory(pathImagenes + pathTorneos);
+        public static bool guardarImagenTorneo(HttpPostedFile file, int id, int tipoImagen) {
+            crearDirectorios();
             string rutaImagenTemporal = pathImagenes + pathTemp + "img.temp";
             try
             {
@@ -50,7 +59,13 @@ namespace Utils
                 foreach (Imagen imagen in imagenes)
                 {
                     Bitmap img = CrearImagen(rutaImagenTemporal, imagen.width, imagen.height);
-                    img.Save(pathImagenes + pathTorneos + idTorneo + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    switch (tipoImagen)
+                    {
+                        case TORNEO: img.Save(pathImagenes + pathTorneos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg);break;
+                        case EQUIPO: img.Save(pathImagenes + pathEquipos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                        case COMPLEJO: img.Save(pathImagenes + pathComplejos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                        case JUGADOR: img.Save(pathImagenes + pathJugadores + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                    }
                     img.Dispose();
                 }
                 return true;
@@ -65,23 +80,42 @@ namespace Utils
             }
         }
 
+        private static void crearDirectorios()
+        {
+            if (!Directory.Exists(pathImagenes + pathTemp))
+                Directory.CreateDirectory(pathImagenes + pathTemp);
+            if (!Directory.Exists(pathImagenes + pathTorneos))
+                Directory.CreateDirectory(pathImagenes + pathTorneos);
+            if (!Directory.Exists(pathImagenes + pathEquipos))
+                Directory.CreateDirectory(pathImagenes + pathEquipos);
+            if (!Directory.Exists(pathImagenes + pathComplejos))
+                Directory.CreateDirectory(pathImagenes + pathComplejos);
+            if (!Directory.Exists(pathImagenes + pathJugadores))
+                Directory.CreateDirectory(pathImagenes + pathJugadores);
+        }
+
         /// <summary>
         /// Se encarga de borrar las imágenes. Recibe por parámetro elel id, y que tipo de image es (torneo, equipo, etc)
         /// autor: Facundo Allemand
         /// </summary>
-        public static void borrrarImagenTorneo(int idTorneo)
+        public static void borrrarImagenTorneo(int id, int tipoImagen)
         {
             try
             {
-                string[] files = System.IO.Directory.GetFiles(pathImagenes + pathTorneos, idTorneo + "*" + extension, System.IO.SearchOption.TopDirectoryOnly);
+                string[] files = null;
+                switch (tipoImagen)
+                {
+                    case TORNEO: files = System.IO.Directory.GetFiles(pathImagenes + pathTorneos, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
+                    case EQUIPO: files = System.IO.Directory.GetFiles(pathImagenes + pathEquipos, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
+                    case COMPLEJO: files = System.IO.Directory.GetFiles(pathImagenes + pathComplejos, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
+                    case JUGADOR: files = System.IO.Directory.GetFiles(pathImagenes + pathJugadores, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
+                }
                 if (files.Length > 0)
                 {
                     foreach (string imagen in files)
-                    {
                         System.IO.File.Delete(imagen);
                     }
                 }
-            }
             catch (Exception)
             {
                 throw;
@@ -198,11 +232,8 @@ namespace Utils
                     return "-sm";
                 default:
                     return "-bg";
-
             }
-
         }
-
     }
 
     /// <summary>
@@ -215,8 +246,4 @@ namespace Utils
         public int width;
         public int height;
     }
-
-
-
-
 }
