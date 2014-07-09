@@ -76,10 +76,10 @@
                 <AnonymousTemplate>
                     <ul class="nav navbar-nav">
                       <li class="dropdown">
-                        <a href="login.aspx"><span class="glyphicon glyphicon-user"></span> Ingresar</a>
+                        <a href="/usuario/login.aspx"><span class="glyphicon glyphicon-user"></span> Ingresar</a>
                       </li>
                       <li class="dropdown">
-                        <a href="registro.aspx"><span class="glyphicon glyphicon-plus-sign"></span> Registrarme</a>
+                        <a href="/usuario/registro.aspx"><span class="glyphicon glyphicon-plus-sign"></span> Registrarme</a>
                       </li>
                     </ul>
                 </AnonymousTemplate>

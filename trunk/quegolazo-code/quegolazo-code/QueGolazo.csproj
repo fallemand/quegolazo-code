@@ -57,15 +57,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="admin\activar.usuario.aspx" />
+    <Content Include="usuario\activar.usuario.aspx" />
     <Content Include="admin\index.aspx" />
-    <Content Include="admin\login.aspx" />
+    <Content Include="usuario\login.aspx" />
     <Content Include="admin\mis-torneos.aspx" />
-    <Content Include="admin\recuperar-contrasenia.aspx" />
-    <Content Include="admin\registro.aspx" />
+    <Content Include="usuario\recuperar-contrasenia.aspx" />
+    <Content Include="usuario\registro.aspx" />
     <Content Include="admin\test.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="admin\recuperar.aspx" />
+    <Content Include="usuario\recuperar.aspx" />
     <Content Include="registrarEquipoByPau.aspx" />
     <Content Include="resources\css\bootstrap.css" />
     <Content Include="resources\css\bootstrapValidator.css" />
@@ -91,11 +91,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="admin\activar.usuario.aspx.cs">
+    <Compile Include="usuario\activar.usuario.aspx.cs">
       <DependentUpon>activar.usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\activar.usuario.aspx.designer.cs">
+    <Compile Include="usuario\activar.usuario.aspx.designer.cs">
       <DependentUpon>activar.usuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\admin.Master.cs">
@@ -119,11 +119,11 @@
     <Compile Include="admin\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\login.aspx.cs">
+    <Compile Include="usuario\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\login.aspx.designer.cs">
+    <Compile Include="usuario\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\mis-torneos.aspx.cs">
@@ -133,18 +133,18 @@
     <Compile Include="admin\mis-torneos.aspx.designer.cs">
       <DependentUpon>mis-torneos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\recuperar-contrasenia.aspx.cs">
+    <Compile Include="usuario\recuperar-contrasenia.aspx.cs">
       <DependentUpon>recuperar-contrasenia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\recuperar-contrasenia.aspx.designer.cs">
+    <Compile Include="usuario\recuperar-contrasenia.aspx.designer.cs">
       <DependentUpon>recuperar-contrasenia.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\registro.aspx.cs">
+    <Compile Include="usuario\registro.aspx.cs">
       <DependentUpon>registro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\registro.aspx.designer.cs">
+    <Compile Include="usuario\registro.aspx.designer.cs">
       <DependentUpon>registro.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\test.aspx.cs">
@@ -157,11 +157,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="admin\recuperar.aspx.cs">
+    <Compile Include="usuario\recuperar.aspx.cs">
       <DependentUpon>recuperar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\recuperar.aspx.designer.cs">
+    <Compile Include="usuario\recuperar.aspx.designer.cs">
       <DependentUpon>recuperar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -34,7 +34,7 @@ namespace Logica
                     email = mail,
                     contrasenia = encriptarContrasenia(contrasenia),
                     codigo = crearCodigo(),
-                    tipoUsuario = new TipoUsuario { idTipoUsuario = 1, nombre = "Administrador" },
+                    tipoUsuario = new TipoUsuario { idTipoUsuario = 1, nombre = "Cliente" },
                 };
 
                 DAOUsuario gestorBD = new DAOUsuario();
