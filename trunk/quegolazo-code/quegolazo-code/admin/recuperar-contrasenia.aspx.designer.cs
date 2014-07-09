@@ -40,39 +40,39 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnGuardarClave;
         
         /// <summary>
-        /// Control panExito1.
+        /// Control panExito.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panExito1;
+        protected global::System.Web.UI.WebControls.Panel panExito;
         
         /// <summary>
-        /// Control LitExito1.
+        /// Control LitExito.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal LitExito1;
+        protected global::System.Web.UI.WebControls.Literal LitExito;
         
         /// <summary>
-        /// Control panFracaso1.
+        /// Control panFracaso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panFracaso1;
+        protected global::System.Web.UI.WebControls.Panel panFracaso;
         
         /// <summary>
-        /// Control LitError1.
+        /// Control LitError.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal LitError1;
+        protected global::System.Web.UI.WebControls.Literal LitError;
     }
 }

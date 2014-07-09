@@ -195,7 +195,12 @@ namespace Logica
         }
 
 
-
+       /// <summary>
+       /// Metodo para generar codigo de recuperacicion cuando el usuario olvido su clave
+       /// autor=Flor
+       /// </summary>
+       /// <param name="mail"></param>
+       /// <returns></returns>
         public string generarCodigoRecuperacion(string mail)
         {
             try
@@ -219,6 +224,29 @@ namespace Logica
             }
 
 
+        }
+
+
+       /// <summary>
+       /// Metodo para encriptar nueva clave y llamar al metodo apra guardarla en la bd
+       /// autor=Flor
+       /// </summary>
+       /// <param name="codigo"></param>
+       /// <param name="clave"></param>
+       /// <returns></returns>
+        public int reestablecerContrasenia(string codigo, string clave)
+        {
+            try
+            {
+                string claveEncriptada = encriptarContrasenia(clave);
+                DAOUsuario gestorBD = new DAOUsuario();
+                int idUsuario = gestorBD.RestablecerContrasenia(codigo,claveEncriptada);
+                return idUsuario;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
     }
