@@ -24,10 +24,10 @@
             </span>
                
              </div>
-                <asp:Panel ID="panExito1" runat="server" CssClass="alert alert-success" Visible="False">
-                <asp:Literal ID="LitExito1" runat="server"></asp:Literal></asp:Panel>
-            <asp:Panel ID="panFracaso1" runat="server" CssClass="alert alert-danger" Visible="False">
-                <asp:Literal ID="LitError1" runat="server"></asp:Literal></asp:Panel>
+                <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success" Visible="False">
+                <asp:Literal ID="LitExito" runat="server"></asp:Literal></asp:Panel>
+            <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
+                <asp:Literal ID="LitError" runat="server"></asp:Literal></asp:Panel>
       
             </fieldset>
        

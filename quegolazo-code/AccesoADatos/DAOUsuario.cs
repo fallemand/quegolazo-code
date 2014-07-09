@@ -335,7 +335,11 @@ namespace AccesoADatos
             }
         }
 
-
+      /// <summary>
+      /// Metodo para registrar el codigo de recuperacion de contraseña
+      /// autor=Flor
+      /// </summary>
+      /// <param name="u"></param>
         public void registrarCodigoRecuperacion(Usuario u)
         {
 
@@ -382,5 +386,93 @@ namespace AccesoADatos
 
             }
         }
+
+
+      /// <summary>
+      /// metodo para grabar nueva clave, borrar el codigo. Devuelve el id del usuario afectado
+      /// autor=Flor
+      /// </summary>
+      /// <param name="codigo"></param>
+      /// <param name="contrasenia"></param>
+      /// <returns></returns>
+        public int RestablecerContrasenia(string codigo,string contrasenia)
+        {
+
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;
+
+            try
+            {
+                int idUsuario = 0;
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                if (codigo != string.Empty)
+                {
+
+                    trans = con.BeginTransaction();
+                    cmd.Connection = con;
+                    cmd.Transaction = trans;
+
+                    //Resgistrar nueva contrasenia
+                    string sql = @"UPDATE Usuarios SET contrasenia=@clave 
+                                    WHERE codigoRecuperacion=@UserCodigo";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@clave", contrasenia);
+                    cmd.Parameters.AddWithValue("@UserCodigo", codigo);
+                    cmd.CommandText = sql;
+                    cmd.ExecuteNonQuery();
+
+                   //Obtener id de usuario
+                   sql = @"SELECT idUsuario
+                                FROM Usuarios
+                                WHERE codigoRecuperacion=@UserCodigo";
+                   cmd.Parameters.Clear();
+                   cmd.Parameters.AddWithValue("@UserCodigo", codigo);
+                   cmd.CommandText = sql;
+                   SqlDataReader dr = cmd.ExecuteReader();
+
+                   while (dr.Read())
+                   {
+                       idUsuario = Int32.Parse(dr["idUsuario"].ToString());
+                   }
+                   dr.Close();
+
+                    //Borrar código de Recuperacion
+                    sql = @"UPDATE Usuarios SET codigoRecuperacion=@codigo
+                            WHERE idUsuario=@idUsuario";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@codigo", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    cmd.CommandText = sql;
+                     cmd.ExecuteNonQuery();
+
+                    trans.Commit();
+                }
+                return idUsuario;
+            }
+            catch (Exception ex)
+            {
+                trans.Rollback();
+                throw new Exception("Ha ocurrido un problema y no se ha podido registrar tu nueva contraseña. Comunícate con nuestro soporte técnico.");
+            }
+            finally
+            {
+
+                if (con != null && con.State == ConnectionState.Open)
+                {
+                    con.Close();
+
+                }
+
+            }
+
+        }
+
     }
 }
