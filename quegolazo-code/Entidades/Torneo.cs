@@ -15,7 +15,7 @@ namespace Entidades
         public List<Edicion> ediciones { get; set; }
         public Usuario usuario { get; set; }
         public string descripcion { get; set; }
-      
+        public string rutaImagen { get; set; }
 
     }
 }

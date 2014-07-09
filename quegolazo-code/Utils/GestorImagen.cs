@@ -16,6 +16,14 @@ namespace Utils
         private static double tamanioMax = 1048576; // 1MB = 1048576bytes
         private static string extension = ".jpg";
         private static string pathTorneos = "torneos/";
+        /// <summary>
+        /// Representa los 3 tamaños de imagenes que se guardan en el sistema.
+        /// Autor: Antonio Herrera
+        /// </summary>
+        public enum enumDimensionImagen
+        {
+            GRANDE, MEDIANA, CHICA
+        }
         private static string pathTemp = "temp/";
 
         /// <summary>
@@ -161,6 +169,40 @@ namespace Utils
             }
             return bmpOut;
         }
+
+        /// <summary>
+        /// Veifica si la imagen esta disponible en el sistema de archivos para ser mostrada
+        /// Autor: Antonio Herrera
+        /// </summary>
+        /// <param name="ubicacionDeLaImagen">Ruta de la imagen a verificar</param>
+        /// <returns>True si existe, false en caso contrario</returns>
+        public static bool existeImagen(string ubicacionDeLaImagen) {
+            return File.Exists(ubicacionDeLaImagen);
+        }
+
+        /// <summary>
+        /// Dveuelve la abreviatura correspondiente al nombre de la imagen segun su tamaño.
+        /// Autor: Antonio Herrera
+        /// </summary>
+        /// <param name="dimension">El tamaño de la imagen que se desea obtener</param>
+        /// <returns>un string con la abreviatura correspondiente</returns>
+        public static string devolverAbreviaturaDeImagen(enumDimensionImagen dimension)
+        {
+            switch (dimension)
+            {
+                case enumDimensionImagen.GRANDE:
+                    return "-bg";
+                case enumDimensionImagen.MEDIANA:
+                    return "-nm";
+                case enumDimensionImagen.CHICA:
+                    return "-sm";
+                default:
+                    return "-bg";
+
+            }
+
+        }
+
     }
 
     /// <summary>
@@ -173,4 +215,8 @@ namespace Utils
         public int width;
         public int height;
     }
+
+
+
+
 }

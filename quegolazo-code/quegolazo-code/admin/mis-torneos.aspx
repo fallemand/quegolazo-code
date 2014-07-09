@@ -18,7 +18,7 @@
                                     <div class="panel-heading header clearfix">
                                         <div class="col-md-1">
                                             <div class="thumbnail nomargin-bottom">
-                                                <img src="/imagenes/torneos/<%# Eval("idTorneo") %>.png" />
+                                                <img src="<%# Eval("rutaImagen") %>" />
                                             </div>
                                         </div>
                                         <div class="col-md-5">
@@ -96,20 +96,20 @@
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">Nombre</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="txtNombreTorneo" runat="server" name="nombreTorneo" minlength="3" maxlength="60" required="true" placeholder="Nombre del Nuevo Torneo">
+                                        <input type="text" class="form-control" id="txtNombreTorneo" runat="server" name="nombreTorneo" minlength="3" maxlength="50" required="required" placeholder="Nombre del Nuevo Torneo">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">URL</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" name="urlTorneo" id="txtUrlTorneo" runat="server" nospace="true" minlength="3" maxlength="60" required="true" placeholder="url-del-torneo">
+                                        <input type="text" class="form-control" name="urlTorneo" id="txtUrlTorneo" runat="server" nospace="true" minlength="3" maxlength="100" required="required" placeholder="url-del-torneo">
                                         <span class="help-block">Nombre de la url del torneo. No podrá cambiarlo. www.quegolazo.com/<b>url-del-torneo</b></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="textArea" class="col-lg-2 control-label">Descripción</label>
                                     <div class="col-lg-10">
-                                        <textarea class="form-control" id="txtDescripcion" runat="server" rows="3"></textarea>
+                                        <textarea class="form-control" id="txtDescripcion" runat="server" maxlength="400" rows="3"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -120,7 +120,7 @@
                                                 <div class="fileinput-preview thumbnail" data-trigger="fileinput"></div>
                                                 <div>
                                                     <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><asp:FileUpload ID="imagenUpload" runat="server" /></span>
-                                                    <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Eliminar</a>
+                                                    <a href="#" class="btn btn-default btn-xs fileinput-exists" id="limpiaImagen" data-dismiss="fileinput">Eliminar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -285,11 +285,12 @@
            // $('form1').resetForm();
         });
         function closeModalTorneo() {
-            $('#registrarTorneo').modal('hide');
+            $('#limpiaImagen').click();
+            $('#registrarTorneo').modal('hide');           
         }
         function openModalTorneo() {
             $('#registrarTorneo').removeClass("fade");
-            $('#registrarTorneo').modal('show');
+            $('#registrarTorneo').modal('show');           
         }
         function closeModalEdicion() {
             $('#agregarEdicion2').modal('hide');

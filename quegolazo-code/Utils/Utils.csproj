@@ -44,7 +44,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GestorDeArchivos.cs" />
     <Compile Include="GestorExtra.cs" />
     <Compile Include="GestorImagen.cs" />
     <Compile Include="GestorMails.cs" />
