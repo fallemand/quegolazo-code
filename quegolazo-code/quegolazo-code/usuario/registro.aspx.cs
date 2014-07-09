@@ -34,7 +34,7 @@ namespace quegolazo_code.admin
             string ActivationUrl = string.Empty;
             string mail=txtEmail.Value;
             string cuerpo=string.Empty;
-            ActivationUrl = Server.HtmlEncode("http://localhost:12434/admin/activar.usuario.aspx?UserCode=" + codigo);
+            ActivationUrl = Server.HtmlEncode("http://localhost:12434/usuario/activar.usuario.aspx?UserCode=" + codigo);
 
             GestorMails gestorMail = new GestorMails();
             gestorMail.mandarMailActivacion(mail, "Activación de Cuenta", ActivationUrl);
