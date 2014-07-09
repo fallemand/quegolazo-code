@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Entidades;
 using AccesoADatos;
+using Utils;
+using System.Web;
 
 namespace Logica
 {
     public class GestorTorneo
     {
+       
         /// <summary>
         /// Obtiene los torneos de un usuario
         /// autor: Paula Pedrosa
@@ -32,6 +35,32 @@ namespace Logica
             } 
         }
 
+
+        /// <summary>
+        /// Asigna la ruta adecuada a cada torneo checkeando si existe o no la imagen que le corresponde. 
+        /// En caso de que la imagen no se haya subido, se carga la ruta por defecto de una imagen generica.
+        /// </summary>
+        /// <param name="listaDeTorneos">La lista de torneos que se desea modificar</param>
+        /// <param name="dimension">El tamaño de la imagen que se desea guardar</param>
+       public void asignarRutaDeImagenATorneos(ref List<Torneo> listaDeTorneos, GestorImagen.enumDimensionImagen dimension) { 
+           string abreviatura = GestorImagen.devolverAbreviaturaDeImagen(dimension).ToString();
+           foreach (Torneo item in listaDeTorneos)
+            {
+               string rutaTest = System.Web.HttpContext.Current.Server.MapPath("/resources/img/torneos/");
+               rutaTest += item.idTorneo.ToString() + abreviatura + ".jpg";
+               if (GestorImagen.existeImagen(rutaTest))
+               {
+                   item.rutaImagen = "/resources/img/torneos/" + item.idTorneo.ToString() + abreviatura + ".jpg"; 
+               }
+               else {
+                   item.rutaImagen = "/resources/img/torneos/default" + abreviatura + ".jpg";
+               }
+	        }
+        
+        }
+
+        
+      
 
         /// <summary>
         /// Obtener torneo por Id del torneo y el id usuario

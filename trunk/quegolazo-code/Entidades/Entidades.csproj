@@ -46,7 +46,6 @@
     <Compile Include="Equipo.cs" />
     <Compile Include="Estado.cs" />
     <Compile Include="Fase.cs" />
-    <Compile Include="FormaPuntuacion.cs" />
     <Compile Include="Grupo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TamanioCancha.cs" />

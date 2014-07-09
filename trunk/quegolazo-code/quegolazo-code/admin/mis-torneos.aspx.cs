@@ -23,6 +23,7 @@ namespace quegolazo_code.admin
             {
                 try
                 {
+                    Session["usuario"] = new Usuario() { idUsuario = 6, nombre = "Usuario del orto me harte de cargarte" };
                     cargarCombos();
                     cargarRepeaterTorneos();           
                 }
@@ -42,8 +43,10 @@ namespace quegolazo_code.admin
         {
             usuarioLogueado = (Usuario)Session["usuario"];
             GestorTorneo gestorTorneo = new GestorTorneo();
-            
-            rptTorneos.DataSource = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
+            List<Torneo> torneosDelUsuario = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
+            gestorTorneo.asignarRutaDeImagenATorneos(ref torneosDelUsuario, GestorImagen.enumDimensionImagen.CHICA);
+            rptTorneos.DataSource = torneosDelUsuario;
+
             rptTorneos.DataBind();
         }
 
@@ -99,27 +102,26 @@ namespace quegolazo_code.admin
         /// <param name="e"></param>
           protected void btnResgitrar_Click(object sender, EventArgs e)
           {             
-            try 
-	           {
-                    limpiarPaneles();
-                    GestorDeArchivos gestor = new GestorDeArchivos();
-                    GestorTorneo gestorTorneo = new GestorTorneo();
-                    Torneo torneoNuevo = obtenerTorneoDelFormulario();
-                    torneoNuevo.idTorneo = gestorTorneo.registrarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
-                   //si la imagen esta ok, la guarda en el servidor. 
-                   if (imagenUpload.PostedFile.ContentLength > 0 && gestor.validarImagen(imagenUpload.PostedFile))
-                        gestor.guardarImagen(imagenUpload.PostedFile, Server.MapPath("/imagenes/torneos/"), torneoNuevo.idTorneo.ToString() + ".png");
-                    limpiarModalTorneo();
-                    cargarRepeaterTorneos();
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalTorneo();", true);
+            try
+            {
                 
-	           }
-	         catch (Exception ex)
-	           {
-                   ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalTorneo();", true);
-                   litFracasoTorneo.Text = ex.Message;
-                   panFracasoTorneo.Visible = true;
-	           }
+                limpiarPaneles();
+                GestorTorneo gestorTorneo = new GestorTorneo();
+                Torneo torneoNuevo = obtenerTorneoDelFormulario();
+                torneoNuevo.idTorneo = gestorTorneo.registrarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
+                //si la imagen esta ok, la guarda en el servidor. 
+                if ( imagenUpload.PostedFile != null && imagenUpload.PostedFile.ContentLength > 0)
+                    GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, torneoNuevo.idTorneo);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalTorneo();", true);
+                cargarRepeaterTorneos();            
+                limpiarModalTorneo();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalTorneo();", true);
+                litFracasoTorneo.Text = ex.Message;
+                panFracasoTorneo.Visible = true;
+            }
 
             }
 
@@ -184,11 +186,20 @@ namespace quegolazo_code.admin
               int empatado = Int32.Parse(txtPuntosPorEmpatar.Value);
               int perdido = Int32.Parse(txtPuntosPorPerder.Value);
 
-              FormaPuntuacion formaPuntuacion = gestorEdicion.obtenerFormaPuntuacionPorGanadoEmpatadoPerdido(ganado, perdido, empatado);
+              //FormaPuntuacion formaPuntuacion = gestorEdicion.obtenerFormaPuntuacionPorGanadoEmpatadoPerdido(ganado, perdido, empatado);
               Estado estado = gestorEstado.obtenerUnEstadoPorNombre(Estado.enumNombre.REGISTRADA, Estado.enumAmbito.EDICION);
-              Torneo torneo = gestorTorneo.obtenerTorneoPorIdYUsuario(Int32.Parse(idTorneo), ((Usuario)Session["usuario"]).idUsuario);
+              Torneo torneo = gestorTorneo.obtenerTorneoPorId(Int32.Parse(idTorneo));
 
-              return new Edicion() { nombre = txtNombreEdicion.Value, tamanioCancha = tamanioCancha , tipoSuperficie = tipoSuperficie, formaPuntuacion = formaPuntuacion, estado = estado , torneo = torneo};
+              return new Edicion() {
+                  nombre = txtNombreEdicion.Value, 
+                  tamanioCancha = tamanioCancha ,
+                  tipoSuperficie = tipoSuperficie,
+                  puntosGanado = ganado, 
+                  puntosPerdido =perdido, 
+                  puntosEmpatado = empatado,
+                  estado = estado , 
+                  torneo = torneo
+              };
           }
 
         /// <summary>
@@ -201,7 +212,7 @@ namespace quegolazo_code.admin
           {
               try
               {
-                      validarDatosDelFormulario();
+                      validarDatosDeLaEdicion();
                       GestorEdicion gestorEdicion = new GestorEdicion();
                       Edicion edicionNueva = obtenerEdicionDelFormulario();
                       gestorEdicion.registrarEdicion(edicionNueva);
@@ -220,7 +231,7 @@ namespace quegolazo_code.admin
           /// valida si los datos introducidos en el formulario son correctos, si no lo son lanza excepciones con el mensaje correspondiente.
           /// autor: Antonio Herrera
           /// </summary>      
-          private void validarDatosDelFormulario()
+          private void validarDatosDeLaEdicion()
           {          
               int ganado, empatado, perdido;
               ValidacionDeTextos validador = new ValidacionDeTextos();
@@ -229,7 +240,7 @@ namespace quegolazo_code.admin
                     ganado = int.Parse(txtPuntosPorGanar.Value);
                     perdido = int.Parse(txtPuntosPorPerder.Value);
                     empatado = int.Parse(txtPuntosPorEmpatar.Value);
-                    if (!(ganado > empatado && empatado > perdido) && (ganado*empatado*perdido) < 0) {
+                    if (!(((ganado > empatado) && (empatado > perdido)) && ((ganado*empatado*perdido) >= 0))) {
                      throw new Exception("Los puntajes por ganar, empatar o perder son incorrectos.");
                     }
                     if(txtNombreEdicion.Value == "")

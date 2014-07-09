@@ -32,31 +32,7 @@ namespace Logica
  
         }
 
-        /// <summary>
-        /// Obtiene la Forma de Puntuacion
-        /// autor: Paula Pedrosa
-        /// </summary>
-        /// <param name="ganado">Cantidad de puntos por partido ganado</param>
-        /// <param name="perdido">Cantidad de puntos por partido perdido</param>
-        /// <param name="empatado">Cantidad de puntos por empatado</param>
-        /// <returns>Objeto FormaPuntuacion</returns>
-        public FormaPuntuacion obtenerFormaPuntuacionPorGanadoEmpatadoPerdido(int ganado, int perdido, int empatado)
-        {
-            try
-            {
-                DAOEdicion daoEdicion = new DAOEdicion();
-                FormaPuntuacion formaPuntuacion = null;
-                formaPuntuacion = daoEdicion.obtenerFormaPuntuacionPorGanadoEmpatadoPerdido(ganado, perdido, empatado);
-
-                return formaPuntuacion;
-            }
-            catch (Exception ex)
-            {
-                
-                throw new Exception(ex.Message);
-            }
-        }
-
+        
         /// <summary>
         /// Registra una nueva edicion
         /// autor: Paula Pedrosa

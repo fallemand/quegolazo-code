@@ -65,11 +65,13 @@ namespace AccesoADatos
                     edicion.idEdicion = Int32.Parse(dr["idEdicion"].ToString());
                     edicion.nombre = dr["nombre"].ToString();
                     edicion.tamanioCancha = daoCancha.obtenerTamanioCanchaPorId(Int32.Parse(dr["idTamanioCancha"].ToString()));
-                    edicion.formaPuntuacion = daoEdicion.obtenerFormaPuntuacionPorId(Int32.Parse(dr["idFormaPuntuacion"].ToString()));
                     edicion.tipoSuperficie = daoTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(dr["idTipoSuperficie"].ToString()));
                     edicion.estado = daoEstado.obtenerUnEstadoPorId(Int32.Parse(dr["idEstado"].ToString()));
                     edicion.cancha = daoCancha.obtenerCanchasDeEdicion(Int32.Parse(dr["idEdicion"].ToString()));
                     edicion.torneo = daoTorneo.obtenerTorneoPorId(Int32.Parse(dr["idTorneo"].ToString()));
+                    edicion.puntosEmpatado = Int32.Parse(dr["puntosEmpatado"].ToString());
+                    edicion.puntosGanado = Int32.Parse(dr["puntosGanado"].ToString());
+                    edicion.puntosPerdido = Int32.Parse(dr["puntosPerdido"].ToString());
                     respuesta.Add(edicion);
 
                 }
@@ -91,113 +93,7 @@ namespace AccesoADatos
 
         }
 
-        /// <summary>
-        /// Busca una FormaPuntuacion por su id
-        /// autor: Paula Pedrosa
-        /// </summary>
-        /// <param name="idFormaPuntuacion">id de Forma puntuación</param>
-        /// <returns>Objeto FormaPuntuacion, o null sino lo encuentra</returns>
-        public FormaPuntuacion obtenerFormaPuntuacionPorId(int idFormaPuntuacion)
-        {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();
 
-            FormaPuntuacion formaPuntuacion = null;
-            try
-            {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                    cmd.Connection = con;
-                }
-
-                string sql = @"SELECT *
-                                FROM FormasPuntuacion
-                                WHERE idFormaPuntuacion = @idFormaPuntuacion";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idFormaPuntuacion", idFormaPuntuacion);
-                cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
-
-
-                while (dr.Read())
-                {
-                    formaPuntuacion = new FormaPuntuacion();
-                    formaPuntuacion.idFormaPuntuacion = Int32.Parse(dr["idFormaPuntuacion"].ToString());
-                    formaPuntuacion.ganado = Int32.Parse(dr["ganado"].ToString());
-                    formaPuntuacion.empatado = Int32.Parse(dr["empatado"].ToString());
-                    formaPuntuacion.perdido = Int32.Parse(dr["perdido"].ToString());
-
-                }
-                return formaPuntuacion;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error al intentar recuperar la forma de puntuación: " + ex.Message);
-            }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
-            }
-        }
-
-        /// <summary>
-        /// Busca una FormaPuntuacion por su id
-        /// autor: Paula Pedrosa
-        /// </summary>
-        /// <param name="idFormaPuntuacion">id de Forma puntuación</param>
-        /// <returns>Objeto FormaPuntuacion, o null sino lo encuentra</returns>
-        public FormaPuntuacion obtenerFormaPuntuacionPorGanadoEmpatadoPerdido(int ganado, int perdido, int empatado)
-        {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();
-
-            FormaPuntuacion formaPuntuacion = null;
-            try
-            {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                    cmd.Connection = con;
-                }
-
-                string sql = @"SELECT *
-                                FROM FormasPuntuacion
-                                WHERE ganado = @ganado
-                                AND perdido = @perdido
-                                AND empatado = @empatado";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@ganado", ganado);
-                cmd.Parameters.AddWithValue("@empatado", empatado);
-                cmd.Parameters.AddWithValue("@perdido", perdido);
-                cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
-
-
-                while (dr.Read())
-                {
-                    formaPuntuacion = new FormaPuntuacion();
-                    formaPuntuacion.idFormaPuntuacion = Int32.Parse(dr["idFormaPuntuacion"].ToString());
-                    formaPuntuacion.ganado = Int32.Parse(dr["ganado"].ToString());
-                    formaPuntuacion.empatado = Int32.Parse(dr["empatado"].ToString());
-                    formaPuntuacion.perdido = Int32.Parse(dr["perdido"].ToString());
-
-                }
-                return formaPuntuacion;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error al intentar recuperar la forma de puntuación: " + ex.Message);
-            }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
-            }
-        }
 
         /// <summary>
         /// Registrar una Nueva Edición
@@ -216,15 +112,17 @@ namespace AccesoADatos
                     cmd.Connection = con;
                 }
 
-                string sql = @"INSERT INTO Ediciones (nombre, idFormaPuntuacion, idTamanioCancha, idTipoSuperficie, idEstado, idTorneo)
-                                              VALUES (@nombre, @idFormaPuntuacion, @idTamanioCancha, @idTipoSuperficie, @idEstado, @idTorneo)";
+                string sql = @"INSERT INTO Ediciones (nombre, idTamanioCancha, idTipoSuperficie, idEstado, idTorneo, puntosGanado, puntosPerdido, puntosEmpatado)
+                                              VALUES (@nombre, @idTamanioCancha, @idTipoSuperficie, @idEstado, @idTorneo, @puntosGanado, @puntosPerdido, @puntosEmpatado )";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@nombre", edicionNueva.nombre);
-                cmd.Parameters.AddWithValue("@idFormaPuntuacion", edicionNueva.formaPuntuacion.idFormaPuntuacion);
+                cmd.Parameters.AddWithValue("@nombre", edicionNueva.nombre);     
                 cmd.Parameters.AddWithValue("@idTamanioCancha", edicionNueva.tamanioCancha.idTamanioCancha);
                 cmd.Parameters.AddWithValue("@idTipoSuperficie", edicionNueva.tipoSuperficie.idTipoSuperficie);
                 cmd.Parameters.AddWithValue("@idEstado", edicionNueva.estado.idEstado);
                 cmd.Parameters.AddWithValue("@idTorneo", edicionNueva.torneo.idTorneo);
+                cmd.Parameters.AddWithValue("@puntosEmpatado", edicionNueva.puntosEmpatado);
+                cmd.Parameters.AddWithValue("@puntosGanado", edicionNueva.puntosGanado);
+                cmd.Parameters.AddWithValue("@puntosPerdido", edicionNueva.puntosPerdido);
                 cmd.CommandText = sql;
 
                 cmd.ExecuteNonQuery();
