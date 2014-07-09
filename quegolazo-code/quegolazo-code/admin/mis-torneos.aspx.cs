@@ -23,7 +23,7 @@ namespace quegolazo_code.admin
             {
                 try
                 {
-                    Session["usuario"] = new Usuario() { idUsuario = 6, nombre = "Usuario del orto me harte de cargarte" };
+                    //Session["usuario"] = new Usuario() { idUsuario = 6, nombre = "Usuario del orto me harte de cargarte" };
                     cargarCombos();
                     cargarRepeaterTorneos();           
                 }
@@ -111,7 +111,7 @@ namespace quegolazo_code.admin
                 torneoNuevo.idTorneo = gestorTorneo.registrarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
                 //si la imagen esta ok, la guarda en el servidor. 
                 if ( imagenUpload.PostedFile != null && imagenUpload.PostedFile.ContentLength > 0)
-                    GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, torneoNuevo.idTorneo);
+                    GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, torneoNuevo.idTorneo, GestorImagen.TORNEO);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalTorneo();", true);
                 cargarRepeaterTorneos();            
                 limpiarModalTorneo();

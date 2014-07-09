@@ -19,13 +19,13 @@ namespace quegolazo_code.admin
         {
             if (FileUpload1.PostedFile.ContentLength > 0)
             {
-                GestorImagen.guardarImagenTorneo(FileUpload1.PostedFile, 2);
+                GestorImagen.guardarImagenTorneo(FileUpload1.PostedFile, 2,GestorImagen.TORNEO);
             }
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            GestorImagen.borrrarImagenTorneo(2);
+            GestorImagen.borrrarImagenTorneo(2,GestorImagen.TORNEO);
         }
     }
 }
