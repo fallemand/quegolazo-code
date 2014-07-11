@@ -113,7 +113,7 @@ namespace Logica
         /// <summary>
         /// Registra un nuevo Torneo 
         /// </summary>
-        /// <param name="torneoNuevo">Objeto Torneo</param>
+        /// <param name="torneoCambiado">Objeto Torneo</param>
         /// <param name="usuario">Objeto Usuario</param>
         /// <returns>El id del torneo que se acaba de registrar</returns>
         public int registrarTorneo(Torneo torneoNuevo, Usuario usuario)
@@ -121,7 +121,7 @@ namespace Logica
             try
             {
                 DAOTorneo daoTorneo = new DAOTorneo();
-                int idTorneoRegistrado = daoTorneo.registrarTorneo(torneoNuevo, usuario);
+                int idTorneoRegistrado = daoTorneo.registrarTorneo(torneoCambiado, usuario);
 
                 return idTorneoRegistrado;
 
@@ -131,6 +131,28 @@ namespace Logica
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Modifica un torneo existente 
+        /// </summary>
+        /// <param name="torneoNuevo">Objeto Torneo</param>
+        /// <param name="usuario">Objeto Usuario</param>
+        /// <returns>El id del torneo que se acaba de modificar</returns>
+        public int modificarTorneo(Torneo torneoCambiado, Usuario usuario)
+        {
+            try
+            {
+                DAOTorneo daoTorneo = new DAOTorneo();
+                int idTorneoRegistrado = daoTorneo.modificarTorneo(torneoCambiado, usuario);
+                return idTorneoRegistrado;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
     }
 }

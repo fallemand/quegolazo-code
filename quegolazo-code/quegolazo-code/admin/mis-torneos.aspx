@@ -5,7 +5,7 @@
      <div class="container padding-top">
         <div class="row">
             <div class="container">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#registrarTorneo">Crear un Nuevo Torneo</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" onclick="crearTorneo();" data-target="#registrarTorneo">Crear un Nuevo Torneo</button>
                 <asp:Label ID="lblMensajeTorneos" runat="server" Text=""></asp:Label>
                 <asp:UpdatePanel ID="pnlLoguear" runat="server">
                     <Triggers>
@@ -28,7 +28,7 @@
                                         <div class="col-md-6">
                                             <div class="pull-right botones">
                                                 <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Ver Sitio Web del Torneo"><span class="glyphicon glyphicon-globe"></span></a>
-                                                <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-toggle="modal" data-target="#registrarTorneo" data-placement="top" onclick="modificarTorneo(<%#Eval("idTorneo")%>,'<%#Eval("nick")%>');" title="Editar Torneo"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-toggle="modal" data-target="#registrarTorneo" data-placement="top" onclick="modificarTorneo(<%#Eval("idTorneo")%>,'<%#Eval("nick")%>','<%#Eval("nombre")%>','<%#Eval("descripcion")%>' );" title="Editar Torneo"><span class="glyphicon glyphicon-pencil"></span></a>
                                                 <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Eliminar Torneo"><span class="glyphicon glyphicon-remove"></span></a>
                                             </div>
                                         </div>
@@ -119,7 +119,7 @@
                                         <div class="col-md-4">
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail" data-trigger="fileinput">
-                                                  <img src="../resources/img/theme/logo-default.png">
+                                                  <img id="imagen-preview" src="../resources/img/theme/logo-default.png">
                                                 </div>
                                                 <div id="logoTorneoPreview" class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput"></div>
                                                 <div>
@@ -282,7 +282,6 @@
         $('#registrarTorneo').on('hidden.bs.modal', function () {
             $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
             $('.modal-body').find('div').removeClass('has-success has-error');
-            //$('.fileinput').fileinput('reset');            
         });
         $('#agregarEdicion2').on('hidden.bs.modal', function () {
             $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');

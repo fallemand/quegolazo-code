@@ -60,8 +60,8 @@ namespace AccesoADatos
                         idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         nick = dr["nick"].ToString(),
-                        usuario = gestorUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
-
+                        usuario = gestorUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString())),
+                        descripcion = dr["descripcion"].ToString()                        
                     };
                     torneos.Add(respuesta);
                     
@@ -122,8 +122,8 @@ namespace AccesoADatos
                         idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         nick = dr["nick"].ToString(),
-                        usuario = daoUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
-                   
+                        usuario = daoUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString())),
+                        descripcion = dr["descripcion"].ToString()  
                     };
                 }
                 return respuesta;
@@ -179,8 +179,8 @@ namespace AccesoADatos
                         idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         nick = dr["nick"].ToString(),
-                        usuario = daoUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString()))
-
+                        usuario = daoUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString())),
+                        descripcion = dr["descripcion"].ToString()  
                     };
                 }
                 return respuesta;
@@ -250,10 +250,11 @@ namespace AccesoADatos
 
         /// <summary>
         /// Registra un torneo nuevo para un determinado usuario.
+        /// Autor: Antonio Herrera
         /// </summary>
         /// <param name="torneoNuevo">El torneo que se modifica con sus nuevos datos</param>
         /// <param name="usuario">El usuario al cual le pertenece el torneo</param>
-        public int modificarTorneo(Torneo torneoNuevo, Usuario usuario)
+        public void modificarTorneo(Torneo torneoNuevo, Usuario usuario)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -271,8 +272,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@nombre", torneoNuevo.nombre);
                 cmd.Parameters.AddWithValue("@descripcion", torneoNuevo.descripcion);
                 cmd.CommandText = sql;
-                return int.Parse(cmd.ExecuteScalar().ToString());
-
+                cmd.ExecuteNonQuery();
             }
             catch (Exception e)
             {
@@ -280,12 +280,7 @@ namespace AccesoADatos
                 if (e.Message.Contains("unique_nombre"))
                 {
                     throw new Exception("No se pudo modificar el torneo: Ya existe un torneo registrado con este nombre, por favor cambielo e intente nuevamente.");
-                }
-                //Si ya existe un torneo con ese nick
-                if (e.Message.Contains("unique_nick"))
-                {
-                    throw new Exception("No se pudo registrar el torneo: Ya existe un torneo registrado con esta URL, por favor cambiela e intente nuevamente.");
-                }
+                }               
                 throw new Exception("No se pudo registrar el torneo: " + e.Message);
             }
             finally

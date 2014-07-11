@@ -47,7 +47,6 @@ namespace quegolazo_code.admin
             List<Torneo> torneosDelUsuario = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
             gestorTorneo.asignarRutaDeImagenATorneos(ref torneosDelUsuario, GestorImagen.enumDimensionImagen.MEDIANA);
             rptTorneos.DataSource = torneosDelUsuario;
-
             rptTorneos.DataBind();
         }
 
@@ -279,7 +278,25 @@ namespace quegolazo_code.admin
 
           protected void btnModificarTorneo_Click(object sender, EventArgs e)
           {
-
+              try
+              {
+                  limpiarPaneles();
+                  GestorTorneo gestorTorneo = new GestorTorneo();
+                  Torneo torneoNuevo = obtenerTorneoDelFormulario();
+                  torneoNuevo.idTorneo = gestorTorneo.modificarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
+                  //si la imagen esta ok, la guarda en el servidor. 
+                  if (imagenUpload.PostedFile != null && imagenUpload.PostedFile.ContentLength > 0)
+                      GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, torneoNuevo.idTorneo, GestorImagen.TORNEO);
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalTorneo();", true);
+                  cargarRepeaterTorneos();
+                  limpiarModalTorneo();
+              }
+              catch (Exception ex)
+              {
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalTorneo();", true);
+                  litFracasoTorneo.Text = ex.Message;
+                  panFracasoTorneo.Visible = true;
+              }
           }
 
        
