@@ -60,9 +60,13 @@ namespace AccesoADatos
                 return int.Parse(cmd.ExecuteScalar().ToString());
                
             }
-            catch (Exception e)
+            catch (SqlException ex)
             {
-                throw new Exception("No se pudo registrar el equipo: " + e.Message);
+                if (ex.Class == 14 && ex.Number == 2601)
+                    throw new Exception("El equipo " + nuevoEquipo.nombre + " ya se encuentra registrado.");
+                else
+                    throw new Exception("No se pudo registrar el equipo: " + ex.Message);
+            
             }
             finally
             {

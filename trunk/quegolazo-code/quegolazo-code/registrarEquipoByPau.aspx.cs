@@ -39,10 +39,10 @@ namespace quegolazo_code
                 Equipo equipoNuevo = null;
                 Delegado delegadoPrincipal = null;
                 Delegado delegadoOpcional = null;
-
-                if (obtenerEquipoDelFormulario() != null)
+                equipoNuevo = obtenerEquipoDelFormulario();
+                
+                if (equipoNuevo != null)
                 {
-                    equipoNuevo = obtenerEquipoDelFormulario();
                     delegadoPrincipal = equipoNuevo.delegadoPrincipal;
                     delegadoOpcional = equipoNuevo.delegadoOpcional;
                 }
