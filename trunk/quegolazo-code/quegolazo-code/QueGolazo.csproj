@@ -57,6 +57,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\equipos.aspx" />
+    <Content Include="resources\js\jquery.colorPicker.min.js" />
     <Content Include="resources\js\misTorneos\misTorneos.js" />
     <Content Include="usuario\activar.usuario.aspx" />
     <Content Include="admin\index.aspx" />
@@ -92,6 +94,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\equipos.aspx.cs">
+      <DependentUpon>equipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\equipos.aspx.designer.cs">
+      <DependentUpon>equipos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="usuario\activar.usuario.aspx.cs">
       <DependentUpon>activar.usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
