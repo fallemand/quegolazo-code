@@ -17,13 +17,14 @@ namespace quegolazo_code.admin
         Usuario usuarioLogueado = null;
         private string idTorneo;
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)        
         {
+            Session["usuario"] = new Usuario() { idUsuario = 6, nombre = "Usuario del orto me harte de cargarte" };
             if (!Page.IsPostBack)
             {
                 try
                 {
-                    //Session["usuario"] = new Usuario() { idUsuario = 6, nombre = "Usuario del orto me harte de cargarte" };
+                    
                     cargarCombos();
                     cargarRepeaterTorneos();           
                 }
@@ -44,7 +45,7 @@ namespace quegolazo_code.admin
             usuarioLogueado = (Usuario)Session["usuario"];
             GestorTorneo gestorTorneo = new GestorTorneo();
             List<Torneo> torneosDelUsuario = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
-            gestorTorneo.asignarRutaDeImagenATorneos(ref torneosDelUsuario, GestorImagen.enumDimensionImagen.CHICA);
+            gestorTorneo.asignarRutaDeImagenATorneos(ref torneosDelUsuario, GestorImagen.enumDimensionImagen.MEDIANA);
             rptTorneos.DataSource = torneosDelUsuario;
 
             rptTorneos.DataBind();
@@ -273,7 +274,14 @@ namespace quegolazo_code.admin
                   txtTorneoAsociado.Value = t.nombre;
                   txtIdTorneo.Value = t.idTorneo.ToString();
                   ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalEdicion();", true);
-              }
+              }             
           }
+
+          protected void btnModificarTorneo_Click(object sender, EventArgs e)
+          {
+
+          }
+
+       
     }
 }
