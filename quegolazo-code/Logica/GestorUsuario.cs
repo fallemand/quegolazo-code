@@ -43,14 +43,9 @@ namespace Logica
             }
             catch (Exception e)
             {
-                if (e.Message.Contains("No se puede insertar una clave duplicada"))
-                {
-                    throw new Exception("El usuario con el mail: " + mail + " Ya se encuentra registrado. Por favor ingrese una cuenta de correo diferente.");
-                }
-                else
-                {
+               
                     throw new Exception(e.Message);
-                }
+               
             }
 
             
