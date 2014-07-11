@@ -50,9 +50,11 @@ namespace AccesoADatos
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                throw new Exception("No se pudo registrar el Usuario: " + ex.Message);
+
+                if (ex.Class == 14 && ex.Number == 2627)
+                    throw new Exception("El usuario con el mail: " + usuarioNuevo.email + " Ya se encuentra registrado. Por favor ingrese una cuenta de correo diferente.");
             }
             finally
             {
