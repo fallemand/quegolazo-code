@@ -15,6 +15,7 @@
     <script type="text/javascript" src="/resources/js/jquery.validate.js"></script>
     <script type="text/javascript" src="/resources/js/messages_es_AR.js"></script>
 	<script type="text/javascript" src="/resources/js/file-input.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery.colorPicker.min.js"></script>
     <!-- Archivos JavaScript -->
 </head>
 <body>
