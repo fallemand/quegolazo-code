@@ -33,7 +33,7 @@
                                     <input type="text" class="form-control" rel="txtTooltip" title="Color secundario de la camiseta" id="txtColorSecundario" runat="server" value="#E1E1E1">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="subform-horizontal clearfix">
                                 <label for="select" class="col-lg-2 control-label">Delegados</label>
                                 <div class="col-lg-10">
                                     <span class="label label-default label-md">
@@ -47,27 +47,33 @@
                                             </span>
                                         </ItemTemplate>
                                     </asp:Repeater>
-                                      <div class="row">
                                         <div id="delegado" class="col-md-9">
-                                            <div class="input-group">
-                                                <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
-                                                <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegedo" runat="server">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
+                                                    <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegedo" runat="server">
+                                                </div>
                                             </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegedo" runat="server">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-envelope"></i></span>
+                                                    <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegedo" runat="server">
+                                                </div>
                                             </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-phone"></i></span>
-                                                <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegedo" runat="server">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-phone"></i></span>
+                                                    <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegedo" runat="server">
+                                                </div>
                                             </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-home"></i></span>
-                                                <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegedo" runat="server">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-home"></i></span>
+                                                    <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegedo" runat="server">
+                                                </div>
                                             </div>
                                             <asp:Button class="btn btn-default btn-xs pull-right" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click" />
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -102,7 +108,6 @@
                         <asp:Button class="btn btn-success pull-right causesValidation" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
                     </div>
                 </div>
-                </span>
             </fieldset>
             <asp:Panel ID="panFracasoTorneo" runat="server" CssClass="alert alert-danger" Visible="False">
             <asp:Literal ID="litFracasoTorneo" runat="server"></asp:Literal>
@@ -122,9 +127,9 @@
     </div>
     <script>
         jQuery(document).ready(function () {
-            $('#txtColorPrimario').colorPicker();
+            $('#ContentAdmin_ContentAdminTorneo_txtColorPrimario').colorPicker();
             $('#delegado').hide();
-            $('#txtColorSecundario').colorPicker();
+            $('#ContentAdmin_ContentAdminTorneo_txtColorSecundario').colorPicker();
         });
         function showDelegados() {
             $('#delegado').toggle("slow");

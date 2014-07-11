@@ -209,7 +209,7 @@
             // Ascend from the button or input element that triggered the 
             //  event until we find a container element flagged with 
             //  .validationGroup and store a reference to that element.
-            var $group = $(this).parents('.validationGroup');
+            var $group = $(this).closest('.validationGroup');
 
             var isValid = true;
 

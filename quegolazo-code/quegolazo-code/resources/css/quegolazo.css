@@ -859,3 +859,15 @@ div.colorPicker-swatch:hover {
   margin-left:16px;
   margin-top:5px;
 }
+
+
+/*SubForm Horizontal*/
+.subform-horizontal {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 15px;
+}
+
+.subform-horizontal .form-group {
+    margin-bottom: 0px;
+}
