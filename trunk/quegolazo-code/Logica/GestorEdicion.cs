@@ -10,6 +10,13 @@ namespace Logica
 {
     public class GestorEdicion
     {
+        public Edicion edicion;
+
+        public GestorEdicion()
+        {
+            edicion = new Edicion();
+        }
+
         /// <summary>
         /// Obtener ediciones de un torneo en particular
         /// autor: Paula Pedrosa
@@ -54,5 +61,25 @@ namespace Logica
             }
  
         }
+
+
+        /// <summary>
+        /// Metodo para registar las configuraciones
+        /// autor=Flor
+        /// </summary>
+        public void registrarConfiguraciones()
+        {
+            try
+            {
+                DAOEdicion daoEdicion = new DAOEdicion();
+                daoEdicion.registrarPreferencias(this.edicion);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
     }
 }

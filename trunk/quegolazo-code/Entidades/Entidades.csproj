@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfiguracionEdicion.cs" />
     <Compile Include="Torneo.cs" />
     <Compile Include="Cancha.cs" />
     <Compile Include="Delegado.cs" />
