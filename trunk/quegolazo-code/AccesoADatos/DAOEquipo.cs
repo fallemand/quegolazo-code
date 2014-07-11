@@ -48,18 +48,17 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@directorTecnico", nuevoEquipo.directorTecnico);
 
                 cmd.Parameters.AddWithValue("@idDelegadoPrincipal", delegadoPrincipal.idDelegado);
+                cmd.Parameters.AddWithValue("@idTorneo", torneo.idTorneo);
 
                 if(delegadoOpcional == null)
                     cmd.Parameters.AddWithValue("@idDelegadoOpcional", DBNull.Value);
                 else
                     cmd.Parameters.AddWithValue("@idDelegadoOpcional", delegadoOpcional.idDelegado);
-
-                cmd.Parameters.AddWithValue("@idTorneo", torneo.idTorneo);
-
-                                                
+                              
+                  
                 cmd.CommandText = sql;
                 return int.Parse(cmd.ExecuteScalar().ToString());
-
+               
             }
             catch (Exception e)
             {
@@ -76,7 +75,7 @@ namespace AccesoADatos
 
         }
 
-
+    
        
     }
 }
