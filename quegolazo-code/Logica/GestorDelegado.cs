@@ -52,5 +52,41 @@ namespace Logica
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Modifica un delegado
+        /// </summary>
+        /// <param name="delegado">Delegado a modificar</param>
+        public void modificarDelegado(Delegado delegado)
+        {
+            try
+            {
+                DAODelegado daoDelegado = new DAODelegado();
+                daoDelegado.modificarDelegado(delegado);
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Elimina de la Base de Datos un delegado
+        /// </summary>
+        /// <param name="delegado">Delegado a eliminar</param>
+        public void eliminarDelegado(Delegado delegado)
+        {
+            try
+            {
+                DAODelegado daoDelegado = new DAODelegado();
+                daoDelegado.eliminarDelegado(delegado);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

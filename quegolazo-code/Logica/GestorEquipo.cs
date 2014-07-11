@@ -33,7 +33,7 @@ namespace Logica
             {
                 if (ex.Message.Contains("No se puede insertar una fila de clave duplicada"))
                 {
-                    throw new Exception("El equipo: " + nuevoEquipo.nombre + " Ya se encuentra registrado en ese torneo.");
+                    throw new Exception("El equipo " + nuevoEquipo.nombre + " ya se encuentra registrado en ese torneo.");
                 }
                 else
                 {
@@ -43,5 +43,6 @@ namespace Logica
                 
             } 
         }
+
     }
 }
