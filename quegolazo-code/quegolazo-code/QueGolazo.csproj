@@ -60,6 +60,7 @@
     <Content Include="admin\equipos.aspx" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
     <Content Include="resources\js\misTorneos\misTorneos.js" />
+    <Content Include="admin\personalizacion-edicion.aspx" />
     <Content Include="usuario\activar.usuario.aspx" />
     <Content Include="admin\index.aspx" />
     <Content Include="usuario\login.aspx" />
@@ -100,6 +101,13 @@
     </Compile>
     <Compile Include="admin\equipos.aspx.designer.cs">
       <DependentUpon>equipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\personalizacion-edicion.aspx.cs">
+      <DependentUpon>personalizacion-edicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\personalizacion-edicion.aspx.designer.cs">
+      <DependentUpon>personalizacion-edicion.aspx</DependentUpon>
     </Compile>
     <Compile Include="usuario\activar.usuario.aspx.cs">
       <DependentUpon>activar.usuario.aspx</DependentUpon>

@@ -141,5 +141,58 @@ namespace AccesoADatos
                 }
             }
         }
+
+
+
+        /// <summary>
+        /// Registrar Configuracion
+        /// autor: Florencia Rojas
+        /// </summary>
+        /// <param name="edicion">Objeto Edición</param>
+        public void registrarPreferencias(Edicion edicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                string sql = @"INSERT INTO ConfiguracionesEdicion (jugadores,cambiosJugadores, tarjetasJugadores, golesJugadores,asignacionArbitros, desempenioArbitros,cantidadArbitros,canchaUnica, sancionesJugadores, arbitros ,sanciones , idEdicion )
+                                              VALUES (@jugadores,@cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @cantidadArbitros, @canchaUnica, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@jugadores", edicion.preferencias.jugadores);
+                cmd.Parameters.AddWithValue("@cambiosJugadores", edicion.preferencias.cambiosJugadores);
+                cmd.Parameters.AddWithValue("@tarjetasJugadores", edicion.preferencias.tarjetasJugadores);
+                cmd.Parameters.AddWithValue("@golesJugadores", edicion.preferencias.golesJugadores);
+                cmd.Parameters.AddWithValue("@asignacionArbitros", edicion.preferencias.asignaArbitros);
+                cmd.Parameters.AddWithValue("@desempenioArbitros", edicion.preferencias.desempenioArbitros);
+                cmd.Parameters.AddWithValue("@cantidadArbitros", edicion.preferencias.cantidadArbitros);
+                cmd.Parameters.AddWithValue("@canchaUnica", edicion.preferencias.canchaUnica);
+                cmd.Parameters.AddWithValue("@sancionesJugadores", edicion.preferencias.sancionesJugadores);
+                cmd.Parameters.AddWithValue("@arbitros", edicion.preferencias.arbitros);
+                cmd.Parameters.AddWithValue("@sanciones", edicion.preferencias.sanciones);
+                cmd.Parameters.AddWithValue("@idEdicion", edicion.idEdicion);
+                cmd.CommandText = sql;
+
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("No se pudo registrar las preferencias: " + e.Message);
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                    cmd.Connection = con;
+                }
+            }
+        }
     }
 }

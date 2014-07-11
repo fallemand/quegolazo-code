@@ -19,5 +19,12 @@ namespace Entidades
         public int puntosGanado { get; set; }
         public int puntosEmpatado { get; set; }
         public int puntosPerdido { get; set; }
+        public ConfiguracionEdicion preferencias { get; set; }
+
+
+        public Edicion()
+        {
+            preferencias = new ConfiguracionEdicion(); 
+        }
     }
 }
