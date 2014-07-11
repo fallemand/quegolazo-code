@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="mis-torneos.aspx.cs" Inherits="quegolazo_code.admin.mis_torneos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdmin" runat="server">
-    <div class="container padding-top">
+     <script src="../resources/js/misTorneos/misTorneos.js"></script>
+     <div class="container padding-top">
         <div class="row">
             <div class="container">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#registrarTorneo">Crear un Nuevo Torneo</button>
@@ -18,7 +19,7 @@
                                     <div class="panel-heading header clearfix">
                                         <div class="col-md-1">
                                             <div class="thumbnail nomargin-bottom">
-                                                <img src="<%# Eval("rutaImagen") %>" />
+                                                <img id="img<%# Eval("idTorneo") %>" src="<%# Eval("rutaImagen") %>" />
                                             </div>
                                         </div>
                                         <div class="col-md-5">
@@ -27,7 +28,7 @@
                                         <div class="col-md-6">
                                             <div class="pull-right botones">
                                                 <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Ver Sitio Web del Torneo"><span class="glyphicon glyphicon-globe"></span></a>
-                                                <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Editar Torneo"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-toggle="modal" data-target="#registrarTorneo" data-placement="top" onclick="modificarTorneo(<%#Eval("idTorneo")%>,'<%#Eval("nick")%>');" title="Editar Torneo"><span class="glyphicon glyphicon-pencil"></span></a>
                                                 <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Eliminar Torneo"><span class="glyphicon glyphicon-remove"></span></a>
                                             </div>
                                         </div>
@@ -85,7 +86,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel"><i class="flaticon-trophy5"></i>Registrar Nuevo Torneo</h4>
+                        <h4 class="modal-title" id="modalTorneoLabel"><i class="flaticon-trophy5"></i>Registrar Nuevo Torneo</h4>
                     </div>
                     <div class="modal-body">
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -117,7 +118,7 @@
                                     <div class="col-lg-10">
                                         <div class="col-md-4">
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <div class="fileinput-preview thumbnail" data-trigger="fileinput"></div>
+                                                <div id="logoTorneoPreview" class="fileinput-preview thumbnail" data-trigger="fileinput"></div>
                                                 <div>
                                                     <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><asp:FileUpload ID="imagenUpload" runat="server" /></span>
                                                     <a href="#" class="btn btn-default btn-xs fileinput-exists" id="limpiaImagen" data-dismiss="fileinput">Eliminar</a>
@@ -139,17 +140,18 @@
                                 </asp:Panel>
                                 </div>
                         <div class="modal-footer">
-                            <div class="col-xs-5 col-xs-offset-6">
+                            <div class="col-xs-8 col-xs-offset-5">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation" data-toggle="modal" data-target="#registrarTorneo" Text="Registrar" OnClick="btnResgitrar_Click" />
+                                <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation"  Text="Modificar" OnClientClick="modificarTorneo()" OnClick="btnModificarTorneo_Click" />
                             </div>
-                         <%--   <div class="col-xs-1">
+                            <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgress2">
                                     <ProgressTemplate>
                                         <img src="/resources/img/theme/load3.gif" />
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
-                            </div>--%>
+                            </div>
                             </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
@@ -269,7 +271,7 @@
         </div>
     </div>
     <!-- Modal Agregar Edicion -->
-
+  
     <script type="text/javascript">
         $('.fileinput').on('change.bs.fileinput', function () {
             $('.fileinput-preview').css('background-image', 'none');
@@ -277,15 +279,13 @@
         $('#registrarTorneo').on('hidden.bs.modal', function () {
             $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
             $('.modal-body').find('div').removeClass('has-success has-error');
-           //$('form1').resetForm();
+            //$('.fileinput').fileinput('reset');            
         });
         $('#agregarEdicion2').on('hidden.bs.modal', function () {
             $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
-            $('.modal-body').find('div').removeClass('has-success has-error');
-           // $('form1').resetForm();
+            $('.modal-body').find('div').removeClass('has-success has-error');           
         });
-        function closeModalTorneo() {
-            $('#limpiaImagen').click();
+        function closeModalTorneo() {         
             $('#registrarTorneo').modal('hide');           
         }
         function openModalTorneo() {
@@ -299,11 +299,5 @@
             $('#agregarEdicion2').modal('show');
         }
     </script>
-
-    <%-- <script type="text/javascript">
-         function validarPuntajes() {
-             return parseInt($("#txtPuntosPorGanar").text()) > parseInt($("#txtPuntosPorEmpatar").text()) > parseInt($("#txtPuntosPorPerder").text());
-         };
-    </script>--%>
 
 </asp:Content>

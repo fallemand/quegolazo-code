@@ -248,5 +248,53 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Registra un torneo nuevo para un determinado usuario.
+        /// </summary>
+        /// <param name="torneoNuevo">El torneo que se modifica con sus nuevos datos</param>
+        /// <param name="usuario">El usuario al cual le pertenece el torneo</param>
+        public int modificarTorneo(Torneo torneoNuevo, Usuario usuario)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                string sql = @"UPDATE Torneos 
+                                     SET descripcion = @descripcion, nombre = @nombre";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nombre", torneoNuevo.nombre);
+                cmd.Parameters.AddWithValue("@descripcion", torneoNuevo.descripcion);
+                cmd.CommandText = sql;
+                return int.Parse(cmd.ExecuteScalar().ToString());
+
+            }
+            catch (Exception e)
+            {
+                //Si ya existe un torneo con ese nombre
+                if (e.Message.Contains("unique_nombre"))
+                {
+                    throw new Exception("No se pudo modificar el torneo: Ya existe un torneo registrado con este nombre, por favor cambielo e intente nuevamente.");
+                }
+                //Si ya existe un torneo con ese nick
+                if (e.Message.Contains("unique_nick"))
+                {
+                    throw new Exception("No se pudo registrar el torneo: Ya existe un torneo registrado con esta URL, por favor cambiela e intente nuevamente.");
+                }
+                throw new Exception("No se pudo registrar el torneo: " + e.Message);
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+        }
     }
 }

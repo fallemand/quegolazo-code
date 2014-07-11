@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="resources\js\misTorneos\misTorneos.js" />
     <Content Include="usuario\activar.usuario.aspx" />
     <Content Include="admin\index.aspx" />
     <Content Include="usuario\login.aspx" />
