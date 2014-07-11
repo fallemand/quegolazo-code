@@ -663,11 +663,9 @@ tr th:last-child {
   cursor: text;
 }
 .fileinput-preview {
-	background-image: url(../img/theme/logo-default.png);
 	width:130px;
 	height:90px;
 }
-
 
 .fileinput .thumbnail {
   overflow: hidden;

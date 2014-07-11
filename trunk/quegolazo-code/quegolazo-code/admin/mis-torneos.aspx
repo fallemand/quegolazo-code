@@ -118,7 +118,10 @@
                                     <div class="col-lg-10">
                                         <div class="col-md-4">
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <div id="logoTorneoPreview" class="fileinput-preview thumbnail" data-trigger="fileinput"></div>
+                                                <div class="fileinput-new thumbnail" data-trigger="fileinput">
+                                                  <img src="../resources/img/theme/logo-default.png">
+                                                </div>
+                                                <div id="logoTorneoPreview" class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput"></div>
                                                 <div>
                                                     <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><asp:FileUpload ID="imagenUpload" runat="server" /></span>
                                                     <a href="#" class="btn btn-default btn-xs fileinput-exists" id="limpiaImagen" data-dismiss="fileinput">Eliminar</a>
