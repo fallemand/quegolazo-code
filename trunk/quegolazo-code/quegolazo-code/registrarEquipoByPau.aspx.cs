@@ -34,6 +34,7 @@ namespace quegolazo_code
             bool b = false;
             try
             {
+               
                 GestorEquipo gestorEquipo = new GestorEquipo();
                 GestorDelegado gestorDelegado = new GestorDelegado();
                 Equipo equipoNuevo = null;
