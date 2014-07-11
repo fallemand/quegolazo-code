@@ -31,16 +31,8 @@ namespace Logica
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("No se puede insertar una fila de clave duplicada"))
-                {
-                    throw new Exception("El equipo " + nuevoEquipo.nombre + " ya se encuentra registrado en ese torneo.");
-                }
-                else
-                {
-                    throw new Exception(ex.Message);
-                }
-                
-                
+                throw new Exception(ex.Message);
+               
             } 
         }
 
