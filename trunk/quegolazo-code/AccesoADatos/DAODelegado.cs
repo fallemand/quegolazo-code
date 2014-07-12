@@ -119,6 +119,51 @@ namespace AccesoADatos
             }
         }
 
+
+       
+        public int obtenerDelegadoPorNombre(string nombre)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            int idDelegadoABuscar = 0;
+
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                }
+
+                string sql = @"SELECT MAX(idDelegado) AS 'delegado'
+                                FROM Delegados
+                                WHERE nombre = @nombre";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.CommandText = sql;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                
+                while (dr.Read())
+                {
+                    idDelegadoABuscar = Int32.Parse(dr["delegado"].ToString());
+
+                }
+
+                return idDelegadoABuscar;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al intentar recuperar el delegado: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
         /// <summary>
         /// Modifica un delegado
         /// </summary>

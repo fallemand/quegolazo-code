@@ -71,6 +71,21 @@ namespace Logica
             }
         }
 
+        public int obtenerDelegadoPorNombre(string nombre)
+        {
+            try
+            {
+                DAODelegado daoDelegado = new DAODelegado();
+                int idDelegado = daoDelegado.obtenerDelegadoPorNombre(nombre);
+                return idDelegado;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         /// <summary>
         /// Elimina de la Base de Datos un delegado
         /// </summary>

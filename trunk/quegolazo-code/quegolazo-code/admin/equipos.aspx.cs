@@ -20,16 +20,23 @@ namespace quegolazo_code.admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            limpiarPaneles();
             if (!Page.IsPostBack)
             {
                 delegados = new List<Delegado>();
                 Session["listaDelegados"] = (List<Delegado>)delegados;
                 cargarRepeaterDelegados();
+                
             }
 
         }
 
-        
+        public int eliminarDelegado()
+        {
+            int codigo = 0;
+            return codigo;
+        }
+                
         private void cargarRepeaterDelegados()
         {
             usuarioLogueado = (Usuario)Session["usuario"];
@@ -69,28 +76,77 @@ namespace quegolazo_code.admin
                     throw new Exception();
                 }
 
+                delegadoPrincipal.idDelegado = gestorDelegado.registrarDelegado(delegadoPrincipal);
+
                 if (delegadoOpcional != null)
                     delegadoOpcional.idDelegado = gestorDelegado.registrarDelegado(delegadoOpcional);
 
                 equipoNuevo.idEquipo = gestorEquipo.registrarEquipo(equipoNuevo, equipoNuevo.torneo, equipoNuevo.delegadoPrincipal, equipoNuevo.delegadoOpcional);
                 GestorImagen.guardarImagenTorneo(fuLog.PostedFile, equipoNuevo.idEquipo, GestorImagen.EQUIPO);
+
+                limpiarCamposEquipo();
+                limpiarCamposDelegado();
+                mostrarPanelExito("El equipo " + equipoNuevo.nombre + " fue registrado exitosamente");
             }
             catch (Exception ex)
             {
                 if (b)
-                {
-                    litFracasoTorneo.Text = "Debe ingresar un delegado";
-                    panFracasoTorneo.Visible = true;
-
-                }
+                    mostrarPanelFracaso("Debe ingresar un delegado");
                 else
-                {
-                    litFracasoTorneo.Text = ex.Message;
-                    panFracasoTorneo.Visible = true;
-                }
-
-                
+                    mostrarPanelExito(ex.Message);
+                               
             }
+        }
+
+        public void limpiarCamposEquipo()
+        {
+            txtNombreEquipo.Value = "";
+            txtNombreDirector.Value = "";
+            txtColorPrimario.Value = "#E1E1E1";
+            txtColorSecundario.Value = "#E1E1E1";
+            delegados = (List<Delegado>)Session["listaDelegados"];
+            delegados.Clear();
+            cargarRepeaterDelegados();
+                       
+        }
+
+        public void limpiarCamposDelegado()
+        {
+            txtNombreDelegado.Value = "";
+            txtEmailDelegado.Value = "";
+            txtTelefonoDelegado.Value = "";
+            txtDireccionDelegado.Value = "";
+        }
+
+        /// <summary>
+        /// Habilita el panel de exito y deshabilita el panel de fracaso.
+        /// </summary>
+        /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
+        private void mostrarPanelExito(string mensaje)
+        {
+            litExito.Text = mensaje;
+            panelExito.Visible = true;
+            panelFracaso.Visible = false;
+        }
+
+        /// <summary>
+        /// Habilita el panel de fraaso y deshabilita el panel de exito.
+        /// </summary>
+        /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
+        private void mostrarPanelFracaso(string mensaje)
+        {
+            litFracaso.Text = mensaje;
+            panelExito.Visible = false;
+            panelFracaso.Visible = true;
+        }
+
+        private void limpiarPaneles()
+        {
+            panelExito.Visible = false;
+            panelFracaso.Visible = false;
+            litFracaso.Text = "";
+            litExito.Text = "";
+ 
         }
 
         /// <summary>
@@ -143,17 +199,90 @@ namespace quegolazo_code.admin
         {
             GestorDelegado gestorDelegado = new GestorDelegado();
             delegados = (List<Delegado>)Session["listaDelegados"];
+            Delegado delegadoDelFormulario = null;
+            bool b = false;
 
             if (delegados.Count < 2)
-                delegados.Add(obtenerDelegadoDelFormulario());
-            else
             {
-                litFracasoTorneo.Text = "Puede ingresar hasta dos delegados";
-                panFracasoTorneo.Visible = true;
-            }
+                delegadoDelFormulario = obtenerDelegadoDelFormulario();
+                foreach (Delegado delegado in delegados)
+                {
+                    if (delegado.nombre.Equals(delegadoDelFormulario.nombre))
+                    {
+                        b = true;
+                        break;
+                    } 
 
+                }
+
+                if(!b)
+                    delegados.Add(delegadoDelFormulario);
+                else
+                    mostrarPanelFracaso("Ese delegado ya fue registrado. Ingrese otro Nombre");
+
+            }    
+            else
+                mostrarPanelFracaso("Puede ingresar hasta dos delegados");
+            
+         
             Session["listaDelegados"] = (List<Delegado>)delegados;
             cargarRepeaterDelegados();
+            limpiarCamposDelegado();
+        }
+
+        protected void rptDelegados_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "eliminarDelegado")
+            {
+                string nombreDelegado = e.CommandArgument.ToString();
+                delegados = (List<Delegado>)Session["listaDelegados"];
+                int i = 0;
+                
+                foreach (Delegado delegado in delegados)
+                {
+                    if (delegado.nombre.Equals(nombreDelegado))
+                    {
+                        delegados.RemoveAt(i);
+                        break;
+                    }
+
+                    i++;
+                       
+                }
+
+                cargarRepeaterDelegados();
+
+            }
+
+            if (e.CommandName == "modificarDelegado")
+            {
+                string nombreDelegado = e.CommandArgument.ToString();
+                delegados = (List<Delegado>)Session["listaDelegados"];
+                int i = 0;
+
+                foreach (Delegado delegado in delegados)
+                {
+                    if (delegado.nombre.Equals(nombreDelegado))
+                    {
+                        txtNombreDelegado.Value = delegado.nombre;
+                        txtTelefonoDelegado.Value = delegado.telefono;
+                        txtDireccionDelegado.Value = delegado.domicilio;
+                        txtEmailDelegado.Value = delegado.email;
+                        delegados.RemoveAt(i);
+                        break;
+                        
+                    }
+
+                    i++;
+
+                }
+
+                cargarRepeaterDelegados();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showDelegados();", true);
+
+            }
+     
+            
         }
 
      
