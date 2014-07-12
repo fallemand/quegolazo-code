@@ -31,12 +31,10 @@ namespace quegolazo_code.admin
 
         }
 
-        public int eliminarDelegado()
-        {
-            int codigo = 0;
-            return codigo;
-        }
-                
+        /// <summary>
+        /// cargar el repeater de los delegados con el nombre
+        /// autor: Paula Pedrosa
+        /// </summary>             
         private void cargarRepeaterDelegados()
         {
             usuarioLogueado = (Usuario)Session["usuario"];
@@ -98,6 +96,10 @@ namespace quegolazo_code.admin
             }
         }
 
+        /// <summary>
+        /// limpia los campos del alta de equipo
+        /// autor: Paula Pedrosa
+        /// </summary>
         public void limpiarCamposEquipo()
         {
             txtNombreEquipo.Value = "";
@@ -110,6 +112,10 @@ namespace quegolazo_code.admin
                        
         }
 
+        /// <summary>
+        /// limpia los campos del alta de delegado
+        /// autor: Paula Pedrosa
+        /// </summary>
         public void limpiarCamposDelegado()
         {
             txtNombreDelegado.Value = "";
@@ -120,6 +126,7 @@ namespace quegolazo_code.admin
 
         /// <summary>
         /// Habilita el panel de exito y deshabilita el panel de fracaso.
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
         private void mostrarPanelExito(string mensaje)
@@ -131,6 +138,7 @@ namespace quegolazo_code.admin
 
         /// <summary>
         /// Habilita el panel de fraaso y deshabilita el panel de exito.
+        /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
         private void mostrarPanelFracaso(string mensaje)
@@ -140,6 +148,10 @@ namespace quegolazo_code.admin
             panelFracaso.Visible = true;
         }
 
+        /// <summary>
+        /// limpia los paneles de éxito y fracaso
+        /// autor: Paula Pedrosa
+        /// </summary>
         private void limpiarPaneles()
         {
             panelExito.Visible = false;
@@ -189,12 +201,17 @@ namespace quegolazo_code.admin
         /// Obtiene los datos del formulario y los encapsula en un objeto Delegado
         /// autor: Paula Pedrosa
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Objeto Delegado obtenido de forumlario</returns>
         private Delegado obtenerDelegadoDelFormulario()
         {
             return new Delegado() { nombre = txtNombreDelegado.Value, email = txtEmailDelegado.Value, telefono = txtTelefonoDelegado.Value, domicilio = txtDireccionDelegado.Value };
         }
 
+        /// <summary>
+        /// Agrega un delegado a una lista genérica de delegados
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAgregarDelegado_Click(object sender, EventArgs e)
         {
             GestorDelegado gestorDelegado = new GestorDelegado();
@@ -207,6 +224,7 @@ namespace quegolazo_code.admin
                 delegadoDelFormulario = obtenerDelegadoDelFormulario();
                 foreach (Delegado delegado in delegados)
                 {
+                    //valida que no esté cargado ese nombre de delegado para ese equipo
                     if (delegado.nombre.Equals(delegadoDelFormulario.nombre))
                     {
                         b = true;
@@ -215,7 +233,7 @@ namespace quegolazo_code.admin
 
                 }
 
-                if(!b)
+                if(!b) // agrega a la lista el delegado
                     delegados.Add(delegadoDelFormulario);
                 else
                     mostrarPanelFracaso("Ese delegado ya fue registrado. Ingrese otro Nombre");
@@ -230,6 +248,7 @@ namespace quegolazo_code.admin
             limpiarCamposDelegado();
         }
 
+      
         protected void rptDelegados_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "eliminarDelegado")
