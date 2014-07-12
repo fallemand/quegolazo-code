@@ -14,7 +14,7 @@
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Nombre</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo" required ="true">
+                                    <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -26,11 +26,11 @@
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Color °1</label>
                                 <div class="col-lg-2 colorpick">
-                                    <input type="text" class="form-control" rel="txtTooltip" title="Color primario de la camiseta" id="txtColorPrimario" runat="server" value="#E1E1E1" required ="true">
+                                    <input type="text" class="form-control" rel="txtTooltip" title="Color primario de la camiseta" id="txtColorPrimario" runat="server" value="#E1E1E1">
                                 </div>
                                 <label for="text" class="col-lg-2 control-label">Color 2°</label>
                                 <div class="col-lg-2 colorpick">
-                                    <input type="text" class="form-control" rel="txtTooltip" title="Color secundario de la camiseta" id="txtColorSecundario" runat="server" value="#E1E1E1" required ="true" >
+                                    <input type="text" class="form-control" rel="txtTooltip" title="Color secundario de la camiseta" id="txtColorSecundario" runat="server" value="#E1E1E1">
                                 </div>
                             </div>
                             <div class="subform-horizontal clearfix">
@@ -74,7 +74,7 @@
                                                     <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server">
                                                 </div>
                                             </div>
-                                            <asp:Button class="btn btn-default btn-xs pull-right" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click"/>
+                                            <asp:Button class="btn btn-default btn-xs pull-right causesValidation" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click"/>
                                         </div>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="panel-footer clearfix">
-                        <asp:Button class="btn btn-success pull-right causesValidation" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
+                        <asp:Button class="btn btn-success pull-right" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
                     </div>
                 </div>
                 </span>

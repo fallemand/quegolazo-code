@@ -89,7 +89,7 @@ namespace quegolazo_code.admin
             catch (Exception ex)
             {
                 if (b)
-                    mostrarPanelFracaso("Debe ingresar un delegado");
+                    mostrarPanelFracaso("Debe ingresar los datos del delegado y del equipo para continuar");
                 else
                     mostrarPanelExito(ex.Message);
                                
@@ -177,24 +177,28 @@ namespace quegolazo_code.admin
             Torneo torneo = gestorTorneo.obtenerTorneoPorId(87);
             delegados = (List<Delegado>)Session["listaDelegados"];
 
-            if (delegados.Count != 0)
-            {
-                for (int i = 0; i < delegados.Count; i++)
-                {
-                    if (!b)
-                    {
-                        b = true;
-                        delegadoPrincipal = delegados.ElementAt(i);
-                    }
-                    else
-                        delegadoOpcional = delegados.ElementAt(i);
-                }
-                
-                return new Equipo() { nombre = txtNombreEquipo.Value, colorCamisetaPrimario = txtColorPrimario.Value, colorCamisetaSecundario = txtColorSecundario.Value, directorTecnico = txtNombreDirector.Value, delegadoPrincipal = delegadoPrincipal, delegadoOpcional = delegadoOpcional, torneo = torneo };
-            }
-            else
+            if (txtNombreEquipo.Value =="" || txtColorPrimario.Value == "#E1E1E1" || txtColorSecundario.Value == "#E1E1E1")
                 return null;
+            else
+            {
+                if (delegados.Count != 0)
+                {
+                    for (int i = 0; i < delegados.Count; i++)
+                    {
+                        if (!b)
+                        {
+                            b = true;
+                            delegadoPrincipal = delegados.ElementAt(i);
+                        }
+                        else
+                            delegadoOpcional = delegados.ElementAt(i);
+                    }
 
+                    return new Equipo() { nombre = txtNombreEquipo.Value, colorCamisetaPrimario = txtColorPrimario.Value, colorCamisetaSecundario = txtColorSecundario.Value, directorTecnico = txtNombreDirector.Value, delegadoPrincipal = delegadoPrincipal, delegadoOpcional = delegadoOpcional, torneo = torneo };
+                }
+                else
+                    return null;
+            }
         }
 
         /// <summary>
