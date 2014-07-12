@@ -105,7 +105,7 @@ namespace AccesoADatos
                     cmd.Connection = con;
                 }
 
-                string sql = @"SELECT idTorneo, nombre, nick, idUsuario
+                string sql = @"SELECT idTorneo, nombre, nick, idUsuario, descripcion
                                 FROM Torneos
                                 WHERE idTorneo = @idTorneo";
                 cmd.Parameters.Clear();

@@ -26,11 +26,11 @@
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Color °1</label>
                                 <div class="col-lg-2 colorpick">
-                                    <input type="text" class="form-control" rel="txtTooltip" title="Color primario de la camiseta" id="txtColorPrimario" runat="server" value="#E1E1E1">
+                                    <input type="text" class="form-control" rel="txtTooltip" title="Color primario de la camiseta" id="txtColorPrimario" runat="server" value="#E1E1E1" required ="true">
                                 </div>
                                 <label for="text" class="col-lg-2 control-label">Color 2°</label>
                                 <div class="col-lg-2 colorpick">
-                                    <input type="text" class="form-control" rel="txtTooltip" title="Color secundario de la camiseta" id="txtColorSecundario" runat="server" value="#E1E1E1">
+                                    <input type="text" class="form-control" rel="txtTooltip" title="Color secundario de la camiseta" id="txtColorSecundario" runat="server" value="#E1E1E1" required ="true" >
                                 </div>
                             </div>
                             <div class="subform-horizontal clearfix">
@@ -39,11 +39,13 @@
                                     <span class="label label-default label-md">
                                         <a href="" rel="txtTooltip" title="Eliminar" onclick="showDelegados();return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Nuevo</a>
                                     </span>
-                                    <asp:Repeater ID="rptDelegados" runat="server">
+                                    <asp:Repeater ID="rptDelegados" runat="server" OnItemCommand="rptDelegados_ItemCommand">
                                         <ItemTemplate>
                                             <span class="label label-default label-md"><%# Eval("nombre") %>
-                                             <a href="" rel="txtTooltip" title="Eliminar"><span class="glyphicon glyphicon-remove"></span></a>
-                                             <a href="" rel="txtTooltip" title="Modificar"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>' Height="30px" Width="45px"/>
+                                                <asp:Button ID="Button1" runat="server" Text="Modificar" CommandName="modificarDelegado" CommandArgument='<%# Eval("nombre") %>' Height="30px" Width="45px" />
+                                             <a href="" rel="txtTooltip" title="Eliminar" runat ="server" id="eliminarDelegado" ><span class="glyphicon glyphicon-remove"></span></a>
+                                             <a href="" rel="txtTooltip" title="Modificar" runat ="server" id="modificarDelegado" ><span class="glyphicon glyphicon-pencil"></span></a>
                                             </span>
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -51,28 +53,28 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
-                                                    <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegedo" runat="server">
+                                                    <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" required="true">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                    <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegedo" runat="server">
+                                                    <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegado" runat="server" required="true" email="true">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-phone"></i></span>
-                                                    <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegedo" runat="server">
+                                                    <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegado" runat="server" required="true" number="true">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-home"></i></span>
-                                                    <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegedo" runat="server">
+                                                    <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server">
                                                 </div>
                                             </div>
-                                            <asp:Button class="btn btn-default btn-xs pull-right" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click" />
+                                            <asp:Button class="btn btn-default btn-xs pull-right" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click"/>
                                         </div>
                                 </div>
                             </div>
@@ -108,9 +110,13 @@
                         <asp:Button class="btn btn-success pull-right causesValidation" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
                     </div>
                 </div>
+                </span>
             </fieldset>
-            <asp:Panel ID="panFracasoTorneo" runat="server" CssClass="alert alert-danger" Visible="False">
-            <asp:Literal ID="litFracasoTorneo" runat="server"></asp:Literal>
+            <asp:Panel ID="panelExito" runat="server" CssClass="well-sm alert-success" Visible="False"><small>
+            <asp:Literal ID="litExito" runat="server"></asp:Literal></small>
+            </asp:Panel>
+            <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
+            <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
             </asp:Panel>
         </div>
         <div class="col-md-6">
