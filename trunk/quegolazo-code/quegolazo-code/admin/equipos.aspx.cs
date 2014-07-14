@@ -177,7 +177,7 @@ namespace quegolazo_code.admin
             Torneo torneo = gestorTorneo.obtenerTorneoPorId(87);
             delegados = (List<Delegado>)Session["listaDelegados"];
 
-            if (txtNombreEquipo.Value =="" || txtColorPrimario.Value == "#E1E1E1" || txtColorSecundario.Value == "#E1E1E1")
+            if (txtNombreEquipo.Value == "" || txtColorPrimario.Value == "#E1E1E1" || txtColorSecundario.Value == "#E1E1E1")
                 return null;
             else
             {
@@ -223,30 +223,56 @@ namespace quegolazo_code.admin
             Delegado delegadoDelFormulario = null;
             bool b = false;
 
-            if (delegados.Count < 2)
+            //si hay un delegado a modificar
+            if ((Delegado)Session["delegadoAModificar"] != null)
             {
-                delegadoDelFormulario = obtenerDelegadoDelFormulario();
+                Delegado delegadoAModificar = (Delegado)Session["delegadoAModificar"];
+
                 foreach (Delegado delegado in delegados)
                 {
-                    //valida que no esté cargado ese nombre de delegado para ese equipo
-                    if (delegado.nombre.Equals(delegadoDelFormulario.nombre))
+                    if (delegado.nombre.Equals(delegadoAModificar.nombre))
                     {
-                        b = true;
+                        delegado.nombre = txtNombreDelegado.Value;
+                        delegado.telefono = txtTelefonoDelegado.Value;
+                        delegado.domicilio = txtDireccionDelegado.Value;
+                        delegado.email = txtEmailDelegado.Value;
                         break;
-                    } 
-
+                    }
                 }
 
-                if(!b) // agrega a la lista el delegado
-                    delegados.Add(delegadoDelFormulario);
-                else
-                    mostrarPanelFracaso("Ese delegado ya fue registrado. Ingrese otro Nombre");
+                Session["delegadoAModificar"] = (Delegado) null;
+                mostrarPanelExito("El Delegado fue modificado exitosamente");
 
-            }    
-            else
-                mostrarPanelFracaso("Puede ingresar hasta dos delegados");
-            
-         
+            }
+            else 
+            {
+                if (delegados.Count < 2)
+                {
+                    delegadoDelFormulario = obtenerDelegadoDelFormulario();
+                    foreach (Delegado delegado in delegados)
+                    {
+                        //valida que no esté cargado ese nombre de delegado para ese equipo
+                        if (delegado.nombre.Equals(delegadoDelFormulario.nombre))
+                        {
+                            b = true;
+                            break;
+                        }
+
+                    }
+
+                    if (!b) // agrega a la lista el delegado
+                    { 
+                        delegados.Add(delegadoDelFormulario);
+                        mostrarPanelExito("El Delegado fue agregado exitosamente");
+                    }
+                    else
+                        mostrarPanelFracaso("Ese delegado ya fue registrado. Ingrese otro Nombre.");
+
+                }
+                else
+                    mostrarPanelFracaso("Puede ingresar hasta dos delegados.");
+            }
+
             Session["listaDelegados"] = (List<Delegado>)delegados;
             cargarRepeaterDelegados();
             limpiarCamposDelegado();
@@ -255,12 +281,13 @@ namespace quegolazo_code.admin
       
         protected void rptDelegados_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
+            //Si elimina el delegado
             if (e.CommandName == "eliminarDelegado")
             {
                 string nombreDelegado = e.CommandArgument.ToString();
                 delegados = (List<Delegado>)Session["listaDelegados"];
-                int i = 0;
-                
+
+                int i = 0;                
                 foreach (Delegado delegado in delegados)
                 {
                     if (delegado.nombre.Equals(nombreDelegado))
@@ -268,15 +295,12 @@ namespace quegolazo_code.admin
                         delegados.RemoveAt(i);
                         break;
                     }
-
-                    i++;
-                       
+                    i++;     
                 }
-
                 cargarRepeaterDelegados();
-
             }
 
+            //Si modifica el delegado
             if (e.CommandName == "modificarDelegado")
             {
                 string nombreDelegado = e.CommandArgument.ToString();
@@ -291,13 +315,11 @@ namespace quegolazo_code.admin
                         txtTelefonoDelegado.Value = delegado.telefono;
                         txtDireccionDelegado.Value = delegado.domicilio;
                         txtEmailDelegado.Value = delegado.email;
-                        delegados.RemoveAt(i);
-                        break;
-                        
+
+                        Session["delegadoAModificar"] = (Delegado) delegado;
+                        break;                        
                     }
-
                     i++;
-
                 }
 
                 cargarRepeaterDelegados();
