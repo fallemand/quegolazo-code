@@ -14,7 +14,7 @@
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Nombre</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo">
+                                    <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -36,9 +36,11 @@
                             <div class="subform-horizontal clearfix">
                                 <label for="select" class="col-lg-2 control-label">Delegados</label>
                                 <div class="col-lg-10">
-                                    <span class="label label-default label-md">
-                                        <a href="" rel="txtTooltip" title="Eliminar" onclick="showDelegados();return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Nuevo</a>
-                                    </span>
+                                    <p class="nomargin-bottom"> 
+                                        <span class="label label-default label-md">
+                                            <a href="" rel="txtTooltip" title="Eliminar" onclick="showDelegados();return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Nuevo</a>
+                                        </span>
+                                    </p>
                                     <asp:Repeater ID="rptDelegados" runat="server" OnItemCommand="rptDelegados_ItemCommand">
                                         <ItemTemplate>
                                             <span class="label label-default label-md"><%# Eval("nombre") %>
@@ -47,30 +49,30 @@
                                             </span>
                                         </ItemTemplate>
                                     </asp:Repeater>
-                                        <div id="delegado" class="col-md-9">
+                                        <div id="delegado" style="display:none;" class="col-md-9">
                                             <fieldset class="validationGroup">
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
-                                                        <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" required="true">
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" required="true" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                        <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegado" runat="server" required="true" email="true">
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegado" runat="server" required="true" email="true" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-phone"></i></span>
-                                                        <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegado" runat="server" required="true" number="true">
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegado" runat="server" required="true" number="true" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-home"></i></span>
-                                                        <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server">
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server" disabled>
                                                     </div>
                                                 </div>
                                                 <asp:Button class="btn btn-default btn-xs pull-right causesValidation" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click"/>
@@ -88,8 +90,11 @@
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                             <div>
-                                                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span>
+                                                <span class="btn btn-default btn-xs btn-file">
+                                                    <span class="fileinput-new">Seleccionar Imagen</span>
+                                                    <span class="fileinput-exists">Cambiar</span>
                                                     <asp:FileUpload ID="fuLog" runat="server"/>
+                                                </span>
                                                 <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Eliminar</a>
                                             </div>
                                         </div>
@@ -107,10 +112,9 @@
                         </div>
                     </div>
                     <div class="panel-footer clearfix">
-                        <asp:Button class="btn btn-success pull-right" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
+                        <asp:Button class="btn btn-success pull-right causesValidation" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
                     </div>
                 </div>
-                </span>
             </fieldset>
             <asp:Panel ID="panelExito" runat="server" CssClass="well-sm alert-success" Visible="False"><small>
             <asp:Literal ID="litExito" runat="server"></asp:Literal></small>
@@ -135,10 +139,14 @@
         jQuery(document).ready(function () {
             $('#ContentAdmin_ContentAdminTorneo_txtColorPrimario').colorPicker();
             $('#ContentAdmin_ContentAdminTorneo_txtColorSecundario').colorPicker();
-            $('#delegado').hide();
         });
         function showDelegados() {
-            $('#delegado').toggle("slow");
+            $('#delegado').toggle("slow", function fildsetActivator() {
+                if ($('#delegado').is(":visible"))
+                    $('#delegado').find('input').prop('disabled', false);
+                else 
+                    $('#delegado').find('input').attr('disabled', 'disabled');
+            });
         };
     </script>
 </asp:Content>
