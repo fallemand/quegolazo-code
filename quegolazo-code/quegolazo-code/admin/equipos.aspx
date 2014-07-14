@@ -42,37 +42,39 @@
                                     <asp:Repeater ID="rptDelegados" runat="server" OnItemCommand="rptDelegados_ItemCommand">
                                         <ItemTemplate>
                                             <span class="label label-default label-md"><%# Eval("nombre") %>
-                                                <asp:LinkButton ID="lnkEliminar" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                                <asp:LinkButton ID="lnkModificar" runat="server" CommandName="modificarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                <asp:LinkButton rel="txtTooltip" ID="lnkEliminar" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                <asp:LinkButton rel="txtTooltip" ID="lnkModificar" runat="server" CommandName="modificarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                             </span>
                                         </ItemTemplate>
                                     </asp:Repeater>
                                         <div id="delegado" class="col-md-9">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
-                                                    <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" required="true">
+                                            <fieldset class="validationGroup">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" required="true">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                    <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegado" runat="server" required="true" email="true">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-envelope"></i></span>
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegado" runat="server" required="true" email="true">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-phone"></i></span>
-                                                    <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegado" runat="server" required="true" number="true">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-phone"></i></span>
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegado" runat="server" required="true" number="true">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-home"></i></span>
-                                                    <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-home"></i></span>
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <asp:Button class="btn btn-default btn-xs pull-right causesValidation" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click"/>
+                                                <asp:Button class="btn btn-default btn-xs pull-right causesValidation" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click"/>
+                                            </fieldset>
                                         </div>
                                 </div>
                             </div>
@@ -87,7 +89,7 @@
                                             <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                             <div>
                                                 <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span>
-                                                    <asp:FileUpload ID="fuLog" runat="server" />
+                                                    <asp:FileUpload ID="fuLog" runat="server"/>
                                                 <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Eliminar</a>
                                             </div>
                                         </div>
@@ -132,11 +134,11 @@
     <script>
         jQuery(document).ready(function () {
             $('#ContentAdmin_ContentAdminTorneo_txtColorPrimario').colorPicker();
-            $('#delegado').hide();
             $('#ContentAdmin_ContentAdminTorneo_txtColorSecundario').colorPicker();
+            $('#delegado').hide();
         });
         function showDelegados() {
             $('#delegado').toggle("slow");
-        }
+        };
     </script>
 </asp:Content>
