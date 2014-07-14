@@ -216,7 +216,7 @@
             // Descending from that .validationGroup element, find any input
             //  elements within it, iterate over them, and run validation on 
             //  each of them.
-            $group.find(':input').each(function (i, item) {
+            $group.find(':input:not(:disabled)').each(function (i, item) {
                 if (!$(item).valid())
                     isValid = false;
             });

@@ -856,7 +856,6 @@ div.colorPicker-swatch:hover {
 }
 
 #delegado {
-  margin-left:16px;
   margin-top:5px;
 }
 
@@ -870,4 +869,6 @@ div.colorPicker-swatch:hover {
 
 .subform-horizontal .form-group {
     margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
