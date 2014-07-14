@@ -9,7 +9,7 @@
                     <li class="active"><a href="index.html"><i class="flaticon-football141"></i><span>Principal</span> </a></li>
                     <li><a href="reports.html"><i class="flaticon-football31"></i><span></span>Fixture</a> </li>
                     <li><a href="reports.html"><i class="flaticon-trophy5"></i><span></span>Ediciones</a> </li>
-                    <li><a href="guidely.html"><i class="flaticon-soccer18"></i><span>Equipos</span> </a></li>
+                    <li><a href="equipos.aspx"><i class="flaticon-soccer18"></i><span>Equipos</span> </a></li>
                     <li><a href="charts.html"><i class="flaticon-football85"></i><span>Arbitros</span> </a></li>
                     <li><a href="shortcodes.html"><i class="flaticon-football84"></i><span>Resultados</span> </a></li>
                     <li><a href="shortcodes.html"><i class="flaticon-football79"></i><span>Sanciones</span> </a></li>
