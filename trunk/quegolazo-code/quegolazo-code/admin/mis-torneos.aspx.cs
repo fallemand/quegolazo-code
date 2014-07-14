@@ -283,7 +283,7 @@ namespace quegolazo_code.admin
                   limpiarPaneles();
                   GestorTorneo gestorTorneo = new GestorTorneo();
                   Torneo torneoNuevo = obtenerTorneoDelFormulario();
-                  torneoNuevo.idTorneo = gestorTorneo.modificarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
+                //  torneoNuevo.idTorneo = gestorTorneo.modificarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
                   //si la imagen esta ok, la guarda en el servidor. 
                   if (imagenUpload.PostedFile != null && imagenUpload.PostedFile.ContentLength > 0)
                       GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, torneoNuevo.idTorneo, GestorImagen.TORNEO);

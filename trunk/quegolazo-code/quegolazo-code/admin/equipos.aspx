@@ -42,10 +42,8 @@
                                     <asp:Repeater ID="rptDelegados" runat="server" OnItemCommand="rptDelegados_ItemCommand">
                                         <ItemTemplate>
                                             <span class="label label-default label-md"><%# Eval("nombre") %>
-                                                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>' Height="30px" Width="45px"/>
-                                                <asp:Button ID="Button1" runat="server" Text="Modificar" CommandName="modificarDelegado" CommandArgument='<%# Eval("nombre") %>' Height="30px" Width="45px" />
-                                             <a href="" rel="txtTooltip" title="Eliminar" runat ="server" id="eliminarDelegado" ><span class="glyphicon glyphicon-remove"></span></a>
-                                             <a href="" rel="txtTooltip" title="Modificar" runat ="server" id="modificarDelegado" ><span class="glyphicon glyphicon-pencil"></span></a>
+                                                <asp:LinkButton ID="lnkEliminar" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                <asp:LinkButton ID="lnkModificar" runat="server" CommandName="modificarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                             </span>
                                         </ItemTemplate>
                                     </asp:Repeater>

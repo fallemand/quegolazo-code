@@ -16,40 +16,40 @@ namespace quegolazo_code.admin
             
         }
 
-        protected void btnRegistrar_Click(object sender, EventArgs e)
-        {
-            GestorEdicion gestorEdicion = new GestorEdicion();
+        //protected void btnRegistrar_Click(object sender, EventArgs e)
+        //{
+        //    GestorEdicion gestorEdicion = new GestorEdicion();
 
-            gestorEdicion.edicion.idEdicion= int.Parse(Session["idEdicion"].ToString());
+        //    gestorEdicion.edicion.idEdicion = int.Parse(Session["idEdicion"].ToString());
 
-            if (rbJugadores_si.Checked)
-                gestorEdicion.edicion.preferencias.jugadores = true;
-            if (rb3_si.Checked)
-                gestorEdicion.edicion.preferencias.golesJugadores = true;
-            if (rb4_si.Checked)
-                gestorEdicion.edicion.preferencias.tarjetasJugadores = true;
-            if (rb2_si.Checked)
-                gestorEdicion.edicion.preferencias.cambiosJugadores = true;
-            if (rbArbitros_si.Checked)
-            {
-                gestorEdicion.edicion.preferencias.arbitros = true;
-                gestorEdicion.edicion.preferencias.cantidadArbitros=int.Parse(txt_cantidadArbitros.Text);
-            }
-            if (rb7_si.Checked)
-                gestorEdicion.edicion.preferencias.asignaArbitros = true;
-            if (rb8_si.Checked)
-                gestorEdicion.edicion.preferencias.desempenioArbitros = true;
-            if (rbSanciones_si.Checked)
-                gestorEdicion.edicion.preferencias.sanciones= true;
-            if (rb6_si.Checked)
-                gestorEdicion.edicion.preferencias.sancionesJugadores= true;
-            if (rb_ComplejosEdicion.Checked)
-                gestorEdicion.edicion.preferencias.canchaUnica = true;
+        //    if (rbJugadores_si.Checked)
+        //        gestorEdicion.edicion.preferencias.jugadores = true;
+        //    if (rb3_si.Checked)
+        //        gestorEdicion.edicion.preferencias.golesJugadores = true;
+        //    if (rb4_si.Checked)
+        //        gestorEdicion.edicion.preferencias.tarjetasJugadores = true;
+        //    if (rb2_si.Checked)
+        //        gestorEdicion.edicion.preferencias.cambiosJugadores = true;
+        //    if (rbArbitros_si.Checked)
+        //    {
+        //        gestorEdicion.edicion.preferencias.arbitros = true;
+        //        gestorEdicion.edicion.preferencias.cantidadArbitros = int.Parse(txt_cantidadArbitros.Text);
+        //    }
+        //    if (rb7_si.Checked)
+        //        gestorEdicion.edicion.preferencias.asignaArbitros = true;
+        //    if (rb8_si.Checked)
+        //        gestorEdicion.edicion.preferencias.desempenioArbitros = true;
+        //    if (rbSanciones_si.Checked)
+        //        gestorEdicion.edicion.preferencias.sanciones = true;
+        //    if (rb6_si.Checked)
+        //        gestorEdicion.edicion.preferencias.sancionesJugadores = true;
+        //    if (rb_ComplejosEdicion.Checked)
+        //        gestorEdicion.edicion.preferencias.canchaUnica = true;
 
-            gestorEdicion.registrarConfiguraciones();
+        //    gestorEdicion.registrarConfiguraciones();
 
 
-        }
+        //}
 
         protected void rbJugadores_si_CheckedChanged(object sender, EventArgs e)
         {
