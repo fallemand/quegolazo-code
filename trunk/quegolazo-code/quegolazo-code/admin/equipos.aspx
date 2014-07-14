@@ -14,7 +14,7 @@
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Nombre</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo" required>
+                                    <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo" required="true">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -26,11 +26,11 @@
                             <div class="form-group">
                                 <label for="text" class="col-lg-2 control-label">Color °1</label>
                                 <div class="col-lg-2 colorpick">
-                                    <input type="text" class="form-control" rel="txtTooltip" title="Color primario de la camiseta" id="txtColorPrimario" runat="server" value="#E1E1E1">
+                                    <input type="text" class="form-control" rel="txtTooltip" title="Color primario de la camiseta" id="txtColorPrimario" runat="server" value="#E1E1E1" required="true">
                                 </div>
                                 <label for="text" class="col-lg-2 control-label">Color 2°</label>
                                 <div class="col-lg-2 colorpick">
-                                    <input type="text" class="form-control" rel="txtTooltip" title="Color secundario de la camiseta" id="txtColorSecundario" runat="server" value="#E1E1E1">
+                                    <input type="text" class="form-control" rel="txtTooltip" title="Color secundario de la camiseta" id="txtColorSecundario" runat="server" value="#E1E1E1" required="true">
                                 </div>
                             </div>
                             <div class="subform-horizontal clearfix">
@@ -40,7 +40,6 @@
                                         <span class="label label-default label-md">
                                             <a href="" rel="txtTooltip" title="Eliminar" onclick="showDelegados();return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Nuevo</a>
                                         </span>
-                                    </p>
                                     <asp:Repeater ID="rptDelegados" runat="server" OnItemCommand="rptDelegados_ItemCommand">
                                         <ItemTemplate>
                                             <span class="label label-default label-md"><%# Eval("nombre") %>
@@ -49,6 +48,7 @@
                                             </span>
                                         </ItemTemplate>
                                     </asp:Repeater>
+                                        </p>
                                         <div id="delegado" style="display:none;" class="col-md-9">
                                             <fieldset class="validationGroup">
                                                 <div class="form-group">
@@ -93,7 +93,7 @@
                                                 <span class="btn btn-default btn-xs btn-file">
                                                     <span class="fileinput-new">Seleccionar Imagen</span>
                                                     <span class="fileinput-exists">Cambiar</span>
-                                                    <asp:FileUpload ID="fuLog" runat="server"/>
+                                                    <asp:FileUpload ID="fuLog" runat="server" required="true"/>
                                                 </span>
                                                 <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Eliminar</a>
                                             </div>

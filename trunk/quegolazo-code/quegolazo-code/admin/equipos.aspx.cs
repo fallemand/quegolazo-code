@@ -21,12 +21,13 @@ namespace quegolazo_code.admin
         protected void Page_Load(object sender, EventArgs e)
         {
             limpiarPaneles();
+            btnAgregarDelegado.Text = "Agregar Delegado";
+
             if (!Page.IsPostBack)
             {
                 delegados = new List<Delegado>();
                 Session["listaDelegados"] = (List<Delegado>)delegados;
-                cargarRepeaterDelegados();
-                
+                cargarRepeaterDelegados();                
             }
 
         }
@@ -53,7 +54,7 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void btnRegistrarEquipo_Click(object sender, EventArgs e)
         {
-            bool b = false;
+            bool noHayDelegados = false;
             try
             {
                 GestorEquipo gestorEquipo = new GestorEquipo();
@@ -63,14 +64,15 @@ namespace quegolazo_code.admin
                 Delegado delegadoOpcional = null;
                 equipoNuevo = obtenerEquipoDelFormulario();
 
-                if (equipoNuevo != null)
+                if (equipoNuevo != null) // si es null es porque no ingresó delegados
                 {
                     delegadoPrincipal = equipoNuevo.delegadoPrincipal;
                     delegadoOpcional = equipoNuevo.delegadoOpcional;
                 }
                 else
                 {
-                    b = true;
+                    //no ingesó delegados
+                    noHayDelegados = true;
                     throw new Exception();
                 }
 
@@ -88,7 +90,7 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
-                if (b)
+                if (noHayDelegados)
                     mostrarPanelFracaso("Debe ingresar los datos del delegado y del equipo para continuar");
                 else
                     mostrarPanelExito(ex.Message);
@@ -164,41 +166,37 @@ namespace quegolazo_code.admin
         /// <summary>
         /// Obtiene los datos del formulario y los encapsula en un objeto Equipo
         /// autor: Paula Pedrosa
-        /// <returns></returns>
+        /// <returns>el Equipo del formulario o null sino ingreso delegados</returns>
         private Equipo obtenerEquipoDelFormulario()
         {
             GestorTorneo gestorTorneo = new GestorTorneo();
             GestorDelegado gestorDelegado = new GestorDelegado();
             Delegado delegadoPrincipal = null;
             Delegado delegadoOpcional = null;
-            bool b = false;
-            //Torneo torneo = gestorTorneo.obtenerTorneoPorId(Int32.Parse(txtIdTorneo.Value));
-
+            //Torneo torneo = (Torneo) Session["torneo"];
             Torneo torneo = gestorTorneo.obtenerTorneoPorId(87);
+
             delegados = (List<Delegado>)Session["listaDelegados"];
 
-            if (txtNombreEquipo.Value == "" || txtColorPrimario.Value == "#E1E1E1" || txtColorSecundario.Value == "#E1E1E1")
-                return null;
-            else
-            {
-                if (delegados.Count != 0)
-                {
-                    for (int i = 0; i < delegados.Count; i++)
-                    {
-                        if (!b)
-                        {
-                            b = true;
-                            delegadoPrincipal = delegados.ElementAt(i);
-                        }
-                        else
-                            delegadoOpcional = delegados.ElementAt(i);
-                    }
+            bool esPrimeraVez = false; 
 
-                    return new Equipo() { nombre = txtNombreEquipo.Value, colorCamisetaPrimario = txtColorPrimario.Value, colorCamisetaSecundario = txtColorSecundario.Value, directorTecnico = txtNombreDirector.Value, delegadoPrincipal = delegadoPrincipal, delegadoOpcional = delegadoOpcional, torneo = torneo };
+            if (delegados.Count != 0)
+            {
+                for (int i = 0; i < delegados.Count; i++)
+                {
+                    if (!esPrimeraVez)
+                    {
+                        esPrimeraVez = true;
+                        delegadoPrincipal = delegados.ElementAt(i);
+                    }
+                    else
+                        delegadoOpcional = delegados.ElementAt(i);
                 }
-                else
-                    return null;
+                return new Equipo() { nombre = txtNombreEquipo.Value, colorCamisetaPrimario = txtColorPrimario.Value, colorCamisetaSecundario = txtColorSecundario.Value, directorTecnico = txtNombreDirector.Value, delegadoPrincipal = delegadoPrincipal, delegadoOpcional = delegadoOpcional, torneo = torneo };
             }
+            else
+                return null; 
+       
         }
 
         /// <summary>
@@ -221,7 +219,7 @@ namespace quegolazo_code.admin
             GestorDelegado gestorDelegado = new GestorDelegado();
             delegados = (List<Delegado>)Session["listaDelegados"];
             Delegado delegadoDelFormulario = null;
-            bool b = false;
+            bool existeDelegado = false;
 
             //si hay un delegado a modificar
             if ((Delegado)Session["delegadoAModificar"] != null)
@@ -254,13 +252,12 @@ namespace quegolazo_code.admin
                         //valida que no esté cargado ese nombre de delegado para ese equipo
                         if (delegado.nombre.Equals(delegadoDelFormulario.nombre))
                         {
-                            b = true;
+                            existeDelegado = true;
                             break;
                         }
-
                     }
 
-                    if (!b) // agrega a la lista el delegado
+                    if (!existeDelegado) // agrega a la lista el delegado
                     { 
                         delegados.Add(delegadoDelFormulario);
                         mostrarPanelExito("El Delegado fue agregado exitosamente");
@@ -273,12 +270,15 @@ namespace quegolazo_code.admin
                     mostrarPanelFracaso("Puede ingresar hasta dos delegados.");
             }
 
-            Session["listaDelegados"] = (List<Delegado>)delegados;
+            Session["listaDelegados"] = (List<Delegado>) delegados;
             cargarRepeaterDelegados();
             limpiarCamposDelegado();
         }
 
-      
+        /// <summary>
+        /// Método para gestionar la eliminación y modificación de los delegados
+        /// autor: Paula Pedrosa
+        /// </summary>
         protected void rptDelegados_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             //Si elimina el delegado
@@ -316,12 +316,13 @@ namespace quegolazo_code.admin
                         txtDireccionDelegado.Value = delegado.domicilio;
                         txtEmailDelegado.Value = delegado.email;
 
-                        Session["delegadoAModificar"] = (Delegado) delegado;
+                        Session["delegadoAModificar"] = (Delegado) delegado; // Guarda el objeto delegado a modificar
                         break;                        
                     }
                     i++;
                 }
 
+                btnAgregarDelegado.Text = "Modificar Delegado";
                 cargarRepeaterDelegados();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showDelegados();", true);
 
