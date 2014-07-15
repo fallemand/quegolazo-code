@@ -19,3 +19,4 @@ function crearTorneo() {
     $('#imagen-preview').attr('src', "../resources/img/theme/logo-default.png");
 }
 
+

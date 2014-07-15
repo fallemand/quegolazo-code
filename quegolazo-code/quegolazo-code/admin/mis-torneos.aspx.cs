@@ -46,6 +46,7 @@ namespace quegolazo_code.admin
             GestorTorneo gestorTorneo = new GestorTorneo();
             List<Torneo> torneosDelUsuario = gestorTorneo.obtenerTorneosDeUnUsuario(usuarioLogueado.idUsuario);
             gestorTorneo.asignarRutaDeImagenATorneos(ref torneosDelUsuario, GestorImagen.enumDimensionImagen.MEDIANA);
+            Session["torneos"] = torneosDelUsuario;
             rptTorneos.DataSource = torneosDelUsuario;
             rptTorneos.DataBind();
         }
@@ -82,9 +83,10 @@ namespace quegolazo_code.admin
                 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
                 {
                     Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
-                    int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
+                   int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
                     rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorIdTorneo(idTorneo);
                     rptEdiciones.DataBind();
+
                 }
             }
             catch (Exception ex)
@@ -273,20 +275,66 @@ namespace quegolazo_code.admin
                   txtTorneoAsociado.Value = t.nombre;
                   txtIdTorneo.Value = t.idTorneo.ToString();
                   ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalEdicion();", true);
-              }             
-          }
+              }
 
+              ////Flor
+              if (e.CommandName == "editarTorneo")
+              {
+                  Session["idTorneo"] = e.CommandArgument;
+                  Torneo t = buscarTorneo(int.Parse(e.CommandArgument.ToString()));
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalTorneo();", true);
+                  txtUrlTorneo.Disabled = true;
+                  btnResgitrarTorneo.Visible = false;
+                  btnModificarTorneo.Visible = true;
+                  txtUrlTorneo.Value = t.nick;
+                  txtNombreTorneo.Value = t.nombre;
+                  txtDescripcion.Value = t.descripcion;
+             
+
+              } 
+
+          }
+        
+       
+        /// <summary>
+        /// Busca el torneo en la lista de torneos en sesión
+        /// autor=Flor
+        /// </summary>
+        /// <param name="idtorneo"></param>
+        /// <returns></returns>
+          private Torneo buscarTorneo(int idtorneo)
+          {
+              Torneo to = new Torneo();
+
+               foreach(Torneo t in (List<Torneo>)Session["torneos"])
+                  {
+                      if (t.idTorneo == idtorneo)
+                      {
+                          to = t;
+                          break;
+                      }
+                  }
+               return to;
+          }  
+
+
+        /// <summary>
+        /// modifica los datos de un campeonato (nombre, descripción o imagen)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
           protected void btnModificarTorneo_Click(object sender, EventArgs e)
           {
               try
               {
                   limpiarPaneles();
                   GestorTorneo gestorTorneo = new GestorTorneo();
-                  Torneo torneoNuevo = obtenerTorneoDelFormulario();
-                //  torneoNuevo.idTorneo = gestorTorneo.modificarTorneo(torneoNuevo, ((Usuario)Session["usuario"]));
+                  Torneo torneoAModificar = obtenerTorneoDelFormulario();
+                  torneoAModificar.idTorneo = int.Parse(Session["idTorneo"].ToString());
+                  gestorTorneo.modificarTorneo(torneoAModificar);
                   //si la imagen esta ok, la guarda en el servidor. 
                   if (imagenUpload.PostedFile != null && imagenUpload.PostedFile.ContentLength > 0)
-                      GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, torneoNuevo.idTorneo, GestorImagen.TORNEO);
+                  GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, torneoAModificar.idTorneo, GestorImagen.TORNEO);
                   ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalTorneo();", true);
                   cargarRepeaterTorneos();
                   limpiarModalTorneo();
@@ -298,6 +346,8 @@ namespace quegolazo_code.admin
                   panFracasoTorneo.Visible = true;
               }
           }
+
+          
 
        
     }

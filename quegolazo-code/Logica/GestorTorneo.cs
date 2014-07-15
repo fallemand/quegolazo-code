@@ -138,20 +138,20 @@ namespace Logica
         /// <param name="torneoNuevo">Objeto Torneo</param>
         /// <param name="usuario">Objeto Usuario</param>
         /// <returns>El id del torneo que se acaba de modificar</returns>
-        //public int modificarTorneo(Torneo torneoCambiado, Usuario usuario)
-        //{
-        //    try
-        //    {
-        //        DAOTorneo daoTorneo = new DAOTorneo();
-        //        int idTorneoRegistrado = daoTorneo.modificarTorneo(torneoCambiado, usuario);
-        //        return idTorneoRegistrado;
+        public void modificarTorneo(Torneo torneoCambiado)
+        {
+            try
+            {
+                DAOTorneo daoTorneo = new DAOTorneo();
+                daoTorneo.modificarTorneo(torneoCambiado);
+               // return 1;
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
 
     }
