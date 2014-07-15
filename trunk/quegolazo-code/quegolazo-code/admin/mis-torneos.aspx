@@ -28,8 +28,9 @@
                                         <div class="col-md-6">
                                             <div class="pull-right botones">
                                                 <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Ver Sitio Web del Torneo"><span class="glyphicon glyphicon-globe"></span></a>
-                                                <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-toggle="modal" data-target="#registrarTorneo" data-placement="top" onclick="modificarTorneo(<%#Eval("idTorneo")%>,'<%#Eval("nick")%>','<%#Eval("nombre")%>','<%#Eval("descripcion")%>' );" title="Editar Torneo"><span class="glyphicon glyphicon-pencil"></span></a>
-                                                <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Eliminar Torneo"><span class="glyphicon glyphicon-remove"></span></a>
+                                                <%--<a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-toggle="modal" data-target="#registrarTorneo" data-placement="top" onclick="modificarTorneo(<%#Eval("idTorneo")%>,'<%#Eval("nick")%>','<%#Eval("nombre")%>','<%#Eval("descripcion")%>' );" title="Editar Torneo"><span class="glyphicon glyphicon-pencil"></span></a>--%>
+                                                <asp:LinkButton ID="lnkModificarCampeonato" title="Editar Torneo" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarTorneo" CommandArgument='<%#Eval("idTorneo")%>'  rel="txtTooltip" ><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                <a href="#" class="btn btn-panel shadow-xs"  rel="txtTooltip" data-placement="top" title="Eliminar Torneo"><span class="glyphicon glyphicon-remove"></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -119,7 +120,8 @@
                                         <div class="col-md-4">
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail" data-trigger="fileinput">
-                                                  <img id="imagen-preview" src="../resources/img/theme/logo-default.png">
+                                                  
+                                                  <img id="imagen-preview" src="../resources/img/theme/logo-default.png"/>
                                                 </div>
                                                 <div id="logoTorneoPreview" class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput"></div>
                                                 <div>
@@ -146,7 +148,7 @@
                             <div class="col-xs-8 col-xs-offset-5">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation" data-toggle="modal" data-target="#registrarTorneo" Text="Registrar" OnClick="btnResgitrar_Click" />
-                                <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation"  Text="Modificar" OnClientClick="modificarTorneo()" OnClick="btnModificarTorneo_Click" />
+                                <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation" data-toggle="modal" data-target="#registrarTorneo" Text="Modificar"  OnClick="btnModificarTorneo_Click" />
                             </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgress2">

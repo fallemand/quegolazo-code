@@ -254,7 +254,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="torneoNuevo">El torneo que se modifica con sus nuevos datos</param>
         /// <param name="usuario">El usuario al cual le pertenece el torneo</param>
-        public void modificarTorneo(Torneo torneoNuevo, Usuario usuario)
+        public void modificarTorneo(Torneo torneoNuevo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -267,10 +267,12 @@ namespace AccesoADatos
                 }
 
                 string sql = @"UPDATE Torneos 
-                                     SET descripcion = @descripcion, nombre = @nombre";
+                                     SET descripcion = @descripcion, nombre = @nombre 
+                                     WHERE idTorneo=@idTorneo";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", torneoNuevo.nombre);
                 cmd.Parameters.AddWithValue("@descripcion", torneoNuevo.descripcion);
+                cmd.Parameters.AddWithValue("@idTorneo", torneoNuevo.idTorneo);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
