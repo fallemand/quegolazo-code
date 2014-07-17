@@ -238,6 +238,96 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Literal litFracasoEdicion;
         
         /// <summary>
+        /// Control rdJugadoresRegistroSi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresRegistroSi;
+        
+        /// <summary>
+        /// Control rdJugadoresCambiosSi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresCambiosSi;
+        
+        /// <summary>
+        /// Control rdJugadoresGolesSi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresGolesSi;
+        
+        /// <summary>
+        /// Control rdJugadoresTarjetasSi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresTarjetasSi;
+        
+        /// <summary>
+        /// Control rdSancionesEquiposSi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSancionesEquiposSi;
+        
+        /// <summary>
+        /// Control rdSancionesJugadoresSi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSancionesJugadoresSi;
+        
+        /// <summary>
+        /// Control rdArbitrosSi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox rdArbitrosSi;
+        
+        /// <summary>
+        /// Control rdArbitrosPorPartidoSi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdArbitrosPorPartidoSi;
+        
+        /// <summary>
+        /// Control rdArbitroDesempenioSi.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdArbitroDesempenioSi;
+        
+        /// <summary>
+        /// Control rdCanchasComplejos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdCanchasComplejos;
+        
+        /// <summary>
         /// Control btnRegistrarOpcioens.
         /// </summary>
         /// <remarks>

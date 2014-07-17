@@ -45,12 +45,12 @@ namespace Logica
         /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="edicionNueva">Objeto Edicion</param>
-        public void registrarEdicion(Edicion edicionNueva)
+        public int registrarEdicion(Edicion edicionNueva)
         {
             try
             {
                 DAOEdicion daoEdicion = new DAOEdicion();
-                daoEdicion.registrarEdicion(edicionNueva);
+                return daoEdicion.registrarEdicion(edicionNueva);
             }
             catch (Exception ex)
             {

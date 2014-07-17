@@ -290,7 +290,7 @@
                                                         <label class="control-label col-md-9" for="radios">¿Registrará que jugador juega cada partido?</label>
                                                         <div class="col-md-3">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="rbgJugadores" id="rdJugadoresRegistroSi">
+                                                                <input type="radio" name="rbgJugadores" id="rdJugadoresRegistroSi" runat="server">
                                                                 Si
                                                             </label>
                                                             <label class="radio-inline">
@@ -301,7 +301,7 @@
                                                         <label class="control-label col-md-9" for="radios">¿Registrará los cambios que se hagan durante el partido?</label>
                                                         <div class="col-md-3">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="rbgCambios" id="rdJugadoresCambiosSi">
+                                                                <input type="radio" name="rbgCambios" id="rdJugadoresCambiosSi" runat="server">
                                                                 Si
                                                             </label>
                                                             <label class="radio-inline">
@@ -312,7 +312,7 @@
                                                         <label class="control-label col-md-9" for="radios">¿Registrará que jugador hizo los goles?</label>
                                                         <div class="col-md-3">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="rbgGoles" id="rdJugadoresGolesSi">
+                                                                <input type="radio" name="rbgGoles" id="rdJugadoresGolesSi" runat="server">
                                                                 Si
                                                             </label>
                                                             <label class="radio-inline">
@@ -323,7 +323,7 @@
                                                         <label class="control-label col-md-9" for="radios">¿Registrará las tarjetas que reciba cada jugador?</label>
                                                         <div class="col-md-3">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="rbgTarjetas" id="rdJugadoresTarjetasSi">
+                                                                <input type="radio" name="rbgTarjetas" id="rdJugadoresTarjetasSi" runat="server">
                                                                 Si
                                                             </label>
                                                             <label class="radio-inline">
@@ -360,7 +360,7 @@
                                                         <label class="control-label col-md-9" for="radios">¿Registrará sanciones a los equipos?</label>
                                                         <div class="col-md-3">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="rbgSancionesEquipos" id="rdSancionesEquiposSi">
+                                                                <input type="radio" name="rbgSancionesEquipos" id="rdSancionesEquiposSi" runat="server">
                                                                 Si
                                                             </label>
                                                             <label class="radio-inline">
@@ -371,7 +371,7 @@
                                                         <label class="control-label col-md-9" for="radios">¿Registrará sanciones a los jugadores?</label>
                                                         <div class="col-md-3">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="rbgSancionesJugadores" id="rdSancionesJugadoresSi">
+                                                                <input type="radio" name="rbgSancionesJugadores" id="rdSancionesJugadoresSi" runat="server">
                                                                 Si
                                                             </label>
                                                             <label class="radio-inline">
@@ -393,7 +393,7 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label class="switch-light well nomargin-bottom" onclick="togglePanelArbitros();">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" runat="server" id="rdArbitrosSi">
                                                                 <span>
                                                                     <span>No</span>
                                                                     <span>Si</span>
@@ -408,7 +408,7 @@
                                                         <label class="control-label col-md-9" for="radios">¿Asignará árbitros en particular a cada partido?</label>
                                                         <div class="col-md-3">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="rbgArbitros" id="rdArbitrosPorPartidoSi">
+                                                                <input type="radio" name="rbgArbitros" id="rdArbitrosPorPartidoSi" runat="server">
                                                                 Si
                                                             </label>
                                                             <label class="radio-inline">
@@ -419,7 +419,7 @@
                                                         <label class="control-label col-md-9" for="radios">¿Registrará el desempeño del árbitros por cada partido?</label>
                                                         <div class="col-md-3">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="rbgArbitros" id="rdArbitroDesempenioSi">
+                                                                <input type="radio" name="rbgArbitros" id="rdArbitroDesempenioSi" runat="server">
                                                                 Si
                                                             </label>
                                                             <label class="radio-inline">
@@ -456,18 +456,18 @@
                                                         <label class="control-label col-md-5" for="radios">¿Donde se jugarán los partidos?</label>
                                                         <div class="col-md-7">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="rbgCanchas" id="rdCanchasComplejos">
-                                                                Complejos
+                                                                <input type="radio" name="rbgCanchas" id="rdCanchasComplejos" runat="server">
+                                                                Complejo/s propios del torneo
                                                             </label>
                                                             <label class="radio-inline">
                                                                 <input type="radio" name="rbgCanchas" id="rdCanchasEquipos">
-                                                                Canchas de los equipos
+                                                                Canchas de los equipos participantes
                                                             </label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <asp:Button ID="btnRegistrarOpcioens" runat="server" Text="Grabar" CssClass="btn btn-success pull-right" />
+                                            <asp:Button ID="btnRegistrarOpcioens" runat="server" Text="Grabar" OnClick="btnRegistrarOpcioens_Click" CssClass="btn btn-success pull-right" />
                                         </div>
                                     </div>
                                 </div>

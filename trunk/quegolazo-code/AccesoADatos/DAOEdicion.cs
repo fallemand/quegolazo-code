@@ -100,7 +100,7 @@ namespace AccesoADatos
         /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="edicionNueva">Objeto nueva Edición</param>
-        public void registrarEdicion(Edicion edicionNueva)
+        public int registrarEdicion(Edicion edicionNueva)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -113,7 +113,7 @@ namespace AccesoADatos
                 }
 
                 string sql = @"INSERT INTO Ediciones (nombre, idTamanioCancha, idTipoSuperficie, idEstado, idTorneo, puntosGanado, puntosPerdido, puntosEmpatado)
-                                              VALUES (@nombre, @idTamanioCancha, @idTipoSuperficie, @idEstado, @idTorneo, @puntosGanado, @puntosPerdido, @puntosEmpatado )";
+                                              VALUES (@nombre, @idTamanioCancha, @idTipoSuperficie, @idEstado, @idTorneo, @puntosGanado, @puntosPerdido, @puntosEmpatado ) SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", edicionNueva.nombre);     
                 cmd.Parameters.AddWithValue("@idTamanioCancha", edicionNueva.tamanioCancha.idTamanioCancha);
@@ -125,7 +125,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@puntosPerdido", edicionNueva.puntosPerdido);
                 cmd.CommandText = sql;
 
-                cmd.ExecuteNonQuery();
+                return int.Parse(cmd.ExecuteScalar().ToString());
 
             }
             catch (Exception e)
