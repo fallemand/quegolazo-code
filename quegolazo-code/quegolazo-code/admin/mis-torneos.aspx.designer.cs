@@ -121,13 +121,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnModificarTorneo;
         
         /// <summary>
-        /// Control UpdateProgress2.
+        /// Control UpdateProgressFooter.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
+        protected global::System.Web.UI.UpdateProgress UpdateProgressFooter;
         
         /// <summary>
         /// Control UpdatePanel3.
@@ -236,6 +236,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litFracasoEdicion;
+        
+        /// <summary>
+        /// Control btnRegistrarOpcioens.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegistrarOpcioens;
         
         /// <summary>
         /// Control btnRegistrarEdicion.

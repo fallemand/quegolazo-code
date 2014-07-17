@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="mis-torneos.aspx.cs" Inherits="quegolazo_code.admin.mis_torneos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdmin" runat="server">
-     <script src="../resources/js/misTorneos/misTorneos.js"></script>
-     <div class="container padding-top">
+    <script src="../resources/js/misTorneos/misTorneos.js"></script>
+    <div class="container padding-top">
         <div class="row">
             <div class="container">
                 <button type="button" class="btn btn-success" data-toggle="modal" onclick="crearTorneo();" data-target="#registrarTorneo">Crear un Nuevo Torneo</button>
@@ -29,8 +29,8 @@
                                             <div class="pull-right botones">
                                                 <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Ver Sitio Web del Torneo"><span class="glyphicon glyphicon-globe"></span></a>
                                                 <%--<a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-toggle="modal" data-target="#registrarTorneo" data-placement="top" onclick="modificarTorneo(<%#Eval("idTorneo")%>,'<%#Eval("nick")%>','<%#Eval("nombre")%>','<%#Eval("descripcion")%>' );" title="Editar Torneo"><span class="glyphicon glyphicon-pencil"></span></a>--%>
-                                                <asp:LinkButton ID="lnkModificarCampeonato" title="Editar Torneo" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarTorneo" CommandArgument='<%#Eval("idTorneo")%>'  rel="txtTooltip" ><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                                <a href="#" class="btn btn-panel shadow-xs"  rel="txtTooltip" data-placement="top" title="Eliminar Torneo"><span class="glyphicon glyphicon-remove"></span></a>
+                                                <asp:LinkButton ID="lnkModificarCampeonato" title="Editar Torneo" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Eliminar Torneo"><span class="glyphicon glyphicon-remove"></span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -43,7 +43,7 @@
                                         </div>
                                         <table class="table">
                                             <thead>
-                                                <tr>                                                   
+                                                <tr>
                                                     <th class="col-md-4">Nombre</th>
                                                     <th class="col-md-2">Tamaño</th>
                                                     <th class="col-md-2">Superficie</th>
@@ -55,7 +55,7 @@
 
                                                 <asp:Repeater ID="rptEdiciones" runat="server">
                                                     <ItemTemplate>
-                                                        <tr>                                                            
+                                                        <tr>
                                                             <td><%# Eval("nombre") %></td>
                                                             <td><%# Eval("tamanioCancha.nombre") %></td>
                                                             <td><%# Eval("tipoSuperficie.nombre") %></td>
@@ -120,8 +120,8 @@
                                         <div class="col-md-4">
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail" data-trigger="fileinput">
-                                                  
-                                                  <img id="imagen-preview" src="../resources/img/theme/logo-default.png"/>
+
+                                                    <img id="imagen-preview" src="../resources/img/theme/logo-default.png" />
                                                 </div>
                                                 <div id="logoTorneoPreview" class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput"></div>
                                                 <div>
@@ -148,16 +148,16 @@
                             <div class="col-xs-8 col-xs-offset-5">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation" data-toggle="modal" data-target="#registrarTorneo" Text="Registrar" OnClick="btnResgitrar_Click" />
-                                <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation" data-toggle="modal" data-target="#registrarTorneo" Text="Modificar"  OnClick="btnModificarTorneo_Click" />
+                                <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation" data-toggle="modal" data-target="#registrarTorneo" Text="Modificar" OnClick="btnModificarTorneo_Click" />
                             </div>
                             <div class="col-xs-1">
-                                <asp:UpdateProgress runat="server" ID="UpdateProgress2">
+                                <asp:UpdateProgress runat="server" ID="UpdateProgressFooter">
                                     <ProgressTemplate>
                                         <img src="/resources/img/theme/load3.gif" />
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
                             </div>
-                            </div>
+                        </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -178,83 +178,299 @@
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                         <ContentTemplate>
                             <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="text" class="col-lg-2 control-label">Torneo</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="txtTorneoAsociado" runat="server" name="nombreTorneoEdicion" placeholder="Nombre del Torneo" disabled>
-                                        <input type="hidden" class="form-control" id="txtIdTorneo" runat="server">
-                                        <span class="help-block">Torneo para el cual esta creando una nueva edición.</span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="text" class="col-lg-2 control-label">Nombre</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="txtNombreEdicion" runat="server" required="true" name="nombreEdicion" placeholder="Nombre de la Edición">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="select" class="col-lg-2 control-label">Tamaño</label>
-                                    <div class="col-lg-10">
-                                        <asp:DropDownList ID="ddlTamañoCancha" runat="server" CssClass="form-control"></asp:DropDownList>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="select" class="col-lg-2 control-label">Superficie</label>
-                                    <div class="col-lg-10">
-                                        <asp:DropDownList ID="ddlTipoSuperficie" runat="server" CssClass="form-control"></asp:DropDownList>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="select" class="col-lg-2 control-label">Complejos</label>
-                                    <div class="col-lg-10">
-                                        <div class="input-group">
-                                            <select class="form-control" name="establecimientos">
-                                                <option disabled selected>Seleccione el establecimiento</option>
-                                                <option>Complejo Quilmes</option>
-                                                <option>Complejo Tres Aguas</option>
-                                                <option>Complejo Match5</option>
-                                            </select>
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button">Agregar</button>
-                                            </span>
-                                        </div>
-                                        <span class="help-block">Complejo Grandes Arcos <a href="" rel="txtTooltip" title="Eliminar"><span class="glyphicon glyphicon-remove"></span></a></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="text" class="col-lg-2 control-label">Puntos</label>
-                                    <div class="col-lg-10">
-                                        <div class="col-lg-3">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
-                                                <input type="number" class="form-control" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3" required="required">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#datosGenerales" data-toggle="tab">Datos Generales</a></li>
+                                    <li class=""><a href="#personalizacion" data-toggle="tab">Opciones</a></li>
+                                </ul>
+                                <div id="myTabContent" class="tab-content" style="padding-top: 10px">
+                                    <div class="tab-pane active in fade" id="datosGenerales">
+                                        <div class="form-group">
+                                            <label for="text" class="col-lg-2 control-label">Torneo</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="txtTorneoAsociado" runat="server" name="nombreTorneoEdicion" placeholder="Nombre del Torneo" disabled>
+                                                <input type="hidden" class="form-control" id="txtIdTorneo" runat="server">
+                                                <span class="help-block">Torneo para el cual esta creando una nueva edición.</span>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">=</span>
-                                                <input type="number" class="form-control" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1" required="required">
+                                        <div class="form-group">
+                                            <label for="text" class="col-lg-2 control-label">Nombre</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="txtNombreEdicion" runat="server" required="true" name="nombreEdicion" placeholder="Nombre de la Edición">
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
-                                                <input type="number" class="form-control" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0" required="required">
+                                        <div class="form-group">
+                                            <label for="select" class="col-lg-2 control-label">Tamaño</label>
+                                            <div class="col-lg-10">
+                                                <asp:DropDownList ID="ddlTamañoCancha" runat="server" CssClass="form-control"></asp:DropDownList>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                        <div class="form-group">
+                                            <label for="select" class="col-lg-2 control-label">Superficie</label>
+                                            <div class="col-lg-10">
+                                                <asp:DropDownList ID="ddlTipoSuperficie" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="select" class="col-lg-2 control-label">Complejos</label>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <select class="form-control" name="establecimientos">
+                                                        <option disabled selected>Seleccione el establecimiento</option>
+                                                        <option>Complejo Quilmes</option>
+                                                        <option>Complejo Tres Aguas</option>
+                                                        <option>Complejo Match5</option>
+                                                    </select>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button">Agregar</button>
+                                                    </span>
+                                                </div>
+                                                <span class="help-block">Complejo Grandes Arcos <a href="" rel="txtTooltip" title="Eliminar"><span class="glyphicon glyphicon-remove"></span></a></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="text" class="col-lg-2 control-label">Puntos</label>
+                                            <div class="col-lg-10">
+                                                <div class="col-lg-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
+                                                        <input type="number" class="form-control" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3" required="required">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">=</span>
+                                                        <input type="number" class="form-control" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1" required="required">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                                                        <input type="number" class="form-control" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0" required="required">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="btnRegistrarEdicion" EventName="Click" />
-                                    </Triggers>
-                                    <ContentTemplate>
-                                        <asp:Panel ID="panFracasoEdicion" runat="server" CssClass="alert alert-danger" Visible="False">
-                                            <asp:Literal ID="litFracasoEdicion" runat="server"></asp:Literal>
-                                        </asp:Panel>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                            <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="btnRegistrarEdicion" EventName="Click" />
+                                            </Triggers>
+                                            <ContentTemplate>
+                                                <asp:Panel ID="panFracasoEdicion" runat="server" CssClass="alert alert-danger" Visible="False">
+                                                    <asp:Literal ID="litFracasoEdicion" runat="server"></asp:Literal>
+                                                </asp:Panel>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                    <div class="tab-pane fade" id="personalizacion">
+                                        <div class="panel-group opciones" id="accordion">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <div class="clearfix">
+                                                        <div class="col-md-8 first">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#panelJugadores">¿Registrará Jugadores?</a>
+                                                                <small><span class="glyphicon glyphicon-question-sign" rel="txtTooltip" title="¿Registrará los jugadores que pertenecen a cada equipo?" data-placement="right"></span></small>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="switch-light well nomargin-bottom" onclick="togglePanelJugadores();">
+                                                                <input type="checkbox">
+                                                                <span>
+                                                                    <span>No</span>
+                                                                    <span>Si</span>
+                                                                </span>
+                                                                <a class="btn btn-success" onclick=""></a>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="panelJugadores" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <label class="control-label col-md-9" for="radios">¿Registrará que jugador juega cada partido?</label>
+                                                        <div class="col-md-3">
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgJugadores" id="rdJugadoresRegistroSi">
+                                                                Si
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgJugadores" id="rdJugadoresRegistroNo">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                        <label class="control-label col-md-9" for="radios">¿Registrará los cambios que se hagan durante el partido?</label>
+                                                        <div class="col-md-3">
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgCambios" id="rdJugadoresCambiosSi">
+                                                                Si
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgCambios" id="rdJugadoresCambiosNo">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                        <label class="control-label col-md-9" for="radios">¿Registrará que jugador hizo los goles?</label>
+                                                        <div class="col-md-3">
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgGoles" id="rdJugadoresGolesSi">
+                                                                Si
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgGoles" id="rdJugadoresGolesNo">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                        <label class="control-label col-md-9" for="radios">¿Registrará las tarjetas que reciba cada jugador?</label>
+                                                        <div class="col-md-3">
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgTarjetas" id="rdJugadoresTarjetasSi">
+                                                                Si
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgTarjetas" id="rdJugadoresTarjetasNo">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <div class="clearfix">
+                                                        <div class="col-md-8 first">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#panelSanciones">¿Registrará Sanciones?</a>
+                                                                <small><span class="glyphicon glyphicon-question-sign" rel="txtTooltip" title="¿Registrará sanciones a los equipos o jugadores?" data-placement="right"></span></small>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="switch-light well nomargin-bottom" onclick="togglePanelSanciones();">
+                                                                <input type="checkbox">
+                                                                <span>
+                                                                    <span>No</span>
+                                                                    <span>Si</span>
+                                                                </span>
+                                                                <a class="btn btn-success" onclick=""></a>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="panelSanciones" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <label class="control-label col-md-9" for="radios">¿Registrará sanciones a los equipos?</label>
+                                                        <div class="col-md-3">
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgSancionesEquipos" id="rdSancionesEquiposSi">
+                                                                Si
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgSancionesEquipos" id="rdSancionesEquiposNo">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                        <label class="control-label col-md-9" for="radios">¿Registrará sanciones a los jugadores?</label>
+                                                        <div class="col-md-3">
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgSancionesJugadores" id="rdSancionesJugadoresSi">
+                                                                Si
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgSancionesJugadores" id="rdSancionesJugadoresNo">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <div class="clearfix">
+                                                        <div class="col-md-8 first">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#panelArbitros">¿Registrará Árbitros?</a>
+                                                                <small><span class="glyphicon glyphicon-question-sign" rel="txtTooltip" title="¿Registrará Árbitros para la edición?" data-placement="right"></span></small>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="switch-light well nomargin-bottom" onclick="togglePanelArbitros();">
+                                                                <input type="checkbox">
+                                                                <span>
+                                                                    <span>No</span>
+                                                                    <span>Si</span>
+                                                                </span>
+                                                                <a class="btn btn-success" onclick=""></a>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="panelArbitros" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <label class="control-label col-md-9" for="radios">¿Asignará árbitros en particular a cada partido?</label>
+                                                        <div class="col-md-3">
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgArbitros" id="rdArbitrosPorPartidoSi">
+                                                                Si
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgArbitros" id="rdArbitrosPorPartidoNo">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                        <label class="control-label col-md-9" for="radios">¿Registrará el desempeño del árbitros por cada partido?</label>
+                                                        <div class="col-md-3">
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgArbitros" id="rdArbitroDesempenioSi">
+                                                                Si
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgArbitros" id="rdArbitroDesempenioNo">
+                                                                No
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <div class="clearfix">
+                                                        <div class="col-md-8 first">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#panelCanchas">¿Registrará Complejos o Canchas?</a>
+                                                                <small><span class="glyphicon glyphicon-question-sign" rel="txtTooltip" title="¿Registrará Complejos o canchas donde se disputará la edición?" data-placement="bottom"></span></small>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="switch-light well nomargin-bottom" onclick="togglePanelCanchas();">
+                                                                <input type="checkbox">
+                                                                <span>
+                                                                    <span>No</span>
+                                                                    <span>Si</span>
+                                                                </span>
+                                                                <a class="btn btn-success" onclick=""></a>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="panelCanchas" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        <label class="control-label col-md-5" for="radios">¿Donde se jugarán los partidos?</label>
+                                                        <div class="col-md-7">
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgCanchas" id="rdCanchasComplejos">
+                                                                Complejos
+                                                            </label>
+                                                            <label class="radio-inline">
+                                                                <input type="radio" name="rbgCanchas" id="rdCanchasEquipos">
+                                                                Canchas de los equipos
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <asp:Button ID="btnRegistrarOpcioens" runat="server" Text="Grabar" CssClass="btn btn-success pull-right" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -276,7 +492,7 @@
         </div>
     </div>
     <!-- Modal Agregar Edicion -->
-  
+
     <script type="text/javascript">
         $('.fileinput').on('change.bs.fileinput', function () {
             $('.fileinput-preview').css('background-image', 'none');
@@ -287,21 +503,25 @@
         });
         $('#agregarEdicion2').on('hidden.bs.modal', function () {
             $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
-            $('.modal-body').find('div').removeClass('has-success has-error');           
+            $('.modal-body').find('div').removeClass('has-success has-error');
         });
-        function closeModalTorneo() {         
-            $('#registrarTorneo').modal('hide');           
-        }
+        function closeModalTorneo() {
+            $('#registrarTorneo').modal('hide');
+        };
         function openModalTorneo() {
             $('#registrarTorneo').removeClass("fade");
-            $('#registrarTorneo').modal('show');           
-        }
+            $('#registrarTorneo').modal('show');
+        };
         function closeModalEdicion() {
             $('#agregarEdicion2').modal('hide');
-        }
+        };
         function openModalEdicion() {
             $('#agregarEdicion2').modal('show');
-        }
+        };
+        function togglePanelJugadores() { $('#panelJugadores').collapse('toggle'); };
+        function togglePanelSanciones() { $('#panelSanciones').collapse('toggle'); };
+        function togglePanelArbitros() { $('#panelArbitros').collapse('toggle'); };
+        function togglePanelCanchas() { $('#panelCanchas').collapse('toggle'); };
     </script>
 
 </asp:Content>

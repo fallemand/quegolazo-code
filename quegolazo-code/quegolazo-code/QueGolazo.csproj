@@ -72,7 +72,7 @@
     <Content Include="resources\css\bootstrap.css" />
     <Content Include="resources\css\bootstrapValidator.css" />
     <Content Include="resources\css\flaticon.css" />
-    <Content Include="resources\css\quegolazo.css" />
+    <Content Include="resources\css\quegolazo1.css" />
     <Content Include="resources\fonts\flaticon.html" />
     <Content Include="resources\fonts\flaticon.svg" />
     <Content Include="resources\fonts\glyphicons-halflings-regular.svg" />
