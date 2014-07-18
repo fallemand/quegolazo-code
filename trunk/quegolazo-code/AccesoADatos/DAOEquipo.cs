@@ -63,7 +63,7 @@ namespace AccesoADatos
             catch (SqlException ex)
             {
                 if (ex.Class == 14 && ex.Number == 2601)
-                    throw new Exception("El equipo " + nuevoEquipo.nombre + " ya se encuentra registrado.");
+                    throw new Exception("El equipo " + nuevoEquipo.nombre + " ya se encuentra registrado. Ingrese otro nombre para el equipo.");
                 else
                     throw new Exception("No se pudo registrar el equipo: " + ex.Message);
             
