@@ -93,7 +93,7 @@ namespace quegolazo_code.admin
                 if (noHayDelegados)
                     mostrarPanelFracaso("Debe ingresar los datos del delegado y del equipo para continuar");
                 else
-                    mostrarPanelExito(ex.Message);
+                    mostrarPanelFracaso(ex.Message);
                                
             }
         }
