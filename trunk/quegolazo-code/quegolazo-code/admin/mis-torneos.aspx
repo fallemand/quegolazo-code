@@ -121,7 +121,7 @@
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="fileinput-new thumbnail" data-trigger="fileinput">
 
-                                                    <img id="imagen-preview" src="../resources/img/theme/logo-default.png" />
+                                                    <img id="imagenpreview" src="../resources/img/theme/logo-default.png" runat="server" />
                                                 </div>
                                                 <div id="logoTorneoPreview" class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput"></div>
                                                 <div>

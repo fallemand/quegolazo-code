@@ -290,6 +290,8 @@ namespace quegolazo_code.admin
                   txtUrlTorneo.Value = t.nick;
                   txtNombreTorneo.Value = t.nombre;
                   txtDescripcion.Value = t.descripcion;
+                  if(t.rutaImagen!=null)
+                  imagenpreview.Src = t.rutaImagen;
              
 
               } 
