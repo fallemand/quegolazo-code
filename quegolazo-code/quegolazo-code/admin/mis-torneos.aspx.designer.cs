@@ -22,13 +22,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Label lblMensajeTorneos;
         
         /// <summary>
-        /// Control pnlLoguear.
+        /// Control upTorneos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel pnlLoguear;
+        protected global::System.Web.UI.UpdatePanel upTorneos;
         
         /// <summary>
         /// Control rptTorneos.
@@ -40,13 +40,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Repeater rptTorneos;
         
         /// <summary>
-        /// Control UpdatePanel1.
+        /// Control upModalTorneo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel upModalTorneo;
         
         /// <summary>
         /// Control txtNombreTorneo.
@@ -130,22 +130,22 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnModificarTorneo;
         
         /// <summary>
-        /// Control UpdateProgressFooter.
+        /// Control UpdateProgressModalTorneo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgressFooter;
+        protected global::System.Web.UI.UpdateProgress UpdateProgressModalTorneo;
         
         /// <summary>
-        /// Control UpdatePanel3.
+        /// Control upModalEdicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+        protected global::System.Web.UI.UpdatePanel upModalEdicion;
         
         /// <summary>
         /// Control txtTorneoAsociado.
@@ -220,33 +220,6 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPuntosPorPerder;
         
         /// <summary>
-        /// Control UpdatePanel2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
-        /// <summary>
-        /// Control panFracasoEdicion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panFracasoEdicion;
-        
-        /// <summary>
-        /// Control litFracasoEdicion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litFracasoEdicion;
-        
-        /// <summary>
         /// Control rdJugadoresRegistroSi.
         /// </summary>
         /// <remarks>
@@ -254,6 +227,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresRegistroSi;
+        
+        /// <summary>
+        /// Control rdJugadoresRegistroNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresRegistroNo;
         
         /// <summary>
         /// Control rdJugadoresCambiosSi.
@@ -265,6 +247,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresCambiosSi;
         
         /// <summary>
+        /// Control rdJugadoresCambiosNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresCambiosNo;
+        
+        /// <summary>
         /// Control rdJugadoresGolesSi.
         /// </summary>
         /// <remarks>
@@ -272,6 +263,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresGolesSi;
+        
+        /// <summary>
+        /// Control rdJugadoresGolesNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresGolesNo;
         
         /// <summary>
         /// Control rdJugadoresTarjetasSi.
@@ -283,6 +283,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresTarjetasSi;
         
         /// <summary>
+        /// Control rdJugadoresTarjetasNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresTarjetasNo;
+        
+        /// <summary>
         /// Control rdSancionesEquiposSi.
         /// </summary>
         /// <remarks>
@@ -292,6 +301,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSancionesEquiposSi;
         
         /// <summary>
+        /// Control rdSancionesEquiposNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSancionesEquiposNo;
+        
+        /// <summary>
         /// Control rdSancionesJugadoresSi.
         /// </summary>
         /// <remarks>
@@ -299,6 +317,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSancionesJugadoresSi;
+        
+        /// <summary>
+        /// Control rdSancionesJugadoresNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSancionesJugadoresNo;
         
         /// <summary>
         /// Control rdArbitrosSi.
@@ -319,6 +346,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdArbitrosPorPartidoSi;
         
         /// <summary>
+        /// Control rdArbitrosPorPartidoNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdArbitrosPorPartidoNo;
+        
+        /// <summary>
         /// Control rdArbitroDesempenioSi.
         /// </summary>
         /// <remarks>
@@ -326,6 +362,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdArbitroDesempenioSi;
+        
+        /// <summary>
+        /// Control rdArbitroDesempenioNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdArbitroDesempenioNo;
         
         /// <summary>
         /// Control rdCanchasComplejos.
@@ -337,13 +382,31 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdCanchasComplejos;
         
         /// <summary>
-        /// Control btnRegistrarOpcioens.
+        /// Control rdCanchasEquipos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegistrarOpcioens;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdCanchasEquipos;
+        
+        /// <summary>
+        /// Control panFracasoEdicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panFracasoEdicion;
+        
+        /// <summary>
+        /// Control litFracasoEdicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litFracasoEdicion;
         
         /// <summary>
         /// Control btnRegistrarEdicion.
@@ -355,12 +418,21 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnRegistrarEdicion;
         
         /// <summary>
-        /// Control UpdateProgress1.
+        /// Control btnRegistrarOpciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+        protected global::System.Web.UI.WebControls.Button btnRegistrarOpciones;
+        
+        /// <summary>
+        /// Control UpdateProgressModalEdicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgressModalEdicion;
     }
 }
