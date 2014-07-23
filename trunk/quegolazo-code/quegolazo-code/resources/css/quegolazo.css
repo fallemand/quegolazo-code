@@ -653,7 +653,7 @@ tr th:last-child {
   cursor: pointer;
 }
 .fileinput {
-	cursor: pointer;
+  cursor: pointer;
   margin-bottom: 9px;
   display: inline-block;
 }
@@ -669,7 +669,10 @@ tr th:last-child {
 	width:130px;
 	height:90px;
 }
-
+.fileinput-default {
+	width:130px;
+	height:90px;
+}
 .fileinput .thumbnail {
   overflow: hidden;
   display: inline-block;

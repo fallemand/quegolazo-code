@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="/resources/css/bootstrap.css" />
     <link rel="stylesheet" href="/resources/css/flaticon.css" />
-    <link rel="stylesheet" href="/resources/css/quegolazo1.css" />
+    <link rel="stylesheet" href="/resources/css/quegolazo.css" />
     <link rel="shortcut icon" href="/resources/img/theme/favicon.ico" />
     <!-- Archivos JavaScript -->
     <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
@@ -181,11 +181,11 @@
             // Search for controls marked with the causesValidation flag 
             //  that are contained anywhere within elements marked as 
             //  validationGroups, and wire their click event up.
-            $('.validationGroup .causesValidation').click(Validate);
+            $('#form1 .causesValidation').click(Validate);
 
             // Select any input[type=text] elements within a validation group
             //  and attach keydown handlers to all of them.
-            $('.validationGroup :text').keydown(function (evt) {
+            $('#form1 :text').keydown(function (evt) {
                 // Only execute validation if the key pressed was enter.
                 if (evt.keyCode == 13) {
                     // Find and store the next input element that comes after the
@@ -203,28 +203,92 @@
                     }
                 }
             });
+            $.validator.addMethod("noSpace", function (value, element) {
+                return value.indexOf(" ") < 0 && value != "";
+            }, "No se permiten espacios en blanco para este campo");
+
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+            function EndRequestHandler(sender, args) {
+                $("#form1").validate({
+                    // This prevents validation from running on every
+                    //  form submission by default.
+                    highlight: function (element) {
+                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    unhighlight: function (element) {
+                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                    },
+                    errorElement: 'span',
+                    errorClass: 'help-block',
+                    errorPlacement: function (error, element) {
+                        if (element.parent('.input-group').length) {
+                            error.insertAfter(element.parent());
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    },
+                    onsubmit: false
+                });
+
+                // Search for controls marked with the causesValidation flag 
+                //  that are contained anywhere within elements marked as 
+                //  validationGroups, and wire their click event up.
+                $('#form1 .causesValidation').click(Validate);
+
+                // Select any input[type=text] elements within a validation group
+                //  and attach keydown handlers to all of them.
+                $('#form1 :text').keydown(function (evt) {
+                    // Only execute validation if the key pressed was enter.
+                    if (evt.keyCode == 13) {
+                        // Find and store the next input element that comes after the
+                        //  one in which the enter key was pressed.
+                        var $nextInput = $(this).nextAll(':input:first');
+
+                        // If the next input is a submit button, go into validation.
+                        //  Else, focus the next form element as if enter == tab.
+                        if ($nextInput.is(':submit')) {
+                            Validate(evt);
+                        }
+                        else {
+                            evt.preventDefault();
+                            $nextInput.focus();
+                        }
+                    }
+                });
+                $.validator.addMethod("noSpace", function (value, element) {
+                    return value.indexOf(" ") < 0 && value != "";
+                }, "No se permiten espacios en blanco para este campo");
+            }
         });
 
         function Validate(evt) {
             // Ascend from the button or input element that triggered the 
             //  event until we find a container element flagged with 
             //  .validationGroup and store a reference to that element.
-            var $group = $(this).closest('.validationGroup');
+            var classnm = '';
+            $.each($(evt.currentTarget).attr('class').split(' '), function (k, v) {
+                if (v.indexOf('vg') == 0) {
+                    classnm = v;
 
-            var isValid = true;
+                    var isValid = true;
 
-            // Descending from that .validationGroup element, find any input
-            //  elements within it, iterate over them, and run validation on 
-            //  each of them.
-            $group.find(':input:not(:disabled)').each(function (i, item) {
-                if (!$(item).valid())
-                    isValid = false;
+                    // Get all the elements on which the same class is applied
+                    // and run validation on each of them
+                    var $group = $('#form1 .' + classnm);
+                    // Descending from that .validationGroup element, find any input
+                    //  elements within it, iterate over them, and run validation on 
+                    //  each of them.
+                    $group.find(':input:not(:disabled)').each(function (i, item) {
+                        if (!$(item).valid())
+                            isValid = false;
+                    });
+
+                    // If any fields failed validation, prevent the button's click 
+                    //  event from triggering form submission.
+                    if (!isValid)
+                        evt.preventDefault();
+                }
             });
-
-            // If any fields failed validation, prevent the button's click 
-            //  event from triggering form submission.
-            if (!isValid)
-                evt.preventDefault();
         }
         </script>
     <!-- Validar Form -->
@@ -234,9 +298,6 @@
         jQuery(document).ready(function () {
             $('[rel="txtTooltip"]').tooltip();
         });
-        jQuery.validator.addMethod("noSpace", function (value, element) {
-            return value.indexOf(" ") < 0 && value != "";
-        }, "No se permiten espacios en blanco para este campo");
     </script>
     <script type="text/javascript">
         var pbControl = null;

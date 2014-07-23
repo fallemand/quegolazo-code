@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="registro.aspx.cs" Inherits="quegolazo_code.admin.registro" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdmin" runat="server">
     <div class="container">
-        <fieldset id="registrar" class="form-singin validationGroup">
+        <fieldset id="registrar" class="form-singin vgRegistro">
           <h2>Registro de Usuarios</h2>
           <p>Por favor ingrese sus datos</p>
           <div class="margin-top"></div>
@@ -47,7 +47,7 @@
             <div class="col-xs-5">
                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" OnClick="btnRegistrar_Click" CssClass="btn btn-success pull-right causesValidation" />
+                        <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" OnClick="btnRegistrar_Click" CssClass="btn btn-success pull-right causesValidation vgRegistro" />
                     </ContentTemplate>
                     </asp:UpdatePanel>
             </div>

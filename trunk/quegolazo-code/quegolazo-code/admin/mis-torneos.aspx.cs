@@ -24,7 +24,6 @@ namespace quegolazo_code.admin
             {
                 try
                 {
-                    
                     cargarCombos();
                     cargarRepeaterTorneos();           
                 }
@@ -114,13 +113,13 @@ namespace quegolazo_code.admin
                 //si la imagen esta ok, la guarda en el servidor. 
                 if ( imagenUpload.PostedFile != null && imagenUpload.PostedFile.ContentLength > 0)
                     GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, torneoNuevo.idTorneo, GestorImagen.TORNEO);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalTorneo();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalTorneo');", true);
                 cargarRepeaterTorneos();            
                 limpiarModalTorneo();
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalTorneo();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
                 litFracasoTorneo.Text = ex.Message;
                 panFracasoTorneo.Visible = true;
             }
@@ -214,14 +213,14 @@ namespace quegolazo_code.admin
           {
               try
               {
+                  panFracasoEdicion.Visible = false;
                       validarDatosDeLaEdicion();
                       GestorEdicion gestorEdicion = new GestorEdicion();
                       Edicion edicionNueva = obtenerEdicionDelFormulario();
                       Session["idEdicionNueva"]=gestorEdicion.registrarEdicion(edicionNueva);
-                      limpiarModalEdicion();
-                      cargarRepeaterTorneos();
-                     
-                      //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalEdicion();", true);                               
+                      btnRegistrarOpciones.Visible = true;
+                      btnRegistrarEdicion.Visible = false;
+                      ScriptManager.RegisterStartupScript(this, this.GetType(), "activarTab", "activaTab('tabsModalEdicion','tabPersonalizacionEdicion');", true);                               
               }
               catch (Exception ex)
               {
@@ -275,7 +274,7 @@ namespace quegolazo_code.admin
                   Torneo t = gestorTorneo.obtenerTorneoPorId(Int32.Parse(idTorneo));
                   txtTorneoAsociado.Value = t.nombre;
                   txtIdTorneo.Value = t.idTorneo.ToString();
-                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalEdicion();", true);
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
               }
 
               ////Flor
@@ -283,7 +282,7 @@ namespace quegolazo_code.admin
               {
                   Session["idTorneo"] = e.CommandArgument;
                   Torneo t = buscarTorneo(int.Parse(e.CommandArgument.ToString()));
-                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalTorneo();", true);
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
                   txtUrlTorneo.Disabled = true;
                   btnResgitrarTorneo.Visible = false;
                   btnModificarTorneo.Visible = true;
@@ -338,13 +337,13 @@ namespace quegolazo_code.admin
                   //si la imagen esta ok, la guarda en el servidor. 
                   if (imagenUpload.PostedFile != null && imagenUpload.PostedFile.ContentLength > 0)
                   GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, torneoAModificar.idTorneo, GestorImagen.TORNEO);
-                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModalTorneo();", true);
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalTorneo');", true);
                   cargarRepeaterTorneos();
                   limpiarModalTorneo();
               }
               catch (Exception ex)
               {
-                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalTorneo();", true);
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
                   litFracasoTorneo.Text = ex.Message;
                   panFracasoTorneo.Visible = true;
               }
@@ -398,16 +397,16 @@ namespace quegolazo_code.admin
 
                   //Registro de configuraciones
                   gestorEdicion.registrarConfiguraciones();
+
+                  limpiarModalEdicion();
+                  cargarRepeaterTorneos();
               }
               catch (Exception ex)
               {
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "activarTab", "activaTab('tabsModalEdicion','tabPersonalizacionEdicion');", true);     
                   litFracasoEdicion.Text = ex.Message;
                   panFracasoEdicion.Visible = true;
               }
           }
-
-          
-
-       
     }
 }
