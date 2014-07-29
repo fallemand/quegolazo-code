@@ -7,46 +7,62 @@ using System.Threading.Tasks;
 
 namespace Utils
 {
-    public class ValidacionDeTextos
+    public class Validacion
     {
        /// <summary>
-       /// Valida si una cadena es un numero entero valido
+       /// Castea la cadena a un numero entero valido
        /// </summary>
-       /// <param name="numero">la cadena a validar</param>
+       /// <param name="numero">cadena a castear</param>
        /// <returns>True si es un numero entero valido, false de lo contrario</returns>
-        public bool validarNumeroEntero(string numero) {
+        public int castInt(string numero) {
             try
             {
-                Int64.Parse(numero);
-                return true;
+                return int.Parse(numero);
             }
             catch (Exception)
             {
-                return false;
+                throw new Exception("El valor ingresado no es un número");
             }
         }
 
         /// <summary>
-        /// Valida si una cadena es un numero decimal valido
+        /// Castea la cadena a una fecha valida
         /// </summary>
-        /// <param name="numero">la cadena a validar</param>
+        /// <param name="numero">cadena a castear</param>
         /// <returns>True si es un numero entero valido, false de lo contrario</returns>
-        public bool validarNumeroDecimal(string numero) {
+        public DateTime castDate(string fecha)
+        {
             try
             {
-                Double.Parse(numero);
-                return true;
+                return DateTime.Parse(fecha);
             }
             catch (Exception)
             {
-                return false;
+                throw new Exception("El valor ingresado no es una fecha");
             }
         }
 
-         /// <summary>
+        /// <summary>
+        /// Castea la cadenaa a un numero entero valido
+        /// </summary>
+        /// <param name="numero">cadena a castear</param>
+        /// <returns>True si es un numero entero valido, false de lo contrario</returns>
+        public decimal castDecimal(string numero)
+        {
+            try
+            {
+                return decimal.Parse(numero, System.Globalization.CultureInfo.InvariantCulture);
+            }
+            catch (Exception)
+            {
+                throw new Exception("El valor ingresado no es una número decimal");
+            }
+        }
+
+       /// <summary>
        /// verifica si una cadena esta vacia. devuelve true si es asi.
        /// </summary>
-          public bool estaVacio(string cadena) {
+        public bool estaVacio(string cadena) {
             return cadena == "";
         }
 
@@ -71,8 +87,6 @@ namespace Utils
               {
                   return false;
               }
-          
           }
     }
-
 }
