@@ -74,7 +74,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-
+            SqlDataReader dr =new SqlDataReader();
 
             Usuario respuesta = null;
             try
@@ -91,7 +91,7 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
+                dr = cmd.ExecuteReader();
 
                 DAOTipoUsuario gestorTipoUsuario = new DAOTipoUsuario();
 
@@ -116,6 +116,8 @@ namespace AccesoADatos
             }
             finally
             {
+                if (dr != null)
+                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -135,6 +137,7 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlTransaction trans = null;
+            SqlDataReader dr = new SqlDataReader();
 
             try
             {
@@ -152,7 +155,6 @@ namespace AccesoADatos
                     trans = con.BeginTransaction();
                     cmd.Connection = con;
                     cmd.Transaction = trans;
-
                     //Activación de Usuario
                     string sql = @"UPDATE Usuarios SET EsActivo=1 
                                     WHERE codigo=@UserCodigo";
@@ -174,7 +176,7 @@ namespace AccesoADatos
                      cmd.Parameters.Clear();
                      cmd.Parameters.AddWithValue("@UserCodigo", codigo);
                      cmd.CommandText = sql;
-                    SqlDataReader dr = cmd.ExecuteReader();
+                    dr = cmd.ExecuteReader();
                    
                      while (dr.Read())
                      {
@@ -207,7 +209,8 @@ namespace AccesoADatos
             }
             finally
             {
-
+                if (dr != null)
+                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                 {
                     con.Close();
@@ -228,7 +231,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-
+            SqlDataReader dr = new SqlDataReader();
 
             Usuario usuario = null;
             try
@@ -245,7 +248,7 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
                 cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
+                dr = cmd.ExecuteReader();
 
                 DAOTipoUsuario gestorTipoUsuario = new DAOTipoUsuario();
 
@@ -277,6 +280,8 @@ namespace AccesoADatos
             }
             finally
             {
+                if (dr != null)
+                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -294,7 +299,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr;
+            SqlDataReader dr=new SqlDataReader();
             Usuario usuario = null;
             try
             {
@@ -332,6 +337,8 @@ namespace AccesoADatos
             }
             finally
             {
+                if (dr != null)
+                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }

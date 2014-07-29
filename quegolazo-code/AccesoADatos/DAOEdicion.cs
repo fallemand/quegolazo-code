@@ -24,7 +24,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-
+            SqlDataReader dr = new SqlDataReader();
 
             List<Edicion> respuesta = new List<Edicion>();
             Edicion edicion = null;
@@ -44,7 +44,7 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
                 cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
+                dr = cmd.ExecuteReader();
 
                 DAOCancha daoCancha = new DAOCancha();
                 DAOEdicion daoEdicion = new DAOEdicion();
@@ -66,7 +66,7 @@ namespace AccesoADatos
                     edicion.nombre = dr["nombre"].ToString();
                     edicion.tamanioCancha = daoCancha.obtenerTamanioCanchaPorId(Int32.Parse(dr["idTamanioCancha"].ToString()));
                     edicion.tipoSuperficie = daoTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(dr["idTipoSuperficie"].ToString()));
-                    edicion.estado = daoEstado.obtenerUnEstadoPorId(Int32.Parse(dr["idEstado"].ToString()));
+                    edicion.estado = daoEstado.obtenerEstadoPorId(Int32.Parse(dr["idEstado"].ToString()));
                     edicion.cancha = daoCancha.obtenerCanchasDeEdicion(Int32.Parse(dr["idEdicion"].ToString()));
                     edicion.torneo = daoTorneo.obtenerTorneoPorId(Int32.Parse(dr["idTorneo"].ToString()));
                     edicion.puntosEmpatado = Int32.Parse(dr["puntosEmpatado"].ToString());

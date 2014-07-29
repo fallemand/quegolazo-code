@@ -41,7 +41,7 @@ namespace quegolazo_code.admin
                     int idUsuario = gestorUsuario.reestablecerContrasenia(codigo, txtClave.Value);
                     if (idUsuario == 0)
                     {
-                        throw new Exception("El código de Recuperación no es válido o ya fue utilizado.");
+                        throw new Exception("");
                     }
 
                     panExito.Visible = true;
