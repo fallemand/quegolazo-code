@@ -59,7 +59,7 @@
   <ItemGroup>
     <Content Include="admin\equipos.aspx" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
-    <Content Include="resources\js\misTorneos\misTorneos.js" />
+    <Content Include="resources\js\quegolazo.js" />
     <Content Include="usuario\activar.usuario.aspx" />
     <Content Include="admin\index.aspx" />
     <Content Include="usuario\login.aspx" />
