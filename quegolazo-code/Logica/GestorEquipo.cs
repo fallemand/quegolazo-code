@@ -15,7 +15,7 @@ namespace Logica
         /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="nuevoEquipo">Nuevo Equipo a registrar</param>
-        /// <param name="torneo">Torneo para el que se va a registrar el equipo</param>
+        /// <param name="idTorneo">el id del Torneo para el que se va a registrar el equipo</param>
         /// <param name="delegadoPrincipal">Delegado Principal del equipo</param>
         /// <param name="delegadoOpcional">Delegado Opcional del equipo, o null sino tiene</param>
         /// <returns>Id del nuevo equipo registrado</returns>
@@ -24,7 +24,7 @@ namespace Logica
             try
             {
                 DAOEquipo daoEquipo = new DAOEquipo();
-                int idNuevoEquipo = daoEquipo.registrarEquipo(nuevoEquipo, torneo, delegadoPrincipal, delegadoOpcional);
+                int idNuevoEquipo = daoEquipo.registrarEquipo(nuevoEquipo, torneo.idTorneo, delegadoPrincipal, delegadoOpcional);
               
                 return idNuevoEquipo;
 
