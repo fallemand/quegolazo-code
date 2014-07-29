@@ -23,7 +23,7 @@ namespace Logica
             {
                 DAOEstado daoEstado = new DAOEstado();
                 Estado estado = null;
-                estado = daoEstado.obtenerUnEstadoPorNombreYAmbito(nombre, ambito);
+                estado = daoEstado.obtenerEstadoPorNombreYAmbito(nombre, ambito);
 
                 return estado;
             }

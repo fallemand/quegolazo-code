@@ -20,11 +20,11 @@ namespace AccesoADatos
         /// <param name="nombre">El nombre del estado</param>
         /// <param name="ambito">El ambito del estado</param>
         /// <returns>Un objeto de tipo Estado</returns>
-        public Estado obtenerUnEstadoPorNombreYAmbito(Estado.enumNombre nombre, Estado.enumAmbito ambito)
+        public Estado obtenerEstadoPorNombreYAmbito(Estado.enumNombre nombre, Estado.enumAmbito ambito)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr;
+            SqlDataReader dr=new SqlDataReader();
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -52,7 +52,7 @@ namespace AccesoADatos
                     };
                     respuesta = nuevoEstado;
                 }
-                dr.Close();
+                
                 return respuesta;
             }
             catch (Exception ex)
@@ -61,6 +61,8 @@ namespace AccesoADatos
             }
             finally
             {
+                if (dr != null)
+                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -72,11 +74,11 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idEstado">id del Estado</param>
         /// <returns>Un objeto de tipo Estado</returns>
-        public Estado obtenerUnEstadoPorId(int idEstado)
+        public Estado obtenerEstadoPorId(int idEstado)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr;
+            SqlDataReader dr = new SqlDataReader() ;
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -103,7 +105,7 @@ namespace AccesoADatos
                     };
                     respuesta = nuevoEstado;
                 }
-                dr.Close();
+               
                 return respuesta;
             }
             catch (Exception ex)
@@ -112,6 +114,8 @@ namespace AccesoADatos
             }
             finally
             {
+                if (dr != null)
+                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -123,11 +127,11 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idEstado">id del Estado</param>
         /// <returns>Un objeto de tipo Estado</returns>
-        public Estado obtenerUnEstadoPorNombre(string nombre, string ambito)
+        public Estado obtenerEstadoPorNombre(string nombre, string ambito)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr;
+            SqlDataReader dr=new SqlDataReader();
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -155,7 +159,7 @@ namespace AccesoADatos
                     };
                     respuesta = nuevoEstado;
                 }
-                dr.Close();
+                
                 return respuesta;
             }
             catch (Exception ex)
@@ -164,6 +168,8 @@ namespace AccesoADatos
             }
             finally
             {
+                 if (dr != null)
+                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }

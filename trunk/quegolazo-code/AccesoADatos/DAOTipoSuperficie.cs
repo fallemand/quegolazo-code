@@ -23,7 +23,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-
+            SqlDataReader dr = new SqlDataReader();
 
             TipoSuperficie respuesta = null;
             try
@@ -76,8 +76,9 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            List<TipoSuperficie> tiposSuperficie = new List<TipoSuperficie>();
 
+            List<TipoSuperficie> tiposSuperficie = new List<TipoSuperficie>();
+            SqlDataReader dr = new SqlDataReader();
 
             TipoSuperficie respuesta = null;
             try
@@ -92,7 +93,7 @@ namespace AccesoADatos
                                 FROM TiposSuperficie";
  
                 cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
+                dr = cmd.ExecuteReader();
 
 
                 while (dr.Read())

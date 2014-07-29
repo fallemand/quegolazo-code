@@ -23,7 +23,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-
+            SqlDataReader dr = new SqlDataReader();
 
             TipoUsuario respuesta = null;
             try
@@ -40,7 +40,7 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idTipoUsuario", idTipoUsuario);
                 cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
+                dr = cmd.ExecuteReader();
 
 
                 while (dr.Read())
@@ -61,6 +61,8 @@ namespace AccesoADatos
             }
             finally
             {
+                if (dr != null)
+                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }

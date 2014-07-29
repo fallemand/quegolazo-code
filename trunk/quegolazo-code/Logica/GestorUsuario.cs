@@ -238,9 +238,9 @@ namespace Logica
                 int idUsuario = gestorBD.RestablecerContrasenia(codigo,claveEncriptada);
                 return idUsuario;
             }
-            catch(Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw new Exception("El código de Recuperación no es válido o ya fue utilizado.");
             }
         }
 
