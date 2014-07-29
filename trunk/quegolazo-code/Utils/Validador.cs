@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Utils
 {
-    public class Validacion
+    public static class Validador
     {
        /// <summary>
        /// Castea la cadena a un numero entero valido
        /// </summary>
        /// <param name="numero">cadena a castear</param>
        /// <returns>True si es un numero entero valido, false de lo contrario</returns>
-        public int castInt(string numero) {
+        public static int castInt(string numero) {
             try
             {
                 return int.Parse(numero);
@@ -30,7 +30,7 @@ namespace Utils
         /// </summary>
         /// <param name="numero">cadena a castear</param>
         /// <returns>True si es un numero entero valido, false de lo contrario</returns>
-        public DateTime castDate(string fecha)
+        public static DateTime castDate(string fecha)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Utils
         /// </summary>
         /// <param name="numero">cadena a castear</param>
         /// <returns>True si es un numero entero valido, false de lo contrario</returns>
-        public decimal castDecimal(string numero)
+        public static decimal castDecimal(string numero)
         {
             try
             {
@@ -62,14 +62,14 @@ namespace Utils
        /// <summary>
        /// verifica si una cadena esta vacia. devuelve true si es asi.
        /// </summary>
-        public bool estaVacio(string cadena) {
+        public static bool estaVacio(string cadena) {
             return cadena == "";
         }
 
           /// <summary>
           /// Valida si la direccion de email es valida devolviendo true en ese caso, y false en caso contrario
           /// </summary>
-          public bool validarEmail(string email) {
+          public static bool validarEmail(string email) {
               String expresion;
               expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
               if (Regex.IsMatch(email, expresion))
