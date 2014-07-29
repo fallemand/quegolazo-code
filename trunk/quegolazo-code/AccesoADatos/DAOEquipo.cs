@@ -19,11 +19,11 @@ namespace AccesoADatos
         /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="nuevoEquipo">Objeto nuevo a registrar</param>
-        /// <param name="torneo">Torneo en donde se va a registrar el equipo</param>
+        /// <param name="idTorneo">id del Torneo en donde se va a registrar el equipo</param>
         /// <param name="delegadoPrincipal">Delegado Principal</param>
         /// <param name="delegadoOpcional">Delegado opcional o null en caso que no tenga</param>
         /// <returns>El id del equipo registrado</returns>
-        public int registrarEquipo(Equipo nuevoEquipo, Torneo torneo, Delegado delegadoPrincipal, Delegado delegadoOpcional) 
+        public int registrarEquipo(Equipo nuevoEquipo, int idTorneo, Delegado delegadoPrincipal, Delegado delegadoOpcional) 
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -48,7 +48,7 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@directorTecnico", nuevoEquipo.directorTecnico);
 
                 cmd.Parameters.AddWithValue("@idDelegadoPrincipal", delegadoPrincipal.idDelegado);
-                cmd.Parameters.AddWithValue("@idTorneo", torneo.idTorneo);
+                cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
 
                 if(delegadoOpcional == null)
                     cmd.Parameters.AddWithValue("@idDelegadoOpcional", DBNull.Value);

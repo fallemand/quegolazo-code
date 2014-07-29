@@ -213,15 +213,17 @@ namespace quegolazo_code.admin
           {
               try
               {
-                  panFracasoEdicion.Visible = false;
+                      panFracasoEdicion.Visible = false;
+                      
                       validarDatosDeLaEdicion();
                       GestorEdicion gestorEdicion = new GestorEdicion();
                       Edicion edicionNueva = obtenerEdicionDelFormulario();
-                      Session["idEdicionNueva"]=gestorEdicion.registrarEdicion(edicionNueva);
+                    //  Session["idEdicionNueva"]= gestorEdicion.registrarEdicion(txtIdTorneo.Value, txtNombreEdicion.Value, txtPuntosPorEmpatar.Value, txtPuntosPorGanar.Value, txtPuntosPorPerder.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue);
                       btnRegistrarOpciones.Visible = true;
                       btnRegistrarEdicion.Visible = false;
                       ScriptManager.RegisterStartupScript(this, this.GetType(), "activarTab", "activaTab('tabsModalEdicion','tabPersonalizacionEdicion');", true);                               
               }
+
               catch (Exception ex)
               {
                   litFracasoEdicion.Text = ex.Message;
@@ -236,7 +238,7 @@ namespace quegolazo_code.admin
           private void validarDatosDeLaEdicion()
           {          
               int ganado, empatado, perdido;
-              ValidacionDeTextos validador = new ValidacionDeTextos();
+             
               try 
 	            {
                     ganado = int.Parse(txtPuntosPorGanar.Value);
