@@ -60,10 +60,21 @@ namespace Utils
         }
 
        /// <summary>
-       /// verifica si una cadena esta vacia. devuelve true si es asi.
+       /// verifica si una cadena esta vacia. devuelvo la cadena sino está vacío
        /// </summary>
-        public static bool estaVacio(string cadena) {
-            return cadena == "";
+        public static string isEmpty(string cadena) {
+            try
+            {
+                if (cadena.Equals(string.Empty))
+                    throw new Exception();
+                else
+                    return cadena;
+               
+            }
+            catch (Exception)
+            {
+                throw new Exception("El valor ingresado no puede ser vacío");
+            }
         }
 
           /// <summary>
@@ -87,6 +98,20 @@ namespace Utils
               {
                   return false;
               }
+          }
+
+        /// <summary>
+        /// Valida si la cadena contiene espacios en blanco
+        /// </summary>
+        /// <param name="cadena">Cadena a validar</param>
+        /// <returns>La cadena si no tiene espacios vacios, o lanza una excepción en caso que si</returns>
+          public static string validarCadenaSinEspacios(string cadena) {
+
+              if (cadena.Contains(" ") || cadena.Equals(string.Empty))
+                  throw new Exception("El valor ingresado no puede contener espacios en blanco, ni estar vacío");
+              else
+                  return cadena;
+          
           }
     }
 }

@@ -6,7 +6,7 @@
     <div class="container padding-top">
         <div class="row">
             <div class="container">
-                <button type="button" class="btn btn-success" data-toggle="modal" onclick="crearTorneo();" data-target="#modalTorneo">Crear un Nuevo Torneo</button>
+                <button type="button" class="btn btn-success" data-toggle="modal"   data-target="#modalTorneo">Crear un Nuevo Torneo</button>
                 <asp:Label ID="lblMensajeTorneos" runat="server" Text=""></asp:Label>
                 <asp:UpdatePanel ID="upTorneos" runat="server">
                     <ContentTemplate>
@@ -25,7 +25,6 @@
                                         <div class="col-md-6">
                                             <div class="pull-right botones">
                                                 <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Ver Sitio Web del Torneo"><span class="glyphicon glyphicon-globe"></span></a>
-                                                <%--<a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-toggle="modal" data-target="#registrarTorneo" data-placement="top" onclick="modificarTorneo(<%#Eval("idTorneo")%>,'<%#Eval("nick")%>','<%#Eval("nombre")%>','<%#Eval("descripcion")%>' );" title="Editar Torneo"><span class="glyphicon glyphicon-pencil"></span></a>--%>
                                                 <asp:LinkButton ID="lnkModificarCampeonato" title="Editar Torneo" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                 <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Eliminar Torneo"><span class="glyphicon glyphicon-remove"></span></a>
                                             </div>
@@ -147,8 +146,8 @@
                             <div class="modal-footer">
                                 <div class="col-xs-8 col-xs-offset-3">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Registrar" OnClick="btnResgitrar_Click" />
-                                    <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Modificar" OnClick="btnModificarTorneo_Click" />
+                                    <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Registrar" OnClick="btnResgitrar_Click"/>
+                                    <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Modificar" OnClick="btnModificarTorneo_Click" Visible="false"/>
                                 </div>
                                 <div class="col-xs-1">
                                     <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo" AssociatedUpdatePanelID="upModalTorneo">
@@ -188,7 +187,6 @@
                                             <label for="text" class="col-lg-2 control-label">Torneo</label>
                                             <div class="col-lg-10">
                                                 <input type="text" class="form-control" id="txtTorneoAsociado" runat="server" name="nombreTorneoEdicion" placeholder="Nombre del Torneo" disabled>
-                                                <input type="hidden" class="form-control" id="txtIdTorneo" runat="server">
                                                 <span class="help-block">Torneo para el cual esta creando una nueva edición.</span>
                                             </div>
                                         </div>
@@ -272,7 +270,7 @@
                                                             </span>
                                                             <a class="btn btn-success" onclick=""></a>
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                 </div>
                                             </div>
                                             <div id="panelJugadores" class="panel-collapse collapse">
@@ -283,44 +281,40 @@
                                                             <input type="radio" name="rbgJugadores" id="rdJugadoresRegistroSi" runat="server">
                                                             Si
                                                         </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="rbgJugadores" id="rdJugadoresRegistroNo" runat="server">
+                                                        &nbsp;<label class="radio-inline"><input type="radio" name="rbgJugadores" id="rdJugadoresRegistroNo" runat="server">
                                                             No
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                     <label class="control-label col-md-9" for="radios">¿Registrará los cambios que se hagan durante el partido?</label>
                                                     <div class="col-md-3">
                                                         <label class="radio-inline">
                                                             <input type="radio" name="rbgCambios" id="rdJugadoresCambiosSi" runat="server">
                                                             Si
                                                         </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="rbgCambios" id="rdJugadoresCambiosNo" runat="server">
+                                                        &nbsp;<label class="radio-inline"><input type="radio" name="rbgCambios" id="rdJugadoresCambiosNo" runat="server">
                                                             No
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                     <label class="control-label col-md-9" for="radios">¿Registrará que jugador hizo los goles?</label>
                                                     <div class="col-md-3">
                                                         <label class="radio-inline">
                                                             <input type="radio" name="rbgGoles" id="rdJugadoresGolesSi" runat="server">
                                                             Si
                                                         </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="rbgGoles" id="rdJugadoresGolesNo" runat="server">
+                                                        &nbsp;<label class="radio-inline"><input type="radio" name="rbgGoles" id="rdJugadoresGolesNo" runat="server">
                                                             No
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                     <label class="control-label col-md-9" for="radios">¿Registrará las tarjetas que reciba cada jugador?</label>
                                                     <div class="col-md-3">
                                                         <label class="radio-inline">
                                                             <input type="radio" name="rbgTarjetas" id="rdJugadoresTarjetasSi" runat="server">
                                                             Si
                                                         </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="rbgTarjetas" id="rdJugadoresTarjetasNo" runat="server">
+                                                        &nbsp;<label class="radio-inline"><input type="radio" name="rbgTarjetas" id="rdJugadoresTarjetasNo" runat="server">
                                                             No
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -342,7 +336,7 @@
                                                             </span>
                                                             <a class="btn btn-success" onclick=""></a>
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                 </div>
                                             </div>
                                             <div id="panelSanciones" class="panel-collapse collapse">
@@ -353,22 +347,20 @@
                                                             <input type="radio" name="rbgSancionesEquipos" id="rdSancionesEquiposSi" runat="server">
                                                             Si
                                                         </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="rbgSancionesEquipos" id="rdSancionesEquiposNo" runat="server">
+                                                        &nbsp;<label class="radio-inline"><input type="radio" name="rbgSancionesEquipos" id="rdSancionesEquiposNo" runat="server">
                                                             No
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                     <label class="control-label col-md-9" for="radios">¿Registrará sanciones a los jugadores?</label>
                                                     <div class="col-md-3">
                                                         <label class="radio-inline">
                                                             <input type="radio" name="rbgSancionesJugadores" id="rdSancionesJugadoresSi" runat="server">
                                                             Si
                                                         </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="rbgSancionesJugadores" id="rdSancionesJugadoresNo" runat="server">
+                                                        &nbsp;<label class="radio-inline"><input type="radio" name="rbgSancionesJugadores" id="rdSancionesJugadoresNo" runat="server">
                                                             No
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -390,7 +382,7 @@
                                                             </span>
                                                             <a class="btn btn-success" onclick=""></a>
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                 </div>
                                             </div>
                                             <div id="panelArbitros" class="panel-collapse collapse">
@@ -401,22 +393,20 @@
                                                             <input type="radio" name="rbgArbitrosPorPartido" id="rdArbitrosPorPartidoSi" runat="server">
                                                             Si
                                                         </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="rbgArbitrosPorPartido" id="rdArbitrosPorPartidoNo" runat="server">
+                                                        &nbsp;<label class="radio-inline"><input type="radio" name="rbgArbitrosPorPartido" id="rdArbitrosPorPartidoNo" runat="server">
                                                             No
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                     <label class="control-label col-md-9" for="radios">¿Registrará el desempeño del árbitros por cada partido?</label>
                                                     <div class="col-md-3">
                                                         <label class="radio-inline">
                                                             <input type="radio" name="rbgArbitrosDesempenio" id="rdArbitroDesempenioSi" runat="server">
                                                             Si
                                                         </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="rbgArbitrosDesempenio" id="rdArbitroDesempenioNo" runat="server">
+                                                        &nbsp;<label class="radio-inline"><input type="radio" name="rbgArbitrosDesempenio" id="rdArbitroDesempenioNo" runat="server">
                                                             No
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -438,7 +428,7 @@
                                                             </span>
                                                             <a class="btn btn-success" onclick=""></a>
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                 </div>
                                             </div>
                                             <div id="panelCanchas" class="panel-collapse collapse">
@@ -449,11 +439,10 @@
                                                             <input type="radio" name="rbgCanchas" id="rdCanchasComplejos" runat="server">
                                                             Complejo/s propios del torneo
                                                         </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="rbgCanchas" id="rdCanchasEquipos" runat="server">
+                                                        &nbsp;<label class="radio-inline"><input type="radio" name="rbgCanchas" id="rdCanchasEquipos" runat="server">
                                                             Canchas de los equipos participantes
                                                         </label>
-                                                    </div>
+                                                    &nbsp;</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -485,28 +474,4 @@
     </div>
     <!-- Modal Agregar Edicion -->
 
-    <script type="text/javascript">
-        $('.fileinput').on('change.bs.fileinput', function () {
-            $('.fileinput-preview').css('background-image', 'none');
-        });
-        $('#modalTorneo').on('hidden.bs.modal', function () {
-            $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
-            $('.modal-body').find('div').removeClass('has-success has-error');
-        });
-        $('#modalEdicion').on('hidden.bs.modal', function () {
-            $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
-            $('.modal-body').find('div').removeClass('has-success has-error');
-        });
-        function closeModal(idModal) {
-            $('#' + idModal + '').modal('hide');
-        };
-        function openModal(idModal) {
-            $('#' + idModal + '').modal('show');
-        };//$('#registrarTorneo').removeClass("fade");
-        function togglePanel(panelId) { $('#' + panelId + '').collapse('toggle'); };
-        function activaTab(nombreGrupo, nombreTab) {
-            $('#' + nombreGrupo + ' a[href="#' + nombreTab + '"]').tab('show');
-        };
-    </script>
-
-</asp:Content>
+   </asp:Content>
