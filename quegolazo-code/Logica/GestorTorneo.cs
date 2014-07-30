@@ -116,15 +116,15 @@ namespace Logica
         /// <param name="torneoCambiado">Objeto Torneo</param>
         /// <param name="usuario">Objeto Usuario</param>
         /// <returns>El id del torneo que se acaba de registrar</returns>
-        public int registrarTorneo(Torneo torneoNuevo, Usuario usuario)
+        public int registrarTorneo(string nombre, string descripcion, string nick, string idUsuario)
         {
             try
             {
                 DAOTorneo daoTorneo = new DAOTorneo();
-                int idTorneoRegistrado = daoTorneo.registrarTorneo(torneoNuevo, usuario);
-
+                Torneo torneoNuevo = validarTorneo(nombre, descripcion, nick);
+                torneoNuevo.usuario.idUsuario = Validador.castInt(idUsuario);
+                int idTorneoRegistrado = daoTorneo.registrarTorneo(torneoNuevo);
                 return idTorneoRegistrado;
-
             }
             catch (Exception ex)
             {
@@ -138,21 +138,60 @@ namespace Logica
         /// <param name="torneoNuevo">Objeto Torneo</param>
         /// <param name="usuario">Objeto Usuario</param>
         /// <returns>El id del torneo que se acaba de modificar</returns>
-        public void modificarTorneo(Torneo torneoCambiado)
+        public void modificarTorneo(string nombre, string descripcion, int idTorneo)
         {
             try
             {
+                Torneo torneoCambiado = validarTorneo(nombre, descripcion, idTorneo);   
                 DAOTorneo daoTorneo = new DAOTorneo();
                 daoTorneo.modificarTorneo(torneoCambiado);
-               // return 1;
-
-            }
+             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+        /// <summary>
+        /// Valida los datos del torneo para una modificacion
+        /// </summary>
+        /// <param name="nombre">nombre nuevo del torneo</param>
+        /// <param name="descrip">descripcion nueva del torneo</param>
+        /// <param name="idTorneo">id del torneo a modificar</param>
+        /// <returns>Un objeto torneo con los datos validados, o bien lanza una excepcion</returns>
+        private Torneo validarTorneo(string nombre, string descrip, int idTorneo)
+        {
+            try
+            {
+                return new Torneo() { nombre = Validador.isEmpty(nombre), descripcion = descrip, idTorneo = idTorneo };
+            }
+            catch (Exception ex)
+            {
+                
+                throw new Exception(ex.Message);
+            }
+        }
 
+        /// <summary>
+        /// Valida los datos de un torneo para su registracion
+        /// </summary>
+        /// <param name="nombre">nombre del torneo a registrar</param>
+        /// <param name="descrip">descripcion del torneo a registrar</param>
+        /// <param name="nick">url unica del torneo</param>
+        /// <returns>Devuelve un objeto Torneo con los datos validados, o bien lanza la excepcion correspondiente</returns>
+        private Torneo validarTorneo(string nombre, string descrip, string nick)
+        {
+            try
+            {
+                return new Torneo() { nombre = Validador.isEmpty(nombre), descripcion = descrip, nick = Validador.validarCadenaSinEspacios(nick) };
 
+            }
+            catch (Exception ex)
+            {
+                
+                throw new Exception(ex.Message);
+            }
+        }
+
+     
     }
 }

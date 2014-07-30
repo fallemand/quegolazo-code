@@ -202,7 +202,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="torneoNuevo">El torneo que se va a registrar</param>
         /// <param name="usuario">El usuario al cual le pertenece el torneo</param>
-        public int registrarTorneo(Torneo torneoNuevo, Usuario usuario)
+        public int registrarTorneo(Torneo torneoNuevo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -220,7 +220,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@nombre", torneoNuevo.nombre);
                 cmd.Parameters.AddWithValue("@descripcion", torneoNuevo.descripcion);
                 cmd.Parameters.AddWithValue("@nick", torneoNuevo.nick);
-                cmd.Parameters.AddWithValue("@idUsuario", usuario.idUsuario);
+                cmd.Parameters.AddWithValue("@idUsuario", torneoNuevo.usuario.idUsuario);
                 cmd.CommandText = sql;
                 return int.Parse(cmd.ExecuteScalar().ToString());
 
