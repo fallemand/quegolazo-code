@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="col-md-6">
-            <fieldset class="validationGroup">
+            <fieldset class="vgEquipo">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <span class="glyphicon glyphicon-plus"></span>
@@ -50,7 +50,7 @@
                                     </asp:Repeater>
                                         </p>
                                         <div id="delegado" style="display:none;" class="col-md-9">
-                                            <fieldset class="validationGroup">
+                                            <fieldset class="vgDelegado">
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
@@ -75,7 +75,9 @@
                                                         <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server" disabled>
                                                     </div>
                                                 </div>
-                                                <asp:Button class="btn btn-default btn-xs pull-right causesValidation" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click"/>
+                                                <asp:Button class="btn btn-default btn-xs causesValidation vgDelegado" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click"/>
+                                                <asp:Button class="btn btn-default btn-xs causesValidation vgDelegado" ID="btnModificarDelegado" runat="server" Text="Modificar Delegado" OnClick="btnModificarDelegado_Click" Visible="false"/>
+                                                <asp:Button class="btn btn-default btn-xs" ID="btnCancelarDelegado" runat="server" Text="Cancelar" OnClick="btnCancelarDelegado_Click" Visible="false"/>
                                             </fieldset>
                                         </div>
                                 </div>
@@ -93,7 +95,7 @@
                                                 <span class="btn btn-default btn-xs btn-file">
                                                     <span class="fileinput-new">Seleccionar Imagen</span>
                                                     <span class="fileinput-exists">Cambiar</span>
-                                                    <asp:FileUpload ID="fuLog" runat="server" required="true"/>
+                                                    <asp:FileUpload ID="fuLog" runat="server" />
                                                 </span>
                                                 <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Eliminar</a>
                                             </div>
@@ -110,18 +112,18 @@
                                 </div>
                             </div>
                         </div>
+                        <asp:Panel ID="panelExito" runat="server" CssClass="alert alert-success" Visible="False"><small>
+                            <asp:Literal ID="litExito" runat="server"></asp:Literal></small>
+                        </asp:Panel>
+                        <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
+                            <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
+                        </asp:Panel>
                     </div>
                     <div class="panel-footer clearfix">
-                        <asp:Button class="btn btn-success pull-right causesValidation" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
+                        <asp:Button class="btn btn-success pull-right causesValidation vgEquipo" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
                     </div>
                 </div>
             </fieldset>
-            <asp:Panel ID="panelExito" runat="server" CssClass="well-sm alert-success" Visible="False"><small>
-            <asp:Literal ID="litExito" runat="server"></asp:Literal></small>
-            </asp:Panel>
-            <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
-            <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
-            </asp:Panel>
         </div>
         <div class="col-md-6">
             <div class="panel panel-default">

@@ -17,48 +17,30 @@ namespace AccesoADatos
         /// Registrar Delegado de un Equipo
         /// autor: Paula Pedrosa
         /// </summary>
-        /// <param name="nuevoDelegado">Nuevo delegado a registrar</param>
+        /// <param name="delegado">Nuevo delegado a registrar</param>
         /// <returns>Id del delegado registrado</returns>
-        public int registrarDelegado(Delegado nuevoDelegado)
+        public int registrarDelegado(Delegado delegado, SqlConnection con, SqlTransaction trans)
         {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
-
+                cmd.Connection = con;
+                cmd.Transaction = trans;
                 string sql = @"INSERT INTO Delegados (nombre, email, telefono, domicilio)
                                               VALUES (@nombre, @email, @telefono, @domicilio) SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@nombre", nuevoDelegado.nombre);
-                cmd.Parameters.AddWithValue("@email", nuevoDelegado.email);
-                cmd.Parameters.AddWithValue("@telefono", nuevoDelegado.telefono);
-
-                if (nuevoDelegado.domicilio == null)
-                    cmd.Parameters.AddWithValue("@domicilio", DBNull.Value);
-                else
-                    cmd.Parameters.AddWithValue("@domicilio", nuevoDelegado.domicilio);
-
-
+                cmd.Parameters.AddWithValue("@nombre", delegado.nombre);
+                cmd.Parameters.AddWithValue("@email", delegado.email);
+                cmd.Parameters.AddWithValue("@telefono", delegado.telefono);
+                cmd.Parameters.AddWithValue("@domicilio", delegado.domicilio);
                 cmd.CommandText = sql;
                 return int.Parse(cmd.ExecuteScalar().ToString());
-
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception("No se pudo registrar el delegado: " + e.Message);
-            }
-            finally
-            {
-                if (con.State == ConnectionState.Open)
-                {
-                    con.Close();
-                    cmd.Connection = con;
-                }
+                throw new Exception("No se pudo registrar el delegado: " + ex.Message);
             }
         }
 
@@ -72,8 +54,6 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr = new SqlDataReader();
-
             Delegado respuesta = null;
             try
             {
@@ -89,7 +69,7 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idDelegado", idDelegado);
                 cmd.CommandText = sql;
-                dr = cmd.ExecuteReader();
+                SqlDataReader dr = cmd.ExecuteReader();
 
                 while (dr.Read())
                 {
@@ -103,8 +83,8 @@ namespace AccesoADatos
                         respuesta.domicilio = dr["domicilio"].ToString();
                     else
                         respuesta.domicilio = null;
-                    
                 }
+                dr.Close();
                 return respuesta;
             }
             catch (Exception ex)
@@ -114,14 +94,9 @@ namespace AccesoADatos
             }
             finally
             {
-                if (dr != null)
-                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-        }
-
-
-                       
+        }              
     }
 }
