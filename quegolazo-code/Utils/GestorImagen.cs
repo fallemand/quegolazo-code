@@ -43,41 +43,45 @@ namespace Utils
         /// autor: Facundo Allemand
         /// </summary>
         public static bool guardarImagenTorneo(HttpPostedFile file, int id, int tipoImagen) {
-            crearDirectorios();
-            string rutaImagenTemporal = pathImagenes + pathTemp + "img.temp";
-            try
+            if (file.ContentLength > 0)
             {
-                if (file.ContentLength > tamanioMax)
-                    throw new Exception("El tamaño del archivo es mayor a 1024kb");
-                file.SaveAs(rutaImagenTemporal);
-                validarImagen(rutaImagenTemporal);
-                //Definimos los tamaños de imagenes a crear
-                List<Imagen> imagenes = new List<Imagen>();
-                imagenes.Add(new Imagen() { abreviacion = "-sm", height = 50, width = 50 });
-                imagenes.Add(new Imagen() { abreviacion = "-nm", height = 200, width = 200 });
-                imagenes.Add(new Imagen() { abreviacion = "-bg", height = 500, width = 500 });
-                foreach (Imagen imagen in imagenes)
+                crearDirectorios();
+                string rutaImagenTemporal = pathImagenes + pathTemp + "img.temp";
+                try
                 {
-                    Bitmap img = CrearImagen(rutaImagenTemporal, imagen.width, imagen.height);
-                    switch (tipoImagen)
+                    if (file.ContentLength > tamanioMax)
+                        throw new Exception("El tamaño del archivo es mayor a 1024kb");
+                    file.SaveAs(rutaImagenTemporal);
+                    validarImagen(rutaImagenTemporal);
+                    //Definimos los tamaños de imagenes a crear
+                    List<Imagen> imagenes = new List<Imagen>();
+                    imagenes.Add(new Imagen() { abreviacion = "-sm", height = 50, width = 50 });
+                    imagenes.Add(new Imagen() { abreviacion = "-nm", height = 200, width = 200 });
+                    imagenes.Add(new Imagen() { abreviacion = "-bg", height = 500, width = 500 });
+                    foreach (Imagen imagen in imagenes)
                     {
-                        case TORNEO: img.Save(pathImagenes + pathTorneos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg);break;
-                        case EQUIPO: img.Save(pathImagenes + pathEquipos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
-                        case COMPLEJO: img.Save(pathImagenes + pathComplejos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
-                        case JUGADOR: img.Save(pathImagenes + pathJugadores + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                        Bitmap img = CrearImagen(rutaImagenTemporal, imagen.width, imagen.height);
+                        switch (tipoImagen)
+                        {
+                            case TORNEO: img.Save(pathImagenes + pathTorneos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                            case EQUIPO: img.Save(pathImagenes + pathEquipos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                            case COMPLEJO: img.Save(pathImagenes + pathComplejos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                            case JUGADOR: img.Save(pathImagenes + pathJugadores + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                        }
+                        img.Dispose();
                     }
-                    img.Dispose();
+                    return true;
                 }
-                return true;
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    System.IO.File.Delete(rutaImagenTemporal);
+                }
             }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                System.IO.File.Delete(rutaImagenTemporal);
-            }
+            return false;
         }
 
         private static void crearDirectorios()
