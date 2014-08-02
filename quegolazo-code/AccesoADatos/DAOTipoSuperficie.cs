@@ -23,7 +23,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr = new SqlDataReader();
+            SqlDataReader dr;
 
             TipoSuperficie respuesta = null;
             try
@@ -40,7 +40,7 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idTipoSuperficie", idTipoSuperficie);
                 cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
+                dr = cmd.ExecuteReader();
 
 
                 while (dr.Read())
@@ -78,7 +78,7 @@ namespace AccesoADatos
             SqlCommand cmd = new SqlCommand();
 
             List<TipoSuperficie> tiposSuperficie = new List<TipoSuperficie>();
-            SqlDataReader dr = new SqlDataReader();
+            SqlDataReader dr ;
 
             TipoSuperficie respuesta = null;
             try
@@ -110,7 +110,6 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error al intentar recuperar los Tipos de Superficie: " + ex.Message);
             }
             finally
