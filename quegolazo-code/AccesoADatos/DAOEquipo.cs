@@ -14,12 +14,14 @@ namespace AccesoADatos
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
 
         
-        /// <summary>
+        /// <summary> 
         /// Registrar un nuevo Equipo en un torneo, junto a sus delegados
-        /// autor: Paula Pedrosa
+        /// autor: Paula Pedrosa        
         /// </summary>
+        /// <param name="equipo">El objeto Equipo que se va a registrar</param>
+        /// <param name="idTorneo">el id del torneo al que pertenece el equipo</param>
         /// <returns>El id del equipo registrado</returns>
-        public int registrarEquipo(Equipo equipo) 
+        public int registrarEquipo(Equipo equipo, int idTorneo) 
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -53,7 +55,7 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@idDelegadoOpcional", equipo.delegadoOpcional.idDelegado);
                 else
                     cmd.Parameters.AddWithValue("@idDelegadoOpcional", DBNull.Value);
-                cmd.Parameters.AddWithValue("@idTorneo", equipo.torneo.idTorneo);
+                cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
                 cmd.CommandText = sql;
                 int idEquipo= int.Parse(cmd.ExecuteScalar().ToString());
                 trans.Commit();

@@ -13,14 +13,7 @@ namespace AccesoADatos
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
 
-        public DAOUsuario()
-        {
-
-        }
-
-
-
-      /// <summary>
+        /// <summary>
       /// autor=Flor
       /// registra un nuevo usuario en la BD
       /// </summary>
@@ -31,12 +24,9 @@ namespace AccesoADatos
             SqlCommand cmd = new SqlCommand();
             try
             {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                    cmd.Connection = con;
-                }
-
+                if (con.State == ConnectionState.Closed)                
+                   con.Open();
+                cmd.Connection = con;
                 string sql = @"INSERT INTO Usuarios (nombre, apellido, email, contrasenia, codigo, idTipoUsuario, esActivo)
                               VALUES (@nombre, @apellido, @email, @contrasenia, @codigo, @idTipoUsuario, 0)";
                 cmd.Parameters.Clear();
@@ -46,24 +36,24 @@ namespace AccesoADatos
                 cmd.Parameters.Add(new SqlParameter("@contrasenia", usuarioNuevo.contrasenia));
                 cmd.Parameters.Add(new SqlParameter("@codigo", usuarioNuevo.codigo));
                 cmd.Parameters.Add(new SqlParameter("@idTipoUsuario", usuarioNuevo.tipoUsuario.idTipoUsuario));
-
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException ex)
             {
-
                 if (ex.Class == 14 && ex.Number == 2627)
                     throw new Exception("El usuario con el mail: " + usuarioNuevo.email + " Ya se encuentra registrado. Por favor ingrese una cuenta de correo diferente.");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo registrar el usuario: " + ex.Message);
             }
             finally
             {
                 if (con != null && con.State == ConnectionState.Open)
                 con.Close();
             }
-
         }
-
         /// <summary>
         /// Busca un Usuario con por un email determinado en la base de datos.
         /// autor: Paula Pedrosa y Flor
@@ -75,14 +65,11 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
-
             Usuario respuesta = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
+                con.Open();                
                 cmd.Connection = con;
                 string sql = @"SELECT *
                                 FROM Usuarios
@@ -91,9 +78,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-
                 DAOTipoUsuario gestorTipoUsuario = new DAOTipoUsuario();
-
                 while (dr.Read())
                 {
                     respuesta = new Usuario(){
@@ -104,7 +89,6 @@ namespace AccesoADatos
                     codigo = dr["codigo"].ToString(),
                     esActivo = bool.Parse(dr["esActivo"].ToString()),
                     tipoUsuario = gestorTipoUsuario.obtenerTipoUsuarioPorId(Int32.Parse(dr["idTipoUsuario"].ToString()))};
-
                 }
                 if (dr != null)
                     dr.Close();
@@ -112,107 +96,52 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error al intentar recuperar el campeonato: " + ex.Message);
             }
             finally
             {
-
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
         }
-
-
-
-/// <summary>
-/// Metodo para activar cuenta
-/// autor: Flor
-/// </summary>
-/// <param name="codigo"></param>
-/// Retorna el id del usuario activado
-        public int ActivarCuenta(string codigo)
-        {
-           
+        /// <summary>
+        /// Metodo para activar cuenta
+        /// autor: Flor
+        /// </summary>
+        /// <param name="codigo"></param>
+        /// Retorna el id del usuario activado
+        public void ActivarCuenta(string codigo)
+        {           
             SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();
-            SqlTransaction trans = null;
-            SqlDataReader dr;
-
+            SqlCommand cmd = new SqlCommand();            
             try
             {
-                int idUsuario=0;
-
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-
-                }
                 cmd.Connection = con;
                 if (codigo != string.Empty)
                 {
-                  
-                    trans = con.BeginTransaction();
                     cmd.Connection = con;
-                    cmd.Transaction = trans;
-                    //Activación de Usuario
-                    string sql = @"UPDATE Usuarios SET EsActivo=1 
+                    string sql = @"UPDATE Usuarios SET EsActivo=1, codigo = @codigoVacio 
                                     WHERE codigo=@UserCodigo";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@UserCodigo", codigo);
+                    cmd.Parameters.AddWithValue("@codigoVacio", DBNull.Value);
                     cmd.CommandText = sql;
-                    cmd.ExecuteNonQuery();
-
-
-                    //Obtener id de usuario
-                     sql = @"SELECT idUsuario
-                                FROM Usuarios
-                                WHERE codigo=@UserCodigo";
-                     cmd.Parameters.Clear();
-                     cmd.Parameters.AddWithValue("@UserCodigo", codigo);
-                     cmd.CommandText = sql;
-                    dr = cmd.ExecuteReader();
-                   
-                     while (dr.Read())
-                     {
-                         idUsuario= Int32.Parse(dr["idUsuario"].ToString());
-                     }
-                     dr.Close();
-
-                    //Borrar código de activación
-                    sql = @"UPDATE Usuarios SET codigo=@codigo
-                            WHERE idUsuario=@idUsuario";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@codigo", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@idUsuario",idUsuario);
-                    cmd.CommandText = sql;
-                    if (dr != null)
-                        dr.Close();
-                  
-                    cmd.ExecuteNonQuery();
-
-                    trans.Commit();
+                    if (cmd.ExecuteNonQuery() == 0)
+                        throw new Exception("El link de Activación no es válido o ya fue utilizado.");
                 }
-                return idUsuario;
             }
             catch (Exception ex)
             {
-                trans.Rollback();
-                throw new Exception("Ha ocurrido un problema y no se ha podido activar tu cuenta. Comunícate con nuestro soporte técnico.");
+                throw new Exception("Ha ocurrido un problema y no se ha podido activar tu cuenta: " + ex.Message);
             }
             finally
             {
-
-                if (con != null && con.State == ConnectionState.Open)
-                {
-                    con.Close();
-                  
-                }
-
-            }
-            
+                if (con != null && con.State == ConnectionState.Open)                
+                    con.Close();               
+            }            
         }
-
         /// <summary>
         /// Busca un Usuario con un Id determinado en la base de datos.
         /// autor: Paula Pedrosa
@@ -224,14 +153,11 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
-
             Usuario usuario = null;
             try
             {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
+                if (con.State == ConnectionState.Closed)                
+                    con.Open();                
                 cmd.Connection = con;
                 string sql = @"SELECT *
                                 FROM Usuarios
@@ -240,9 +166,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-
                 DAOTipoUsuario gestorTipoUsuario = new DAOTipoUsuario();
-
                 while (dr.Read())
                 {
                     usuario = new Usuario();
@@ -251,12 +175,7 @@ namespace AccesoADatos
                     usuario.apellido = dr["apellido"].ToString();
                     usuario.email = dr["email"].ToString();
                     usuario.contrasenia = dr["contrasenia"].ToString();
-
-                    if (dr["esActivo"].ToString().Equals("0"))
-                        usuario.esActivo = false;
-                    else
-                        usuario.esActivo = true;
-
+                    usuario.esActivo = bool.Parse(dr["esActivo"].ToString());                   
                     usuario.codigo = dr["codigo"].ToString();
                     usuario.tipoUsuario = gestorTipoUsuario.obtenerTipoUsuarioPorId(Int32.Parse(dr["idTipoUsuario"].ToString()));
 
@@ -279,9 +198,6 @@ namespace AccesoADatos
             }
 
         }
-
-
-
         /// <summary>
         /// Obtiene el usuario con ese mail y contraseña
         /// </summary>
@@ -335,27 +251,19 @@ namespace AccesoADatos
                     con.Close();
             }
         }
-
-      /// <summary>
-      /// Metodo para registrar el codigo de recuperacion de contraseña
-      /// autor=Flor
-      /// </summary>
-      /// <param name="u"></param>
+        /// <summary>
+        /// Metodo para registrar el codigo de recuperacion de contraseña
+        /// autor=Flor
+        /// </summary>
+        /// <param name="u"></param>
         public void registrarCodigoRecuperacion(Usuario u)
         {
-
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-
             try
             {
-
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-
-                }
-
+                if (con.State == ConnectionState.Closed)                
+                    con.Open();  
                 cmd.Connection = con;
                 string sql = @"UPDATE Usuarios SET codigoRecuperacion=@codigo 
                                WHERE idUsuario=@idUsuario";
@@ -363,117 +271,67 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@codigo", u.codigoRecuperacion);
                 cmd.Parameters.AddWithValue("@idUsuario", u.idUsuario);
                 cmd.CommandText = sql;
-
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
-
                 if (cmd.ExecuteNonQuery() == 0)
                     throw new Exception();
-
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new Exception("Ha ocurrido un problema y no se ha podido completar la operación");
             }
             finally
             {
-
-                if (con != null && con.State == ConnectionState.Open)
-                {
-                    con.Close();
-                }
-
+                if (con != null && con.State == ConnectionState.Open)                
+                    con.Close();                
             }
         }
-
-
-      /// <summary>
-      /// metodo para grabar nueva clave, borrar el codigo. Devuelve el id del usuario afectado
-      /// autor=Flor
-      /// </summary>
-      /// <param name="codigo"></param>
-      /// <param name="contrasenia"></param>
-      /// <returns></returns>
+        /// <summary>
+        /// metodo para grabar nueva clave, borrar el codigo. Devuelve el id del usuario afectado
+        /// autor=Flor
+        /// </summary>
+        /// <param name="codigo">codigo univoco crear el link para restrablecer contraseña</param>
+        /// <param name="contrasenia">nueva contraseña del usuario</param>
+        /// <returns></returns>
         public int RestablecerContrasenia(string codigo,string contrasenia)
         {
-
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlTransaction trans = null;
-
             try
             {
                 int idUsuario = 0;
 
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
-
+                 cmd.Connection = con;
                 if (codigo != string.Empty)
-                {
-
-                    trans = con.BeginTransaction();
+                {                    
                     cmd.Connection = con;
                     cmd.Transaction = trans;
-
-                    //Resgistrar nueva contrasenia
-                    string sql = @"UPDATE Usuarios SET contrasenia=@clave 
+                    string sql = @"UPDATE Usuarios SET contrasenia=@clave, codigoRecuperacion= @codigoVacio 
                                     WHERE codigoRecuperacion=@UserCodigo";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@clave", contrasenia);
                     cmd.Parameters.AddWithValue("@UserCodigo", codigo);
+                    cmd.Parameters.AddWithValue("@codigoVacio", DBNull.Value);
                     cmd.CommandText = sql;
-                    cmd.ExecuteNonQuery();
-
-                   //Obtener id de usuario
-                   sql = @"SELECT idUsuario
-                                FROM Usuarios
-                                WHERE codigoRecuperacion=@UserCodigo";
-                   cmd.Parameters.Clear();
-                   cmd.Parameters.AddWithValue("@UserCodigo", codigo);
-                   cmd.CommandText = sql;
-                   SqlDataReader dr = cmd.ExecuteReader();
-
-                   while (dr.Read())
-                   {
-                       idUsuario = Int32.Parse(dr["idUsuario"].ToString());
-                   }
-                   dr.Close();
-
-                    //Borrar código de Recuperacion
-                    sql = @"UPDATE Usuarios SET codigoRecuperacion=@codigo
-                            WHERE idUsuario=@idUsuario";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@codigo", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
-                    cmd.CommandText = sql;
-                     cmd.ExecuteNonQuery();
-
-                    trans.Commit();
+                    if (cmd.ExecuteNonQuery() == 0)
+                        throw new Exception("El link para reestablecer la clave no es válido o ya fue utilizado.");
                 }
                 return idUsuario;
             }
             catch (Exception ex)
             {
-                trans.Rollback();
-                throw new Exception("Ha ocurrido un problema y no se ha podido registrar tu nueva contraseña. Comunícate con nuestro soporte técnico.");
+                throw new Exception("Ha ocurrido un problema y no se ha podido activar tu cuenta: " + ex.Message);
             }
-            finally
+             finally
             {
+                if (con != null && con.State == ConnectionState.Open)                
+                    con.Close();               
+            }      
 
-                if (con != null && con.State == ConnectionState.Open)
-                {
-                    con.Close();
-
-                }
-
-            }
+        }
 
         }
 
     }
-}
+

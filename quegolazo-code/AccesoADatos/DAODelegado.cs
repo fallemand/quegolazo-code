@@ -14,10 +14,12 @@ namespace AccesoADatos
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
 
         /// <summary>
-        /// Registrar Delegado de un Equipo
+        /// Registrar Delegado de un Equipo, es parte de una transaccion al registrar un equipo.
         /// autor: Paula Pedrosa
         /// </summary>
         /// <param name="delegado">Nuevo delegado a registrar</param>
+        /// <param name="con">La conexion abierta de la transaccion.</param>
+        /// <param name="trans">La transaccion de registro de equipo</param>
         /// <returns>Id del delegado registrado</returns>
         public int registrarDelegado(Delegado delegado, SqlConnection con, SqlTransaction trans)
         {
@@ -60,7 +62,6 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-
                 string sql = @"SELECT *
                                 FROM Delegados
                                 WHERE idDelegado = @idDelegado";
@@ -68,7 +69,6 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idDelegado", idDelegado);
                 cmd.CommandText = sql;
                 SqlDataReader dr = cmd.ExecuteReader();
-
                 while (dr.Read())
                 {
                     respuesta = new Delegado();
@@ -76,18 +76,13 @@ namespace AccesoADatos
                     respuesta.nombre = dr["nombre"].ToString();
                     respuesta.email = dr["email"].ToString();
                     respuesta.telefono = dr["telefono"].ToString();
-
-                    if (dr["domicilio"] != System.DBNull.Value)
-                        respuesta.domicilio = dr["domicilio"].ToString();
-                    else
-                        respuesta.domicilio = null;
+                    respuesta.domicilio = dr["domicilio"].ToString();                  
                 }
                 dr.Close();
                 return respuesta;
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error al intentar recuperar el delegado: " + ex.Message);
             }
             finally

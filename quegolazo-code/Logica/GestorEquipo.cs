@@ -26,9 +26,9 @@ namespace Logica
                 equipo.colorCamisetaPrimario = colorCamisetaPrimario;
                 equipo.colorCamisetaSecundario = colorCamisetaSecundario;
                 equipo.directorTecnico = directorTecnico;
-                equipo.torneo=(Torneo)System.Web.HttpContext.Current.Session["torneo"];
+                int idTorneo =((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
                 DAOEquipo daoEquipo = new DAOEquipo();
-                equipo.idEquipo = daoEquipo.registrarEquipo(equipo);
+                equipo.idEquipo = daoEquipo.registrarEquipo(equipo, idTorneo);
                 equipo = new Equipo();
             }
             catch (Exception ex)

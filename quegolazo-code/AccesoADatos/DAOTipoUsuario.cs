@@ -25,7 +25,6 @@ namespace AccesoADatos
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
             TipoUsuario respuesta = null;
-
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -40,14 +39,12 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idTipoUsuario", idTipoUsuario);
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-
                 while (dr.Read())
                 {
                     respuesta = new TipoUsuario()
                     {
                         idTipoUsuario = Int32.Parse(dr["idTipoUsuario"].ToString()),
                         nombre = dr["nombre"].ToString(),
-
                     };
                 }
                 if (dr != null )
