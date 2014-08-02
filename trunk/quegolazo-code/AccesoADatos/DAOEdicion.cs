@@ -31,6 +31,7 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
+
                 string sql = @"SELECT *
                                 FROM Ediciones
                                 WHERE idTorneo = @idTorneo
@@ -85,8 +86,9 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="edicionNueva">Objeto nueva Edición</param>
         /// <param name="idTorneo">El di del torneo al cual se agregara la edicion</param>
-        public int registrarEdicion(Edicion edicionNueva, int idTorneo)
+        public void registrarEdicion(Edicion edicionNueva, int idTorneo)
         {
+            SqlTransaction trans = null;
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             try
@@ -94,6 +96,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
+                trans = con.BeginTransaction();
+                cmd.Transaction = trans;
                 string sql = @"INSERT INTO Ediciones (nombre, idTamanioCancha, idTipoSuperficie, idEstado, idTorneo, puntosGanado, puntosPerdido, puntosEmpatado)
                                               VALUES (@nombre, @idTamanioCancha, @idTipoSuperficie, @idEstado, @idTorneo, @puntosGanado, @puntosPerdido, @puntosEmpatado ) SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
@@ -106,10 +110,13 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@puntosGanado", edicionNueva.puntosGanado);
                 cmd.Parameters.AddWithValue("@puntosPerdido", edicionNueva.puntosPerdido);
                 cmd.CommandText = sql;
-                return int.Parse(cmd.ExecuteScalar().ToString());
+                edicionNueva.idEdicion= int.Parse(cmd.ExecuteScalar().ToString());
+                registrarPreferencias(edicionNueva, con, trans);
+                trans.Commit();
             }
             catch (SqlException ex)
             {
+                trans.Rollback();
                 if (ex.Class == 14 && ex.Number == 2601)
                     throw new Exception("La edicion " + edicionNueva.nombre + " ya se encuentra registrada. Ingrese otro nombre para la misma.");
                 else
@@ -130,15 +137,15 @@ namespace AccesoADatos
         /// autor: Florencia Rojas
         /// </summary>
         /// <param name="edicion">Objeto Edición</param>
-        public void registrarPreferencias(Edicion edicion)
+        private void registrarPreferencias(Edicion edicion,SqlConnection con, SqlTransaction trans)
         {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
+                cmd.Transaction = trans;
                 string sql = @"INSERT INTO ConfiguracionesEdicion (jugadores,cambiosJugadores, tarjetasJugadores, golesJugadores,asignacionArbitros, desempenioArbitros,cantidadArbitros,canchaUnica, sancionesJugadores, arbitros ,sanciones , idEdicion )
                                               VALUES (@jugadores,@cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @cantidadArbitros, @canchaUnica, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion)";
                 cmd.Parameters.Clear();
@@ -148,7 +155,6 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@golesJugadores", edicion.preferencias.golesJugadores);
                 cmd.Parameters.AddWithValue("@asignacionArbitros", edicion.preferencias.asignaArbitros);
                 cmd.Parameters.AddWithValue("@desempenioArbitros", edicion.preferencias.desempenioArbitros);
-                cmd.Parameters.AddWithValue("@cantidadArbitros", edicion.preferencias.cantidadArbitros);
                 cmd.Parameters.AddWithValue("@canchaUnica", edicion.preferencias.canchaUnica);
                 cmd.Parameters.AddWithValue("@sancionesJugadores", edicion.preferencias.sancionesJugadores);
                 cmd.Parameters.AddWithValue("@arbitros", edicion.preferencias.arbitros);
