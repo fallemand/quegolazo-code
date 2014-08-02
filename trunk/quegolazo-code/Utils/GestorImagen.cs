@@ -16,7 +16,8 @@ namespace Utils
         private static string extension = ".jpg";
 
         //Paths de Imágenes
-        private static string pathImagenes = System.Web.HttpContext.Current.Server.MapPath("/resources/img/");
+        private static string pathImagenes="/resources/img/";
+        private static string pathImagenesDisco = System.Web.HttpContext.Current.Server.MapPath(pathImagenes);
         private static string pathTorneos = "torneos/";
         private static string pathEquipos = "equipos/";
         private static string pathComplejos = "complejos/";
@@ -29,24 +30,20 @@ namespace Utils
         public const int COMPLEJO = 3;
         public const int JUGADOR = 4;
 
-        /// <summary>
-        /// Representa los 3 tamaños de imagenes que se guardan en el sistema.
-        /// Autor: Antonio Herrera
-        /// </summary>
-        public enum enumDimensionImagen
-        {
-            GRANDE, MEDIANA, CHICA
-        }
+        //Tamaños de Imagen
+        public const string CHICA = "-sm";
+        public const string MEDIANA = "-nm";
+        public const string GRANDE = "-bg";
 
         /// <summary>
         /// Guarda las imágenes validándolas. Recibe por parámetro el archivo, el id, y que tipo de image es (torneo, equipo, etc)
         /// autor: Facundo Allemand
         /// </summary>
         public static bool guardarImagenTorneo(HttpPostedFile file, int id, int tipoImagen) {
-            if (file.ContentLength > 0)
+            if (file!=null && file.ContentLength > 0)
             {
                 crearDirectorios();
-                string rutaImagenTemporal = pathImagenes + pathTemp + "img.temp";
+                string rutaImagenTemporal = pathImagenesDisco + pathTemp + "img.temp";
                 try
                 {
                     if (file.ContentLength > tamanioMax)
@@ -55,18 +52,18 @@ namespace Utils
                     validarImagen(rutaImagenTemporal);
                     //Definimos los tamaños de imagenes a crear
                     List<Imagen> imagenes = new List<Imagen>();
-                    imagenes.Add(new Imagen() { abreviacion = "-sm", height = 50, width = 50 });
-                    imagenes.Add(new Imagen() { abreviacion = "-nm", height = 200, width = 200 });
-                    imagenes.Add(new Imagen() { abreviacion = "-bg", height = 500, width = 500 });
+                    imagenes.Add(new Imagen() { abreviacion = CHICA, height = 50, width = 50 });
+                    imagenes.Add(new Imagen() { abreviacion = MEDIANA, height = 200, width = 200 });
+                    imagenes.Add(new Imagen() { abreviacion = GRANDE, height = 500, width = 500 });
                     foreach (Imagen imagen in imagenes)
                     {
                         Bitmap img = CrearImagen(rutaImagenTemporal, imagen.width, imagen.height);
                         switch (tipoImagen)
                         {
-                            case TORNEO: img.Save(pathImagenes + pathTorneos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
-                            case EQUIPO: img.Save(pathImagenes + pathEquipos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
-                            case COMPLEJO: img.Save(pathImagenes + pathComplejos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
-                            case JUGADOR: img.Save(pathImagenes + pathJugadores + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                            case TORNEO: img.Save(pathImagenesDisco + pathTorneos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                            case EQUIPO: img.Save(pathImagenesDisco + pathEquipos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                            case COMPLEJO: img.Save(pathImagenesDisco + pathComplejos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                            case JUGADOR: img.Save(pathImagenesDisco + pathJugadores + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
                         }
                         img.Dispose();
                     }
@@ -86,16 +83,16 @@ namespace Utils
 
         private static void crearDirectorios()
         {
-            if (!Directory.Exists(pathImagenes + pathTemp))
-                Directory.CreateDirectory(pathImagenes + pathTemp);
-            if (!Directory.Exists(pathImagenes + pathTorneos))
-                Directory.CreateDirectory(pathImagenes + pathTorneos);
-            if (!Directory.Exists(pathImagenes + pathEquipos))
-                Directory.CreateDirectory(pathImagenes + pathEquipos);
-            if (!Directory.Exists(pathImagenes + pathComplejos))
-                Directory.CreateDirectory(pathImagenes + pathComplejos);
-            if (!Directory.Exists(pathImagenes + pathJugadores))
-                Directory.CreateDirectory(pathImagenes + pathJugadores);
+            if (!Directory.Exists(pathImagenesDisco + pathTemp))
+                Directory.CreateDirectory(pathImagenesDisco + pathTemp);
+            if (!Directory.Exists(pathImagenesDisco + pathTorneos))
+                Directory.CreateDirectory(pathImagenesDisco + pathTorneos);
+            if (!Directory.Exists(pathImagenesDisco + pathEquipos))
+                Directory.CreateDirectory(pathImagenesDisco + pathEquipos);
+            if (!Directory.Exists(pathImagenesDisco + pathComplejos))
+                Directory.CreateDirectory(pathImagenesDisco + pathComplejos);
+            if (!Directory.Exists(pathImagenesDisco + pathJugadores))
+                Directory.CreateDirectory(pathImagenesDisco + pathJugadores);
         }
 
         /// <summary>
@@ -109,10 +106,10 @@ namespace Utils
                 string[] files = null;
                 switch (tipoImagen)
                 {
-                    case TORNEO: files = System.IO.Directory.GetFiles(pathImagenes + pathTorneos, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
-                    case EQUIPO: files = System.IO.Directory.GetFiles(pathImagenes + pathEquipos, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
-                    case COMPLEJO: files = System.IO.Directory.GetFiles(pathImagenes + pathComplejos, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
-                    case JUGADOR: files = System.IO.Directory.GetFiles(pathImagenes + pathJugadores, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
+                    case TORNEO: files = System.IO.Directory.GetFiles(pathImagenesDisco + pathTorneos, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
+                    case EQUIPO: files = System.IO.Directory.GetFiles(pathImagenesDisco + pathEquipos, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
+                    case COMPLEJO: files = System.IO.Directory.GetFiles(pathImagenesDisco + pathComplejos, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
+                    case JUGADOR: files = System.IO.Directory.GetFiles(pathImagenesDisco + pathJugadores, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
                 }
                 if (files.Length > 0)
                 {
@@ -209,34 +206,38 @@ namespace Utils
         }
 
         /// <summary>
-        /// Veifica si la imagen esta disponible en el sistema de archivos para ser mostrada
-        /// Autor: Antonio Herrera
+        /// Retorna el path de la imagen si existe, sino la imagen default.
+        /// autor: Facundo Allemand
         /// </summary>
-        /// <param name="ubicacionDeLaImagen">Ruta de la imagen a verificar</param>
-        /// <returns>True si existe, false en caso contrario</returns>
-        public static bool existeImagen(string ubicacionDeLaImagen) {
-            return File.Exists(ubicacionDeLaImagen);
-        }
-
-        /// <summary>
-        /// Dveuelve la abreviatura correspondiente al nombre de la imagen segun su tamaño.
-        /// Autor: Antonio Herrera
-        /// </summary>
-        /// <param name="dimension">El tamaño de la imagen que se desea obtener</param>
-        /// <returns>un string con la abreviatura correspondiente</returns>
-        public static string devolverAbreviaturaDeImagen(enumDimensionImagen dimension)
-        {
-            switch (dimension)
-            {
-                case enumDimensionImagen.GRANDE:
-                    return "-bg";
-                case enumDimensionImagen.MEDIANA:
-                    return "-nm";
-                case enumDimensionImagen.CHICA:
-                    return "-sm";
-                default:
-                    return "-bg";
+        public static string obtenerImagen(int id, int tipo, string tamañoImagen) {
+            string pathImagen;
+            switch(tipo) {
+                case TORNEO : 
+                    pathImagen = pathImagenes + pathTorneos + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return pathImagen;
+                    else
+                        return (pathImagenes + pathTorneos + "default" + tamañoImagen + extension);
+                case EQUIPO :
+                    pathImagen = pathImagenes + pathEquipos + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return pathImagen;
+                    else
+                        return (pathImagenes + pathEquipos + "default" + tamañoImagen + extension);
+                case COMPLEJO :
+                    pathImagen = pathImagenes + pathComplejos + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return pathImagen;
+                    else
+                        return (pathImagenes + pathComplejos + "default" + tamañoImagen + extension);
+                case JUGADOR :
+                    pathImagen = pathImagenes + pathJugadores + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return pathImagen;
+                    else
+                        return (pathImagenes + pathJugadores + "default" + tamañoImagen + extension);
             }
+            throw new Exception("Error al obtener la imagen");
         }
     }
 

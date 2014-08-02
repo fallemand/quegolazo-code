@@ -16,7 +16,7 @@
                                     <div class="panel-heading header clearfix">
                                         <div class="col-md-1">
                                             <div class="thumbnail nomargin-bottom">
-                                                <img id="img<%# Eval("idTorneo") %>" src="<%# Eval("rutaImagen") %>" />
+                                                <img id="img<%# Eval("idTorneo") %>" src="<%# ((Entidades.Torneo)Container.DataItem).obtenerImagenChicha() %>" />
                                             </div>
                                         </div>
                                         <div class="col-md-5">
@@ -118,7 +118,6 @@
                                         <div class="col-md-4">
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                                 <div class="fileinput-new fileinput-default thumbnail" data-trigger="fileinput">
-
                                                     <img id="imagenpreview" src="../resources/img/theme/logo-default.png" runat="server" />
                                                 </div>
                                                 <div id="logoTorneoPreview" class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput"></div>
@@ -146,7 +145,7 @@
                             <div class="modal-footer">
                                 <div class="col-xs-8 col-xs-offset-3">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Registrar" OnClick="btnResgitrar_Click"/>
+                                    <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Registrar" OnClick="btnResgitrarTorneo_Click"/>
                                     <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Modificar" OnClick="btnModificarTorneo_Click" Visible="false"/>
                                 </div>
                                 <div class="col-xs-1">

@@ -62,43 +62,35 @@ namespace Utils
        /// <summary>
        /// verifica si una cadena esta vacia. devuelvo la cadena sino está vacío
        /// </summary>
-        public static string isEmpty(string cadena) {
-            try
-            {
-                if (cadena.Equals(string.Empty))
-                    throw new Exception();
-                else
-                    return cadena;
-               
-            }
-            catch (Exception)
-            {
-                throw new Exception("El valor ingresado no puede ser vacío");
-            }
+        public static string isNotEmpty(string cadena) {
+            if (cadena.Equals(""))
+                throw new Exception("El valor ingresado no puede estarvacío");
+            else
+                return cadena;
         }
 
-          /// <summary>
-          /// Valida si la direccion de email es valida devolviendo true en ese caso, y false en caso contrario
-          /// </summary>
-          public static bool validarEmail(string email) {
-              String expresion;
-              expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-              if (Regex.IsMatch(email, expresion))
-              {
-                  if (Regex.Replace(email, expresion, String.Empty).Length == 0)
-                  {
-                      return true;
-                  }
-                  else
-                  {
-                      return false;
-                  }
-              }
-              else
-              {
-                  return false;
-              }
-          }
+        /// <summary>
+        /// Valida si la direccion de email es valida devolviendo true en ese caso, y false en caso contrario
+        /// </summary>
+        public static bool validarEmail(string email) {
+            String expresion;
+            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (Regex.IsMatch(email, expresion))
+            {
+                if (Regex.Replace(email, expresion, String.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         /// <summary>
         /// Valida si la cadena contiene espacios en blanco

@@ -17,9 +17,9 @@ namespace quegolazo_code.admin
             {
                 if (Session["usuario"] != null)
                 {
-                    //Usuario usuario = (Usuario)Session["usuario"];
-                    //Literal litNombre = (Literal)lvNavBar.FindControl("LitNombre");
-                    //litNombre.Text = usuario.nombre;
+                    Usuario usuario = (Usuario)Session["usuario"];
+                    Literal litNombre = (Literal)lvNavBar.FindControl("LitNombre");
+                    litNombre.Text = usuario.nombre;
                 }
             }
         }

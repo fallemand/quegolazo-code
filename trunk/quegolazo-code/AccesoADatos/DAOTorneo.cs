@@ -20,7 +20,7 @@ namespace AccesoADatos
         /// </summary>
         /// <parameters>id de Usuario</parameters>
         /// <returns>Lista genérica de Torneos</returns>
-        public List<Torneo> obtenerTorneosDeUnUsuario(int idUsuario)
+        public List<Torneo> obtenerTorneosPorUsuario(int idUsuario)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
