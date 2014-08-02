@@ -24,7 +24,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr = new SqlDataReader();
+            SqlDataReader dr;
 
             List<Edicion> respuesta = new List<Edicion>();
             Edicion edicion = null;
@@ -32,10 +32,8 @@ namespace AccesoADatos
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
 
                 string sql = @"SELECT *
                                 FROM Ediciones
@@ -107,10 +105,8 @@ namespace AccesoADatos
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
 
                 string sql = @"INSERT INTO Ediciones (nombre, idTamanioCancha, idTipoSuperficie, idEstado, idTorneo, puntosGanado, puntosPerdido, puntosEmpatado)
                                               VALUES (@nombre, @idTamanioCancha, @idTipoSuperficie, @idEstado, @idTorneo, @puntosGanado, @puntosPerdido, @puntosEmpatado ) SELECT SCOPE_IDENTITY()";
@@ -134,11 +130,8 @@ namespace AccesoADatos
             }
             finally
             {
-                if (con.State == ConnectionState.Open)
-                {
+                if (con != null && con.State == ConnectionState.Open)
                     con.Close();
-                    cmd.Connection = con;
-                }
             }
         }
 
@@ -156,10 +149,8 @@ namespace AccesoADatos
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
 
                 string sql = @"INSERT INTO ConfiguracionesEdicion (jugadores,cambiosJugadores, tarjetasJugadores, golesJugadores,asignacionArbitros, desempenioArbitros,cantidadArbitros,canchaUnica, sancionesJugadores, arbitros ,sanciones , idEdicion )
                                               VALUES (@jugadores,@cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @cantidadArbitros, @canchaUnica, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion)";
@@ -187,11 +178,8 @@ namespace AccesoADatos
             }
             finally
             {
-                if (con.State == ConnectionState.Open)
-                {
+                if (con != null && con.State == ConnectionState.Open)
                     con.Close();
-                    cmd.Connection = con;
-                }
             }
         }
     }
