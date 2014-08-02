@@ -15,6 +15,6 @@ namespace Entidades
         public string directorTecnico { get; set; }
         public Delegado delegadoPrincipal { get; set; }
         public Delegado delegadoOpcional { get; set; }
-        public Torneo torneo { get; set; }
+        
     }
 }

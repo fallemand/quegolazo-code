@@ -121,9 +121,8 @@ namespace Logica
             try
             {
                 DAOTorneo daoTorneo = new DAOTorneo();
-                Torneo torneoNuevo = validarTorneo(nombre, descripcion, nick);
-                torneoNuevo.usuario.idUsuario = Validador.castInt(idUsuario);
-                int idTorneoRegistrado = daoTorneo.registrarTorneo(torneoNuevo);
+                Torneo torneoNuevo = validarTorneo(nombre, descripcion, nick);                
+                int idTorneoRegistrado = daoTorneo.registrarTorneo(torneoNuevo, Validador.castInt(idUsuario));
                 return idTorneoRegistrado;
             }
             catch (Exception ex)

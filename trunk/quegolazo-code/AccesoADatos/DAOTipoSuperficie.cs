@@ -24,7 +24,6 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
-
             TipoSuperficie respuesta = null;
             try
             {
@@ -33,7 +32,6 @@ namespace AccesoADatos
                     con.Open();
                     cmd.Connection = con;
                 }
-
                 string sql = @"SELECT *
                                 FROM TiposSuperficie
                                 WHERE idTipoSuperficie= @idTipoSuperficie";
@@ -41,22 +39,18 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idTipoSuperficie", idTipoSuperficie);
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-
-
                 while (dr.Read())
                 {
                     respuesta = new TipoSuperficie()
                     {
                         idTipoSuperficie = Int32.Parse(dr["idTipoSuperficie"].ToString()),
                         nombre = dr["nombre"].ToString()
-
                     };
                 }
                 return respuesta;
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error al intentar recuperar el Tipo de Superficie: " + ex.Message);
             }
             finally
@@ -64,7 +58,6 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-
         }
 
         /// <summary>
@@ -76,11 +69,9 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-
-            List<TipoSuperficie> tiposSuperficie = new List<TipoSuperficie>();
-            SqlDataReader dr ;
-
-            TipoSuperficie respuesta = null;
+            SqlDataReader dr;
+            List<TipoSuperficie> respuesta = new List<TipoSuperficie>(); 
+            TipoSuperficie tipoDeSuperficie = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -88,25 +79,20 @@ namespace AccesoADatos
                     con.Open();
                     cmd.Connection = con;
                 }
-
                 string sql = @"SELECT *
-                                FROM TiposSuperficie";
- 
+                                FROM TiposSuperficie"; 
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-
-
                 while (dr.Read())
                 {
-                    respuesta = new TipoSuperficie()
+                    tipoDeSuperficie = new TipoSuperficie()
                     {
                         idTipoSuperficie = Int32.Parse(dr["idTipoSuperficie"].ToString()),
                         nombre = dr["nombre"].ToString()
-
                     };
-                    tiposSuperficie.Add(respuesta);
+                    respuesta.Add(tipoDeSuperficie);
                 }
-                return tiposSuperficie;
+                return respuesta;
             }
             catch (Exception ex)
             {

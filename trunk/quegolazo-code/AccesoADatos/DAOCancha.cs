@@ -30,8 +30,7 @@ namespace AccesoADatos
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                cmd.Connection = con;
-                
+                cmd.Connection = con;                
                 string sql = @"SELECT *
                                 FROM TamaniosCancha
                                 WHERE idTamanioCancha= @idTamanioCancha";
@@ -39,8 +38,6 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idTamanioCancha", idTamanioCancha);
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-
-
                 while (dr.Read())
                 {
                     respuesta = new TamanioCancha()
@@ -56,7 +53,6 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error al intentar recuperar el tamaño de cancha: " + ex.Message);
             }
             finally
@@ -78,21 +74,17 @@ namespace AccesoADatos
             SqlCommand cmd = new SqlCommand();
             List<TamanioCancha> tamaniosCancha = new List<TamanioCancha>();
             SqlDataReader dr;
-
             TamanioCancha respuesta = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-
                 string sql = @"SELECT *
                                 FROM TamaniosCancha";
                 cmd.Parameters.Clear();
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-
-
                 while (dr.Read())
                 {
                     respuesta = new TamanioCancha()
@@ -100,7 +92,6 @@ namespace AccesoADatos
                         idTamanioCancha = Int32.Parse(dr["idTamanioCancha"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         cantidadJugadores = Int32.Parse(dr["cantidadJugadores"].ToString())
-
                     };
                     tamaniosCancha.Add(respuesta);
                 }
@@ -109,7 +100,6 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error al intentar recuperar los tamaños de cancha: " + ex.Message);
             }
             finally
@@ -117,10 +107,7 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-
         }
-
-
         /// <summary>
         /// Obtiene todas las canchas de una edición
         /// autor: Paula Pedrosa
@@ -132,15 +119,13 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
-
             List<Cancha> canchas = null;
-            Cancha c = null;
+            Cancha unaCancha = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-
                 string sql = @"SELECT c.*
                                FROM Canchas c INNER JOIN CanchaXEdicion ce 
                                ON c.idCancha = ce.idCancha
@@ -149,25 +134,21 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-
-
                 while (dr.Read())
                 {
                    canchas = new List<Cancha>();
-                   c = new Cancha();
-                   c.idCancha = Int32.Parse(dr["idCancha"].ToString());
-                   c.nombre = dr["nombre"].ToString();
-                   c.telefono = dr["telefono"].ToString();
-                   c.domicilio = dr["domicilio"].ToString();
-
-                   canchas.Add(c);
+                   unaCancha = new Cancha();
+                   unaCancha.idCancha = Int32.Parse(dr["idCancha"].ToString());
+                   unaCancha.nombre = dr["nombre"].ToString();
+                   unaCancha.telefono = dr["telefono"].ToString();
+                   unaCancha.domicilio = dr["domicilio"].ToString();
+                   canchas.Add(unaCancha);
                 }
                 dr.Close();
                 return canchas;
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error al intentar recuperar los datos: " + ex.Message);
             }
             finally

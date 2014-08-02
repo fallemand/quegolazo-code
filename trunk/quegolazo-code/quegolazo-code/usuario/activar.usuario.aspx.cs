@@ -24,18 +24,10 @@ namespace quegolazo_code.admin
                     try
                     {
                         panel_activacion.Visible = true;
-
                         GestorUsuario gestor = new GestorUsuario();
-                        int idUsuario = gestor.activarUsuario(codigo);
-                        if (idUsuario == 0)
-                        {
-                            throw new Exception("El código de activación no es válido o ya fue utilizado.");
-                        }
-
-                        LitEmail.Text = gestor.obtenerUsuario(idUsuario).email;
+                        gestor.activarUsuario(codigo);                     
                         panExito.Visible = true;
                         litMensaje.Text = "Ha sido activada. <strong><a href='login.aspx'>Ingresa Aquí</a></strong>";
-
                     }
                     catch (Exception ex)
                     {

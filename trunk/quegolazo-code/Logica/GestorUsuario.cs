@@ -75,13 +75,12 @@ namespace Logica
         /// </summary>
         /// <param name="claveSinencriptar"></param>
         /// <returns></returns>
-        public int activarUsuario(string codigo)
+        public void activarUsuario(string codigo)
         {
             try
             {
                 DAOUsuario gestorBD = new DAOUsuario();
-                int idUsuario=gestorBD.ActivarCuenta(codigo);
-                return idUsuario;
+                gestorBD.ActivarCuenta(codigo);                
             }
             catch (Exception e)
             {

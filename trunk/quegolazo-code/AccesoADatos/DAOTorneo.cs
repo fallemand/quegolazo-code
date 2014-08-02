@@ -25,16 +25,13 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
-            List<Torneo> torneos = new List<Torneo>();
-            Torneo respuesta = null;
-            
-            bool b = false;
+            List<Torneo> respuesta = new List<Torneo>();
+            Torneo torneo = null;            
+            bool noTieneTorneosAsociados = false;
             try
             {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
+                if (con.State == ConnectionState.Closed)                
+                    con.Open();                
                 cmd.Connection = con;
                 string sql = @"SELECT * 
                              FROM Torneos
@@ -44,38 +41,27 @@ namespace AccesoADatos
                 cmd.Parameters.Add(new SqlParameter("@idUsuario", idUsuario));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-
                 if (!dr.HasRows)
                 {
-                    b = true;
-                    throw new Exception("No hay torneos registrados de ese usuario");
-                    
-                }
-
-                DAOUsuario gestorUsuario = new DAOUsuario();                
+                    noTieneTorneosAsociados = true;
+                    throw new Exception("No hay torneos registrados de ese usuario");                    
+                }                             
                 while (dr.Read())
                 {
-                    respuesta = new Torneo()
+                    torneo = new Torneo()
                     {
                         idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         nick = dr["nick"].ToString(),
-                        usuario = gestorUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString())),
                         descripcion = dr["descripcion"].ToString()                        
                     };
-                    torneos.Add(respuesta);
-                    if (dr != null)
-                    {
-                        dr.Close();
-                    }
-                }
-
-               
-                return torneos;
+                    respuesta.Add(torneo);
+                  }               
+                return respuesta;
             }
             catch (Exception ex)
             {
-                if(!b)
+                if(!noTieneTorneosAsociados)
                    throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
                 else
                     throw new Exception(ex.Message);
@@ -97,27 +83,19 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-
-
             Torneo respuesta = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                    cmd.Connection = con;
-                }
-
+                  con.Open();
+                cmd.Connection = con; 
                 string sql = @"SELECT idTorneo, nombre, nick, idUsuario, descripcion
                                 FROM Torneos
                                 WHERE idTorneo = @idTorneo";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
                 cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                DAOUsuario daoUsuario = new DAOUsuario();
-             
+                SqlDataReader dr = cmd.ExecuteReader();             
                 while (dr.Read())
                 {
                     respuesta = new Torneo()
@@ -125,7 +103,6 @@ namespace AccesoADatos
                         idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         nick = dr["nick"].ToString(),
-                        usuario = daoUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString())),
                         descripcion = dr["descripcion"].ToString()  
                     };
                 }
@@ -158,10 +135,8 @@ namespace AccesoADatos
             Torneo respuesta = null;
             try
             {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
+                if (con.State == ConnectionState.Closed)                
+                    con.Open();                
                 cmd.Connection = con;
                 string sql = @"SELECT idTorneo, nombre, nick, idUsuario
                                 FROM Torneos
@@ -181,7 +156,6 @@ namespace AccesoADatos
                         idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
                         nombre = dr["nombre"].ToString(),
                         nick = dr["nick"].ToString(),
-                        usuario = daoUsuario.obtenerUsuarioPorId(Int32.Parse(dr["idUsuario"].ToString())),
                         descripcion = dr["descripcion"].ToString()  
                     };
                 }
@@ -205,17 +179,15 @@ namespace AccesoADatos
         /// Registra un torneo nuevo para un determinado usuario.
         /// </summary>
         /// <param name="torneoNuevo">El torneo que se va a registrar</param>
-        /// <param name="usuario">El usuario al cual le pertenece el torneo</param>
-        public int registrarTorneo(Torneo torneoNuevo)
+        /// <param name="idUsuario">El id del usuario al cual le pertenece el torneo</param>
+        public int registrarTorneo(Torneo torneoNuevo, int idUsuario)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             try
             {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
+                if (con.State == ConnectionState.Closed)                
+                    con.Open();                
                 cmd.Connection = con;
                 string sql = @"INSERT INTO Torneos (nombre, descripcion, nick, idUsuario)
                                               VALUES (@nombre, @descripcion, @nick, @idUsuario) SELECT SCOPE_IDENTITY()";
@@ -223,7 +195,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@nombre", torneoNuevo.nombre);
                 cmd.Parameters.AddWithValue("@descripcion", torneoNuevo.descripcion);
                 cmd.Parameters.AddWithValue("@nick", torneoNuevo.nick);
-                cmd.Parameters.AddWithValue("@idUsuario", torneoNuevo.usuario.idUsuario);
+                cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
                 cmd.CommandText = sql;
                 return int.Parse(cmd.ExecuteScalar().ToString());
 
@@ -263,10 +235,8 @@ namespace AccesoADatos
             SqlCommand cmd = new SqlCommand();
             try
             {
-                if (con.State == ConnectionState.Closed)
-                {
-                    con.Open();
-                }
+                if (con.State == ConnectionState.Closed)                
+                    con.Open();                
                 cmd.Connection = con;
                 string sql = @"UPDATE Torneos 
                                      SET descripcion = @descripcion, nombre = @nombre 

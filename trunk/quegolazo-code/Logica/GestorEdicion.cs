@@ -48,9 +48,9 @@ namespace Logica
         {            
             try
             {
-                Edicion edicionNueva = validarEdicion(nombre, idTorneo, idTamanioCancha, idSuperficie, ptosGanado, ptosEmpatado, ptosPerdido);
+                Edicion edicionNueva = validarEdicion(nombre, idTamanioCancha, idSuperficie, ptosGanado, ptosEmpatado, ptosPerdido);
                 DAOEdicion daoEdicion = new DAOEdicion();
-                return daoEdicion.registrarEdicion(edicionNueva);
+                return daoEdicion.registrarEdicion(edicionNueva, int.Parse(idTorneo));
             }
             catch (Exception ex)
             {
@@ -65,7 +65,7 @@ namespace Logica
         /// valida si los datos introducidos en el formulario son correctos, si es asi devuelve el objeto Edicion correspondiente, si no lo son lanza excepciones con el mensaje correspondiente.
         /// autor: Antonio Herrera
         /// </summary> 
-        public Edicion validarEdicion(string nombre, string idTorneo, string idTamanioCancha, string idSuperficie, string ptosGanado, string ptosEmpatado, string puntosPerdido)
+        public Edicion validarEdicion(string nombre, string idTamanioCancha, string idSuperficie, string ptosGanado, string ptosEmpatado, string puntosPerdido)
         {
            try
             {
@@ -88,11 +88,7 @@ namespace Logica
                 
                 TamanioCancha tamanioCancha = gestorCancha.obtenerTamanioCanchaPorId(Int32.Parse(idTamanioCancha));
                 TipoSuperficie tipoSuperficie = gestorTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(idSuperficie));
-
-;
                 Estado estado = gestorEstado.obtenerEstadoPorNombreYAmbito(Estado.enumNombre.REGISTRADA, Estado.enumAmbito.EDICION);
-                Torneo torneo = gestorTorneo.obtenerTorneoPorId(Int32.Parse(idTorneo));
-
                 return new Edicion()
                 {
                     nombre = nombre,
@@ -101,8 +97,7 @@ namespace Logica
                     puntosGanado = ganado,
                     puntosPerdido = perdido,
                     puntosEmpatado = empatado,
-                    estado = estado,
-                    torneo = torneo
+                    estado = estado                    
                 };
 
             }
