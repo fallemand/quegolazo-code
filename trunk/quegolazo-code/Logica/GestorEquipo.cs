@@ -125,5 +125,80 @@ namespace Logica
             delegado.telefono = telefono;
             delegado.domicilio = domicilio;
         }
+
+        /// <summary>
+        /// Obtiene los Equipos de un Torneo
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <returns>Lista genérica de objetos Equipos</returns>
+        public List<Equipo> obtenerEquiposDeUnTorneo()
+        {
+            try
+            {
+                DAOEquipo daoEquipo = new DAOEquipo();
+                int idTorneo = ((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
+
+                List<Equipo> equipos = daoEquipo.obtenerEquiposDeUnTorneo(idTorneo);
+
+                return equipos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
+        }
+
+        /// <summary>
+        /// Obtiene el equipo a modificar
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idEquipo">id del equipo a modificar</param>
+        public void obtenerEquipoAModificar(int idEquipo)
+        {
+            DAOEquipo daoEquipo = new DAOEquipo();
+            equipo = daoEquipo.obtenerEquipoPorId(idEquipo);
+
+        }
+
+        /// <summary>
+        /// Modifica el equipo 
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idEquipo">id del equipo</param>
+        /// <param name="nombre">nombre del equipo</param>
+        /// <param name="colorCamisetaPrimario">color camiseta 1° del equipo</param>
+        /// <param name="colorCamisetaSecundario">color camiseta 2° del equipo</param>
+        /// <param name="directorTecnico">director tecnico del equipo</param>
+        public void modificarEquipo(int idEquipo, string nombre, string colorCamisetaPrimario, string colorCamisetaSecundario, string directorTecnico)
+        {
+            try
+            {
+                DAOEquipo daoEquipo = new DAOEquipo();
+                equipo.nombre = nombre;
+                equipo.colorCamisetaPrimario = colorCamisetaPrimario;
+                equipo.colorCamisetaSecundario = colorCamisetaSecundario;
+                equipo.directorTecnico = directorTecnico;
+                List<Delegado> delegadosModificados = obtenerDelegados();
+                int i = 0;
+
+                foreach (Delegado delegado in delegadosModificados)
+                {
+                    if (i == 0)
+                        equipo.delegadoPrincipal = delegado;
+                    else
+                        equipo.delegadoOpcional = delegado;
+                    i++;
+                }
+
+                daoEquipo.modificarEquipo(equipo);
+               
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
     }
 }

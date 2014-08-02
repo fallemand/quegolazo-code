@@ -5,13 +5,13 @@
         <div class="col-md-6">
             <fieldset class="vgEquipo">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        Agregar un Equipo
+                    <div class="panel-heading">                        
+                        <asp:LinkButton ID="lnkNuevoEquipo" Text="Agregar un Equipo" title="Nuevo Equipo" runat="server" OnClick="lnkNuevoEquipo_Click"><span class="glyphicon glyphicon-plus"></span></asp:LinkButton>     
+                        Agregar un Equipo                                   
                     </div>
                     <div class="panel-body nopadding-bottom">
                         <div class="form-horizontal">
-                            <div class="form-group">
+                            <div class="form-group">                               
                                 <label for="text" class="col-lg-2 control-label">Nombre</label>
                                 <div class="col-lg-10">
                                     <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo" required="true">
@@ -88,7 +88,7 @@
                                     <div class="col-md-5">
                                         <div class="fileinput fileinput-new" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail">
-                                                <img src="../resources/img/theme/logo-default.png" alt="...">
+                                                <img id="imagenpreview" src="../resources/img/theme/logo-default.png" alt="..." runat ="server">
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                             <div>
@@ -112,8 +112,8 @@
                                 </div>
                             </div>
                         </div>
-                        <asp:Panel ID="panelExito" runat="server" CssClass="alert alert-success" Visible="False"><small>
-                            <asp:Literal ID="litExito" runat="server"></asp:Literal></small>
+                        <asp:Panel ID="panelExito" runat="server" CssClass="alert alert-success" Visible="False">
+                            <asp:Literal ID="litExito" runat="server"></asp:Literal>
                         </asp:Panel>
                         <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                             <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
@@ -121,6 +121,7 @@
                     </div>
                     <div class="panel-footer clearfix">
                         <asp:Button class="btn btn-success pull-right causesValidation vgEquipo" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
+                        <asp:Button class="btn btn-success pull-right causesValidation vgEquipo" ID="btnModificarEquipo" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarEquipo_Click" />
                     </div>
                 </div>
             </fieldset>
@@ -132,7 +133,27 @@
                     Equipos Existentes
                 </div>
                 <div class="panel-body">
-                    Panel content
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="col-md-4">Nombre</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                        <asp:Repeater ID="rptEquipos" runat="server" OnItemCommand="rptEquipos_ItemCommand">
+                            <ItemTemplate>
+                                <tr>
+                                    <td><%# Eval("nombre") %></td>
+                                    <td>
+                                        <asp:LinkButton ID="lnkEditarEquipo" title="Editar Equipo" runat="server" CommandName="editarEquipo" CommandArgument='<%#Eval("idEquipo")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                        <a href="#" class="editar"><span class="glyphicon glyphicon-remove eliminar" rel="txtTooltip" title="Eliminar Equipo" data-toggle="tooltip" data-placement="top"></span></a>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </tbody>
+                    </table>
+                    <asp:Label ID="lblMensajeEquipos" runat="server" Text=""></asp:Label>
                 </div>
             </div>
         </div>

@@ -13,6 +13,15 @@ namespace quegolazo_code.admin {
     public partial class equipos {
         
         /// <summary>
+        /// Control lnkNuevoEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkNuevoEquipo;
+        
+        /// <summary>
         /// Control txtNombreEquipo.
         /// </summary>
         /// <remarks>
@@ -121,6 +130,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnCancelarDelegado;
         
         /// <summary>
+        /// Control imagenpreview.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imagenpreview;
+        
+        /// <summary>
         /// Control fuLog.
         /// </summary>
         /// <remarks>
@@ -173,5 +191,32 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRegistrarEquipo;
+        
+        /// <summary>
+        /// Control btnModificarEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModificarEquipo;
+        
+        /// <summary>
+        /// Control rptEquipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptEquipos;
+        
+        /// <summary>
+        /// Control lblMensajeEquipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensajeEquipos;
     }
 }

@@ -23,8 +23,38 @@ namespace quegolazo_code.admin
             //obtiene en gestor de la Session.
             gestorEquipo = (GestorEquipo)Session["gestorEquipo"];
 
+            //TORNEO HARDCODEADOOO
+            //TORNEO HARDCODEADOOO
+            Session["torneo"] = new Torneo
+            {
+                idTorneo = 87,
+            };
+            //TORNEO HARDCODEADOOO
+            //TORNEO HARDCODEADOOO
+
+            try
+            {
+                cargarRepeaterEquipos();
+            }
+            catch (Exception ex)
+            {
+                lblMensajeEquipos.Text = ex.Message;
+            }
+                        
             limpiarPaneles();
         }
+
+
+       /// <summary>
+       /// carga el repeater de Equipos
+       /// autor: Pau Pedrosa
+       /// </summary>
+        private void cargarRepeaterEquipos()
+        {
+            rptEquipos.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo();
+            rptEquipos.DataBind();
+        }
+
 
         /// <summary>
         /// cargar el repeater de los delegados con el nombre
@@ -43,18 +73,12 @@ namespace quegolazo_code.admin
         protected void btnRegistrarEquipo_Click(object sender, EventArgs e)
         {
             try
-            {
-                //TORNEO HARDCODEADOOO
-                //TORNEO HARDCODEADOOO
-                Session["torneo"]=new Torneo {
-                    idTorneo=87,
-                };
-                //TORNEO HARDCODEADOOO
-                //TORNEO HARDCODEADOOO
+            {                
                 gestorEquipo.registrarEquipo(txtNombreEquipo.Value, txtColorPrimario.Value, txtColorSecundario.Value, txtNombreDirector.Value);
                 GestorImagen.guardarImagenTorneo(fuLog.PostedFile, gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
                 limpiarCamposEquipo();
                 mostrarPanelExito("Equipo registrado con éxito!");
+                cargarRepeaterEquipos();
             }
             catch (Exception ex)
             {
@@ -209,6 +233,60 @@ namespace quegolazo_code.admin
             btnAgregarDelegado.Visible = true;
             btnModificarDelegado.Visible = false;
             btnCancelarDelegado.Visible = false;
+        }
+
+        /// <summary>
+        /// Permite editar un Equipo
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void rptEquipos_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "editarEquipo")
+            {                
+                gestorEquipo.obtenerEquipoAModificar(Int32.Parse(e.CommandArgument.ToString()));                
+                txtNombreEquipo.Value = gestorEquipo.equipo.nombre;
+                txtNombreDirector.Value = gestorEquipo.equipo.directorTecnico;
+                txtColorPrimario.Value = gestorEquipo.equipo.colorCamisetaPrimario;
+                txtColorSecundario.Value = gestorEquipo.equipo.colorCamisetaSecundario;
+                rptDelegados.DataSource = gestorEquipo.obtenerDelegados();
+                rptDelegados.DataBind();
+                btnRegistrarEquipo.Visible = false;
+                btnModificarEquipo.Visible = true;
+                imagenpreview.Src = gestorEquipo.equipo.obtenerImagenMediana();              
+            } 
+        }
+
+        /// <summary>
+        /// Modifica el equipo
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void btnModificarEquipo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idEquipoAModificar = gestorEquipo.equipo.idEquipo;                
+                gestorEquipo.modificarEquipo(idEquipoAModificar, txtNombreEquipo.Value, txtColorPrimario.Value, txtColorSecundario.Value, txtNombreDirector.Value);
+                GestorImagen.guardarImagenTorneo(fuLog.PostedFile, gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
+                limpiarCamposEquipo();
+                mostrarPanelExito("Equipo modificado con éxito!");
+                cargarRepeaterEquipos();
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Permite ir a agregar un nuevo equipo
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void lnkNuevoEquipo_Click(object sender, EventArgs e)
+        {
+            limpiarCamposEquipo();
+            btnRegistrarEquipo.Visible = true;
+            btnModificarEquipo.Visible = false;
         }
     }
 }
