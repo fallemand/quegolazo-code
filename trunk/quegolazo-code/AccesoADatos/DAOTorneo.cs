@@ -34,8 +34,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
-                    cmd.Connection = con;
                 }
+                cmd.Connection = con;
                 string sql = @"SELECT * 
                              FROM Torneos
                              WHERE idUsuario = @idUsuario
@@ -64,7 +64,10 @@ namespace AccesoADatos
                         descripcion = dr["descripcion"].ToString()                        
                     };
                     torneos.Add(respuesta);
-                    
+                    if (dr != null)
+                    {
+                        dr.Close();
+                    }
                 }
 
                
@@ -126,6 +129,8 @@ namespace AccesoADatos
                         descripcion = dr["descripcion"].ToString()  
                     };
                 }
+                if (dr != null)
+                    dr.Close();
                 return respuesta;
             }
             catch (Exception ex)
@@ -150,17 +155,14 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-
-
             Torneo respuesta = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
-                    cmd.Connection = con;
                 }
-
+                cmd.Connection = con;
                 string sql = @"SELECT idTorneo, nombre, nick, idUsuario
                                 FROM Torneos
                                 WHERE idUsuario = @idUsuario AND idTorneo = @idTorneo";
@@ -183,6 +185,8 @@ namespace AccesoADatos
                         descripcion = dr["descripcion"].ToString()  
                     };
                 }
+                if (dr != null)
+                    dr.Close();
                 return respuesta;
             }
             catch (Exception ex)
@@ -211,9 +215,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
-                    cmd.Connection = con;
                 }
-
+                cmd.Connection = con;
                 string sql = @"INSERT INTO Torneos (nombre, descripcion, nick, idUsuario)
                                               VALUES (@nombre, @descripcion, @nick, @idUsuario) SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
@@ -263,9 +266,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
-                    cmd.Connection = con;
                 }
-
+                cmd.Connection = con;
                 string sql = @"UPDATE Torneos 
                                      SET descripcion = @descripcion, nombre = @nombre 
                                      WHERE idTorneo=@idTorneo";

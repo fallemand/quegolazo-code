@@ -74,7 +74,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr =new SqlDataReader();
+            SqlDataReader dr;
 
             Usuario respuesta = null;
             try
@@ -82,9 +82,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
-                    cmd.Connection = con;
                 }
-
+                cmd.Connection = con;
                 string sql = @"SELECT *
                                 FROM Usuarios
                                 WHERE email = @email";
@@ -107,6 +106,8 @@ namespace AccesoADatos
                     tipoUsuario = gestorTipoUsuario.obtenerTipoUsuarioPorId(Int32.Parse(dr["idTipoUsuario"].ToString()))};
 
                 }
+                if (dr != null)
+                    dr.Close();
                 return respuesta;
             }
             catch (Exception ex)
@@ -116,8 +117,7 @@ namespace AccesoADatos
             }
             finally
             {
-                if (dr != null)
-                    dr.Close();
+
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -137,7 +137,7 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlTransaction trans = null;
-            SqlDataReader dr = new SqlDataReader();
+            SqlDataReader dr;
 
             try
             {
@@ -146,9 +146,9 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
-                    cmd.Connection = con;
-                }
 
+                }
+                cmd.Connection = con;
                 if (codigo != string.Empty)
                 {
                   
@@ -161,11 +161,6 @@ namespace AccesoADatos
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@UserCodigo", codigo);
                     cmd.CommandText = sql;
-
-                    if (con.State == ConnectionState.Closed)
-                    {
-                        con.Open();
-                    }
                     cmd.ExecuteNonQuery();
 
 
@@ -191,11 +186,9 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@codigo", DBNull.Value);
                     cmd.Parameters.AddWithValue("@idUsuario",idUsuario);
                     cmd.CommandText = sql;
-
-                    if (con.State == ConnectionState.Closed)
-                    {
-                        con.Open();
-                    }
+                    if (dr != null)
+                        dr.Close();
+                  
                     cmd.ExecuteNonQuery();
 
                     trans.Commit();
@@ -209,8 +202,7 @@ namespace AccesoADatos
             }
             finally
             {
-                if (dr != null)
-                    dr.Close();
+
                 if (con != null && con.State == ConnectionState.Open)
                 {
                     con.Close();
@@ -231,7 +223,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr = new SqlDataReader();
+            SqlDataReader dr;
 
             Usuario usuario = null;
             try
@@ -239,9 +231,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
-                    cmd.Connection = con;
                 }
-
+                cmd.Connection = con;
                 string sql = @"SELECT *
                                 FROM Usuarios
                                 WHERE idUsuario = @idUsuario";
@@ -271,6 +262,8 @@ namespace AccesoADatos
 
 
                 }
+                if (dr != null)
+                    dr.Close();
                 return usuario;
             }
             catch (Exception ex)
@@ -280,8 +273,7 @@ namespace AccesoADatos
             }
             finally
             {
-                if (dr != null)
-                    dr.Close();
+
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -299,7 +291,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr=new SqlDataReader();
+            SqlDataReader dr;
             Usuario usuario = null;
             try
             {
@@ -329,6 +321,8 @@ namespace AccesoADatos
                         esActivo = bool.Parse(dr["esActivo"].ToString())
                     };
                 }
+                if (dr != null)
+                    dr.Close();
                 return usuario;
             }
             catch (Exception ex)
@@ -337,8 +331,6 @@ namespace AccesoADatos
             }
             finally
             {
-                if (dr != null)
-                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -361,7 +353,7 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
-                    cmd.Connection = con;
+
                 }
 
                 cmd.Connection = con;
