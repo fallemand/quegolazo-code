@@ -90,7 +90,7 @@ namespace Logica
                 TipoSuperficie tipoSuperficie = gestorTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(idSuperficie));
 
 ;
-                Estado estado = gestorEstado.obtenerUnEstadoPorNombreYAmbito(Estado.enumNombre.REGISTRADA, Estado.enumAmbito.EDICION);
+                Estado estado = gestorEstado.obtenerEstadoPorNombreYAmbito(Estado.enumNombre.REGISTRADA, Estado.enumAmbito.EDICION);
                 Torneo torneo = gestorTorneo.obtenerTorneoPorId(Int32.Parse(idTorneo));
 
                 return new Edicion()
