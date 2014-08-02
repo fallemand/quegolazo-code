@@ -73,6 +73,7 @@ namespace AccesoADatos
                     respuesta.Add(edicion);
 
                 }
+                dr.Close();
                 return respuesta;
             }
             catch (Exception ex)

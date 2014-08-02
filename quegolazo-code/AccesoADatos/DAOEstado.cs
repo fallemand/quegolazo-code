@@ -24,14 +24,12 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr=new SqlDataReader();
+            SqlDataReader dr;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
 
                 string sql = @"SELECT idEstado, nombre, ambito 
                              FROM Estados
@@ -52,7 +50,7 @@ namespace AccesoADatos
                     };
                     respuesta = nuevoEstado;
                 }
-                
+                dr.Close();                
                 return respuesta;
             }
             catch (Exception ex)
@@ -61,8 +59,6 @@ namespace AccesoADatos
             }
             finally
             {
-                if (dr != null)
-                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -78,14 +74,12 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr = new SqlDataReader() ;
+            SqlDataReader dr;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
 
                 string sql = @"SELECT idEstado, nombre, ambito 
                              FROM Estados
@@ -105,7 +99,7 @@ namespace AccesoADatos
                     };
                     respuesta = nuevoEstado;
                 }
-               
+                dr.Close();
                 return respuesta;
             }
             catch (Exception ex)
@@ -114,8 +108,6 @@ namespace AccesoADatos
             }
             finally
             {
-                if (dr != null)
-                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -131,14 +123,12 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr=new SqlDataReader();
+            SqlDataReader dr;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
 
                 string sql = @"SELECT idEstado, nombre, ambito 
                              FROM Estados
@@ -159,7 +149,8 @@ namespace AccesoADatos
                     };
                     respuesta = nuevoEstado;
                 }
-                
+
+                dr.Close();
                 return respuesta;
             }
             catch (Exception ex)
@@ -168,8 +159,6 @@ namespace AccesoADatos
             }
             finally
             {
-                 if (dr != null)
-                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
