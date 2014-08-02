@@ -90,7 +90,7 @@ namespace quegolazo_code.admin
                 gestorEquipo.modificarDelegado(txtNombreDelegado.Value, txtEmailDelegado.Value, txtTelefonoDelegado.Value, txtDireccionDelegado.Value);
                 Session["delegadoAModificar"] = null;
                 cargarRepeaterDelegados();
-                limpiarCamposDelegado();
+                limpiarCamposDelegado();    
             }
             catch (Exception ex)
             {

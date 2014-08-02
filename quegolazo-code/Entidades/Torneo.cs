@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace Entidades
 {
@@ -14,12 +15,23 @@ namespace Entidades
         public List<Equipo> equipos { get; set; }
         public List<Edicion> ediciones { get; set; }       
         public string descripcion { get; set; }
-        public string rutaImagen { get; set; }
         
         public Torneo()
         {            
             equipos = new List<Equipo>();
             ediciones = new List<Edicion>();
+        }
+
+        public string obtenerImagenChicha() {
+            return GestorImagen.obtenerImagen(idTorneo, GestorImagen.TORNEO, GestorImagen.CHICA);
+        }
+        public string obtenerImagenMediana()
+        {
+            return GestorImagen.obtenerImagen(idTorneo, GestorImagen.TORNEO, GestorImagen.MEDIANA);
+        }
+        public string obtenerImagenGrande()
+        {
+            return GestorImagen.obtenerImagen(idTorneo, GestorImagen.TORNEO, GestorImagen.GRANDE);
         }
     }
 }

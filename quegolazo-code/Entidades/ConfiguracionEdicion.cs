@@ -15,13 +15,8 @@ namespace Entidades
         public bool arbitros { get; set; }
         public bool asignaArbitros { get; set; }
         public bool desempenioArbitros { get; set; }
-        public int cantidadArbitros { get; set; }
         public bool sanciones{ get; set; }
         public bool sancionesJugadores { get; set; }
-        public bool canchaUnica { get; set; }
-
-
-
-       
+        public bool canchaUnica { get; set; } 
     }
 }
