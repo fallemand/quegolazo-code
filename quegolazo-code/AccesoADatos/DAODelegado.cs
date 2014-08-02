@@ -90,6 +90,40 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-        }              
+        }
+
+        /// <summary>
+        /// Modifica en la BD el delegado
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="delegado">Objeto Delegado con sus nuevos dato</param>
+        /// <param name="con">Conexion</param>
+        /// <param name="trans">Transaccion</param>
+        public void modificarDelegado(Delegado delegado, SqlConnection con, SqlTransaction trans)
+        {
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+                string sql = @"UPDATE Delegados 
+                                     SET nombre = @nombre, email = @email, telefono = @telefono, domicilio = @domicilio
+                                     WHERE idDelegado = @idDelegado";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nombre", delegado.nombre);
+                cmd.Parameters.AddWithValue("@email", delegado.email);
+                cmd.Parameters.AddWithValue("@telefono", delegado.telefono);
+                cmd.Parameters.AddWithValue("@domicilio", delegado.domicilio);
+                cmd.Parameters.AddWithValue("@idDelegado", delegado.idDelegado);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo actualizar el delegado: " + ex.Message);
+            }                                  
+        }
     }
 }

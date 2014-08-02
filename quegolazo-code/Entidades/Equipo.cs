@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace Entidades
 {
@@ -15,6 +16,19 @@ namespace Entidades
         public string directorTecnico { get; set; }
         public Delegado delegadoPrincipal { get; set; }
         public Delegado delegadoOpcional { get; set; }
+
+        public string obtenerImagenChicha()
+        {
+            return GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, GestorImagen.CHICA);
+        }
+        public string obtenerImagenMediana()
+        {
+            return GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, GestorImagen.MEDIANA);
+        }
+        public string obtenerImagenGrande()
+        {
+            return GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, GestorImagen.GRANDE);
+        }
         
     }
 }
