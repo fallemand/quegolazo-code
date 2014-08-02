@@ -23,17 +23,15 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr = new SqlDataReader();
+            SqlDataReader dr;
 
             TamanioCancha respuesta = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
-
+                cmd.Connection = con;
+                
                 string sql = @"SELECT *
                                 FROM TamaniosCancha
                                 WHERE idTamanioCancha= @idTamanioCancha";
@@ -53,6 +51,7 @@ namespace AccesoADatos
 
                     };
                 }
+                dr.Close();
                 return respuesta;
             }
             catch (Exception ex)
@@ -62,8 +61,6 @@ namespace AccesoADatos
             }
             finally
             {
-                if(dr!=null)
-                dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -80,22 +77,20 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             List<TamanioCancha> tamaniosCancha = new List<TamanioCancha>();
-            SqlDataReader dr = new SqlDataReader();
+            SqlDataReader dr;
 
             TamanioCancha respuesta = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
 
                 string sql = @"SELECT *
                                 FROM TamaniosCancha";
                 cmd.Parameters.Clear();
                 cmd.CommandText = sql;
-               dr = cmd.ExecuteReader();
+                dr = cmd.ExecuteReader();
 
 
                 while (dr.Read())
@@ -109,6 +104,7 @@ namespace AccesoADatos
                     };
                     tamaniosCancha.Add(respuesta);
                 }
+                dr.Close();
                 return tamaniosCancha;
             }
             catch (Exception ex)
@@ -117,9 +113,7 @@ namespace AccesoADatos
                 throw new Exception("Error al intentar recuperar los tamaños de cancha: " + ex.Message);
             }
             finally
-            {
-                if (dr != null)
-                    dr.Close();
+            {                
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
@@ -137,17 +131,15 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr = new SqlDataReader();
+            SqlDataReader dr;
 
             List<Cancha> canchas = null;
             Cancha c = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
 
                 string sql = @"SELECT c.*
                                FROM Canchas c INNER JOIN CanchaXEdicion ce 
@@ -170,6 +162,7 @@ namespace AccesoADatos
 
                    canchas.Add(c);
                 }
+                dr.Close();
                 return canchas;
             }
             catch (Exception ex)
@@ -179,8 +172,6 @@ namespace AccesoADatos
             }
             finally
             {
-                if (dr != null)
-                    dr.Close();
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }

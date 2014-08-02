@@ -58,10 +58,8 @@ namespace AccesoADatos
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
 
                 string sql = @"SELECT *
                                 FROM Delegados
