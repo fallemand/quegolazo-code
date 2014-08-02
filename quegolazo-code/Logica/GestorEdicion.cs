@@ -29,10 +29,10 @@ namespace Logica
         /// autor: Antonio Herrera
         /// </summary>
         /// <returns>El id de la edicion que se registro.</returns>
-        public int registrarEdicion()
+        public void registrarEdicion()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            return daoEdicion.registrarEdicion(edicion,Sesion.obtenerTorneo().idTorneo);
+            daoEdicion.registrarEdicion(edicion,Sesion.obtenerTorneo().idTorneo);
         }
 
         /// <summary> 
