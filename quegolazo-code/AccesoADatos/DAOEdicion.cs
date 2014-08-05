@@ -146,8 +146,8 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 cmd.Transaction = trans;
-                string sql = @"INSERT INTO ConfiguracionesEdicion (jugadores,cambiosJugadores, tarjetasJugadores, golesJugadores,asignacionArbitros, desempenioArbitros,cantidadArbitros,canchaUnica, sancionesJugadores, arbitros ,sanciones , idEdicion )
-                                              VALUES (@jugadores,@cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @cantidadArbitros, @canchaUnica, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion)";
+                string sql = @"INSERT INTO ConfiguracionesEdicion (jugadores,cambiosJugadores, tarjetasJugadores, golesJugadores,asignacionArbitros, desempenioArbitros,canchaUnica, sancionesJugadores, arbitros ,sanciones , idEdicion )
+                                              VALUES (@jugadores,@cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @canchaUnica, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@jugadores", edicion.preferencias.jugadores);
                 cmd.Parameters.AddWithValue("@cambiosJugadores", edicion.preferencias.cambiosJugadores);
@@ -166,11 +166,6 @@ namespace AccesoADatos
             catch (Exception e)
             {
                 throw new Exception("No se pudo registrar las preferencias: " + e.Message);
-            }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
             }
         }
     }

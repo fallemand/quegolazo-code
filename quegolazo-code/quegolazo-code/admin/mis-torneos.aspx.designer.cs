@@ -400,13 +400,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Literal litFracasoEdicion;
         
         /// <summary>
-        /// Control btnRegistrarEdicion.
+        /// Control btnSiguienteEdicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegistrarEdicion;
+        protected global::System.Web.UI.WebControls.Button btnSiguienteEdicion;
         
         /// <summary>
         /// Control btnRegistrarOpciones.

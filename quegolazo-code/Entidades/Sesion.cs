@@ -11,7 +11,7 @@ namespace Entidades
         /// <summary>
         /// Obtiene el usuario de Session
         /// </summary>
-        public static Usuario obtenerUsuario()
+        public static Usuario getUsuario()
         {
             Usuario usuario = (Usuario)System.Web.HttpContext.Current.Session["usuario"];
             if (usuario == null)
@@ -22,12 +22,28 @@ namespace Entidades
         /// <summary>
         /// Obtiene el torneo de Session
         /// </summary>
-        public static Torneo obtenerTorneo()
+        public static Torneo getTorneo()
         {
             Torneo torneo = (Torneo)System.Web.HttpContext.Current.Session["torneo"];
             if (torneo == null)
                 throw new Exception("No se pudo obtener el torneo");
             return torneo;
+        }
+
+        /// <summary>
+        /// Setea el torneo en Session
+        /// </summary>
+        public static void setTorneo(Torneo torneo)
+        {
+            System.Web.HttpContext.Current.Session["torneo"]=torneo;
+        }
+
+        /// <summary>
+        /// Setea el torneo en Session
+        /// </summary>
+        public static void setUsuario(Usuario usuario)
+        {
+            System.Web.HttpContext.Current.Session["usuario"] = usuario;
         }
     }
 }

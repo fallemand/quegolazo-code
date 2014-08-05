@@ -9,30 +9,33 @@ namespace Entidades
     public class Estado
     {
         public int idEstado { get; set; }
-        public enumNombre nombre { get; set; }
-        public enumAmbito ambito { get; set; }
+        public string nombre { get; set; }
+        public Ambito ambito { get; set; }
 
-        /// <summary>
-        /// Enumerado de nombres de estado, que corresponde a los nombres que se encuentran en los registros de la tabla Estados en la base de datos
-        /// </summary>
-        public enum enumNombre
+        public Estado()
         {
-            REGISTRADO,
-            REGISTRADA,
-            DIAGRAMADO,
-            PROGRAMADA,
-            INCOMPLETA,
-            COMPLETA,
-            JUGADO,
-            NO_JUGADO
-            
+            ambito = new Ambito();
         }
-        /// <summary>
-        /// Enumerado de ámbitos de estado, que corresponde a los ambitos que se encuentran en los registros de la tabla Estados en la base de datos
-        /// </summary>
-        public enum enumAmbito
-        {
-            PARTIDO, TORNEO, FECHA, EDICION
-        }
+
+        //Estados Torneo
+        public const int REGISTRADO = 1;
+
+        //Estados Edicion
+        public const int REGISTRADA = 2;
+    }
+    /// <summary>
+    /// Struct que define los ambitos.
+    /// autor: Facundo Allemand
+    /// </summary>
+    public class Ambito
+    {
+        public int idAmbito;
+        public string nombre;
+
+        //Ambitos
+        public const int TORNEO = 1;
+        public const int EDICION = 2;
+        public const int FECHA = 3;
+        public const int PARTIDO = 4;
     }
 }
