@@ -7,7 +7,7 @@
         <div class="row">
             <div class="container">
                 <button type="button" class="btn btn-success" data-toggle="modal"   data-target="#modalTorneo">Crear un Nuevo Torneo</button>
-                <asp:Label ID="lblMensajeTorneos" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lblMensajeTorneos" runat="server" Text="" Visible="False"></asp:Label>
                 <asp:UpdatePanel ID="upTorneos" runat="server">
                     <ContentTemplate>
                         <asp:Repeater ID="rptTorneos" runat="server" OnItemDataBound="rptTorneosItemDataBound" OnItemCommand="rptTorneos_ItemCommand">
@@ -85,6 +85,7 @@
                     <asp:UpdatePanel ID="upModalTorneo" runat="server">
                         <Triggers>
                             <asp:PostBackTrigger ControlID="btnResgitrarTorneo" />
+                            <asp:PostBackTrigger ControlID="btnModificarTorneo" />
                         </Triggers>
                         <ContentTemplate>
                             <div class="modal-header">
@@ -455,7 +456,7 @@
                         <div class="modal-footer">
                             <div class="col-xs-5 col-xs-offset-6">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <asp:Button ID="btnRegistrarEdicion" runat="server" Text="Siguiente" CssClass="btn btn-success causesValidation vgDatosEdicion" OnClick="btnRegistrarEdicion_Click" />
+                                <asp:Button ID="btnSiguienteEdicion" runat="server" Text="Siguiente" CssClass="btn btn-success causesValidation vgDatosEdicion" OnClick="btnSiguienteEdicion_Click" />
                                 <asp:Button ID="btnRegistrarOpciones" runat="server" Text="Grabar" CssClass="btn btn-success pull-right" OnClick="btnRegistrarOpcioens_Click" Visible="false" />
                             </div>
                             <div class="col-xs-1">
@@ -472,5 +473,21 @@
         </div>
     </div>
     <!-- Modal Agregar Edicion -->
-
+    <script>
+        // mis-torneos.aspx
+        $('.fileinput').on('change.bs.fileinput', function () {
+            $('.fileinput-preview').css('background-image', 'none');
+        });
+        $('#modalTorneo').on('hidden.bs.modal', function () {
+            $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
+            $('.modal-body').find('div').removeClass('has-success has-error');
+            $('#ContentAdmin_txtUrlTorneo').prop('disabled', false);
+            $("#ContentAdmin_imagenpreview").attr("src", "../resources/img/theme/logo-default.png");
+            $('.fileinput').fileinput('clear');
+        });
+        $('#modalEdicion').on('hidden.bs.modal', function () {
+            $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
+            $('.modal-body').find('div').removeClass('has-success has-error');
+        });
+    </script>
    </asp:Content>

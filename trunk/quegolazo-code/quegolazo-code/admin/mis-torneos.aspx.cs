@@ -29,6 +29,7 @@ namespace quegolazo_code.admin
                 }
                 catch (Exception ex)
                 {
+                    lblMensajeTorneos.Visible = true;
                     lblMensajeTorneos.Text = ex.Message;
                 }                             
             }
@@ -85,14 +86,14 @@ namespace quegolazo_code.admin
         /// Registra una nueva Edicion
         /// autor: Paula Pedrosa
         /// </summary>
-        protected void btnRegistrarEdicion_Click(object sender, EventArgs e)
+        protected void btnSiguienteEdicion_Click(object sender, EventArgs e)
         {
             try
             {
                 limpiarPaneles();
                 gestorEdicion.cargarDatos(txtNombreEdicion.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue, txtPuntosPorGanar.Value,txtPuntosPorEmpatar.Value, txtPuntosPorPerder.Value);
                 btnRegistrarOpciones.Visible = true;
-                btnRegistrarEdicion.Visible = false;
+                btnSiguienteEdicion.Visible = false;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "activarTab", "activaTab('tabsModalEdicion','tabPersonalizacionEdicion');", true);                               
             }
             catch (Exception ex)
@@ -114,6 +115,7 @@ namespace quegolazo_code.admin
             {
                 limpiarModalEdicion();
                 txtTorneoAsociado.Value = torneo.nombre;
+                Sesion.setTorneo(torneo);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
             }
             if (e.CommandName == "editarTorneo")
@@ -160,46 +162,29 @@ namespace quegolazo_code.admin
           {
               try
               {
-                  //Tomo el valor del id de la edición recientemente generada
-                  gestorEdicion.edicion.idEdicion = int.Parse(Session["idEdicionNueva"].ToString());
-
                   //Preferencias Jugadores
-                  if (rdJugadoresRegistroSi.Checked)
-                      gestorEdicion.edicion.preferencias.jugadores = true;
-                  if (rdJugadoresGolesSi.Checked)
-                      gestorEdicion.edicion.preferencias.golesJugadores = true;
-                  if (rdJugadoresTarjetasSi.Checked)
-                      gestorEdicion.edicion.preferencias.tarjetasJugadores = true;
-                  if (rdJugadoresCambiosSi.Checked)
-                      gestorEdicion.edicion.preferencias.cambiosJugadores = true;
-
+                  gestorEdicion.edicion.preferencias.jugadores = rdJugadoresRegistroSi.Checked;
+                  gestorEdicion.edicion.preferencias.golesJugadores = rdJugadoresGolesSi.Checked;
+                  gestorEdicion.edicion.preferencias.tarjetasJugadores = rdJugadoresTarjetasSi.Checked;
+                  gestorEdicion.edicion.preferencias.cambiosJugadores = rdJugadoresCambiosSi.Checked;
                   //Preferencias Árbitros
-                  if (rdArbitrosSi.Checked)
-                      gestorEdicion.edicion.preferencias.arbitros = true;
-                  if (rdArbitrosPorPartidoSi.Checked)
-                      gestorEdicion.edicion.preferencias.asignaArbitros = true;
-                  if (rdArbitroDesempenioSi.Checked)
-                      gestorEdicion.edicion.preferencias.desempenioArbitros = true;
-
+                  gestorEdicion.edicion.preferencias.arbitros = rdArbitrosSi.Checked;
+                  gestorEdicion.edicion.preferencias.asignaArbitros = rdArbitrosPorPartidoSi.Checked;
+                  gestorEdicion.edicion.preferencias.desempenioArbitros = rdArbitroDesempenioSi.Checked;
                   //Preferencias Sanciones
-                  if (rdSancionesEquiposSi.Checked)
-                      gestorEdicion.edicion.preferencias.sanciones = true;
-                  if (rdSancionesJugadoresSi.Checked)
-                      gestorEdicion.edicion.preferencias.sancionesJugadores = true;
-
+                  gestorEdicion.edicion.preferencias.sanciones = rdSancionesEquiposSi.Checked;
+                  gestorEdicion.edicion.preferencias.sancionesJugadores = rdSancionesJugadoresSi.Checked;
                   //Preferencia Canchas
-                  if (rdCanchasComplejos.Checked)
-                      gestorEdicion.edicion.preferencias.canchaUnica = true;
-
+                  gestorEdicion.edicion.preferencias.canchaUnica = rdCanchasComplejos.Checked;
                   //Registro de configuraciones
                   gestorEdicion.registrarEdicion();
 
                   limpiarModalEdicion();
                   cargarRepeaterTorneos();
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
               }
               catch (Exception ex)
               {
-                  ScriptManager.RegisterStartupScript(this, this.GetType(), "activarTab", "activaTab('tabsModalEdicion','tabPersonalizacionEdicion');", true);     
                   litFracasoEdicion.Text = ex.Message;
                   panFracasoEdicion.Visible = true;
               }

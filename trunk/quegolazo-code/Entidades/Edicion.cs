@@ -21,10 +21,12 @@ namespace Entidades
         public ConfiguracionEdicion preferencias { get; set; }
         public List<Equipo> equipos { get; set; }
 
-
         public Edicion()
         {
-            preferencias = new ConfiguracionEdicion(); 
+            preferencias = new ConfiguracionEdicion();
+            tamanioCancha = new TamanioCancha();
+            tipoSuperficie = new TipoSuperficie();
+            estado = new Estado();
         }
     }
 }

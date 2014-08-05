@@ -35,16 +35,3 @@ function removeClass(id, clase) {
     $('#' + id).removeClass(clase);
 };
 
-// mis-torneos.aspx
-$('.fileinput').on('change.bs.fileinput', function () {
-    $('.fileinput-preview').css('background-image', 'none');
-});
-$('#modalTorneo').on('hidden.bs.modal', function () {
-    $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
-    $('.modal-body').find('div').removeClass('has-success has-error');
-});
-$('#modalEdicion').on('hidden.bs.modal', function () {
-    $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
-    $('.modal-body').find('div').removeClass('has-success has-error');
-});
-

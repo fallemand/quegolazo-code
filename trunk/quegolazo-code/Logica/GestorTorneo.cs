@@ -21,7 +21,7 @@ namespace Logica
         public List<Torneo> obtenerTorneosPorUsuario()
         {
             DAOTorneo daoTorneo = new DAOTorneo();
-            List<Torneo> torneos = daoTorneo.obtenerTorneosPorUsuario(Sesion.obtenerUsuario().idUsuario);
+            List<Torneo> torneos = daoTorneo.obtenerTorneosPorUsuario(Sesion.getUsuario().idUsuario);
             return torneos;
         }      
 
@@ -32,7 +32,6 @@ namespace Logica
         public Torneo obtenerTorneoPorIdYUsuario(int idTorneo, int idUsuario)
         {
             DAOTorneo daoTorneo = new DAOTorneo();
-            Torneo torneo = null;
             torneo = daoTorneo.obtenerTorneoPorIdYUsuario(idTorneo, idUsuario);
             return torneo;
         }
@@ -58,7 +57,7 @@ namespace Logica
             torneo.nick = Validador.isNotEmpty(nick);
             torneo.descripcion = descripcion;
             DAOTorneo daoTorneo = new DAOTorneo();
-            torneo.idTorneo = daoTorneo.registrarTorneo(torneo, Sesion.obtenerUsuario().idUsuario);
+            torneo.idTorneo = daoTorneo.registrarTorneo(torneo, Sesion.getUsuario().idUsuario);
             return torneo.idTorneo;
         }
 
