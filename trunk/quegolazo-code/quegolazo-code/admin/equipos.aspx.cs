@@ -27,7 +27,7 @@ namespace quegolazo_code.admin
             //TORNEO HARDCODEADOOO
             Session["torneo"] = new Torneo
             {
-                idTorneo = 87,
+                idTorneo = 88,
             };
             //TORNEO HARDCODEADOOO
             //TORNEO HARDCODEADOOO
@@ -73,11 +73,12 @@ namespace quegolazo_code.admin
         protected void btnRegistrarEquipo_Click(object sender, EventArgs e)
         {
             try
-            {                
+            {               
                 gestorEquipo.registrarEquipo(txtNombreEquipo.Value, txtColorPrimario.Value, txtColorSecundario.Value, txtNombreDirector.Value);
                 GestorImagen.guardarImagenTorneo(fuLog.PostedFile, gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
                 limpiarCamposEquipo();
                 mostrarPanelExito("Equipo registrado con éxito!");
+                lblMensajeEquipos.Text = "";
                 cargarRepeaterEquipos();
             }
             catch (Exception ex)
