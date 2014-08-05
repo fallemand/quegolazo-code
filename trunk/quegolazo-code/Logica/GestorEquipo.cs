@@ -137,16 +137,13 @@ namespace Logica
             {
                 DAOEquipo daoEquipo = new DAOEquipo();
                 int idTorneo = ((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
-
                 List<Equipo> equipos = daoEquipo.obtenerEquiposDeUnTorneo(idTorneo);
-
                 return equipos;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-            
+            }            
         }
 
         /// <summary>
@@ -158,7 +155,6 @@ namespace Logica
         {
             DAOEquipo daoEquipo = new DAOEquipo();
             equipo = daoEquipo.obtenerEquipoPorId(idEquipo);
-
         }
 
         /// <summary>
@@ -181,7 +177,6 @@ namespace Logica
                 equipo.directorTecnico = directorTecnico;
                 List<Delegado> delegadosModificados = obtenerDelegados();
                 int i = 0;
-
                 foreach (Delegado delegado in delegadosModificados)
                 {
                     if (i == 0)
@@ -190,9 +185,7 @@ namespace Logica
                         equipo.delegadoOpcional = delegado;
                     i++;
                 }
-
-                daoEquipo.modificarEquipo(equipo);
-               
+                daoEquipo.modificarEquipo(equipo);               
             }
             catch (Exception ex)
             {

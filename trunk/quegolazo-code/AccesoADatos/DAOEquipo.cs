@@ -31,13 +31,11 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 trans=con.BeginTransaction();
-
                 DAODelegado daoDelegado = new DAODelegado();
                 if(equipo.delegadoPrincipal!=null)
                     equipo.delegadoPrincipal.idDelegado=daoDelegado.registrarDelegado(equipo.delegadoPrincipal, con, trans);
                 if(equipo.delegadoOpcional!=null)
                     equipo.delegadoOpcional.idDelegado=daoDelegado.registrarDelegado(equipo.delegadoOpcional, con, trans);
-
                 cmd.Connection = con;
                 cmd.Transaction = trans;
                 string sql = @"INSERT INTO Equipos (nombre, colorCamisetaPrimario, colorCamisetaSecundario, directorTecnico, idDelegadoPrincipal, idDelegadoOpcional, idTorneo)
@@ -46,7 +44,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@nombre", equipo.nombre);
                 cmd.Parameters.AddWithValue("@colorCamisetaPrimario", equipo.colorCamisetaPrimario);
                 cmd.Parameters.AddWithValue("@colorCamisetaSecundario", equipo.colorCamisetaSecundario);
-                cmd.Parameters.AddWithValue("@directorTecnico",equipo.directorTecnico);
+                cmd.Parameters.AddWithValue("@directorTecnico",equipo.directorTecnico);               
                 if(equipo.delegadoPrincipal!=null)
                     cmd.Parameters.AddWithValue("@idDelegadoPrincipal", equipo.delegadoPrincipal.idDelegado);
                 else
@@ -88,18 +86,14 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
-
             List<Equipo> respuesta = new List<Equipo>();
             Equipo equipo = null;
-
-            bool b = false;
+            bool noHayEquiposRegistrados = false;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                    con.Open();
-                
+                    con.Open();                
                 cmd.Connection = con;
-
                 string sql = @"SELECT * 
                              FROM Equipos
                              WHERE idTorneo = @idTorneo
@@ -108,17 +102,13 @@ namespace AccesoADatos
                 cmd.Parameters.Add(new SqlParameter("@idTorneo", idTorneo));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-
                 if (!dr.HasRows)
                 {
-                    b = true;
+                    noHayEquiposRegistrados = true;
                     throw new Exception("No hay equipos registrados de ese torneo");
-
                 }
-
                 DAODelegado daoDelegado = new DAODelegado();
                 DAOTorneo daoTorneo = new DAOTorneo();
-
                 while (dr.Read())
                 {
                     equipo = new Equipo()
@@ -129,13 +119,10 @@ namespace AccesoADatos
                         colorCamisetaSecundario = dr["colorCamisetaSecundario"].ToString(),
                         directorTecnico = dr["directorTecnico"].ToString(),
                         delegadoPrincipal = daoDelegado.obtenerDelegadoPorId(Int32.Parse(dr["idDelegadoPrincipal"].ToString())),
-                        delegadoOpcional = daoDelegado.obtenerDelegadoPorId(Int32.Parse(dr["idDelegadoPrincipal"].ToString())),
-                        
+                        delegadoOpcional = daoDelegado.obtenerDelegadoPorId(Int32.Parse(dr["idDelegadoPrincipal"].ToString())),                        
                     };
                     respuesta.Add(equipo);
-
                 }
-
                 if (dr != null)
                     dr.Close();
 
@@ -143,7 +130,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                if (!b)
+                if (!noHayEquiposRegistrados)
                     throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
                 else
                     throw new Exception(ex.Message);
@@ -156,7 +143,7 @@ namespace AccesoADatos
         }
 
         /// <summary>
-        /// Obtiene equipo por ir
+        /// Obtiene equipo por id
         /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="idEquipo">id del equipo</param>
@@ -165,14 +152,12 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-
             Equipo respuesta = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-
                 string sql = @"SELECT *
                                 FROM Equipos
                                 WHERE idEquipo = @idEquipo";
@@ -180,10 +165,8 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idEquipo", idEquipo);
                 cmd.CommandText = sql;
                 SqlDataReader dr = cmd.ExecuteReader();
-
                 DAODelegado daoDelegado = new DAODelegado();
-                DAOTorneo daoTorneo = new DAOTorneo();
-                
+                DAOTorneo daoTorneo = new DAOTorneo();                
                 while (dr.Read())
                 {
                     respuesta = new Equipo();
@@ -192,22 +175,15 @@ namespace AccesoADatos
                     respuesta.directorTecnico = dr["directorTecnico"].ToString();
                     respuesta.colorCamisetaPrimario = dr["colorCamisetaPrimario"].ToString();
                     respuesta.colorCamisetaSecundario = dr["colorCamisetaSecundario"].ToString();
-                    respuesta.delegadoPrincipal = daoDelegado.obtenerDelegadoPorId(Int32.Parse(dr["idDelegadoPrincipal"].ToString()));
-                                       
-                    if (dr["idDelegadoOpcional"] != System.DBNull.Value)
-                        respuesta.delegadoOpcional = daoDelegado.obtenerDelegadoPorId(Int32.Parse(dr["idDelegadoOpcional"].ToString()));
-                    else
-                        respuesta.delegadoOpcional = null;
-                    
+                    respuesta.delegadoPrincipal = daoDelegado.obtenerDelegadoPorId(Int32.Parse(dr["idDelegadoPrincipal"].ToString()));                                    
+                    respuesta.delegadoOpcional = (dr["idDelegadoOpcional"] != System.DBNull.Value) ? daoDelegado.obtenerDelegadoPorId(Int32.Parse(dr["idDelegadoOpcional"].ToString())) : null;
                 }
-
                 if (dr != null)
                     dr.Close();
                 return respuesta;
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error al intentar recuperar el equipo: " + ex.Message);
             }
             finally
@@ -226,8 +202,7 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlTransaction trans = null;
-      
+            SqlTransaction trans = null;      
             bool nuevoDelegado = false;
             try
             {
@@ -242,32 +217,28 @@ namespace AccesoADatos
                 {
                     if (equipo.delegadoOpcional.idDelegado != 0)
                         daoDelegado.modificarDelegado(equipo.delegadoOpcional, con, trans);
-                    else //el delegado no se insertó en la tabla
+                    else 
                     {
                         equipo.delegadoOpcional.idDelegado = daoDelegado.registrarDelegado(equipo.delegadoOpcional, con, trans);
                         nuevoDelegado = true;
                     }                  
-                }
-                            
+                }                            
                 cmd.Connection = con;
                 cmd.Transaction = trans;
                 string sql = @"UPDATE Equipos
                                      SET nombre = @nombreEquipo, colorCamisetaPrimario = @colorCamisetaPrimario,
                                      colorCamisetaSecundario = @colorCamisetaSecundario, directorTecnico = @directorTecnico ";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@nombreEquipo", equipo.nombre);
-                cmd.Parameters.AddWithValue("@colorCamisetaPrimario", equipo.colorCamisetaPrimario);
-                cmd.Parameters.AddWithValue("@colorCamisetaSecundario", equipo.colorCamisetaSecundario);
-                cmd.Parameters.AddWithValue("@directorTecnico", equipo.directorTecnico);
-
                 if (nuevoDelegado)
                 {
                     sql += " , idDelegadoOpcional = @idDelegadoOpcional ";
                     cmd.Parameters.AddWithValue("@idDelegadoOpcional", equipo.delegadoOpcional.idDelegado);
                 }
-
-                sql += " WHERE idEquipo = @idEquipo";                             
-               
+                sql += " WHERE idEquipo = @idEquipo"; 
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nombreEquipo", equipo.nombre);
+                cmd.Parameters.AddWithValue("@colorCamisetaPrimario", equipo.colorCamisetaPrimario);
+                cmd.Parameters.AddWithValue("@colorCamisetaSecundario", equipo.colorCamisetaSecundario);
+                cmd.Parameters.AddWithValue("@directorTecnico", equipo.directorTecnico);                                         
                 cmd.Parameters.AddWithValue("@idEquipo", equipo.idEquipo);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -286,8 +257,7 @@ namespace AccesoADatos
             finally
             {
                 if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
-                
+                    con.Close();                
             }
         }
             
