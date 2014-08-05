@@ -54,8 +54,6 @@ namespace quegolazo_code.admin
             rptEquipos.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo();
             rptEquipos.DataBind();
         }
-
-
         /// <summary>
         /// cargar el repeater de los delegados con el nombre
         /// autor: Paula Pedrosa
