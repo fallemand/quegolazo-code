@@ -10,8 +10,7 @@ namespace Logica
 {
     public class GestorEquipo
     {
-        public Equipo equipo=new Equipo();
-
+        public Equipo equipo = new Equipo();
         /// <summary>
         /// Registra en la Bd el objeto equipo actual.
         /// autor: Facundo Allemand
@@ -81,8 +80,8 @@ namespace Logica
         {
             if((equipo.delegadoPrincipal!=null &&nombre.Equals(equipo.delegadoPrincipal.nombre,StringComparison.OrdinalIgnoreCase)) || (equipo.delegadoOpcional!=null && nombre.Equals(equipo.delegadoOpcional.nombre,StringComparison.OrdinalIgnoreCase)))
                 throw new Exception("Ya existe un delegado con ese nombre");
-            if (equipo.delegadoPrincipal != null && equipo.delegadoOpcional != null)
-                throw new Exception("Solo puede cargar 2 delegados");
+            if (equipo.delegadoOpcional != null)
+                throw new Exception("Solo puede cargar dos delegados");
         }
 
         /// <summary>
@@ -104,9 +103,9 @@ namespace Logica
         /// </summary>  
         public Delegado obtenerDelegadoPorNombre(string nombre)
         {
-            if (equipo.delegadoPrincipal.nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase))
+            if (equipo.delegadoPrincipal != null && equipo.delegadoPrincipal.nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase))
                 return equipo.delegadoPrincipal;
-            else if (equipo.delegadoOpcional.nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase))
+            else if (equipo.delegadoOpcional != null && equipo.delegadoOpcional.nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase))
                 return equipo.delegadoOpcional;
             else
                 throw new Exception("No existe ningún delegado con ese nombre");
@@ -118,13 +117,15 @@ namespace Logica
         /// </summary>  
         public void modificarDelegado(string nombre, string email, string telefono, string domicilio)
         {
-            Delegado delegado = (Delegado)System.Web.HttpContext.Current.Session["delegadoAModificar"];
-            delegado = obtenerDelegadoPorNombre(delegado.nombre);
+            Delegado delegado = (Delegado)System.Web.HttpContext.Current.Session["delegadoAModificar"];            
+            delegado = obtenerDelegadoPorNombre(delegado.nombre);// delegado a modificar
+            if ((equipo.delegadoPrincipal != null && nombre.Equals(equipo.delegadoPrincipal.nombre, StringComparison.OrdinalIgnoreCase)) || (equipo.delegadoOpcional != null && nombre.Equals(equipo.delegadoOpcional.nombre, StringComparison.OrdinalIgnoreCase)))
+                throw new Exception("Ya existe un delegado con ese nombre"); 
             delegado.nombre = nombre;
             delegado.email = email;
             delegado.telefono = telefono;
             delegado.domicilio = domicilio;
-        }
+        }              
 
         /// <summary>
         /// Obtiene los Equipos de un Torneo
@@ -171,15 +172,24 @@ namespace Logica
             try
             {
                 DAOEquipo daoEquipo = new DAOEquipo();
+                DAODelegado daoDelegado = new DAODelegado();
+                List<Delegado> delegadosModificados = obtenerDelegados();
+                if(delegadosModificados.Count == 0)
+                    throw new Exception("Debe ingresar al menos un delegado");
+                equipo = daoEquipo.obtenerEquipoPorId(idEquipo);// Obtiene el equipo a modificar de la BD
+                // Elimina los delegados de la BD, y setea NULL en las claves foráneas de la tabla Equipo
+                daoDelegado.eliminarDelegadosPorEquipo(equipo); 
                 equipo.nombre = nombre;
                 equipo.colorCamisetaPrimario = colorCamisetaPrimario;
                 equipo.colorCamisetaSecundario = colorCamisetaSecundario;
                 equipo.directorTecnico = directorTecnico;
-                List<Delegado> delegadosModificados = obtenerDelegados();
+                //le setea null a los delegados, para sobreescribirlos con los nuevos
+                equipo.delegadoPrincipal = null;
+                equipo.delegadoOpcional = null;
                 int i = 0;
                 foreach (Delegado delegado in delegadosModificados)
                 {
-                    if (i == 0)
+                    if (i == 0) // primera vez que entra al foreach
                         equipo.delegadoPrincipal = delegado;
                     else
                         equipo.delegadoOpcional = delegado;
@@ -191,7 +201,6 @@ namespace Logica
             {
                 throw new Exception(ex.Message);
             }
-
         }
     }
 }
