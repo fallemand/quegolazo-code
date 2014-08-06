@@ -12,7 +12,6 @@ namespace AccesoADatos
     public class DAODelegado
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-
         /// <summary>
         /// Registrar Delegado de un Equipo, es parte de una transaccion al registrar un equipo.
         /// autor: Paula Pedrosa
@@ -124,6 +123,80 @@ namespace AccesoADatos
             {
                 throw new Exception("No se pudo actualizar el delegado: " + ex.Message);
             }                                  
+        }
+        
+        /// <summary>
+        /// Elimina los delegados de un Equipo. 
+        /// Actualiza la tabla Equipos: Le setea null a las claves foráneas (idDelegadoPrincipal y idDelegadoOpcional)
+        /// Elimina los delegados de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="equipo">Equipo con los delegados a eliminar</param>
+        public void eliminarDelegadosPorEquipo(Equipo equipo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                trans = con.BeginTransaction();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+                string sql = @"UPDATE Equipos 
+                                      SET idDelegadoPrincipal = @idDelegadoPrincipal, idDelegadoOpcional = @idDelegadoOpcional
+                                      WHERE idEquipo = @idEquipo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idDelegadoPrincipal", DBNull.Value);
+                cmd.Parameters.AddWithValue("@idDelegadoOpcional", DBNull.Value);
+                cmd.Parameters.AddWithValue("@idEquipo", equipo.idEquipo);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+                eliminarDelegado(equipo.delegadoPrincipal, con, trans); // elimina delegado principal de la BD
+                if (equipo.delegadoOpcional != null)
+                    eliminarDelegado(equipo.delegadoOpcional, con, trans); // elimina delegado opcional de la BD
+                trans.Commit();
+            }
+            catch (Exception e)
+            {
+                trans.Rollback();
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+       
+        /// <summary>
+        /// Elimina un delegado de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="delegado">Delegado a eliminar</param>
+        /// <param name="con">Objeto Conexión</param>
+        /// <param name="trans">Objeto Transacción</param>
+        public void eliminarDelegado(Delegado delegado, SqlConnection con, SqlTransaction trans)
+        {
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+                string sql = @"DELETE FROM Delegados 
+                                     WHERE idDelegado = @idDelegado";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idDelegado", delegado.idDelegado);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo eliminar el delegado: " + ex.Message);
+            }
         }
     }
 }

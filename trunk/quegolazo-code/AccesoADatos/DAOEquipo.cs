@@ -11,9 +11,7 @@ namespace AccesoADatos
 {
     public class DAOEquipo
     {
-        public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-
-        
+        public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;                
         /// <summary> 
         /// Registrar un nuevo Equipo en un torneo, junto a sus delegados
         /// autor: Paula Pedrosa        
@@ -70,8 +68,7 @@ namespace AccesoADatos
             finally
             {
                 if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
-                   
+                    con.Close();                   
             }
         }
 
@@ -203,43 +200,35 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlTransaction trans = null;      
-            bool nuevoDelegado = false;
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                trans = con.BeginTransaction();
-        
+                trans = con.BeginTransaction();        
                 DAODelegado daoDelegado = new DAODelegado();
-                if (equipo.delegadoPrincipal != null)
-                    daoDelegado.modificarDelegado(equipo.delegadoPrincipal, con, trans);
-                if (equipo.delegadoOpcional != null)
-                {
-                    if (equipo.delegadoOpcional.idDelegado != 0)
-                        daoDelegado.modificarDelegado(equipo.delegadoOpcional, con, trans);
-                    else 
-                    {
-                        equipo.delegadoOpcional.idDelegado = daoDelegado.registrarDelegado(equipo.delegadoOpcional, con, trans);
-                        nuevoDelegado = true;
-                    }                  
-                }                            
+                if(equipo.delegadoPrincipal != null)
+                    equipo.delegadoPrincipal.idDelegado = daoDelegado.registrarDelegado(equipo.delegadoPrincipal, con, trans);
+                if(equipo.delegadoOpcional != null)
+                    equipo.delegadoOpcional.idDelegado = daoDelegado.registrarDelegado(equipo.delegadoOpcional, con, trans);
+                      
                 cmd.Connection = con;
                 cmd.Transaction = trans;
+                cmd.Parameters.Clear();
                 string sql = @"UPDATE Equipos
                                      SET nombre = @nombreEquipo, colorCamisetaPrimario = @colorCamisetaPrimario,
-                                     colorCamisetaSecundario = @colorCamisetaSecundario, directorTecnico = @directorTecnico ";
-                if (nuevoDelegado)
-                {
-                    sql += " , idDelegadoOpcional = @idDelegadoOpcional ";
-                    cmd.Parameters.AddWithValue("@idDelegadoOpcional", equipo.delegadoOpcional.idDelegado);
-                }
-                sql += " WHERE idEquipo = @idEquipo"; 
-                cmd.Parameters.Clear();
+                                     colorCamisetaSecundario = @colorCamisetaSecundario, directorTecnico = @directorTecnico,
+                                     idDelegadoPrincipal = @idDelegadoPrincipal, idDelegadoOpcional = @idDelegadoOpcional
+                                     WHERE idEquipo = @idEquipo";                 
                 cmd.Parameters.AddWithValue("@nombreEquipo", equipo.nombre);
                 cmd.Parameters.AddWithValue("@colorCamisetaPrimario", equipo.colorCamisetaPrimario);
                 cmd.Parameters.AddWithValue("@colorCamisetaSecundario", equipo.colorCamisetaSecundario);
-                cmd.Parameters.AddWithValue("@directorTecnico", equipo.directorTecnico);                                         
+                cmd.Parameters.AddWithValue("@directorTecnico", equipo.directorTecnico);
+                cmd.Parameters.AddWithValue("@idDelegadoPrincipal", equipo.delegadoPrincipal.idDelegado);                       
                 cmd.Parameters.AddWithValue("@idEquipo", equipo.idEquipo);
+                if(equipo.delegadoOpcional != null)
+                    cmd.Parameters.AddWithValue("@idDelegadoOpcional", equipo.delegadoOpcional.idDelegado);
+                else
+                    cmd.Parameters.AddWithValue("@idDelegadoOpcional", DBNull.Value);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
                 trans.Commit();
@@ -249,9 +238,7 @@ namespace AccesoADatos
                 trans.Rollback();
                 //Si ya existe un equipo con ese nombre en ese torneo
                 if (e.Message.Contains("unique_nombre_idTorneo"))
-                {
-                    throw new Exception("No se pudo modificar el equipo: Ya existe un equipo registrado con este nombre, por favor cambielo e intente nuevamente.");
-                }
+                    throw new Exception("Ya existe un equipo registrado con este nombre, por favor cambielo e intente nuevamente.");
                 throw new Exception("No se pudo modificar el equipo: " + e.Message);
             }
             finally
@@ -260,7 +247,5 @@ namespace AccesoADatos
                     con.Close();                
             }
         }
-            
-
     }
 }

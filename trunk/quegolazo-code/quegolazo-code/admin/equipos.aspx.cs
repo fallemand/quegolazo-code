@@ -13,7 +13,7 @@ namespace quegolazo_code.admin
 {
     public partial class equipos : System.Web.UI.Page
     {
-        GestorEquipo gestorEquipo=null;
+        GestorEquipo gestorEquipo = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,7 +31,6 @@ namespace quegolazo_code.admin
             };
             //TORNEO HARDCODEADOOO
             //TORNEO HARDCODEADOOO
-
             try
             {
                 cargarRepeaterEquipos();
@@ -39,30 +38,9 @@ namespace quegolazo_code.admin
             catch (Exception ex)
             {
                 lblMensajeEquipos.Text = ex.Message;
-            }
-                        
+            }                        
             limpiarPaneles();
-        }
-
-
-       /// <summary>
-       /// carga el repeater de Equipos
-       /// autor: Pau Pedrosa
-       /// </summary>
-        private void cargarRepeaterEquipos()
-        {
-            rptEquipos.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo();
-            rptEquipos.DataBind();
-        }
-        /// <summary>
-        /// cargar el repeater de los delegados con el nombre
-        /// autor: Paula Pedrosa
-        /// </summary>             
-        private void cargarRepeaterDelegados()
-        {
-            rptDelegados.DataSource = gestorEquipo.obtenerDelegados();
-            rptDelegados.DataBind();
-        }
+        }     
 
         /// <summary>
         /// Registra un nuevo equipo en la base de datos
@@ -78,10 +56,11 @@ namespace quegolazo_code.admin
                 mostrarPanelExito("Equipo registrado con éxito!");
                 lblMensajeEquipos.Text = "";
                 cargarRepeaterEquipos();
+                gestorEquipo.equipo = null; // le setea null al equipo
             }
             catch (Exception ex)
             {
-                    mostrarPanelFracaso(ex.Message);            
+                mostrarPanelFracaso(ex.Message);            
             }
         }
 
@@ -98,6 +77,8 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
+                if (ex.Message.Contains("Solo puede cargar dos delegados"))
+                    limpiarCamposDelegado();
                 mostrarPanelFracaso(ex.Message);
             }
         }
@@ -120,16 +101,7 @@ namespace quegolazo_code.admin
                 mostrarPanelFracaso(ex.Message);
             }
         }
-
-        /// <summary>
-        /// Cancelar la carga de delegado
-        /// autor: Facundo Allemand
-        /// </summary>
-        protected void btnCancelarDelegado_Click(object sender, EventArgs e)
-        {
-            limpiarCamposDelegado();
-        }
-
+      
         /// <summary>
         /// Método para gestionar la eliminación y modificación de los delegados
         /// autor: Paula Pedrosa
@@ -145,7 +117,6 @@ namespace quegolazo_code.admin
                     gestorEquipo.eliminarDelegado(nombre);
                     cargarRepeaterDelegados();
                 }
-
                 //Si modifica el delegado
                 if (e.CommandName == "modificarDelegado")
                 {
@@ -165,74 +136,8 @@ namespace quegolazo_code.admin
             catch (Exception ex)
             {
                 mostrarPanelFracaso(ex.Message);
-            }
-            
-        }
-
-        /// <summary>
-        /// Habilita el panel de exito y deshabilita el panel de fracaso.
-        /// autor: Paula Pedrosa
-        /// </summary>
-        /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
-        private void mostrarPanelExito(string mensaje)
-        {
-            litExito.Text = mensaje;
-            panelExito.Visible = true;
-            panelFracaso.Visible = false;
-        }
-
-        /// <summary>
-        /// Habilita el panel de fraaso y deshabilita el panel de exito.
-        /// autor: Paula Pedrosa
-        /// </summary>
-        /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
-        private void mostrarPanelFracaso(string mensaje)
-        {
-            litFracaso.Text = mensaje;
-            panelExito.Visible = false;
-            panelFracaso.Visible = true;
-        }
-
-        /// <summary>
-        /// limpia los paneles de éxito y fracaso
-        /// autor: Paula Pedrosa
-        /// </summary>
-        private void limpiarPaneles()
-        {
-            panelExito.Visible = false;
-            panelFracaso.Visible = false;
-            litFracaso.Text = "";
-            litExito.Text = "";
-        }
-        /// <summary>
-        /// limpia los campos del alta de equipo
-        /// autor: Paula Pedrosa
-        /// </summary>
-        public void limpiarCamposEquipo()
-        {
-            txtNombreEquipo.Value = "";
-            txtNombreDirector.Value = "";
-            txtColorPrimario.Value = "#E1E1E1";
-            txtColorSecundario.Value = "#E1E1E1";
-            limpiarCamposDelegado();
-            rptDelegados.DataSource = null;
-            rptDelegados.DataBind();
-        }
-
-        /// <summary>
-        /// limpia los campos del alta de delegado
-        /// autor: Paula Pedrosa
-        /// </summary>
-        public void limpiarCamposDelegado()
-        {
-            txtNombreDelegado.Value = "";
-            txtEmailDelegado.Value = "";
-            txtTelefonoDelegado.Value = "";
-            txtDireccionDelegado.Value = "";
-            btnAgregarDelegado.Visible = true;
-            btnModificarDelegado.Visible = false;
-            btnCancelarDelegado.Visible = false;
-        }
+            }            
+        }     
 
         /// <summary>
         /// Permite editar un Equipo
@@ -251,6 +156,7 @@ namespace quegolazo_code.admin
                 rptDelegados.DataBind();
                 btnRegistrarEquipo.Visible = false;
                 btnModificarEquipo.Visible = true;
+                btnCancelarModificacionEquipo.Visible = true;
                 imagenpreview.Src = gestorEquipo.equipo.obtenerImagenMediana();              
             } 
         }
@@ -269,6 +175,7 @@ namespace quegolazo_code.admin
                 limpiarCamposEquipo();
                 mostrarPanelExito("Equipo modificado con éxito!");
                 cargarRepeaterEquipos();
+                gestorEquipo.equipo = null; // le setea null al equipo
             }
             catch (Exception ex)
             {
@@ -278,14 +185,130 @@ namespace quegolazo_code.admin
         }
 
         /// <summary>
+        /// Cancelar la carga de delegado
+        /// autor: Facundo Allemand
+        /// </summary>
+        protected void btnCancelarDelegado_Click(object sender, EventArgs e)
+        {
+            limpiarCamposDelegado();
+        }
+
+        /// <summary>
+        /// Cancelar la Modificación de un Equipo
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void btnCancelarModificacionEquipo_Click(object sender, EventArgs e)
+        {
+            limpiarCamposEquipo();
+            limpiarCamposDelegado();
+            btnRegistrarEquipo.Visible = true;
+            btnModificarEquipo.Visible = false;
+            btnCancelarModificacionEquipo.Visible = false;
+        }
+
+        //------------------------------------------
+        //--------------Metodos Extras--------------
+        //------------------------------------------
+
+        /// <summary>
+        /// Carga el repeater de Equipos
+        /// autor: Pau Pedrosa
+        /// </summary>
+        private void cargarRepeaterEquipos()
+        {
+            rptEquipos.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo();
+            rptEquipos.DataBind();
+        }
+
+        /// <summary>
+        /// cargar el repeater de los delegados con el nombre
+        /// autor: Paula Pedrosa
+        /// </summary>             
+        private void cargarRepeaterDelegados()
+        {
+            rptDelegados.DataSource = gestorEquipo.obtenerDelegados();
+            rptDelegados.DataBind();
+        }
+
+        /// <summary>
         /// Permite ir a agregar un nuevo equipo
         /// autor: Pau Pedrosa
         /// </summary>
         protected void lnkNuevoEquipo_Click(object sender, EventArgs e)
         {
             limpiarCamposEquipo();
+            limpiarCamposDelegado();
             btnRegistrarEquipo.Visible = true;
             btnModificarEquipo.Visible = false;
+            btnCancelarModificacionEquipo.Visible = false;
         }
+
+        /// <summary>
+        /// limpia los campos del alta de delegado
+        /// autor: Paula Pedrosa
+        /// </summary>
+        public void limpiarCamposDelegado()
+        {
+            txtNombreDelegado.Value = "";
+            txtEmailDelegado.Value = "";
+            txtTelefonoDelegado.Value = "";
+            txtDireccionDelegado.Value = "";
+            btnAgregarDelegado.Visible = true;
+            btnModificarDelegado.Visible = false;
+            btnCancelarDelegado.Visible = false;
+        }             
+
+        /// <summary>
+        /// limpia los campos del alta de equipo
+        /// autor: Paula Pedrosa
+        /// </summary>
+        public void limpiarCamposEquipo()
+        {
+            txtNombreEquipo.Value = "";
+            txtNombreDirector.Value = "";
+            txtColorPrimario.Value = "#E1E1E1";
+            txtColorSecundario.Value = "#E1E1E1";
+            limpiarCamposDelegado();
+            rptDelegados.DataSource = null;
+            rptDelegados.DataBind();
+        }
+
+        /// <summary>
+        /// limpia los paneles de éxito y fracaso
+        /// autor: Paula Pedrosa
+        /// </summary>
+        private void limpiarPaneles()
+        {
+            panelExito.Visible = false;
+            panelFracaso.Visible = false;
+            litFracaso.Text = "";
+            litExito.Text = "";
+        }
+
+        /// <summary>
+        /// Habilita el panel de fraaso y deshabilita el panel de exito.
+        /// autor: Paula Pedrosa
+        /// </summary>
+        /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
+        private void mostrarPanelFracaso(string mensaje)
+        {
+            litFracaso.Text = mensaje;
+            panelExito.Visible = false;
+            panelFracaso.Visible = true;
+        }
+
+        /// <summary>
+        /// Habilita el panel de exito y deshabilita el panel de fracaso.
+        /// autor: Paula Pedrosa
+        /// </summary>
+        /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
+        private void mostrarPanelExito(string mensaje)
+        {
+            litExito.Text = mensaje;
+            panelExito.Visible = true;
+            panelFracaso.Visible = false;
+        }
+
+        
     }
 }
