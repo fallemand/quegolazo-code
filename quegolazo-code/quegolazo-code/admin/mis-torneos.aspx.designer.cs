@@ -13,15 +13,6 @@ namespace quegolazo_code.admin {
     public partial class mis_torneos {
         
         /// <summary>
-        /// Control lblMensajeTorneos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensajeTorneos;
-        
-        /// <summary>
         /// Control upTorneos.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upTorneos;
+        
+        /// <summary>
+        /// Control panelSinTorneos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelSinTorneos;
         
         /// <summary>
         /// Control rptTorneos.
@@ -40,6 +40,24 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Repeater rptTorneos;
         
         /// <summary>
+        /// Control panFracaso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panFracaso;
+        
+        /// <summary>
+        /// Control litFracaso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litFracaso;
+        
+        /// <summary>
         /// Control upModalTorneo.
         /// </summary>
         /// <remarks>
@@ -47,6 +65,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upModalTorneo;
+        
+        /// <summary>
+        /// Control lblTituloModalTorneo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloModalTorneo;
         
         /// <summary>
         /// Control txtNombreTorneo.

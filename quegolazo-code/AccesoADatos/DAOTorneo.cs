@@ -27,7 +27,6 @@ namespace AccesoADatos
             SqlDataReader dr;
             List<Torneo> respuesta = new List<Torneo>();
             Torneo torneo = null;            
-            bool noTieneTorneosAsociados = false;
             try
             {
                 if (con.State == ConnectionState.Closed)                
@@ -40,12 +39,7 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idUsuario", idUsuario));
                 cmd.CommandText = sql;
-                dr = cmd.ExecuteReader();
-                if (!dr.HasRows)
-                {
-                    noTieneTorneosAsociados = true;
-                    throw new Exception("No hay torneos registrados de ese usuario");                    
-                }                             
+                dr = cmd.ExecuteReader();                                       
                 while (dr.Read())
                 {
                     torneo = new Torneo()
@@ -61,10 +55,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                if(!noTieneTorneosAsociados)
-                   throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
-                else
-                    throw new Exception(ex.Message);
+                throw new Exception("Error al obtener los torneos del usuario: " + ex.Message);
             }
             finally
             {
