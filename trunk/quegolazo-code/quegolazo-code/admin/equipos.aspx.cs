@@ -14,7 +14,6 @@ namespace quegolazo_code.admin
     public partial class equipos : System.Web.UI.Page
     {
         GestorEquipo gestorEquipo = null;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             //si no existe gestor en Session lo carga
@@ -79,6 +78,8 @@ namespace quegolazo_code.admin
             {
                 if (ex.Message.Contains("Solo puede cargar dos delegados"))
                     limpiarCamposDelegado();
+                if (ex.Message.Contains("Ya existe un delegado con ese nombre"))
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showDelegados();", true);
                 mostrarPanelFracaso(ex.Message);
             }
         }
@@ -98,6 +99,8 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
+                if(ex.Message.Contains("Ya existe un delegado con ese nombre"))
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showDelegados();", true);
                 mostrarPanelFracaso(ex.Message);
             }
         }
@@ -173,9 +176,14 @@ namespace quegolazo_code.admin
                 gestorEquipo.modificarEquipo(idEquipoAModificar, txtNombreEquipo.Value, txtColorPrimario.Value, txtColorSecundario.Value, txtNombreDirector.Value);
                 GestorImagen.guardarImagenTorneo(fuLog.PostedFile, gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
                 limpiarCamposEquipo();
+                limpiarCamposDelegado();
                 mostrarPanelExito("Equipo modificado con éxito!");
                 cargarRepeaterEquipos();
-                gestorEquipo.equipo = null; // le setea null al equipo
+                gestorEquipo.equipo = null; // le setea null al equipo  
+                //lo manda a la solapa de agregar un equipo
+                btnRegistrarEquipo.Visible = true;
+                btnModificarEquipo.Visible = false;
+                btnCancelarModificacionEquipo.Visible = false;
             }
             catch (Exception ex)
             {
@@ -204,6 +212,7 @@ namespace quegolazo_code.admin
             btnRegistrarEquipo.Visible = true;
             btnModificarEquipo.Visible = false;
             btnCancelarModificacionEquipo.Visible = false;
+            gestorEquipo.equipo = null; // le setea null al equipo 
         }
 
         //------------------------------------------

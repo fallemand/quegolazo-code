@@ -19,6 +19,8 @@ namespace Logica
         {
             try
             {
+                if (equipo == null)
+                    equipo = new Equipo();
                 if (equipo.delegadoPrincipal == null && equipo.delegadoOpcional == null)
                     throw new Exception("Debe cargar al menos un delegado");
                 equipo.nombre=nombre;
@@ -78,9 +80,11 @@ namespace Logica
         /// </summary>  
         protected void validarDelegado(string nombre)
         {
+            if (equipo == null)
+                equipo = new Equipo();
             if((equipo.delegadoPrincipal!=null &&nombre.Equals(equipo.delegadoPrincipal.nombre,StringComparison.OrdinalIgnoreCase)) || (equipo.delegadoOpcional!=null && nombre.Equals(equipo.delegadoOpcional.nombre,StringComparison.OrdinalIgnoreCase)))
                 throw new Exception("Ya existe un delegado con ese nombre");
-            if (equipo.delegadoOpcional != null)
+            if (equipo.delegadoOpcional != null && equipo.delegadoPrincipal != null)
                 throw new Exception("Solo puede cargar dos delegados");
         }
 
@@ -119,8 +123,20 @@ namespace Logica
         {
             Delegado delegado = (Delegado)System.Web.HttpContext.Current.Session["delegadoAModificar"];            
             delegado = obtenerDelegadoPorNombre(delegado.nombre);// delegado a modificar
-            if ((equipo.delegadoPrincipal != null && nombre.Equals(equipo.delegadoPrincipal.nombre, StringComparison.OrdinalIgnoreCase)) || (equipo.delegadoOpcional != null && nombre.Equals(equipo.delegadoOpcional.nombre, StringComparison.OrdinalIgnoreCase)))
-                throw new Exception("Ya existe un delegado con ese nombre"); 
+            if (equipo.delegadoPrincipal == delegado)
+            { // el delegado a modificar es el delegado principal
+                //me fijo si el nuevo nombre es distinto del nombre del delegado opcional
+                if ((equipo.delegadoOpcional != null && nombre.Equals(equipo.delegadoOpcional.nombre, StringComparison.OrdinalIgnoreCase)))
+                    throw new Exception("Ya existe un delegado con ese nombre"); 
+            }
+            else if ((equipo.delegadoPrincipal != null && nombre.Equals(equipo.delegadoPrincipal.nombre, StringComparison.OrdinalIgnoreCase)))
+            { 
+                if ((equipo.delegadoPrincipal != null && nombre.Equals(equipo.delegadoPrincipal.nombre, StringComparison.OrdinalIgnoreCase)))
+                    throw new Exception("Ya existe un delegado con ese nombre"); 
+            }             
+              
+            //if ((equipo.delegadoPrincipal != null && nombre.Equals(equipo.delegadoPrincipal.nombre, StringComparison.OrdinalIgnoreCase)) || (equipo.delegadoOpcional != null && nombre.Equals(equipo.delegadoOpcional.nombre, StringComparison.OrdinalIgnoreCase)))
+            //    throw new Exception("Ya existe un delegado con ese nombre"); 
             delegado.nombre = nombre;
             delegado.email = email;
             delegado.telefono = telefono;
