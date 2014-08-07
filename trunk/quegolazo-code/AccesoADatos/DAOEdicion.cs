@@ -45,11 +45,6 @@ namespace AccesoADatos
                 DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
                 DAOEstado daoEstado = new DAOEstado();
                 DAOTorneo daoTorneo = new DAOTorneo();
-                if (!dr.HasRows)
-                {
-                    tieneEdicionesRegistradas = true;
-                    throw new Exception("No hay ediciones registradas");
-                }
                 while (dr.Read())
                 {
                     edicion = new Edicion();
@@ -69,10 +64,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                if (!tieneEdicionesRegistradas)
-                    throw new Exception("Error al intentar recuperar las Ediciones de un Torneo: " + ex.Message);
-                else
-                    throw new Exception(ex.Message);
+                throw new Exception(ex.Message);
             }
             finally
             {

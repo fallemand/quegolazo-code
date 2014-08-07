@@ -6,10 +6,14 @@
     <div class="container padding-top">
         <div class="row">
             <div class="container">
-                <button type="button" class="btn btn-success" data-toggle="modal"   data-target="#modalTorneo">Crear un Nuevo Torneo</button>
-                <asp:Label ID="lblMensajeTorneos" runat="server" Text="" Visible="False"></asp:Label>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalTorneo">Crear un Nuevo Torneo</button>
                 <asp:UpdatePanel ID="upTorneos" runat="server">
                     <ContentTemplate>
+                        <asp:Panel ID="panelSinTorneos" runat="server" CssClass="col-md-5 margin-top " Enabled="True" Visible="False">
+                            <div class="alert alert-success">
+                                <span class="glyphicon glyphicon-chevron-up"></span> Haz clic en el botón para crear tu primer torneo!
+                            </div>
+                        </asp:Panel>
                         <asp:Repeater ID="rptTorneos" runat="server" OnItemDataBound="rptTorneosItemDataBound" OnItemCommand="rptTorneos_ItemCommand">
                             <ItemTemplate>
                                 <div class="panel panel-default lista-torneos shadow-sm">
@@ -48,7 +52,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                                 <asp:Repeater ID="rptEdiciones" runat="server">
                                                     <ItemTemplate>
                                                         <tr>
@@ -63,14 +66,16 @@
                                                         </tr>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
-
                                             </tbody>
                                         </table>
-                                        <asp:Label ID="lblMensajeEdiciones" runat="server" Text=""></asp:Label>
+                                        <asp:Literal ID="litSinEdiciones" runat="server" Text="No existen ediciones para este torneo" Visible="false"></asp:Literal>
                                     </div>
                                 </div>
                             </ItemTemplate>
                         </asp:Repeater>
+                        <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
+                            <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
+                        </asp:Panel>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -90,7 +95,9 @@
                         <ContentTemplate>
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="modalTorneoLabel"><i class="flaticon-trophy5"></i>Registrar Nuevo Torneo</h4>
+                                <h4 class="modal-title" id="modalTorneoLabel"><i class="flaticon-trophy5"></i>
+                                    <asp:Label ID="lblTituloModalTorneo" runat="server" Text="Registrar Torneo"></asp:Label>
+                                </h4>
                             </div>
                             <div class="modal-body">
                                 <fieldset class="form-horizontal vgModalTorneo">
@@ -484,6 +491,7 @@
             $('#ContentAdmin_txtUrlTorneo').prop('disabled', false);
             $("#ContentAdmin_imagenpreview").attr("src", "../resources/img/theme/logo-default.png");
             $('.fileinput').fileinput('clear');
+            $("#ContentAdmin_lblTituloModalTorneo").text("Registrar Torneo");
         });
         $('#modalEdicion').on('hidden.bs.modal', function () {
             $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');

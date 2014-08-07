@@ -29,8 +29,7 @@ namespace quegolazo_code.admin
                 }
                 catch (Exception ex)
                 {
-                    lblMensajeTorneos.Visible = true;
-                    lblMensajeTorneos.Text = ex.Message;
+                    mostrarPanelFracaso(ex.Message);
                 }                             
             }
         }
@@ -41,20 +40,14 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void rptTorneosItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            try
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-                {
-                    Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
-                    int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
-                    rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorTorneo(idTorneo);
-                    rptEdiciones.DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
-                Label lblMensajeEdiciones = (Label)e.Item.FindControl("lblMensajeEdiciones");
-                lblMensajeEdiciones.Text = ex.Message;
+                Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
+                int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
+                rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorTorneo(idTorneo);
+                rptEdiciones.DataBind();
+                Literal litSinEdiciones = e.Item.FindControl("litSinEdiciones") as Literal;
+                litSinEdiciones.Visible = (rptEdiciones.Items.Count > 0) ? false : true;
             }
         }
 
@@ -77,8 +70,7 @@ namespace quegolazo_code.admin
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "removeClass", "removeClass('modalTorneo','fade');", true);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
-                litFracasoTorneo.Text = ex.Message;
-                panFracasoTorneo.Visible = true;
+                mostrarPanelFracasoTorneo(ex.Message);
             }
         }
 
@@ -98,8 +90,7 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
-                litFracasoEdicion.Text = ex.Message;
-                panFracasoEdicion.Visible = true;
+                mostrarPanelFracasoEdicion(ex.Message);
             }
         }
 
@@ -109,27 +100,35 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void rptTorneos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            int idTorneo = int.Parse(e.CommandArgument.ToString());
-            Torneo torneo = gestorTorneo.obtenerTorneoPorId(idTorneo);
-            if (e.CommandName == "agregarEdicion")
+            try
             {
-                limpiarModalEdicion();
-                txtTorneoAsociado.Value = torneo.nombre;
-                Sesion.setTorneo(torneo);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
+                int idTorneo = int.Parse(e.CommandArgument.ToString());
+                Torneo torneo = gestorTorneo.obtenerTorneoPorId(idTorneo);
+                if (e.CommandName == "agregarEdicion")
+                {
+                    limpiarModalEdicion();
+                    txtTorneoAsociado.Value = torneo.nombre;
+                    Sesion.setTorneo(torneo);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
+                }
+                if (e.CommandName == "editarTorneo")
+                {
+                    lblTituloModalTorneo.Text = "Modificar Torneo";
+                    txtUrlTorneo.Disabled = true;
+                    btnResgitrarTorneo.Visible = false;
+                    btnModificarTorneo.Visible = true;
+                    txtUrlTorneo.Value = torneo.nick;
+                    txtNombreTorneo.Value = torneo.nombre;
+                    txtDescripcion.Value = torneo.descripcion;
+                    imagenpreview.Src = torneo.obtenerImagenMediana();
+                    gestorTorneo.torneo.idTorneo = idTorneo;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
+                } 
             }
-            if (e.CommandName == "editarTorneo")
+            catch (Exception ex)
             {
-                txtUrlTorneo.Disabled = true;
-                btnResgitrarTorneo.Visible = false;
-                btnModificarTorneo.Visible = true;
-                txtUrlTorneo.Value = torneo.nick;
-                txtNombreTorneo.Value = torneo.nombre;
-                txtDescripcion.Value = torneo.descripcion;
-                imagenpreview.Src = torneo.obtenerImagenMediana();
-                gestorTorneo.torneo.idTorneo = idTorneo;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
-            } 
+                mostrarPanelFracaso(ex.Message);
+            }
         }
         
         /// <summary>
@@ -190,9 +189,10 @@ namespace quegolazo_code.admin
               }
           }
 
-        //------------------------------------------
-        //--------------Metodos Extras--------------
-        //------------------------------------------
+        //*************************************************
+        //-----------------Metodos Extras-----------------
+        //*************************************************
+
         /// <summary>
         /// Carga el gestor de la clase
         /// autor: Facundo Allemand
@@ -203,6 +203,7 @@ namespace quegolazo_code.admin
                 Session["gestorTorneo"] = new GestorTorneo();
             gestorTorneo = (GestorTorneo)Session["gestorTorneo"];
         }
+
         /// <summary>
         /// Carga el gestor de la clase
         /// autor: Facundo Allemand
@@ -213,6 +214,7 @@ namespace quegolazo_code.admin
                 Session["gestorEdicion"] = new GestorEdicion();
             gestorEdicion = (GestorEdicion)Session["gestorEdicion"];
         }
+
         /// <summary>
         /// Carga el Repeater de los torneos de un usuario con una lista de Torneos
         /// autor: Paula Pedrosa
@@ -221,7 +223,9 @@ namespace quegolazo_code.admin
         {
             rptTorneos.DataSource = gestorTorneo.obtenerTorneosPorUsuario();
             rptTorneos.DataBind();
+            panelSinTorneos.Visible = (rptTorneos.Items.Count>0) ? false : true;
         }
+
         /// <summary>
         /// Carga los combos de los tamaños de cancha y de los tipos de superficie
         /// autor: Paula Pedrosa
@@ -241,16 +245,20 @@ namespace quegolazo_code.admin
             ddlTipoSuperficie.DataTextField = "nombre";
             ddlTipoSuperficie.DataBind();
         }
+
         /// <summary>
         /// Oculta los paneles de Errores y limpia los Literal
         /// </summary>
         protected void limpiarPaneles()
         {
+            panFracaso.Visible = false;
+            litFracaso.Text = "";
             panFracasoTorneo.Visible = false;
             litFracasoTorneo.Text = "";
             panFracasoEdicion.Visible = false;
             litFracasoEdicion.Text = "";
         }
+
         /// <summary>
         /// setea vacias las cadenas del modal torneo.
         /// </summary>
@@ -259,7 +267,9 @@ namespace quegolazo_code.admin
             txtUrlTorneo.Value = "";
             txtNombreTorneo.Value = "";
             txtDescripcion.Value = "";
+            panFracasoTorneo.Visible = false;
         }
+
         /// <summary>
         /// setea vacias las cadenas de los inputs del modal de la edicion
         /// </summary>
@@ -273,6 +283,32 @@ namespace quegolazo_code.admin
             txtPuntosPorEmpatar.Value = "1";
             txtPuntosPorPerder.Value = "0";
             panFracasoEdicion.Visible = false;
+        }
+
+        /// <summary>
+        /// Muestra el panel de error de la pag principal
+        /// </summary>
+        private void mostrarPanelFracaso(string mensaje)
+        {
+            litFracaso.Text = mensaje;
+            panFracaso.Visible = true;
+        }
+
+        /// <summary>
+        /// Muestra el panel de error del modal de Torneo
+        /// </summary>
+        private void mostrarPanelFracasoTorneo(string mensaje)
+        {
+            litFracasoTorneo.Text = mensaje;
+            panFracasoTorneo.Visible = true;
+        }
+        /// <summary>
+        /// Muestra el panel de error del modal de Edicion
+        /// </summary>
+        private void mostrarPanelFracasoEdicion(string mensaje)
+        {
+            litFracasoEdicion.Text = mensaje;
+            panFracasoEdicion.Visible = true;
         }
     }
 }
