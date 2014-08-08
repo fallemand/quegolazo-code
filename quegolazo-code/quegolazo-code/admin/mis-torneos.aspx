@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="mis-torneos.aspx.cs" Inherits="quegolazo_code.admin.mis_torneos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdmin" runat="server">
-    <script src="../resources/js/misTorneos/misTorneos.js"></script>
     <!-- Pantalla Principal -->
     <div class="container padding-top">
         <div class="row">
@@ -184,8 +183,8 @@
                         <div class="modal-body">
 
                             <ul id="tabsModalEdicion" class="nav nav-tabs">
-                                <li class="active"><a href="#tabDatosEdicion" data-toggle="tab">Datos Generales</a></li>
-                                <li class=""><a href="#tabPersonalizacionEdicion" data-toggle="tab">Opciones</a></li>
+                                <li class="active"><a href="#tabDatosEdicion">Datos Generales</a></li>
+                                <li class=""><a href="#tabPersonalizacionEdicion">Opciones</a></li>
                             </ul>
                             <div id="tabsEdicion" class="tab-content" style="padding-top: 10px">
                                 <div class="tab-pane active in fade" id="tabDatosEdicion">
@@ -480,22 +479,15 @@
         </div>
     </div>
     <!-- Modal Agregar Edicion -->
+
+    <!-- Script -->
     <script>
-        // mis-torneos.aspx
-        $('.fileinput').on('change.bs.fileinput', function () {
-            $('.fileinput-preview').css('background-image', 'none');
-        });
         $('#modalTorneo').on('hidden.bs.modal', function () {
-            $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
-            $('.modal-body').find('div').removeClass('has-success has-error');
-            $('#ContentAdmin_txtUrlTorneo').prop('disabled', false);
-            $("#ContentAdmin_imagenpreview").attr("src", "../resources/img/theme/logo-default.png");
-            $('.fileinput').fileinput('clear');
-            $("#ContentAdmin_lblTituloModalTorneo").text("Registrar Torneo");
+            limpiarModalTorneo();
         });
         $('#modalEdicion').on('hidden.bs.modal', function () {
-            $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
-            $('.modal-body').find('div').removeClass('has-success has-error');
+            limpiarModalEdicion();
         });
     </script>
+    <!-- Script -->
    </asp:Content>

@@ -186,6 +186,8 @@ namespace quegolazo_code.admin
               {
                   litFracasoEdicion.Text = ex.Message;
                   panFracasoEdicion.Visible = true;
+                  btnRegistrarOpciones.Visible = false;
+                  btnSiguienteEdicion.Visible = true;
               }
           }
 
@@ -283,6 +285,8 @@ namespace quegolazo_code.admin
             txtPuntosPorEmpatar.Value = "1";
             txtPuntosPorPerder.Value = "0";
             panFracasoEdicion.Visible = false;
+            btnRegistrarOpciones.Visible = false;
+            btnSiguienteEdicion.Visible = true;
         }
 
         /// <summary>
