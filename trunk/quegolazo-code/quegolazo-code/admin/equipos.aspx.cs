@@ -42,8 +42,8 @@ namespace quegolazo_code.admin
         }     
 
         /// <summary>
-        /// Registra un nuevo equipo en la base de datos
-        /// autor: Paula Pedrosa
+        /// Registra un nuevo equipo en la BD
+        /// autor: Pau Pedrosa
         /// </summary>
         protected void btnRegistrarEquipo_Click(object sender, EventArgs e)
         {
@@ -65,6 +65,7 @@ namespace quegolazo_code.admin
 
         /// <summary>
         /// Agrega un delegado a una lista genérica de delegados
+        /// autor: Facundo Allemand
         /// </summary>
         protected void btnAgregarDelegado_Click(object sender, EventArgs e)
         {
@@ -107,7 +108,7 @@ namespace quegolazo_code.admin
       
         /// <summary>
         /// Método para gestionar la eliminación y modificación de los delegados
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         protected void rptDelegados_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -115,14 +116,14 @@ namespace quegolazo_code.admin
             {
                 //Si elimina el delegado
                 if (e.CommandName == "eliminarDelegado")
-                {
+                {   //por CommandArgument recibe el NOMBRE del delegado a eliminar
                     string nombre = e.CommandArgument.ToString();
                     gestorEquipo.eliminarDelegado(nombre);
                     cargarRepeaterDelegados();
                 }
                 //Si modifica el delegado
                 if (e.CommandName == "modificarDelegado")
-                {
+                {   //por CommandArgument recibe el NOMBRE del delegado a modificar
                     string nombre = e.CommandArgument.ToString();
                     Delegado delegado = gestorEquipo.obtenerDelegadoPorNombre(nombre);
                     Session["delegadoAModificar"] = delegado;
@@ -149,7 +150,7 @@ namespace quegolazo_code.admin
         protected void rptEquipos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "editarEquipo")
-            {                
+            {   //por CommandArgument recibe el ID del equipo a modificar               
                 gestorEquipo.obtenerEquipoAModificar(Int32.Parse(e.CommandArgument.ToString()));                
                 txtNombreEquipo.Value = gestorEquipo.equipo.nombre;
                 txtNombreDirector.Value = gestorEquipo.equipo.directorTecnico;
@@ -189,7 +190,6 @@ namespace quegolazo_code.admin
             {
                 mostrarPanelFracaso(ex.Message);
             }
-
         }
 
         /// <summary>
@@ -218,7 +218,6 @@ namespace quegolazo_code.admin
         //------------------------------------------
         //--------------Metodos Extras--------------
         //------------------------------------------
-
         /// <summary>
         /// Carga el repeater de Equipos
         /// autor: Pau Pedrosa
@@ -230,8 +229,8 @@ namespace quegolazo_code.admin
         }
 
         /// <summary>
-        /// cargar el repeater de los delegados con el nombre
-        /// autor: Paula Pedrosa
+        /// Permite cargar el repeater de los delegados con el nombre del delegado
+        /// autor: Pau Pedrosa
         /// </summary>             
         private void cargarRepeaterDelegados()
         {
@@ -254,7 +253,7 @@ namespace quegolazo_code.admin
 
         /// <summary>
         /// limpia los campos del alta de delegado
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         public void limpiarCamposDelegado()
         {
@@ -264,12 +263,12 @@ namespace quegolazo_code.admin
             txtDireccionDelegado.Value = "";
             btnAgregarDelegado.Visible = true;
             btnModificarDelegado.Visible = false;
-            btnCancelarDelegado.Visible = false;
+            btnCancelarDelegado.Visible = true;
         }             
 
         /// <summary>
-        /// limpia los campos del alta de equipo
-        /// autor: Paula Pedrosa
+        /// Limpia los campos del alta de equipo
+        /// autor: Pau Pedrosa
         /// </summary>
         public void limpiarCamposEquipo()
         {
@@ -283,8 +282,8 @@ namespace quegolazo_code.admin
         }
 
         /// <summary>
-        /// limpia los paneles de éxito y fracaso
-        /// autor: Paula Pedrosa
+        /// Limpia los paneles de éxito y fracaso
+        /// autor: Pau Pedrosa
         /// </summary>
         private void limpiarPaneles()
         {
@@ -295,8 +294,8 @@ namespace quegolazo_code.admin
         }
 
         /// <summary>
-        /// Habilita el panel de fraaso y deshabilita el panel de exito.
-        /// autor: Paula Pedrosa
+        /// Habilita el panel de fracaso y deshabilita el panel de exito.
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
         private void mostrarPanelFracaso(string mensaje)
@@ -308,7 +307,7 @@ namespace quegolazo_code.admin
 
         /// <summary>
         /// Habilita el panel de exito y deshabilita el panel de fracaso.
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
         private void mostrarPanelExito(string mensaje)
@@ -316,8 +315,6 @@ namespace quegolazo_code.admin
             litExito.Text = mensaje;
             panelExito.Visible = true;
             panelFracaso.Visible = false;
-        }
-
-        
+        }        
     }
 }

@@ -15,7 +15,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Obtiene un estado de la base de datos
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="idEstado">id del Estado</param>
         /// <returns>Un objeto de tipo Estado</returns>

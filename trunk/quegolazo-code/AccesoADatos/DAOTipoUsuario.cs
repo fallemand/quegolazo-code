@@ -28,9 +28,7 @@ namespace AccesoADatos
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open(); 
-                }
                 cmd.Connection = con;
                 string sql = @"SELECT *
                                 FROM TiposUsuario
@@ -47,23 +45,19 @@ namespace AccesoADatos
                         nombre = dr["nombre"].ToString(),
                     };
                 }
-                if (dr != null )
+                if (dr != null)
                     dr.Close();
                 return respuesta;
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error al intentar recuperar el tipo de usuario: " + ex.Message);
             }
             finally
             {
-               
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-
         }
-
      }
 }

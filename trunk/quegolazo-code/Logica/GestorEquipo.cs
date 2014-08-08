@@ -27,7 +27,7 @@ namespace Logica
                 equipo.colorCamisetaPrimario = colorCamisetaPrimario;
                 equipo.colorCamisetaSecundario = colorCamisetaSecundario;
                 equipo.directorTecnico = directorTecnico;
-                int idTorneo =((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
+                int idTorneo = ((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
                 DAOEquipo daoEquipo = new DAOEquipo();
                 equipo.idEquipo = daoEquipo.registrarEquipo(equipo, idTorneo);
                 equipo = new Equipo();
@@ -134,9 +134,6 @@ namespace Logica
                 if ((equipo.delegadoPrincipal != null && nombre.Equals(equipo.delegadoPrincipal.nombre, StringComparison.OrdinalIgnoreCase)))
                     throw new Exception("Ya existe un delegado con ese nombre"); 
             }             
-              
-            //if ((equipo.delegadoPrincipal != null && nombre.Equals(equipo.delegadoPrincipal.nombre, StringComparison.OrdinalIgnoreCase)) || (equipo.delegadoOpcional != null && nombre.Equals(equipo.delegadoOpcional.nombre, StringComparison.OrdinalIgnoreCase)))
-            //    throw new Exception("Ya existe un delegado con ese nombre"); 
             delegado.nombre = nombre;
             delegado.email = email;
             delegado.telefono = telefono;
@@ -178,11 +175,6 @@ namespace Logica
         /// Modifica el equipo 
         /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="idEquipo">id del equipo</param>
-        /// <param name="nombre">nombre del equipo</param>
-        /// <param name="colorCamisetaPrimario">color camiseta 1° del equipo</param>
-        /// <param name="colorCamisetaSecundario">color camiseta 2° del equipo</param>
-        /// <param name="directorTecnico">director tecnico del equipo</param>
         public void modificarEquipo(int idEquipo, string nombre, string colorCamisetaPrimario, string colorCamisetaSecundario, string directorTecnico)
         {
             try
@@ -192,23 +184,23 @@ namespace Logica
                 List<Delegado> delegadosModificados = obtenerDelegados();
                 if(delegadosModificados.Count == 0)
                     throw new Exception("Debe ingresar al menos un delegado");
-                equipo = daoEquipo.obtenerEquipoPorId(idEquipo);// Obtiene el equipo a modificar de la BD
+                equipo = daoEquipo.obtenerEquipoPorId(idEquipo); // Obtiene el equipo a modificar de la BD
                 // Elimina los delegados de la BD, y setea NULL en las claves foráneas de la tabla Equipo
                 daoDelegado.eliminarDelegadosPorEquipo(equipo); 
                 equipo.nombre = nombre;
                 equipo.colorCamisetaPrimario = colorCamisetaPrimario;
                 equipo.colorCamisetaSecundario = colorCamisetaSecundario;
                 equipo.directorTecnico = directorTecnico;
-                //le setea null a los delegados, para sobreescribirlos con los nuevos
+                //le setea null a los delegados, para sobreescribirlos con los nuevos delegados
                 equipo.delegadoPrincipal = null;
                 equipo.delegadoOpcional = null;
                 int i = 0;
                 foreach (Delegado delegado in delegadosModificados)
                 {
                     if (i == 0) // primera vez que entra al foreach
-                        equipo.delegadoPrincipal = delegado;
+                        equipo.delegadoPrincipal = delegado;//si es la 1° vez, el delegado va ser el delegado principal
                     else
-                        equipo.delegadoOpcional = delegado;
+                        equipo.delegadoOpcional = delegado;//si es la 2° vez, el delegado va ser el delegado opcional
                     i++;
                 }
                 daoEquipo.modificarEquipo(equipo);               

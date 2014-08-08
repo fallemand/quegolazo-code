@@ -16,7 +16,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Obtiene todos los Torneos de un Usuario
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <parameters>id de Usuario</parameters>
         /// <returns>Lista genérica de Torneos</returns>
@@ -66,7 +66,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Busca un Torneo con un Id determinado en la base de datos.
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="idTorneo"> Id del Torneo que se quiere buscar </param>
         /// <returns>Un objeto Torneo, o null si no encuentra el Torneo.</returns>
@@ -115,7 +115,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Busca un Torneo por un nombre y usuario determinado en la base de datos.
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="idTorneo"> Id del Torneo que se quiere buscar </param>
         /// <returns>Un objeto Torneo, o null si no encuentra el Torneo.</returns>
@@ -189,28 +189,21 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
                 cmd.CommandText = sql;
                 return int.Parse(cmd.ExecuteScalar().ToString());
-
             }
             catch (Exception e)
             {
                 //Si ya existe un torneo con ese nombre
                 if(e.Message.Contains("unique_nombre"))
-                {                    
                     throw new Exception("No se pudo registrar el torneo: Ya existe un torneo registrado con este nombre, por favor cambielo e intente nuevamente.");
-                }
                 //Si ya existe un torneo con ese nick
                 if (e.Message.Contains("unique_nick"))
-                {
                     throw new Exception("No se pudo registrar el torneo: Ya existe un torneo registrado con esta URL, por favor cambiela e intente nuevamente.");
-                }
                 throw new Exception("No se pudo registrar el torneo: " + e.Message);
             }
             finally 
             {
                 if (con.State == ConnectionState.Open)
-                {
                     con.Close();                  
-                }
             }
         }
 
@@ -243,17 +236,13 @@ namespace AccesoADatos
             {
                 //Si ya existe un torneo con ese nombre
                 if (e.Message.Contains("unique_nombre"))
-                {
-                    throw new Exception("No se pudo modificar el torneo: Ya existe un torneo registrado con este nombre, por favor cambielo e intente nuevamente.");
-                }               
+                    throw new Exception("No se pudo modificar el torneo: ya existe un torneo registrado con este nombre, por favor cambielo e intente nuevamente.");              
                 throw new Exception("No se pudo registrar el torneo: " + e.Message);
             }
             finally
             {
                 if (con.State == ConnectionState.Open)
-                {
                     con.Close();
-                }
             }
         }
     }
