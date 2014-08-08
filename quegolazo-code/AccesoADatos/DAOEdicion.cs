@@ -14,7 +14,7 @@ namespace AccesoADatos
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
         /// <summary>
         /// Obtiene una lista de ediciones de un determinado torneo
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="idTorneo">Id del torneo</param>
         /// <returns>Lista de Objeto Ediciones, o null sino existen ediciones de ese torneo</returns>
@@ -74,15 +74,15 @@ namespace AccesoADatos
         }
         /// <summary>
         /// Registrar una Nueva Edición
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="edicionNueva">Objeto nueva Edición</param>
-        /// <param name="idTorneo">El di del torneo al cual se agregara la edicion</param>
+        /// <param name="idTorneo">El id del torneo al cual se agregara la edicion</param>
         public void registrarEdicion(Edicion edicionNueva, int idTorneo)
-        {
-            SqlTransaction trans = null;
+        {          
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -110,7 +110,7 @@ namespace AccesoADatos
             {
                 trans.Rollback();
                 if (ex.Class == 14 && ex.Number == 2601)
-                    throw new Exception("La edicion " + edicionNueva.nombre + " ya se encuentra registrada. Ingrese otro nombre para la misma.");
+                    throw new Exception("La edición " + edicionNueva.nombre + " ya se encuentra registrada. Ingrese otro nombre para la misma.");
                 else
                     throw new Exception("No se pudo registrar la edición: " + ex.Message);
             }
@@ -129,7 +129,7 @@ namespace AccesoADatos
         /// autor: Florencia Rojas
         /// </summary>
         /// <param name="edicion">Objeto Edición</param>
-        private void registrarPreferencias(Edicion edicion,SqlConnection con, SqlTransaction trans)
+        private void registrarPreferencias(Edicion edicion, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
             try

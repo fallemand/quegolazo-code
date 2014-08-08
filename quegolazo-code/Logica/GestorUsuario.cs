@@ -234,7 +234,7 @@ namespace Logica
             {
                 string claveEncriptada = encriptarContrasenia(clave);
                 DAOUsuario gestorBD = new DAOUsuario();
-                int idUsuario = gestorBD.RestablecerContrasenia(codigo,claveEncriptada);
+                int idUsuario = gestorBD.restablecerContrasenia(codigo,claveEncriptada);
                 return idUsuario;
             }
             catch

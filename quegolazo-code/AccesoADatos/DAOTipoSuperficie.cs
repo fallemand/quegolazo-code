@@ -28,13 +28,11 @@ namespace AccesoADatos
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
                 string sql = @"SELECT *
                                 FROM TiposSuperficie
-                                WHERE idTipoSuperficie= @idTipoSuperficie";
+                                WHERE idTipoSuperficie = @idTipoSuperficie";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idTipoSuperficie", idTipoSuperficie);
                 cmd.CommandText = sql;
@@ -62,7 +60,7 @@ namespace AccesoADatos
 
         /// <summary>
         /// Ontiene todos los Tipos de Superficie
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <returns>Una lista de Objeto TipoSuperficie o null sino lo encuentra</returns>
         public List<TipoSuperficie> obtenerTodos()
@@ -71,26 +69,24 @@ namespace AccesoADatos
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
             List<TipoSuperficie> respuesta = new List<TipoSuperficie>(); 
-            TipoSuperficie tipoDeSuperficie = null;
+            TipoSuperficie tipoSuperficie = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                {
                     con.Open();
-                    cmd.Connection = con;
-                }
+                cmd.Connection = con;
                 string sql = @"SELECT *
                                 FROM TiposSuperficie"; 
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    tipoDeSuperficie = new TipoSuperficie()
+                    tipoSuperficie = new TipoSuperficie()
                     {
                         idTipoSuperficie = Int32.Parse(dr["idTipoSuperficie"].ToString()),
                         nombre = dr["nombre"].ToString()
                     };
-                    respuesta.Add(tipoDeSuperficie);
+                    respuesta.Add(tipoSuperficie);
                 }
                 return respuesta;
             }
@@ -103,7 +99,6 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-
         }
     }
 }
