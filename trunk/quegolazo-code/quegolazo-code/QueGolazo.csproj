@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\equipos.aspx" />
+    <Content Include="admin\Test.aspx" />
+    <Content Include="resources\js\ajaxfileupload.js" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
     <Content Include="resources\js\quegolazo.js" />
     <Content Include="usuario\activar.usuario.aspx" />
@@ -92,12 +94,22 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\AjaxFileUploader.ashx.cs">
+      <DependentUpon>AjaxFileUploader.ashx</DependentUpon>
+    </Compile>
     <Compile Include="admin\equipos.aspx.cs">
       <DependentUpon>equipos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="admin\equipos.aspx.designer.cs">
       <DependentUpon>equipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="usuario\activar.usuario.aspx.cs">
       <DependentUpon>activar.usuario.aspx</DependentUpon>
@@ -176,6 +188,7 @@
     <Content Include="resources\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="admin\admin.Master" />
     <Content Include="admin\admin.torneo.master" />
+    <Content Include="admin\AjaxFileUploader.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

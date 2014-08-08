@@ -39,17 +39,11 @@ namespace Utils
         /// Guarda las imágenes validándolas. Recibe por parámetro el archivo, el id, y que tipo de image es (torneo, equipo, etc)
         /// autor: Facundo Allemand
         /// </summary>
-        public static bool guardarImagenTorneo(HttpPostedFile file, int id, int tipoImagen) {
-            if (file!=null && file.ContentLength > 0)
-            {
+        public static void guardarImagen(int id, int tipoImagen) {
                 crearDirectorios();
                 string rutaImagenTemporal = pathImagenesDisco + pathTemp + "img.temp";
                 try
                 {
-                    if (file.ContentLength > tamanioMax)
-                        throw new Exception("El tamaño del archivo es mayor a 1024kb");
-                    file.SaveAs(rutaImagenTemporal);
-                    validarImagen(rutaImagenTemporal);
                     //Definimos los tamaños de imagenes a crear
                     List<Imagen> imagenes = new List<Imagen>();
                     imagenes.Add(new Imagen() { abreviacion = CHICA, height = 50, width = 50 });
@@ -67,7 +61,6 @@ namespace Utils
                         }
                         img.Dispose();
                     }
-                    return true;
                 }
                 catch (Exception)
                 {
@@ -77,8 +70,25 @@ namespace Utils
                 {
                     System.IO.File.Delete(rutaImagenTemporal);
                 }
+        }
+
+        public static void guardarImagenTemporal(HttpPostedFile file)
+        {
+            if (file != null && file.ContentLength > 0)
+            {
+                crearDirectorios();
+                string rutaImagenTemporal = pathImagenesDisco + pathTemp + "img.temp";
+                try
+                {
+                    file.SaveAs(rutaImagenTemporal);
+                    validarImagen(rutaImagenTemporal); 
+                }
+                catch (Exception)
+                {
+                    System.IO.File.Delete(rutaImagenTemporal);
+                    throw;
+                }
             }
-            return false;
         }
 
         private static void crearDirectorios()
@@ -99,7 +109,7 @@ namespace Utils
         /// Se encarga de borrar las imágenes. Recibe por parámetro elel id, y que tipo de image es (torneo, equipo, etc)
         /// autor: Facundo Allemand
         /// </summary>
-        public static void borrrarImagenTorneo(int id, int tipoImagen)
+        public static void borrrarImagen(int id, int tipoImagen)
         {
             try
             {
@@ -132,6 +142,9 @@ namespace Utils
             Image img=null;
             try
             {
+                FileInfo file = new FileInfo(rutaImagen);
+                if (file.Length > tamanioMax)
+                        throw new Exception("El tamaño del archivo es mayor a 1024kb");
                 using (img = Image.FromFile(rutaImagen))
                 {
                     if (!img.RawFormat.Equals(ImageFormat.Bmp) &&
@@ -139,13 +152,17 @@ namespace Utils
                         !img.RawFormat.Equals(ImageFormat.Jpeg) &&
                         !img.RawFormat.Equals(ImageFormat.Png))
                     {
-                        throw new Exception();
+                        throw new Exception("El formato de imagen no es válido");
                     }
                 }
             }
-            catch (Exception)
+            catch (OutOfMemoryException)
             {
                 throw new Exception("El formato de imagen no es válido");
+            }
+            catch (Exception)
+            {
+                throw;
             }
             finally
             {

@@ -39,7 +39,6 @@ function limpiarModalTorneo() {
     $('.modal-body').find('div').removeClass('has-success has-error');
     $('#ContentAdmin_txtUrlTorneo').prop('disabled', false);
     $("#ContentAdmin_imagenpreview").attr("src", "../resources/img/theme/logo-default.png");
-    $('.fileinput').fileinput('clear');
     $("#ContentAdmin_lblTituloModalTorneo").text("Registrar Torneo");
 };
 function limpiarModalEdicion() {
