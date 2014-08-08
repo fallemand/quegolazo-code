@@ -61,7 +61,7 @@ namespace quegolazo_code.admin
             {                
                 limpiarPaneles();   
                 int idTorneo = gestorTorneo.registrarTorneo(txtNombreTorneo.Value, txtDescripcion.Value, txtUrlTorneo.Value.Replace(" ", "-"));
-                GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, idTorneo, GestorImagen.TORNEO);
+                GestorImagen.guardarImagen(idTorneo, GestorImagen.TORNEO);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalTorneo');", true);
                 cargarRepeaterTorneos();            
                 limpiarModalTorneo();
@@ -140,7 +140,7 @@ namespace quegolazo_code.admin
             {
                 limpiarPaneles();
                 gestorTorneo.modificarTorneo(txtNombreTorneo.Value, txtDescripcion.Value);
-                GestorImagen.guardarImagenTorneo(imagenUpload.PostedFile, gestorTorneo.torneo.idTorneo, GestorImagen.TORNEO);
+                GestorImagen.guardarImagen(gestorTorneo.torneo.idTorneo, GestorImagen.TORNEO);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalTorneo');", true);
                 cargarRepeaterTorneos();
                 limpiarModalTorneo();
@@ -306,6 +306,7 @@ namespace quegolazo_code.admin
             litFracasoTorneo.Text = mensaje;
             panFracasoTorneo.Visible = true;
         }
+
         /// <summary>
         /// Muestra el panel de error del modal de Edicion
         /// </summary>

@@ -123,23 +123,24 @@
                                     <label for="textArea" class="col-lg-2 control-label">Logo</label>
                                     <div class="col-lg-10">
                                         <div class="col-md-4">
-                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <div class="fileinput-new fileinput-default thumbnail" data-trigger="fileinput">
+                                            <div class="fileinput fileinput-new">
+                                                <div class="thumbnail fileinput-preview">
                                                     <img id="imagenpreview" src="../resources/img/theme/logo-default.png" runat="server" />
                                                 </div>
-                                                <div id="logoTorneoPreview" class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput"></div>
                                                 <div>
-                                                    <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><asp:FileUpload ID="imagenUpload" runat="server" /></span>
-                                                    <a href="#" class="btn btn-default btn-xs fileinput-exists" id="limpiaImagen" data-dismiss="fileinput">Eliminar</a>
+                                                    <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span>
+                                                    <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <p class="help-block" style="margin-top: 15px;">
+                                            <p class="help-block">
+                                                <img src="../resources/img/theme/load2.gif" id="loading" style="display:none;" alt="load" /><br />
+                                                <span id="resultadoImagen" style="display:none;"><span id="error"></span><br /></span>
                                                 <strong>Formato admitido</strong><br />
                                                 PNG, JPEG, JPG, GIF<br />
                                                 <strong>Tamaño Máximo</strong><br />
-                                                1 Mb<br />
+                                                1 Mb
                                             </p>
                                         </div>
                                     </div>
@@ -482,11 +483,59 @@
 
     <!-- Script -->
     <script>
-        $('#modalTorneo').on('hidden.bs.modal', function () {
-            limpiarModalTorneo();
-        });
-        $('#modalEdicion').on('hidden.bs.modal', function () {
-            limpiarModalEdicion();
+        $(document).ready(function () {
+            function previewImage(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#ContentAdmin_imagenpreview').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            };
+            $('body').on('change', '#ContentAdmin_imagenUpload', function () {
+                previewImage(this);
+                ajaxFileUpload();
+            });
+            $('#modalTorneo').on('hidden.bs.modal', function () {
+                limpiarModalTorneo();
+            });
+            $('#modalEdicion').on('hidden.bs.modal', function () {
+                limpiarModalEdicion();
+            });
+            function ajaxFileUpload() {
+                $(document).ajaxStart(function () {
+                    $("#loading").show();
+                });
+                $(document).ajaxStop(function () {
+                    $("#loading").hide();
+                });
+                $.ajaxFileUpload
+                (
+                    {
+                        url: 'AjaxFileUploader.ashx',
+                        secureuri: false,
+                        fileElementId: 'ContentAdmin_imagenUpload',
+                        dataType: 'json',
+                        data: { name: 'logan', id: 'id' },
+                        success: function (data, status) {
+                            $("#resultadoImagen").show();
+                            if (typeof (data.error) != 'undefined') {
+                                if (data.error != '') {
+                                    $("#error").text(data.error);
+                                }
+                            }
+                            else {
+                                $("#error").text(data.msg);
+                            }
+                        },
+                        error: function (data, status, e) {
+                            alert(e);
+                        }
+                    }
+                )
+                return false;
+            };
         });
     </script>
     <!-- Script -->
