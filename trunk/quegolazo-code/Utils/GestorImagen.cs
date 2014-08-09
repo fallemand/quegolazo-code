@@ -40,9 +40,11 @@ namespace Utils
         /// autor: Facundo Allemand
         /// </summary>
         public static void guardarImagen(int id, int tipoImagen) {
+            string rutaImagenTemporal = pathImagenesDisco + pathTemp + "img.temp";
+            try
+            {
                 crearDirectorios();
-                string rutaImagenTemporal = pathImagenesDisco + pathTemp + "img.temp";
-                try
+                if (File.Exists(rutaImagenTemporal))
                 {
                     //Definimos los tamaños de imagenes a crear
                     List<Imagen> imagenes = new List<Imagen>();
@@ -62,14 +64,15 @@ namespace Utils
                         img.Dispose();
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
-                finally
-                {
-                    System.IO.File.Delete(rutaImagenTemporal);
-                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                System.IO.File.Delete(rutaImagenTemporal);
+            }
         }
 
         public static void guardarImagenTemporal(HttpPostedFile file)

@@ -667,10 +667,7 @@ tr th:last-child {
 	width:130px;
 	height:90px;
 }
-.fileinput-default {
-	width:130px;
-	height:90px;
-}
+
 .fileinput .thumbnail {
   overflow: hidden;
   display: inline-block;
@@ -684,31 +681,23 @@ tr th:last-child {
 .fileinput .btn {
   vertical-align: middle;
 }
-.fileinput-exists .fileinput-new,
-.fileinput-new .fileinput-exists {
-  display: none;
+
+.fileinput .fileUpload {
+	position: relative;
+	overflow: hidden;
 }
-.fileinput-inline .fileinput-controls {
-  display: inline;
+.fileinput .fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
 }
-.fileinput-filename {
-  vertical-align: middle;
-  display: inline-block;
-  overflow: hidden;
-}
-.form-control .fileinput-filename {
-  vertical-align: bottom;
-}
-.fileinput.input-group {
-  display: table;
-}
-.fileinput.input-group > * {
-  position: relative;
-  z-index: 2;
-}
-.fileinput.input-group > .btn-file {
-  z-index: 1;
-}
+
 .fileinput-new.input-group .btn-file,
 .fileinput-new .input-group .btn-file {
   border-radius: 0 4px 4px 0;

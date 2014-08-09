@@ -50,7 +50,7 @@ namespace quegolazo_code.admin
             try
             {               
                 gestorEquipo.registrarEquipo(txtNombreEquipo.Value, txtColorPrimario.Value, txtColorSecundario.Value, txtNombreDirector.Value);
-                //GestorImagen.guardarImagen(fuLog.PostedFile, gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
+                GestorImagen.guardarImagen(gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
                 limpiarCamposEquipo();
                 mostrarPanelExito("Equipo registrado con éxito!");
                 lblMensajeEquipos.Text = "";
@@ -175,7 +175,7 @@ namespace quegolazo_code.admin
             {
                 int idEquipoAModificar = gestorEquipo.equipo.idEquipo;                
                 gestorEquipo.modificarEquipo(idEquipoAModificar, txtNombreEquipo.Value, txtColorPrimario.Value, txtColorSecundario.Value, txtNombreDirector.Value);
-                //GestorImagen.guardarImagen(gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
+                GestorImagen.guardarImagen(gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
                 limpiarCamposEquipo();
                 limpiarCamposDelegado();
                 mostrarPanelExito("Equipo modificado con éxito!");

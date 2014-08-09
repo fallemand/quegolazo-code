@@ -88,8 +88,8 @@
                 <div class="modal-content">
                     <asp:UpdatePanel ID="upModalTorneo" runat="server">
                         <Triggers>
-                            <asp:PostBackTrigger ControlID="btnResgitrarTorneo" />
-                            <asp:PostBackTrigger ControlID="btnModificarTorneo" />
+                            <asp:AsyncPostBackTrigger ControlID="btnResgitrarTorneo" EventName="Click"/>
+                            <asp:AsyncPostBackTrigger ControlID="btnModificarTorneo" EventName="Click" />
                         </Triggers>
                         <ContentTemplate>
                             <div class="modal-header">
@@ -103,13 +103,13 @@
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">Nombre</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="txtNombreTorneo" runat="server" name="nombreTorneo" minlength="3" maxlength="50" required="required" placeholder="Nombre del Nuevo Torneo">
+                                        <input type="text" class="form-control" id="txtNombreTorneo" runat="server" name="nombreTorneo" minlength="3" maxlength="50" required="required" placeholder="Nombre del Nuevo Torneo" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">URL</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" name="urlTorneo" id="txtUrlTorneo" runat="server" nospace="true" minlength="3" maxlength="100" required="required" placeholder="url-del-torneo">
+                                        <input type="text" class="form-control" name="urlTorneo" id="txtUrlTorneo" runat="server" nospace="true" minlength="3" maxlength="100" required="required" placeholder="url-del-torneo" />
                                         <span class="help-block">Nombre de la url del torneo. No podrá cambiarlo. www.quegolazo.com/<b>url-del-torneo</b></span>
                                     </div>
                                 </div>
@@ -123,20 +123,20 @@
                                     <label for="textArea" class="col-lg-2 control-label">Logo</label>
                                     <div class="col-lg-10">
                                         <div class="col-md-4">
-                                            <div class="fileinput fileinput-new">
+                                            <div class="fileinput">
                                                 <div class="thumbnail fileinput-preview">
                                                     <img id="imagenpreview" src="../resources/img/theme/logo-default.png" runat="server" />
                                                 </div>
-                                                <div>
-                                                    <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span>
+                                                <div class="fileUpload">
+                                                    <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
                                                     <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
                                             <p class="help-block">
-                                                <img src="../resources/img/theme/load2.gif" id="loading" style="display:none;" alt="load" /><br />
-                                                <span id="resultadoImagen" style="display:none;"><span id="error"></span><br /></span>
+                                                <img src="../resources/img/theme/load2.gif" id="loading" style="display:none;" alt="load" />
+                                                <span id="resultadoImagen" style="display:none;"><span id="error"></span></span><br />
                                                 <strong>Formato admitido</strong><br />
                                                 PNG, JPEG, JPG, GIF<br />
                                                 <strong>Tamaño Máximo</strong><br />
@@ -484,18 +484,9 @@
     <!-- Script -->
     <script>
         $(document).ready(function () {
-            function previewImage(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#ContentAdmin_imagenpreview').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                }
-            };
             $('body').on('change', '#ContentAdmin_imagenUpload', function () {
-                previewImage(this);
-                ajaxFileUpload();
+                previewImage(this, 'ContentAdmin_imagenpreview');
+                ajaxFileUpload('ContentAdmin_imagenUpload');
             });
             $('#modalTorneo').on('hidden.bs.modal', function () {
                 limpiarModalTorneo();
@@ -503,39 +494,6 @@
             $('#modalEdicion').on('hidden.bs.modal', function () {
                 limpiarModalEdicion();
             });
-            function ajaxFileUpload() {
-                $(document).ajaxStart(function () {
-                    $("#loading").show();
-                });
-                $(document).ajaxStop(function () {
-                    $("#loading").hide();
-                });
-                $.ajaxFileUpload
-                (
-                    {
-                        url: 'AjaxFileUploader.ashx',
-                        secureuri: false,
-                        fileElementId: 'ContentAdmin_imagenUpload',
-                        dataType: 'json',
-                        data: { name: 'logan', id: 'id' },
-                        success: function (data, status) {
-                            $("#resultadoImagen").show();
-                            if (typeof (data.error) != 'undefined') {
-                                if (data.error != '') {
-                                    $("#error").text(data.error);
-                                }
-                            }
-                            else {
-                                $("#error").text(data.msg);
-                            }
-                        },
-                        error: function (data, status, e) {
-                            alert(e);
-                        }
-                    }
-                )
-                return false;
-            };
         });
     </script>
     <!-- Script -->

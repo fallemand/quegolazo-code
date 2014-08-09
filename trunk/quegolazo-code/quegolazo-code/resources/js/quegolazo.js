@@ -40,9 +40,52 @@ function limpiarModalTorneo() {
     $('#ContentAdmin_txtUrlTorneo').prop('disabled', false);
     $("#ContentAdmin_imagenpreview").attr("src", "../resources/img/theme/logo-default.png");
     $("#ContentAdmin_lblTituloModalTorneo").text("Registrar Torneo");
+    $("#error").text("");
 };
 function limpiarModalEdicion() {
     $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
     $('.modal-body').find('div').removeClass('has-success has-error');
+};
+function previewImage(input, idImagen) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#'+idImagen).attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+};
+function ajaxFileUpload(input) {
+    $(document).ajaxStart(function () {
+        $("#loading").show();
+    });
+    $(document).ajaxStop(function () {
+        $("#loading").hide();
+    });
+    $.ajaxFileUpload
+    (
+        {
+            url: 'AjaxFileUploader.ashx',
+            secureuri: false,
+            fileElementId: input,
+            dataType: 'json',
+            data: { name: 'logan', id: 'id' },
+            success: function (data, status) {
+                $("#resultadoImagen").show();
+                if (typeof (data.error) != 'undefined') {
+                    if (data.error != '') {
+                        $("#error").text(data.error);
+                    }
+                }
+                else {
+                    $("#error").text(data.msg);
+                }
+            },
+            error: function (data, status, e) {
+                alert(e);
+            }
+        }
+    )
+    return false;
 };
 
