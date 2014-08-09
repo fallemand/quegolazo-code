@@ -21,9 +21,7 @@ namespace quegolazo_code
             try
             {
                 ocultarPaneles();
-
                 GestorUsuario gestorUsuario=new GestorUsuario();
-
                 string codigo= gestorUsuario.generarCodigoRecuperacion(email.Value);
 
                 //parámetros para mandar mail
@@ -35,7 +33,7 @@ namespace quegolazo_code
                 GestorMails gestorMail = new GestorMails();
                 gestorMail.mandarMailRecuperacion(mail, "Recuperación de Contraseña",RecuperacionUrl);
                 panExito.Visible = true;
-                LitExito.Text = "<strong>Se ha enviado exitosamente el mail con los pasos para reestablecer su clave</strong><br />Revise su casilla de correo.";
+                LitExito.Text = "<strong>Revise su casilla de correo</strong>Se ha enviado un mail con los detalles para restablecer su contraseña<br />.";
 
             }
             catch (Exception ex)
@@ -45,14 +43,10 @@ namespace quegolazo_code
             }
         }
 
-
-
         private void ocultarPaneles()
         {
-           
             panExito.Visible = false;
             panFracaso.Visible = false;
         }
-
     }
 }

@@ -15,9 +15,6 @@ namespace Utils
         /// metodo para mandar mails
         /// autor: Flor
         /// </summary>
-        /// <param name="destinatario"></param>
-        /// <param name="asunto"></param>
-        /// <param name="cuerpo"></param>
         public void mandarMailActivacion(string destinatario, string asunto, string urlActivación)
         {
             MailMessage msg;
@@ -72,12 +69,11 @@ namespace Utils
             msg.Body =body;
             msg.IsBodyHtml = true;
             smtp.Port = 587;
-            
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Credentials = new System.Net.NetworkCredential("quegolazo.soporte@gmail.com", "quegolazo123");
             smtp.EnableSsl = true;
             smtp.Send(msg);
         }
-
 
         /// <summary>
         /// metodo para mandar mails
