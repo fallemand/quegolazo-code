@@ -85,29 +85,28 @@
                             <div class="form-group">
                                 <label for="textArea" class="col-lg-2 control-label">Logo</label>
                                 <div class="col-lg-10">
-                                    <div class="col-md-5">
-                                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                                            <div class="fileinput-new thumbnail">
-                                                <img id="imagenpreview" src="../resources/img/theme/logo-default.png" alt="..." runat ="server">
-                                            </div>
-                                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                            <div>
-                                                <span class="btn btn-default btn-xs btn-file">
-                                                    <span class="fileinput-new">Seleccionar Imagen</span>
-                                                    <span class="fileinput-exists">Cambiar</span>
-                                                    <asp:FileUpload ID="fuLog" runat="server" />
-                                                </span>
-                                                <a href="#" class="btn btn-default btn-xs fileinput-exists" data-dismiss="fileinput">Eliminar</a>
+                                    <div class="col-lg-10">
+                                       <div class="col-md-5">
+                                            <div class="fileinput">
+                                                <div class="thumbnail fileinput-preview">
+                                                    <img id="imagenpreview" src="../resources/img/theme/logo-default.png" runat="server" />
+                                                </div>
+                                                <div class="fileUpload">
+                                                    <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
+                                                    <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload" />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <p class="help-block" style="margin-top: 15px;">
-                                            <strong>Formato admitido</strong><br />
-                                            PNG, JPEG, JPG, GIF<br />
-                                            <strong>Tamaño Máximo</strong><br />
-                                            512kb<br />
-                                        </p>
+                                        <div class="col-md-7">
+                                            <p class="help-block">
+                                                <img src="../resources/img/theme/load2.gif" id="loading" style="display:none;" alt="load" />
+                                                <span id="resultadoImagen" style="display:none;"><span id="error"></span></span><br />
+                                                <strong>Formato admitido</strong><br />
+                                                PNG, JPEG, JPG, GIF<br />
+                                                <strong>Tamaño Máximo</strong><br />
+                                                1 Mb
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -163,14 +162,18 @@
         jQuery(document).ready(function () {
             $('#ContentAdmin_ContentAdminTorneo_txtColorPrimario').colorPicker();
             $('#ContentAdmin_ContentAdminTorneo_txtColorSecundario').colorPicker();
-        });
-        function showDelegados() {
-            $('#delegado').toggle("slow", function fildsetActivator() {
-                if ($('#delegado').is(":visible"))
-                    $('#delegado').find('input').prop('disabled', false);
-                else 
-                    $('#delegado').find('input').attr('disabled', 'disabled');
+            $('body').on('change', '#ContentAdmin_ContentAdminTorneo_imagenUpload', function () {
+                previewImage(this, 'ContentAdmin_ContentAdminTorneo_imagenpreview');
+                ajaxFileUpload('ContentAdmin_ContentAdminTorneo_imagenUpload');
             });
-        };
+            function showDelegados() {
+                $('#delegado').toggle("slow", function fildsetActivator() {
+                    if ($('#delegado').is(":visible"))
+                        $('#delegado').find('input').prop('disabled', false);
+                    else
+                        $('#delegado').find('input').attr('disabled', 'disabled');
+                });
+            };
+        });
     </script>
 </asp:Content>
