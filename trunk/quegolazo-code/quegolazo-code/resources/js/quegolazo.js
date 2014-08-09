@@ -58,6 +58,7 @@ function previewImage(input, idImagen) {
 function ajaxFileUpload(input) {
     $(document).ajaxStart(function () {
         $("#loading").show();
+        $("#error").text("");
     });
     $(document).ajaxStop(function () {
         $("#loading").hide();

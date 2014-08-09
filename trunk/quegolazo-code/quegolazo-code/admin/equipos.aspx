@@ -119,7 +119,7 @@
                         </asp:Panel>
                     </div>
                     <div class="panel-footer clearfix">
-                        <asp:Button class="btn btn-success vgEquipo" ID="btnCancelarModificacionEquipo" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionEquipo_Click"/>&nbsp;
+                        <asp:Button class="btn btn-success" ID="btnCancelarModificacionEquipo" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionEquipo_Click"/>&nbsp;
                         <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnModificarEquipo" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarEquipo_Click"/>
                         <asp:Button class="btn btn-success pull-right causesValidation vgEquipo" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />                                               
                     </div>                    
