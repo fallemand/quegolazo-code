@@ -132,12 +132,12 @@ namespace AccesoADatos
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                   cancha = new Cancha();
-                   cancha.idCancha = Int32.Parse(dr["idCancha"].ToString());
-                   cancha.nombre = dr["nombre"].ToString();
-                   cancha.telefono = dr["telefono"].ToString();
-                   cancha.domicilio = dr["domicilio"].ToString();
-                   respuesta.Add(cancha);
+                    cancha = new Cancha();
+                    cancha.idCancha = Int32.Parse(dr["idCancha"].ToString());
+                    cancha.nombre = dr["nombre"].ToString();
+                    cancha.telefono = dr["telefono"].ToString();
+                    cancha.domicilio = dr["domicilio"].ToString();
+                    respuesta.Add(cancha);
                 }
                 dr.Close();
                 return respuesta;
@@ -145,6 +145,116 @@ namespace AccesoADatos
             catch (Exception ex)
             {
                 throw new Exception("Error al intentar recuperar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+        
+        /// <summary>
+        /// Registra en la BD una nueva Cancha
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="cancha">Objeto Cancha a registrar</param>
+        /// <param name="idTorneo">Id del torneo</param>
+        /// <returns>El id de la cancha generado por la BD</returns>
+        public int registrarCancha(Cancha cancha, int idTorneo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"INSERT INTO Canchas (nombre, domicilio, telefono, idTorneo)
+                                    VALUES (@nombre, @domicilio, @telefono, @idTorneo)
+                                    SELECT SCOPE_IDENTITY()";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nombre", cancha.nombre);
+                if(cancha.domicilio != null)
+                    cmd.Parameters.AddWithValue("@domicilio", cancha.domicilio);
+                else
+                    cmd.Parameters.AddWithValue("@domicilio", DBNull.Value);
+                if(cancha.telefono != null)
+                    cmd.Parameters.AddWithValue("@telefono", cancha.telefono);
+                else
+                    cmd.Parameters.AddWithValue("@telefono", DBNull.Value);               
+                cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
+                cmd.CommandText = sql;
+                int idCancha = int.Parse(cmd.ExecuteScalar().ToString());
+                return idCancha; //retorna el id de la cancha generado por la BD
+            }
+            catch (SqlException ex)
+            {   //excepción de BD, por clave unique
+                if (ex.Class == 14 && ex.Number == 2601)
+                    throw new Exception("La Cancha " + cancha.nombre + " ya se encuentra registrada. Ingrese otro nombre.");
+                else
+                    throw new Exception("No se pudo registrar la cancha: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene de la Bd las canchas de un torneo
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idTorneo">Id del torneo</param>
+        /// <returns>Lista genérica de objetos Cancha</returns>
+        public List<Cancha> obtenerCanchasDeUnTorneo(int idTorneo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Cancha> respuesta = new List<Cancha>();
+            Cancha cancha = null;
+            bool noHayCanchasRegistradas = false;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT * 
+                                FROM Canchas
+                                WHERE idTorneo = @idTorneo
+                                ORDER BY idCancha DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idTorneo", idTorneo));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                //verifica si el DataReader está vacío
+                if (!dr.HasRows)
+                {
+                    noHayCanchasRegistradas = true;
+                    throw new Exception("No hay canchas registradas en ese Torneo");
+                }
+                while (dr.Read())
+                {
+                    cancha = new Cancha()
+                    {
+                        idCancha = Int32.Parse(dr["idCancha"].ToString()),
+                        nombre = dr["nombre"].ToString(),
+                        domicilio = dr["domicilio"].ToString(),
+                        telefono = dr["telefono"].ToString()
+                    };
+                    respuesta.Add(cancha);
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                if (!noHayCanchasRegistradas)
+                    throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+                else
+                    throw new Exception(ex.Message);
             }
             finally
             {

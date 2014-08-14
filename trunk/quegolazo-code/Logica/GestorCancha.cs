@@ -10,9 +10,54 @@ namespace Logica
 {
     public class GestorCancha
     {
+        public Cancha cancha = new Cancha();
+        /// <summary>
+        /// Registra en la Bd el objeto Cancha actual
+        /// autor: Pau Pedrosa
+        /// </summary>  
+        public void registrarCancha(string nombre, string domicilio, string telefono)
+        {
+            try
+            {
+                if (cancha == null)
+                    cancha = new Cancha();
+                cancha.nombre = nombre;
+                cancha.domicilio = domicilio;
+                cancha.telefono = telefono;
+                int idTorneo = ((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
+                DAOCancha daoCancha = new DAOCancha();
+                cancha.idCancha = daoCancha.registrarCancha(cancha, idTorneo);
+                cancha = new Cancha();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Obtiene una lista de Canchas de un torneo en particular
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <returns>Lista genérica de objeto Cancha</returns>
+        public List<Cancha> obtenerCanchasDeUnTorneo()
+        {
+            try
+            {
+                DAOCancha daoCancha = new DAOCancha();
+                int idTorneo = ((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
+                List<Cancha> canchas = daoCancha.obtenerCanchasDeUnTorneo(idTorneo);
+                return canchas;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }              
+        
         /// <summary>
         /// Obtiene todos los tamaños de cancha
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <returns>Lista genérica del objeto TamanioCancha</returns>
         public List<TamanioCancha> obtenerTodos()
@@ -20,22 +65,19 @@ namespace Logica
             try
             {
                 DAOCancha daoCancha = new DAOCancha();
-
                 List<TamanioCancha> tamaniosCancha = new List<TamanioCancha>();
                 tamaniosCancha = daoCancha.obtenerTodos();
-
                 return tamaniosCancha;
-
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } 
+            }
         }
 
         /// <summary>
         /// Obtiene el Tamaño de Cancha por Id
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="idTamanioCancha">Id del tamaño de cancha</param>
         /// <returns>Objeto Tamaño Cancha</returns>
@@ -46,7 +88,6 @@ namespace Logica
                 DAOCancha daoCancha = new DAOCancha();
                 TamanioCancha tamanioCancha = null;
                 tamanioCancha = daoCancha.obtenerTamanioCanchaPorId(idTamanioCancha);
-
                 return tamanioCancha;
             }
             catch (Exception ex)

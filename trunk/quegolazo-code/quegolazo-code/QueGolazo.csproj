@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\canchas.aspx" />
     <Content Include="admin\equipos.aspx" />
     <Content Include="resources\js\ajaxfileupload.js" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
@@ -95,6 +96,13 @@
   <ItemGroup>
     <Compile Include="admin\AjaxFileUploader.ashx.cs">
       <DependentUpon>AjaxFileUploader.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\canchas.aspx.cs">
+      <DependentUpon>canchas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\canchas.aspx.designer.cs">
+      <DependentUpon>canchas.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\equipos.aspx.cs">
       <DependentUpon>equipos.aspx</DependentUpon>

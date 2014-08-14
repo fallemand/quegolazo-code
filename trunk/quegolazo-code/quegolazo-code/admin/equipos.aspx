@@ -137,6 +137,7 @@
                         <thead>
                             <tr>
                                 <th class="col-md-4">Nombre</th>
+                                <th class="col-md-1"></th>
                             </tr>
                         </thead>
                     <tbody>
