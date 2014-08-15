@@ -53,7 +53,50 @@ namespace Logica
             {
                 throw new Exception(ex.Message);
             }
-        }              
+        }
+
+        /// <summary>
+        /// Obtiene la Cancha a modificar por su Id
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idCancha">Id de Cancha a modificar</param>
+        public void obtenerCanchaAModificar(int idCancha)
+        {
+            try
+            {
+                DAOCancha daoCancha = new DAOCancha();
+                cancha = daoCancha.obtenerCanchaPorId(idCancha);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            } 
+        }
+
+        /// <summary>
+        /// Modifica la Cancha
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idCancha">Id de la Cancha a modificar</param>
+        /// <param name="nombre">Nombre nuevo</param>
+        /// <param name="domicilio">Domicilio nuevo</param>
+        /// <param name="telefono">Telefono nuevo</param>
+        public void modificarCancha(int idCancha, string nombre, string domicilio, string telefono)
+        {
+            try
+            {
+                DAOCancha daoCancha = new DAOCancha();
+                cancha.idCancha = idCancha;
+                cancha.nombre = nombre;
+                cancha.domicilio = domicilio;
+                cancha.telefono = telefono;
+                daoCancha.modificarCancha(cancha);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         
         /// <summary>
         /// Obtiene todos los tamaños de cancha

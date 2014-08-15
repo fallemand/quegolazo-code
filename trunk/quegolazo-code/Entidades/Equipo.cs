@@ -28,7 +28,6 @@ namespace Entidades
         public string obtenerImagenGrande()
         {
             return GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, GestorImagen.GRANDE);
-        }
-        
+        }        
     }
 }
