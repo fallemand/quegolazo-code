@@ -280,6 +280,7 @@ namespace AccesoADatos
                 string sql = @"UPDATE Canchas
                                 SET nombre = @nombre, domicilio = @domicilio, telefono = @telefono
                                 WHERE idCancha = @idCancha";
+                cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", cancha.nombre);
                 cmd.Parameters.AddWithValue("@idCancha", cancha.idCancha);
                 if (cancha.domicilio != null)
@@ -352,6 +353,38 @@ namespace AccesoADatos
             catch (Exception ex)
             {
                 throw new Exception("Error al intentar recuperar la Cancha: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Elimina una cancha de la Bd 
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idCancha">Id de la cancha a eliminar</param>
+        public void eliminarCancha(int idCancha)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"DELETE FROM Canchas
+                                WHERE idCancha = @idCancha";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idCancha", idCancha);                
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {               
+                throw new Exception("No se pudo eliminar la cancha: " + ex.Message);
             }
             finally
             {

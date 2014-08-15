@@ -138,5 +138,23 @@ namespace Logica
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Elimina una cancha de la Bd
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idCancha">Id de la cancha a eliminar</param>
+        public void eliminarCancha(int idCancha)
+        {
+            try
+            {
+                DAOCancha daoCancha = new DAOCancha();
+                daoCancha.eliminarCancha(idCancha);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
