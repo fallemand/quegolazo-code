@@ -12,10 +12,9 @@ namespace Logica
     public class GestorEdicion
     {
         public Edicion edicion = new Edicion();
-
         /// <summary>
         /// Obtener ediciones de un torneo en particular
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         public List<Edicion> obtenerEdicionesPorTorneo(int idTorneo)
         {

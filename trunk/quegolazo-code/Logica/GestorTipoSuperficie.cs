@@ -10,51 +10,45 @@ namespace Logica
 {
     public class GestorTipoSuperficie
     {
-            /// <summary>
-            /// Obtiene todos los tipos de superficie
-            /// autor: Paula Pedrosa
-            /// </summary>
-            /// <returns>Lista genérica del objeto TipoSuperficie</returns>
-            public List<TipoSuperficie> obtenerTodos()
+        /// <summary>
+        /// Obtiene todos los Tipos de Superficies de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <returns>Lista genérica de objeto TipoSuperficie</returns>
+        public List<TipoSuperficie> obtenerTodos()
+        {
+            try
             {
-                try
-                {
-                     DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
-
+                DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
                 List<TipoSuperficie> tiposSuperficie = new List<TipoSuperficie>();
                 tiposSuperficie = daoTipoSuperficie.obtenerTodos();
-
                 return tiposSuperficie;
-                }
-                catch (Exception ex)
-                {
-                    
-                   throw new Exception(ex.Message);
-                }
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         /// <summary>
-        /// Obtiene un Tipo de Superficie por un Id
-        /// autor: Paula Pedrosa
+        /// Obtiene un Tipo de Superficie por Id
+        /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="idTipoSuperficie">Id Tipo de Superficie</param>
+        /// <param name="idTipoSuperficie">Id del Tipo de Superficie a obtener</param>
         /// <returns>Objeto Tipo de Superficie</returns>
-            public TipoSuperficie obtenerTipoSuperficiePorId(int idTipoSuperficie)
+        public TipoSuperficie obtenerTipoSuperficiePorId(int idTipoSuperficie)
+        {
+            try
             {
-                try
-                {
-                    DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
-                    TipoSuperficie tipoSuperficie = null;
-                    tipoSuperficie = daoTipoSuperficie.obtenerTipoSuperficiePorId(idTipoSuperficie);
-
-                    return tipoSuperficie;
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
- 
+                DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
+                TipoSuperficie tipoSuperficie = null;
+                tipoSuperficie = daoTipoSuperficie.obtenerTipoSuperficiePorId(idTipoSuperficie);
+                return tipoSuperficie;
             }
-     }
-    
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+     }    
 }

@@ -13,10 +13,9 @@ namespace Logica
     public class GestorTorneo
     {
         public Torneo torneo = new Torneo();
-
         /// <summary>
         /// Obtiene los torneos de un usuario
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         public List<Torneo> obtenerTorneosPorUsuario()
         {
@@ -27,7 +26,7 @@ namespace Logica
 
         /// <summary>
         /// Obtener torneo por Id del torneo y el id usuario
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         public Torneo obtenerTorneoPorIdYUsuario(int idTorneo, int idUsuario)
         {
@@ -38,7 +37,7 @@ namespace Logica
 
         /// <summary>
         /// Obtener un Torneo por Id
-        /// autor: Paula Pedrosa
+        /// autor: Pau Pedrosa
         /// </summary>
         public Torneo obtenerTorneoPorId(int idTorneo)
         {
