@@ -90,7 +90,7 @@
                             </tr>
                         </thead>
                     <tbody>
-                        <asp:Repeater ID="rptCanchas" runat="server" OnItemCommand="rptCanchas_ItemCommand">
+                        <asp:Repeater ID="rptCanchas" runat="server" OnItemCommand="rptCanchas_ItemCommand" OnItemDataBound="rptCanchas_ItemDataBound">
                             <ItemTemplate>
                                 <tr>
                                     <td><%# Eval("nombre") %></td>
@@ -98,7 +98,7 @@
                                     <td><%# Eval("telefono") %></td>
                                     <td>
                                         <asp:LinkButton ID="lnkEditarCancha" title="Editar Cancha" runat="server" CommandName="editarCancha" CommandArgument='<%#Eval("idCancha")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                        <a href="#" class="editar"><span class="glyphicon glyphicon-remove eliminar" rel="txtTooltip" title="Eliminar Cancha" data-toggle="tooltip" data-placement="top"></span></a>
+                                        <asp:LinkButton ID="lnkEliminarCancha" title="Eliminar Cancha" runat="server" CommandName="eliminarCancha" CommandArgument='<%#Eval("idCancha")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>
                                     </td>
                                 </tr>
                             </ItemTemplate>

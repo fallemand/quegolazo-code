@@ -66,22 +66,40 @@ namespace quegolazo_code.admin
         }
 
         /// <summary>
-        /// Método del Repeater para traer la Cancha a modificar
+        /// Método del Repeater para traer la Cancha a modificar o eliminar
         /// autor: Pau Pedrosa
         /// </summary>
         protected void rptCanchas_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName == "editarCancha")
-            {   //por CommandArgument recibe el ID de la cancha a modificar               
-                gestorCancha.obtenerCanchaAModificar(Int32.Parse(e.CommandArgument.ToString()));
-                txtNombreCancha.Value = gestorCancha.cancha.nombre;
-                txtDomicilio.Value = gestorCancha.cancha.domicilio;
-                txtTelefono.Value = gestorCancha.cancha.telefono;
-                btnRegistrarCancha.Visible = false;
-                btnModificarCancha.Visible = true;
-                btnCancelarModificacionCancha.Visible = true;
-                imagenpreview.Src = gestorCancha.cancha.obtenerImagenMediana();
+            try
+            {
+                if (e.CommandName == "editarCancha")
+                {   //por CommandArgument recibe el ID de la cancha a modificar               
+                    gestorCancha.obtenerCanchaAModificar(Int32.Parse(e.CommandArgument.ToString()));
+                    txtNombreCancha.Value = gestorCancha.cancha.nombre;
+                    txtDomicilio.Value = gestorCancha.cancha.domicilio;
+                    txtTelefono.Value = gestorCancha.cancha.telefono;
+                    btnRegistrarCancha.Visible = false;
+                    btnModificarCancha.Visible = true;
+                    btnCancelarModificacionCancha.Visible = true;
+                    imagenpreview.Src = gestorCancha.cancha.obtenerImagenMediana();
+                }
+
+                if (e.CommandName == "eliminarCancha")
+                {   //por CommandArgument recibe el ID de la cancha a eliminar              
+                    gestorCancha.eliminarCancha(Int32.Parse(e.CommandArgument.ToString()));
+                    cargarRepeaterCanchas();
+                }
             }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("No hay canchas registradas en ese Torneo"))
+                {
+                    rptCanchas.DataSource = null;
+                    rptCanchas.DataBind(); 
+                }                
+                lblMensajeCanchas.Text = ex.Message;
+            }            
         }
 
         /// <summary>
@@ -122,6 +140,19 @@ namespace quegolazo_code.admin
                 mostrarPanelFracaso(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Permite la apertura de la ventana de confirmación de la eliminación de una cancha
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void rptCanchas_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                LinkButton lnk = (LinkButton)e.Item.FindControl("lnkEliminarCancha");
+                lnk.Attributes.Add("onclick", "return confirm('¿Desea eliminar esta Cancha?');");
+            }
+        }   
 
         //------------------------------------------
         //--------------Metodos Extras--------------
@@ -187,14 +218,12 @@ namespace quegolazo_code.admin
         /// Habilita los botones para agregar una nueva cancha
         /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected void lnkNuevaCancha_Click(object sender, EventArgs e)
         {
             limpiarCamposCancha();
             btnRegistrarCancha.Visible = true;
             btnModificarCancha.Visible = false;
             btnCancelarModificacionCancha.Visible = false;
-        }        
+        }            
     }
 }
