@@ -6,7 +6,7 @@
             <fieldset class="vgCancha">
                 <div class="panel panel-default">
                     <div class="panel-heading">                        
-                        <asp:LinkButton ID="lnkNuevaCancha" Text="Agregar una Cancha" title="Nueva Cancha" runat="server"><span class="glyphicon glyphicon-plus"></span></asp:LinkButton>     
+                        <asp:LinkButton ID="lnkNuevaCancha" Text="Agregar una Cancha" title="Nueva Cancha" runat="server" OnClick="lnkNuevaCancha_Click"><span class="glyphicon glyphicon-plus"></span></asp:LinkButton>     
                         Agregar una Cancha                                   
                     </div>
                     <div class="panel-body nopadding-bottom">
@@ -66,8 +66,8 @@
                         </asp:Panel>
                     </div>
                     <div class="panel-footer clearfix">
-                        <asp:Button class="btn btn-success" ID="btnCancelarModificacionEquipo" runat="server" Text="Cancelar" Visible="false"/>&nbsp;
-                        <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnModificarEquipo" runat="server" Text="Modificar" Visible="false"/>
+                        <asp:Button class="btn btn-success" ID="btnCancelarModificacionCancha" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionCancha_Click"/>&nbsp;
+                        <asp:Button class="btn btn-success causesValidation vgCancha" ID="btnModificarCancha" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarCancha_Click"/>
                         <asp:Button class="btn btn-success pull-right causesValidation vgCancha" ID="btnRegistrarCancha" runat="server" Text="Registrar" OnClick="btnRegistrarCancha_Click" />                                               
                     </div>                    
                 </div>
@@ -90,7 +90,7 @@
                             </tr>
                         </thead>
                     <tbody>
-                        <asp:Repeater ID="rptCanchas" runat="server">
+                        <asp:Repeater ID="rptCanchas" runat="server" OnItemCommand="rptCanchas_ItemCommand">
                             <ItemTemplate>
                                 <tr>
                                     <td><%# Eval("nombre") %></td>

@@ -65,6 +65,64 @@ namespace quegolazo_code.admin
             }
         }
 
+        /// <summary>
+        /// Método del Repeater para traer la Cancha a modificar
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void rptCanchas_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "editarCancha")
+            {   //por CommandArgument recibe el ID de la cancha a modificar               
+                gestorCancha.obtenerCanchaAModificar(Int32.Parse(e.CommandArgument.ToString()));
+                txtNombreCancha.Value = gestorCancha.cancha.nombre;
+                txtDomicilio.Value = gestorCancha.cancha.domicilio;
+                txtTelefono.Value = gestorCancha.cancha.telefono;
+                btnRegistrarCancha.Visible = false;
+                btnModificarCancha.Visible = true;
+                btnCancelarModificacionCancha.Visible = true;
+                imagenpreview.Src = gestorCancha.cancha.obtenerImagenMediana();
+            }
+        }
+
+        /// <summary>
+        /// Permite cancelar la modificación de la Cancha
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void btnCancelarModificacionCancha_Click(object sender, EventArgs e)
+        {
+            limpiarCamposCancha();
+            btnRegistrarCancha.Visible = true;
+            btnModificarCancha.Visible = false;
+            btnCancelarModificacionCancha.Visible = false;
+            gestorCancha.cancha = null; // le setea null a la cancha
+        }
+
+        /// <summary>
+        /// Permite modificar una cancha
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void btnModificarCancha_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idCanchaAModificar = gestorCancha.cancha.idCancha;
+                gestorCancha.modificarCancha(idCanchaAModificar, txtNombreCancha.Value, txtDomicilio.Value, txtTelefono.Value);
+                GestorImagen.guardarImagen(idCanchaAModificar, GestorImagen.COMPLEJO);
+                limpiarCamposCancha();
+                mostrarPanelExito("Cancha modificada con éxito!");
+                cargarRepeaterCanchas();
+                gestorCancha.cancha = null; //le setea null a la cancha
+                //lo manda a la solapa de agregar una cancha
+                btnRegistrarCancha.Visible = true;
+                btnModificarCancha.Visible = false;
+                btnCancelarModificacionCancha.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
+        }
+
         //------------------------------------------
         //--------------Metodos Extras--------------
         //------------------------------------------
@@ -124,5 +182,19 @@ namespace quegolazo_code.admin
             litFracaso.Text = "";
             litExito.Text = "";
         }
+
+        /// <summary>
+        /// Habilita los botones para agregar una nueva cancha
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void lnkNuevaCancha_Click(object sender, EventArgs e)
+        {
+            limpiarCamposCancha();
+            btnRegistrarCancha.Visible = true;
+            btnModificarCancha.Visible = false;
+            btnCancelarModificacionCancha.Visible = false;
+        }        
     }
 }

@@ -262,5 +262,102 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        /// <summary>
+        /// Modifica en la BD una Cancha registrada
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="cancha">Objeto Cancha con los datos modificados</param>
+        public void modificarCancha(Cancha cancha)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"UPDATE Canchas
+                                SET nombre = @nombre, domicilio = @domicilio, telefono = @telefono
+                                WHERE idCancha = @idCancha";
+                cmd.Parameters.AddWithValue("@nombre", cancha.nombre);
+                cmd.Parameters.AddWithValue("@idCancha", cancha.idCancha);
+                if (cancha.domicilio != null)
+                    cmd.Parameters.AddWithValue("@domicilio", cancha.domicilio);
+                else
+                    cmd.Parameters.AddWithValue("@domicilio", DBNull.Value);
+                if(cancha.telefono != null)
+                    cmd.Parameters.AddWithValue("@telefono", cancha.telefono);
+                else
+                    cmd.Parameters.AddWithValue("@telefono", DBNull.Value);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                //Si ya existe una cancha con ese nombre en ese torneo
+                if (ex.Message.Contains("unique_nombreCancha_idTorneo"))
+                    throw new Exception("Ya existe una cancha registrada con este nombre, por favor cambielo e intente nuevamente.");
+                throw new Exception("No se pudo modificar la cancha: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene una cancha de la BD por su Id
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idCancha">Id de la Cancha a buscar</param>
+        /// <returns>Objeto Cancha</returns>
+        public Cancha obtenerCanchaPorId(int idCancha)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            Cancha respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM Canchas
+                                WHERE idCancha = @idCancha";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idCancha", idCancha);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    respuesta = new Cancha();
+                    respuesta.idCancha = Int32.Parse(dr["idCancha"].ToString());
+                    respuesta.nombre = dr["nombre"].ToString();
+                    if (dr["domicilio"] != System.DBNull.Value)
+                        respuesta.domicilio = dr["domicilio"].ToString();
+                    else
+                        respuesta.domicilio = null;
+                    if (dr["telefono"] != System.DBNull.Value)
+                        respuesta.telefono = dr["telefono"].ToString();
+                    else
+                        respuesta.telefono = null; 
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar la Cancha: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

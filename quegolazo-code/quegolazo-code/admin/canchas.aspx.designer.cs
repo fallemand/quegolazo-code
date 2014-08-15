@@ -103,22 +103,22 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Literal litFracaso;
         
         /// <summary>
-        /// Control btnCancelarModificacionEquipo.
+        /// Control btnCancelarModificacionCancha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarModificacionEquipo;
+        protected global::System.Web.UI.WebControls.Button btnCancelarModificacionCancha;
         
         /// <summary>
-        /// Control btnModificarEquipo.
+        /// Control btnModificarCancha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarEquipo;
+        protected global::System.Web.UI.WebControls.Button btnModificarCancha;
         
         /// <summary>
         /// Control btnRegistrarCancha.
