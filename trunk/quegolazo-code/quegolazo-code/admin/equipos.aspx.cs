@@ -36,7 +36,7 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
-                lblMensajeEquipos.Text = ex.Message;
+                mostrarPanelFracasoListaEquipos(ex.Message);
             }                        
             limpiarPaneles();
         }     
@@ -53,7 +53,6 @@ namespace quegolazo_code.admin
                 GestorImagen.guardarImagen(gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
                 limpiarCamposEquipo();
                 mostrarPanelExito("Equipo registrado con éxito!");
-                lblMensajeEquipos.Text = "";
                 cargarRepeaterEquipos();
                 gestorEquipo.equipo = null; // le setea null al equipo
             }
@@ -226,6 +225,7 @@ namespace quegolazo_code.admin
         {
             rptEquipos.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo();
             rptEquipos.DataBind();
+            sinequipos.Visible = (rptEquipos.Items.Count > 0) ? false : true;
         }
 
         /// <summary>
@@ -289,15 +289,16 @@ namespace quegolazo_code.admin
         {
             panelExito.Visible = false;
             panelFracaso.Visible = false;
+            panelFracasoListaEquipos.Visible = false;
             litFracaso.Text = "";
             litExito.Text = "";
+            litFracasoListaEquipos.Text = "";
         }
 
         /// <summary>
         /// Habilita el panel de fracaso y deshabilita el panel de exito.
         /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
         private void mostrarPanelFracaso(string mensaje)
         {
             litFracaso.Text = mensaje;
@@ -306,10 +307,19 @@ namespace quegolazo_code.admin
         }
 
         /// <summary>
+        /// Habilita el panel de fracaso y deshabilita el panel de exito.
+        /// autor: Pau Pedrosa
+        /// </summary>
+        private void mostrarPanelFracasoListaEquipos(string mensaje)
+        {
+            litFracasoListaEquipos.Text = mensaje;
+            panelFracasoListaEquipos.Visible = true;
+        }
+
+        /// <summary>
         /// Habilita el panel de exito y deshabilita el panel de fracaso.
         /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
         private void mostrarPanelExito(string mensaje)
         {
             litExito.Text = mensaje;

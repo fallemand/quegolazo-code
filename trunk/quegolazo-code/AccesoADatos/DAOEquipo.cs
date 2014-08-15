@@ -87,7 +87,6 @@ namespace AccesoADatos
             SqlDataReader dr;
             List<Equipo> respuesta = new List<Equipo>();
             Equipo equipo = null;
-            bool noHayEquiposRegistrados = false; 
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -101,12 +100,6 @@ namespace AccesoADatos
                 cmd.Parameters.Add(new SqlParameter("@idTorneo", idTorneo));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-                //verifica si el DataReader está vacío
-                if (!dr.HasRows)
-                {
-                    noHayEquiposRegistrados = true;
-                    throw new Exception("No hay equipos registrados en ese Torneo");
-                }
                 DAODelegado daoDelegado = new DAODelegado();
                 DAOTorneo daoTorneo = new DAOTorneo();
                 while (dr.Read())
@@ -129,10 +122,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                if (!noHayEquiposRegistrados)
-                    throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
-                else
-                    throw new Exception(ex.Message);
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
             }
             finally
             {

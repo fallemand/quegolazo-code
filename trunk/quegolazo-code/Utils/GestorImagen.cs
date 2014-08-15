@@ -36,15 +36,15 @@ namespace Utils
         public const string GRANDE = "-bg";
 
         /// <summary>
-        /// Guarda las imágenes validándolas. Recibe por parámetro el archivo, el id, y que tipo de image es (torneo, equipo, etc)
+        /// Crea imágenes a partir de la imagen temporal, las guarda en sus respectivos directorios y luego elimina la imagen temporal.
         /// autor: Facundo Allemand
         /// </summary>
         public static void guardarImagen(int id, int tipoImagen) {
-            string rutaImagenTemporal = pathImagenesDisco + pathTemp + "img.temp";
+            string pathImagenTemporal = pathImagenesDisco + pathTemp + System.Web.HttpContext.Current.Session.SessionID + ".temp";
             try
             {
                 crearDirectorios();
-                if (File.Exists(rutaImagenTemporal))
+                if (File.Exists(pathImagenTemporal))
                 {
                     //Definimos los tamaños de imagenes a crear
                     List<Imagen> imagenes = new List<Imagen>();
@@ -53,7 +53,7 @@ namespace Utils
                     imagenes.Add(new Imagen() { abreviacion = GRANDE, height = 500, width = 500 });
                     foreach (Imagen imagen in imagenes)
                     {
-                        Bitmap img = CrearImagen(rutaImagenTemporal, imagen.width, imagen.height);
+                        Bitmap img = CrearImagen(pathImagenTemporal, imagen.width, imagen.height);
                         switch (tipoImagen)
                         {
                             case TORNEO: img.Save(pathImagenesDisco + pathTorneos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
@@ -71,16 +71,20 @@ namespace Utils
             }
             finally
             {
-                System.IO.File.Delete(rutaImagenTemporal);
+                System.IO.File.Delete(pathImagenTemporal);
             }
         }
 
-        public static void guardarImagenTemporal(HttpPostedFile file)
+        /// <summary>
+        /// Guarda la imagen en un directorio temporal con el nombre del id de session.
+        /// autor: Facundo Allemand
+        /// </summary>
+        public static void guardarImagenTemporal(HttpPostedFile file, string idSesion)
         {
             if (file != null && file.ContentLength > 0)
             {
                 crearDirectorios();
-                string rutaImagenTemporal = pathImagenesDisco + pathTemp + "img.temp";
+                string rutaImagenTemporal = pathImagenesDisco + pathTemp + idSesion + ".temp";
                 try
                 {
                     file.SaveAs(rutaImagenTemporal);
@@ -94,6 +98,10 @@ namespace Utils
             }
         }
 
+        /// <summary>
+        /// Crea los directorios en caso que no esten creados
+        /// autor: Facundo Allemand
+        /// </summary>
         private static void crearDirectorios()
         {
             if (!Directory.Exists(pathImagenesDisco + pathTemp))
