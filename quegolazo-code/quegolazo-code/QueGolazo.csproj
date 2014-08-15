@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="admin\canchas.aspx" />
     <Content Include="admin\equipos.aspx" />
+    <Content Include="resources\img\theme\load4.gif" />
     <Content Include="resources\js\ajaxfileupload.js" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
     <Content Include="resources\js\quegolazo.js" />

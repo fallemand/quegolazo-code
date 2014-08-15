@@ -13,6 +13,15 @@ namespace quegolazo_code.admin {
     public partial class equipos {
         
         /// <summary>
+        /// Control upRegistrarEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upRegistrarEquipo;
+        
+        /// <summary>
         /// Control lnkNuevoEquipo.
         /// </summary>
         /// <remarks>
@@ -211,6 +220,24 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnRegistrarEquipo;
         
         /// <summary>
+        /// Control UpdateProgressModalTorneo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgressModalTorneo;
+        
+        /// <summary>
+        /// Control upEquipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upEquipos;
+        
+        /// <summary>
         /// Control rptEquipos.
         /// </summary>
         /// <remarks>
@@ -220,12 +247,30 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Repeater rptEquipos;
         
         /// <summary>
-        /// Control lblMensajeEquipos.
+        /// Control sinequipos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensajeEquipos;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinequipos;
+        
+        /// <summary>
+        /// Control panelFracasoListaEquipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelFracasoListaEquipos;
+        
+        /// <summary>
+        /// Control litFracasoListaEquipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litFracasoListaEquipos;
     }
 }

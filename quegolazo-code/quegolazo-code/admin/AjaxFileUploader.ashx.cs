@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.SessionState;
 using Utils;
 
 namespace quegolazo_code.admin
@@ -10,9 +11,8 @@ namespace quegolazo_code.admin
     /// <summary>
     /// Permite subir una imagen sin realizar postback
     /// </summary>
-    public class AjaxFileUploader : IHttpHandler
+    public class AjaxFileUploader : IHttpHandler, IReadOnlySessionState
     {
-
         public void ProcessRequest(HttpContext context)
         {
             string msg = "{";
@@ -20,7 +20,7 @@ namespace quegolazo_code.admin
             {
                 if (context.Request.Files.Count > 0 && context.Request.Files[0].ContentLength>0)
                 {
-                    GestorImagen.guardarImagenTemporal(context.Request.Files[0]);
+                    GestorImagen.guardarImagenTemporal(context.Request.Files[0],context.Session.SessionID);
                     msg += string.Format("msg:'{0}'\n", "Imagen Correta!");
                 }
             }
