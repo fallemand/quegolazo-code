@@ -281,18 +281,27 @@ namespace Utils
             if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
                 return pathImagen;
             else
+                pathImagen = obtenerImagenDefault(tipoImagen, tamañoImagen);
+            return pathImagen;
+        }
+
+        /// <summary>
+        /// Obtener Imagen Temporal
+        /// autor: Facundo Allemand
+        /// </summary>
+        public static string obtenerImagenDefault(int tipoImagen, string tamañoImagen)
+        {
+            string pathImagen="";
+            switch (tipoImagen)
             {
-                switch (tipoImagen)
-                {
-                    case TORNEO:
-                        pathImagen = pathImagenes + pathTorneos + "default" + tamañoImagen + extension;break;
-                    case EQUIPO:
-                        pathImagen = pathImagenes + pathEquipos + "default" + tamañoImagen + extension;break;
-                    case COMPLEJO:
-                        pathImagen = pathImagenes + pathComplejos + "default" + tamañoImagen + extension;break;
-                    case JUGADOR:
-                        pathImagen = pathImagenes + pathJugadores + "default" + tamañoImagen + extension;break;
-                }
+                case TORNEO:
+                    pathImagen = pathImagenes + pathTorneos + "default" + tamañoImagen + extension; break;
+                case EQUIPO:
+                    pathImagen = pathImagenes + pathEquipos + "default" + tamañoImagen + extension; break;
+                case COMPLEJO:
+                    pathImagen = pathImagenes + pathComplejos + "default" + tamañoImagen + extension; break;
+                case JUGADOR:
+                    pathImagen = pathImagenes + pathJugadores + "default" + tamañoImagen + extension; break;
             }
             return pathImagen;
         }

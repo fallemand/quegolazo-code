@@ -1,13 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="mis-torneos.aspx.cs" Inherits="quegolazo_code.admin.mis_torneos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="torneos.aspx.cs" Inherits="quegolazo_code.admin.mis_torneos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdmin" runat="server">
     <!-- Pantalla Principal -->
     <div class="container padding-top">
         <div class="row">
             <div class="container">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalTorneo">Crear un Nuevo Torneo</button>
                 <asp:UpdatePanel ID="upTorneos" runat="server">
                     <ContentTemplate>
+                        <asp:Button ID="btnRegistrarNuevoTorneo" runat="server" Text="Crear un Nuevo Torneo" CssClass="btn btn-success" OnClick="btnRegistrarNuevoTorneo_Click" />
                         <asp:Panel ID="panelSinTorneos" runat="server" CssClass="col-md-5 margin-top " Enabled="True" Visible="False">
                             <div class="alert alert-success">
                                 <span class="glyphicon glyphicon-chevron-up"></span> Haz clic en el botón para crear tu primer torneo!
@@ -65,9 +65,11 @@
                                                         </tr>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
+                                                <asp:Panel ID="panelSinEdiciones" runat="server">
+                                                    <tr><td colspan="5">No hay ediciones registradas para el torneo</td></tr>
+                                                </asp:Panel>
                                             </tbody>
                                         </table>
-                                        <asp:Literal ID="litSinEdiciones" runat="server" Text="No existen ediciones para este torneo" Visible="false"></asp:Literal>
                                     </div>
                                 </div>
                             </ItemTemplate>
@@ -88,7 +90,7 @@
                 <div class="modal-content">
                     <asp:UpdatePanel ID="upModalTorneo" runat="server">
                         <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="btnResgitrarTorneo" EventName="Click"/>
+                            <asp:AsyncPostBackTrigger ControlID="btnRegistrarTorneo" EventName="Click"/>
                             <asp:AsyncPostBackTrigger ControlID="btnModificarTorneo" EventName="Click" />
                         </Triggers>
                         <ContentTemplate>
@@ -153,7 +155,7 @@
                             <div class="modal-footer">
                                 <div class="col-xs-8 col-xs-offset-3">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    <asp:Button ID="btnResgitrarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Registrar" OnClick="btnResgitrarTorneo_Click"/>
+                                    <asp:Button ID="btnRegistrarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Registrar" OnClick="btnResgitrarTorneo_Click"/>
                                     <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Modificar" OnClick="btnModificarTorneo_Click" Visible="false"/>
                                 </div>
                                 <div class="col-xs-1">
@@ -487,9 +489,6 @@
             $('body').on('change', '#ContentAdmin_imagenUpload', function () {
                 previewImage(this, 'ContentAdmin_imagenpreview');
                 ajaxFileUpload('ContentAdmin_imagenUpload');
-            });
-            $('#modalTorneo').on('hidden.bs.modal', function () {
-                limpiarModalTorneo();
             });
             $('#modalEdicion').on('hidden.bs.modal', function () {
                 limpiarModalEdicion();

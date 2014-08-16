@@ -22,6 +22,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.UpdatePanel upTorneos;
         
         /// <summary>
+        /// Control btnRegistrarNuevoTorneo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegistrarNuevoTorneo;
+        
+        /// <summary>
         /// Control panelSinTorneos.
         /// </summary>
         /// <remarks>
@@ -139,13 +148,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Literal litFracasoTorneo;
         
         /// <summary>
-        /// Control btnResgitrarTorneo.
+        /// Control btnRegistrarTorneo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnResgitrarTorneo;
+        protected global::System.Web.UI.WebControls.Button btnRegistrarTorneo;
         
         /// <summary>
         /// Control btnModificarTorneo.
