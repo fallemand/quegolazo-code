@@ -250,7 +250,7 @@ namespace AccesoADatos
         public void eliminarEquipo(int idEquipo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();
+            SqlCommand cmd = new SqlCommand();            
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -268,6 +268,47 @@ namespace AccesoADatos
                 if (ex.Message.Contains("FK"))
                     throw new Exception("Clave forránea");//Cambiar mensaje
                 throw new Exception("No se pudo eliminar el equipo: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Registrar equipos para una edición
+        /// </summary>
+        /// <param name="idEquipo">Id del Equipo</param>
+        /// <param name="idEdicion">Id de la Edición</param>
+        public void registrarEquiposEnEdicion(List<Equipo> equipos, int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;   
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                trans = con.BeginTransaction();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+                foreach (Equipo equipo in equipos)
+                {
+                    string sql = @"INSERT INTO EquipoXEdicion (idEdicion, idEquipo)
+                                    VALUES (@idEdicion, @idEquipo)";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                    cmd.Parameters.AddWithValue("@idEquipo", equipo.idEquipo);
+                    cmd.CommandText = sql;
+                    cmd.ExecuteNonQuery();                    
+                }
+                trans.Commit();
+            }
+            catch (SqlException ex)
+            {
+                trans.Rollback();
+                throw new Exception("No se pudo registrar el equipo: " + ex.Message);
             }
             finally
             {
