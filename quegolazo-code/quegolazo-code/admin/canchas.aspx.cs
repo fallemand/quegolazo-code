@@ -32,6 +32,7 @@ namespace quegolazo_code.admin
             try
             {
                 cargarRepeaterCanchas();
+                imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.COMPLEJO, GestorImagen.MEDIANA);
             }
             catch (Exception ex)
             {
