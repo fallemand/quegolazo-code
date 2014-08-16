@@ -91,7 +91,7 @@
                                                 <div class="col-md-5">
                                                     <div class="fileinput">
                                                         <div class="thumbnail fileinput-preview">
-                                                            <img id="imagenpreview" src="../resources/img/theme/logo-default.png" runat="server" />
+                                                            <img id="imagenpreview" src="../resources/img/equipos/default-nm.jpg" runat="server" />
                                                         </div>
                                                         <div class="fileUpload">
                                                             <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>

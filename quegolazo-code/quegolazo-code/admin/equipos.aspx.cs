@@ -73,6 +73,7 @@ namespace quegolazo_code.admin
                 gestorEquipo.agregarDelegado(txtNombreDelegado.Value, txtEmailDelegado.Value, txtTelefonoDelegado.Value, txtDireccionDelegado.Value);
                 limpiarCamposDelegado();
                 cargarRepeaterDelegados();
+                imagenpreview.Src = GestorImagen.obtenerImagenTemporal(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
             }
             catch (Exception ex)
             {
