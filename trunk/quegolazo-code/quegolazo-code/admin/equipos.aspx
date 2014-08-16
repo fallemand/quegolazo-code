@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="equipos.aspx.cs" Inherits="quegolazo_code.admin.equipos" %>
-
+<%@ Import Namespace="Utils" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="col-md-6">
@@ -91,7 +91,7 @@
                                                 <div class="col-md-5">
                                                     <div class="fileinput">
                                                         <div class="thumbnail fileinput-preview">
-                                                            <img id="imagenpreview" src="../resources/img/equipos/default-nm.jpg" runat="server" />
+                                                            <img id="imagenpreview" src="<%# GestorImagen.obtenerImagenDefault(GestorImagen.EQUIPO,GestorImagen.MEDIANA) %>" runat="server" />
                                                         </div>
                                                         <div class="fileUpload">
                                                             <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
@@ -167,7 +167,7 @@
                                                 <td><%# Eval("nombre") %></td>
                                                 <td>
                                                     <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarEquipo" title="Editar Equipo" runat="server" CommandName="editarEquipo" CommandArgument='<%#Eval("idEquipo")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                                    <a href="#" class="editar"><span class="glyphicon glyphicon-remove eliminar" rel="txtTooltip" title="Eliminar Equipo" data-toggle="tooltip" data-placement="top"></span></a>
+                                                    <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarEquipo" title="Eliminar Equipo" runat="server" CommandName="eliminarEquipo" CommandArgument='<%#Eval("idEquipo")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar"></span></asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>

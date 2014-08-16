@@ -241,5 +241,39 @@ namespace AccesoADatos
                     con.Close();                
             }
         }
+
+        /// <summary>
+        /// Elimina un equipo de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idCancha">Id del equipo a eliminar</param>
+        public void eliminarEquipo(int idEquipo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"DELETE FROM Equipos
+                                WHERE idEquipo = @idEquipo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEquipo", idEquipo);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {//Error de Clave foránea
+                if (ex.Message.Contains("FK"))
+                    throw new Exception("Clave forránea");//Cambiar mensaje
+                throw new Exception("No se pudo eliminar el equipo: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

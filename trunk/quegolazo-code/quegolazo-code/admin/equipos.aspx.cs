@@ -144,7 +144,7 @@ namespace quegolazo_code.admin
         }     
 
         /// <summary>
-        /// Permite editar un Equipo
+        /// Permite editar y eliminar un Equipo
         /// autor: Pau Pedrosa
         /// </summary>
         protected void rptEquipos_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -162,7 +162,13 @@ namespace quegolazo_code.admin
                 btnModificarEquipo.Visible = true;
                 btnCancelarModificacionEquipo.Visible = true;
                 imagenpreview.Src = gestorEquipo.equipo.obtenerImagenMediana();              
-            } 
+            }
+
+            if (e.CommandName == "eliminarEquipo")
+            {//por CommandArgument recibe el ID del equipo a eliminar 
+                gestorEquipo.eliminarEquipo(Int32.Parse(e.CommandArgument.ToString()));
+                cargarRepeaterEquipos();
+            }
         }
 
         /// <summary>
@@ -264,6 +270,7 @@ namespace quegolazo_code.admin
             txtNombreDirector.Value = "";
             txtColorPrimario.Value = "#E1E1E1";
             txtColorSecundario.Value = "#E1E1E1";
+            imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
             limpiarCamposDelegado();
             rptDelegados.DataSource = null;
             rptDelegados.DataBind();
