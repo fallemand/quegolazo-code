@@ -59,6 +59,7 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
+                imagenpreview.Src = GestorImagen.obtenerImagenTemporal(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
                 mostrarPanelFracaso(ex.Message);            
             }
         }

@@ -78,8 +78,9 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "removeClass", "removeClass('modalTorneo','fade');", true);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "removeClass", "removeClass('modalTorneo','fade');", true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
+                imagenpreview.Src = GestorImagen.obtenerImagenTemporal(GestorImagen.TORNEO, GestorImagen.MEDIANA);
                 mostrarPanelFracasoTorneo(ex.Message);
             }
         }
