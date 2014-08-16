@@ -58,6 +58,7 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
+                imagenpreview.Src = GestorImagen.obtenerImagenTemporal(GestorImagen.COMPLEJO, GestorImagen.MEDIANA);
                 mostrarPanelFracaso(ex.Message);
                 txtNombreCancha.Focus();
             }
