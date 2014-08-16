@@ -8,7 +8,7 @@
                     <ContentTemplate>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <asp:LinkButton ID="lnkNuevoEquipo" Text="Agregar un Equipo" title="Nuevo Equipo" runat="server" OnClick="lnkNuevoEquipo_Click"><span class="glyphicon glyphicon-plus"></span></asp:LinkButton>
+                                <span class="glyphicon glyphicon-plus"></span>
                                 Agregar un Equipo                                   
                             </div>
                             <div class="panel-body nopadding-bottom">
