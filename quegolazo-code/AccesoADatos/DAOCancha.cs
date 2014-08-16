@@ -214,7 +214,6 @@ namespace AccesoADatos
             SqlDataReader dr;
             List<Cancha> respuesta = new List<Cancha>();
             Cancha cancha = null;
-            bool noHayCanchasRegistradas = false;
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -228,12 +227,6 @@ namespace AccesoADatos
                 cmd.Parameters.Add(new SqlParameter("@idTorneo", idTorneo));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-                //verifica si el DataReader está vacío
-                if (!dr.HasRows)
-                {
-                    noHayCanchasRegistradas = true;
-                    throw new Exception("No hay canchas registradas en ese Torneo");
-                }
                 while (dr.Read())
                 {
                     cancha = new Cancha()
@@ -251,10 +244,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                if (!noHayCanchasRegistradas)
-                    throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
-                else
-                    throw new Exception(ex.Message);
+                    throw new Exception("Error al obtener las canchas:" + ex.Message);
             }
             finally
             {

@@ -103,9 +103,14 @@
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
+                        <tr id="sinCanchas" runat="server" visible="false">
+                            <td colspan="2">No hay canchas registradas</td>
+                        </tr>
                     </tbody>
                     </table>
-                    <asp:Label ID="lblMensajeCanchas" runat="server" Text=""></asp:Label>
+                    <asp:Panel ID="panelFracasoListaCanchas" runat="server" CssClass="alert alert-danger" Visible="False">
+                                <asp:Literal ID="litFracasoListaCanchas" runat="server"></asp:Literal>
+                            </asp:Panel>
                 </div>
             </div>
         </div>

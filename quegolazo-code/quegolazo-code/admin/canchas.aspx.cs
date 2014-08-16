@@ -35,7 +35,7 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
-                lblMensajeCanchas.Text = ex.Message;
+                mostrarPanelFracasoListaCanchas(ex.Message);
             }
             limpiarPaneles();
         }
@@ -54,7 +54,6 @@ namespace quegolazo_code.admin
                 GestorImagen.guardarImagen(gestorCancha.cancha.idCancha, GestorImagen.COMPLEJO);
                 limpiarCamposCancha();                
                 mostrarPanelExito("Cancha registrada con éxito!");
-                lblMensajeCanchas.Text = "";
                 cargarRepeaterCanchas();
                 gestorCancha.cancha = null; // le setea null a la cancha
             }
@@ -93,12 +92,7 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("No hay canchas registradas en ese Torneo"))
-                {
-                    rptCanchas.DataSource = null;
-                    rptCanchas.DataBind(); 
-                }                
-                lblMensajeCanchas.Text = ex.Message;
+                mostrarPanelFracasoListaCanchas(ex.Message);                
             }            
         }
 
@@ -165,6 +159,7 @@ namespace quegolazo_code.admin
         {
             rptCanchas.DataSource = gestorCancha.obtenerCanchasDeUnTorneo();
             rptCanchas.DataBind();
+            sinCanchas.Visible = (rptCanchas.Items.Count > 0) ? false : true;
         }
 
         /// <summary>
@@ -183,12 +178,21 @@ namespace quegolazo_code.admin
         /// Habilita el panel de exito y deshabilita el panel de fracaso.
         /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
         private void mostrarPanelExito(string mensaje)
         {
             litExito.Text = mensaje;
             panelExito.Visible = true;
             panelFracaso.Visible = false;
+        }
+
+        /// <summary>
+        /// Habilita el panel de exito y deshabilita el panel de fracaso.
+        /// autor: Pau Pedrosa
+        /// </summary>
+        private void mostrarPanelFracasoListaCanchas(string mensaje)
+        {
+            litFracasoListaCanchas.Text = mensaje;
+            panelFracasoListaCanchas.Visible = false;
         }
 
         /// <summary>
