@@ -240,19 +240,6 @@ namespace quegolazo_code.admin
         }
 
         /// <summary>
-        /// Permite ir a agregar un nuevo equipo
-        /// autor: Pau Pedrosa
-        /// </summary>
-        protected void lnkNuevoEquipo_Click(object sender, EventArgs e)
-        {
-            limpiarCamposEquipo();
-            limpiarCamposDelegado();
-            btnRegistrarEquipo.Visible = true;
-            btnModificarEquipo.Visible = false;
-            btnCancelarModificacionEquipo.Visible = false;
-        }
-
-        /// <summary>
         /// limpia los campos del alta de delegado
         /// autor: Pau Pedrosa
         /// </summary>
