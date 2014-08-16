@@ -13,6 +13,15 @@ namespace quegolazo_code.admin {
     public partial class canchas {
         
         /// <summary>
+        /// Control upRegistrarNuevaCancha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upRegistrarNuevaCancha;
+        
+        /// <summary>
         /// Control lnkNuevaCancha.
         /// </summary>
         /// <remarks>
@@ -128,6 +137,24 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRegistrarCancha;
+        
+        /// <summary>
+        /// Control UpdateProgressModalTorneo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgressModalTorneo;
+        
+        /// <summary>
+        /// Control upListaCanchas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upListaCanchas;
         
         /// <summary>
         /// Control rptCanchas.

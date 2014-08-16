@@ -4,6 +4,8 @@
     <div class="container">
         <div class="col-md-6">
             <fieldset class="vgCancha">
+            <asp:UpdatePanel ID="upRegistrarNuevaCancha" runat="server">
+                <ContentTemplate>
                 <div class="panel panel-default">
                     <div class="panel-heading">                        
                         <asp:LinkButton ID="lnkNuevaCancha" Text="Agregar una Cancha" title="Nueva Cancha" runat="server" OnClick="lnkNuevaCancha_Click"><span class="glyphicon glyphicon-plus"></span></asp:LinkButton>     
@@ -64,13 +66,24 @@
                         <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                             <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
                         </asp:Panel>
-                    </div>
-                    <div class="panel-footer clearfix">
-                        <asp:Button class="btn btn-success" ID="btnCancelarModificacionCancha" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionCancha_Click"/>&nbsp;
-                        <asp:Button class="btn btn-success causesValidation vgCancha" ID="btnModificarCancha" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarCancha_Click"/>
-                        <asp:Button class="btn btn-success pull-right causesValidation vgCancha" ID="btnRegistrarCancha" runat="server" Text="Registrar" OnClick="btnRegistrarCancha_Click" />                                               
                     </div>                    
+                    <div class="panel-footer clearfix text-right">
+                        <div class="col-xs-8 col-xs-offset-3">
+                            <asp:Button class="btn btn-default" ID="btnCancelarModificacionCancha" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionCancha_Click" />
+                            <asp:Button class="btn btn-success causesValidation vgCancha" ID="btnModificarCancha" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarCancha_Click" />
+                            <asp:Button class="btn btn-success causesValidation vgCancha" ID="btnRegistrarCancha" runat="server" Text="Registrar" OnClick="btnRegistrarCancha_Click" />
+                        </div>
+                        <div class="col-xs-1">
+                            <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
+                                <ProgressTemplate>
+                                    <img src="/resources/img/theme/load4.gif" />
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                        </div>
+                    </div>                                                           
                 </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
             </fieldset>
         </div>
         <div class="col-md-6">
@@ -80,7 +93,13 @@
                     Canchas Existentes
                 </div>
                 <div class="panel-body">
-                    <table class="table">
+                    <asp:UpdatePanel ID="upListaCanchas" runat="server">
+                         <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="btnRegistrarCancha" EventName="Click" />
+                            <asp:AsyncPostBackTrigger ControlID="btnModificarCancha" EventName="Click" />
+                        </Triggers> 
+                        <ContentTemplate>
+                        <table class="table">
                         <thead>
                             <tr>
                                 <th class="col-md-2">Nombre</th>
@@ -97,8 +116,8 @@
                                     <td><%# Eval("domicilio") %></td>
                                     <td><%# Eval("telefono") %></td>
                                     <td>
-                                        <asp:LinkButton ID="lnkEditarCancha" title="Editar Cancha" runat="server" CommandName="editarCancha" CommandArgument='<%#Eval("idCancha")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                        <asp:LinkButton ID="lnkEliminarCancha" title="Eliminar Cancha" runat="server" CommandName="eliminarCancha" CommandArgument='<%#Eval("idCancha")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>
+                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarCancha" title="Editar Cancha" runat="server" CommandName="editarCancha" CommandArgument='<%#Eval("idCancha")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarCancha" title="Eliminar Cancha" runat="server" CommandName="eliminarCancha" CommandArgument='<%#Eval("idCancha")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>
                                     </td>
                                 </tr>
                             </ItemTemplate>
@@ -109,8 +128,10 @@
                     </tbody>
                     </table>
                     <asp:Panel ID="panelFracasoListaCanchas" runat="server" CssClass="alert alert-danger" Visible="False">
-                                <asp:Literal ID="litFracasoListaCanchas" runat="server"></asp:Literal>
-                            </asp:Panel>
+                        <asp:Literal ID="litFracasoListaCanchas" runat="server"></asp:Literal>
+                    </asp:Panel>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                 </div>
             </div>
         </div>
