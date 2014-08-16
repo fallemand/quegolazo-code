@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="torneos.aspx.cs" Inherits="quegolazo_code.admin.mis_torneos" %>
-
+<%@ Import Namespace="Utils" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdmin" runat="server">
     <!-- Pantalla Principal -->
     <div class="container padding-top">
@@ -127,7 +127,7 @@
                                         <div class="col-md-4">
                                             <div class="fileinput">
                                                 <div class="thumbnail fileinput-preview">
-                                                    <img id="imagenpreview" src="../resources/img/theme/logo-default.png" runat="server" />
+                                                    <img id="imagenpreview" src="<%# GestorImagen.obtenerImagenDefault(GestorImagen.TORNEO,GestorImagen.MEDIANA) %>" runat="server" />
                                                 </div>
                                                 <div class="fileUpload">
                                                     <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
