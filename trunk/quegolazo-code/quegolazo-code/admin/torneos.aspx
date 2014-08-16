@@ -6,7 +6,11 @@
             <div class="container">
                 <asp:UpdatePanel ID="upTorneos" runat="server">
                     <ContentTemplate>
-                        <asp:Button ID="btnRegistrarNuevoTorneo" runat="server" Text="Crear un Nuevo Torneo" CssClass="btn btn-success" OnClick="btnRegistrarNuevoTorneo_Click" />
+                        <div class="row">
+                            <div class="col-xs-12">
+                                 <asp:Button ID="btnRegistrarNuevoTorneo" runat="server" Text="Crear un Nuevo Torneo" CssClass="btn btn-success" OnClick="btnRegistrarNuevoTorneo_Click" />
+                            </div>
+                        </div>
                         <asp:Panel ID="panelSinTorneos" runat="server" CssClass="col-md-5 margin-top " Enabled="True" Visible="False">
                             <div class="alert alert-success">
                                 <span class="glyphicon glyphicon-chevron-up"></span> Haz clic en el botón para crear tu primer torneo!
@@ -79,7 +83,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-        </div>
+            </div>
     </div>
     <!-- Pantalla Principal -->
 
