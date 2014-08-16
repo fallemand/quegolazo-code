@@ -139,12 +139,30 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Repeater rptCanchas;
         
         /// <summary>
-        /// Control lblMensajeCanchas.
+        /// Control sinCanchas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensajeCanchas;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinCanchas;
+        
+        /// <summary>
+        /// Control panelFracasoListaCanchas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelFracasoListaCanchas;
+        
+        /// <summary>
+        /// Control litFracasoListaCanchas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litFracasoListaCanchas;
     }
 }

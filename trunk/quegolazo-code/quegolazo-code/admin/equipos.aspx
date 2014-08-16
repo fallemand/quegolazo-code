@@ -45,8 +45,8 @@
                                                 <asp:Repeater ID="rptDelegados" runat="server" OnItemCommand="rptDelegados_ItemCommand">
                                                     <ItemTemplate>
                                                         <span class="label label-default label-md"><%# Eval("nombre") %>
-                                                            <asp:LinkButton title="Eliminar" rel="txtTooltip" ID="lnkEliminar" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                                            <asp:LinkButton title="Modificar" rel="txtTooltip" ID="lnkModificar" runat="server" CommandName="modificarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                            <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminar" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                            <asp:LinkButton ClientIDMode="AutoID" title="Modificar" rel="txtTooltip" ID="lnkModificar" runat="server" CommandName="modificarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         </span>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
@@ -136,7 +136,7 @@
                                 </div>
                             </div>
                         </div>
-                    </ContentTemplate>
+                        </ContentTemplate>
                 </asp:UpdatePanel>
             </fieldset>
         </div>
@@ -147,7 +147,7 @@
                     Equipos Existentes
                 </div>
                 <div class="panel-body">
-                    <asp:UpdatePanel ID="upEquipos" runat="server">
+                    <asp:UpdatePanel ID="upListaEquipos" runat="server">
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="btnRegistrarEquipo" EventName="Click" />
                             <asp:AsyncPostBackTrigger ControlID="btnModificarEquipo" EventName="Click" />
@@ -180,7 +180,7 @@
                             <asp:Panel ID="panelFracasoListaEquipos" runat="server" CssClass="alert alert-danger" Visible="False">
                                 <asp:Literal ID="litFracasoListaEquipos" runat="server"></asp:Literal>
                             </asp:Panel>
-                        </ContentTemplate>
+                            </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
             </div>
