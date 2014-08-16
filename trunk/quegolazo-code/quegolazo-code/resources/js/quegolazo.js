@@ -55,6 +55,9 @@ function previewImage(input, idImagen) {
         reader.readAsDataURL(input.files[0]);
     }
 };
+function previewTempImage(idImagen,path) {
+    $('#' + idImagen).attr('src', path);
+};
 function ajaxFileUpload(input) {
     $(document).ajaxStart(function () {
         $("#loading").show();

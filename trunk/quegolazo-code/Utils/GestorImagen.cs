@@ -16,7 +16,7 @@ namespace Utils
         private static string extension = ".jpg";
 
         //Paths de Imágenes
-        private static string pathImagenes="/resources/img/";
+        private static string pathImagenes = "/resources/img/";
         private static string pathImagenesDisco = System.Web.HttpContext.Current.Server.MapPath(pathImagenes);
         private static string pathTorneos = "torneos/";
         private static string pathEquipos = "equipos/";
@@ -39,8 +39,9 @@ namespace Utils
         /// Crea imágenes a partir de la imagen temporal, las guarda en sus respectivos directorios y luego elimina la imagen temporal.
         /// autor: Facundo Allemand
         /// </summary>
-        public static void guardarImagen(int id, int tipoImagen) {
-            string pathImagenTemporal = pathImagenesDisco + pathTemp + System.Web.HttpContext.Current.Session.SessionID + ".temp";
+        public static void guardarImagen(int id, int tipoImagen)
+        {
+            string pathImagenTemporal = pathImagenesDisco + pathTemp + System.Web.HttpContext.Current.Session.SessionID + extension;
             try
             {
                 crearDirectorios();
@@ -84,11 +85,11 @@ namespace Utils
             if (file != null && file.ContentLength > 0)
             {
                 crearDirectorios();
-                string rutaImagenTemporal = pathImagenesDisco + pathTemp + idSesion + ".temp";
+                string rutaImagenTemporal = pathImagenesDisco + pathTemp + idSesion + extension;
                 try
                 {
                     file.SaveAs(rutaImagenTemporal);
-                    validarImagen(rutaImagenTemporal); 
+                    validarImagen(rutaImagenTemporal);
                 }
                 catch (Exception)
                 {
@@ -136,8 +137,8 @@ namespace Utils
                 {
                     foreach (string imagen in files)
                         System.IO.File.Delete(imagen);
-                    }
                 }
+            }
             catch (Exception)
             {
                 throw;
@@ -150,12 +151,12 @@ namespace Utils
         /// </summary>
         public static void validarImagen(string rutaImagen)
         {
-            Image img=null;
+            Image img = null;
             try
             {
                 FileInfo file = new FileInfo(rutaImagen);
                 if (file.Length > tamanioMax)
-                        throw new Exception("El tamaño del archivo es mayor a 1024kb");
+                    throw new Exception("El tamaño del archivo es mayor a 1024kb");
                 using (img = Image.FromFile(rutaImagen))
                 {
                     if (!img.RawFormat.Equals(ImageFormat.Bmp) &&
@@ -226,7 +227,7 @@ namespace Utils
 
                 loBMP.Dispose();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
@@ -237,28 +238,30 @@ namespace Utils
         /// Retorna el path de la imagen si existe, sino la imagen default.
         /// autor: Facundo Allemand
         /// </summary>
-        public static string obtenerImagen(int id, int tipo, string tamañoImagen) {
+        public static string obtenerImagen(int id, int tipo, string tamañoImagen)
+        {
             string pathImagen;
-            switch(tipo) {
-                case TORNEO : 
+            switch (tipo)
+            {
+                case TORNEO:
                     pathImagen = pathImagenes + pathTorneos + id + tamañoImagen + extension;
                     if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
                         return pathImagen;
                     else
                         return (pathImagenes + pathTorneos + "default" + tamañoImagen + extension);
-                case EQUIPO :
+                case EQUIPO:
                     pathImagen = pathImagenes + pathEquipos + id + tamañoImagen + extension;
                     if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
                         return pathImagen;
                     else
                         return (pathImagenes + pathEquipos + "default" + tamañoImagen + extension);
-                case COMPLEJO :
+                case COMPLEJO:
                     pathImagen = pathImagenes + pathComplejos + id + tamañoImagen + extension;
                     if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
                         return pathImagen;
                     else
                         return (pathImagenes + pathComplejos + "default" + tamañoImagen + extension);
-                case JUGADOR :
+                case JUGADOR:
                     pathImagen = pathImagenes + pathJugadores + id + tamañoImagen + extension;
                     if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
                         return pathImagen;
@@ -266,6 +269,32 @@ namespace Utils
                         return (pathImagenes + pathJugadores + "default" + tamañoImagen + extension);
             }
             throw new Exception("Error al obtener la imagen");
+        }
+
+        /// <summary>
+        /// Obtener Imagen Temporal
+        /// autor: Facundo Allemand
+        /// </summary>
+        public static string obtenerImagenTemporal(int tipoImagen, string tamañoImagen)
+        {
+            string pathImagen = pathImagenes + pathTemp + System.Web.HttpContext.Current.Session.SessionID + extension; ;
+            if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                return pathImagen;
+            else
+            {
+                switch (tipoImagen)
+                {
+                    case TORNEO:
+                        pathImagen = pathImagenes + pathTorneos + "default" + tamañoImagen + extension;break;
+                    case EQUIPO:
+                        pathImagen = pathImagenes + pathEquipos + "default" + tamañoImagen + extension;break;
+                    case COMPLEJO:
+                        pathImagen = pathImagenes + pathComplejos + "default" + tamañoImagen + extension;break;
+                    case JUGADOR:
+                        pathImagen = pathImagenes + pathJugadores + "default" + tamañoImagen + extension;break;
+                }
+            }
+            return pathImagen;
         }
     }
 
