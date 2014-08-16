@@ -30,7 +30,6 @@ namespace Logica
                 int idTorneo = ((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
                 DAOEquipo daoEquipo = new DAOEquipo();
                 equipo.idEquipo = daoEquipo.registrarEquipo(equipo, idTorneo);
-                equipo = new Equipo();
             }
             catch (Exception ex)
             {
@@ -204,6 +203,24 @@ namespace Logica
                     i++;
                 }
                 daoEquipo.modificarEquipo(equipo);               
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        } 
+
+        /// <summary>
+        /// Elimina un equipo de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idCancha">Id del equipo a eliminar</param>
+        public void eliminarEquipo(int idEquipo)
+        {
+            try
+            {
+                DAOEquipo daoEquipo = new DAOEquipo();
+                daoEquipo.eliminarEquipo(idEquipo);
             }
             catch (Exception ex)
             {
