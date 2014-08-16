@@ -291,7 +291,7 @@ namespace Utils
         /// </summary>
         public static string obtenerImagenDefault(int tipoImagen, string tamañoImagen)
         {
-            string pathImagen="";
+            string pathImagen="asdasasd";
             switch (tipoImagen)
             {
                 case TORNEO:

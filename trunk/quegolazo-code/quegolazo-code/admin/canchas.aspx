@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="canchas.aspx.cs" Inherits="quegolazo_code.admin.canchas" %>
-<%@ Import Namespace="Utils" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="col-md-6">
@@ -38,7 +37,7 @@
                                        <div class="col-md-5">
                                             <div class="fileinput">
                                                 <div class="thumbnail fileinput-preview">
-                                                    <img id="imagenpreview" src="<%# GestorImagen.obtenerImagenDefault(GestorImagen.COMPLEJO,GestorImagen.MEDIANA) %>" runat="server" />
+                                                    <img id="imagenpreview" runat="server" />
                                                 </div>
                                                 <div class="fileUpload">
                                                     <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
