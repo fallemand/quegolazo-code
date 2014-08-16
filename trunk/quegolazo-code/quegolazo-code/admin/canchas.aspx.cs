@@ -25,7 +25,7 @@ namespace quegolazo_code.admin
             //TORNEO HARDCODEADOOO
             Session["torneo"] = new Torneo
             {
-                idTorneo = 87,
+                idTorneo = 88,
             };
             //TORNEO HARDCODEADOOO
             //TORNEO HARDCODEADOOO
@@ -44,8 +44,6 @@ namespace quegolazo_code.admin
         /// Permite Registrar una Nueva Cancha para un torneo
         /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected void btnRegistrarCancha_Click(object sender, EventArgs e)
         {
             try
@@ -88,6 +86,7 @@ namespace quegolazo_code.admin
                 {   //por CommandArgument recibe el ID de la cancha a eliminar              
                     gestorCancha.eliminarCancha(Int32.Parse(e.CommandArgument.ToString()));
                     cargarRepeaterCanchas();
+                    limpiarCamposCancha();
                 }
             }
             catch (Exception ex)
@@ -166,7 +165,6 @@ namespace quegolazo_code.admin
         /// Habilita el panel de fracaso y deshabilita el panel de exito.
         /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="mensaje">Mensaje a mostrar en el panel.</param>
         private void mostrarPanelFracaso(string mensaje)
         {
             litFracaso.Text = mensaje;
@@ -192,7 +190,7 @@ namespace quegolazo_code.admin
         private void mostrarPanelFracasoListaCanchas(string mensaje)
         {
             litFracasoListaCanchas.Text = mensaje;
-            panelFracasoListaCanchas.Visible = false;
+            panelFracasoListaCanchas.Visible = true;
         }
 
         /// <summary>
@@ -214,8 +212,10 @@ namespace quegolazo_code.admin
         {
             panelExito.Visible = false;
             panelFracaso.Visible = false;
+            panelFracasoListaCanchas.Visible = false;
             litFracaso.Text = "";
             litExito.Text = "";
+            litFracasoListaCanchas.Text = "";            
         }
 
         /// <summary>
