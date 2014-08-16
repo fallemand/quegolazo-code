@@ -35,6 +35,16 @@ namespace quegolazo_code.admin
         }
 
         /// <summary>
+        /// Limpia y muestra el modal para registrar un torneo.
+        /// autor: Facundo Allemand
+        /// </summary>
+        protected void btnRegistrarNuevoTorneo_Click(object sender, EventArgs e)
+        {
+            limpiarModalTorneo();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
+        }
+
+        /// <summary>
         /// Carga las ediciones de un torneo en particular
         /// autor: Paula Pedrosa
         /// </summary>
@@ -46,8 +56,8 @@ namespace quegolazo_code.admin
                 int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
                 rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorTorneo(idTorneo);
                 rptEdiciones.DataBind();
-                Literal litSinEdiciones = e.Item.FindControl("litSinEdiciones") as Literal;
-                litSinEdiciones.Visible = (rptEdiciones.Items.Count > 0) ? false : true;
+                Panel panelSinEdiciones = e.Item.FindControl("panelSinEdiciones") as Panel;
+                panelSinEdiciones.Visible = (rptEdiciones.Items.Count > 0) ? false : true;
             }
         }
 
@@ -115,7 +125,7 @@ namespace quegolazo_code.admin
                 {
                     lblTituloModalTorneo.Text = "Modificar Torneo";
                     txtUrlTorneo.Disabled = true;
-                    btnResgitrarTorneo.Visible = false;
+                    btnRegistrarTorneo.Visible = false;
                     btnModificarTorneo.Visible = true;
                     txtUrlTorneo.Value = torneo.nick;
                     txtNombreTorneo.Value = torneo.nombre;
@@ -267,9 +277,13 @@ namespace quegolazo_code.admin
         protected void limpiarModalTorneo()
         {
             txtUrlTorneo.Value = "";
+            txtUrlTorneo.Disabled = false;
             txtNombreTorneo.Value = "";
             txtDescripcion.Value = "";
+            btnModificarTorneo.Visible = false;
+            btnRegistrarTorneo.Visible = true;
             panFracasoTorneo.Visible = false;
+            imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.TORNEO,GestorImagen.MEDIANA);
         }
 
         /// <summary>

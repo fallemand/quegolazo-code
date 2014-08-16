@@ -47,7 +47,7 @@
                           <span class="glyphicon glyphicon-cog"></span> Mi Cuenta <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a href="mis-torneos.aspx"><span class="glyphicon glyphicon-certificate"></span> Mis Torneos</a></li>
+                          <li><a href="torneos.aspx"><span class="glyphicon glyphicon-certificate"></span> Mis Torneos</a></li>
                           <li><a href="#"><span class="glyphicon glyphicon-user"></span> Mis Datos</a></li>
                           <li>
                               <asp:LinkButton ID="hlCerrarSesion" runat="server" OnClick="hlCerrarSesion_Click"><span class="glyphicon glyphicon-minus-sign"></span> Cerrar Sesión</asp:LinkButton>
