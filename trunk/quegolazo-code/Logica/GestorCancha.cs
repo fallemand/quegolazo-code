@@ -27,7 +27,7 @@ namespace Logica
                 int idTorneo = ((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
                 DAOCancha daoCancha = new DAOCancha();
                 cancha.idCancha = daoCancha.registrarCancha(cancha, idTorneo);
-                cancha = new Cancha();
+                //cancha = new Cancha();
             }
             catch (Exception ex)
             {

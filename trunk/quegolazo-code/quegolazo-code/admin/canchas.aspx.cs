@@ -216,18 +216,6 @@ namespace quegolazo_code.admin
             litFracaso.Text = "";
             litExito.Text = "";
             litFracasoListaCanchas.Text = "";            
-        }
-
-        /// <summary>
-        /// Habilita los botones para agregar una nueva cancha
-        /// autor: Pau Pedrosa
-        /// </summary>
-        protected void lnkNuevaCancha_Click(object sender, EventArgs e)
-        {
-            limpiarCamposCancha();
-            btnRegistrarCancha.Visible = true;
-            btnModificarCancha.Visible = false;
-            btnCancelarModificacionCancha.Visible = false;
-        }            
+        } 
     }
 }

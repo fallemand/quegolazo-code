@@ -8,7 +8,7 @@
                 <ContentTemplate>
                 <div class="panel panel-default">
                     <div class="panel-heading">                        
-                        <asp:LinkButton ID="lnkNuevaCancha" Text="Agregar una Cancha" title="Nueva Cancha" runat="server" OnClick="lnkNuevaCancha_Click"><span class="glyphicon glyphicon-plus"></span></asp:LinkButton>     
+                    <span class="glyphicon glyphicon-plus"></span>
                         Agregar una Cancha                                   
                     </div>
                     <div class="panel-body nopadding-bottom">
