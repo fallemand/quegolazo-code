@@ -19,6 +19,7 @@ namespace quegolazo_code.admin
             gestorEquipo = Sesion.getGestorEquipo();
             try
             {
+                limpiarPaneles();
                 cargarRepeaterEquipos();
                 imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
             }
@@ -26,7 +27,6 @@ namespace quegolazo_code.admin
             {
                 mostrarPanelFracasoListaEquipos(ex.Message);
             }                        
-            limpiarPaneles();
         }  
 
         /// <summary>
