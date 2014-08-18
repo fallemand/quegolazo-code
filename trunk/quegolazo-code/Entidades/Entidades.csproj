@@ -47,7 +47,6 @@
     <Compile Include="IPartido.cs" />
     <Compile Include="PartidoComun.cs" />
     <Compile Include="PartidoEliminatorio.cs" />
-    <Compile Include="Sesion.cs" />
     <Compile Include="Torneo.cs" />
     <Compile Include="Cancha.cs" />
     <Compile Include="Delegado.cs" />

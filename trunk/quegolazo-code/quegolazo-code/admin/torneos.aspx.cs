@@ -175,9 +175,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarGestorTorneo()
         {
-            if (Session["gestorTorneo"] == null)
-                Session["gestorTorneo"] = new GestorTorneo();
-            gestorTorneo = (GestorTorneo)Session["gestorTorneo"];
+            Sesion.setGestorTorneo();
+            gestorTorneo = Sesion.getGestorTorneo();
         }
 
         /// <summary>
@@ -186,9 +185,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarGestorEdicion()
         {
-            if (Session["gestorEdicion"] == null)
-                Session["gestorEdicion"] = new GestorEdicion();
-            gestorEdicion = (GestorEdicion)Session["gestorEdicion"];
+            Sesion.setGestorEdicion();
+            gestorEdicion = Sesion.getGestorEdicion();            
         }
 
         /// <summary>
