@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Grupo
+    public interface IPartido
     {
+        Equipo local { get; set; }
+        Equipo visita { get; set; }
+        string fecha { get; set; }
+        string hora { get; set; }
+
+        public int idPartido { get; set; }
+        public int idFecha { get; set; }
         public int idGrupo { get; set; }
         public int idFase { get; set; }
         public int idEdicion { get; set; }
-        public List<Equipo> equipos { get; set; }
-        public List<Fecha> fixture {get; set;}
-        public int nombre { get; set; }
     }
 }
