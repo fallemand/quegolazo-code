@@ -56,6 +56,18 @@ namespace Entidades
             }
         }
 
+        public int idPartido
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public PartidoEliminatorio partidoPosterior { get; set; }
 
     }

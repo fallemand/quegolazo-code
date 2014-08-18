@@ -55,5 +55,17 @@ namespace Entidades
                 throw new NotImplementedException();
             }
         }
+
+        public int idPartido
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

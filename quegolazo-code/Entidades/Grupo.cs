@@ -9,8 +9,8 @@ namespace Entidades
     public class Grupo
     {
         public int idGrupo { get; set; }
-        public int idFase { get; set; }
-        public int idEdicion { get; set; }
+        //public int idFase { get; set; }
+        //public int idEdicion { get; set; }
         public List<Equipo> equipos { get; set; }
         public List<Fecha> fixture {get; set;}
         public int nombre { get; set; }
