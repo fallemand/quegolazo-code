@@ -13,5 +13,10 @@ namespace quegolazo_code.admin.edicion
         {
 
         }
+
+        protected void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            int cant= ddlEquiposSeleccionados.Items.Count;
+        }
     }
 }

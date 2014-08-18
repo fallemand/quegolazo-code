@@ -18,6 +18,10 @@
     <script type="text/javascript" src="/resources/js/quegolazo.js"></script>
     <script type="text/javascript" src="/resources/js/ajaxfileupload.js"></script>
     <!-- Archivos JavaScript -->
+    <!-- Content Head -->
+    <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
+    </asp:ContentPlaceHolder>
+    <!-- Content Head -->
 </head>
 <body>
     <form id="form1" runat="server">
