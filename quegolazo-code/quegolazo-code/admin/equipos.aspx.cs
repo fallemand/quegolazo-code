@@ -22,14 +22,6 @@ namespace quegolazo_code.admin
             //obtiene en gestor de la Session.
             gestorEquipo = (GestorEquipo)Session["gestorEquipo"];
 
-            //TORNEO HARDCODEADOOO
-            //TORNEO HARDCODEADOOO
-            Session["torneo"] = new Torneo
-            {
-                idTorneo = 88,
-            };
-            //TORNEO HARDCODEADOOO
-            //TORNEO HARDCODEADOOO
             try
             {
                 cargarRepeaterEquipos();

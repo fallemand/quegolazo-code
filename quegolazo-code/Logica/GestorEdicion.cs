@@ -60,6 +60,8 @@ namespace Logica
             edicion.puntosGanado = Validador.castInt(ptosGanado);
             edicion.puntosPerdido = Validador.castInt(ptosPerdido);
             edicion.puntosEmpatado = Validador.castInt(ptosEmpatado);
+            if ((edicion.puntosGanado < edicion.puntosEmpatado || edicion.puntosEmpatado < edicion.puntosPerdido) || (edicion.puntosGanado == edicion.puntosEmpatado))
+                throw new Exception("Los puntos por ganar, empatar y perder son incorrectos.");
             edicion.nombre = Validador.isNotEmpty(nombre);
             edicion.tamanioCancha.idTamanioCancha = Validador.castInt(idTamanioCancha);
             edicion.tipoSuperficie.idTipoSuperficie = Validador.castInt(idSuperficie);

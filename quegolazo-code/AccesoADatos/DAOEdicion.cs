@@ -81,15 +81,12 @@ namespace AccesoADatos
         public void registrarEdicion(Edicion edicionNueva, int idTorneo)
         {          
             SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();
-            SqlTransaction trans = null;
+            SqlCommand cmd = new SqlCommand();            
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                cmd.Connection = con;
-                trans = con.BeginTransaction();
-                cmd.Transaction = trans;
+                cmd.Connection = con;               
                 string sql = @"INSERT INTO Ediciones (nombre, idTamanioCancha, idTipoSuperficie, idEstado, idTorneo, puntosGanado, puntosPerdido, puntosEmpatado)
                                               VALUES (@nombre, @idTamanioCancha, @idTipoSuperficie, @idEstado, @idTorneo, @puntosGanado, @puntosPerdido, @puntosEmpatado ) SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
@@ -102,20 +99,17 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@puntosGanado", edicionNueva.puntosGanado);
                 cmd.Parameters.AddWithValue("@puntosPerdido", edicionNueva.puntosPerdido);
                 cmd.CommandText = sql;
-                edicionNueva.idEdicion= int.Parse(cmd.ExecuteScalar().ToString());
-                registrarPreferencias(edicionNueva, con, trans);
-                trans.Commit();
+                cmd.ExecuteScalar();                
             }
             catch (SqlException ex)
             {
-                trans.Rollback();
                 if (ex.Class == 14 && ex.Number == 2601)
                     throw new Exception("La edición " + edicionNueva.nombre + " ya se encuentra registrada. Ingrese otro nombre para la misma.");
                 else
                     throw new Exception("No se pudo registrar la edición: " + ex.Message);
             }
             catch (Exception e)
-            {
+            {                
                 throw new Exception("No se pudo registrar la edición: " + e.Message);
             }               
             finally
