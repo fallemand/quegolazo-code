@@ -15,6 +15,9 @@
                 <asp:ListItem Value='3'>Equipo 3</asp:ListItem>
                 <asp:ListItem Value='4'>Equipo 4</asp:ListItem>
             </asp:DropDownList>
+            <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
+                <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
+            </asp:Panel>
         </div>
         <div class="panel-footer clearfix ">
             <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClick="btnSiguiente_Click"/>
