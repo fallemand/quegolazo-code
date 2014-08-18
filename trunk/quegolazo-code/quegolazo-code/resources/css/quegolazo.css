@@ -345,6 +345,17 @@ body {
     border-color:#579F43
 }
 
+.btn-panel-important {
+    font-size: 15px;
+    background-color: #78b766;
+    color : #ffffff;
+    border-radius: 5px;
+}
+.btn-panel-important:hover {
+   background-color: #7EC768;
+}
+
+
 /* --------------------- Márgenes ------------------------- */
 .nopadding-right {
   padding-right:0px;

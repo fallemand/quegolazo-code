@@ -69,7 +69,7 @@ namespace quegolazo_code.admin
         {             
             try
             {                
-                limpiarPaneles();   
+                limpiarPaneles();                
                 int idTorneo = gestorTorneo.registrarTorneo(txtNombreTorneo.Value, txtDescripcion.Value, txtUrlTorneo.Value.Replace(" ", "-"));
                 GestorImagen.guardarImagen(idTorneo, GestorImagen.TORNEO);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalTorneo');", true);
@@ -95,9 +95,9 @@ namespace quegolazo_code.admin
             {
                 limpiarPaneles();
                 gestorEdicion.cargarDatos(txtNombreEdicion.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue, txtPuntosPorGanar.Value,txtPuntosPorEmpatar.Value, txtPuntosPorPerder.Value);
-                btnRegistrarOpciones.Visible = true;
-                btnSiguienteEdicion.Visible = false;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "activarTab", "activaTab('tabsModalEdicion','tabPersonalizacionEdicion');", true);                               
+                gestorEdicion.registrarEdicion();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
+                cargarRepeaterTorneos(); 
             }
             catch (Exception ex)
             {
@@ -134,6 +134,11 @@ namespace quegolazo_code.admin
                     imagenpreview.Src = torneo.obtenerImagenMediana();
                     gestorTorneo.torneo.idTorneo = idTorneo;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
+                }
+                if (e.CommandName == "administrarTorneo")
+                {
+                    Sesion.setTorneo(gestorTorneo.obtenerTorneoPorId(int.Parse(e.CommandArgument.ToString())));
+                    Response.Redirect("/admin/index.aspx");
                 } 
             }
             catch (Exception ex)
@@ -163,49 +168,7 @@ namespace quegolazo_code.admin
                 panFracasoTorneo.Visible = true;
             }
         }
-
-        /// <summary>
-        /// Metodo para grabar las preferencias de una edición
-        /// autor=Flor
-        /// </summary>
-          protected void btnRegistrarOpcioens_Click(object sender, EventArgs e)
-          {
-              try
-              {
-                  //Preferencias Jugadores
-                  gestorEdicion.edicion.preferencias.jugadores = rdJugadoresRegistroSi.Checked;
-                  gestorEdicion.edicion.preferencias.golesJugadores = rdJugadoresGolesSi.Checked;
-                  gestorEdicion.edicion.preferencias.tarjetasJugadores = rdJugadoresTarjetasSi.Checked;
-                  gestorEdicion.edicion.preferencias.cambiosJugadores = rdJugadoresCambiosSi.Checked;
-                  //Preferencias Árbitros
-                  gestorEdicion.edicion.preferencias.arbitros = rdArbitrosSi.Checked;
-                  gestorEdicion.edicion.preferencias.asignaArbitros = rdArbitrosPorPartidoSi.Checked;
-                  gestorEdicion.edicion.preferencias.desempenioArbitros = rdArbitroDesempenioSi.Checked;
-                  //Preferencias Sanciones
-                  gestorEdicion.edicion.preferencias.sanciones = rdSancionesEquiposSi.Checked;
-                  gestorEdicion.edicion.preferencias.sancionesJugadores = rdSancionesJugadoresSi.Checked;
-                  //Preferencia Canchas
-                  gestorEdicion.edicion.preferencias.canchaUnica = rdCanchasComplejos.Checked;
-                  //Registro de configuraciones
-                  gestorEdicion.registrarEdicion();
-
-                  limpiarModalEdicion();
-                  cargarRepeaterTorneos();
-                  ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
-              }
-              catch (Exception ex)
-              {
-                  litFracasoEdicion.Text = ex.Message;
-                  panFracasoEdicion.Visible = true;
-                  btnRegistrarOpciones.Visible = false;
-                  btnSiguienteEdicion.Visible = true;
-              }
-          }
-
-        //*************************************************
-        //-----------------Metodos Extras-----------------
-        //*************************************************
-
+       
         /// <summary>
         /// Carga el gestor de la clase
         /// autor: Facundo Allemand
@@ -277,6 +240,7 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void limpiarModalTorneo()
         {
+            lblTituloModalTorneo.Text = "Crear nuevo torneo";
             txtUrlTorneo.Value = "";
             txtUrlTorneo.Disabled = false;
             txtNombreTorneo.Value = "";
@@ -299,8 +263,7 @@ namespace quegolazo_code.admin
             txtPuntosPorGanar.Value = "3";
             txtPuntosPorEmpatar.Value = "1";
             txtPuntosPorPerder.Value = "0";
-            panFracasoEdicion.Visible = false;
-            btnRegistrarOpciones.Visible = false;
+            panFracasoEdicion.Visible = false;           
             btnSiguienteEdicion.Visible = true;
         }
 
