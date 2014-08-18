@@ -7,7 +7,7 @@ using Utils;
 
 namespace Entidades
 {
-    public class Equipo
+    public class Equipo : ICloneable    
     {
         public int idEquipo { get; set; }
         public string nombre { get; set; }
@@ -28,6 +28,10 @@ namespace Entidades
         public string obtenerImagenGrande()
         {
             return GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, GestorImagen.GRANDE);
-        }        
+        }
+        public object Clone()
+        {
+            return (Equipo)this.MemberwiseClone();
+        }
     }
 }

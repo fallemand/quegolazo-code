@@ -11,5 +11,6 @@ namespace Entidades
         public int idFase { get; set; }
         public List<Grupo> grupos { get; set; }
         public TipoFixture tipoFixture { get; set; }
+        public Estado estado { get; set; }
     }
 }
