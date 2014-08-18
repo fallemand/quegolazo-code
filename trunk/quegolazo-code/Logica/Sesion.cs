@@ -42,61 +42,39 @@ namespace Logica
         public static void setUsuario(Usuario usuario)
         {
             System.Web.HttpContext.Current.Session["usuario"] = usuario;
-        }
+        }       
         /// <summary>
-        /// si no existe gestorEquipo en Session, lo carga
-        /// </summary>
-        /// <param name="gestorEquipo">El gesor a cargar en sesion</param>
-        public static void setGestorEquipo()
-        {           
-            if (System.Web.HttpContext.Current.Session["gestorEquipo"] == null)
-                System.Web.HttpContext.Current.Session["gestorEquipo"] = new GestorEquipo();
-        }
-        /// <summary>
-        /// Devuelve el objeto GestorEquipo que esta en la sesion.
+        /// Devuelve el objeto GestorEquipo que esta en la sesion, si es nulo, crea uno nuevo.
         /// </summary>       
         public static GestorEquipo getGestorEquipo()
         {
+            if (System.Web.HttpContext.Current.Session["gestorEquipo"] == null)
+                System.Web.HttpContext.Current.Session["gestorEquipo"] = new GestorEquipo();
             return (GestorEquipo)System.Web.HttpContext.Current.Session["gestorEquipo"];               
         }
         /// <summary>
-        /// Devuelve el objeto GestorTorneo que se encuentra en Session.
+        /// Devuelve el objeto GestorTorneo que se encuentra en Session, si es nulo, crea uno nuevo.
         /// </summary>
         /// <returns></returns>
-        public static GestorTorneo getGestorTorneo() {           
-           return (GestorTorneo)System.Web.HttpContext.Current.Session["gestorTorneo"];
-        }
-        /// <summary>
-        /// Si no se encuentra el objeto GestorTorneo en Session, lo carga.
-        /// </summary>
-        public static void setGestorTorneo() {
+        public static GestorTorneo getGestorTorneo() {
             if (System.Web.HttpContext.Current.Session["gestorTorneo"] == null)
                 System.Web.HttpContext.Current.Session["gestorTorneo"] = new GestorTorneo();
-        }
+            return (GestorTorneo)System.Web.HttpContext.Current.Session["gestorTorneo"];
+        }    
         /// <summary>
-        /// si no existe gestorEdicion en Session, lo carga
-        /// </summary>
-        public static void setGestorEdicion() {
-            if (System.Web.HttpContext.Current.Session["gestorEdicion"] == null)
-                System.Web.HttpContext.Current.Session["gestorEdicion"] = new GestorEdicion();
-        }
-        /// <summary>
-        /// devuelve el objeto GestorEdicion que se encuentra en Session.
+        /// devuelve el objeto GestorEdicion que se encuentra en Session, si es nulo, crea uno nuevo
         /// </summary>        
         public static GestorEdicion getGestorEdicion() {
+            if (System.Web.HttpContext.Current.Session["gestorEdicion"] == null)
+                System.Web.HttpContext.Current.Session["gestorEdicion"] = new GestorEdicion();
             return (GestorEdicion)System.Web.HttpContext.Current.Session["gestorEdicion"];
-        }
+        }   
         /// <summary>
-        /// si el gestor cancha no se encuentra en Session, lo crea.
-        /// </summary>
-        public static void setGestorCancha() {
-            if (System.Web.HttpContext.Current.Session["gestorCancha"] == null)
-                System.Web.HttpContext.Current.Session["gestorCancha"] = new GestorCancha();
-        }
-        /// <summary>
-        /// Devuelve el objeto cancha que se encuentra en Session
+        /// Devuelve el objeto cancha que se encuentra en Session, si es nulo, crea uno nuevo
         /// </summary>        
         public static GestorCancha getGestorCancha() {
+            if (System.Web.HttpContext.Current.Session["gestorCancha"] == null)
+                System.Web.HttpContext.Current.Session["gestorCancha"] = new GestorCancha();
             return (GestorCancha)System.Web.HttpContext.Current.Session["gestorCancha"];
         }
     }
