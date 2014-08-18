@@ -278,10 +278,11 @@ namespace AccesoADatos
 
         /// <summary>
         /// Registrar equipos para una edición
+        /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="idEquipo">Id del Equipo</param>
+        /// <param name="idEquipo">Lista de los Id de los Equipos</param>
         /// <param name="idEdicion">Id de la Edición</param>
-        public void registrarEquiposEnEdicion(List<Equipo> equipos, int idEdicion)
+        public void registrarEquiposEnEdicion(List<int> equipos, int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -292,14 +293,15 @@ namespace AccesoADatos
                     con.Open();
                 trans = con.BeginTransaction();
                 cmd.Connection = con;
-                cmd.Transaction = trans;
-                foreach (Equipo equipo in equipos)
+                cmd.Transaction = trans;    
+
+                foreach (Int32 idEquipo in equipos)
                 {
                     string sql = @"INSERT INTO EquipoXEdicion (idEdicion, idEquipo)
                                     VALUES (@idEdicion, @idEquipo)";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
-                    cmd.Parameters.AddWithValue("@idEquipo", equipo.idEquipo);
+                    cmd.Parameters.AddWithValue("@idEquipo", idEquipo);
                     cmd.CommandText = sql;
                     cmd.ExecuteNonQuery();                    
                 }
