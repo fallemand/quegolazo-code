@@ -6,29 +6,68 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    class GenerarTodosContraTodos: IGenerarFixture
+   public class GenerarTodosContraTodos: IGenerarFixture
     {
+        /// <summary>
+        /// Método par generar fixture
+        /// autor=Flor
+        /// </summary>
+        /// <param name="equiposParticipantes"></param>
+        /// <returns></returns>
         public List<Fecha> generarFixture(List<Equipo> equiposParticipantes)
         {
-            return new List<Fecha>();
+            prepararListaDeEquipos(ref equiposParticipantes);
+            int cantidadFechas = (equiposParticipantes.Count - 1);
+            int cantidadPartidos = equiposParticipantes.Count / 2;
+            Equipo equipoPivot = (Equipo)equiposParticipantes[0].Clone();
+            List<Fecha> fechas = new List<Fecha>();
 
-            //for (int y = 1; y < equiposParticipantes.Count; y++) // for para Fechas
-            //{
-            //    Fecha fecha = new Fecha();
-
-            //    fecha.idFecha = (y);
-
-            //    for (int x = 1; x <= equiposParticipantes.Count / 2; y++)               // for para Partidos
-            //    {
-            //        PartidoComun partido = new PartidoComun();
-
-            //        // Aquí como hago para añadir los enfrentamientos de acuerdo a las reglas que puse previamente?
-
-            //        jornada.enfrentamientos.Add(enfrentamiento);
-            //    }
-
-            //    listajornadas.Add(jornada);
-            //}
+            for (int i = 0; i < cantidadFechas; i++)
+            {
+                Fecha fechaNueva = new Fecha() {  idFecha = i + 1 };
+                for (int j = 0, k = equiposParticipantes.Count - 1; j < cantidadPartidos && j < k; j++, k--)
+                {
+                    PartidoComun partidoNuevo = new PartidoComun()
+                    {
+                        local = equiposParticipantes[j],
+                        visita = equiposParticipantes[k],                      
+                       // estado = new Estado() { ambito = Estado.enumAmbito.PARTIDO, nombre = Estado.enumNombre.NO_JUGADO }
+                    };
+                    fechaNueva.partidos.Add(partidoNuevo);
+                }
+                fechas.Add(fechaNueva);
+                intercambiarPosiciones(ref equiposParticipantes);
+            }          
+            return fechas;
         }
+
+        /// <summary>
+        ///  Intercambia la posicion de los equipos, pasando el ultimo equipo al segundo lugar, y adelantando los demas desde el segundo lugar (Round Robin)
+        /// </summary>
+        /// <param name="equiposParticipantes"></param>
+        private void intercambiarPosiciones(ref List<Equipo> equiposParticipantes)
+        {
+            Equipo cambio = (Equipo)equiposParticipantes[equiposParticipantes.Count - 1].Clone();
+            for (int i = equiposParticipantes.Count - 1; i > 1; i--)
+            {
+                equiposParticipantes[i] = equiposParticipantes[i - 1];
+            }
+            equiposParticipantes[1] = cambio;
+        }
+
+        /// <summary>
+        /// Método para completar la lista de equipos en caso que no sea par
+        /// </summary>
+        /// <param name="equiposParticipantes"></param>
+        private void prepararListaDeEquipos(ref List<Equipo> equiposParticipantes)
+        {
+            if (equiposParticipantes.Count % 2 != 0)
+            {
+                Equipo libre = new Equipo() { nombre = "LIBRE" };
+                equiposParticipantes.Add(libre);
+            }
+        }
+
+     
     }
 }

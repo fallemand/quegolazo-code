@@ -13,18 +13,30 @@ namespace Logica
     {
       public List<Equipo> equipos { get; set; }
       public Fase fase { get; set; }
+      public IGenerarFixture generadorFixture { get; set; }
 
-
-      public List<Fecha> generarFixture(List<Equipo> EquiposDelGrupo, string tipoFixture)
+      /// <summary>
+      /// método para generar fixture
+      /// autor=Flor
+      /// </summary>
+      public void generarFixture(string tipoFixture)
       {
-          return new List<Fecha>();
+          fase.tipoFixture.nombre = tipoFixture;
+
+          if (fase.tipoFixture.nombre == "TODOS CONTRA TODOS")
+              generadorFixture = new GenerarTodosContraTodos();
+          
+          foreach(Grupo g in fase.grupos)
+          {
+             g.fixture = generadorFixture.generarFixture(g.equipos);
+          }
+
       }
 
-      public void registrarFase( string tipoFixture)
+
+      public void registrarFase()
       {
-          fase= new Fase();
-          fase.tipoFixture.nombre = tipoFixture;
-          fase.grupos = new List<Grupo>();
+         
       }
 
 

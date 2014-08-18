@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    interface IGenerarFixture
+   public interface IGenerarFixture
     {
        List<Fecha> generarFixture(List<Equipo> equiposParticipantes);
     }
