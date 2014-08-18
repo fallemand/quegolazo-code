@@ -10,7 +10,7 @@ namespace Entidades
     {
         public List<Fecha> generarFixture(List<Equipo> equiposParticipantes)
         {
-            //List<Fecha> listajornadas = new List<Fecha>();
+            return new List<Fecha>();
 
             //for (int y = 1; y < equiposParticipantes.Count; y++) // for para Fechas
             //{

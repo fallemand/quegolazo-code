@@ -8,6 +8,6 @@ namespace Entidades
 {
     interface IGenerarFixture
     {
-        public List<Fecha> generarFixture(List<Equipo> equiposParticipantes);
+       List<Fecha> generarFixture(List<Equipo> equiposParticipantes);
     }
 }

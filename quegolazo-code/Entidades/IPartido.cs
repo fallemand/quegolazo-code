@@ -13,10 +13,10 @@ namespace Entidades
         string fecha { get; set; }
         string hora { get; set; }
 
-       int idPartido { get; set; }
-       int idFecha { get; set; }
-       int idGrupo { get; set; }
-       int idFase { get; set; }
-       int idEdicion { get; set; }
+       //int idPartido { get; set; }
+       //int idFecha { get; set; }
+       //int idGrupo { get; set; }
+       //int idFase { get; set; }
+       //int idEdicion { get; set; }
     }
 }
