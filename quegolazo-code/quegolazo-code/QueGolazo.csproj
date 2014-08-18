@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\canchas.aspx" />
+    <Content Include="admin\edicion\configurar.aspx" />
+    <Content Include="admin\edicion\equipos.aspx" />
     <Content Include="admin\equipos.aspx" />
     <Content Include="resources\img\complejos\default-bg.jpg" />
     <Content Include="resources\img\complejos\default-nm.jpg" />
@@ -116,6 +118,27 @@
     </Compile>
     <Compile Include="admin\canchas.aspx.designer.cs">
       <DependentUpon>canchas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\edicion\configurar.aspx.cs">
+      <DependentUpon>configurar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\edicion\configurar.aspx.designer.cs">
+      <DependentUpon>configurar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\edicion\edicion.master.cs">
+      <DependentUpon>edicion.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\edicion\edicion.master.designer.cs">
+      <DependentUpon>edicion.master</DependentUpon>
+    </Compile>
+    <Compile Include="admin\edicion\equipos.aspx.cs">
+      <DependentUpon>equipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\edicion\equipos.aspx.designer.cs">
+      <DependentUpon>equipos.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\equipos.aspx.cs">
       <DependentUpon>equipos.aspx</DependentUpon>
@@ -202,6 +225,7 @@
     <Content Include="admin\admin.Master" />
     <Content Include="admin\admin.torneo.master" />
     <Content Include="admin\AjaxFileUploader.ashx" />
+    <Content Include="admin\edicion\edicion.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
