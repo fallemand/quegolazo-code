@@ -17,17 +17,10 @@ namespace Logica
         /// <returns>Lista genérica de objeto TipoSuperficie</returns>
         public List<TipoSuperficie> obtenerTodos()
         {
-            try
-            {
-                DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
-                List<TipoSuperficie> tiposSuperficie = new List<TipoSuperficie>();
-                tiposSuperficie = daoTipoSuperficie.obtenerTodos();
-                return tiposSuperficie;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
+            List<TipoSuperficie> tiposSuperficie = new List<TipoSuperficie>();
+            tiposSuperficie = daoTipoSuperficie.obtenerTodos();
+            return tiposSuperficie;
         }
 
         /// <summary>
@@ -38,17 +31,10 @@ namespace Logica
         /// <returns>Objeto Tipo de Superficie</returns>
         public TipoSuperficie obtenerTipoSuperficiePorId(int idTipoSuperficie)
         {
-            try
-            {
-                DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
-                TipoSuperficie tipoSuperficie = null;
-                tipoSuperficie = daoTipoSuperficie.obtenerTipoSuperficiePorId(idTipoSuperficie);
-                return tipoSuperficie;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
+            TipoSuperficie tipoSuperficie = null;
+            tipoSuperficie = daoTipoSuperficie.obtenerTipoSuperficiePorId(idTipoSuperficie);
+            return tipoSuperficie;
         }
      }    
 }

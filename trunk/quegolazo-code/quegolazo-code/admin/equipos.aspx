@@ -1,16 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="equipos.aspx.cs" Inherits="quegolazo_code.admin.equipos" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="col-md-6">
-            <fieldset class="vgEquipo">
-                <asp:UpdatePanel ID="upRegistrarEquipo" runat="server">
-                    <ContentTemplate>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <span class="glyphicon glyphicon-plus"></span>
-                                Agregar un Equipo                                   
-                            </div>
-                            <div class="panel-body nopadding-bottom">
+            <asp:UpdatePanel ID="upRegistrarEquipo" runat="server">
+                <ContentTemplate>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Agregar un Equipo                                   
+                        </div>
+                        <div class="panel-body nopadding-bottom">
+                            <fieldset class="vgEquipo">
                                 <div class="form-horizontal">
                                     <div class="form-group">
                                         <label for="text" class="col-lg-2 control-label">Nombre</label>
@@ -113,31 +114,31 @@
                                         </div>
                                     </div>
                                 </div>
-                                <asp:Panel ID="panelExito" runat="server" CssClass="alert alert-success" Visible="False">
-                                    <asp:Literal ID="litExito" runat="server"></asp:Literal>
-                                </asp:Panel>
-                                <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
-                                    <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
-                                </asp:Panel>
+                            </fieldset>
+                            <asp:Panel ID="panelExito" runat="server" CssClass="alert alert-success" Visible="False">
+                                <asp:Literal ID="litExito" runat="server"></asp:Literal>
+                            </asp:Panel>
+                            <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
+                                <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
+                            </asp:Panel>
+                        </div>
+                        <div class="panel-footer clearfix text-right">
+                            <div class="col-xs-8 col-xs-offset-3">
+                                <asp:Button class="btn btn-default" ID="btnCancelarModificacionEquipo" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionEquipo_Click" />
+                                <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnModificarEquipo" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarEquipo_Click" />
+                                <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
                             </div>
-                            <div class="panel-footer clearfix text-right">
-                                <div class="col-xs-8 col-xs-offset-3">
-                                    <asp:Button class="btn btn-default" ID="btnCancelarModificacionEquipo" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionEquipo_Click" />
-                                    <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnModificarEquipo" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarEquipo_Click" />
-                                    <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
-                                </div>
-                                <div class="col-xs-1">
-                                    <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
-                                        <ProgressTemplate>
-                                            <img src="/resources/img/theme/load4.gif" />
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>
-                                </div>
+                            <div class="col-xs-1">
+                                <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
+                                    <ProgressTemplate>
+                                        <img src="/resources/img/theme/load4.gif" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
                             </div>
                         </div>
-                        </ContentTemplate>
-                </asp:UpdatePanel>
-            </fieldset>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
         <div class="col-md-6">
             <div class="panel panel-default">
@@ -179,7 +180,7 @@
                             <asp:Panel ID="panelFracasoListaEquipos" runat="server" CssClass="alert alert-danger" Visible="False">
                                 <asp:Literal ID="litFracasoListaEquipos" runat="server"></asp:Literal>
                             </asp:Panel>
-                            </ContentTemplate>
+                        </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
             </div>
