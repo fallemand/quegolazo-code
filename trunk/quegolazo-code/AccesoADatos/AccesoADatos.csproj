@@ -46,6 +46,9 @@
     <Compile Include="DAOEquipo.cs" />
     <Compile Include="DAOEstado.cs" />
     <Compile Include="DAOFase.cs" />
+    <Compile Include="DAOFecha.cs" />
+    <Compile Include="DAOGrupo.cs" />
+    <Compile Include="DAOPartido.cs" />
     <Compile Include="DAOTipoSuperficie.cs" />
     <Compile Include="DAOTipoUsuario.cs" />
     <Compile Include="DAOTorneo.cs" />
