@@ -15,20 +15,7 @@ namespace quegolazo_code.admin
         GestorCancha gestorCancha = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //si no existe gestor en Session lo carga
-            if (Session["gestorCancha"] == null)
-                Session["gestorCancha"] = new GestorCancha();
-            //obtiene en gestor de la Session.
-            gestorCancha = (GestorCancha)Session["gestorCancha"];
-
-            //TORNEO HARDCODEADOOO
-            //TORNEO HARDCODEADOOO
-            Session["torneo"] = new Torneo
-            {
-                idTorneo = 88,
-            };
-            //TORNEO HARDCODEADOOO
-            //TORNEO HARDCODEADOOO
+            cargarGestorCancha();           
             try
             {
                 cargarRepeaterCanchas();
@@ -39,6 +26,15 @@ namespace quegolazo_code.admin
                 mostrarPanelFracasoListaCanchas(ex.Message);
             }
             limpiarPaneles();
+        }
+
+        /// <summary>
+        /// carga el GestorCancha que se encuentre en Session, si no esta, lo crea.
+        /// </summary>
+        private void cargarGestorCancha()
+        {
+            Sesion.setGestorCancha();
+            gestorCancha = Sesion.getGestorCancha();
         }
 
         /// <summary>
