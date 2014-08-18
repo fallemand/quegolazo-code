@@ -13,6 +13,15 @@ namespace quegolazo_code.admin.edicion {
     public partial class edicion {
         
         /// <summary>
+        /// Control ContentHeaderEdicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentHeaderEdicion;
+        
+        /// <summary>
         /// Control upMaster.
         /// </summary>
         /// <remarks>

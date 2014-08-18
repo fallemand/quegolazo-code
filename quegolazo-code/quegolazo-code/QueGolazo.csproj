@@ -71,11 +71,13 @@
     <Content Include="resources\img\jugadores\default-nm.jpg" />
     <Content Include="resources\img\jugadores\default-sm.jpg" />
     <Content Include="resources\img\theme\load4.gif" />
+    <Content Include="resources\img\theme\switch.png" />
     <Content Include="resources\img\torneos\default-bg.jpg" />
     <Content Include="resources\img\torneos\default-nm.jpg" />
     <Content Include="resources\img\torneos\default-sm.jpg" />
     <Content Include="resources\js\ajaxfileupload.js" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
+    <Content Include="resources\js\jquery.multi-select.js" />
     <Content Include="resources\js\quegolazo.js" />
     <Content Include="usuario\activar.usuario.aspx" />
     <Content Include="admin\index.aspx" />

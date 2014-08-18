@@ -1,5 +1,10 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="admin.torneo.master.cs" Inherits="quegolazo_code.admin.admin_torneo" %>
-
+<asp:Content ContentPlaceHolderID="ContentHeader" runat="server">
+    <!-- ContentPage Header -->
+    <asp:ContentPlaceHolder ID="ContentHeaderAdminTorneo" runat="server">
+    </asp:ContentPlaceHolder>
+    <!-- ContentPage Header -->
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdmin" runat="server">
     <!-- Navbar Administación Campeonato -->
     <div class="subnavbar hidden-sm hidden-xs">

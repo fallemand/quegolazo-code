@@ -1,4 +1,7 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="edicion.master.cs" Inherits="quegolazo_code.admin.edicion.edicion" %>
+<asp:Content ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
+    <asp:ContentPlaceHolder ID="ContentHeaderEdicion" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="col-md-3">
