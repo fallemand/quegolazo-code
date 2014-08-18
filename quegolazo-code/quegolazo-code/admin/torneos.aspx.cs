@@ -18,8 +18,8 @@ namespace quegolazo_code.admin
 
         protected void Page_Load(object sender, EventArgs e)        
         {
-            cargarGestorTorneo();
-            cargarGestorEdicion();
+            gestorTorneo = Sesion.getGestorTorneo();
+            gestorEdicion = Sesion.getGestorEdicion(); 
             if (!Page.IsPostBack)
             {
                 try
@@ -167,27 +167,7 @@ namespace quegolazo_code.admin
                 litFracasoTorneo.Text = ex.Message;
                 panFracasoTorneo.Visible = true;
             }
-        }
-       
-        /// <summary>
-        /// Carga el gestor de la clase
-        /// autor: Facundo Allemand
-        /// </summary>
-        private void cargarGestorTorneo()
-        {
-            Sesion.setGestorTorneo();
-            gestorTorneo = Sesion.getGestorTorneo();
-        }
-
-        /// <summary>
-        /// Carga el gestor de la clase
-        /// autor: Facundo Allemand
-        /// </summary>
-        private void cargarGestorEdicion()
-        {
-            Sesion.setGestorEdicion();
-            gestorEdicion = Sesion.getGestorEdicion();            
-        }
+        }     
 
         /// <summary>
         /// Carga el Repeater de los torneos de un usuario con una lista de Torneos

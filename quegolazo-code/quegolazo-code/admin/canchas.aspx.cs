@@ -15,7 +15,7 @@ namespace quegolazo_code.admin
         GestorCancha gestorCancha = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            cargarGestorCancha();           
+            gestorCancha = Sesion.getGestorCancha();         
             try
             {
                 cargarRepeaterCanchas();
@@ -26,16 +26,7 @@ namespace quegolazo_code.admin
                 mostrarPanelFracasoListaCanchas(ex.Message);
             }
             limpiarPaneles();
-        }
-
-        /// <summary>
-        /// carga el GestorCancha que se encuentre en Session, si no esta, lo crea.
-        /// </summary>
-        private void cargarGestorCancha()
-        {
-            Sesion.setGestorCancha();
-            gestorCancha = Sesion.getGestorCancha();
-        }
+        }       
 
         /// <summary>
         /// Permite Registrar una Nueva Cancha para un torneo

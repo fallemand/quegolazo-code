@@ -16,7 +16,7 @@ namespace quegolazo_code.admin
         GestorEquipo gestorEquipo = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            cargarGestorEquipo();
+            gestorEquipo = Sesion.getGestorEquipo();
             try
             {
                 cargarRepeaterEquipos();
@@ -27,15 +27,7 @@ namespace quegolazo_code.admin
                 mostrarPanelFracasoListaEquipos(ex.Message);
             }                        
             limpiarPaneles();
-        }
-        /// <summary>
-        /// Toma el objeto Gestor Equipo que haya en Session, si no esta devuelve uno nuevo.
-        /// </summary>
-        private void cargarGestorEquipo()
-        {
-            Sesion.setGestorEquipo();
-            gestorEquipo = Sesion.getGestorEquipo();
-        }     
+        }  
 
         /// <summary>
         /// Registra un nuevo equipo en la BD
