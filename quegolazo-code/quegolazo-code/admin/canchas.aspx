@@ -2,7 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="col-md-6">
-            <fieldset class="vgCancha">
             <asp:UpdatePanel ID="upRegistrarNuevaCancha" runat="server">
                 <ContentTemplate>
                 <div class="panel panel-default">
@@ -11,6 +10,7 @@
                         Agregar una Cancha                                   
                     </div>
                     <div class="panel-body nopadding-bottom">
+                        <fieldset class="vgCancha">
                         <div class="form-horizontal">
                             <div class="form-group">                               
                                 <label for="text" class="col-lg-2 control-label">Nombre</label>
@@ -59,6 +59,7 @@
                                 </div>
                             </div>
                         </div>
+            </fieldset>
                         <asp:Panel ID="panelExito" runat="server" CssClass="alert alert-success" Visible="False">
                             <asp:Literal ID="litExito" runat="server"></asp:Literal>
                         </asp:Panel>
@@ -83,7 +84,6 @@
                 </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
-            </fieldset>
         </div>
         <div class="col-md-6">
             <div class="panel panel-default">

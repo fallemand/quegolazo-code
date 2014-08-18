@@ -18,6 +18,7 @@ namespace quegolazo_code.admin
             gestorCancha = Sesion.getGestorCancha();         
             try
             {
+                limpiarPaneles();
                 cargarRepeaterCanchas();
                 imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.COMPLEJO, GestorImagen.MEDIANA);
             }
@@ -25,7 +26,6 @@ namespace quegolazo_code.admin
             {
                 mostrarPanelFracasoListaCanchas(ex.Message);
             }
-            limpiarPaneles();
         }       
 
         /// <summary>

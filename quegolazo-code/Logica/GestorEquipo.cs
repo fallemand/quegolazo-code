@@ -17,24 +17,17 @@ namespace Logica
         /// </summary>  
         public void registrarEquipo(string nombre, string colorCamisetaPrimario, string colorCamisetaSecundario, string directorTecnico)
         {
-            try
-            {
-                if (equipo == null)
-                    equipo = new Equipo();
-                if (equipo.delegadoPrincipal == null && equipo.delegadoOpcional == null)
-                    throw new Exception("Debe cargar al menos un delegado");
-                equipo.nombre=nombre;
-                equipo.colorCamisetaPrimario = colorCamisetaPrimario;
-                equipo.colorCamisetaSecundario = colorCamisetaSecundario;
-                equipo.directorTecnico = directorTecnico;
-                int idTorneo = ((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
-                DAOEquipo daoEquipo = new DAOEquipo();
-                equipo.idEquipo = daoEquipo.registrarEquipo(equipo, idTorneo);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            if (equipo == null)
+                equipo = new Equipo();
+            if (equipo.delegadoPrincipal == null && equipo.delegadoOpcional == null)
+                throw new Exception("Debe cargar al menos un delegado");
+            equipo.nombre=nombre;
+            equipo.colorCamisetaPrimario = colorCamisetaPrimario;
+            equipo.colorCamisetaSecundario = colorCamisetaSecundario;
+            equipo.directorTecnico = directorTecnico;
+            int idTorneo = Sesion.getTorneo().idTorneo;
+            DAOEquipo daoEquipo = new DAOEquipo();
+            equipo.idEquipo = daoEquipo.registrarEquipo(equipo, idTorneo);
         }
 
         /// <summary>
@@ -146,17 +139,10 @@ namespace Logica
         /// <returns>Lista genérica de objetos Equipos</returns>
         public List<Equipo> obtenerEquiposDeUnTorneo()
         {
-            try
-            {
-                DAOEquipo daoEquipo = new DAOEquipo();
-                int idTorneo = ((Torneo)System.Web.HttpContext.Current.Session["torneo"]).idTorneo;
-                List<Equipo> equipos = daoEquipo.obtenerEquiposDeUnTorneo(idTorneo);
-                return equipos;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }            
+            DAOEquipo daoEquipo = new DAOEquipo();
+            int idTorneo = Sesion.getTorneo().idTorneo;
+            List<Equipo> equipos = daoEquipo.obtenerEquiposDeUnTorneo(idTorneo);
+            return equipos;         
         }
 
         /// <summary>
@@ -176,38 +162,31 @@ namespace Logica
         /// </summary>
         public void modificarEquipo(int idEquipo, string nombre, string colorCamisetaPrimario, string colorCamisetaSecundario, string directorTecnico)
         {
-            try
+            DAOEquipo daoEquipo = new DAOEquipo();
+            DAODelegado daoDelegado = new DAODelegado();
+            List<Delegado> delegadosModificados = obtenerDelegados();
+            if(delegadosModificados.Count == 0)
+                throw new Exception("Debe ingresar al menos un delegado");
+            equipo = daoEquipo.obtenerEquipoPorId(idEquipo); // Obtiene el equipo a modificar de la BD
+            // Elimina los delegados de la BD, y setea NULL en las claves foráneas de la tabla Equipo
+            daoDelegado.eliminarDelegadosPorEquipo(equipo); 
+            equipo.nombre = nombre;
+            equipo.colorCamisetaPrimario = colorCamisetaPrimario;
+            equipo.colorCamisetaSecundario = colorCamisetaSecundario;
+            equipo.directorTecnico = directorTecnico;
+            //le setea null a los delegados, para sobreescribirlos con los nuevos delegados
+            equipo.delegadoPrincipal = null;
+            equipo.delegadoOpcional = null;
+            int i = 0;
+            foreach (Delegado delegado in delegadosModificados)
             {
-                DAOEquipo daoEquipo = new DAOEquipo();
-                DAODelegado daoDelegado = new DAODelegado();
-                List<Delegado> delegadosModificados = obtenerDelegados();
-                if(delegadosModificados.Count == 0)
-                    throw new Exception("Debe ingresar al menos un delegado");
-                equipo = daoEquipo.obtenerEquipoPorId(idEquipo); // Obtiene el equipo a modificar de la BD
-                // Elimina los delegados de la BD, y setea NULL en las claves foráneas de la tabla Equipo
-                daoDelegado.eliminarDelegadosPorEquipo(equipo); 
-                equipo.nombre = nombre;
-                equipo.colorCamisetaPrimario = colorCamisetaPrimario;
-                equipo.colorCamisetaSecundario = colorCamisetaSecundario;
-                equipo.directorTecnico = directorTecnico;
-                //le setea null a los delegados, para sobreescribirlos con los nuevos delegados
-                equipo.delegadoPrincipal = null;
-                equipo.delegadoOpcional = null;
-                int i = 0;
-                foreach (Delegado delegado in delegadosModificados)
-                {
-                    if (i == 0) // primera vez que entra al foreach
-                        equipo.delegadoPrincipal = delegado;//si es la 1° vez, el delegado va ser el delegado principal
-                    else
-                        equipo.delegadoOpcional = delegado;//si es la 2° vez, el delegado va ser el delegado opcional
-                    i++;
-                }
-                daoEquipo.modificarEquipo(equipo);               
+                if (i == 0) // primera vez que entra al foreach
+                    equipo.delegadoPrincipal = delegado;//si es la 1° vez, el delegado va ser el delegado principal
+                else
+                    equipo.delegadoOpcional = delegado;//si es la 2° vez, el delegado va ser el delegado opcional
+                i++;
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            daoEquipo.modificarEquipo(equipo);               
         } 
 
         /// <summary>
@@ -217,15 +196,8 @@ namespace Logica
         /// <param name="idCancha">Id del equipo a eliminar</param>
         public void eliminarEquipo(int idEquipo)
         {
-            try
-            {
-                DAOEquipo daoEquipo = new DAOEquipo();
-                daoEquipo.eliminarEquipo(idEquipo);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            DAOEquipo daoEquipo = new DAOEquipo();
+            daoEquipo.eliminarEquipo(idEquipo);
         }
     }
 }

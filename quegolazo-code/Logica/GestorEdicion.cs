@@ -18,16 +18,9 @@ namespace Logica
         /// </summary>
         public List<Edicion> obtenerEdicionesPorTorneo(int idTorneo)
         {
-            try
-            {
-                DAOEdicion daoEdicion = new DAOEdicion();
-                List<Edicion> ediciones = daoEdicion.obtenerEdicionesPorIdTorneo(idTorneo);
-                return ediciones;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message); 
-            }            
+            DAOEdicion daoEdicion = new DAOEdicion();
+            List<Edicion> ediciones = daoEdicion.obtenerEdicionesPorIdTorneo(idTorneo);
+            return ediciones;           
         }
 
         /// <summary> 
@@ -37,15 +30,8 @@ namespace Logica
         /// <returns>El id de la edicion que se registro.</returns>
         public void registrarEdicion()
         {
-            try
-            {
-                DAOEdicion daoEdicion = new DAOEdicion();
-                daoEdicion.registrarEdicion(edicion, Sesion.getTorneo().idTorneo);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message); 
-            } 
+            DAOEdicion daoEdicion = new DAOEdicion();
+            daoEdicion.registrarEdicion(edicion, Sesion.getTorneo().idTorneo);
         }
 
         /// <summary> 
@@ -74,15 +60,8 @@ namespace Logica
         /// <param name="idEdicion">Id de la Edición</param>
         public void registrarEquiposEnEdicion(List<Equipo> equipos, int idEdicion)
         {
-            try
-            {
-                DAOEquipo daoEquipo = new DAOEquipo();
-                daoEquipo.registrarEquiposEnEdicion(equipos, idEdicion);                
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            } 
+            DAOEquipo daoEquipo = new DAOEquipo();
+            daoEquipo.registrarEquiposEnEdicion(equipos, idEdicion);                
         }
     }
 }

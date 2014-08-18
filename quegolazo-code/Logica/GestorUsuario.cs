@@ -18,25 +18,18 @@ namespace Logica
        /// </summary>
        public string registrarUsuario(string apellido, string nombre, string mail, string contrasenia)
        {
-           try
-           {
-               Usuario u = new Usuario
-               {
-                   apellido = apellido,
-                   nombre = nombre,
-                   email = mail,
-                   contrasenia = encriptarContrasenia(contrasenia),
-                   codigo = crearCodigo(),
-                   tipoUsuario = new TipoUsuario { idTipoUsuario = 1, nombre = "Cliente" },
-               };
-               DAOUsuario gestorBD = new DAOUsuario();
-               gestorBD.registrarUsuario(u);//guarda en la BD
-               return u.codigo;
-           }
-           catch (Exception e)
-           {
-               throw new Exception(e.Message);
-           }
+            Usuario u = new Usuario
+            {
+                apellido = apellido,
+                nombre = nombre,
+                email = mail,
+                contrasenia = encriptarContrasenia(contrasenia),
+                codigo = crearCodigo(),
+                tipoUsuario = new TipoUsuario { idTipoUsuario = 1, nombre = "Cliente" },
+            };
+            DAOUsuario gestorBD = new DAOUsuario();
+            gestorBD.registrarUsuario(u);//guarda en la BD
+            return u.codigo;
        }
 
        /// <summary>
@@ -59,15 +52,8 @@ namespace Logica
        /// <returns></returns>
        public void activarUsuario(string codigo)
        {
-           try
-           {
-               DAOUsuario gestorBD = new DAOUsuario();
-               gestorBD.ActivarCuenta(codigo);
-           }
-           catch (Exception e)
-           {
-               throw new Exception(e.Message);
-           }
+            DAOUsuario gestorBD = new DAOUsuario();
+            gestorBD.ActivarCuenta(codigo);
        }
 
        /// <summary>
@@ -78,16 +64,9 @@ namespace Logica
        /// <returns>Objeto Usuario</returns>
        public Usuario obtenerUsuario(int idUsuario)
        {
-           try
-           {
-               DAOUsuario gestorBD = new DAOUsuario();
-               Usuario usuario = gestorBD.obtenerUsuarioPorId(idUsuario);
-               return usuario;
-           }
-           catch (Exception e)
-           {
-               throw new Exception(e.Message);
-           }
+            DAOUsuario gestorBD = new DAOUsuario();
+            Usuario usuario = gestorBD.obtenerUsuarioPorId(idUsuario);
+            return usuario;
        }
 
        /// <summary>
@@ -144,18 +123,11 @@ namespace Logica
        /// </summary>
        public Usuario obtenerUsuario(string mail)
        {
-           try
-           {
-               DAOUsuario gestorBD = new DAOUsuario();
-               Usuario usuario = gestorBD.obtenerUsuarioPorEmail(mail);
-               if (usuario == null)
-                   throw new Exception("No se encuentra registrado ningún usuario con ese e-mail.");
-               return usuario;
-           }
-           catch (Exception e)
-           {
-               throw new Exception(e.Message);
-           }
+            DAOUsuario gestorBD = new DAOUsuario();
+            Usuario usuario = gestorBD.obtenerUsuarioPorEmail(mail);
+            if (usuario == null)
+                throw new Exception("No se encuentra registrado ningún usuario con ese e-mail.");
+            return usuario;
        }
 
        /// <summary>
@@ -164,23 +136,16 @@ namespace Logica
        /// </summary>
        public string generarCodigoRecuperacion(string mail)
        {
-           try
-           {
-               Usuario u = this.obtenerUsuario(mail);
-               if (u.esActivo)
-               {
-                   u.codigoRecuperacion = this.crearCodigo();
-                   DAOUsuario dUsuario = new DAOUsuario();
-                   dUsuario.registrarCodigoRecuperacion(u);
-               }
-               else
-                   throw new Exception("Debes activar tu cuenta para poder ingresar: <a href='activar.usuario.aspx?idUsuario=" + u.idUsuario + "'>Activar aquí</a>");
-               return u.codigoRecuperacion;
-           }
-           catch (Exception e)
-           {
-               throw new Exception(e.Message);
-           }
+            Usuario u = this.obtenerUsuario(mail);
+            if (u.esActivo)
+            {
+                u.codigoRecuperacion = this.crearCodigo();
+                DAOUsuario dUsuario = new DAOUsuario();
+                dUsuario.registrarCodigoRecuperacion(u);
+            }
+            else
+                throw new Exception("Debes activar tu cuenta para poder ingresar: <a href='activar.usuario.aspx?idUsuario=" + u.idUsuario + "'>Activar aquí</a>");
+            return u.codigoRecuperacion;
        }
 
        /// <summary>
