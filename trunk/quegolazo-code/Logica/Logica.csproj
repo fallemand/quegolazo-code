@@ -59,7 +59,7 @@
     <Compile Include="GestorEdicion.cs" />
     <Compile Include="GestorEquipo.cs" />
     <Compile Include="GestorEstado.cs" />
-    <Compile Include="GestorFixture.cs" />
+    <Compile Include="GestorFase.cs" />
     <Compile Include="GestorTipoSuperficie.cs" />
     <Compile Include="GestorTorneo.cs" />
     <Compile Include="GestorUsuario.cs" />

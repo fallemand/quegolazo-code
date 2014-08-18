@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="ConfiguracionEdicion.cs" />
     <Compile Include="Fecha.cs" />
+    <Compile Include="GenerarTodosContraTodos.cs" />
+    <Compile Include="IGenerarFixture.cs" />
     <Compile Include="IPartido.cs" />
     <Compile Include="PartidoComun.cs" />
     <Compile Include="PartidoEliminatorio.cs" />
