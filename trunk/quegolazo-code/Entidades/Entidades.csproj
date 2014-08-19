@@ -45,6 +45,7 @@
     <Compile Include="GenerarTodosContraTodos.cs" />
     <Compile Include="IGenerarFixture.cs" />
     <Compile Include="IPartido.cs" />
+    <Compile Include="Partido.cs" />
     <Compile Include="PartidoComun.cs" />
     <Compile Include="PartidoEliminatorio.cs" />
     <Compile Include="Torneo.cs" />

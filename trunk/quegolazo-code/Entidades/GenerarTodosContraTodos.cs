@@ -29,6 +29,7 @@ namespace Entidades
                 {
                     PartidoComun partidoNuevo = new PartidoComun()
                     {
+                        idPartido=j+1,
                         local = equiposParticipantes[j],
                         visita = equiposParticipantes[k],                      
                        // estado = new Estado() { ambito = Estado.enumAmbito.PARTIDO, nombre = Estado.enumNombre.NO_JUGADO }

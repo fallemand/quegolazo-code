@@ -29,16 +29,16 @@ namespace AccesoADatos
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
+                trans = con.BeginTransaction();
                 cmd.Connection = con;
                 cmd.Transaction = trans;
-                trans = con.BeginTransaction();
-                string sql = @"INSERT INTO Fases (idFase,idEstado,idEdicion,tipoFixture)
-                                    VALUES (@idFase,@idEstado,@idEdicion,@tipoFixture)";
+                
+                string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture)
+                                    VALUES (@idFase,@idEdicion,@tipoFixture)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idFase", fase.idFase);
-                cmd.Parameters.AddWithValue("@idEstado", fase.estado.idEstado);
                 cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture);
+                cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
 

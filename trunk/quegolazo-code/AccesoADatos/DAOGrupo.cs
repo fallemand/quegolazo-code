@@ -31,7 +31,7 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 foreach (Grupo g in fase.grupos)
                 {
-                    string sql = @"INSERT INTO Grupos (idGrupo,idFase,idEdicion)
+                    string sql = @"INSERT INTO Grupos (idGrupo,idFase,idEdicion,nombre)
                                 VALUES (@idGrupo,@idFase,@idEdicion,@nombre) 
                                 SELECT SCOPE_IDENTITY()";
                     cmd.Parameters.Clear();

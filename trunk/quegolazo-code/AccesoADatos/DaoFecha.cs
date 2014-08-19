@@ -40,7 +40,10 @@ namespace AccesoADatos
                         cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                        cmd.Parameters.AddWithValue("@nombre", f.nombre);
+                        if(f.nombre != null)
+                            cmd.Parameters.AddWithValue("@nombre",  f.nombre );
+                        else
+                            cmd.Parameters.AddWithValue("@nombre",  DBNull.Value);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
                     }
