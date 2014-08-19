@@ -22,6 +22,15 @@ namespace quegolazo_code.admin.edicion {
         protected global::System.Web.UI.WebControls.ListBox lstEquiposSeleccionados;
         
         /// <summary>
+        /// Control hfEquiposSeleccionados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfEquiposSeleccionados;
+        
+        /// <summary>
         /// Control panelFracaso.
         /// </summary>
         /// <remarks>

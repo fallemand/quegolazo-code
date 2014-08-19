@@ -15,33 +15,19 @@ namespace quegolazo_code.admin.edicion
         GestorEdicion gestorEdicion = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //si no existe gestor en Session lo carga
-            if (Session["gestorEquipo"] == null)
-                Session["gestorEquipo"] = new GestorEquipo();
-            //obtiene en gestor de la Session.
-            gestorEquipo = (GestorEquipo)Session["gestorEquipo"];
-
-            //si no existe gestor en Session lo carga
-            if (Session["gestorEdicion"] == null)
-                Session["gestorEdicion"] = new GestorEdicion();
-            //obtiene en gestor de la Session.
-            gestorEdicion = (GestorEdicion)Session["gestorEdicion"];
+            gestorEquipo = Sesion.getGestorEquipo();
+            gestorEdicion = Sesion.getGestorEdicion();
+            limpiarPaneles();
 
             //TORNEO HARDCODEADO
             //TORNEO HARDCODEADO
-            Session["torneo"] = new Torneo
-            {
-                idTorneo = 88,
-            };
+            Sesion.setTorneo(new Torneo() { idTorneo = 88 });
             //TORNEO HARDCODEADO
             //TORNEO HARDCODEADO
 
             //EDICION HARDCODEADA
             //EDICION HARDCODEADA
-            Session["edicion"] = new Edicion
-            {
-                idEdicion = 14,
-            };
+            Sesion.setEdicion(new Edicion() {idEdicion=14});
             //EDICION HARDCODEADA
             //EDICION HARDCODEADA
 
@@ -58,16 +44,35 @@ namespace quegolazo_code.admin.edicion
 
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
-            //int cant = ddlEquiposSeleccionados.Items.Count;
-            foreach (ListItem item in lstEquiposSeleccionados.Items)
+            try
             {
-                if (item.Selected)
-                {
-                    if (gestorEdicion.edicion == null)
-                        gestorEdicion.edicion = new Edicion();
-                    gestorEdicion.edicion.equipos.Add(new Equipo { idEquipo = Int32.Parse(item.Value) });
-                }
+                gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
+                Response.Redirect("fases.aspx");
             }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Habilita el panel de fracaso y muestra el error
+        /// autor: Facundo Allemand
+        /// </summary>
+        private void mostrarPanelFracaso(string mensaje)
+        {
+            panelFracaso.Visible = true;
+            litFracaso.Text = mensaje;
+        }
+
+        /// <summary>
+        /// Limpiar panel de error
+        /// autor: Facundo Allemand
+        /// </summary>
+        private void limpiarPaneles()
+        {
+            panelFracaso.Visible = false;
+            litFracaso.Text = "";
         }
     }
 }

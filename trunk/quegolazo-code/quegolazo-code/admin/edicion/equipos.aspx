@@ -10,6 +10,7 @@
         </div>
         <div class="panel-body">
             <asp:ListBox ClientIDMode="Static" ID="lstEquiposSeleccionados" runat="server" SelectionMode="Multiple"></asp:ListBox>
+            <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />
             <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                 <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
             </asp:Panel>
@@ -22,6 +23,13 @@
         $('#lstEquiposSeleccionados').multiSelect({
             selectableHeader: "<div class='well well-sm alert-success nomargin-bottom'>Listado de Equipos</div>",
             selectionHeader: "<div class='well well-sm alert-success nomargin-bottom'>Equipos Seleccionados</div>",
+            afterSelect: function (values) {
+                $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + values + ',');
+            },
+            afterDeselect: function (values) {
+                $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val().replace(values + ',', ''));
+                
+            }
         });
     </script>
 </asp:Content>
