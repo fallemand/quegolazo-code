@@ -27,6 +27,7 @@ namespace Entidades
             tamanioCancha = new TamanioCancha();
             tipoSuperficie = new TipoSuperficie();
             estado = new Estado();
+            equipos = new List<Equipo>();
         }
     }
 }

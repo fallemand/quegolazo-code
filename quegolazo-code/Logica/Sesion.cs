@@ -20,6 +20,16 @@ namespace Logica
             return usuario;
         }
         /// <summary>
+        /// Obtiene la edicion de Session
+        /// </summary>
+        public static Edicion getEdicion()
+        {
+            Edicion edicion = (Edicion)System.Web.HttpContext.Current.Session["edicion"];
+            if (edicion == null)
+                throw new Exception("No se pudo obtener la edición");
+            return edicion;
+        }
+        /// <summary>
         /// Obtiene el torneo de Session
         /// </summary>
         public static Torneo getTorneo()
@@ -35,6 +45,13 @@ namespace Logica
         public static void setTorneo(Torneo torneo)
         {
             System.Web.HttpContext.Current.Session["torneo"] = torneo;
+        }
+        /// <summary>
+        /// Setea la edicion en Session
+        /// </summary>
+        public static void setEdicion(Edicion edicion)
+        {
+            System.Web.HttpContext.Current.Session["edicion"] = edicion;
         }
         /// <summary>
         /// Setea el torneo en Session

@@ -63,5 +63,21 @@ namespace Logica
             DAOEquipo daoEquipo = new DAOEquipo();
             daoEquipo.registrarEquiposEnEdicion(equipos, idEdicion);                
         }
+
+        /// <summary>
+        /// Agrega los equipos recibidos a la edición
+        /// </summary>
+        public void agregarEquiposEnEdicion(string equipos)
+        {
+            if (equipos == "")
+                throw new Exception("No hay equipos seleccionados");
+            //quita la última coma de la cadena
+            string cadena = equipos.Substring(0, equipos.Length - 1);
+            //transforma la cadena en una lista de enteros
+            List<int> listaIdsSeleccionados = cadena.Split(',').Select(Int32.Parse).ToList();
+
+            foreach (int id in listaIdsSeleccionados)
+                edicion.equipos.Add(new Equipo { idEquipo = id });
+        }
     }
 }
