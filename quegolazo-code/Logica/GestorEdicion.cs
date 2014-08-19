@@ -51,7 +51,7 @@ namespace Logica
             edicion.nombre = Validador.isNotEmpty(nombre);
             edicion.tamanioCancha.idTamanioCancha = Validador.castInt(idTamanioCancha);
             edicion.tipoSuperficie.idTipoSuperficie = Validador.castInt(idSuperficie);
-        }
+        }     
 
         /// <summary>
         /// Registrar equipos para una edición
