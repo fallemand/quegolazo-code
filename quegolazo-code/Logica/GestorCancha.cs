@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entidades;
+using Utils;
 using AccesoADatos;
 
 namespace Logica
@@ -103,6 +104,13 @@ namespace Logica
         {
             DAOCancha daoCancha = new DAOCancha();
             daoCancha.eliminarCancha(idCancha);
+            GestorImagen.borrrarImagen(idCancha, GestorImagen.COMPLEJO);
+        }
+
+        public Cancha obtenerCanchaPorId(int idCancha)
+        {
+            DAOCancha daoCancha = new DAOCancha();
+            return daoCancha.obtenerCanchaPorId(idCancha);
         }
     }
 }

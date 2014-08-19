@@ -111,7 +111,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <asp:Repeater ID="rptCanchas" runat="server" OnItemCommand="rptCanchas_ItemCommand" OnItemDataBound="rptCanchas_ItemDataBound">
+                                        <asp:Repeater ID="rptCanchas" runat="server" OnItemCommand="rptCanchas_ItemCommand">
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%# Eval("nombre") %></td>
@@ -135,6 +135,29 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-sm" id="eliminarCancha" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Cancha</h4>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="upEliminarCancha" runat="server">
+                        <ContentTemplate>
+                            <strong>Cancha: </strong>
+                            <asp:Literal ID="litNombreCancha" runat="server"></asp:Literal>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    ¿Esta seguro de eliminar la cancha?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminar_Click" />
                 </div>
             </div>
         </div>
