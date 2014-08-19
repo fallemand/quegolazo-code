@@ -221,7 +221,7 @@
             </asp:Panel>
         </div>
         <div class="panel-footer clearfix ">
-            <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" />
+            <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClick="btnSiguiente_Click" />
         </div>
     </div>
 </asp:Content>
