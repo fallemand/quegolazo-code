@@ -204,7 +204,7 @@ namespace Logica
         /// Registra los Equipos en una Edición
         /// autor: Pau Pedrosa
         /// </summary>
-        public void registrarEquiposEnEdicion(List<int> listaequipos)
+        public void registrarEquiposEnEdicion(List<Equipo> listaequipos)
         {
             try
             {
