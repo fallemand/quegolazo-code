@@ -70,12 +70,11 @@ namespace quegolazo_code.admin
                     btnCancelarModificacionCancha.Visible = true;
                     imagenpreview.Src = gestorCancha.cancha.obtenerImagenMediana();
                 }
-
                 if (e.CommandName == "eliminarCancha")
-                {   //por CommandArgument recibe el ID de la cancha a eliminar              
-                    gestorCancha.eliminarCancha(Int32.Parse(e.CommandArgument.ToString()));
-                    cargarRepeaterCanchas();
-                    limpiarCamposCancha();
+                {
+                    gestorCancha.cancha = gestorCancha.obtenerCanchaPorId(int.Parse(e.CommandArgument.ToString()));
+                    litNombreCancha.Text = gestorCancha.cancha.nombre;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarCancha');", true);
                 }
             }
             catch (Exception ex)
@@ -123,18 +122,19 @@ namespace quegolazo_code.admin
             }
         }
 
-        /// <summary>
-        /// Permite la apertura de la ventana de confirmación de la eliminación de una cancha
-        /// autor: Pau Pedrosa
-        /// </summary>
-        protected void rptCanchas_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            try
             {
-                LinkButton lnk = (LinkButton)e.Item.FindControl("lnkEliminarCancha");
-                lnk.Attributes.Add("onclick", "return confirm('¿Desea eliminar esta Cancha?');");
+                gestorCancha.eliminarCancha(gestorCancha.cancha.idCancha);
+                cargarRepeaterCanchas();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarCancha", "closeModal('eliminarCancha');", true);
             }
-        }   
+            catch (Exception ex)
+            {
+                mostrarPanelFracasoListaCanchas(ex.Message);
+            }
+        }
 
         //------------------------------------------
         //--------------Metodos Extras--------------
@@ -205,6 +205,6 @@ namespace quegolazo_code.admin
             litFracaso.Text = "";
             litExito.Text = "";
             litFracasoListaCanchas.Text = "";            
-        } 
+        }
     }
 }

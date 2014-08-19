@@ -254,6 +254,53 @@ namespace AccesoADatos
         }
 
         /// <summary>
+        /// Obtiene de la Bd la cancha por id
+        /// autor: Facundo Allemand
+        /// </summary>
+        public Cancha obtenerCanchasPorId(int idCancha)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            Cancha cancha = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT * 
+                                FROM Canchas
+                                WHERE idCancha = @idCancha";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idCancha", idCancha));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    cancha = new Cancha()
+                    {
+                        idCancha = Int32.Parse(dr["idCancha"].ToString()),
+                        nombre = dr["nombre"].ToString(),
+                        domicilio = dr["domicilio"].ToString(),
+                        telefono = dr["telefono"].ToString()
+                    };
+                }
+                if (dr != null)
+                    dr.Close();
+                return cancha;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener la cancha:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
         /// Modifica en la BD una Cancha registrada
         /// autor: Pau Pedrosa
         /// </summary>
