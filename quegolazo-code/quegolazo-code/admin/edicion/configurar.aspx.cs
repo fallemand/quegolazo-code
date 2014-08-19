@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Logica;
 
 namespace quegolazo_code.admin.edicion
 {
@@ -11,7 +12,7 @@ namespace quegolazo_code.admin.edicion
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            GestorFase GestorFase = new GestorFase();
         }
     }
 }

@@ -34,10 +34,10 @@ namespace AccesoADatos
                 {
                     foreach (Fecha f in g.fixture)
                     {
-                         foreach (IPartido p in f.partidos)
-                    {
-                        string sql = @"INSERT INTO Partidos (idPartido,idFecha,idGrupo,idFase,idEdicion,idEquipoLocal,idEquipoVisitante,fecha)
-                                     VALUES (@idPartido,@idFecha,@idGrupo,@idFase,@idEdicion,@idEquipoLocal,@idEquipoVisitante,@fecha)";
+                         foreach (Partido p in f.partidos)
+                         {
+                        string sql = @"INSERT INTO Partidos (idPartido,idFecha,idGrupo,idFase,idEdicion,idEquipoLocal,idEquipoVisitante)
+                                     VALUES (@idPartido,@idFecha,@idGrupo,@idFase,@idEdicion,@idEquipoLocal,@idEquipoVisitante)";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idPartido", p.idPartido);
                         cmd.Parameters.AddWithValue("@idFecha", f.idFecha);
@@ -46,10 +46,9 @@ namespace AccesoADatos
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                         cmd.Parameters.AddWithValue("@idEquipoLocal", p.local.idEquipo);
                         cmd.Parameters.AddWithValue("@idEquipoVisitante", p.visita.idEquipo);
-                        cmd.Parameters.AddWithValue("@fecha", p.fecha + " "+p.hora);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
-                    }
+                        }
                     }
                 }
             }
