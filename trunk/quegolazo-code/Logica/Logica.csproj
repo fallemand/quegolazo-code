@@ -60,6 +60,7 @@
     <Compile Include="GestorEquipo.cs" />
     <Compile Include="GestorEstado.cs" />
     <Compile Include="GestorFase.cs" />
+    <Compile Include="GestorJugador.cs" />
     <Compile Include="GestorTipoSuperficie.cs" />
     <Compile Include="GestorTorneo.cs" />
     <Compile Include="GestorUsuario.cs" />

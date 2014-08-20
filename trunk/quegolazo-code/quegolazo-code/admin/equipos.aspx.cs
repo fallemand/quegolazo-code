@@ -154,9 +154,10 @@ namespace quegolazo_code.admin
             }
 
             if (e.CommandName == "eliminarEquipo")
-            {//por CommandArgument recibe el ID del equipo a eliminar 
-                gestorEquipo.eliminarEquipo(Int32.Parse(e.CommandArgument.ToString()));
-                cargarRepeaterEquipos();
+            {//por CommandArgument recibe el ID del equipo a eliminar   
+                gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(e.CommandArgument.ToString()));
+                litNombreEquipo.Text = gestorEquipo.equipo.nombre;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarEquipo');", true);
             }
         }
 
@@ -208,6 +209,24 @@ namespace quegolazo_code.admin
             btnModificarEquipo.Visible = false;
             btnCancelarModificacionEquipo.Visible = false;
             gestorEquipo.equipo = null; // le setea null al equipo 
+        }
+
+        /// <summary>
+        /// Elimina un Equipo de la Bd
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorEquipo.eliminarEquipo(gestorEquipo.equipo.idEquipo);
+                cargarRepeaterEquipos();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarEquipo", "closeModal('eliminarEquipo');", true);
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracasoListaEquipos(ex.Message);
+            }
         }
 
         //------------------------------------------
@@ -309,6 +328,6 @@ namespace quegolazo_code.admin
             litExito.Text = mensaje;
             panelExito.Visible = true;
             panelFracaso.Visible = false;
-        }        
+        }             
     }
 }

@@ -244,6 +244,40 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Open)
                     con.Close();
             }
+        }        
+
+        /// <summary>
+        /// Permite eliminar de la BD un Torneo (sin ediciones asociadas)
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idTorneo">Id del torneo a eliminar</param>
+        public void eliminarTorneo(int idTorneo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"DELETE FROM Torneos
+                                WHERE idTorneo = @idTorneo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {// si tiene ediciones asociadas
+                if (ex.Message.Contains("FK_Ediciones_Campeonatos"))
+                    throw new Exception("No se puede eliminar ese torneo: tiene ediciones asociadas");
+                throw new Exception("No se pudo eliminar el torneo: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
         }
     }
 }

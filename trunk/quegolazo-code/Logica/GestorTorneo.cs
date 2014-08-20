@@ -70,5 +70,14 @@ namespace Logica
             DAOTorneo daoTorneo = new DAOTorneo();
             daoTorneo.modificarTorneo(torneo);
         }
+
+        /// <summary>
+        /// Elimina un torneo 
+        /// </summary>
+        public void eliminarTorneo(int idTorneo)
+        {
+            DAOTorneo daoTorneo = new DAOTorneo();
+            daoTorneo.eliminarTorneo(idTorneo);
+        }
     }
 }

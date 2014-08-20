@@ -30,6 +30,16 @@ namespace Logica
             return edicion;
         }
         /// <summary>
+        /// Obtiene el equipo de Session
+        /// </summary>
+        public static Equipo getEquipo()
+        {
+            Equipo equipo = (Equipo)System.Web.HttpContext.Current.Session["equipo"];
+            if (equipo == null)
+                throw new Exception("No se pudo obtener el equipo");
+            return equipo;
+        }
+        /// <summary>
         /// Obtiene el torneo de Session
         /// </summary>
         public static Torneo getTorneo()
@@ -59,6 +69,13 @@ namespace Logica
         public static void setUsuario(Usuario usuario)
         {
             System.Web.HttpContext.Current.Session["usuario"] = usuario;
+        }
+        /// <summary>
+        /// Setea el equipo en Session
+        /// </summary>
+        public static void setEquipo(Equipo equipo)
+        {
+            System.Web.HttpContext.Current.Session["equipo"] = equipo;
         }       
         /// <summary>
         /// Devuelve el objeto GestorEquipo que esta en la sesion, si es nulo, crea uno nuevo.
@@ -93,6 +110,15 @@ namespace Logica
             if (System.Web.HttpContext.Current.Session["gestorCancha"] == null)
                 System.Web.HttpContext.Current.Session["gestorCancha"] = new GestorCancha();
             return (GestorCancha)System.Web.HttpContext.Current.Session["gestorCancha"];
+        }
+        /// <summary>
+        /// Devuelve el objeto GestorJugador que se encuentra en Session, si es nulo, crea uno nuevo
+        /// </summary>        
+        public static GestorJugador getGestorJugador()
+        {
+            if (System.Web.HttpContext.Current.Session["gestorJugador"] == null)
+                System.Web.HttpContext.Current.Session["gestorJugador"] = new GestorJugador();
+            return (GestorJugador)System.Web.HttpContext.Current.Session["gestorJugador"];
         }
     }
 }
