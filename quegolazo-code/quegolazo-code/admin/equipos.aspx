@@ -192,6 +192,29 @@
             </div>
         </div>
     </div>
+    <div class="modal fade bs-example-modal-sm" id="eliminarEquipo" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Equipo</h4>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="upEliminarEquipo" runat="server">
+                        <ContentTemplate>
+                            <strong>Equipo: </strong>
+                            <asp:Literal ID="litNombreEquipo" runat="server"></asp:Literal>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    ¿Esta seguro de eliminar el equipo?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminar_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         jQuery(document).ready(function () {
             loadColorPicker();

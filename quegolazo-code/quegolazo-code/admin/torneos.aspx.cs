@@ -137,9 +137,15 @@ namespace quegolazo_code.admin
                 }
                 if (e.CommandName == "administrarTorneo")
                 {
-                    Sesion.setTorneo(gestorTorneo.obtenerTorneoPorId(int.Parse(e.CommandArgument.ToString())));
+                    Sesion.setTorneo(gestorTorneo.obtenerTorneoPorId(idTorneo));
                     Response.Redirect("/admin/index.aspx");
-                } 
+                }
+                if (e.CommandName == "eliminarTorneo")
+                {
+                    gestorTorneo.eliminarTorneo(idTorneo);
+                    limpiarPaneles();
+                    cargarRepeaterTorneos();
+                }                                  
             }
             catch (Exception ex)
             {

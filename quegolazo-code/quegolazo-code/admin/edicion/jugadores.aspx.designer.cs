@@ -7,145 +7,91 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace quegolazo_code.admin {
+namespace quegolazo_code.admin.edicion {
     
     
-    public partial class equipos {
+    public partial class jugadores {
         
         /// <summary>
-        /// Control upRegistrarEquipo.
+        /// Control txtNombreJugador.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upRegistrarEquipo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNombreJugador;
         
         /// <summary>
-        /// Control txtNombreEquipo.
+        /// Control txtDni.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNombreEquipo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDni;
         
         /// <summary>
-        /// Control txtNombreDirector.
+        /// Control txtFechaNacimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNombreDirector;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtFechaNacimiento;
         
         /// <summary>
-        /// Control txtColorPrimario.
+        /// Control txtEmail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtColorPrimario;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtEmail;
         
         /// <summary>
-        /// Control txtColorSecundario.
+        /// Control txtFacebook.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtColorSecundario;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtFacebook;
         
         /// <summary>
-        /// Control rptDelegados.
+        /// Control rdSexoFemenino.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptDelegados;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSexoFemenino;
         
         /// <summary>
-        /// Control txtNombreDelegado.
+        /// Control rdSexoMasculino.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNombreDelegado;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSexoMasculino;
         
         /// <summary>
-        /// Control txtEmailDelegado.
+        /// Control rdTieneFichaMedicaSi.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtEmailDelegado;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdTieneFichaMedicaSi;
         
         /// <summary>
-        /// Control txtTelefonoDelegado.
+        /// Control rdTieneFichaMedicaNo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTelefonoDelegado;
-        
-        /// <summary>
-        /// Control txtDireccionDelegado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDireccionDelegado;
-        
-        /// <summary>
-        /// Control btnAgregarDelegado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarDelegado;
-        
-        /// <summary>
-        /// Control btnModificarDelegado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarDelegado;
-        
-        /// <summary>
-        /// Control btnCancelarDelegado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarDelegado;
-        
-        /// <summary>
-        /// Control imagenpreview.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imagenpreview;
-        
-        /// <summary>
-        /// Control imagenUpload.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload imagenUpload;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdTieneFichaMedicaNo;
         
         /// <summary>
         /// Control panelExito.
@@ -184,31 +130,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Literal litFracaso;
         
         /// <summary>
-        /// Control btnCancelarModificacionEquipo.
+        /// Control btnRegistrarJugador.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarModificacionEquipo;
-        
-        /// <summary>
-        /// Control btnModificarEquipo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarEquipo;
-        
-        /// <summary>
-        /// Control btnRegistrarEquipo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegistrarEquipo;
+        protected global::System.Web.UI.WebControls.Button btnRegistrarJugador;
         
         /// <summary>
         /// Control UpdateProgressModalTorneo.
@@ -218,15 +146,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgressModalTorneo;
-        
-        /// <summary>
-        /// Control upListaEquipos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upListaEquipos;
         
         /// <summary>
         /// Control rptEquipos.
@@ -263,32 +182,5 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litFracasoListaEquipos;
-        
-        /// <summary>
-        /// Control upEliminarEquipo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upEliminarEquipo;
-        
-        /// <summary>
-        /// Control litNombreEquipo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litNombreEquipo;
-        
-        /// <summary>
-        /// Control btnEliminar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminar;
     }
 }

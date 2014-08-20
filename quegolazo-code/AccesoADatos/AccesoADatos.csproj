@@ -48,6 +48,7 @@
     <Compile Include="DAOFase.cs" />
     <Compile Include="DAOFecha.cs" />
     <Compile Include="DAOGrupo.cs" />
+    <Compile Include="DAOJugador.cs" />
     <Compile Include="DAOPartido.cs" />
     <Compile Include="DAOTipoSuperficie.cs" />
     <Compile Include="DAOTipoUsuario.cs" />

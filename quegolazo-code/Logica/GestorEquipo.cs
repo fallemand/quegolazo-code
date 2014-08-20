@@ -217,5 +217,15 @@ namespace Logica
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Obtiene un Equipo por Id
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public Equipo obtenerEquipoPorId(int idEquipo)
+        {
+            DAOEquipo daoEquipo = new DAOEquipo();
+            return daoEquipo.obtenerEquipoPorId(idEquipo);
+        }
     }
 }
