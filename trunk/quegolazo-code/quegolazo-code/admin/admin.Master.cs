@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entidades;
+using Logica;
+
 
 namespace quegolazo_code.admin
 {
@@ -15,11 +16,10 @@ namespace quegolazo_code.admin
         {
             if (!Page.IsPostBack)
             {
-                if (Session["usuario"] != null)
+                if (Sesion.getUsuario() != null)
                 {
-                    Usuario usuario = (Usuario)Session["usuario"];
                     Literal litNombre = (Literal)lvNavBar.FindControl("LitNombre");
-                    litNombre.Text = usuario.nombre;
+                    litNombre.Text = Sesion.getUsuario().nombre;
                 }
             }
         }
@@ -29,7 +29,7 @@ namespace quegolazo_code.admin
             Session.Clear();
             Session.Abandon();
             FormsAuthentication.SignOut();
-            Response.Redirect("login.aspx");
+            Response.Redirect(GestorUrl.uLOGIN);
         }
     }
 }

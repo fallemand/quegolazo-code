@@ -12,6 +12,7 @@ namespace Logica
    public class GestorUsuario
     {
        public Usuario usuario;
+       public string mailUsuario;
        /// <summary>
        /// Método para tomar los datos de la pantalla y crear la entidad Usuario
        /// autor: Flor Rojas

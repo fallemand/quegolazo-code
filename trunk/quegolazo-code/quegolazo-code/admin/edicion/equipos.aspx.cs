@@ -47,7 +47,7 @@ namespace quegolazo_code.admin.edicion
             try
             {
                 gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
-                Response.Redirect("fases.aspx");
+                Response.Redirect(GestorUrl.eFASES);
             }
             catch (Exception ex)
             {

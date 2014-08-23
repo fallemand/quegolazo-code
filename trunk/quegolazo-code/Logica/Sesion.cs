@@ -15,8 +15,8 @@ namespace Logica
         public static Usuario getUsuario()
         {
             Usuario usuario = (Usuario)System.Web.HttpContext.Current.Session["usuario"];
-            if (usuario == null)
-                throw new Exception("No se pudo obtener el usuario");
+            //if (usuario == null)
+            //    throw new Exception("No se pudo obtener el usuario");
             return usuario;
         }
         /// <summary>
