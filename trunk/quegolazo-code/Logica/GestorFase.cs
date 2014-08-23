@@ -21,6 +21,7 @@ namespace Logica
           fase.idFase = 1;
           fase.idEdicion = 14;
           fase.grupos = new List<Grupo>();
+          fase.estado = new Estado { idEstado = Estado.CREADA, ambito = new Ambito() {idAmbito=Ambito.FASE, } };
 
           Grupo g = new Grupo();
           g.equipos = new List<Equipo>();

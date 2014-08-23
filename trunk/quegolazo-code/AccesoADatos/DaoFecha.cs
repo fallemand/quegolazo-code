@@ -33,13 +33,14 @@ namespace AccesoADatos
                 {
                     foreach (Fecha f in g.fixture)
                     {
-                        string sql = @"INSERT INTO Fechas (idFecha,idGrupo,idFase,idEdicion,nombre)
-                                     VALUES (@idFecha,@idGrupo,@idFase,@idEdicion,@nombre)";
+                        string sql = @"INSERT INTO Fechas (idFecha,idGrupo,idFase,idEdicion,nombre,idEstado)
+                                     VALUES (@idFecha,@idGrupo,@idFase,@idEdicion,@nombre,@idEstado)";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idFecha", f.idFecha);
                         cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                        cmd.Parameters.AddWithValue("@idEstado", f.estado.idEstado);
                         if(f.nombre != null)
                             cmd.Parameters.AddWithValue("@nombre",  f.nombre );
                         else
