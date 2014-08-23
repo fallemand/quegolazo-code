@@ -33,7 +33,7 @@ namespace quegolazo_code.admin.edicion
                 gestorEdicion.edicion.preferencias.sancionesJugadores = rdSancionesJugadoresSi.Checked;
                 //Preferencia Canchas
                 gestorEdicion.edicion.preferencias.canchaUnica = rdCanchasComplejos.Checked;
-                Response.Redirect("equipos.aspx"); 
+                Response.Redirect(GestorUrl.eEQUIPOS); 
             }
             catch (Exception ex)
             {

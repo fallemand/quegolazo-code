@@ -16,6 +16,7 @@ namespace quegolazo_code.usuario
         {
             gestorUsuario = Sesion.getGestorUsuario();
             gestorUsuario.usuario = Sesion.getUsuario();
+            gestorUsuario.mailUsuario = gestorUsuario.usuario.email;
 
             if (gestorUsuario.usuario != null)
             {

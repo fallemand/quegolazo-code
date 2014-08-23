@@ -27,7 +27,7 @@ namespace quegolazo_code.admin
                         GestorUsuario gestor = new GestorUsuario();
                         gestor.activarUsuario(codigo);                     
                         panExito.Visible = true;
-                        litMensaje.Text = "Ha sido activada. <strong><a href='login.aspx'>Ingresa Aquí</a></strong>";
+                        litMensaje.Text = "Ha sido activada. <strong><a href='"+GestorUrl.uLOGIN+"'>Ingresa Aquí</a></strong>";
                     }
                     catch (Exception ex)
                     {
