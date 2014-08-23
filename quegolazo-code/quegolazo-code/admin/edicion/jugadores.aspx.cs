@@ -57,7 +57,8 @@ namespace quegolazo_code.admin.edicion
                     gestorJugador.obtenerJugadorPorId(Int32.Parse(e.CommandArgument.ToString()));
                     txtNombreJugador.Value = gestorJugador.jugador.nombre;
                     txtDni.Value = gestorJugador.jugador.dni;
-                    txtFechaNacimiento.Value = gestorJugador.jugador.fechaNacimiento.ToString();
+                    txtFechaNacimiento.Value = DateTime.Parse(gestorJugador.jugador.fechaNacimiento.ToString()).ToShortDateString();
+                    //txtFechaNacimiento.Value = gestorJugador.jugador.fechaNacimiento.ToString();
                     txtTelefono.Value = gestorJugador.jugador.telefono;
                     txtFacebook.Value = gestorJugador.jugador.facebook;
                     txtEmail.Value = gestorJugador.jugador.email;

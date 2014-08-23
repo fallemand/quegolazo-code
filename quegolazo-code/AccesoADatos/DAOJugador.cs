@@ -13,6 +13,10 @@ namespace AccesoADatos
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
 
+        /// <summary>
+        /// Registra un nuevo Jugador en la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
         public int registrarJugador(Jugador jugador, int idEquipo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -66,6 +70,10 @@ namespace AccesoADatos
             }
         }
                
+        /// <summary>
+        /// Obtiene todos los jugadores de un Equipo
+        /// autor: Pau Pedrosa
+        /// </summary>
         public List<Jugador> obtenerJugadoresDeUnEquipo(int idEquipo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -117,6 +125,10 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Obtiene un Jugador por Id
+        /// autor: Pau Pedrosa
+        /// </summary>
         public Jugador obtenerJugadorPorId(int idJugador)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -142,10 +154,7 @@ namespace AccesoADatos
                     respuesta.nombre = dr["nombre"].ToString();
                     respuesta.dni = dr["dni"].ToString();
                     if (dr["fechaNacimiento"] != System.DBNull.Value)
-                    {
-                        string f = DateTime.Parse(dr["fechaNacimiento"].ToString()).ToShortDateString();
-                        respuesta.fechaNacimiento = DateTime.Parse(f);
-                    }                   
+                        respuesta.fechaNacimiento = DateTime.Parse(dr["fechaNacimiento"].ToString());                                 
                     else
                         respuesta.fechaNacimiento = null;
                     if (dr["telefono"] != System.DBNull.Value)
@@ -178,6 +187,10 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Permite modificar un jugador en la BD 
+        /// autor: Pau Pedrosa
+        /// </summary>
         public void modificarJugador(Jugador jugador)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -230,6 +243,10 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Eliminar un jugador de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
         public void eliminarJugador(int idJugador)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
