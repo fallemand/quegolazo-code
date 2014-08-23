@@ -113,13 +113,12 @@ namespace quegolazo_code.admin
         {
             try
             {
-                int idTorneo = int.Parse(e.CommandArgument.ToString());
-                Torneo torneo = gestorTorneo.obtenerTorneoPorId(idTorneo);
+                gestorTorneo.torneo = gestorTorneo.obtenerTorneoPorId(int.Parse(e.CommandArgument.ToString()));
                 if (e.CommandName == "agregarEdicion")
                 {
                     limpiarModalEdicion();
-                    txtTorneoAsociado.Value = torneo.nombre;
-                    Sesion.setTorneo(torneo);
+                    txtTorneoAsociado.Value = gestorTorneo.torneo.nombre;
+                    Sesion.setTorneo(gestorTorneo.torneo);
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
                 }
                 if (e.CommandName == "editarTorneo")
@@ -128,24 +127,23 @@ namespace quegolazo_code.admin
                     txtUrlTorneo.Disabled = true;
                     btnRegistrarTorneo.Visible = false;
                     btnModificarTorneo.Visible = true;
-                    txtUrlTorneo.Value = torneo.nick;
-                    txtNombreTorneo.Value = torneo.nombre;
-                    txtDescripcion.Value = torneo.descripcion;
-                    imagenpreview.Src = torneo.obtenerImagenMediana();
-                    gestorTorneo.torneo.idTorneo = idTorneo;
+                    txtUrlTorneo.Value = gestorTorneo.torneo.nick;
+                    txtNombreTorneo.Value = gestorTorneo.torneo.nombre;
+                    txtDescripcion.Value = gestorTorneo.torneo.descripcion;
+                    imagenpreview.Src = gestorTorneo.torneo.obtenerImagenMediana();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
                 }
                 if (e.CommandName == "administrarTorneo")
                 {
-                    Sesion.setTorneo(gestorTorneo.obtenerTorneoPorId(idTorneo));
+                    Sesion.setTorneo(gestorTorneo.torneo);
                     Response.Redirect("/admin/index.aspx");
                 }
                 if (e.CommandName == "eliminarTorneo")
                 {
-                    gestorTorneo.eliminarTorneo(idTorneo);
+                    litNombreTorneo.Text = gestorTorneo.torneo.nombre;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarTorneo');", true);
                     limpiarPaneles();
-                    cargarRepeaterTorneos();
-                }                                  
+                }                
             }
             catch (Exception ex)
             {
@@ -276,6 +274,78 @@ namespace quegolazo_code.admin
         {
             litFracasoEdicion.Text = mensaje;
             panFracasoEdicion.Visible = true;
+        }
+
+        /// <summary>
+        /// Elimina de la BD un torneo
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorTorneo.eliminarTorneo(gestorTorneo.torneo.idTorneo);
+                cargarRepeaterTorneos();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarTorneo", "closeModal('eliminarTorneo');", true);
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Permite Editar Edición
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void rptEdiciones_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "editarEdicion")
+                {
+                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
+                    lblTituloModalEdicion.Text = "Modificar Edición";
+                    btnSiguienteEdicion.Visible = false;
+                    btnModificarEdicion.Visible = true;
+                    txtNombreEdicion.Value = gestorEdicion.edicion.nombre;
+                    ddlTamañoCancha.SelectedValue = gestorEdicion.edicion.tamanioCancha.idTamanioCancha.ToString();
+                    ddlTipoSuperficie.SelectedValue = gestorEdicion.edicion.tipoSuperficie.idTipoSuperficie.ToString();
+                    txtPuntosPorEmpatar.Value = gestorEdicion.edicion.puntosEmpatado.ToString();
+                    txtPuntosPorGanar.Value = gestorEdicion.edicion.puntosGanado.ToString();
+                    txtPuntosPorPerder.Value = gestorEdicion.edicion.puntosPerdido.ToString();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }            
+        }
+
+        /// <summary>
+        /// Permite modificar de la Bd una Edición
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void btnModificarEdicion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                limpiarPaneles();
+                gestorEdicion.modificarEdicion(gestorEdicion.edicion.idEdicion, txtNombreEdicion.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue, txtPuntosPorGanar.Value, txtPuntosPorEmpatar.Value, txtPuntosPorPerder.Value);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
+                cargarRepeaterTorneos();
+                limpiarModalEdicion();
+                lblTituloModalEdicion.Text = "Agregar Nueva Edición";
+                btnSiguienteEdicion.Visible = true;
+                btnModificarEdicion.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
+                litFracasoEdicion.Text = ex.Message;
+                panFracasoEdicion.Visible = true;
+            }
         }
     }
 }

@@ -184,6 +184,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.UpdatePanel upModalEdicion;
         
         /// <summary>
+        /// Control lblTituloModalEdicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloModalEdicion;
+        
+        /// <summary>
         /// Control txtTorneoAsociado.
         /// </summary>
         /// <remarks>
@@ -274,6 +283,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnSiguienteEdicion;
         
         /// <summary>
+        /// Control btnModificarEdicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModificarEdicion;
+        
+        /// <summary>
         /// Control UpdateProgressModalEdicion.
         /// </summary>
         /// <remarks>
@@ -281,5 +299,32 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgressModalEdicion;
+        
+        /// <summary>
+        /// Control upEliminarTorneo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upEliminarTorneo;
+        
+        /// <summary>
+        /// Control litNombreTorneo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litNombreTorneo;
+        
+        /// <summary>
+        /// Control btnEliminar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEliminar;
     }
 }
