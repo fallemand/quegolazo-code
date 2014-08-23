@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="equipos.aspx.cs" Inherits="quegolazo_code.admin.equipos" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="row">
@@ -148,11 +147,18 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <span class="glyphicon glyphicon-search"></span>
-                        Equipos Existentes
+                        <div class="row clearfix">
+                            <div class="col-md-8">
+                                <span class="glyphicon glyphicon-search"></span>
+                                Equipos Existentes
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar por Nombre"/>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
-                        <asp:UpdatePanel ID="upListaEquipos" runat="server">
+                        <asp:UpdatePanel ID="upListaEquipos" runat="server" class="listado">
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="btnRegistrarEquipo" EventName="Click" />
                                 <asp:AsyncPostBackTrigger ControlID="btnModificarEquipo" EventName="Click" />
@@ -161,14 +167,16 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-4">Nombre</th>
                                             <th class="col-md-1"></th>
+                                            <th class="col-md-9">Nombre</th>
+                                            <th class="col-md-2"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="tablaFiltro">
                                         <asp:Repeater ID="rptEquipos" runat="server" OnItemCommand="rptEquipos_ItemCommand">
                                             <ItemTemplate>
                                                 <tr>
+                                                    <td><img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
                                                     <td><%# Eval("nombre") %></td>
                                                     <td>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarEquipo" title="Editar Equipo" runat="server" CommandName="editarEquipo" CommandArgument='<%#Eval("idEquipo")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
@@ -221,6 +229,13 @@
             $('body').on('change', '#ContentAdmin_ContentAdminTorneo_imagenUpload', function () {
                 previewImage(this, 'ContentAdmin_ContentAdminTorneo_imagenpreview');
                 ajaxFileUpload('ContentAdmin_ContentAdminTorneo_imagenUpload');
+            });
+            $('body').on('keyup', '#filtro', function () {
+                var rex = new RegExp($(this).val(), 'i');
+                $('.tablaFiltro tr').hide();
+                $('.tablaFiltro tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
             });
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
             function EndRequestHandler(sender, args) {

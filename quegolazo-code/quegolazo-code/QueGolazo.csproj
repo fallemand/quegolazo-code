@@ -81,7 +81,7 @@
     <Content Include="resources\js\jquery.colorPicker.min.js" />
     <Content Include="resources\js\jquery.multi-select.js" />
     <Content Include="resources\js\quegolazo.js" />
-    <Content Include="usuario\activar.usuario.aspx" />
+    <Content Include="usuario\activar.aspx" />
     <Content Include="admin\index.aspx" />
     <Content Include="usuario\login.aspx" />
     <Content Include="admin\torneos.aspx" />
@@ -165,12 +165,12 @@
     <Compile Include="admin\equipos.aspx.designer.cs">
       <DependentUpon>equipos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="usuario\activar.usuario.aspx.cs">
-      <DependentUpon>activar.usuario.aspx</DependentUpon>
+    <Compile Include="usuario\activar.aspx.cs">
+      <DependentUpon>activar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="usuario\activar.usuario.aspx.designer.cs">
-      <DependentUpon>activar.usuario.aspx</DependentUpon>
+    <Compile Include="usuario\activar.aspx.designer.cs">
+      <DependentUpon>activar.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\admin.Master.cs">
       <DependentUpon>admin.Master</DependentUpon>
