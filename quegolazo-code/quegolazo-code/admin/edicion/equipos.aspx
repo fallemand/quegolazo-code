@@ -11,9 +11,16 @@
         <div class="panel-body">
             <asp:ListBox ClientIDMode="Static" ID="lstEquiposSeleccionados" runat="server" SelectionMode="Multiple"></asp:ListBox>
             <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />
-            <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
-                <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
-            </asp:Panel>
+            <asp:UpdatePanel ID="upSeleccionarEquipos" runat="server">
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="btnSiguiente" EventName="Click"/>
+                </Triggers>
+                <ContentTemplate>                    
+                    <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
+                        <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
+                    </asp:Panel>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
         <div class="panel-footer clearfix ">
             <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClick="btnSiguiente_Click"/>
