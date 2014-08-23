@@ -33,12 +33,13 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 cmd.Transaction = trans;
                 
-                string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture)
-                                    VALUES (@idFase,@idEdicion,@tipoFixture)";
+                string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture, idEstado)
+                                    VALUES (@idFase,@idEdicion,@tipoFixture, @idEstado)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                 cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                 cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
+                cmd.Parameters.AddWithValue("@idEstado", fase.estado.idEstado);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
 
