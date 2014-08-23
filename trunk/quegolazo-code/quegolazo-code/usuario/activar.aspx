@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="activar-usuario.aspx.cs" Inherits="quegolazo_code.admin.activar_usuario" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="activar.aspx.cs" Inherits="quegolazo_code.admin.activar_usuario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdmin" runat="server">
     <div class="container">

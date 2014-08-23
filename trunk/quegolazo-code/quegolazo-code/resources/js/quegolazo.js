@@ -94,4 +94,11 @@ function ajaxFileUpload(input) {
     )
     return false;
 };
-
+function filtrar(input) {
+    alert($(input).val());
+    var rex = new RegExp($(input).val(), 'i');
+    $('.tablaFiltro tr').hide();
+    $('.tablaFiltro tr').filter(function () {
+        return rex.test($(input).val());
+    }).show();
+}

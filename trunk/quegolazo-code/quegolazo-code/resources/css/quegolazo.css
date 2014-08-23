@@ -1324,3 +1324,16 @@ div.colorPicker-swatch:hover {
   cursor: text;
 }
 /*----------------------Jquery Multiselect---------------------*/
+
+.listado {
+    max-height: 450px !important;
+    overflow: auto;
+}
+
+.input-xs {
+height: 25px;
+padding: 3px 8px;
+font-size: 12px;
+line-height: 1.5;
+border-radius: 0;
+}
