@@ -27,6 +27,7 @@ namespace Logica
         public const string uRECUPERARCONTRASENIA = "/usuario/recuperar-contrasenia.aspx";
         public const string uRECUPERAR = "/usuario/recuperar.aspx";
         public const string uREGISTRO = "/usuario/registro.aspx";
+        public const string uMODIFICAR = "/usuario/modificar.aspx";
 
         //Forms en el root 
         public const string rINDEX = "/index.aspx";

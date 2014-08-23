@@ -49,7 +49,7 @@
             </asp:UpdatePanel>
         </fieldset>
         <div class="center-block margin-top sub-login">
-          <a href="recuperar.aspx" >No recuerdo la contraseña</a> - <a href="registro.aspx" >Registrarme</a>
+          <a href="<%=Logica.GestorUrl.uRECUPERAR %>" >No recuerdo la contraseña</a> - <a href="<%=Logica.GestorUrl.uREGISTRO %>" >Registrarme</a>
         </div>
       </div>
 </asp:Content>

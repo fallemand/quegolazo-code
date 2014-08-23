@@ -85,6 +85,7 @@
     <Content Include="admin\index.aspx" />
     <Content Include="usuario\login.aspx" />
     <Content Include="admin\torneos.aspx" />
+    <Content Include="usuario\modificar.aspx" />
     <Content Include="usuario\recuperar-contrasenia.aspx" />
     <Content Include="usuario\registro.aspx" />
     <Content Include="Global.asax" />
@@ -206,6 +207,13 @@
     </Compile>
     <Compile Include="admin\torneos.aspx.designer.cs">
       <DependentUpon>torneos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="usuario\modificar.aspx.cs">
+      <DependentUpon>modificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="usuario\modificar.aspx.designer.cs">
+      <DependentUpon>modificar.aspx</DependentUpon>
     </Compile>
     <Compile Include="usuario\recuperar-contrasenia.aspx.cs">
       <DependentUpon>recuperar-contrasenia.aspx</DependentUpon>

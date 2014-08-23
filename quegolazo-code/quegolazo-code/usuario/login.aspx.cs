@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Logica;
-using Entidades;
 using System.Web.Security;
 
 namespace quegolazo_code.admin
@@ -23,8 +22,8 @@ namespace quegolazo_code.admin
             {
                 ocultarPaneles();
                 GestorUsuario gestorUsuario = new GestorUsuario();
-                Usuario u = gestorUsuario.validarUsuario(txtEmail.Value, txtContrasenia.Value);
-                Session["usuario"] = u;
+                gestorUsuario.usuario = gestorUsuario.validarUsuario(txtEmail.Value, txtContrasenia.Value);
+                Sesion.setUsuario(gestorUsuario.usuario);
                 FormsAuthentication.RedirectFromLoginPage(txtEmail.Value, noCerrarSesion.Checked);
             }
             catch (Exception ex)
