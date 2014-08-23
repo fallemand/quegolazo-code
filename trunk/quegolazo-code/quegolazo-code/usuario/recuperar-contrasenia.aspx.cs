@@ -15,7 +15,7 @@ namespace quegolazo_code.admin
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["Code"] == null)
-                Response.Redirect("login.aspx");
+                Response.Redirect(GestorUrl.uLOGIN);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace quegolazo_code.admin
                         throw new Exception("");
                     }
                     panExito.Visible = true;
-                    LitExito.Text = "Se ha registrado exitosamente su nueva clave de acceso. <strong><a href='login.aspx'>Ingresa Aquí</a></strong>";
+                    LitExito.Text = "Se ha registrado exitosamente su nueva clave de acceso. <strong><a href='"+GestorUrl.uLOGIN +"'>Ingresa Aquí</a></strong>";
                 }
                 catch (Exception ex)
                 {

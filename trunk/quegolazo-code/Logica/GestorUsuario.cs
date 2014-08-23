@@ -166,5 +166,25 @@ namespace Logica
                throw new Exception("El código de Recuperación no es válido o ya fue utilizado.");
            }
        }
+       /// <summary>
+       /// Método para modificar datos del usuario
+       /// autor: Flor Rojas
+       /// </summary>
+       public string modificarUsuario(string apellido, string nombre, string mail, string contrasenia , string contraseniaNueva)
+       {
+               usuario.apellido = apellido;
+               usuario.nombre = nombre;
+               usuario.email = mail;
+               usuario.contrasenia= encriptarContrasenia(contrasenia);
+               usuario.tipoUsuario = new TipoUsuario { idTipoUsuario = 1, nombre = "Cliente" };
+
+           DAOUsuario gestorBD = new DAOUsuario();
+
+
+           gestorBD.registrarUsuario(usuario);//guarda en la BD
+           return usuario.codigo;
+       }
+
+
     }
 }

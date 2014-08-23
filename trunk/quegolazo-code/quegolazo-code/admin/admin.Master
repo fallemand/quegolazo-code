@@ -51,8 +51,8 @@
                           <span class="glyphicon glyphicon-cog"></span> Mi Cuenta <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a href="torneos.aspx"><span class="glyphicon glyphicon-certificate"></span> Mis Torneos</a></li>
-                          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Mis Datos</a></li>
+                          <li><a href="<%=Logica.GestorUrl.aTORNEOS %>"><span class="glyphicon glyphicon-certificate"></span> Mis Torneos</a></li>
+                          <li><a href="<%=Logica.GestorUrl.uMODIFICAR %>"><span class="glyphicon glyphicon-user"></span> Mis Datos</a></li>
                           <li>
                               <asp:LinkButton ID="hlCerrarSesion" runat="server" OnClick="hlCerrarSesion_Click"><span class="glyphicon glyphicon-minus-sign"></span> Cerrar Sesión</asp:LinkButton>
                           </li>
@@ -82,10 +82,10 @@
                 <AnonymousTemplate>
                     <ul class="nav navbar-nav">
                       <li class="dropdown">
-                        <a href="/usuario/login.aspx"><span class="glyphicon glyphicon-user"></span> Ingresar</a>
+                        <a href="<%=Logica.GestorUrl.uLOGIN %>"><span class="glyphicon glyphicon-user"></span> Ingresar</a>
                       </li>
                       <li class="dropdown">
-                        <a href="/usuario/registro.aspx"><span class="glyphicon glyphicon-plus-sign"></span> Registrarme</a>
+                        <a href="<%=Logica.GestorUrl.uREGISTRO %>"><span class="glyphicon glyphicon-plus-sign"></span> Registrarme</a>
                       </li>
                     </ul>
                 </AnonymousTemplate>

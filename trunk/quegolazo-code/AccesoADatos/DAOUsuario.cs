@@ -322,6 +322,95 @@ namespace AccesoADatos
                     con.Close();               
             }
         }
+
+        /// <summary>
+        /// Modifica el usuario en la BD
+        /// autor: Flor Rojas
+        /// </summary>
+        /// <param name="usuarioNuevo">Objeto usuario</param>
+        public void modificarUsuario(Usuario usuarioModificado)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"UPDATE Usuarios 
+                                SET nombre=@nombre, apellido=@apellido, email=@email, contrasenia=@contrasenia, codigo=@codigo, esActivo=@esActivo
+                                WHERE idUsuario=@idUsuario";
+     
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idUsuario", usuarioModificado.idUsuario));
+                cmd.Parameters.Add(new SqlParameter("@nombre", usuarioModificado.nombre));
+                cmd.Parameters.Add(new SqlParameter("@apellido", usuarioModificado.apellido));
+                cmd.Parameters.Add(new SqlParameter("@email", usuarioModificado.email));
+                if(usuarioModificado.codigo != string.Empty)
+                cmd.Parameters.Add(new SqlParameter("@codigo", usuarioModificado.codigo));
+                else
+                    cmd.Parameters.Add(new SqlParameter("@codigo", DBNull.Value));
+                cmd.Parameters.Add(new SqlParameter("@esActivo", usuarioModificado.esActivo));
+                cmd.Parameters.Add(new SqlParameter("@contrasenia", usuarioModificado.contrasenia));
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {// Excepción de BD, clave unique
+                if (ex.Class == 14 && ex.Number == 2627)
+                    throw new Exception("El usuario con el mail: " + usuarioModificado.email + " Ya se encuentra registrado. Por favor ingrese una cuenta de correo diferente.");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo modificar el usuario: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+        /// <summary>
+        /// Validar contrasenia para corroborar identidad del usuario
+        /// </summary>
+        /// <parameters>contrasenia</parameters>
+        /// <returns>Usuario</returns>
+        public void validarUsuario(string idUsuario, string contrasenia)
+        {
+//            SqlConnection con = new SqlConnection(cadenaDeConexion);
+//            SqlCommand cmd = new SqlCommand();
+//            SqlDataReader dr;
+//            Usuario respuesta = null;
+//            try
+//            {
+//                DAOTipoUsuario gestorTipoUsuario = new DAOTipoUsuario();
+//                if (con.State == ConnectionState.Closed)
+//                    con.Open();
+//                cmd.Connection = con;
+//                string sql = @"SELECT * 
+//                                FROM Usuarios
+//                                WHERE idUsuario = @idUsuario AND contrasenia = @contrasenia";
+//                cmd.Parameters.Clear();
+//                cmd.Parameters.Add(new SqlParameter("@idUsuario", idUsuario));
+//                cmd.Parameters.Add(new SqlParameter("@contrasenia", contrasenia));
+//                cmd.CommandText = sql;
+//                //ifcmd.ExecuteReader();
+//                while (dr.Read())
+//                {
+           
+//                }
+               
+//            }
+//            catch (Exception ex)
+//            {
+//                throw new Exception("Ocurrio un error al obtener el usuario" + ex.Message);
+//            }
+//            finally
+//            {
+//                if (con != null && con.State == ConnectionState.Open)
+//                    con.Close();
+//            }
+        }
     }
 }
 
