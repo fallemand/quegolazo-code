@@ -125,7 +125,7 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinCanchas" runat="server" visible="false">
-                                            <td colspan="2">No hay canchas registradas</td>
+                                            <td colspan="4">No hay canchas registradas</td>
                                         </tr>
                                     </tbody>
                                 </table>

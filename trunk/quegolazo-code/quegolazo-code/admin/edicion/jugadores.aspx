@@ -29,7 +29,13 @@
                                             <div class="col-lg-10">
                                                 <input type="text" class="form-control" id="txtFechaNacimiento" runat="server" placeholder="Fecha de Nacimiento" date="true">
                                             </div>
-                                        </div>  
+                                        </div> 
+                                         <div class="form-group">
+                                            <label for="select" class="col-lg-2 control-label">Teléfono:</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Telefono" date="true">
+                                            </div>
+                                        </div>   
                                          <div class="form-group">
                                             <label for="select" class="col-lg-2 control-label">E-mail</label>
                                             <div class="col-lg-10">
@@ -77,6 +83,8 @@
                             </div>
                             <div class="panel-footer clearfix text-right">
                                 <div class="col-xs-8 col-xs-offset-3">
+                                    <asp:Button class="btn btn-default" ID="btnCancelarModificacionJugador" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionJugador_Click"/>
+                                    <asp:Button class="btn btn-success causesValidation vgJugador" ID="btnModificarJugador" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarJugador_Click"/>
                                     <asp:Button class="btn btn-success causesValidation vgJugador" ID="btnRegistrarJugador" runat="server" Text="Registrar" OnClick="btnRegistrarJugador_Click" />
                                 </div>
                                 <div class="col-xs-1">
@@ -99,29 +107,35 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-4">Nombre</th>
+                                            <th class="col-md-2">Nombre</th>
+                                            <th class="col-md-2">Telefono</th>
+                                            <th class="col-md-2">E-mail</th>
+                                            <th class="col-md-2">Facebook</th>
                                             <th class="col-md-1"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <asp:Repeater ID="rptEquipos" runat="server" >
+                                        <asp:Repeater ID="rptJugadores" runat="server" OnItemCommand="rptJugadores_ItemCommand">
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%# Eval("nombre") %></td>
+                                                    <td><%# Eval("telefono") %></td>
+                                                    <td><%# Eval("email") %></td>
+                                                    <td><%# Eval("facebook") %></td>
                                                     <td>
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarEquipo" title="Editar Equipo" runat="server" CommandName="editarEquipo" CommandArgument='<%#Eval("idEquipo")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarEquipo" title="Eliminar Equipo" runat="server" CommandName="eliminarEquipo" CommandArgument='<%#Eval("idEquipo")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar"></span></asp:LinkButton>
+                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarJugador" title="Editar Jugador" runat="server" CommandName="editarJugador" CommandArgument='<%#Eval("idJugador")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarJugador" title="Eliminar Jugador" runat="server" CommandName="eliminarJugador" CommandArgument='<%#Eval("idJugador")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar"></span></asp:LinkButton>
                                                     </td>
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
-                                        <tr id="sinequipos" runat="server" visible="false">
-                                            <td colspan="2">No hay Jugadores registrados</td>
+                                        <tr id="sinJugadores" runat="server" visible="false">
+                                            <td colspan="5">No hay Jugadores registrados</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                        <asp:Panel ID="panelFracasoListaEquipos" runat="server" CssClass="alert alert-danger" Visible="False">
-                            <asp:Literal ID="litFracasoListaEquipos" runat="server"></asp:Literal>
+                        <asp:Panel ID="panelFracasoListaJugadores" runat="server" CssClass="alert alert-danger" Visible="False">
+                            <asp:Literal ID="litFracasoListaJugadores" runat="server"></asp:Literal>
                         </asp:Panel>
                     </div>
                 </div>

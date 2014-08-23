@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entidades;
 using AccesoADatos;
+using Utils;
 
 namespace Logica
 {
@@ -198,6 +199,7 @@ namespace Logica
         {
             DAOEquipo daoEquipo = new DAOEquipo();
             daoEquipo.eliminarEquipo(idEquipo);
+            GestorImagen.borrrarImagen(idEquipo, GestorImagen.EQUIPO);
         }
 
         /// <summary>

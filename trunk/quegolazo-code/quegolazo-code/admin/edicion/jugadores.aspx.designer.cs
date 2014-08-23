@@ -40,6 +40,15 @@ namespace quegolazo_code.admin.edicion {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtFechaNacimiento;
         
         /// <summary>
+        /// Control txtTelefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTelefono;
+        
+        /// <summary>
         /// Control txtEmail.
         /// </summary>
         /// <remarks>
@@ -130,6 +139,24 @@ namespace quegolazo_code.admin.edicion {
         protected global::System.Web.UI.WebControls.Literal litFracaso;
         
         /// <summary>
+        /// Control btnCancelarModificacionJugador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarModificacionJugador;
+        
+        /// <summary>
+        /// Control btnModificarJugador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModificarJugador;
+        
+        /// <summary>
         /// Control btnRegistrarJugador.
         /// </summary>
         /// <remarks>
@@ -148,39 +175,39 @@ namespace quegolazo_code.admin.edicion {
         protected global::System.Web.UI.UpdateProgress UpdateProgressModalTorneo;
         
         /// <summary>
-        /// Control rptEquipos.
+        /// Control rptJugadores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptEquipos;
+        protected global::System.Web.UI.WebControls.Repeater rptJugadores;
         
         /// <summary>
-        /// Control sinequipos.
+        /// Control sinJugadores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinequipos;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinJugadores;
         
         /// <summary>
-        /// Control panelFracasoListaEquipos.
+        /// Control panelFracasoListaJugadores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelFracasoListaEquipos;
+        protected global::System.Web.UI.WebControls.Panel panelFracasoListaJugadores;
         
         /// <summary>
-        /// Control litFracasoListaEquipos.
+        /// Control litFracasoListaJugadores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litFracasoListaEquipos;
+        protected global::System.Web.UI.WebControls.Literal litFracasoListaJugadores;
     }
 }

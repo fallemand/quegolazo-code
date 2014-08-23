@@ -12,19 +12,56 @@ namespace Logica
     public class GestorJugador
     {
         public Jugador jugador = new Jugador();
-        public void registrarJugador(string nombre, string dni, string fechaNacimiento, string email, string facebook, bool sexo, bool tieneFichaMedica, int idEquipo)
+        public void registrarJugador(string nombre, string dni, string fechaNacimiento, string telefono, string email, string facebook, bool sexo, bool tieneFichaMedica)
         {
             if (jugador == null)
                 jugador = new Jugador();
             jugador.nombre = nombre;
             jugador.dni = dni;
             jugador.fechaNacimiento = Validador.castDate(fechaNacimiento);
+            jugador.telefono = telefono;
             jugador.email = email;
             jugador.facebook = facebook;
             jugador.sexo = (sexo == true) ? "Masculino" : "Femenino";
             jugador.tieneFichaMedica = (tieneFichaMedica == true) ? true : false;
+            int idEquipo = Sesion.getEquipo().idEquipo;//obtiene el Id del equipo que está en Session
             DAOJugador daoJugador = new DAOJugador();
             jugador.idJugador = daoJugador.registrarJugador(jugador, idEquipo);
+        }
+
+        public List<Jugador> obtenerJugadoresDeUnEquipo()
+        {
+            DAOJugador daoJugador = new DAOJugador();
+            int idEquipo = Sesion.getEquipo().idEquipo;//obtiene el Id del equipo que está en Session
+            List<Jugador> jugadores = daoJugador.obtenerJugadoresDeUnEquipo(idEquipo);
+            return jugadores;
+        }
+
+        public void obtenerJugadorPorId(int idJugador)
+        {
+            DAOJugador daoJugador = new DAOJugador();
+            jugador = daoJugador.obtenerJugadorPorId(idJugador);
+        }
+
+        public void modificarJugador(int idJugador, string nombre, string dni, string fechaNacimiento, string telefono, string email, string facebook, bool sexo, bool tienefichaMedica)
+        {
+            DAOJugador daoJugador = new DAOJugador();
+            jugador.idJugador = idJugador;
+            jugador.nombre = nombre;
+            jugador.dni = dni;
+            jugador.fechaNacimiento = Validador.castDate(fechaNacimiento);
+            jugador.telefono = telefono;
+            jugador.email = email;
+            jugador.facebook = facebook;
+            jugador.sexo = (sexo == true) ? "Masculino" : "Femenino";
+            jugador.tieneFichaMedica = (tienefichaMedica == true) ? true : false;
+            daoJugador.modificarJugador(jugador);        
+        }
+
+        public void eliminarJugador(int idJugador)
+        {
+            DAOJugador daoJugador = new DAOJugador();
+            daoJugador.eliminarJugador(idJugador);
         }
     }
 }

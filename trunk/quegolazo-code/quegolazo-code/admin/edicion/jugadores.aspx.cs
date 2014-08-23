@@ -18,19 +18,28 @@ namespace quegolazo_code.admin.edicion
             //EQUIPO HARDCODEADO
             //EQUIPO HARDCODEADO
             GestorEquipo gestorEquipo = new GestorEquipo();
-            Sesion.setEquipo(gestorEquipo.obtenerEquipoPorId(1));
+            Sesion.setEquipo(gestorEquipo.obtenerEquipoPorId(2));
             //EQUIPO HARDCODEADO
             //EQUIPO HARDCODEADO
+            try
+            {
+                limpiarPaneles();
+                cargarRepeaterJugadores();
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracasoListaJugadores(ex.Message);
+            }
         }       
 
         protected void btnRegistrarJugador_Click(object sender, EventArgs e)
         {
             try
             {
-                int idEquipo = Sesion.getEquipo().idEquipo;
-                gestorJugador.registrarJugador(txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked, idEquipo);
+                gestorJugador.registrarJugador(txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtTelefono.Value, txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked);
                 limpiarCampos();
-                mostrarPanelExito("Jugador registrada con éxito!");
+                mostrarPanelExito("Jugador registrado con éxito!");
+                cargarRepeaterJugadores();
                 gestorJugador.jugador = null;
             }
             catch (Exception ex)
@@ -39,11 +48,49 @@ namespace quegolazo_code.admin.edicion
             }
         }
 
+        protected void rptJugadores_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "editarJugador")
+                {   //por CommandArgument recibe el ID del jugador a modificar 
+                    gestorJugador.obtenerJugadorPorId(Int32.Parse(e.CommandArgument.ToString()));
+                    txtNombreJugador.Value = gestorJugador.jugador.nombre;
+                    txtDni.Value = gestorJugador.jugador.dni;
+                    txtFechaNacimiento.Value = gestorJugador.jugador.fechaNacimiento.ToString();
+                    txtTelefono.Value = gestorJugador.jugador.telefono;
+                    txtFacebook.Value = gestorJugador.jugador.facebook;
+                    txtEmail.Value = gestorJugador.jugador.email;
+                    if (gestorJugador.jugador.sexo.Equals("Masculino"))
+                        rdSexoMasculino.Checked = true;
+                    else
+                        rdSexoFemenino.Checked = true;
+                    if (gestorJugador.jugador.tieneFichaMedica)
+                        rdTieneFichaMedicaSi.Checked = true;
+                    else
+                        rdTieneFichaMedicaNo.Checked = true;
+                    btnRegistrarJugador.Visible = false;
+                    btnModificarJugador.Visible = true;
+                    btnCancelarModificacionJugador.Visible = true;
+                }
+                if (e.CommandName == "eliminarJugador")
+                {
+                    gestorJugador.eliminarJugador(Int32.Parse(e.CommandArgument.ToString()));
+                    cargarRepeaterJugadores();
+                }
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracasoListaJugadores(ex.Message);
+            }     
+        }
+
         public void limpiarCampos()
         {
             txtNombreJugador.Value = "";
             txtDni.Value = "";
             txtFechaNacimiento.Value = "";
+            txtTelefono.Value = "";
             txtEmail.Value = "";
             txtFacebook.Value = "";
             rdSexoFemenino.Checked = false;
@@ -81,10 +128,53 @@ namespace quegolazo_code.admin.edicion
         {
             panelExito.Visible = false;
             panelFracaso.Visible = false;
-            panelFracasoListaCanchas.Visible = false;
+            panelFracasoListaJugadores.Visible = false;
             litFracaso.Text = "";
             litExito.Text = "";
-            litFracasoListaCanchas.Text = "";
+            litFracasoListaJugadores.Text = "";
         }
+
+        private void mostrarPanelFracasoListaJugadores(string mensaje)
+        {
+            litFracasoListaJugadores.Text = mensaje;
+            panelFracasoListaJugadores.Visible = true;
+        }
+
+        private void cargarRepeaterJugadores()
+        {
+            rptJugadores.DataSource = gestorJugador.obtenerJugadoresDeUnEquipo();
+            rptJugadores.DataBind();
+            sinJugadores.Visible = (rptJugadores.Items.Count > 0) ? false : true;
+        }
+
+        protected void btnCancelarModificacionJugador_Click(object sender, EventArgs e)
+        {
+            limpiarCampos();
+            btnRegistrarJugador.Visible = true;
+            btnModificarJugador.Visible = false;
+            btnCancelarModificacionJugador.Visible = false;
+            gestorJugador.jugador = null; // le setea null al jugador
+        }
+
+        protected void btnModificarJugador_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idJugadorAModificar = gestorJugador.jugador.idJugador;
+                gestorJugador.modificarJugador(idJugadorAModificar, txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtTelefono.Value,txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked);          
+                limpiarCampos();
+                mostrarPanelExito("Jugador modificado con éxito!");
+                cargarRepeaterJugadores();
+                gestorJugador.jugador = null; //le setea null al jugador
+                //lo manda a la solapa de agregar un jugador
+                btnRegistrarJugador.Visible = true;
+                btnModificarJugador.Visible = false;
+                btnCancelarModificacionJugador.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
+        }       
     }
 }
