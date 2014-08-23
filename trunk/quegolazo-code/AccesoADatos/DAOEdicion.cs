@@ -154,5 +154,97 @@ namespace AccesoADatos
                 throw new Exception("No se pudo registrar las preferencias: " + e.Message);
             }
         }
+
+        /// <summary>
+        /// Obtiene de la BD una edición por Id
+        /// autor: Paula Pedrosa
+        /// </summary>
+        public Edicion obtenerEdicionPorId(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            Edicion respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM Ediciones
+                                WHERE idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.CommandText = sql;
+                DAOTipoSuperficie daoTipoSupericie = new DAOTipoSuperficie();
+                DAOCancha daoCancha = new DAOCancha();
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    respuesta = new Edicion();
+                    respuesta.idEdicion = int.Parse(dr["idEdicion"].ToString());
+                    respuesta.nombre = dr["nombre"].ToString();
+                    respuesta.tipoSuperficie = daoTipoSupericie.obtenerTipoSuperficiePorId(int.Parse(dr["idTipoSuperficie"].ToString()));
+                    respuesta.tamanioCancha = daoCancha.obtenerTamanioCanchaPorId(int.Parse(dr["idTamanioCancha"].ToString()));
+                    respuesta.puntosPerdido = int.Parse(dr["puntosPerdido"].ToString());
+                    respuesta.puntosEmpatado = int.Parse(dr["puntosEmpatado"].ToString());
+                    respuesta.puntosGanado = int.Parse(dr["puntosGanado"].ToString()); 
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar la Edición: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Modifica de la Bd una edición
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public void modificarEdicion(Edicion edicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"UPDATE Ediciones
+                                SET nombre = @nombre, idTamanioCancha = @idTamanioCancha,
+                                idTipoSuperficie = @idTipoSuperficie, puntosEmpatado = @puntosEmpatado,
+                                puntosGanado = @puntosGanado, puntosPerdido = @puntosPerdido
+                                WHERE idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nombre", edicion.nombre);
+                cmd.Parameters.AddWithValue("@idTamanioCancha", edicion.tamanioCancha.idTamanioCancha);
+                cmd.Parameters.AddWithValue("@idTipoSuperficie", edicion.tipoSuperficie.idTipoSuperficie);
+                cmd.Parameters.AddWithValue("@puntosEmpatado", edicion.puntosEmpatado);
+                cmd.Parameters.AddWithValue("@puntosGanado", edicion.puntosGanado);
+                cmd.Parameters.AddWithValue("@puntosPerdido", edicion.puntosPerdido);
+                cmd.Parameters.AddWithValue("@idEdicion", edicion.idEdicion);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("unique_nombre_torneo"))
+                    throw new Exception("Ya existe ese nombre de Edición");
+                throw new Exception("No se pudo modificar la Edición: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

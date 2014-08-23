@@ -55,15 +55,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <asp:Repeater ID="rptEdiciones" runat="server">
+                                                <asp:Repeater ID="rptEdiciones" runat="server" OnItemCommand="rptEdiciones_ItemCommand">
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td><%# Eval("nombre") %></td>
                                                             <td><%# Eval("tamanioCancha.nombre") %></td>
                                                             <td><%# Eval("tipoSuperficie.nombre") %></td>
                                                             <td><%# Eval("estado.nombre") %></td>
-                                                            <td>
-                                                                <a href="#" class="editar"><span class="glyphicon glyphicon-pencil" rel="txtTooltip" title="Editar Edición" data-toggle="tooltip" data-placement="top"></span></a>
+                                                            <td>                                                                
+                                                                <asp:LinkButton ClientIDMode="AutoID" title="Editar Edición" rel="txtTooltip" ID="lnkEditarEdicion" runat="server" CommandName="editarEdicion" CommandArgument='<%# Eval("idEdicion") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                                 <a href="#" class="editar"><span class="glyphicon glyphicon-remove eliminar" rel="txtTooltip" title="Eliminar Edición" data-toggle="tooltip" data-placement="top"></span></a>
                                                             </td>
                                                         </tr>
@@ -184,8 +184,10 @@
                 <asp:UpdatePanel ID="upModalEdicion" runat="server">
                     <ContentTemplate>
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="H1"><i class="flaticon-trophy5"></i>Agregar Nueva Edición</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                            
+                            <h4 class="modal-title" id="H1"><i class="flaticon-trophy5"></i>
+                                <asp:Label ID="lblTituloModalEdicion" runat="server" Text="Agregar Nueva Edición"></asp:Label>
+                            </h4>
                         </div>
                         <div class="modal-body">
                            <fieldset class="form-horizontal vgDatosEdicion">
@@ -247,6 +249,7 @@
                             <div class="col-xs-5 col-xs-offset-6">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <asp:Button ID="btnSiguienteEdicion" runat="server" Text="Guardar" CssClass="btn btn-success causesValidation vgDatosEdicion" OnClick="btnSiguienteEdicion_Click" />
+                                <asp:Button ID="btnModificarEdicion" runat="server" Text="Modificar" Visible="false" CssClass="btn btn-success causesValidation vgDatosEdicion" OnClick="btnModificarEdicion_Click"/>
                            </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
@@ -262,7 +265,31 @@
         </div>
     </div>
     <!-- Modal Agregar Edicion -->
-
+    <!-- Modal Eliminar Torneo -->
+      <div class="modal fade bs-example-modal-sm" id="eliminarTorneo" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Torneo</h4>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="upEliminarTorneo" runat="server">
+                        <ContentTemplate>
+                            <strong>Torneo: </strong>
+                            <asp:Literal ID="litNombreTorneo" runat="server"></asp:Literal>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    ¿Está seguro de eliminar el torneo?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminar_Click"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Eliminar Torneo -->
     <!-- Script -->
     <script>
         $(document).ready(function () {

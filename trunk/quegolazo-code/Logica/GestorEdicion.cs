@@ -79,5 +79,35 @@ namespace Logica
             foreach (int id in listaIdsSeleccionados)
                 edicion.equipos.Add(new Equipo { idEquipo = id });
         }
+
+        /// <summary>
+        /// Modifica de la BD una edición
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public void modificarEdicion(int idEdicion,string nombre, string idTamanioCancha, string idSuperficie, string ptosGanado, string ptosEmpatado, string ptosPerdido)
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            edicion = daoEdicion.obtenerEdicionPorId(idEdicion);
+            edicion.nombre = nombre;
+            edicion.puntosGanado = Validador.castInt(ptosGanado);
+            edicion.puntosPerdido = Validador.castInt(ptosPerdido);
+            edicion.puntosEmpatado = Validador.castInt(ptosEmpatado);
+            if ((edicion.puntosGanado < edicion.puntosEmpatado || edicion.puntosEmpatado < edicion.puntosPerdido) || (edicion.puntosGanado == edicion.puntosEmpatado))
+                throw new Exception("Los puntos por ganar, empatar y perder son incorrectos.");
+            edicion.nombre = Validador.isNotEmpty(nombre);
+            edicion.tamanioCancha.idTamanioCancha = Validador.castInt(idTamanioCancha);
+            edicion.tipoSuperficie.idTipoSuperficie = Validador.castInt(idSuperficie);
+            daoEdicion.modificarEdicion(edicion);
+        }
+
+        /// <summary>
+        /// Obtiene una Edición por Id
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public Edicion obtenerEdicionPorId(int idEdicion)
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            return daoEdicion.obtenerEdicionPorId(idEdicion);
+        }
     }
 }
