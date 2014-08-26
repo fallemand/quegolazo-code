@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <asp:UpdatePanel ID="upRegistrarNuevaCancha" runat="server">
                     <ContentTemplate>
                         <div class="panel panel-default">
@@ -88,11 +88,18 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <span class="glyphicon glyphicon-search"></span>
-                        Canchas Existentes
+                        <div class="row clearfix">
+                            <div class="col-md-8">
+                                <span class="glyphicon glyphicon-search"></span>
+                                Canchas Existentes
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Canchas"/>
+                            </div>
+                        </div>                        
                     </div>
                     <div class="panel-body">
                         <asp:UpdatePanel ID="upListaCanchas" runat="server">
@@ -104,16 +111,18 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-2">Nombre</th>
+                                            <th class="col-md-1"></th>
+                                            <th class="col-md-4">Nombre</th>
                                             <th class="col-md-3">Domicilio</th>
-                                            <th class="col-md-2">Telefono</th>
+                                            <th class="col-md-3">Telefono</th>
                                             <th class="col-md-1"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="tablaFiltro">
                                         <asp:Repeater ID="rptCanchas" runat="server" OnItemCommand="rptCanchas_ItemCommand">
                                             <ItemTemplate>
                                                 <tr>
+                                                    <td><img src="<%# ((Entidades.Cancha)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
                                                     <td><%# Eval("nombre") %></td>
                                                     <td><%# Eval("domicilio") %></td>
                                                     <td><%# Eval("telefono") %></td>
@@ -169,6 +178,13 @@
             $('body').on('change', '#ContentAdmin_ContentAdminTorneo_imagenUpload', function () {
                 previewImage(this, 'ContentAdmin_ContentAdminTorneo_imagenpreview');
                 ajaxFileUpload('ContentAdmin_ContentAdminTorneo_imagenUpload');
+            });
+            $('body').on('keyup', '#filtro', function () {
+                var rex = new RegExp($(this).val(), 'i');
+                $('.tablaFiltro tr').hide();
+                $('.tablaFiltro tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
             });
         });
     </script>
