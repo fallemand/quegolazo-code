@@ -15,7 +15,6 @@ namespace quegolazo_code.admin
     {
         GestorTorneo gestorTorneo = new GestorTorneo();
         GestorEdicion gestorEdicion = new GestorEdicion();
-
         protected void Page_Load(object sender, EventArgs e)        
         {
             gestorTorneo = Sesion.getGestorTorneo();
@@ -171,8 +170,107 @@ namespace quegolazo_code.admin
                 litFracasoTorneo.Text = ex.Message;
                 panFracasoTorneo.Visible = true;
             }
-        }     
+        }
 
+        /// <summary>
+        /// Permite Editar Edición
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void rptEdiciones_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "editarEdicion")
+                {
+                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
+                    lblTituloModalEdicion.Text = "Modificar Edición";
+                    btnSiguienteEdicion.Visible = false;
+                    btnModificarEdicion.Visible = true;
+                    txtNombreEdicion.Value = gestorEdicion.edicion.nombre;
+                    ddlTamañoCancha.SelectedValue = gestorEdicion.edicion.tamanioCancha.idTamanioCancha.ToString();
+                    ddlTipoSuperficie.SelectedValue = gestorEdicion.edicion.tipoSuperficie.idTipoSuperficie.ToString();
+                    txtPuntosPorEmpatar.Value = gestorEdicion.edicion.puntosEmpatado.ToString();
+                    txtPuntosPorGanar.Value = gestorEdicion.edicion.puntosGanado.ToString();
+                    txtPuntosPorPerder.Value = gestorEdicion.edicion.puntosPerdido.ToString();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
+                }
+                if (e.CommandName == "eliminarEdicion")
+                {
+                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
+                    litNombreEdicion.Text = gestorEdicion.edicion.nombre;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarEdicion');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Permite modificar de la Bd una Edición
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void btnModificarEdicion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                limpiarPaneles();
+                gestorEdicion.modificarEdicion(gestorEdicion.edicion.idEdicion, txtNombreEdicion.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue, txtPuntosPorGanar.Value, txtPuntosPorEmpatar.Value, txtPuntosPorPerder.Value);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
+                cargarRepeaterTorneos();
+                limpiarModalEdicion();
+                lblTituloModalEdicion.Text = "Agregar Nueva Edición";
+                btnSiguienteEdicion.Visible = true;
+                btnModificarEdicion.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
+                litFracasoEdicion.Text = ex.Message;
+                panFracasoEdicion.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// Elimina de la Bd una edición
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void btnEliminarEdicion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorEdicion.eliminarEdicion(gestorEdicion.edicion.idEdicion);
+                cargarRepeaterTorneos();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarEdicion", "closeModal('eliminarEdicion');", true);
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Elimina de la BD un torneo
+        /// autor: Pau Pedrosa
+        /// </summary>
+        protected void btnEliminarTorneo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorTorneo.eliminarTorneo(gestorTorneo.torneo.idTorneo);
+                cargarRepeaterTorneos();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarTorneo", "closeModal('eliminarTorneo');", true);
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
+        }
+
+        //------------------------------------------
+        //--------------Metodos Extras--------------
+        //------------------------------------------
         /// <summary>
         /// Carga el Repeater de los torneos de un usuario con una lista de Torneos
         /// autor: Paula Pedrosa
@@ -274,78 +372,6 @@ namespace quegolazo_code.admin
         {
             litFracasoEdicion.Text = mensaje;
             panFracasoEdicion.Visible = true;
-        }
-
-        /// <summary>
-        /// Elimina de la BD un torneo
-        /// autor: Pau Pedrosa
-        /// </summary>
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                gestorTorneo.eliminarTorneo(gestorTorneo.torneo.idTorneo);
-                cargarRepeaterTorneos();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarTorneo", "closeModal('eliminarTorneo');", true);
-            }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Permite Editar Edición
-        /// autor: Pau Pedrosa
-        /// </summary>
-        protected void rptEdiciones_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-            try
-            {
-                if (e.CommandName == "editarEdicion")
-                {
-                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
-                    lblTituloModalEdicion.Text = "Modificar Edición";
-                    btnSiguienteEdicion.Visible = false;
-                    btnModificarEdicion.Visible = true;
-                    txtNombreEdicion.Value = gestorEdicion.edicion.nombre;
-                    ddlTamañoCancha.SelectedValue = gestorEdicion.edicion.tamanioCancha.idTamanioCancha.ToString();
-                    ddlTipoSuperficie.SelectedValue = gestorEdicion.edicion.tipoSuperficie.idTipoSuperficie.ToString();
-                    txtPuntosPorEmpatar.Value = gestorEdicion.edicion.puntosEmpatado.ToString();
-                    txtPuntosPorGanar.Value = gestorEdicion.edicion.puntosGanado.ToString();
-                    txtPuntosPorPerder.Value = gestorEdicion.edicion.puntosPerdido.ToString();
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
-                }
-            }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }            
-        }
-
-        /// <summary>
-        /// Permite modificar de la Bd una Edición
-        /// autor: Pau Pedrosa
-        /// </summary>
-        protected void btnModificarEdicion_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                limpiarPaneles();
-                gestorEdicion.modificarEdicion(gestorEdicion.edicion.idEdicion, txtNombreEdicion.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue, txtPuntosPorGanar.Value, txtPuntosPorEmpatar.Value, txtPuntosPorPerder.Value);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
-                cargarRepeaterTorneos();
-                limpiarModalEdicion();
-                lblTituloModalEdicion.Text = "Agregar Nueva Edición";
-                btnSiguienteEdicion.Visible = true;
-                btnModificarEdicion.Visible = false;
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
-                litFracasoEdicion.Text = ex.Message;
-                panFracasoEdicion.Visible = true;
-            }
-        }
+        }       
     }
 }

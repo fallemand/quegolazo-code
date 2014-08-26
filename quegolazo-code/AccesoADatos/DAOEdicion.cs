@@ -246,5 +246,40 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        /// <summary>
+        /// Elimina de la Bd una edición
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idEdicion">Id de la edición a eliminar</param>
+        /// <param name="idEstado">Id del estado</param>
+        public void eliminarEdicion(int idEdicion, int idEstado)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"DELETE FROM Ediciones
+                                WHERE idEdicion = @idEdicion 
+                                AND idEstado = @idEstado";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@idEstado", idEstado);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("No se pudo eliminar la cancha: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
