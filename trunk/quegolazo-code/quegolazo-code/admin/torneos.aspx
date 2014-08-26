@@ -64,7 +64,7 @@
                                                             <td><%# Eval("estado.nombre") %></td>
                                                             <td>                                                                
                                                                 <asp:LinkButton ClientIDMode="AutoID" title="Editar Edición" rel="txtTooltip" ID="lnkEditarEdicion" runat="server" CommandName="editarEdicion" CommandArgument='<%# Eval("idEdicion") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                                                <a href="#" class="editar"><span class="glyphicon glyphicon-remove eliminar" rel="txtTooltip" title="Eliminar Edición" data-toggle="tooltip" data-placement="top"></span></a>
+                                                                <asp:LinkButton ClientIDMode="AutoID" title="Eliminar Edición" rel="txtTooltip" ID="lnkEliminarEdicion" runat="server" CommandName="eliminarEdicion" CommandArgument='<%# Eval("idEdicion") %>'><span class="glyphicon glyphicon-remove eliminar"></span></asp:LinkButton>
                                                             </td>
                                                         </tr>
                                                     </ItemTemplate>
@@ -179,7 +179,6 @@
         </div>
     </div>
     <!-- Modal Registrar Torneo -->
-
     <!-- Modal Agregar Edicion -->
     <div class="modal fade" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -287,12 +286,37 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminar_Click"/>
+                    <asp:Button ID="btnEliminarTorneo" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminarTorneo_Click"/>
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal Eliminar Torneo -->
+    <!-- Modal Eliminar Edición -->
+      <div class="modal fade bs-example-modal-sm" id="eliminarEdicion" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="H2">Eliminar Edición</h4>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="upEliminarEdicion" runat="server">
+                        <ContentTemplate>
+                            <strong>Edición: </strong>
+                            <asp:Literal ID="litNombreEdicion" runat="server"></asp:Literal>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    ¿Está seguro de eliminar la Edición?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnEliminarEdicion" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminarEdicion_Click"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Eliminar Edición -->
     <!-- Script -->
     <script>
         $(document).ready(function () {

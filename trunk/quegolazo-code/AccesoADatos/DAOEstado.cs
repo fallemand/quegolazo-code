@@ -63,5 +63,42 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public int obtenerIdEstadoPorEstadoYAmbito(string estado, string ambito)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT e.idEstado AS 'idEstado'
+                             FROM Estados e INNER JOIN EstadoAmbitos a ON e.idAmbito = a.idAmbito
+                             WHERE e.nombre = @estado AND a.nombre = @ambito";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@estado", estado);
+                cmd.Parameters.AddWithValue("@ambito", ambito);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                int respuesta = 0;
+                while (dr.Read())
+                {
+                    respuesta = int.Parse(dr["idEstado"].ToString());
+                }
+                dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

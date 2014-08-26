@@ -109,5 +109,15 @@ namespace Logica
             DAOEdicion daoEdicion = new DAOEdicion();
             return daoEdicion.obtenerEdicionPorId(idEdicion);
         }
+
+        /// <summary>
+        /// Elimina una edición de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public void eliminarEdicion(int idEdicion)
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            daoEdicion.eliminarEdicion(idEdicion, Estado.REGISTRADA);
+        }
     }
 }
