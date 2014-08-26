@@ -48,10 +48,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-7">
+                                                        <img src="../resources/img/theme/load2.gif" id="cargandoImagen" style="display: none;" alt="load" />
+                                                        <span id="imagenCorrecta" class="label alert-success label-md" style="display: none;">Imagen Correcta <span class="glyphicon glyphicon-ok"></span></span>
+                                                        <span id="imagenIncorrecta" class="label alert-danger label-md" style="display: none;"><span id="mensajeErrorImagen"></span></span>
                                                         <p class="help-block">
-                                                            <img src="../resources/img/theme/load2.gif" id="loading" style="display: none;" alt="load" />
-                                                            <span id="resultadoImagen" style="display: none;"><span id="error"></span></span>
-                                                            <br />
                                                             <strong>Formato admitido</strong><br />
                                                             PNG, JPEG, JPG, GIF<br />
                                                             <strong>Tamaño Máximo</strong><br />

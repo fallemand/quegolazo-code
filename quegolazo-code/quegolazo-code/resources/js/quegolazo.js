@@ -62,11 +62,12 @@ function previewTempImage(idImagen,path) {
 };
 function ajaxFileUpload(input) {
     $(document).ajaxStart(function () {
-        $("#loading").show();
-        $("#error").text("");
+        $("#cargandoImagen").show("slow");
+        $("#imagenIncorrecta").hide();
+        $("#imagenCorrecta").hide();
     });
     $(document).ajaxStop(function () {
-        $("#loading").hide();
+        $("#cargandoImagen").hide();
     });
     $.ajaxFileUpload
     (
@@ -77,14 +78,14 @@ function ajaxFileUpload(input) {
             dataType: 'json',
             data: { name: 'logan', id: 'id' },
             success: function (data, status) {
-                $("#resultadoImagen").show();
                 if (typeof (data.error) != 'undefined') {
                     if (data.error != '') {
-                        $("#error").text(data.error);
+                        $("#imagenIncorrecta").show("slow");
+                        $("#mensajeErrorImagen").text(data.error);
                     }
                 }
                 else {
-                    $("#error").text(data.msg);
+                    $("#imagenCorrecta").show("slow");
                 }
             },
             error: function (data, status, e) {
@@ -94,11 +95,3 @@ function ajaxFileUpload(input) {
     )
     return false;
 };
-function filtrar(input) {
-    alert($(input).val());
-    var rex = new RegExp($(input).val(), 'i');
-    $('.tablaFiltro tr').hide();
-    $('.tablaFiltro tr').filter(function () {
-        return rex.test($(input).val());
-    }).show();
-}
