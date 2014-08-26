@@ -156,7 +156,7 @@ namespace Utils
             {
                 FileInfo file = new FileInfo(rutaImagen);
                 if (file.Length > tamanioMax)
-                    throw new Exception("El tamaño del archivo es mayor a 1024kb");
+                    throw new Exception("El tamaño del archivo es muy grande");
                 using (img = Image.FromFile(rutaImagen))
                 {
                     if (!img.RawFormat.Equals(ImageFormat.Bmp) &&

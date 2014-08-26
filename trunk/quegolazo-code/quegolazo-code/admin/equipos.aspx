@@ -92,29 +92,29 @@
                                             <label for="textArea" class="col-lg-2 control-label">Logo</label>
                                             <div class="col-lg-10">
                                                 <div class="row">
-                                                    <div class="col-md-5">
-                                                        <div class="fileinput">
-                                                            <div class="thumbnail fileinput-preview">
-                                                                <img id="imagenpreview" src="" runat="server" />
-                                                            </div>
-                                                            <div class="fileUpload">
-                                                                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
-                                                                <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload" />
-                                                            </div>
+                                                <div class="col-md-5">
+                                                    <div class="fileinput">
+                                                        <div class="thumbnail fileinput-preview">
+                                                            <img id="imagenpreview" runat="server" />
+                                                        </div>
+                                                        <div class="fileUpload">
+                                                            <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
+                                                            <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <p class="help-block">
-                                                            <img src="../resources/img/theme/load2.gif" id="loading" style="display: none;" alt="load" />
-                                                            <span id="resultadoImagen" style="display: none;"><span id="error"></span></span>
-                                                            <br />
-                                                            <strong>Formato admitido</strong><br />
-                                                            PNG, JPEG, JPG, GIF<br />
-                                                            <strong>Tamaño Máximo</strong><br />
-                                                            1 Mb
-                                                        </p>
-                                                    </div>
                                                 </div>
+                                                <div class="col-md-7">
+                                                    <img src="../resources/img/theme/load2.gif" id="cargandoImagen" style="display: none;" alt="load" />
+                                                    <span id="imagenCorrecta" class="label alert-success label-md" style="display: none;">Imagen Correcta <span class="glyphicon glyphicon-ok"></span></span>
+                                                    <span id="imagenIncorrecta" class="label alert-danger label-md" style="display: none;"><span id="mensajeErrorImagen"></span></span>
+                                                    <p class="help-block">
+                                                        <strong>Formato admitido</strong><br />
+                                                        PNG, JPEG, JPG, GIF<br />
+                                                        <strong>Tamaño Máximo</strong><br />
+                                                        1 Mb
+                                                    </p>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
