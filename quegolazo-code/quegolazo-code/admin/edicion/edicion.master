@@ -22,16 +22,16 @@
                                             <strong>
                                                 <asp:Literal ID="litNombreProyecto" runat="server">Edición 2014 Silver</asp:Literal></strong>
                                         </a>
-                                        <a href="criterios.aspx" class="list-group-item" id="lbCriterios" runat="server">
+                                        <a href="configurar.aspx" class="list-group-item" id="lbCriterios" runat="server">
                                             <span class="badge" rel="txtTooltip" data-toggle="tooltip" data-placement="left" title="Criterios Definidos">
                                                 <asp:Literal ID="litCantCriterios" runat="server">0</asp:Literal></span> 1. Configurar Preferencias
                                         </a>
-                                        <a href="variables.aspx" class="list-group-item" id="lbVaribles" runat="server">
+                                        <a href="equipos.aspx" class="list-group-item" id="lbVaribles" runat="server">
                                             <span class="badge" rel="txtTooltip" data-toggle="tooltip" data-placement="left" title="Variables Definidas">
                                                 <asp:Literal ID="litCantVariables" runat="server">0</asp:Literal>
                                             </span>2. Asignar Equipos
                                         </a>
-                                        <a href="alternativas.aspx" class="list-group-item" id="lbAlterntivas" runat="server">
+                                        <a href="fases.aspx" class="list-group-item" id="lbAlterntivas" runat="server">
                                             <span class="badge" rel="txtTooltip" data-toggle="tooltip" data-placement="left" title="Alternativas Definidas">
                                                 <asp:Literal ID="litCantAlternativas" runat="server">0</asp:Literal></span> 3. Generar Fases</a>
                                         <a href="generar-informe.aspx" class="list-group-item" id="lbGenerarInforme" runat="server">4. Editar Fechas</a>

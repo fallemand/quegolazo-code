@@ -19,17 +19,17 @@ namespace quegolazo_code.admin.edicion
             gestorEdicion = Sesion.getGestorEdicion();
             limpiarPaneles();
 
-            //TORNEO HARDCODEADO
-            //TORNEO HARDCODEADO
-            Sesion.setTorneo(new Torneo() { idTorneo = 88 });
-            //TORNEO HARDCODEADO
-            //TORNEO HARDCODEADO
+            ////TORNEO HARDCODEADO
+            ////TORNEO HARDCODEADO
+            //Sesion.setTorneo(new Torneo() { idTorneo = 88 });
+            ////TORNEO HARDCODEADO
+            ////TORNEO HARDCODEADO
 
-            //EDICION HARDCODEADA
-            //EDICION HARDCODEADA
-            Sesion.setEdicion(new Edicion() {idEdicion=14});
-            //EDICION HARDCODEADA
-            //EDICION HARDCODEADA
+            ////EDICION HARDCODEADA
+            ////EDICION HARDCODEADA
+            //Sesion.setEdicion(new Edicion() {idEdicion=14});
+            ////EDICION HARDCODEADA
+            ////EDICION HARDCODEADA
 
             cargarEquipos();
         }

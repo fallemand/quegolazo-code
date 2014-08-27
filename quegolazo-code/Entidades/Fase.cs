@@ -13,11 +13,13 @@ namespace Entidades
         public List<Grupo> grupos { get; set; }
         public TipoFixture tipoFixture { get; set; }
         public Estado estado { get; set; }
+        public int? cantidadDeEquipos { get; set; }
 
         public Fase()
         {
             tipoFixture = new TipoFixture();
             estado = new Estado();
+            grupos = new List<Grupo>();
         }
     }
 }
