@@ -129,5 +129,16 @@ namespace Logica
                 System.Web.HttpContext.Current.Session["gestorUsuario"] = new GestorUsuario();
             return (GestorUsuario)System.Web.HttpContext.Current.Session["gestorUsuario"];
         }
+
+        /// <summary>
+        /// devuelve el objeto GestorFase que se encuentra en Session, si es nulo, crea uno nuevo
+        /// </summary>        
+        public static GestorFase getGestorFase()
+        {
+            if (System.Web.HttpContext.Current.Session["gestorFase"] == null)
+                System.Web.HttpContext.Current.Session["gestorFase"] = new GestorFase();
+            return (GestorFase)System.Web.HttpContext.Current.Session["gestorFase"];
+        }  
+
     }
 }

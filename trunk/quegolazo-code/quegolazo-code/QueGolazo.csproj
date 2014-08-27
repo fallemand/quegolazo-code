@@ -78,9 +78,13 @@
     <Content Include="resources\img\torneos\default-nm.jpg" />
     <Content Include="resources\img\torneos\default-sm.jpg" />
     <Content Include="resources\js\ajaxfileupload.js" />
+    <Content Include="resources\js\fases.js" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
     <Content Include="resources\js\jquery.multi-select.js" />
+    <Content Include="resources\js\jquery.ui\jquery-ui.js" />
     <Content Include="resources\js\quegolazo.js" />
+    <Content Include="resources\js\widgetFases.js" />
+    <Content Include="usuario\activar.usuario.aspx" />
     <Content Include="usuario\activar.aspx" />
     <Content Include="admin\index.aspx" />
     <Content Include="usuario\login.aspx" />

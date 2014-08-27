@@ -95,3 +95,12 @@ function ajaxFileUpload(input) {
     )
     return false;
 };
+function createDropDownList(id, optionList) {
+    var combo = $("<select></select>").attr("id", id);
+    $.each(optionList, function (i, el) {
+        combo.append("<option value='" + this.value + "'>" + this.text + "</option>");
+    });
+
+    return combo;
+
+}

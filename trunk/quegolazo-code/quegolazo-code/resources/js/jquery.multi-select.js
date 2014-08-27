@@ -519,7 +519,9 @@
 
   $.fn.multiSelect.Constructor = MultiSelect;
 
-  $.fn.insertAt = function(index, $parent) {
+  $.fn.insertAt = function (index, $parent) {
+      var lista = [];
+      
     return this.each(function() {
       if (index === 0) {
         $parent.prepend(this);
@@ -528,5 +530,5 @@
       }
     });
 }
-
+  
 }(window.jQuery);

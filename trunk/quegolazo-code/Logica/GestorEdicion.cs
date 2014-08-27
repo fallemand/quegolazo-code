@@ -75,9 +75,9 @@ namespace Logica
             string cadena = equipos.Substring(0, equipos.Length - 1);
             //transforma la cadena en una lista de enteros
             List<int> listaIdsSeleccionados = cadena.Split(',').Select(Int32.Parse).ToList();
-
+            GestorEquipo gestorEquipo = new GestorEquipo();
             foreach (int id in listaIdsSeleccionados)
-                edicion.equipos.Add(new Equipo { idEquipo = id });
+                edicion.equipos.Add(gestorEquipo.obtenerEquipoPorId(id));
         }
 
         /// <summary>

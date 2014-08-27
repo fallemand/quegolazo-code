@@ -9,44 +9,27 @@ using Utils;
 
 namespace Logica
 {
-  public  class GestorFase
+  public class GestorFase
     {
       public List<Equipo> equipos { get; set; }
-      public Fase fase { get; set; }
+      public Fase faseActual { get; set; }
+      public List<Fase> fases { get; set; }
       public IGenerarFixture generadorFixture { get; set; }
 
-      public GestorFase()
-      {
-          fase = new Fase();
-          fase.idFase = 1;
-          fase.idEdicion = 14;
-          fase.grupos = new List<Grupo>();
-          fase.estado = new Estado { idEstado = Estado.CREADA, ambito = new Ambito() {idAmbito=Ambito.FASE, } };
-
-          Grupo g = new Grupo();
-          g.equipos = new List<Equipo>();
-          g.equipos.Add(new Equipo { idEquipo = 1 });
-          g.equipos.Add(new Equipo { idEquipo = 2 });
-          fase.grupos.Add(g);
-
-          generarFixture("TODOS CONTRA TODOS");
-      }
-
+     
       /// <summary>
       /// método para generar fixture
       /// autor=Flor
       /// </summary>
       public void generarFixture(string tipoFixture)
       {
-          //fase.idEdicion = Sesion.getGestorEdicion().edicion.idEdicion;
+          faseActual.tipoFixture.nombre = tipoFixture;
 
-          fase.tipoFixture.nombre = tipoFixture;
-
-          if (fase.tipoFixture.nombre == "TODOS CONTRA TODOS")
+          if (faseActual.tipoFixture.nombre == "TODOS CONTRA TODOS")
               generadorFixture = new GenerarTodosContraTodos();
 
           int i = 1;
-          foreach(Grupo g in fase.grupos)
+          foreach(Grupo g in faseActual.grupos)       
           {
              g.idGrupo = i;
              g.fixture = generadorFixture.generarFixture(g.equipos);
@@ -57,11 +40,18 @@ namespace Logica
 
       }
 
+      public GestorFase()
+      {
+          equipos = new List<Equipo>();
+          faseActual = new Fase();
+          fases = new List<Fase>();
+
+      }
 
       public void registrarFase()
       {
           DAOFase daoFase = new DAOFase();
-          daoFase.registrarFase(this.fase);
+          daoFase.registrarFase(this.faseActual);
       }
 
 
