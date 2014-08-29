@@ -54,7 +54,7 @@
                                                 <input type="radio" name="rbgSexo" id="rdSexoFemenino" runat="server">
                                                 Femenino
                                             </label>
-                                            &nbsp;<label class="radio-inline"><input type="radio" name="rbgSexo" id="rdSexoMasculino" runat="server">
+                                            &nbsp;<label class="radio-inline"><input type="radio" name="rbgSexo" id="rdSexoMasculino" runat="server" checked="checked">
                                                 Masculino
                                             </label>
                                             &nbsp;
@@ -67,7 +67,7 @@
                                                 <input type="radio" name="rbgTieneFichaMedica" id="rdTieneFichaMedicaSi" runat="server">
                                                 Si
                                             </label>
-                                            &nbsp;<label class="radio-inline"><input type="radio" name="rbgTieneFichaMedica" id="rdTieneFichaMedicaNo" runat="server">
+                                            &nbsp;<label class="radio-inline"><input type="radio" name="rbgTieneFichaMedica" id="rdTieneFichaMedicaNo" runat="server" checked="checked">
                                                 No
                                             </label>
                                             &nbsp;
