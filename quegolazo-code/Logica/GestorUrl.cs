@@ -10,6 +10,7 @@ namespace Logica
     public class GestorUrl
     {
         //Forms en carpeta Admin
+        public const string aARBITROS = "/admin/arbitros.aspx";
         public const string aCANCHAS = "/admin/canchas.aspx";
         public const string aEQUIPOS = "/admin/equipos.aspx";
         public const string aINDEX = "/admin/index.aspx";

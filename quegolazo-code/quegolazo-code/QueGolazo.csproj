@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\arbitros.aspx" />
     <Content Include="admin\canchas.aspx" />
     <Content Include="admin\edicion\configurar.aspx" />
     <Content Include="admin\edicion\equipos.aspx" />
@@ -120,6 +121,13 @@
   <ItemGroup>
     <Compile Include="admin\AjaxFileUploader.ashx.cs">
       <DependentUpon>AjaxFileUploader.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\arbitros.aspx.cs">
+      <DependentUpon>arbitros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\arbitros.aspx.designer.cs">
+      <DependentUpon>arbitros.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\canchas.aspx.cs">
       <DependentUpon>canchas.aspx</DependentUpon>

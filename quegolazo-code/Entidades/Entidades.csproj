@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arbitro.cs" />
     <Compile Include="ConfiguracionEdicion.cs" />
     <Compile Include="Fecha.cs" />
     <Compile Include="GenerarTodosContraTodos.cs" />

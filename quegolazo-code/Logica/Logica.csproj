@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GestorArbitro.cs" />
     <Compile Include="GestorCancha.cs" />
     <Compile Include="GestorEdicion.cs" />
     <Compile Include="GestorEquipo.cs" />
