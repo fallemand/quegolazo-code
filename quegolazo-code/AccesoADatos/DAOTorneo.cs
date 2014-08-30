@@ -267,11 +267,11 @@ namespace AccesoADatos
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {// si tiene ediciones asociadas
                 if (ex.Message.Contains("FK_Ediciones_Campeonatos"))
                     throw new Exception("No se puede eliminar ese torneo: tiene ediciones asociadas");
-                throw new Exception("No se pudo eliminar el torneo: " + ex.Message);
+                throw new Exception("No se pudo eliminar el torneo");
             }
             finally
             {

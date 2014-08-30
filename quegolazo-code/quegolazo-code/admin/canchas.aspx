@@ -63,9 +63,6 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <asp:Panel ID="panelExito" runat="server" CssClass="alert alert-success" Visible="False">
-                                    <asp:Literal ID="litExito" runat="server"></asp:Literal>
-                                </asp:Panel>
                                 <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                                     <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
                                 </asp:Panel>

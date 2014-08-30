@@ -40,7 +40,6 @@ namespace quegolazo_code.admin
                 gestorEquipo.registrarEquipo(txtNombreEquipo.Value, txtColorPrimario.Value, txtColorSecundario.Value, txtNombreDirector.Value);
                 GestorImagen.guardarImagen(gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
                 limpiarCamposEquipo();
-                mostrarPanelExito("Equipo registrado con éxito!");
                 cargarRepeaterEquipos();
                 gestorEquipo.equipo = null; // le setea null al equipo
             }
@@ -174,7 +173,6 @@ namespace quegolazo_code.admin
                 GestorImagen.guardarImagen(gestorEquipo.equipo.idEquipo, GestorImagen.EQUIPO);
                 limpiarCamposEquipo();
                 limpiarCamposDelegado();
-                mostrarPanelExito("Equipo modificado con éxito!");
                 cargarRepeaterEquipos();
                 gestorEquipo.equipo = null; // le setea null al equipo  
                 //lo manda a la solapa de agregar un equipo
@@ -290,11 +288,9 @@ namespace quegolazo_code.admin
         /// </summary>
         private void limpiarPaneles()
         {
-            panelExito.Visible = false;
             panelFracaso.Visible = false;
             panelFracasoListaEquipos.Visible = false;
             litFracaso.Text = "";
-            litExito.Text = "";
             litFracasoListaEquipos.Text = "";
         }
 
@@ -305,7 +301,6 @@ namespace quegolazo_code.admin
         private void mostrarPanelFracaso(string mensaje)
         {
             litFracaso.Text = mensaje;
-            panelExito.Visible = false;
             panelFracaso.Visible = true;
         }
 
@@ -317,17 +312,6 @@ namespace quegolazo_code.admin
         {
             litFracasoListaEquipos.Text = mensaje;
             panelFracasoListaEquipos.Visible = true;
-        }
-
-        /// <summary>
-        /// Habilita el panel de exito y deshabilita el panel de fracaso.
-        /// autor: Pau Pedrosa
-        /// </summary>
-        private void mostrarPanelExito(string mensaje)
-        {
-            litExito.Text = mensaje;
-            panelExito.Visible = true;
-            panelFracaso.Visible = false;
-        }             
+        }          
     }
 }

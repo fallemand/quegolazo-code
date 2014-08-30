@@ -37,7 +37,36 @@
                                             <div class="col-lg-10">
                                                 <input type="text" class="form-control" id="txtMatricula" runat="server" placeholder="Matrícula" maxlength="20">
                                             </div>
-                                        </div>                                        
+                                        </div>                         
+                                         <div class="form-group">
+                                            <label for="textArea" class="col-lg-2 control-label">Imagen</label>
+                                            <div class="col-lg-10">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div class="fileinput">
+                                                            <div class="thumbnail fileinput-preview">
+                                                                <img id="imagenpreview" runat="server" />
+                                                            </div>
+                                                            <div class="fileUpload">
+                                                                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
+                                                                <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <img src="../resources/img/theme/load2.gif" id="cargandoImagen" style="display: none;" alt="load" />
+                                                        <span id="imagenCorrecta" class="label alert-success label-md" style="display: none;">Imagen Correcta <span class="glyphicon glyphicon-ok"></span></span>
+                                                        <span id="imagenIncorrecta" class="label alert-danger label-md" style="display: none;"><span id="mensajeErrorImagen"></span></span>
+                                                        <p class="help-block">
+                                                            <strong>Formato admitido</strong><br />
+                                                            PNG, JPEG, JPG, GIF<br />
+                                                            <strong>Tamaño Máximo</strong><br />
+                                                            1 Mb
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>               
                                     </div>
                                 </fieldset>
                                 <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
@@ -85,6 +114,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th class="col-md-1"></th>
                                             <th class="col-md-2">Nombre</th>
                                             <th class="col-md-1">Celular</th>
                                             <th class="col-md-1">E-mail</th>
@@ -95,6 +125,7 @@
                                         <asp:Repeater ID="rptArbitros" runat="server" OnItemCommand="rptArbitros_ItemCommand" >
                                             <ItemTemplate>
                                                 <tr>
+                                                    <td><img src="<%# ((Entidades.Arbitro)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
                                                     <td><%# Eval("nombre") %></td>
                                                     <td><%# Eval("celular") %></td>
                                                     <td><%# Eval("email") %></td>

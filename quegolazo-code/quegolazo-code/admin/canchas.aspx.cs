@@ -39,7 +39,6 @@ namespace quegolazo_code.admin
                 gestorCancha.registrarCancha(txtNombreCancha.Value, txtDomicilio.Value, txtTelefono.Value);
                 GestorImagen.guardarImagen(gestorCancha.cancha.idCancha, GestorImagen.COMPLEJO);
                 limpiarCamposCancha();                
-                mostrarPanelExito("Cancha registrada con éxito!");
                 cargarRepeaterCanchas();
                 gestorCancha.cancha = null; // le setea null a la cancha
             }
@@ -108,7 +107,6 @@ namespace quegolazo_code.admin
                 gestorCancha.modificarCancha(idCanchaAModificar, txtNombreCancha.Value, txtDomicilio.Value, txtTelefono.Value);
                 GestorImagen.guardarImagen(idCanchaAModificar, GestorImagen.COMPLEJO);
                 limpiarCamposCancha();
-                mostrarPanelExito("Cancha modificada con éxito!");
                 cargarRepeaterCanchas();
                 gestorCancha.cancha = null; //le setea null a la cancha
                 //lo manda a la solapa de agregar una cancha
@@ -157,21 +155,9 @@ namespace quegolazo_code.admin
         private void mostrarPanelFracaso(string mensaje)
         {
             litFracaso.Text = mensaje;
-            panelExito.Visible = false;
             panelFracaso.Visible = true;
         }
-
-        /// <summary>
-        /// Habilita el panel de exito y deshabilita el panel de fracaso.
-        /// autor: Pau Pedrosa
-        /// </summary>
-        private void mostrarPanelExito(string mensaje)
-        {
-            litExito.Text = mensaje;
-            panelExito.Visible = true;
-            panelFracaso.Visible = false;
-        }
-
+      
         /// <summary>
         /// Habilita el panel de exito y deshabilita el panel de fracaso.
         /// autor: Pau Pedrosa
@@ -199,11 +185,9 @@ namespace quegolazo_code.admin
         /// </summary>
         private void limpiarPaneles()
         {
-            panelExito.Visible = false;
             panelFracaso.Visible = false;
             panelFracasoListaCanchas.Visible = false;
             litFracaso.Text = "";
-            litExito.Text = "";
             litFracasoListaCanchas.Text = "";            
         }
     }

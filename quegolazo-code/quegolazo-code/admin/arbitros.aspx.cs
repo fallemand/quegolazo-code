@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Entidades;
 using Logica;
+using Utils;
 
 namespace quegolazo_code.admin
 {
@@ -35,12 +36,14 @@ namespace quegolazo_code.admin
             try
             {
                 gestorArbitro.registrarArbitro(txtNombreArbitro.Value, txtCelular.Value, txtEmail.Value, txtMatricula.Value);
+                GestorImagen.guardarImagen(gestorArbitro.arbitro.idArbitro, GestorImagen.ARBITRO);
                 limpiarCamposArbitros();
                 cargarRepeaterArbitros();
                 gestorArbitro.arbitro = null; // le setea null al arbitro
             }
             catch (Exception ex)
             {
+                imagenpreview.Src = GestorImagen.obtenerImagenTemporal(GestorImagen.ARBITRO, GestorImagen.MEDIANA);
                 mostrarPanelFracaso(ex.Message);
                 txtNombreArbitro.Focus();
             }
@@ -64,6 +67,7 @@ namespace quegolazo_code.admin
                     btnRegistrarArbitro.Visible = false;
                     btnModificarArbitro.Visible = true;
                     btnCancelarModificacionArbitro.Visible = true;
+                    imagenpreview.Src = gestorArbitro.arbitro.obtenerImagenMediana();
                 }
                 if (e.CommandName == "eliminarArbitro")
                 {
@@ -100,6 +104,7 @@ namespace quegolazo_code.admin
             {
                 int idArbitroAModificar = gestorArbitro.arbitro.idArbitro;
                 gestorArbitro.modificarArbitro(idArbitroAModificar, txtNombreArbitro.Value, txtCelular.Value, txtEmail.Value, txtMatricula.Value);
+                GestorImagen.guardarImagen(idArbitroAModificar, GestorImagen.ARBITRO);
                 limpiarCamposArbitros();
                 cargarRepeaterArbitros();
                 gestorArbitro.arbitro = null;
