@@ -1,21 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="torneos.aspx.cs" Inherits="quegolazo_code.admin.mis_torneos" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdmin" runat="server">
     <!-- Pantalla Principal -->
     <div class="container padding-top">
-        <div class="row">
-            <div class="container">
-                <asp:UpdatePanel ID="upTorneos" runat="server">
-                    <ContentTemplate>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                 <asp:Button ID="btnRegistrarNuevoTorneo" runat="server" Text="Crear un Nuevo Torneo" CssClass="btn btn-success" OnClick="btnRegistrarNuevoTorneo_Click" />
-                            </div>
+        <asp:UpdatePanel ID="upTorneos" runat="server">
+            <ContentTemplate>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <asp:Button ID="btnRegistrarNuevoTorneo" runat="server" Text="Crear un Nuevo Torneo" CssClass="btn btn-success" OnClick="btnRegistrarNuevoTorneo_Click" />
+                    </div>
+                </div>
+                <div class="row">
+                    <asp:Panel ID="panelSinTorneos" runat="server" CssClass="col-md-5 margin-top " Enabled="True" Visible="False">
+                        <div class="alert alert-success">
+                            <span class="glyphicon glyphicon-chevron-up"></span>Haz clic en el botón para crear tu primer torneo!
                         </div>
-                        <asp:Panel ID="panelSinTorneos" runat="server" CssClass="col-md-5 margin-top " Enabled="True" Visible="False">
-                            <div class="alert alert-success">
-                                <span class="glyphicon glyphicon-chevron-up"></span> Haz clic en el botón para crear tu primer torneo!
-                            </div>
-                        </asp:Panel>
+                    </asp:Panel>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <asp:Repeater ID="rptTorneos" runat="server" OnItemDataBound="rptTorneosItemDataBound" OnItemCommand="rptTorneos_ItemCommand">
                             <ItemTemplate>
                                 <div class="panel panel-default lista-torneos shadow-sm">
@@ -64,7 +67,7 @@
                                                             <td><%# Eval("tipoSuperficie.nombre") %></td>
                                                             <td><%# Eval("generoEdicion.nombre") %></td>
                                                             <td><%# Eval("estado.nombre") %></td>
-                                                            <td>                                                                
+                                                            <td>
                                                                 <asp:LinkButton ClientIDMode="AutoID" title="Editar Edición" rel="txtTooltip" ID="lnkEditarEdicion" runat="server" CommandName="editarEdicion" CommandArgument='<%# Eval("idEdicion") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar Edición" rel="txtTooltip" ID="lnkEliminarEdicion" runat="server" CommandName="eliminarEdicion" CommandArgument='<%# Eval("idEdicion") %>'><span class="glyphicon glyphicon-remove eliminar"></span></asp:LinkButton>
                                                             </td>
@@ -72,7 +75,9 @@
                                                     </ItemTemplate>
                                                 </asp:Repeater>
                                                 <asp:Panel ID="panelSinEdiciones" runat="server">
-                                                    <tr><td colspan="5">No hay ediciones registradas para el torneo</td></tr>
+                                                    <tr>
+                                                        <td colspan="5">No hay ediciones registradas para el torneo</td>
+                                                    </tr>
                                                 </asp:Panel>
                                             </tbody>
                                         </table>
@@ -83,10 +88,10 @@
                         <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                             <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
                         </asp:Panel>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-            </div>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
     <!-- Pantalla Principal -->
 

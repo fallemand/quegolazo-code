@@ -279,5 +279,47 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public Torneo obtenerUltimoTorneoDelUsuario(int idUsuario)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            Torneo torneo = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT TOP 1 * 
+                             FROM Torneos
+                             WHERE idUsuario = @idUsuario
+                             ORDER BY idTorneo DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idUsuario", idUsuario));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    torneo = new Torneo()
+                    {
+                        idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
+                        nombre = dr["nombre"].ToString(),
+                        nick = dr["nick"].ToString(),
+                        descripcion = dr["descripcion"].ToString()
+                    };
+                }
+                return torneo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el último torneo del usuario: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

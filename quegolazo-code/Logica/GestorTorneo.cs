@@ -13,6 +13,18 @@ namespace Logica
     public class GestorTorneo
     {
         public Torneo torneo = new Torneo();
+
+        /// <summary>
+        /// Obtiene el ultimo torneo del usuario, si no tiene devuelve null.
+        /// autor: Facu Allemand
+        /// </summary>
+        public Torneo obtenerUltimoTorneoDelUsuario()
+        {
+            DAOTorneo daoTorneo = new DAOTorneo();
+            Torneo torneo = daoTorneo.obtenerUltimoTorneoDelUsuario(Sesion.getUsuario().idUsuario);
+            return torneo;
+        }
+
         /// <summary>
         /// Obtiene los torneos de un usuario
         /// autor: Pau Pedrosa
