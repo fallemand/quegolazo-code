@@ -16,13 +16,13 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Nombre</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo" required="true">
+                                                <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo" required="true" rangelength="3, 50">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="select" class="col-lg-2 control-label">Director</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtNombreDirector" runat="server" placeholder="Nombre del Director Técnico">
+                                                <input type="text" class="form-control" id="txtNombreDirector" runat="server" placeholder="Nombre del Director Técnico" rangelength="3, 80">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -60,25 +60,25 @@
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" required="true" disabled>
+                                                                <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" rangelength="3, 100" required="true" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegado" runat="server" required="true" email="true" disabled>
+                                                                <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegado" runat="server" rangelength="3, 100" required="true" email="true" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-phone"></i></span>
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegado" runat="server" required="true" number="true" disabled>
+                                                                <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegado" runat="server" rangelength="3, 20" required="true" number="true" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-home"></i></span>
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server" disabled>
+                                                                <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server" maxlength="100" disabled>
                                                             </div>
                                                         </div>
                                                         <asp:Button class="btn btn-default btn-xs causesValidation vgDelegado" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click" />
@@ -119,9 +119,6 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <asp:Panel ID="panelExito" runat="server" CssClass="alert alert-success" Visible="False">
-                                    <asp:Literal ID="litExito" runat="server"></asp:Literal>
-                                </asp:Panel>
                                 <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                                     <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
                                 </asp:Panel>
