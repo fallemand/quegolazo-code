@@ -179,6 +179,7 @@
                                                     <td><img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
                                                     <td><%# Eval("nombre") %></td>
                                                     <td>
+                                                        <a href="<%=Logica.GestorUrl.aJUGADORES %>?idEquipo=<%#Eval("idEquipo")%>" title="Administrar Jugadores"  rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-user"></span></a>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarEquipo" title="Editar Equipo" runat="server" CommandName="editarEquipo" CommandArgument='<%#Eval("idEquipo")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarEquipo" title="Eliminar Equipo" runat="server" CommandName="eliminarEquipo" CommandArgument='<%#Eval("idEquipo")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar"></span></asp:LinkButton>
                                                     </td>
@@ -200,6 +201,8 @@
             </div>
         </div>
     </div>
+
+    <!--Modal Eliminar Equipo-->
     <div class="modal fade bs-example-modal-sm" id="eliminarEquipo" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -223,6 +226,9 @@
             </div>
         </div>
     </div>
+    <!--Modal Eliminar Equipo-->
+
+    <!--Scripts-->
     <script>
         jQuery(document).ready(function () {
             loadColorPicker();
@@ -255,4 +261,5 @@
             $('#ContentAdmin_ContentAdminTorneo_txtColorSecundario').colorPicker();
         };
     </script>
+    <!--Scripts-->
 </asp:Content>

@@ -28,7 +28,9 @@ namespace Logica
             jugador.facebook = facebook;
             jugador.sexo = (sexo == true) ? "Masculino" : "Femenino";
             jugador.tieneFichaMedica = (tieneFichaMedica == true) ? true : false;
-            int idEquipo = Sesion.getEquipo().idEquipo;//obtiene el Id del equipo que está en Session
+            int idEquipo = Sesion.getGestorEquipo().getEquipo().idEquipo;//obtiene el Id del equipo que está en Session
+            if (idEquipo <= 0)
+                throw new Exception("No hay un equipo seleccionado");
             DAOJugador daoJugador = new DAOJugador();
             jugador.idJugador = daoJugador.registrarJugador(jugador, idEquipo);
         }
@@ -40,8 +42,10 @@ namespace Logica
         public List<Jugador> obtenerJugadoresDeUnEquipo()
         {
             DAOJugador daoJugador = new DAOJugador();
-            int idEquipo = Sesion.getEquipo().idEquipo;//obtiene el Id del equipo que está en Session
-            List<Jugador> jugadores = daoJugador.obtenerJugadoresDeUnEquipo(idEquipo);
+            List<Jugador> jugadores = null;
+            int idEquipo = Sesion.getGestorEquipo().equipo.idEquipo;//obtiene el Id del equipo que está en Session
+            if(idEquipo>0)
+                jugadores = daoJugador.obtenerJugadoresDeUnEquipo(idEquipo);
             return jugadores;
         }
 
