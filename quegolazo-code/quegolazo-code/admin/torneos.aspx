@@ -47,9 +47,10 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th class="col-md-4">Nombre</th>
+                                                    <th class="col-md-3">Nombre</th>
                                                     <th class="col-md-2">Tamaño</th>
                                                     <th class="col-md-2">Superficie</th>
+                                                    <th class="col-md-2">Género</th>
                                                     <th class="col-md-2">Estado</th>
                                                     <th class="col-md-1"></th>
                                                 </tr>
@@ -61,6 +62,7 @@
                                                             <td><%# Eval("nombre") %></td>
                                                             <td><%# Eval("tamanioCancha.nombre") %></td>
                                                             <td><%# Eval("tipoSuperficie.nombre") %></td>
+                                                            <td><%# Eval("generoEdicion.nombre") %></td>
                                                             <td><%# Eval("estado.nombre") %></td>
                                                             <td>                                                                
                                                                 <asp:LinkButton ClientIDMode="AutoID" title="Editar Edición" rel="txtTooltip" ID="lnkEditarEdicion" runat="server" CommandName="editarEdicion" CommandArgument='<%# Eval("idEdicion") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
@@ -109,13 +111,13 @@
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">Nombre</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" id="txtNombreTorneo" runat="server" name="nombreTorneo" minlength="3" maxlength="50" required="required" placeholder="Nombre del Nuevo Torneo" />
+                                        <input type="text" class="form-control" id="txtNombreTorneo" runat="server" name="nombreTorneo" rangelength="3, 50" required="required" placeholder="Nombre del Nuevo Torneo" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">URL</label>
                                     <div class="col-lg-10">
-                                        <input type="text" class="form-control" name="urlTorneo" id="txtUrlTorneo" runat="server" nospace="true" minlength="3" maxlength="100" required="required" placeholder="url-del-torneo" />
+                                        <input type="text" class="form-control" name="urlTorneo" id="txtUrlTorneo" runat="server" nospace="true" rangelength="3, 100" required="required" placeholder="url-del-torneo" />
                                         <span class="help-block">Nombre de la url del torneo. No podrá cambiarlo. www.quegolazo.com/<b>url-del-torneo</b></span>
                                     </div>
                                 </div>
@@ -197,13 +199,13 @@
                                             <label for="text" class="col-lg-2 control-label">Torneo</label>
                                             <div class="col-lg-10">
                                                 <input type="text" class="form-control" id="txtTorneoAsociado" runat="server" name="nombreTorneoEdicion" placeholder="Nombre del Torneo" disabled>
-                                                <span class="help-block">Torneo para el cual esta creando una nueva edición.</span>
+                                                <span class="help-block">Torneo para el cual esta creando una nueva Edición</span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Nombre</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtNombreEdicion" runat="server" required="true" name="nombreEdicion" placeholder="Nombre de la Edición">
+                                                <input type="text" class="form-control" id="txtNombreEdicion" runat="server" rangelength="3, 50" required="true" name="nombreEdicion" placeholder="Nombre de la Edición">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -218,6 +220,12 @@
                                                 <asp:DropDownList ID="ddlTipoSuperficie" runat="server" CssClass="form-control"></asp:DropDownList>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="select" class="col-lg-2 control-label">Género</label>
+                                            <div class="col-lg-10">
+                                                <asp:DropDownList ID="ddlGenero" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>                                        
                                  
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Puntos</label>
@@ -282,7 +290,7 @@
                             <asp:Literal ID="litNombreTorneo" runat="server"></asp:Literal>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    ¿Está seguro de eliminar el torneo?
+                    ¿Está seguro de eliminar el Torneo?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>

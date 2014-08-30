@@ -17,25 +17,25 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Nombre</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" runat="server" id="txtNombreArbitro" placeholder="Nombre del Árbitro" required="true">
+                                                <input type="text" class="form-control" runat="server" id="txtNombreArbitro" placeholder="Nombre del Árbitro" required="true" rangelength="3, 100">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="select" class="col-lg-2 control-label">Celular</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtCelular" runat="server" placeholder="Celular">
+                                                <input type="text" class="form-control" id="txtCelular" runat="server" placeholder="Celular" maxlength="20">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="select" class="col-lg-2 control-label">E-mail</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtEmail" runat="server" placeholder="Email" email="true">
+                                                <input type="text" class="form-control" id="txtEmail" runat="server" placeholder="Email" email="true" maxlength="100">
                                             </div>
                                         </div> 
                                         <div class="form-group">
                                             <label for="select" class="col-lg-2 control-label">Matrícula</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtMatricula" runat="server" placeholder="Matrícula">
+                                                <input type="text" class="form-control" id="txtMatricula" runat="server" placeholder="Matrícula" maxlength="20">
                                             </div>
                                         </div>                                        
                                     </div>
