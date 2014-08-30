@@ -49,6 +49,17 @@ namespace Logica
         }
 
         /// <summary>
+        /// Genera una lista a partir de los delegados del objeto equipo
+        /// autor: Facundo Allemand
+        /// </summary>  
+        public Equipo getEquipo()
+        {
+            if (equipo == null)
+                equipo = new Equipo();
+            return equipo;
+        }
+
+        /// <summary>
         /// Agrega un delegado al objeto de clase equipo
         /// autor: Facundo Allemand
         /// </summary>  
