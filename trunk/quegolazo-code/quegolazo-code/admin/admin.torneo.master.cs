@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Logica;
+using Entidades;
 
 namespace quegolazo_code.admin
 {
@@ -11,7 +13,15 @@ namespace quegolazo_code.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Torneo"]==null)
+            {
+                GestorTorneo gestorTorneo = new GestorTorneo();
+                Torneo torneo = gestorTorneo.obtenerUltimoTorneoDelUsuario();
+                if (torneo != null)
+                    Session["Torneo"] = gestorTorneo.obtenerUltimoTorneoDelUsuario();
+                else
+                    Response.Redirect(GestorUrl.aTORNEOS);
+            }
         }
     }
 }
