@@ -4,8 +4,7 @@
     <script src="../../resources/js/jquery.ui/jquery-ui.js"></script>  
     <script src="../../resources/js/quegolazo.js"></script>
     <script src="../../resources/js/widgetFases.js"></script>
-    <script>
-        
+    <script>        
     </script>
   </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentEdicion" runat="server">

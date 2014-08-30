@@ -8,7 +8,7 @@ namespace Entidades
 {
     public class TipoFixture
     {
-        public int idTipoFixture { get; set; }
+        public string idTipoFixture { get; set; }
         public string nombre { get; set; }
     }
 }
