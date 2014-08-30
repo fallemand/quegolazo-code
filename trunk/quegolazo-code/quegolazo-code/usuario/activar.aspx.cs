@@ -31,12 +31,9 @@ namespace quegolazo_code.admin
                     }
                     catch (Exception ex)
                     {
-
                         panFracaso.Visible = true;
                         litError.Text = ex.Message;
-
                     }
-
                 }
                 else
                 {
@@ -51,7 +48,6 @@ namespace quegolazo_code.admin
                             int idUsuario = Int32.Parse(Request.QueryString["idUsuario"]);
                             Usuario u = gestorUsuario.obtenerUsuario(idUsuario);
                             email.Value = u.email;
-
                         }
                     }
                     catch (Exception ex)
@@ -59,9 +55,7 @@ namespace quegolazo_code.admin
                         panFracaso.Visible = true;
                         litError.Text = ex.Message;
                     }
-                
                 }
-
             }
         }
 

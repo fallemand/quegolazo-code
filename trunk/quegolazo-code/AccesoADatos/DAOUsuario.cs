@@ -113,27 +113,66 @@ namespace AccesoADatos
         public void ActivarCuenta(string codigo)
         {           
             SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();            
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
+                trans = con.BeginTransaction();
+                cmd.Transaction = trans;
+                cmd.Connection = con;
                 if (codigo != string.Empty)
                 {
-                    cmd.Connection = con;
-                    string sql = @"UPDATE Usuarios SET EsActivo=1, codigo = @codigoVacio 
-                                    WHERE codigo = @userCodigo";
+                    //obtener si es activo o no
+                    string sql = @"SELECT esActivo
+                                    FROM Usuarios
+                                    WHERE codigo=@userCodigo";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@userCodigo", codigo);
-                    cmd.Parameters.AddWithValue("@codigoVacio", DBNull.Value);
                     cmd.CommandText = sql;
-                    if (cmd.ExecuteNonQuery() == 0)
-                        throw new Exception("El link de Activación no es válido o ya fue utilizado.");
+                    bool esActivo = (bool)cmd.ExecuteScalar();
+
+                    //si es activo, modifico el mail
+                    if (esActivo)
+                    {
+                        sql = @"SELECT emailNuevo
+                                    FROM Usuarios
+                                    WHERE codigo=@userCodigo";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@userCodigo", codigo);
+                        cmd.CommandText = sql;
+                        string mail= cmd.ExecuteScalar().ToString();
+
+                        sql = @"UPDATE Usuarios SET  codigo = @codigoVacio  , email=@mail , emailNuevo=@emailNuevo
+                                    WHERE codigo = @userCodigo";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@userCodigo ", codigo);
+                        cmd.Parameters.AddWithValue("@mail ", mail);
+                        cmd.Parameters.AddWithValue("@emailNuevo ", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@codigoVacio", DBNull.Value);
+                        cmd.CommandText = sql;
+                        cmd.ExecuteNonQuery();
+                    }
+                        //Si no es activo, activo el nuevo usuario
+                    else
+                    {
+                        sql = @"UPDATE Usuarios SET EsActivo=1, codigo = @codigoVacio 
+                                    WHERE codigo = @userCodigo";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@userCodigo", codigo);
+                        cmd.Parameters.AddWithValue("@codigoVacio", DBNull.Value);
+                        cmd.CommandText = sql;
+                        if (cmd.ExecuteNonQuery() == 0)
+                            throw new Exception("El link de Activación no es válido o ya fue utilizado.");
+                    }
+                    trans.Commit();
                 }
             }
             catch (Exception ex)
             {
+                trans.Rollback();
                 throw new Exception("Ha ocurrido un problema y no se ha podido activar tu cuenta: " + ex.Message);
             }
             finally
@@ -226,6 +265,7 @@ namespace AccesoADatos
                         nombre = dr["nombre"].ToString(),
                         apellido = dr["apellido"].ToString(),
                         email = dr["email"].ToString(),
+                        contrasenia = dr["contrasenia"].ToString(),
                         idUsuario = dr.GetInt32(dr.GetOrdinal("idUsuario")),
                         tipoUsuario = gestorTipoUsuario.obtenerTipoUsuarioPorId(Int32.Parse(dr["idTipoUsuario"].ToString())),
                         esActivo = bool.Parse(dr["esActivo"].ToString())
@@ -289,7 +329,6 @@ namespace AccesoADatos
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlTransaction trans = null;
             try
             {
                 int idUsuario = 0;
@@ -299,7 +338,6 @@ namespace AccesoADatos
                 if (codigo != string.Empty)
                 {                    
                     cmd.Connection = con;
-                    cmd.Transaction = trans;
                     string sql = @"UPDATE Usuarios SET contrasenia = @clave, codigoRecuperacion = @codigoVacio 
                                     WHERE codigoRecuperacion = @userCodigo";
                     cmd.Parameters.Clear();
@@ -338,28 +376,25 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"UPDATE Usuarios 
-                                SET nombre=@nombre, apellido=@apellido, email=@email, contrasenia=@contrasenia, codigo=@codigo, esActivo=@esActivo
+                                SET nombre=@nombre, apellido=@apellido,contrasenia=@contrasenia, codigo=@codigo , emailNuevo=@emailNuevo
                                 WHERE idUsuario=@idUsuario";
      
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idUsuario", usuarioModificado.idUsuario));
                 cmd.Parameters.Add(new SqlParameter("@nombre", usuarioModificado.nombre));
                 cmd.Parameters.Add(new SqlParameter("@apellido", usuarioModificado.apellido));
-                cmd.Parameters.Add(new SqlParameter("@email", usuarioModificado.email));
-                if(usuarioModificado.codigo != string.Empty)
+                if (usuarioModificado.emailNuevo != null)
+                    cmd.Parameters.Add(new SqlParameter("@emailNuevo", usuarioModificado.emailNuevo));
+                else
+                    cmd.Parameters.Add(new SqlParameter("@emailNuevo", DBNull.Value));
+                if(usuarioModificado.codigo != null)
                 cmd.Parameters.Add(new SqlParameter("@codigo", usuarioModificado.codigo));
                 else
                     cmd.Parameters.Add(new SqlParameter("@codigo", DBNull.Value));
-                cmd.Parameters.Add(new SqlParameter("@esActivo", usuarioModificado.esActivo));
                 cmd.Parameters.Add(new SqlParameter("@contrasenia", usuarioModificado.contrasenia));
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {// Excepción de BD, clave unique
-                if (ex.Class == 14 && ex.Number == 2627)
-                    throw new Exception("El usuario con el mail: " + usuarioModificado.email + " Ya se encuentra registrado. Por favor ingrese una cuenta de correo diferente.");
-            }
+            }    
             catch (Exception ex)
             {
                 throw new Exception("No se pudo modificar el usuario: " + ex.Message);
