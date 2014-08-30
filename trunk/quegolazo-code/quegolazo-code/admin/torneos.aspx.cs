@@ -93,7 +93,7 @@ namespace quegolazo_code.admin
             try
             {
                 limpiarPaneles();
-                gestorEdicion.cargarDatos(txtNombreEdicion.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue, txtPuntosPorGanar.Value,txtPuntosPorEmpatar.Value, txtPuntosPorPerder.Value);
+                gestorEdicion.cargarDatos(txtNombreEdicion.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue, txtPuntosPorGanar.Value,txtPuntosPorEmpatar.Value, txtPuntosPorPerder.Value, ddlGenero.SelectedValue);
                 gestorEdicion.registrarEdicion();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
                 cargarRepeaterTorneos(); 
@@ -189,6 +189,7 @@ namespace quegolazo_code.admin
                     txtNombreEdicion.Value = gestorEdicion.edicion.nombre;
                     ddlTamañoCancha.SelectedValue = gestorEdicion.edicion.tamanioCancha.idTamanioCancha.ToString();
                     ddlTipoSuperficie.SelectedValue = gestorEdicion.edicion.tipoSuperficie.idTipoSuperficie.ToString();
+                    ddlGenero.SelectedValue = gestorEdicion.edicion.generoEdicion.idGeneroEdicion.ToString();
                     txtPuntosPorEmpatar.Value = gestorEdicion.edicion.puntosEmpatado.ToString();
                     txtPuntosPorGanar.Value = gestorEdicion.edicion.puntosGanado.ToString();
                     txtPuntosPorPerder.Value = gestorEdicion.edicion.puntosPerdido.ToString();
@@ -216,7 +217,7 @@ namespace quegolazo_code.admin
             try
             {
                 limpiarPaneles();
-                gestorEdicion.modificarEdicion(gestorEdicion.edicion.idEdicion, txtNombreEdicion.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue, txtPuntosPorGanar.Value, txtPuntosPorEmpatar.Value, txtPuntosPorPerder.Value);
+                gestorEdicion.modificarEdicion(gestorEdicion.edicion.idEdicion, txtNombreEdicion.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue, txtPuntosPorGanar.Value, txtPuntosPorEmpatar.Value, txtPuntosPorPerder.Value, ddlGenero.SelectedValue);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
                 cargarRepeaterTorneos();
                 limpiarModalEdicion();
@@ -300,6 +301,11 @@ namespace quegolazo_code.admin
             ddlTipoSuperficie.DataValueField = "idTipoSuperficie";
             ddlTipoSuperficie.DataTextField = "nombre";
             ddlTipoSuperficie.DataBind();
+
+            ddlGenero.DataSource = gestorEdicion.obtenerGenerosEdicion();
+            ddlGenero.DataValueField = "idGeneroEdicion";
+            ddlGenero.DataTextField = "nombre";
+            ddlGenero.DataBind();
         }
 
         /// <summary>
@@ -340,6 +346,7 @@ namespace quegolazo_code.admin
             txtNombreEdicion.Value = "";
             ddlTamañoCancha.ClearSelection();
             ddlTipoSuperficie.ClearSelection();
+            ddlGenero.ClearSelection();
             txtPuntosPorGanar.Value = "3";
             txtPuntosPorEmpatar.Value = "1";
             txtPuntosPorPerder.Value = "0";

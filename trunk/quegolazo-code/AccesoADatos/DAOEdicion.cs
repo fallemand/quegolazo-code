@@ -25,7 +25,6 @@ namespace AccesoADatos
             SqlDataReader dr;
             List<Edicion> respuesta = new List<Edicion>();
             Edicion edicion = null;
-            bool tieneEdicionesRegistradas = false;
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -57,6 +56,7 @@ namespace AccesoADatos
                     edicion.puntosEmpatado = Int32.Parse(dr["puntosEmpatado"].ToString());
                     edicion.puntosGanado = Int32.Parse(dr["puntosGanado"].ToString());
                     edicion.puntosPerdido = Int32.Parse(dr["puntosPerdido"].ToString());
+                    edicion.generoEdicion = daoEdicion.obtenerGeneroEdicionPorId(Int32.Parse(dr["idGeneroEdicion"].ToString()));
                     respuesta.Add(edicion);
                 }
                 dr.Close();
@@ -87,8 +87,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;               
-                string sql = @"INSERT INTO Ediciones (nombre, idTamanioCancha, idTipoSuperficie, idEstado, idTorneo, puntosGanado, puntosPerdido, puntosEmpatado)
-                                              VALUES (@nombre, @idTamanioCancha, @idTipoSuperficie, @idEstado, @idTorneo, @puntosGanado, @puntosPerdido, @puntosEmpatado ) SELECT SCOPE_IDENTITY()";
+                string sql = @"INSERT INTO Ediciones (nombre, idTamanioCancha, idTipoSuperficie, idEstado, idTorneo, puntosGanado, puntosPerdido, puntosEmpatado, idGeneroEdicion)
+                                              VALUES (@nombre, @idTamanioCancha, @idTipoSuperficie, @idEstado, @idTorneo, @puntosGanado, @puntosPerdido, @puntosEmpatado, @idGeneroEdicion ) SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", edicionNueva.nombre);     
                 cmd.Parameters.AddWithValue("@idTamanioCancha", edicionNueva.tamanioCancha.idTamanioCancha);
@@ -98,6 +98,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@puntosEmpatado", edicionNueva.puntosEmpatado);
                 cmd.Parameters.AddWithValue("@puntosGanado", edicionNueva.puntosGanado);
                 cmd.Parameters.AddWithValue("@puntosPerdido", edicionNueva.puntosPerdido);
+                cmd.Parameters.AddWithValue("@idGeneroEdicion", edicionNueva.generoEdicion.idGeneroEdicion);
                 cmd.CommandText = sql;
                 cmd.ExecuteScalar();                
             }
@@ -188,7 +189,8 @@ namespace AccesoADatos
                     respuesta.tamanioCancha = daoCancha.obtenerTamanioCanchaPorId(int.Parse(dr["idTamanioCancha"].ToString()));
                     respuesta.puntosPerdido = int.Parse(dr["puntosPerdido"].ToString());
                     respuesta.puntosEmpatado = int.Parse(dr["puntosEmpatado"].ToString());
-                    respuesta.puntosGanado = int.Parse(dr["puntosGanado"].ToString()); 
+                    respuesta.puntosGanado = int.Parse(dr["puntosGanado"].ToString());
+                    respuesta.generoEdicion = obtenerGeneroEdicionPorId(int.Parse(dr["idGeneroEdicion"].ToString()));
                 }
                 if (dr != null)
                     dr.Close();
@@ -221,7 +223,7 @@ namespace AccesoADatos
                 string sql = @"UPDATE Ediciones
                                 SET nombre = @nombre, idTamanioCancha = @idTamanioCancha,
                                 idTipoSuperficie = @idTipoSuperficie, puntosEmpatado = @puntosEmpatado,
-                                puntosGanado = @puntosGanado, puntosPerdido = @puntosPerdido
+                                puntosGanado = @puntosGanado, puntosPerdido = @puntosPerdido, idGeneroEdicion = @idGeneroEdicion
                                 WHERE idEdicion = @idEdicion";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", edicion.nombre);
@@ -231,6 +233,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@puntosGanado", edicion.puntosGanado);
                 cmd.Parameters.AddWithValue("@puntosPerdido", edicion.puntosPerdido);
                 cmd.Parameters.AddWithValue("@idEdicion", edicion.idEdicion);
+                cmd.Parameters.AddWithValue("@idGeneroEdicion", edicion.generoEdicion.idGeneroEdicion);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
@@ -274,6 +277,95 @@ namespace AccesoADatos
             catch (SqlException ex)
             {
                 throw new Exception("No se pudo eliminar la cancha: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene todos los Géneros de Edición de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <returns>Lista genérica de objeto GeneroEdicion</returns>
+        public List<GeneroEdicion> obtenerGenerosEdicion()
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<GeneroEdicion> respuesta = new List<GeneroEdicion>();
+            GeneroEdicion generoEdicion = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM GenerosEdicion";
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    generoEdicion = new GeneroEdicion()
+                    {
+                        idGeneroEdicion = Int32.Parse(dr["idGeneroEdicion"].ToString()),
+                        nombre = dr["nombre"].ToString()
+                    };
+                    respuesta.Add(generoEdicion);
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar los Géneros de Edición: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene un GeneroEdicion por Id de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idGeneroEdicion">Id del Género Edicion</param>
+        /// <returns>Objeto GeneroEdicion</returns>
+        public GeneroEdicion obtenerGeneroEdicionPorId(int idGeneroEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            GeneroEdicion respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM GenerosEdicion
+                                WHERE idGeneroEdicion = @idGeneroEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idGeneroEdicion", idGeneroEdicion);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    respuesta = new GeneroEdicion()
+                    {
+                        idGeneroEdicion = Int32.Parse(dr["idGeneroEdicion"].ToString()),
+                        nombre = dr["nombre"].ToString()
+                    };
+                }
+                dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar los géneros de edición: " + ex.Message);
             }
             finally
             {

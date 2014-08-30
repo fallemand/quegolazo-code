@@ -17,19 +17,19 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Nombre</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" runat="server" id="txtNombreCancha" placeholder="Nombre de la Cancha" required="true">
+                                                <input type="text" class="form-control" runat="server" id="txtNombreCancha" placeholder="Nombre de la Cancha" required="true" rangelength="3, 50">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="select" class="col-lg-2 control-label">Domicilio</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtDomicilio" runat="server" placeholder="Domicilio">
+                                                <input type="text" class="form-control" id="txtDomicilio" runat="server" placeholder="Domicilio" maxlength="100">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="select" class="col-lg-2 control-label">Telefono</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Telefono">
+                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Telefono" maxlength="20">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -162,7 +162,7 @@
                             <asp:Literal ID="litNombreCancha" runat="server"></asp:Literal>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    ¿Esta seguro de eliminar la cancha?
+                    ¿Está seguro de eliminar la cancha?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>

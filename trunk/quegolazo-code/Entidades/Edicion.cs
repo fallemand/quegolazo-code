@@ -18,6 +18,7 @@ namespace Entidades
         public int puntosGanado { get; set; }
         public int puntosEmpatado { get; set; }
         public int puntosPerdido { get; set; }
+        public GeneroEdicion generoEdicion { get; set; }
         public ConfiguracionEdicion preferencias { get; set; }
         public List<Equipo> equipos { get; set; }
 
@@ -26,6 +27,7 @@ namespace Entidades
             preferencias = new ConfiguracionEdicion();
             tamanioCancha = new TamanioCancha();
             tipoSuperficie = new TipoSuperficie();
+            generoEdicion = new GeneroEdicion();
             fases = new List<Fase>();
             estado = new Estado();
             equipos = new List<Equipo>();

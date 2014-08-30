@@ -39,7 +39,7 @@ namespace Logica
         /// autor: Antonio Herrera
         /// </summary>
         /// <returns>El id de la edicion que se registro.</returns>
-        public void cargarDatos(string nombre, string idTamanioCancha, string idSuperficie, string ptosGanado, string ptosEmpatado, string ptosPerdido)
+        public void cargarDatos(string nombre, string idTamanioCancha, string idSuperficie, string ptosGanado, string ptosEmpatado, string ptosPerdido, string idGeneroEdicion)
         {
             edicion.estado.idEstado = Estado.REGISTRADA;
             edicion.estado.ambito.idAmbito = Ambito.EDICION; 
@@ -51,6 +51,7 @@ namespace Logica
             edicion.nombre = Validador.isNotEmpty(nombre);
             edicion.tamanioCancha.idTamanioCancha = Validador.castInt(idTamanioCancha);
             edicion.tipoSuperficie.idTipoSuperficie = Validador.castInt(idSuperficie);
+            edicion.generoEdicion.idGeneroEdicion = Validador.castInt(idGeneroEdicion);
         }     
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace Logica
         /// Modifica de la BD una edición
         /// autor: Pau Pedrosa
         /// </summary>
-        public void modificarEdicion(int idEdicion,string nombre, string idTamanioCancha, string idSuperficie, string ptosGanado, string ptosEmpatado, string ptosPerdido)
+        public void modificarEdicion(int idEdicion,string nombre, string idTamanioCancha, string idSuperficie, string ptosGanado, string ptosEmpatado, string ptosPerdido, string idGeneroEdicion)
         {
             DAOEdicion daoEdicion = new DAOEdicion();
             edicion = daoEdicion.obtenerEdicionPorId(idEdicion);
@@ -97,6 +98,7 @@ namespace Logica
             edicion.nombre = Validador.isNotEmpty(nombre);
             edicion.tamanioCancha.idTamanioCancha = Validador.castInt(idTamanioCancha);
             edicion.tipoSuperficie.idTipoSuperficie = Validador.castInt(idSuperficie);
+            edicion.generoEdicion.idGeneroEdicion = Validador.castInt(idGeneroEdicion);
             daoEdicion.modificarEdicion(edicion);
         }
 
@@ -118,6 +120,28 @@ namespace Logica
         {
             DAOEdicion daoEdicion = new DAOEdicion();
             daoEdicion.eliminarEdicion(idEdicion, Estado.REGISTRADA);
+        }
+
+        /// <summary>
+        /// Obtiene los Generos Edicion de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public List<GeneroEdicion> obtenerGenerosEdicion()
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            //List<GeneroEdicion> generosEdicion = new List<GeneroEdicion>();
+            //generosEdicion = daoEdicion.obtenerGenerosEdicion();
+            return daoEdicion.obtenerGenerosEdicion();
+        }
+
+        /// <summary>
+        /// Obtiene Genero Edicion por Id
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public GeneroEdicion obtenerGeneroEdicionPorId(int idGeneroEdicion)
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            return daoEdicion.obtenerGeneroEdicionPorId(idGeneroEdicion);
         }
     }
 }
