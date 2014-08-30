@@ -14,7 +14,7 @@ namespace Entidades
         public TipoFixture tipoFixture { get; set; }
         public Estado estado { get; set; }
         public int? cantidadDeEquipos { get; set; }
-
+        
         public Fase()
         {
             tipoFixture = new TipoFixture();

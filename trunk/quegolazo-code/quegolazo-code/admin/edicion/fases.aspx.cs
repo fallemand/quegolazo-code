@@ -13,7 +13,7 @@ namespace quegolazo_code.admin.edicion
 {
     public partial class fases : System.Web.UI.Page
     {
-        GestorEdicion gestorEdicion = new GestorEdicion();
+       GestorEdicion gestorEdicion = new GestorEdicion();
        private static GestorFase gestorFase = new GestorFase();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,13 +25,15 @@ namespace quegolazo_code.admin.edicion
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ idEdicion:" + "12" + ", idTorneo:" + Sesion.getTorneo().idTorneo + " , equiposDeLaEdicion: " + equipos + "});", true);
         }             
 
-        [WebMethod]
-        public static string guardarFases(string JSONFases)
+        [WebMethod(enableSession : true)]    
+        public static string guardarFases(object JSONFases)
         {
-            //JavaScriptSerializer serializador = new JavaScriptSerializer();
-            //List<Fase> fases = serializador.Deserialize<List<Fase>>(JSONFases);
+            JavaScriptSerializer serializador = new JavaScriptSerializer();
+            //string cad = JSONFases.ToString();
+            List<Fase> fases = serializador.ConvertToType<List<Fase>>(JSONFases);
             gestorFase = Sesion.getGestorFase();
-            gestorFase.fases = null;
+            gestorFase.fases = fases;
+            
             return "OK";        
         }
 
