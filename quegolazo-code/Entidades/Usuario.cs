@@ -17,5 +17,6 @@ namespace Entidades
         public string codigo { get; set; }
         public string codigoRecuperacion { get; set; }
         public TipoUsuario tipoUsuario { get; set; }
+        public string emailNuevo { get; set; }
     }
 }

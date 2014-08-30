@@ -7,10 +7,7 @@
                 <h2>Activación de Usuarios</h2>
                 <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success" Visible="False">
                     <p>
-                        Tu cuenta:
-                        <asp:Literal ID="LitEmail" runat="server"></asp:Literal>
-                    </p>
-                    <asp:Literal ID="litMensaje" runat="server"></asp:Literal>
+                        Tu cuenta <asp:Literal ID="litMensaje" runat="server"></asp:Literal></p>
                 </asp:Panel>
                 <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                     <asp:Literal ID="litError" runat="server"></asp:Literal>

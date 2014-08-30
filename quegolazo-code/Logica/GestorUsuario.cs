@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Entidades;
 using System.Security.Cryptography;
 using AccesoADatos;
+using Logica;
 
 namespace Logica
 {
@@ -13,6 +14,13 @@ namespace Logica
     {
        public Usuario usuario;
        public string mailUsuario;
+
+       public GestorUsuario()
+       {
+           usuario = new Usuario();
+       }
+
+
        /// <summary>
        /// Método para tomar los datos de la pantalla y crear la entidad Usuario
        /// autor: Flor Rojas
@@ -173,18 +181,38 @@ namespace Logica
        /// </summary>
        public string modificarUsuario(string apellido, string nombre, string mail, string contrasenia , string contraseniaNueva)
        {
+               usuario.idUsuario = Sesion.getUsuario().idUsuario;
                usuario.apellido = apellido;
                usuario.nombre = nombre;
-               usuario.email = mail;
-               usuario.contrasenia= encriptarContrasenia(contrasenia);
-               usuario.tipoUsuario = new TipoUsuario { idTipoUsuario = 1, nombre = "Cliente" };
-
-           DAOUsuario gestorBD = new DAOUsuario();
-
-
-           gestorBD.registrarUsuario(usuario);//guarda en la BD
-           return usuario.codigo;
+               if (Sesion.getUsuario().email != mail)
+               {
+                   usuario.codigo = crearCodigo();
+                   usuario.emailNuevo = mail;
+               }
+               validarContrasenia(contrasenia);
+               if(contraseniaNueva != String.Empty)
+               usuario.contrasenia= encriptarContrasenia(contraseniaNueva);
+               else
+               usuario.contrasenia = encriptarContrasenia(contrasenia);
+               DAOUsuario gestorBD = new DAOUsuario();
+               gestorBD.modificarUsuario(usuario);//guarda en la BD
+               return usuario.codigo;  
        }
+
+       private void validarContrasenia(string contrasenia)
+       {
+           try
+           {
+               if (Sesion.getUsuario().contrasenia != encriptarContrasenia(contrasenia))
+                   throw new Exception();   
+           }
+           catch
+           {
+               throw new Exception("La contraseña ingresada es incorrecta. No se ha podido actualizar sus datos.");
+           }
+       }
+
+   
 
 
     }
