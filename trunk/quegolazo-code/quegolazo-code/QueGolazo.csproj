@@ -64,6 +64,9 @@
     <Content Include="admin\edicion\fases.aspx" />
     <Content Include="admin\jugadores.aspx" />
     <Content Include="admin\equipos.aspx" />
+    <Content Include="resources\img\arbitros\default-bg.jpg" />
+    <Content Include="resources\img\arbitros\default-nm.jpg" />
+    <Content Include="resources\img\arbitros\default-sm.jpg" />
     <Content Include="resources\img\complejos\default-bg.jpg" />
     <Content Include="resources\img\complejos\default-nm.jpg" />
     <Content Include="resources\img\complejos\default-sm.jpg" />
