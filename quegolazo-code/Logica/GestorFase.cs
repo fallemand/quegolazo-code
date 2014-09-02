@@ -36,8 +36,6 @@ namespace Logica
              i++;
           }
 
-          registrarFase();
-
       }
 
       public GestorFase()
@@ -45,6 +43,7 @@ namespace Logica
           equipos = new List<Equipo>();
           faseActual = new Fase();
           fases = new List<Fase>();
+          fases.Add(faseActual);
 
       }
 

@@ -17,7 +17,7 @@ namespace quegolazo_code.admin.edicion
        private static GestorFase gestorFase = new GestorFase();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //gestorFase = Sesion.getGestorFase();
+            gestorFase = Sesion.getGestorFase();
             gestorEdicion = Sesion.getGestorEdicion();            
             string equipos = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.equipos);
             if(!IsPostBack)

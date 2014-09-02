@@ -147,7 +147,15 @@ namespace Logica
             if (System.Web.HttpContext.Current.Session["gestorFase"] == null)
                 System.Web.HttpContext.Current.Session["gestorFase"] = new GestorFase();
             return (GestorFase)System.Web.HttpContext.Current.Session["gestorFase"];
-        }  
+        }
+
+        /// <summary>
+        /// Setea el gestorEdición en Session
+        /// </summary>
+        public static void setGestorEdicion(GestorEdicion gestorEdicion)
+        {
+            System.Web.HttpContext.Current.Session["gestorEdicion"] = gestorEdicion;
+        }
 
     }
 }
