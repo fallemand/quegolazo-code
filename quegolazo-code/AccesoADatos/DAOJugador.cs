@@ -96,18 +96,18 @@ namespace AccesoADatos
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    jugador = new Jugador()
-                    {
-                        idJugador = Int32.Parse(dr["idJugador"].ToString()),
-                        nombre = dr["nombre"].ToString(),
-                        dni = dr["dni"].ToString(),
-                        fechaNacimiento = DateTime.Parse(dr["fechaNacimiento"].ToString()),
-                        telefono = dr["telefono"].ToString(),
-                        email = dr["email"].ToString(),
-                        facebook = dr["facebook"].ToString(),
-                        sexo = dr["sexo"].ToString(),
-                        tieneFichaMedica = bool.Parse(dr["tieneFichaMedica"].ToString())
-                    };
+                    jugador = new Jugador();
+                    jugador.idJugador = Int32.Parse(dr["idJugador"].ToString());
+                    jugador.nombre = dr["nombre"].ToString();
+                    jugador.dni = dr["dni"].ToString();
+                    if(dr["fechaNacimiento"] != System.DBNull.Value)
+                        jugador.fechaNacimiento = DateTime.Parse(dr["fechaNacimiento"].ToString());
+                    else
+                        jugador.fechaNacimiento = null;
+                    jugador.email = dr["email"].ToString();
+                    jugador.facebook = dr["facebook"].ToString();
+                    jugador.sexo = dr["sexo"].ToString();
+                    jugador.tieneFichaMedica = bool.Parse(dr["tieneFichaMedica"].ToString());                   
                     respuesta.Add(jugador);
                 }
                 if (dr != null)
