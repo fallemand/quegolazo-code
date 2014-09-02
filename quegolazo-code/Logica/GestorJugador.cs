@@ -22,7 +22,7 @@ namespace Logica
                 jugador = new Jugador();
             jugador.nombre = nombre;
             jugador.dni = dni;
-            jugador.fechaNacimiento = Validador.castDate(fechaNacimiento);
+            jugador.fechaNacimiento = Validador.castDate(fechaNacimiento); 
             jugador.telefono = telefono;
             jugador.email = email;
             jugador.facebook = facebook;

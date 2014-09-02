@@ -4,6 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5">
+                <asp:UpdatePanel ID="upRegistrarJugador" runat="server">
+                    <ContentTemplate>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <span class="glyphicon glyphicon-plus"></span>
@@ -124,6 +126,8 @@
                         </div>
                     </div>
                 </div>
+                        </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
             <div class="col-md-7">
                 <div class="well">
@@ -153,6 +157,12 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                        <asp:UpdatePanel ID="upListaEquipos" runat="server" class="listado">
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btnRegistrarJugador" EventName="Click" />
+                                <asp:AsyncPostBackTrigger ControlID="btnModificarJugador" EventName="Click" />
+                            </Triggers>
+                            <ContentTemplate>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -186,6 +196,8 @@
                         <asp:Panel ID="panelFracasoListaJugadores" runat="server" CssClass="alert alert-danger" Visible="False">
                             <asp:Literal ID="litFracasoListaJugadores" runat="server"></asp:Literal>
                         </asp:Panel>
+                                </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </div>
