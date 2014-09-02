@@ -18,7 +18,7 @@ namespace quegolazo_code.admin
                 GestorTorneo gestorTorneo = new GestorTorneo();
                 Torneo torneo = gestorTorneo.obtenerUltimoTorneoDelUsuario();
                 if (torneo != null)
-                    Session["Torneo"] = gestorTorneo.obtenerUltimoTorneoDelUsuario();
+                    Sesion.setTorneo(gestorTorneo.obtenerUltimoTorneoDelUsuario());
                 else
                     Response.Redirect(GestorUrl.aTORNEOS);
             }

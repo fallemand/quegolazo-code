@@ -21,7 +21,6 @@ namespace quegolazo_code.admin
             {
                 limpiarPaneles();
                 cargarRepeaterEquipos();
-                imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
             }
             catch (Exception ex)
             {
@@ -292,6 +291,7 @@ namespace quegolazo_code.admin
             panelFracasoListaEquipos.Visible = false;
             litFracaso.Text = "";
             litFracasoListaEquipos.Text = "";
+            imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
         }
 
         /// <summary>
