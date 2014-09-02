@@ -185,6 +185,7 @@ namespace quegolazo_code.admin
             panelFracasoListaArbitros.Visible = false;
             litFracaso.Text = "";
             litFracasoListaArbitros.Text = "";
+            imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.ARBITRO, GestorImagen.MEDIANA);
         }  
     }
 }

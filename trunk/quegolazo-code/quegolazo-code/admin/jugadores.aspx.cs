@@ -20,11 +20,6 @@ namespace quegolazo_code.admin.edicion
             {
                 gestorJugador = Sesion.getGestorJugador();
                 gestorEquipo = Sesion.getGestorEquipo();
-                //EQUIPO HARDCODEADO
-                //EQUIPO HARDCODEADO
-                Sesion.setEquipo(gestorEquipo.obtenerEquipoPorId(2));
-                //EQUIPO HARDCODEADO
-                //EQUIPO HARDCODEADO
                 limpiarPaneles();
                 if (!Page.IsPostBack)
                 {
@@ -33,6 +28,8 @@ namespace quegolazo_code.admin.edicion
                     cargarRepeaterJugadores();
                     if (gestorEquipo.getEquipo().idEquipo > 0)
                         habilitarCampos();
+                    else
+                        imagenUpload.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -54,6 +51,7 @@ namespace quegolazo_code.admin.edicion
             rdTieneFichaMedicaSi.Disabled = false;
             rdTieneFichaMedicaNo.Disabled = false;
             btnRegistrarJugador.Enabled = true;
+            imagenUpload.Enabled = true;
         }
 
         private void obtenerEquipoSeleccionado()

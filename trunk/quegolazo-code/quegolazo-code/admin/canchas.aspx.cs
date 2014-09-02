@@ -20,7 +20,6 @@ namespace quegolazo_code.admin
             {
                 limpiarPaneles();
                 cargarRepeaterCanchas();
-                imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.COMPLEJO, GestorImagen.MEDIANA);
             }
             catch (Exception ex)
             {
@@ -188,7 +187,8 @@ namespace quegolazo_code.admin
             panelFracaso.Visible = false;
             panelFracasoListaCanchas.Visible = false;
             litFracaso.Text = "";
-            litFracasoListaCanchas.Text = "";            
+            litFracasoListaCanchas.Text = "";
+            imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.COMPLEJO, GestorImagen.MEDIANA);
         }
     }
 }

@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="pull-right botones">
-                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkAdministrarTorneo" title="Admnistrar Torneo" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="administrarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip"><span class="glyphicon glyphicon-flag"></span></asp:LinkButton>
+                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkAdministrarTorneo" title="Ir al Panel de Administración" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="administrarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip">Administrar Torneo</asp:LinkButton>
                                                 <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Ver Sitio Web del Torneo"><span class="glyphicon glyphicon-globe"></span></a>
                                                 <asp:LinkButton ClientIDMode="AutoID" ID="lnkModificarCampeonato" title="Editar Torneo" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                 <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarTorneo" title="Eliminar Torneo" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="eliminarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>

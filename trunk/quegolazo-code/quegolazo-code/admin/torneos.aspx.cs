@@ -13,8 +13,8 @@ namespace quegolazo_code.admin
 {
     public partial class mis_torneos : System.Web.UI.Page
     {
-        GestorTorneo gestorTorneo = new GestorTorneo();
-        GestorEdicion gestorEdicion = new GestorEdicion();
+        GestorTorneo gestorTorneo;
+        GestorEdicion gestorEdicion;
         protected void Page_Load(object sender, EventArgs e)        
         {
             gestorTorneo = Sesion.getGestorTorneo();

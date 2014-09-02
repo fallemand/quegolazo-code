@@ -82,7 +82,7 @@
                                                     </div>
                                                     <div class="fileUpload">
                                                         <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
-                                                        <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload" disabled="true"/>
+                                                        <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,15 +193,10 @@
     </div>
     <script>
         jQuery(document).ready(function () {
-            loadColorPicker();
             $('body').on('change', '#ContentAdmin_ContentAdminTorneo_imagenUpload', function () {
                 previewImage(this, 'ContentAdmin_ContentAdminTorneo_imagenpreview');
                 ajaxFileUpload('ContentAdmin_ContentAdminTorneo_imagenUpload');
             });
-            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
-            function EndRequestHandler(sender, args) {
-                loadColorPicker();
-            }
         });
     </script>
 </asp:Content>
