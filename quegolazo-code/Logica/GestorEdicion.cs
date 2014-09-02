@@ -12,6 +12,7 @@ namespace Logica
     public class GestorEdicion
     {
         public Edicion edicion = new Edicion();
+        public GestorFase gestorFase = new GestorFase();
         /// <summary>
         /// Obtener ediciones de un torneo en particular
         /// autor: Pau Pedrosa
@@ -142,6 +143,16 @@ namespace Logica
         {
             DAOEdicion daoEdicion = new DAOEdicion();
             return daoEdicion.obtenerGeneroEdicionPorId(idGeneroEdicion);
+        }
+
+        /// <summary>
+        /// Obtiene id de una torneo a partir de la edición
+        /// autor: Flor Rojas
+        /// </summary>
+        public int obtenerIdTorneo()
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            return daoEdicion.obtenerTorneoPorId(edicion.idEdicion);
         }
     }
 }

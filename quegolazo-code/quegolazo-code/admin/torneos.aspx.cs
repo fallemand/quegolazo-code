@@ -205,6 +205,7 @@ namespace quegolazo_code.admin
                 {
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     Sesion.setGestorEdicion(gestorEdicion);
+                    Sesion.setTorneo(gestorTorneo.obtenerTorneoPorId(gestorEdicion.obtenerIdTorneo()));
                     Response.Redirect(GestorUrl.eCONFIGURAR);
                 }
             }
