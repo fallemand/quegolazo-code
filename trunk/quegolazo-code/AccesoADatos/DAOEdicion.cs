@@ -373,5 +373,39 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        /// <summary>
+        /// Obtiene ídTorneo
+        /// autor: Flor Rojas
+        /// </summary>
+        public int obtenerTorneoPorId(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT idTorneo
+                                FROM Ediciones
+                                WHERE idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.CommandText = sql;
+                int idTorneo =int.Parse(cmd.ExecuteScalar().ToString());
+                return idTorneo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar el idTorneo " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
     }
 }
