@@ -70,6 +70,7 @@
                                                             <td>
                                                                 <asp:LinkButton ClientIDMode="AutoID" title="Editar Edición" rel="txtTooltip" ID="lnkEditarEdicion" runat="server" CommandName="editarEdicion" CommandArgument='<%# Eval("idEdicion") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar Edición" rel="txtTooltip" ID="lnkEliminarEdicion" runat="server" CommandName="eliminarEdicion" CommandArgument='<%# Eval("idEdicion") %>'><span class="glyphicon glyphicon-remove eliminar"></span></asp:LinkButton>
+                                                                <asp:LinkButton ClientIDMode="AutoID" title="Configurar Edición" rel="txtTooltip" ID="lnkConfigurar" runat="server" CommandName="configurarEdicion" CommandArgument='<%# Eval("idEdicion") %>'><span class="glyphicon glyphicon-cog"></span></asp:LinkButton>
                                                             </td>
                                                         </tr>
                                                     </ItemTemplate>

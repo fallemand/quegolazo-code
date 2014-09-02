@@ -135,7 +135,7 @@ namespace quegolazo_code.admin
                 if (e.CommandName == "administrarTorneo")
                 {
                     Sesion.setTorneo(gestorTorneo.torneo);
-                    Response.Redirect("/admin/index.aspx");
+                    Response.Redirect(GestorUrl.aINDEX);
                 }
                 if (e.CommandName == "eliminarTorneo")
                 {
@@ -200,6 +200,12 @@ namespace quegolazo_code.admin
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     litNombreEdicion.Text = gestorEdicion.edicion.nombre;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarEdicion');", true);
+                }
+                if (e.CommandName == "configurarEdicion")
+                {
+                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
+                    Sesion.setGestorEdicion(gestorEdicion);
+                    Response.Redirect(GestorUrl.eCONFIGURAR);
                 }
             }
             catch (Exception ex)
