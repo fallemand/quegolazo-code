@@ -13,6 +13,15 @@ namespace quegolazo_code.admin.edicion {
     public partial class jugadores {
         
         /// <summary>
+        /// Control upRegistrarJugador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upRegistrarJugador;
+        
+        /// <summary>
         /// Control txtNombreJugador.
         /// </summary>
         /// <remarks>
@@ -209,6 +218,15 @@ namespace quegolazo_code.admin.edicion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSeleccionarEquipo;
+        
+        /// <summary>
+        /// Control upListaEquipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upListaEquipos;
         
         /// <summary>
         /// Control rptJugadores.
