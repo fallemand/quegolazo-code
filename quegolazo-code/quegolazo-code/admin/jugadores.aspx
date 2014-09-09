@@ -54,7 +54,7 @@
                                             <label class="col-lg-2 control-label" for="radios">Sexo</label>
                                             <div class="col-lg-10">
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="rbgSexo" id="rdSexoMasculino" runat="server" disabled="true">
+                                                    <input type="radio" name="rbgSexo" id="rdSexoMasculino" runat="server" disabled="true" checked="true">
                                                     Masculino
                                                 </label>
                                                 <label class="radio-inline">
@@ -71,7 +71,7 @@
                                                     Si
                                                 </label>
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="rbgTieneFichaMedica" id="rdTieneFichaMedicaNo" runat="server" disabled="true">
+                                                    <input type="radio" name="rbgTieneFichaMedica" id="rdTieneFichaMedicaNo" runat="server" disabled="true" checked="true">
                                                     No
                                                 </label>
                                             </div>
@@ -107,9 +107,6 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <asp:Panel ID="panelExito" runat="server" CssClass="alert alert-success" Visible="False">
-                                    <asp:Literal ID="litExito" runat="server"></asp:Literal>
-                                </asp:Panel>
                                 <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                                     <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
                                 </asp:Panel>
