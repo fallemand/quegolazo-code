@@ -86,8 +86,7 @@ namespace quegolazo_code.admin.edicion
                     gestorJugador.obtenerJugadorPorId(Int32.Parse(e.CommandArgument.ToString()));
                     txtNombreJugador.Value = gestorJugador.jugador.nombre;
                     txtDni.Value = gestorJugador.jugador.dni;
-                    txtFechaNacimiento.Value = DateTime.Parse(gestorJugador.jugador.fechaNacimiento.ToString()).ToShortDateString();
-                    //txtFechaNacimiento.Value = gestorJugador.jugador.fechaNacimiento.ToString();
+                    txtFechaNacimiento.Value = (gestorJugador.jugador.fechaNacimiento == null)? "" : DateTime.Parse(gestorJugador.jugador.fechaNacimiento.ToString()).ToShortDateString();
                     txtTelefono.Value = gestorJugador.jugador.telefono;
                     txtFacebook.Value = gestorJugador.jugador.facebook;
                     txtEmail.Value = gestorJugador.jugador.email;
@@ -136,31 +135,18 @@ namespace quegolazo_code.admin.edicion
         private void mostrarPanelFracaso(string mensaje)
         {
             litFracaso.Text = mensaje;
-            panelExito.Visible = false;
             panelFracaso.Visible = true;
         }
-
-        /// <summary>
-        /// Habilita el panel de exito y deshabilita el panel de fracaso.
-        /// autor: Pau Pedrosa
-        /// </summary>
-        private void mostrarPanelExito(string mensaje)
-        {
-            litExito.Text = mensaje;
-            panelExito.Visible = true;
-            panelFracaso.Visible = false;
-        }
+       
         /// <summary>
         /// Limpia los paneles de éxito y fracaso
         /// autor: Pau Pedrosa
         /// </summary>
         private void limpiarPaneles()
         {
-            panelExito.Visible = false;
             panelFracaso.Visible = false;
             panelFracasoListaJugadores.Visible = false;
             litFracaso.Text = "";
-            litExito.Text = "";
             litFracasoListaJugadores.Text = "";
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.JUGADOR, GestorImagen.MEDIANA);
             if (ddlEquipos.Items.Count > 0)
@@ -198,7 +184,6 @@ namespace quegolazo_code.admin.edicion
                 int idJugadorAModificar = gestorJugador.jugador.idJugador;
                 gestorJugador.modificarJugador(idJugadorAModificar, txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtTelefono.Value,txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked);          
                 limpiarCampos();
-                mostrarPanelExito("Jugador modificado con éxito!");
                 cargarRepeaterJugadores();
                 gestorJugador.jugador = null; //le setea null al jugador
                 //lo manda a la solapa de agregar un jugador
