@@ -71,6 +71,7 @@ namespace Logica
         /// </summary>
         public void agregarEquiposEnEdicion(string equipos)
         {
+            //primero limpiamos la lista para evitar que se acumulen cuando el usuario apriete siguiente mas de una vez por algun motivo.
             edicion.equipos.Clear();
             if (equipos == "")
                 throw new Exception("No hay equipos seleccionados");
