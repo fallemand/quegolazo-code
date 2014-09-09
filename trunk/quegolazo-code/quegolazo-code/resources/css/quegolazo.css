@@ -360,6 +360,9 @@ body {
 .nopadding-right {
   padding-right:0px;
 }
+.nopadding-left {
+  padding-left:0px;
+}
 .nopadding-bottom {
   padding-bottom:0px;
 }
