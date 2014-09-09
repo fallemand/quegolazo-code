@@ -60,11 +60,11 @@
     <Content Include="admin\arbitros.aspx" />
     <Content Include="admin\canchas.aspx" />
     <Content Include="admin\edicion\configurar.aspx" />
+    <Content Include="admin\edicion\confirmar.aspx" />
     <Content Include="admin\edicion\equipos.aspx" />
     <Content Include="admin\edicion\fases.aspx" />
     <Content Include="admin\jugadores.aspx" />
     <Content Include="admin\equipos.aspx" />
-    <Content Include="admin\noticias.aspx" />
     <Content Include="resources\img\arbitros\default-bg.jpg" />
     <Content Include="resources\img\arbitros\default-nm.jpg" />
     <Content Include="resources\img\arbitros\default-sm.jpg" />
@@ -146,6 +146,13 @@
     <Compile Include="admin\edicion\configurar.aspx.designer.cs">
       <DependentUpon>configurar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\edicion\confirmar.aspx.cs">
+      <DependentUpon>confirmar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\edicion\confirmar.aspx.designer.cs">
+      <DependentUpon>confirmar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\edicion\edicion.master.cs">
       <DependentUpon>edicion.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -180,13 +187,6 @@
     </Compile>
     <Compile Include="admin\equipos.aspx.designer.cs">
       <DependentUpon>equipos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\noticias.aspx.cs">
-      <DependentUpon>noticias.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\noticias.aspx.designer.cs">
-      <DependentUpon>noticias.aspx</DependentUpon>
     </Compile>
     <Compile Include="usuario\activar.aspx.cs">
       <DependentUpon>activar.aspx</DependentUpon>
