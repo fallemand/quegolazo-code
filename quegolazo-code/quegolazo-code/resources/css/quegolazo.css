@@ -1343,13 +1343,13 @@ border-radius: 0;
 /*GENERACION DE FASES */
 .connectedSortable {
     border: 1px solid #eee;
-    width: 142px;
     min-height: 20px;
     list-style-type: none;
-    margin: 0;
+    margin: 15px;
     padding: 5px 0 0 0;
     float: left;
     margin-right: 10px;
+
 
 }
     .connectedSortable li {
@@ -1360,3 +1360,8 @@ border-radius: 0;
     cursor: -webkit-grab;
     background-color: rgb(236, 236, 236);
     }
+
+.gruposFase {
+padding: 0;
+display: inline-block;
+}
