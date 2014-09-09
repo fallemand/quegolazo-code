@@ -9,6 +9,20 @@
         </div>
         <div class="panel-body">
             <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm clearfix">
+                        <div class="col-md-2">
+                            <div class="thumbnail">
+                                <img src="http://pngimg.com/upload/car_logo_PNG1667.png" class="img-responsive center-block" alt="" style="max-height:31px;">
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <h4>Edición Que Golazo <small>Torneo Córdoba Gambeta</small></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                     <div class="col-md-8">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -115,7 +129,7 @@
             </asp:Panel>
         </div>
         <div class="panel-footer clearfix ">
-            <input id="btnSiguiente" type="button" class="btn btn-success pull-right" onclick="$('#contenedorFases').generadorDeFases('guardarFasesEnSesion');" value="Siguiente" />
+            <asp:Button ID="btnRegistrar" runat="server" Text="Registrar Configuración" CssClass="btn btn-success pull-right"/>
         </div>
     </div>
 </asp:Content>
