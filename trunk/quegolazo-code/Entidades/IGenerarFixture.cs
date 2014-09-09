@@ -9,5 +9,9 @@ namespace Entidades
    public interface IGenerarFixture
     {
        List<Fecha> generarFixture(List<Equipo> equiposParticipantes);
+
+       int getCantidadRondas();
+
+       void setCantidadRondas(int cantidadRondas);
     }
 }
