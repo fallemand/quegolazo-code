@@ -163,6 +163,10 @@ namespace quegolazo_code.admin.edicion
             litExito.Text = "";
             litFracasoListaJugadores.Text = "";
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.JUGADOR, GestorImagen.MEDIANA);
+            if (ddlEquipos.Items.Count > 0)
+            {
+                ddlEquipos.Items.FindByValue("").Attributes.Add("disabled", "disabled");
+            }
         }
 
         private void mostrarPanelFracasoListaJugadores(string mensaje)
@@ -225,10 +229,17 @@ namespace quegolazo_code.admin.edicion
 
         protected void btnSeleccionarEquipo_Click(object sender, EventArgs e)
         {
-            int idEquipo = Validador.castInt(ddlEquipos.SelectedValue);
-            gestorEquipo.getEquipo().idEquipo = idEquipo;
-            cargarRepeaterJugadores();
-            habilitarCampos();
+            try
+            {
+                int idEquipo = Validador.castInt(ddlEquipos.SelectedValue);
+                gestorEquipo.getEquipo().idEquipo = idEquipo;
+                cargarRepeaterJugadores();
+                habilitarCampos();
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracasoListaJugadores(ex.Message);
+            }
         }  
     }
 }

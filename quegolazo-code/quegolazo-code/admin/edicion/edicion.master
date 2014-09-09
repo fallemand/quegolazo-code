@@ -19,22 +19,20 @@
                                 <asp:UpdatePanel ID="upMaster" runat="server">
                                     <ContentTemplate>
                                         <a href="mis-proyectos.aspx" class="list-group-item" rel="txtTooltip" data-toggle="tooltip" data-placement="bottom" title="Ver Mis Proyectos">
-                                            <strong>
-                                                <asp:Literal ID="litNombreProyecto" runat="server">Edición 2014 Silver</asp:Literal></strong>
+                                            <strong><asp:Literal ID="litNombreEdicion" runat="server"></asp:Literal></strong>
                                         </a>
                                         <a href="configurar.aspx" class="list-group-item" id="lbCriterios" runat="server">
-                                            <span class="badge" rel="txtTooltip" data-toggle="tooltip" data-placement="left" title="Criterios Definidos">
-                                                <asp:Literal ID="litCantCriterios" runat="server">0</asp:Literal></span> 1. Configurar Preferencias
+                                            1. Configurar Preferencias
                                         </a>
                                         <a href="equipos.aspx" class="list-group-item" id="lbVaribles" runat="server">
-                                            <span class="badge" rel="txtTooltip" data-toggle="tooltip" data-placement="left" title="Variables Definidas">
-                                                <asp:Literal ID="litCantVariables" runat="server">0</asp:Literal>
-                                            </span>2. Asignar Equipos
+                                            2. Asignar Equipos
                                         </a>
                                         <a href="fases.aspx" class="list-group-item" id="lbAlterntivas" runat="server">
-                                            <span class="badge" rel="txtTooltip" data-toggle="tooltip" data-placement="left" title="Alternativas Definidas">
-                                                <asp:Literal ID="litCantAlternativas" runat="server">0</asp:Literal></span> 3. Generar Fases</a>
-                                        <a href="generar-informe.aspx" class="list-group-item" id="lbGenerarInforme" runat="server">4. Editar Fechas</a>
+                                            3. Generar Fases
+                                        </a>
+                                        <a href="generar-informe.aspx" class="list-group-item" id="lbGenerarInforme" runat="server">
+                                            4. Editar Fechas
+                                        </a>
                                         <a href="#" class="list-group-item disabled">
                                             <div class="progress progress-striped active">
                                                 <asp:Panel ID="barraProgreso" runat="server" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" Style="width: 50%;" CssClass="progress-bar">
