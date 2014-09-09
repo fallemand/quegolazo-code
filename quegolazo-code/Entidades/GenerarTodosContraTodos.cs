@@ -8,6 +8,7 @@ namespace Entidades
 {
    public class GenerarTodosContraTodos: IGenerarFixture
     {
+       public int cantidadRondas;
         /// <summary>
         /// Método par generar fixture
         /// autor=Flor
@@ -17,7 +18,7 @@ namespace Entidades
         public List<Fecha> generarFixture(List<Equipo> equiposParticipantes)
         {
             prepararListaDeEquipos(ref equiposParticipantes);
-            int cantidadFechas = (equiposParticipantes.Count - 1);
+            int cantidadFechas = (equiposParticipantes.Count - 1) * getCantidadRondas();
             int cantidadPartidos = equiposParticipantes.Count / 2;
             Equipo equipoPivot = (Equipo)equiposParticipantes[0].Clone();
             List<Fecha> fechas = new List<Fecha>();
@@ -40,7 +41,10 @@ namespace Entidades
                 }
                 fechas.Add(fechaNueva);
                 intercambiarPosiciones(ref equiposParticipantes);
-            }          
+            }
+            //si tiene 2 rondas (ida y vuelta)
+            if (getCantidadRondas() == 2) 
+                reordenarLocalias(ref fechas);
             return fechas;
         }
 
@@ -71,6 +75,31 @@ namespace Entidades
             }
         }
 
-     
+        /// <summary>
+        /// Intercambia los equipos locales y visitantes para la segunda ronda de un campeonato
+        /// </summary>
+        /// <param name="fechas">Las fechas a reordenar</param>
+        private void reordenarLocalias(ref List<Fecha> fechas)
+        {
+            int mitad = fechas.Count / 2;
+            for (int i = mitad; i < fechas.Count; i++)
+            {
+                for (int j = 0; j < fechas[i].partidos.Count; j++)
+                {
+                    Equipo copia = (Equipo)fechas[i].partidos[j].local.Clone();
+                    fechas[i].partidos[j].local = (Equipo)fechas[i].partidos[j].visita.Clone();
+                    fechas[i].partidos[j].visita = copia;
+                }
+            }
+
+        }
+        public int getCantidadRondas()
+        {
+            return cantidadRondas;
+        }
+        public void setCantidadRondas(int cantidadRondas)
+        {
+            this.cantidadRondas = cantidadRondas;
+        }
     }
 }

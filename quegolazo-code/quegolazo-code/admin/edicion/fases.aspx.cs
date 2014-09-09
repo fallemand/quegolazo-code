@@ -33,7 +33,7 @@ namespace quegolazo_code.admin.edicion
             List<Fase> fases = serializador.ConvertToType<List<Fase>>(JSONFases);
             gestorFase = Sesion.getGestorFase();
             gestorFase.fases = fases;
-            
+            gestorFase.generarFixture();
             return "OK";        
         }
 

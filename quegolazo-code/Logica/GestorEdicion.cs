@@ -71,6 +71,7 @@ namespace Logica
         /// </summary>
         public void agregarEquiposEnEdicion(string equipos)
         {
+            edicion.equipos.Clear();
             if (equipos == "")
                 throw new Exception("No hay equipos seleccionados");
             //quita la última coma de la cadena

@@ -21,19 +21,31 @@ namespace Logica
       /// método para generar fixture
       /// autor=Flor
       /// </summary>
-      public void generarFixture(string tipoFixture)
+      public void generarFixture()
       {
-          faseActual.tipoFixture.nombre = tipoFixture;
-
-          if (faseActual.tipoFixture.nombre == "TODOS CONTRA TODOS")
-              generadorFixture = new GenerarTodosContraTodos();
-
-          int i = 1;
-          foreach(Grupo g in faseActual.grupos)       
+          foreach (Fase f in fases)
           {
-             g.idGrupo = i;
-             g.fixture = generadorFixture.generarFixture(g.equipos);
-             i++;
+              if (f != null)
+              {
+                  if (f.tipoFixture.idTipoFixture == "TCT")//Todos contra todos ida
+                  {
+                      generadorFixture = new GenerarTodosContraTodos();
+                      generadorFixture.setCantidadRondas(1);
+                  }
+                  if (f.tipoFixture.idTipoFixture == "TCT-IV")//Todos contra todos ida y vuelta
+                  {
+                      generadorFixture = new GenerarTodosContraTodos();
+                      generadorFixture.setCantidadRondas(2);
+                  }
+
+                  int i = 1;
+                  foreach (Grupo g in f.grupos)
+                  {
+                      g.idGrupo = i;
+                      g.fixture = generadorFixture.generarFixture(g.equipos);
+                      i++;
+                  }
+              }
           }
 
       }
@@ -43,8 +55,6 @@ namespace Logica
           equipos = new List<Equipo>();
           faseActual = new Fase();
           fases = new List<Fase>();
-          fases.Add(faseActual);
-
       }
 
       public void registrarFase()
@@ -52,7 +62,6 @@ namespace Logica
           DAOFase daoFase = new DAOFase();
           daoFase.registrarFase(this.faseActual);
       }
-
 
     }
 }
