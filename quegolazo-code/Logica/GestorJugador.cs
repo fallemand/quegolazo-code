@@ -72,7 +72,10 @@ namespace Logica
             jugador.idJugador = idJugador;
             jugador.nombre = nombre;
             jugador.dni = dni;
-            jugador.fechaNacimiento = Validador.castDate(fechaNacimiento);
+            if (!fechaNacimiento.Equals(""))
+                jugador.fechaNacimiento = Validador.castDate(fechaNacimiento);
+            else
+                jugador.fechaNacimiento = null;
             jugador.telefono = telefono;
             jugador.email = email;
             jugador.facebook = facebook;

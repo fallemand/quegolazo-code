@@ -130,6 +130,15 @@ namespace Logica
             return (GestorArbitro)System.Web.HttpContext.Current.Session["gestorArbitro"];
         }
         /// <summary>
+        /// Devuelve el objeto GestorNoticia que se encuentra en Session, si es nulo, crea uno nuevo
+        /// </summary>        
+        public static GestorNoticia getGestorNoticia()
+        {
+            if (System.Web.HttpContext.Current.Session["gestorNoticia"] == null)
+                System.Web.HttpContext.Current.Session["gestorNoticia"] = new GestorNoticia();
+            return (GestorNoticia)System.Web.HttpContext.Current.Session["gestorNoticia"];
+        }
+        /// <summary>
         /// Devuelve el objeto GestorUsuario que se encuentra en Session, si es nulo, crea uno nuevo
         /// </summary>        
         public static GestorUsuario getGestorUsuario()

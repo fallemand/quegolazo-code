@@ -50,6 +50,7 @@
     <Compile Include="DAOFecha.cs" />
     <Compile Include="DAOGrupo.cs" />
     <Compile Include="DAOJugador.cs" />
+    <Compile Include="DAONoticia.cs" />
     <Compile Include="DAOPartido.cs" />
     <Compile Include="DAOTipoSuperficie.cs" />
     <Compile Include="DAOTipoUsuario.cs" />
