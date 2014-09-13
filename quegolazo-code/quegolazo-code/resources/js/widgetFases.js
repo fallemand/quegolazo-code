@@ -50,7 +50,7 @@
         var contenedorGeneral = $("<div/>", { class: 'panel panel-default' });
         var headerContenedor = $("<div/>", { class: 'panel-heading' });
         var contenedorTitulo = $("<h4/>", { class: 'panel-title' });
-        var linkTitulo = $("<a/>").attr("data-togle", "collapse").attr("data-parent", "#accordionFases").attr("href", "#collapse" + numeroDeFase).text("Fase N° " + numeroDeFase);
+        var linkTitulo = $("<a/>").attr("data-toggle", "collapse").attr("data-parent", "#accordionFases").attr("href", "#collapse" + numeroDeFase).text("Fase N° " + numeroDeFase);
         var contenedorDeLaFase = $("<div/>", { class: 'panel-collapse collapse in' }).attr("id", "collapse" + numeroDeFase);
         var cuerpoDeLaFase = $("<div/>", { class: 'panel-body' }).attr("id", "panelFase" + numeroDeFase);
         var contenedorControles = widget.crearControlesDeFase(numeroDeFase);
@@ -145,7 +145,7 @@
         var widget = this;
         var tipoDeFixture = {
             "idTipoFixture": $("#ddlTipoFixtureFase" + numFase).val(),
-            "nombre": $("#ddlTipoFixtureFase" + numFase).text()
+            "nombre": $("#ddlTipoFixtureFase" + numFase +" option:selected").text()
         };
         return tipoDeFixture;
     },
@@ -225,6 +225,16 @@
             }
         }
         
+    },
+    //devuelve un equipo pasando un id como parametro, si no lo encuentra devuelve null
+    buscarEquipo: function (listaDeEquipos, idBuscado) {
+        for (var j = 0; j < listaDeEquipos.length; j++) {
+            var equipo = listaDeEquipos[j];
+            if (idBuscado == equipo.idEquipo) {
+                return equipo;
+            }
+        }
+        return null;
     },
 
     //obtiene los equipos de un grupo para una fase determinada, basandose en como los ordenó el usuario en la UI
