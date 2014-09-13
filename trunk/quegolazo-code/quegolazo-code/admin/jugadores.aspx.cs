@@ -37,23 +37,11 @@ namespace quegolazo_code.admin.edicion
                 mostrarPanelFracasoListaJugadores(ex.Message);
             }
         }
-
-        private void habilitarCampos()
-        {
-            txtNombreJugador.Disabled = false;
-            txtDni.Disabled = false;
-            txtFechaNacimiento.Disabled = false;
-            txtTelefono.Disabled = false;
-            txtEmail.Disabled = false;
-            txtFacebook.Disabled = false;
-            rdSexoFemenino.Disabled = false;
-            rdSexoMasculino.Disabled = false;
-            rdTieneFichaMedicaSi.Disabled = false;
-            rdTieneFichaMedicaNo.Disabled = false;
-            btnRegistrarJugador.Enabled = true;
-            imagenUpload.Enabled = true;
-        }
-
+        
+        /// <summary>
+        /// Obtiene Equipo Seleccionado
+        /// autor: Facu Allemand
+        /// </summary>
         private void obtenerEquipoSeleccionado()
         {
             if (Request.QueryString["idEquipo"] != null)
@@ -62,6 +50,10 @@ namespace quegolazo_code.admin.edicion
                 gestorEquipo.getEquipo().idEquipo = 0;
         }
 
+        /// <summary>
+        /// Registra un Nuevo Jugador en la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
         protected void btnRegistrarJugador_Click(object sender, EventArgs e)
         {
             try
@@ -77,6 +69,10 @@ namespace quegolazo_code.admin.edicion
             }
         }
 
+        /// <summary>
+        /// Para Modifica y/o Eliminar un Jugador
+        /// autor: Pau Pedrosa
+        /// </summary>
         protected void rptJugadores_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             try
@@ -112,62 +108,12 @@ namespace quegolazo_code.admin.edicion
             {
                 mostrarPanelFracasoListaJugadores(ex.Message);
             }     
-        }
-
-        public void limpiarCampos()
-        {
-            txtNombreJugador.Value = "";
-            txtDni.Value = "";
-            txtFechaNacimiento.Value = "";
-            txtTelefono.Value = "";
-            txtEmail.Value = "";
-            txtFacebook.Value = "";
-            rdSexoFemenino.Checked = false;
-            rdSexoMasculino.Checked = false;
-            rdTieneFichaMedicaSi.Checked = false;
-            rdTieneFichaMedicaNo.Checked = false;
-        }
+        }           
 
         /// <summary>
-        /// Habilita el panel de fracaso y deshabilita el panel de exito.
+        /// Cancela la modificación de un jugador
         /// autor: Pau Pedrosa
         /// </summary>
-        private void mostrarPanelFracaso(string mensaje)
-        {
-            litFracaso.Text = mensaje;
-            panelFracaso.Visible = true;
-        }
-       
-        /// <summary>
-        /// Limpia los paneles de éxito y fracaso
-        /// autor: Pau Pedrosa
-        /// </summary>
-        private void limpiarPaneles()
-        {
-            panelFracaso.Visible = false;
-            panelFracasoListaJugadores.Visible = false;
-            litFracaso.Text = "";
-            litFracasoListaJugadores.Text = "";
-            imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.JUGADOR, GestorImagen.MEDIANA);
-            if (ddlEquipos.Items.Count > 0)
-            {
-                ddlEquipos.Items.FindByValue("").Attributes.Add("disabled", "disabled");
-            }
-        }
-
-        private void mostrarPanelFracasoListaJugadores(string mensaje)
-        {
-            litFracasoListaJugadores.Text = mensaje;
-            panelFracasoListaJugadores.Visible = true;
-        }
-
-        private void cargarRepeaterJugadores()
-        {
-            rptJugadores.DataSource = gestorJugador.obtenerJugadoresDeUnEquipo();
-            rptJugadores.DataBind();
-            sinJugadores.Visible = (rptJugadores.Items.Count > 0) ? false : true;
-        }
-
         protected void btnCancelarModificacionJugador_Click(object sender, EventArgs e)
         {
             limpiarCampos();
@@ -177,6 +123,10 @@ namespace quegolazo_code.admin.edicion
             gestorJugador.jugador = null; // le setea null al jugador
         }
 
+        /// <summary>
+        /// Permite modificar en la BD un jugador
+        /// autor: Pau Pedrosa
+        /// </summary>
         protected void btnModificarJugador_Click(object sender, EventArgs e)
         {
             try
@@ -195,8 +145,51 @@ namespace quegolazo_code.admin.edicion
             {
                 mostrarPanelFracaso(ex.Message);
             }
+        }      
+
+        /// <summary>
+        /// Permite Seleccionar Equipo
+        /// autor: Facu Allemand
+        /// </summary>
+        protected void btnSeleccionarEquipo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idEquipo = Validador.castInt(ddlEquipos.SelectedValue);
+                gestorEquipo.getEquipo().idEquipo = idEquipo;
+                cargarRepeaterJugadores();
+                habilitarCampos();
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracasoListaJugadores(ex.Message);
+            }
         }
 
+        //------------------------------------------
+        //--------------Metodos Extras--------------
+        //------------------------------------------
+        /// <summary>
+        /// Habilita Campos
+        /// </summary>
+        private void habilitarCampos()
+        {
+            txtNombreJugador.Disabled = false;
+            txtDni.Disabled = false;
+            txtFechaNacimiento.Disabled = false;
+            txtTelefono.Disabled = false;
+            txtEmail.Disabled = false;
+            txtFacebook.Disabled = false;
+            rdSexoFemenino.Disabled = false;
+            rdSexoMasculino.Disabled = false;
+            rdTieneFichaMedicaSi.Disabled = false;
+            rdTieneFichaMedicaNo.Disabled = false;
+            btnRegistrarJugador.Enabled = true;
+            imagenUpload.Enabled = true;
+        }
+        /// <summary>
+        /// Carga Combo Equipos
+        /// </summary>
         private void cargarComboEquipos()
         {
             ddlEquipos.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo();
@@ -211,20 +204,63 @@ namespace quegolazo_code.admin.edicion
             else
                 itemSeleccionarEquipo.Selected = true;
         }
-
-        protected void btnSeleccionarEquipo_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Limpiar Campos
+        /// </summary>
+        public void limpiarCampos()
         {
-            try
+            txtNombreJugador.Value = "";
+            txtDni.Value = "";
+            txtFechaNacimiento.Value = "";
+            txtTelefono.Value = "";
+            txtEmail.Value = "";
+            txtFacebook.Value = "";
+            rdSexoFemenino.Checked = false;
+            rdSexoMasculino.Checked = false;
+            rdTieneFichaMedicaSi.Checked = false;
+            rdTieneFichaMedicaNo.Checked = false;
+        }
+        /// <summary>
+        /// Panel Fracaso Lista Jugadores
+        /// </summary>
+        private void mostrarPanelFracasoListaJugadores(string mensaje)
+        {
+            litFracasoListaJugadores.Text = mensaje;
+            panelFracasoListaJugadores.Visible = true;
+        }
+        /// <summary>
+        /// Carga Repeater Jugadores
+        /// </summary>
+        private void cargarRepeaterJugadores()
+        {
+            rptJugadores.DataSource = gestorJugador.obtenerJugadoresDeUnEquipo();
+            rptJugadores.DataBind();
+            sinJugadores.Visible = (rptJugadores.Items.Count > 0) ? false : true;
+        }
+        /// <summary>
+        /// Limpia los paneles de éxito y fracaso
+        /// autor: Pau Pedrosa
+        /// </summary>
+        private void limpiarPaneles()
+        {
+            panelFracaso.Visible = false;
+            panelFracasoListaJugadores.Visible = false;
+            litFracaso.Text = "";
+            litFracasoListaJugadores.Text = "";
+            imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.JUGADOR, GestorImagen.MEDIANA);
+            if (ddlEquipos.Items.Count > 0)
             {
-                int idEquipo = Validador.castInt(ddlEquipos.SelectedValue);
-                gestorEquipo.getEquipo().idEquipo = idEquipo;
-                cargarRepeaterJugadores();
-                habilitarCampos();
+                ddlEquipos.Items.FindByValue("").Attributes.Add("disabled", "disabled");
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaJugadores(ex.Message);
-            }
+        }
+        /// <summary>
+        /// Habilita el panel de fracaso y deshabilita el panel de exito.
+        /// autor: Pau Pedrosa
+        /// </summary>
+        private void mostrarPanelFracaso(string mensaje)
+        {
+            litFracaso.Text = mensaje;
+            panelFracaso.Visible = true;
         }  
     }
 }

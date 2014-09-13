@@ -19,7 +19,7 @@
                     <li><a href="<%=Logica.GestorUrl.aCANCHAS %>"><i class="flaticon-football65"></i><span>Canchas</span> </a></li>
                     <li><a href="#"><i class="flaticon-football84"></i><span>Resultados</span> </a></li>
                     <li><a href="#"><i class="flaticon-football79"></i><span>Sanciones</span> </a></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i><span>Noticias</span> </a></li>
+                    <li><a href="<%=Logica.GestorUrl.aNOTICIAS %>"><i class="glyphicon glyphicon-list-alt"></i><span>Noticias</span> </a></li>
                     <li><a href="#"><i class="glyphicon glyphicon-cog"></i><span>Opciones</span> </a></li>
                     <li><%=Logica.Sesion.getTorneo().nombre %></li>
                 </ul>

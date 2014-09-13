@@ -48,6 +48,7 @@
     <Compile Include="IGenerarFixture.cs" />
     <Compile Include="IPartido.cs" />
     <Compile Include="Jugador.cs" />
+    <Compile Include="Noticia.cs" />
     <Compile Include="Partido.cs" />
     <Compile Include="PartidoComun.cs" />
     <Compile Include="PartidoEliminatorio.cs" />
