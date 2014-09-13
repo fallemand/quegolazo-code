@@ -63,6 +63,7 @@
     <Content Include="admin\edicion\confirmar.aspx" />
     <Content Include="admin\edicion\equipos.aspx" />
     <Content Include="admin\edicion\fases.aspx" />
+    <Content Include="admin\fechas.aspx" />
     <Content Include="admin\jugadores.aspx" />
     <Content Include="admin\equipos.aspx" />
     <Content Include="resources\img\arbitros\default-bg.jpg" />
@@ -173,6 +174,13 @@
     </Compile>
     <Compile Include="admin\edicion\fases.aspx.designer.cs">
       <DependentUpon>fases.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\fechas.aspx.cs">
+      <DependentUpon>fechas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\fechas.aspx.designer.cs">
+      <DependentUpon>fechas.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\jugadores.aspx.cs">
       <DependentUpon>jugadores.aspx</DependentUpon>

@@ -1222,6 +1222,10 @@ div.colorPicker-swatch:hover {
 	color: #fff;
 }
 
+.panel-heading-master a {
+    color:#fff;
+}
+
 .progress-bar {
     background-color: #5FA54E;
 }
