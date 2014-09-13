@@ -18,8 +18,16 @@ namespace quegolazo_code.admin
             {
                 if (Sesion.getUsuario() != null)
                 {
-                    Literal litNombre = (Literal)lvNavBar.FindControl("LitNombre");
-                    litNombre.Text = Sesion.getUsuario().nombre;
+                    try
+                    {
+                        Literal litNombre = (Literal)lvNavBar.FindControl("LitNombre");
+                        litNombre.Text = Sesion.getUsuario().nombre;
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+                   
                 }
             }
         }

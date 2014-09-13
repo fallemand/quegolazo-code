@@ -31,10 +31,11 @@
         <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                 <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
             </asp:Panel>
+        
+    </div>
         <div class="panel-footer clearfix ">
              <input id="btnSiguiente" type="button" class="btn btn-success pull-right" onclick="$('#contenedorFases').generadorDeFases('guardarFasesEnSesion');" value="Siguiente" />
          
         </div>
-    </div>
     </div>
 </asp:Content>
