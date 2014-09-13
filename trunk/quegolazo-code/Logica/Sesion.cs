@@ -165,6 +165,13 @@ namespace Logica
         {
             System.Web.HttpContext.Current.Session["gestorEdicion"] = gestorEdicion;
         }
+        /// <summary>
+        /// Setea el gestorFase en Session
+        /// </summary>
+        public static void setGestorFase(GestorFase gestorFase)
+        {
+            System.Web.HttpContext.Current.Session["gestorFase"] = gestorFase;
+        }       
 
     }
 }

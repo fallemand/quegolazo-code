@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-md-3 switch">
                                 <label class="switch-light well nomargin-bottom" onclick="togglePanel('panelJugadores');">
-                                    <input type="checkbox">
+                                    <input type="checkbox"  runat="server" id="rdJugadoresSi">
                                     <span>
                                         <span>No</span>
                                         <span>Si</span>
@@ -90,7 +90,7 @@
                             </div>
                             <div class="col-md-3 switch">
                                 <label class="switch-light well nomargin-bottom" onclick="togglePanel('panelSanciones');">
-                                    <input type="checkbox">
+                                    <input type="checkbox"  runat="server" id="rdSancionesSi">
                                     <span>
                                         <span>No</span>
                                         <span>Si</span>
@@ -188,7 +188,7 @@
                             </div>
                             <div class="col-md-3 switch">
                                 <label class="switch-light well nomargin-bottom" onclick="togglePanel('panelCanchas');">
-                                    <input type="checkbox">
+                                    <input type="checkbox"  runat="server" id="rdCanchasSi">
                                     <span>
                                         <span>No</span>
                                         <span>Si</span>

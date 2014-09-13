@@ -124,29 +124,38 @@ namespace AccesoADatos
         /// autor: Florencia Rojas
         /// </summary>
         /// <param name="edicion">Objeto Edición</param>
-        private void registrarPreferencias(Edicion edicion, SqlConnection con, SqlTransaction trans)
+        public void registrarPreferencias(Edicion edicion)
         {
-            SqlCommand cmd = new SqlCommand();
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();       
+
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                cmd.Transaction = trans;
-                string sql = @"INSERT INTO ConfiguracionesEdicion (jugadores,cambiosJugadores, tarjetasJugadores, golesJugadores,asignacionArbitros, desempenioArbitros,canchaUnica, sancionesJugadores, arbitros ,sanciones , idEdicion )
-                                              VALUES (@jugadores,@cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @canchaUnica, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion)";
+                string sql = @"INSERT INTO ConfiguracionesEdicion (jugadores,cambiosJugadores, tarjetasJugadores, golesJugadores,asignacionArbitros, desempenioArbitros,canchaUnica,sancionesEquipos, sancionesJugadores, arbitros ,sanciones , idEdicion, jugadorXPartido )
+                                              VALUES (@jugadores,@cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @canchaUnica, @sancionesEquipos, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion, @jugadorXPartido)";
                 cmd.Parameters.Clear();
+                //Jugadores
                 cmd.Parameters.AddWithValue("@jugadores", edicion.preferencias.jugadores);
                 cmd.Parameters.AddWithValue("@cambiosJugadores", edicion.preferencias.cambiosJugadores);
                 cmd.Parameters.AddWithValue("@tarjetasJugadores", edicion.preferencias.tarjetasJugadores);
                 cmd.Parameters.AddWithValue("@golesJugadores", edicion.preferencias.golesJugadores);
+                cmd.Parameters.AddWithValue("@jugadorXPartido", edicion.preferencias.jugadoresXPartido);
+                //Arbitros
+                cmd.Parameters.AddWithValue("@arbitros", edicion.preferencias.arbitros);
                 cmd.Parameters.AddWithValue("@asignacionArbitros", edicion.preferencias.asignaArbitros);
                 cmd.Parameters.AddWithValue("@desempenioArbitros", edicion.preferencias.desempenioArbitros);
+                //Cancha
                 cmd.Parameters.AddWithValue("@canchaUnica", edicion.preferencias.canchaUnica);
+                //Sanciones
+                cmd.Parameters.AddWithValue("@sancionesEquipos", edicion.preferencias.sancionesEquipos);
                 cmd.Parameters.AddWithValue("@sancionesJugadores", edicion.preferencias.sancionesJugadores);
-                cmd.Parameters.AddWithValue("@arbitros", edicion.preferencias.arbitros);
                 cmd.Parameters.AddWithValue("@sanciones", edicion.preferencias.sanciones);
+                //idEdición
                 cmd.Parameters.AddWithValue("@idEdicion", edicion.idEdicion);
+                
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }

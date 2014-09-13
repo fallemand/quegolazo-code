@@ -60,7 +60,7 @@ namespace Logica
       public void registrarFase()
       {
           DAOFase daoFase = new DAOFase();
-          daoFase.registrarFase(this.faseActual);
+          daoFase.registrarFase(fases);
       }
 
     }

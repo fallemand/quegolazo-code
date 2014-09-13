@@ -40,7 +40,7 @@ namespace AccesoADatos
                         cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                        cmd.Parameters.AddWithValue("@idEstado", f.estado.idEstado);
+                        cmd.Parameters.AddWithValue("@idEstado", 1);
                         if(f.nombre != null)
                             cmd.Parameters.AddWithValue("@nombre",  f.nombre );
                         else

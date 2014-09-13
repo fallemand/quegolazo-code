@@ -36,19 +36,22 @@ namespace AccesoADatos
                     {
                          foreach (Partido p in f.partidos)
                          {
-                        string sql = @"INSERT INTO Partidos (idPartido,idFecha,idGrupo,idFase,idEdicion,idEquipoLocal,idEquipoVisitante, idEstado)
+                             if (p.idPartido != 0)
+                             {
+                                 string sql = @"INSERT INTO Partidos (idPartido,idFecha,idGrupo,idFase,idEdicion,idEquipoLocal,idEquipoVisitante, idEstado)
                                      VALUES (@idPartido,@idFecha,@idGrupo,@idFase,@idEdicion,@idEquipoLocal,@idEquipoVisitante, @idEstado)";
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@idPartido", p.idPartido);
-                        cmd.Parameters.AddWithValue("@idFecha", f.idFecha);
-                        cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
-                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
-                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                        cmd.Parameters.AddWithValue("@idEquipoLocal", p.local.idEquipo);
-                        cmd.Parameters.AddWithValue("@idEquipoVisitante", p.visita.idEquipo);
-                        cmd.Parameters.AddWithValue("@idEstado", p.estado.idEstado);
-                        cmd.CommandText = sql;
-                        cmd.ExecuteNonQuery();
+                                 cmd.Parameters.Clear();
+                                 cmd.Parameters.AddWithValue("@idPartido", p.idPartido);
+                                 cmd.Parameters.AddWithValue("@idFecha", f.idFecha);
+                                 cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
+                                 cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                                 cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                                 cmd.Parameters.AddWithValue("@idEquipoLocal", p.local.idEquipo);
+                                 cmd.Parameters.AddWithValue("@idEquipoVisitante", p.visita.idEquipo);
+                                 cmd.Parameters.AddWithValue("@idEstado", 1);
+                                 cmd.CommandText = sql;
+                                 cmd.ExecuteNonQuery();
+                             }
                         }
                     }
                 }

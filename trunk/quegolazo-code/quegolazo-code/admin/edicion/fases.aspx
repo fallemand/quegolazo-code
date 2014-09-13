@@ -34,8 +34,8 @@
         
     </div>
         <div class="panel-footer clearfix ">
-             <input id="btnSiguiente" type="button" class="btn btn-success pull-right" onclick="$('#contenedorFases').generadorDeFases('guardarFasesEnSesion');" value="Siguiente" />
-         
+            <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClientClick="$('#contenedorFases').generadorDeFases('guardarFasesEnSesion');" OnClick="btnSiguiente_Click"/>
+             <%--<input id="btnSiguiente" type="button" class="btn btn-success pull-right"  onclick="$('#contenedorFases').generadorDeFases('guardarFasesEnSesion');" value="Siguiente" />--%>         
         </div>
     </div>
 </asp:Content>

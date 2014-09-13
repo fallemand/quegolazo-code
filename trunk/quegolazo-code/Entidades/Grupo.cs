@@ -14,6 +14,7 @@ namespace Entidades
         public List<Equipo> equipos { get; set; }
         public List<Fecha> fixture {get; set;}
         public int nombre { get; set; }
+
         public Grupo()
         {
             equipos = new List<Equipo>();
