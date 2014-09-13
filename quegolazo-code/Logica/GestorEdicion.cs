@@ -36,6 +36,17 @@ namespace Logica
         }
 
         /// <summary> 
+        /// Registra una nueva edicion
+        /// autor: Antonio Herrera
+        /// </summary>
+        /// <returns>El id de la edicion que se registro.</returns>
+        public void registrarPreferencias()
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            daoEdicion.registrarPreferencias(edicion);
+        }
+
+        /// <summary> 
         /// Carga los datos en el objeto edicion
         /// autor: Antonio Herrera
         /// </summary>
@@ -60,10 +71,10 @@ namespace Logica
         /// </summary>
         /// <param name="idEquipo">Id del Equipo</param>
         /// <param name="idEdicion">Id de la Edición</param>
-        public void registrarEquiposEnEdicion(List<Equipo> equipos, int idEdicion)
+        public void registrarEquiposEnEdicion()
         {
             DAOEquipo daoEquipo = new DAOEquipo();
-            daoEquipo.registrarEquiposEnEdicion(equipos, idEdicion);                
+            daoEquipo.registrarEquiposEnEdicion(edicion.equipos, edicion.idEdicion);                
         }
 
         /// <summary>

@@ -22,11 +22,12 @@ namespace quegolazo_code.admin.edicion
             string equipos = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.equipos);
             if(!IsPostBack)
             //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ idEdicion:" + "12" + ", idTorneo:" + Sesion.getTorneo().idTorneo + " , equiposDeLaEdicion: " + equipos + "});", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ idEdicion:" + Sesion.getGestorEdicion().edicion.idEdicion + ", idTorneo:" + Sesion.getTorneo().idTorneo + " , equiposDeLaEdicion: " + equipos + "});", true);
+            
         }             
 
         [WebMethod(enableSession : true)]    
-        public static string guardarFases(object JSONFases)
+        public static void guardarFases(object JSONFases)
         {
             JavaScriptSerializer serializador = new JavaScriptSerializer();
             //string cad = JSONFases.ToString();
@@ -34,16 +35,14 @@ namespace quegolazo_code.admin.edicion
             gestorFase = Sesion.getGestorFase();
             gestorFase.fases = fases;
             gestorFase.generarFixture();
-            return "OK";        
+            Sesion.setGestorFase(gestorFase);
+
         }
 
-       
-       
+        protected void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(GestorUrl.eCONFIRMAR);
+        }
 
-      
-
-        
-
-     
     }
 }

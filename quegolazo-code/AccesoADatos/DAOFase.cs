@@ -20,7 +20,7 @@ namespace AccesoADatos
         /// <param name="equipo">El objeto Equipo que se va a registrar</param>
         /// <param name="idTorneo">Id del torneo al que pertenece el equipo</param>
         /// <returns>El id del equipo registrado</returns>
-        public void registrarFase(Fase fase)
+        public void registrarFase(List<Fase> fases)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -32,25 +32,34 @@ namespace AccesoADatos
                 trans = con.BeginTransaction();
                 cmd.Connection = con;
                 cmd.Transaction = trans;
-                
-                string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture, idEstado)
-                                    VALUES (@idFase,@idEdicion,@tipoFixture, @idEstado)";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idFase", fase.idFase);
-                cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
-                cmd.Parameters.AddWithValue("@idEstado", fase.estado.idEstado);
-                cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
 
-                DAOGrupo DaoGrupo = new DAOGrupo();
-                DaoGrupo.registrarGrupos(fase, con, trans);
+                foreach (Fase fase in fases)
+                {
+                    if (fase != null)
+                    {
+                        string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture)
+                                    VALUES (@idFase,@idEdicion,@tipoFixture)";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                        cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
+                        //cmd.Parameters.AddWithValue("@idEstado", fase.estado.idEstado);
+                        cmd.CommandText = sql;
+                        cmd.ExecuteNonQuery();
 
-                DAOFecha DaoFecha = new DAOFecha();
-                DaoFecha.registrarFechas(fase,con,trans);
+                        if (fase.grupos.Count != 0)
+                        {
+                            DAOGrupo DaoGrupo = new DAOGrupo();
+                            DaoGrupo.registrarGrupos(fase, con, trans);
 
-                DAOPartido DaoPartido = new DAOPartido();
-                DaoPartido.registrarPartidos(fase, con, trans);
+                            DAOFecha DaoFecha = new DAOFecha();
+                            DaoFecha.registrarFechas(fase, con, trans);
+
+                            DAOPartido DaoPartido = new DAOPartido();
+                            DaoPartido.registrarPartidos(fase, con, trans);
+                        }
+                    }
+                }
 
                 trans.Commit();
             }

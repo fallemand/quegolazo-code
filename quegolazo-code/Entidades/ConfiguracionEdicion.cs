@@ -26,6 +26,7 @@ namespace Entidades
         public bool sancionesJugadores { get; set; }
 
         //Complejos
+        public bool canchas { get; set; } 
         public bool canchaUnica { get; set; } 
     }
 

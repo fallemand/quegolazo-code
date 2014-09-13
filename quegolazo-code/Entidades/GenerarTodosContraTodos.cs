@@ -70,7 +70,7 @@ namespace Entidades
         {
             if (equiposParticipantes.Count % 2 != 0)
             {
-                Equipo libre = new Equipo() { nombre = "LIBRE" };
+                Equipo libre = new Equipo() { idEquipo=0, nombre = "LIBRE" };
                 equiposParticipantes.Add(libre);
             }
         }

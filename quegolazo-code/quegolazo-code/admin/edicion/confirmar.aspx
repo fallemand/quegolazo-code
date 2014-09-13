@@ -12,12 +12,11 @@
                 <div class="col-md-12">
                     <div class="well well-sm clearfix">
                         <div class="col-md-2">
-                            <div class="thumbnail">
-                                <img src="http://pngimg.com/upload/car_logo_PNG1667.png" class="img-responsive center-block" alt="" style="max-height:31px;">
+                            <div class="thumbnail"><img src="<%= Logica.Sesion.getTorneo().obtenerImagenChicha() %>" class="img-responsive center-block" alt="" style="max-height:31px; " />
                             </div>
                         </div>
                         <div class="col-md-10">
-                            <h4>Edición Que Golazo <small>Torneo Córdoba Gambeta</small></h4>
+                            <h4><asp:Literal ID="LitEdicion" runat="server"></asp:Literal><small>  Torneo <%= Logica.Sesion.getTorneo().nombre %></small></h4>
                         </div>
                     </div>
                 </div>
@@ -31,34 +30,15 @@
                                 </div>
                                 <div class="panel-body small-padding">
                                     <table>
-                                        <tr class="col-md-4">
-                                            <td><img src="http://pngimg.com/upload/car_logo_PNG1667.png" class="img-responsive" alt="" style="height:22px; max-width:30px; margin-right:4px;" /></td>
-                                            <td>Boca Juniors</td>
-                                        </tr>
-                                        <tr class="col-md-4">
-                                            <td><img src="http://pngimg.com/upload/car_logo_PNG1667.png" class="img-responsive" alt="" style="height:22px; max-width:30px; margin-right:4px;" /></td>
-                                            <td>Boca Juniors</td>
-                                        </tr>
-                                        <tr class="col-md-4">
-                                            <td><img src="http://pngimg.com/upload/car_logo_PNG1667.png" class="img-responsive" alt="" style="height:22px; max-width:30px; margin-right:4px;" /></td>
-                                            <td>Boca Juniors</td>
-                                        </tr>
-                                        <tr class="col-md-4">
-                                            <td><img src="http://pngimg.com/upload/car_logo_PNG1667.png" class="img-responsive" alt="" style="height:22px; max-width:30px; margin-right:4px;" /></td>
-                                            <td>Boca Juniors</td>
-                                        </tr>
-                                        <tr class="col-md-4">
-                                            <td><img src="http://pngimg.com/upload/car_logo_PNG1667.png" class="img-responsive" alt="" style="height:22px; max-width:30px; margin-right:4px;" /></td>
-                                            <td>Boca Juniors</td>
-                                        </tr>
-                                        <tr class="col-md-4">
-                                            <td><img src="http://pngimg.com/upload/car_logo_PNG1667.png" class="img-responsive" alt="" style="height:22px; max-width:30px; margin-right:4px;" /></td>
-                                            <td>Boca Juniors</td>
-                                        </tr>
-                                        <tr class="col-md-4">
-                                            <td><img src="http://pngimg.com/upload/car_logo_PNG1667.png" class="img-responsive" alt="" style="height:22px; max-width:30px; margin-right:4px;" /></td>
-                                            <td>Boca Juniors</td>
-                                        </tr>
+                                         <asp:Repeater ID="rptEquipos" runat="server">
+                                                        
+                                             <ItemTemplate>
+                                                         <tr class="col-md-4">
+                                                            <td><img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>"  class="img-responsive" alt="" style="height:22px; max-width:30px; margin-right:4px;"  /></td>
+                                                            <td><%# Eval("nombre") %></td> 
+                                                        </tr>
+                                           </ItemTemplate>
+                                                    </asp:Repeater>
                                     </table>
                                 </div>
                             </div>
@@ -70,10 +50,14 @@
                                     Opciones
                                 </div>
                                 <div class="panel-body">
-                                    Registra Arbitros: <span class="text-success"><b><span class="glyphicon glyphicon-ok"></span></b></span><br />
-                                    Registra Arbitros: <span class="text-danger"><b><span class="glyphicon glyphicon-remove"></span></b></span><br />
-                                    Registra Arbitros: <span class="text-danger"><b><span class="glyphicon glyphicon-remove"></span></b></span><br />
-                                    Registra Arbitros: <span class="text-success"><b><span class="glyphicon glyphicon-ok"></span></b></span><br />
+                                    Registra Jugadores: <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rJugadoresSi"></span></b></span>
+                                                        <span class="text-danger"><b><span class="glyphicon glyphicon-remove" runat="server" visible="false" id="rJugadoresNo"></span></b></span><br />
+                                    Registra Arbitros:  <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rArbitrosSi"></span></b></span>
+                                                        <span class="text-danger"><b><span  class="glyphicon glyphicon-remove" runat="server" visible="false" id="rArbitrosNo" ></span></b></span><br />
+                                    Registra Sanciones: <span class="text-success"><b><span  class="glyphicon glyphicon-ok" runat="server" visible="false" id="rSancionesSi"></span></b></span>
+                                                        <span class="text-danger"><b><span  class="glyphicon glyphicon-remove" runat="server" visible="false" id="rSancionesNo"></span></b></span><br />
+                                    Registra Canchas:   <span class="text-success"><b><span  class="glyphicon glyphicon-ok" runat="server" visible="false" id="rCanchasSi"></span></b></span>
+                                                        <span class="text-danger"><b><span  class="glyphicon glyphicon-remove" runat="server" visible="false" id="rCanchasNo"></span></b></span><br />
                                 </div>
                             </div>
                         </div>
@@ -81,46 +65,35 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel-group" id="fases">
-                      <div class="panel panel-default">
+                        <asp:Repeater  ID="rptFases" runat="server">
+                            <ItemTemplate>
+                                 <div class="panel panel-default">
                         <div class="panel-heading">
                           <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#fases" href="#collapseOne">
-                              Fase 1 <small>Ver Más Detalles</small>
+                              Fase  <%# Eval("idFase") %><small>Ver Más Detalles</small>
                             </a>
                           </h4>
                         </div>
                         <div id="collapseOne" class="panel-collapse collapse in">
                           <div class="panel-body">
                               <div class="col-md-6">
-                                <b>Tipo Fixture:</b> Todos Contro Todos <br />
-                                <b>Cantidad de Grupos:</b> 2 <br />
-                                <b>Cantidad de Equipos:</b> 8 <br />
-                                <b>Cantidad de Equipos por Grupo:</b> 4 <br />
+                                <b>Tipo Fixture:</b> <%# Eval("TipoFixture.nombre") %><br />
+                                <b>Cantidad de Grupos:</b> <%# ((Entidades.Fase)Container.DataItem).grupos.Count %> <br />
+                                <b>Cantidad de Equipos:</b> <%# ((Entidades.Fase)Container.DataItem).grupos[0].equipos.Count*((Entidades.Fase)Container.DataItem).grupos.Count %> <br />
+                                <b>Cantidad de Equipos por Grupo:</b> <%#  ((Entidades.Fase)Container.DataItem).grupos[0].equipos.Count %>  <br />
                               </div>
                               <div class="col-md-6">
-                                <b>Cantidad de Fechas:</b> 8 <br />
-                                <b>Partidos por Fecha:</b> 4 <br />
+                                <b>Cantidad de Fechas:</b> <%#((Entidades.Fase)Container.DataItem).grupos[0].fixture.Count %> <br />
+                                <b>Partidos por Fecha:</b> <%#((Entidades.Fase)Container.DataItem).grupos[0].fixture[0].partidos.Count %> <br />
                               </div>
                           </div>
                         </div>
                       </div>
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#fases" href="#collapseTwo">
-                              Fase 2 <small>Ver Más Detalles</small>
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                          <div class="panel-body">
-                            <b>Tipo Fixture:</b> Todos Contro Todos <br />
-                            <b>Cantidad de Grupos:</b> 2 <br />
-                            <b>Cantidad de Equipos:</b> 8 <br />
-                            <b>Cantidad de Equipos por Grupo:</b> 4 <br />
-                          </div>
-                        </div>
-                      </div>
+                            </ItemTemplate>
+
+                        </asp:Repeater>
+
                     </div>
                 </div>
             </div>
@@ -129,7 +102,7 @@
             </asp:Panel>
         </div>
         <div class="panel-footer clearfix ">
-            <asp:Button ID="btnRegistrar" runat="server" Text="Registrar Configuración" CssClass="btn btn-success pull-right"/>
+            <asp:Button ID="btnRegistrar" runat="server" Text="Registrar Configuración" OnClick="btnRegistrar_Click" CssClass="btn btn-success pull-right"/>
         </div>
     </div>
 </asp:Content>

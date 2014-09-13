@@ -12,7 +12,7 @@
                     Panel content
                 </div>
             </div>
-        </div>
+        </div>a
 
         <div class="col-md-6">
             <div class="panel panel-default">

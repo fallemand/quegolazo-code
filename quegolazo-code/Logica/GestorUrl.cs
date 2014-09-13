@@ -22,6 +22,7 @@ namespace Logica
         public const string eCONFIGURAR = "/admin/edicion/configurar.aspx";
         public const string eEQUIPOS = "/admin/edicion/equipos.aspx";
         public const string eFASES = "/admin/edicion/fases.aspx";
+        public const string eCONFIRMAR = "/admin/edicion/confirmar.aspx";
         public const string eJUGADORES = "/admin/edicion/jugadores.aspx";
 
         //Forms en carpeta Usuario
