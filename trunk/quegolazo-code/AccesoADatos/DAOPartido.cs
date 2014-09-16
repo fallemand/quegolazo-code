@@ -36,8 +36,7 @@ namespace AccesoADatos
                     {
                          foreach (Partido p in f.partidos)
                          {
-                             if (p.idPartido != 0)
-                             {
+                             
                                  string sql = @"INSERT INTO Partidos (idPartido,idFecha,idGrupo,idFase,idEdicion,idEquipoLocal,idEquipoVisitante, idEstado)
                                      VALUES (@idPartido,@idFecha,@idGrupo,@idFase,@idEdicion,@idEquipoLocal,@idEquipoVisitante, @idEstado)";
                                  cmd.Parameters.Clear();
@@ -46,12 +45,26 @@ namespace AccesoADatos
                                  cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                                  cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                                  cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                                 cmd.Parameters.AddWithValue("@idEquipoLocal", p.local.idEquipo);
-                                 cmd.Parameters.AddWithValue("@idEquipoVisitante", p.visita.idEquipo);
+                                 if (p.local.idEquipo != 0)
+                                 {
+                                     cmd.Parameters.AddWithValue("@idEquipoLocal", p.local.idEquipo);
+                                 }
+                                 else
+                                 {
+                                     cmd.Parameters.AddWithValue("@idEquipoLocal", DBNull.Value);
+                                 }
+                                 if (p.local.idEquipo != 0)
+                                 {
+                                     cmd.Parameters.AddWithValue("@idEquipoVisitante", p.visita.idEquipo);
+                                 }
+                                 else
+                                 {
+                                     cmd.Parameters.AddWithValue("@idEquipoVisitante", DBNull.Value);
+                                 }
                                  cmd.Parameters.AddWithValue("@idEstado", 1);
                                  cmd.CommandText = sql;
                                  cmd.ExecuteNonQuery();
-                             }
+                             
                         }
                     }
                 }
