@@ -1374,4 +1374,8 @@ width : 50%;
 .divGrupos th {
     text-align:center;
     font-size: 1.2em;
-    }
+}
+.flaticon-form {
+    font-size: 50px;
+    line-height: 30px;
+}

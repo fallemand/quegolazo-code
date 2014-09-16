@@ -355,15 +355,6 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnGolAgregar;
         
         /// <summary>
-        /// Control btnGolCancelar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGolCancelar;
-        
-        /// <summary>
         /// Control LinkButton26.
         /// </summary>
         /// <remarks>
@@ -398,15 +389,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCambiosAgregar;
-        
-        /// <summary>
-        /// Control btnCambiosCancelar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCambiosCancelar;
         
         /// <summary>
         /// Control LinkButton25.
@@ -445,15 +427,6 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnTarjetaAgregar;
         
         /// <summary>
-        /// Control btnTarjetaCancelar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTarjetaCancelar;
-        
-        /// <summary>
         /// Control LinkButton29.
         /// </summary>
         /// <remarks>
@@ -488,15 +461,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSancionesAgregar;
-        
-        /// <summary>
-        /// Control btnSancionesCancelar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSancionesCancelar;
         
         /// <summary>
         /// Control panel2.
