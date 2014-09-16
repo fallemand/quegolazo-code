@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="fechas.aspx.cs" Inherits="quegolazo_code.admin.fechas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
+    <script type="text/javascript" src="../resources/js/moment.js"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap-datetimepicker.es.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
         <div class="container">
@@ -361,8 +364,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">Fecha</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" class="form-control" runat="server" id="txtFecha" placeholder="Equipo Local" required="true" disabled="true">
+                                    <div id="divFechaPartido" class="col-lg-10 input-append date">
+                                        <div class="input-group input-group-md">
+                                            <input type="text" data-format="dd/MM/yyyy hh:mm" class="form-control" runat="server" id="txtFecha" placeholder="Sin Asignar" required="true">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -723,5 +729,12 @@
                 </div>
             </div>
         </div>
-        </div>
+     </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#divFechaPartido').datetimepicker({
+                language: 'es'
+            });
+        });
+    </script>
 </asp:Content>
