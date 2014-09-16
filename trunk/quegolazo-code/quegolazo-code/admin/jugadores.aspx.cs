@@ -58,7 +58,7 @@ namespace quegolazo_code.admin.edicion
         {
             try
             {
-                gestorJugador.registrarJugador(txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtTelefono.Value, txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked);
+                gestorJugador.registrarJugador(txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtNumeroCamiseta.Value, txtTelefono.Value, txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked);
                 limpiarCampos();
                 cargarRepeaterJugadores();
                 gestorJugador.jugador = null;
@@ -77,12 +77,13 @@ namespace quegolazo_code.admin.edicion
         {
             try
             {
+                gestorJugador.obtenerJugadorPorId(Int32.Parse(e.CommandArgument.ToString()));
                 if (e.CommandName == "editarJugador")
-                {   //por CommandArgument recibe el ID del jugador a modificar 
-                    gestorJugador.obtenerJugadorPorId(Int32.Parse(e.CommandArgument.ToString()));
+                {                        
                     txtNombreJugador.Value = gestorJugador.jugador.nombre;
                     txtDni.Value = gestorJugador.jugador.dni;
                     txtFechaNacimiento.Value = (gestorJugador.jugador.fechaNacimiento == null)? "" : DateTime.Parse(gestorJugador.jugador.fechaNacimiento.ToString()).ToShortDateString();
+                    txtNumeroCamiseta.Value = (gestorJugador.jugador.numeroCamiseta == null) ? "" : Int32.Parse(gestorJugador.jugador.numeroCamiseta.ToString()).ToString();
                     txtTelefono.Value = gestorJugador.jugador.telefono;
                     txtFacebook.Value = gestorJugador.jugador.facebook;
                     txtEmail.Value = gestorJugador.jugador.email;
@@ -100,8 +101,8 @@ namespace quegolazo_code.admin.edicion
                 }
                 if (e.CommandName == "eliminarJugador")
                 {
-                    gestorJugador.eliminarJugador(Int32.Parse(e.CommandArgument.ToString()));
-                    cargarRepeaterJugadores();
+                    litNombreJugador.Text = gestorJugador.jugador.nombre;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarJugador');", true);
                 }
             }
             catch (Exception ex)
@@ -132,7 +133,7 @@ namespace quegolazo_code.admin.edicion
             try
             {
                 int idJugadorAModificar = gestorJugador.jugador.idJugador;
-                gestorJugador.modificarJugador(idJugadorAModificar, txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtTelefono.Value,txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked);          
+                gestorJugador.modificarJugador(idJugadorAModificar, txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtNumeroCamiseta.Value, txtTelefono.Value,txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked);          
                 limpiarCampos();
                 cargarRepeaterJugadores();
                 gestorJugador.jugador = null; //le setea null al jugador
@@ -177,6 +178,7 @@ namespace quegolazo_code.admin.edicion
             txtNombreJugador.Disabled = false;
             txtDni.Disabled = false;
             txtFechaNacimiento.Disabled = false;
+            txtNumeroCamiseta.Disabled = false;
             txtTelefono.Disabled = false;
             txtEmail.Disabled = false;
             txtFacebook.Disabled = false;
@@ -212,6 +214,7 @@ namespace quegolazo_code.admin.edicion
             txtNombreJugador.Value = "";
             txtDni.Value = "";
             txtFechaNacimiento.Value = "";
+            txtNumeroCamiseta.Value = "";
             txtTelefono.Value = "";
             txtEmail.Value = "";
             txtFacebook.Value = "";
@@ -261,6 +264,20 @@ namespace quegolazo_code.admin.edicion
         {
             litFracaso.Text = mensaje;
             panelFracaso.Visible = true;
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorJugador.eliminarJugador(gestorJugador.jugador.idJugador);
+                cargarRepeaterJugadores();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarJugador", "closeModal('eliminarJugador');", true);
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracasoListaJugadores(ex.Message);
+            }
         }  
     }
 }

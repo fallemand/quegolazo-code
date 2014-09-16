@@ -26,8 +26,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"INSERT INTO Jugadores (nombre, dni, fechaNacimiento, telefono, email, facebook, sexo, tieneFichaMedica, idEquipo)
-                                    VALUES (@nombre, @dni, @fechaNacimiento, @telefono, @email, @facebook, @sexo, @tieneFichaMedica, @idEquipo)
+                string sql = @"INSERT INTO Jugadores (nombre, dni, fechaNacimiento, numeroCamiseta, telefono, email, facebook, sexo, tieneFichaMedica, idEquipo)
+                                    VALUES (@nombre, @dni, @fechaNacimiento, @numeroCamiseta, @telefono, @email, @facebook, @sexo, @tieneFichaMedica, @idEquipo)
                                     SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", jugador.nombre);
@@ -36,6 +36,10 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@fechaNacimiento", jugador.fechaNacimiento);
                 else
                     cmd.Parameters.AddWithValue("@fechaNacimiento", DBNull.Value);
+                if (jugador.numeroCamiseta!= null)
+                    cmd.Parameters.AddWithValue("@numeroCamiseta", jugador.numeroCamiseta);
+                else
+                    cmd.Parameters.AddWithValue("@numeroCamiseta", DBNull.Value);
                 if (jugador.telefono != null)
                     cmd.Parameters.AddWithValue("@telefono", jugador.telefono);
                 else
@@ -104,6 +108,10 @@ namespace AccesoADatos
                         jugador.fechaNacimiento = DateTime.Parse(dr["fechaNacimiento"].ToString());
                     else
                         jugador.fechaNacimiento = null;
+                    if (dr["numeroCamiseta"] != System.DBNull.Value)
+                        jugador.numeroCamiseta = Int32.Parse(dr["numeroCamiseta"].ToString());
+                    else
+                        jugador.numeroCamiseta = null;
                     jugador.email = dr["email"].ToString();
                     jugador.facebook = dr["facebook"].ToString();
                     jugador.sexo = dr["sexo"].ToString();
@@ -157,6 +165,10 @@ namespace AccesoADatos
                         respuesta.fechaNacimiento = DateTime.Parse(dr["fechaNacimiento"].ToString());                                 
                     else
                         respuesta.fechaNacimiento = null;
+                    if (dr["numeroCamiseta"] != System.DBNull.Value)
+                        respuesta.numeroCamiseta = Int32.Parse(dr["numeroCamiseta"].ToString());
+                    else
+                        respuesta.numeroCamiseta = null;
                     if (dr["telefono"] != System.DBNull.Value)
                         respuesta.telefono = dr["telefono"].ToString();
                     else
@@ -201,7 +213,7 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"UPDATE Jugadores
-                                SET nombre = @nombre, dni = @dni, fechaNacimiento = @fechaNacimiento, telefono = @telefono, email = @email, facebook = @facebook,
+                                SET nombre = @nombre, dni = @dni, fechaNacimiento = @fechaNacimiento, numeroCamiseta = @numeroCamiseta, telefono = @telefono, email = @email, facebook = @facebook,
                                 sexo = @sexo, tieneFichaMedica = @tieneFichaMedica
                                 WHERE idJugador = @idJugador";
                 cmd.Parameters.Clear();
@@ -212,6 +224,10 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@fechaNacimiento", jugador.fechaNacimiento);
                 else
                     cmd.Parameters.AddWithValue("@fechaNacimiento", DBNull.Value);
+                if (jugador.numeroCamiseta != null)
+                    cmd.Parameters.AddWithValue("@numeroCamiseta", jugador.numeroCamiseta);
+                else
+                    cmd.Parameters.AddWithValue("@numeroCamiseta", DBNull.Value);
                 if (jugador.telefono != null)
                     cmd.Parameters.AddWithValue("@telefono", jugador.telefono);
                 else

@@ -16,7 +16,7 @@ namespace Logica
         /// Permite registrar un jugador
         /// autor: Pau Pedrosa
         /// </summary>
-        public void registrarJugador(string nombre, string dni, string fechaNacimiento, string telefono, string email, string facebook, bool sexo, bool tieneFichaMedica)
+        public void registrarJugador(string nombre, string dni, string fechaNacimiento, string numeroCamiseta, string telefono, string email, string facebook, bool sexo, bool tieneFichaMedica)
         {
             if (jugador == null)
                 jugador = new Jugador();
@@ -26,6 +26,10 @@ namespace Logica
                 jugador.fechaNacimiento = Validador.castDate(fechaNacimiento);
             else
                 jugador.fechaNacimiento = null;
+            if (!numeroCamiseta.Equals(""))
+                jugador.numeroCamiseta = Validador.castInt(numeroCamiseta);
+            else
+                jugador.numeroCamiseta = null;
             jugador.telefono = telefono;
             jugador.email = email;
             jugador.facebook = facebook;
@@ -66,7 +70,7 @@ namespace Logica
         /// Modifica un Jugador
         /// autor: Pau Pedrosa
         /// </summary>
-        public void modificarJugador(int idJugador, string nombre, string dni, string fechaNacimiento, string telefono, string email, string facebook, bool sexo, bool tienefichaMedica)
+        public void modificarJugador(int idJugador, string nombre, string dni, string fechaNacimiento, string numeroCamiseta, string telefono, string email, string facebook, bool sexo, bool tienefichaMedica)
         {
             DAOJugador daoJugador = new DAOJugador();
             jugador.idJugador = idJugador;
@@ -76,6 +80,10 @@ namespace Logica
                 jugador.fechaNacimiento = Validador.castDate(fechaNacimiento);
             else
                 jugador.fechaNacimiento = null;
+            if (!numeroCamiseta.Equals(""))
+                jugador.numeroCamiseta = Validador.castInt(numeroCamiseta);
+            else
+                jugador.numeroCamiseta = null;
             jugador.telefono = telefono;
             jugador.email = email;
             jugador.facebook = facebook;
