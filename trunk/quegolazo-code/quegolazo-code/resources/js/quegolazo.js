@@ -117,3 +117,21 @@ function shuffle(list) {
         }
     }
 }
+
+function showSubform(id) {
+    $('#' + id).toggle("fast", function fildsetActivator() {
+        if ($('#' + id).is(":visible"))
+            $('#' + id).find('input,select').prop('disabled', false);
+        else
+            $('#' + id).find('input,select').attr('disabled', 'disabled');
+    });
+};
+
+function hideSubform(id) {
+    $('#' + id).toggle("fast", function fildsetDesactivator() {
+        if ($('#' + id).is(":visible"))
+            $('#' + id).find('input,select').prop('disabled', false);
+        else
+            $('#' + id).find('input,select').attr('disabled', 'disabled');
+    });
+};

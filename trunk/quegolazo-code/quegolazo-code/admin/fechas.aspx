@@ -426,13 +426,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="text" class="col-lg-2 control-label">Goles</label>
+                                <div class="form-group" style="background-color:#F8F8F8">
+                                    <label for="text" class="col-lg-2 control-label">
+                                        <span class="flaticon-football37 flaticon-form"></span>
+                                        Goles
+                                    </label>
                                     <div class="col-lg-10">
                                         <p class="nomargin-bottom">
-                                            <span class="label label-default label-md">
-                                                <a href="" rel="txtTooltip" title="Agregar Gol" onclick="show('goles');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Nuevo</a>
-                                            </span>
+                                            <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Gol" onclick="showSubform('goles');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Gol</a>
                                             <span class="label label-default label-md">18' Javier Mascherano
                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminar" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                             </span>
@@ -440,7 +441,7 @@
                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton24" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                             </span>
                                         </p>
-                                        <div id="goles" style="display: none;" class="col-md-11 well well-sm">
+                                        <div id="goles" style="display: none;" class="col-md-11 well well-sm alert-success">
                                             <fieldset class="vgGoles">
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
@@ -489,30 +490,31 @@
                                                     </div>
                                                 </div>
                                                 <asp:Button class="btn btn-default btn-xs causesValidation vgGoles pull-right" ID="btnGolAgregar" runat="server" Text="Agregar Gol" />
-                                                <asp:Button class="btn btn-default btn-xs pull-right" ID="btnGolCancelar" runat="server" Text="Cancelar" />
+                                                <button class="btn btn-default btn-xs pull-right" OnClick="hideSubform('goles');return false;">Cancelar</button>
                                             </fieldset>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="text" class="col-lg-2 control-label">Cambios</label>
+                                <div class="form-group" style="background-color:#F8F8F8">
+                                    <label for="text" class="col-lg-2 control-label">
+                                        <span class="flaticon-up23 flaticon-form"></span>
+                                        Cambios
+                                    </label>
                                     <div class="col-lg-10">
                                         <p class="nomargin-bottom">
-                                            <span class="label label-default label-md">
-                                                <a href="" rel="txtTooltip" title="Agregar Cambio" onclick="show('cambios');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Nuevo</a>
-                                            </span> <br />
+                                            <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Cambio" onclick="showSubform('cambios');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Cambio</a>
                                             <span class="label label-default label-md">18' 
                                                 <span class="glyphicon glyphicon-arrow-up" style="color:green"></span> Javier Mascherano 
                                                 <span class="glyphicon glyphicon-arrow-down" style="color:red"></span> Javier Mascherano
                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton26" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                            </span> <br />
+                                            </span>
                                             <span class="label label-default label-md">18' 
                                                 <span class="glyphicon glyphicon-arrow-up" style="color:green"></span> Javier Mascherano 
                                                 <span class="glyphicon glyphicon-arrow-down" style="color:red"></span> Javier Mascherano
                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton27" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                             </span>
                                         </p>
-                                        <div id="cambios" style="display: none;" class="col-md-11 well well-sm">
+                                        <div id="cambios" style="display: none;" class="col-md-11 well well-sm alert-success">
                                             <fieldset class="vgCambios">
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
@@ -568,18 +570,19 @@
                                                     </div>
                                                 </div>
                                                 <asp:Button class="btn btn-default btn-xs causesValidation vgCambios pull-right" ID="btnCambiosAgregar" runat="server" Text="Agregar Cambio" />
-                                                <asp:Button class="btn btn-default btn-xs pull-right" ID="btnCambiosCancelar" runat="server" Text="Cancelar" />
+                                                <button class="btn btn-default btn-xs pull-right" OnClick="hideSubform('cambios');return false;">Cancelar</button>
                                             </fieldset>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label">Tarjetas</label>
+                                <div class="form-group" style="background-color:#F8F8F8">
+                                    <label class="col-lg-2 control-label">
+                                        <span class="flaticon-football108 flaticon-form"></span>
+                                        Tarjetas
+                                    </label>
                                     <div class="col-lg-10">
                                            <p class="nomargin-bottom">
-                                            <span class="label label-default label-md">
-                                                <a href="" rel="txtTooltip" title="Agregar Tarjeta" onclick="show('tarjetas');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Nuevo</a>
-                                            </span>
+                                            <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Tarjeta" onclick="showSubform('tarjetas');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Tarjeta</a>
                                             <span class="label label-default label-md">18' Javier Mascherano
                                                 <span class="glyphicon glyphicon-stop" style="color:yellow"></span>
                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton25" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
@@ -589,7 +592,7 @@
                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton28" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                             </span>
                                         </p>
-                                        <div id="tarjetas" style="display: none;" class="col-md-11 well well-sm">
+                                        <div id="tarjetas" style="display: none;" class="col-md-11 well well-sm alert-success">
                                             <fieldset class="vgTarjetas">
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
@@ -635,18 +638,19 @@
                                                     </div>
                                                 </div>
                                                 <asp:Button class="btn btn-default btn-xs causesValidation vgTarjetas pull-right" ID="btnTarjetaAgregar" runat="server" Text="Agregar Tarjeta" />
-                                                <asp:Button class="btn btn-default btn-xs pull-right" ID="btnTarjetaCancelar" runat="server" Text="Cancelar" />
+                                                <button class="btn btn-default btn-xs pull-right" OnClick="hideSubform('tarjetas');return false;">Cancelar</button>
                                             </fieldset>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="radios">Sanciones</label>
+                                <div class="form-group" style="background-color:#F8F8F8">
+                                    <label class="col-lg-2 control-label" for="radios">
+                                        <span class="flaticon-whistle2 flaticon-form"></span>
+                                        Sanciones
+                                    </label>
                                     <div class="col-lg-10">
                                         <p class="nomargin-bottom">
-                                            <span class="label label-default label-md">
-                                                <a href="" rel="txtTooltip" title="Agregar Sanción" onclick="show('sanciones');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Nuevo</a>
-                                            </span>
+                                            <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Sanción" onclick="showSubform('sanciones');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Sanción</a>
                                             <span class="label label-default label-md">Javier Mascherano
                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton29" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                             </span>
@@ -654,7 +658,7 @@
                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton30" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                             </span>
                                         </p>
-                                        <div id="sanciones" style="display: none;" class="col-md-11 well well-sm">
+                                        <div id="sanciones" style="display: none;" class="col-md-11 well well-sm alert-success">
                                             <fieldset class="vgSanciones">
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
@@ -691,7 +695,7 @@
                                                     </div>
                                                 </div>
                                                 <asp:Button class="btn btn-default btn-xs causesValidation vgSanciones pull-right" ID="btnSancionesAgregar" runat="server" Text="Agregar Sanción" />
-                                                <asp:Button class="btn btn-default btn-xs pull-right" ID="btnSancionesCancelar" runat="server" Text="Cancelar" />
+                                                <button class="btn btn-default btn-xs pull-right" OnClick="hideSubform('sanciones');return false;">Cancelar</button>
                                             </fieldset>
                                         </div>
                                     </div>
@@ -720,14 +724,4 @@
             </div>
         </div>
         </div>
-    <script>
-        function show(id) {
-            $('#' + id).toggle("fast", function fildsetActivator() {
-                if ($('#' + id).is(":visible"))
-                    $('#' + id).find('input,select').prop('disabled', false);
-                else
-                    $('#' + id).find('input,select').attr('disabled', 'disabled');
-            });
-        };
-    </script>
 </asp:Content>
