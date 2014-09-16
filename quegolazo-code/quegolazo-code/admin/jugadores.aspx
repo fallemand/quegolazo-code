@@ -27,6 +27,12 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label for="text" class="col-lg-2 control-label">Número de Camiseta</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" runat="server" id="txtNumeroCamiseta" digits="true" placeholder="Número de Camiseta" disabled="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Fecha Nacimiento</label>
                                             <div class="col-lg-10">
                                                 <input type="text" class="form-control" id="txtFechaNacimiento" runat="server" placeholder="Fecha de Nacimiento" date="true" disabled="true">
@@ -167,6 +173,7 @@
                                     <thead>
                                         <tr>
                                             <th class="col-md-2">Nombre</th>
+                                            <th class="col-md-1">Número Camiseta</th>
                                             <th class="col-md-2">Telefono</th>
                                             <th class="col-md-2">E-mail</th>
                                             <th class="col-md-2">Facebook</th>
@@ -178,6 +185,7 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%# Eval("nombre") %></td>
+                                                    <td><%# Eval("numeroCamiseta") %></td>
                                                     <td><%# Eval("telefono") %></td>
                                                     <td><%# Eval("email") %></td>
                                                     <td><%# Eval("facebook") %></td>
@@ -199,6 +207,29 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="modal fade bs-example-modal-sm" id="eliminarJugador" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Jugador</h4>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="upEliminarJugador" runat="server">
+                        <ContentTemplate>
+                            <strong>Jugador: </strong>
+                            <asp:Literal ID="litNombreJugador" runat="server"></asp:Literal>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    ¿Está seguro de eliminar el Jugador?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminar_Click"/>
                 </div>
             </div>
         </div>

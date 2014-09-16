@@ -40,6 +40,15 @@ namespace quegolazo_code.admin.edicion {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtDni;
         
         /// <summary>
+        /// Control txtNumeroCamiseta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNumeroCamiseta;
+        
+        /// <summary>
         /// Control txtFechaNacimiento.
         /// </summary>
         /// <remarks>
@@ -245,5 +254,32 @@ namespace quegolazo_code.admin.edicion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litFracasoListaJugadores;
+        
+        /// <summary>
+        /// Control upEliminarJugador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upEliminarJugador;
+        
+        /// <summary>
+        /// Control litNombreJugador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litNombreJugador;
+        
+        /// <summary>
+        /// Control btnEliminar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEliminar;
     }
 }
