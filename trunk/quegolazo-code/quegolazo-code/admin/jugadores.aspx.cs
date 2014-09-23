@@ -59,12 +59,15 @@ namespace quegolazo_code.admin.edicion
             try
             {
                 gestorJugador.registrarJugador(txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtNumeroCamiseta.Value, txtTelefono.Value, txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked);
+                GestorImagen.guardarImagen(gestorJugador.jugador.idJugador, GestorImagen.JUGADOR);
                 limpiarCampos();
                 cargarRepeaterJugadores();
                 gestorJugador.jugador = null;
             }
             catch (Exception ex)
             {
+
+                imagenpreview.Src = GestorImagen.obtenerImagenTemporal(GestorImagen.JUGADOR, GestorImagen.MEDIANA);
                 mostrarPanelFracaso(ex.Message);
             }
         }
@@ -98,6 +101,7 @@ namespace quegolazo_code.admin.edicion
                     btnRegistrarJugador.Visible = false;
                     btnModificarJugador.Visible = true;
                     btnCancelarModificacionJugador.Visible = true;
+                    imagenpreview.Src = gestorJugador.jugador.obtenerImagenMediana();   
                 }
                 if (e.CommandName == "eliminarJugador")
                 {
@@ -133,7 +137,8 @@ namespace quegolazo_code.admin.edicion
             try
             {
                 int idJugadorAModificar = gestorJugador.jugador.idJugador;
-                gestorJugador.modificarJugador(idJugadorAModificar, txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtNumeroCamiseta.Value, txtTelefono.Value,txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked);          
+                gestorJugador.modificarJugador(idJugadorAModificar, txtNombreJugador.Value, txtDni.Value, txtFechaNacimiento.Value, txtNumeroCamiseta.Value, txtTelefono.Value,txtEmail.Value, txtFacebook.Value, rdSexoMasculino.Checked, rdTieneFichaMedicaSi.Checked);
+                GestorImagen.guardarImagen(idJugadorAModificar, GestorImagen.JUGADOR);
                 limpiarCampos();
                 cargarRepeaterJugadores();
                 gestorJugador.jugador = null; //le setea null al jugador

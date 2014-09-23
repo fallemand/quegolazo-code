@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace Entidades
 {
@@ -18,5 +19,18 @@ namespace Entidades
         public string facebook { get; set; }
         public string sexo { get; set; }
         public bool tieneFichaMedica { get; set; }
+
+        public string obtenerImagenChicha()
+        {
+            return GestorImagen.obtenerImagen(idJugador, GestorImagen.JUGADOR, GestorImagen.CHICA);
+        }
+        public string obtenerImagenMediana()
+        {
+            return GestorImagen.obtenerImagen(idJugador, GestorImagen.JUGADOR, GestorImagen.MEDIANA);
+        }
+        public string obtenerImagenGrande()
+        {
+            return GestorImagen.obtenerImagen(idJugador, GestorImagen.JUGADOR, GestorImagen.GRANDE);
+        }
     }
 }
