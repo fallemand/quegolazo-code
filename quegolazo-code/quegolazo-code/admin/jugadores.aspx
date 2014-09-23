@@ -35,13 +35,13 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Fecha Nacimiento</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtFechaNacimiento" runat="server" placeholder="Fecha de Nacimiento" date="true" disabled="true">
+                                                <input type="text" class="form-control" id="txtFechaNacimiento" runat="server" placeholder="Fecha de Nacimiento" fecha="true" disabled="true">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Teléfono:</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Telefono" date="true" disabled="true">
+                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Telefono" digits="true" disabled="true">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -172,21 +172,21 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th class="col-md-1"></th>
                                             <th class="col-md-2">Nombre</th>
-                                            <th class="col-md-1">Número Camiseta</th>
-                                            <th class="col-md-2">Telefono</th>
+                                            <th class="col-md-1">#</th>
                                             <th class="col-md-2">E-mail</th>
                                             <th class="col-md-2">Facebook</th>
-                                            <th class="col-md-1"></th>
+                                            <th class="col-md-1">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <asp:Repeater ID="rptJugadores" runat="server" OnItemCommand="rptJugadores_ItemCommand">
                                             <ItemTemplate>
                                                 <tr>
-                                                    <td><%# Eval("nombre") %></td>
+                                                    <td><img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
+                                                    <td><strong><%# Eval("nombre") %></strong></td>
                                                     <td><%# Eval("numeroCamiseta") %></td>
-                                                    <td><%# Eval("telefono") %></td>
                                                     <td><%# Eval("email") %></td>
                                                     <td><%# Eval("facebook") %></td>
                                                     <td>
