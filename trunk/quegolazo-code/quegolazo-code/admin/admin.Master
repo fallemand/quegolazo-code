@@ -211,6 +211,10 @@
             $.validator.addMethod("noSpace", function (value, element) {
                 return value.indexOf(" ") < 0 && value != "";
             }, "No se permiten espacios en blanco para este campo");
+            $.validator.addMethod("fecha", function (value, element) {
+                return value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
+            }, "Fecha incorrecta, el formato correcto es: dd/mm/yyyy");
+
 
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
             function EndRequestHandler(sender, args) {
