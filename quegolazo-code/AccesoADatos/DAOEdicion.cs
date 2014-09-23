@@ -426,7 +426,7 @@ namespace AccesoADatos
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
-            ConfiguracionEdicion preferencias=null;
+            ConfiguracionEdicion preferencias=new ConfiguracionEdicion();
             try
             {
                 if (con.State == ConnectionState.Closed)
