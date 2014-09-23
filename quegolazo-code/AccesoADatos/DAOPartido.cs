@@ -53,7 +53,7 @@ namespace AccesoADatos
                                  {
                                      cmd.Parameters.AddWithValue("@idEquipoLocal", DBNull.Value);
                                  }
-                                 if (p.local.idEquipo != 0)
+                                 if (p.visita.idEquipo != 0)
                                  {
                                      cmd.Parameters.AddWithValue("@idEquipoVisitante", p.visita.idEquipo);
                                  }
@@ -61,7 +61,7 @@ namespace AccesoADatos
                                  {
                                      cmd.Parameters.AddWithValue("@idEquipoVisitante", DBNull.Value);
                                  }
-                                 cmd.Parameters.AddWithValue("@idEstado", 1);
+                                 cmd.Parameters.AddWithValue("@idEstado", p.estado.idEstado);
                                  cmd.CommandText = sql;
                                  cmd.ExecuteNonQuery();
                              

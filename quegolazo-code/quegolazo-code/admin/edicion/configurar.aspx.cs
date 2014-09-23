@@ -13,7 +13,11 @@ namespace quegolazo_code.admin.edicion
         GestorEdicion gestorEdicion = new GestorEdicion();   
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorEdicion = Sesion.getGestorEdicion();           
+            
+                gestorEdicion = Sesion.getGestorEdicion();
+            if(!Page.IsPostBack)
+                cargarPreferencias();
+
         }
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
@@ -44,5 +48,27 @@ namespace quegolazo_code.admin.edicion
                 panelFracaso.Visible = true;                
             }
         }
+
+        private void cargarPreferencias()
+        {
+            //Preferencias Jugadores
+            rdJugadoresSi.Checked = gestorEdicion.edicion.preferencias.jugadores;
+            rdJugadoresRegistroSi.Checked = gestorEdicion.edicion.preferencias.jugadoresXPartido;
+            rdJugadoresGolesSi.Checked = gestorEdicion.edicion.preferencias.golesJugadores;
+            rdJugadoresTarjetasSi.Checked = gestorEdicion.edicion.preferencias.tarjetasJugadores;
+            rdJugadoresCambiosSi.Checked = gestorEdicion.edicion.preferencias.cambiosJugadores;
+            //Preferencias Árbitros
+            rdArbitrosSi.Checked = gestorEdicion.edicion.preferencias.arbitros;
+            rdArbitrosPorPartidoSi.Checked = gestorEdicion.edicion.preferencias.asignaArbitros;
+            rdArbitroDesempenioSi.Checked = gestorEdicion.edicion.preferencias.desempenioArbitros;
+            //Preferencias Sanciones
+            rdSancionesSi.Checked = gestorEdicion.edicion.preferencias.sanciones;
+            rdSancionesEquiposSi.Checked = gestorEdicion.edicion.preferencias.sancionesEquipos;
+            rdSancionesJugadoresSi.Checked = gestorEdicion.edicion.preferencias.sancionesJugadores;
+            //Preferencia Canchas
+            rdCanchasSi.Checked = gestorEdicion.edicion.preferencias.canchas;
+            rdCanchasComplejos.Checked = gestorEdicion.edicion.preferencias.canchaUnica;
+        }
+
     }
 }
