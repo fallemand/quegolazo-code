@@ -112,14 +112,18 @@ namespace AccesoADatos
                           idEdicion = idEdicion,
                           estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
                           tipoFixture = new TipoFixture() { nombre = dr["tipoFixture"].ToString() },
-                      };
-                     DaoGrupo.obtenerGrupos(fase, con, trans);
-                     DaoFecha.obtenerFechas(fase, con, trans);
-                     DaoPartido.obtenerPartidos(fase, con, trans);
+                      };        
                      fases.Add(fase);
                  }
                  if (dr != null)
                      dr.Close();
+
+                 foreach (Fase fase in fases)
+                 {
+                     DaoGrupo.obtenerGrupos(fase, con, trans);
+                     DaoFecha.obtenerFechas(fase, con, trans);
+                     DaoPartido.obtenerPartidos(fase, con, trans);
+                 }
                  return fases;
              }
              catch (Exception ex)

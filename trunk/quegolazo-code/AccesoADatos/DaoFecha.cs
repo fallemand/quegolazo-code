@@ -81,7 +81,7 @@ namespace AccesoADatos
                     {
                         Fecha fecha = new Fecha()
                         {
-                            idFecha = int.Parse(dr["idPartido"].ToString()),
+                            idFecha = int.Parse(dr["idFecha"].ToString()),
                             estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
                             nombre = dr["nombre"].ToString(),
                         };
