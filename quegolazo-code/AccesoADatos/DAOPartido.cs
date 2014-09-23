@@ -93,6 +93,7 @@ namespace AccesoADatos
                      {
                          foreach (Partido p in f.partidos)
                          {
+                             cmd.Parameters.Clear();
                              cmd.Connection = con;
                              string sql = @"SELECT * 
                                                     FROM Partidos

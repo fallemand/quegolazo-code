@@ -68,6 +68,7 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 foreach (Grupo g in fase.grupos)
                 {
+                    cmd.Parameters.Clear();
                     cmd.Connection = con;
                     string sql = @"SELECT * 
                                                     FROM Fechas
