@@ -37,13 +37,13 @@ namespace AccesoADatos
                 {
                     if (fase != null)
                     {
-                        string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture)
-                                    VALUES (@idFase,@idEdicion,@tipoFixture)";
+                        string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture,idEstado)
+                                    VALUES (@idFase,@idEdicion,@tipoFixture,@idEstado)";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                         cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
-                        //cmd.Parameters.AddWithValue("@idEstado", fase.estado.idEstado);
+                        cmd.Parameters.AddWithValue("@idEstado", fase.estado.idEstado);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
 
@@ -75,5 +75,61 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Obtiene las fases  de una edición por Id. Si no tiene devuelve lista vacia
+        /// autor: Florencia Rojas
+        /// </summary>
+        public List<Fase> obtenerFases(int idEdicion)
+        {
+             SqlConnection con = new SqlConnection(cadenaDeConexion);
+             SqlCommand cmd = new SqlCommand();
+             SqlDataReader dr;
+             SqlTransaction trans = null;
+             List<Fase> fases = new List<Fase>();
+             DAOGrupo DaoGrupo= new DAOGrupo();
+             DAOFecha DaoFecha=new DAOFecha();
+             DAOPartido DaoPartido=new DAOPartido();
+             try
+             {
+                 if (con.State == ConnectionState.Closed)
+                     con.Open();
+                 trans = con.BeginTransaction();
+                 cmd.Connection = con;
+                 cmd.Transaction = trans;
+                 string sql = @"SELECT * 
+                                FROM  Fases
+                                WHERE idEdicion=@idEdicion";
+                 cmd.Parameters.Clear();
+                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                 cmd.CommandText = sql;
+                 dr = cmd.ExecuteReader();
+                 while (dr.Read())
+                 {
+                     Fase fase = new Fase()
+                      {
+                          idFase = int.Parse(dr["idFase"].ToString()),
+                          idEdicion = idEdicion,
+                          estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
+                          tipoFixture = new TipoFixture() { nombre = dr["tipoFixture"].ToString() },
+                      };
+                     DaoGrupo.obtenerGrupos(fase, con, trans);
+                     DaoFecha.obtenerFechas(fase, con, trans);
+                     DaoPartido.obtenerPartidos(fase, con, trans);
+                     fases.Add(fase);
+                 }
+                 if (dr != null)
+                     dr.Close();
+                 return fases;
+             }
+             catch (Exception ex)
+             {
+                 throw new Exception("Error al intentar recuperar los equipos de una Edición: " + ex.Message);
+             }
+             finally
+             {
+                 if (con != null && con.State == ConnectionState.Open)
+                     con.Close();
+             }
+        }
     }
 }
