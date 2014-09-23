@@ -167,5 +167,38 @@ namespace Logica
             DAOEdicion daoEdicion = new DAOEdicion();
             return daoEdicion.obtenerTorneoPorId(edicion.idEdicion);
         }
+
+        /// <summary>
+        /// Obtiene las preferencias de una edicion
+        /// AUTOR: FLOR ROJAS
+        /// </summary>
+        /// <returns>configuracion/preferencias de la edicion</returns>
+        public ConfiguracionEdicion obtenerPreferencias()
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            return daoEdicion.obtenerPreferenciasPorId(edicion.idEdicion);
+        }
+
+        /// <summary>
+        /// Obtiene los equipos de una edicion
+        /// AUTOR: FLOR ROJAS
+        /// </summary>
+        /// <returns>lista de equipos</returns>
+        public List<Equipo> obtenerEquipos()
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            return daoEdicion.obtenerEquiposPorId(edicion.idEdicion);
+        }
+
+        /// <summary>
+        /// Obtiene las fases de una edicion
+        /// AUTOR: FLOR ROJAS
+        /// </summary>
+        /// <returns>lista de fases</returns>
+        public List<Fase> obtenerFases()
+        {
+            DAOFase daoFase = new DAOFase(); 
+            return daoFase.obtenerFases(edicion.idEdicion);
+        }
     }
 }

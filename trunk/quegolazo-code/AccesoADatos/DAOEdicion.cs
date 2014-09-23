@@ -416,5 +416,110 @@ namespace AccesoADatos
             }
         }
 
+
+        /// <summary>
+        /// Obtiene las preferencias de una edición por Id. Si no tiene devuelve null
+        /// autor: Florencia Rojas
+        /// </summary>
+        public ConfiguracionEdicion obtenerPreferenciasPorId(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            ConfiguracionEdicion preferencias=null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM ConfiguracionesEdicion
+                                WHERE idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.CommandText = sql;
+                DAOTipoSuperficie daoTipoSupericie = new DAOTipoSuperficie();
+                DAOCancha daoCancha = new DAOCancha();
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    preferencias = new ConfiguracionEdicion();
+                    //Jugadores
+                    preferencias.jugadores = bool.Parse(dr["jugadores"].ToString());
+                    preferencias.jugadoresXPartido = bool.Parse(dr["jugadorXPartido"].ToString());
+                    preferencias.golesJugadores = bool.Parse(dr["golesJugadores"].ToString());
+                    preferencias.tarjetasJugadores = bool.Parse(dr["tarjetasJugadores"].ToString());
+                    preferencias.cambiosJugadores = bool.Parse(dr["cambiosJugadores"].ToString());
+                    //Arbitros
+                    preferencias.arbitros = bool.Parse(dr["arbitros"].ToString());
+                    preferencias.asignaArbitros = bool.Parse(dr["asignacionArbitros"].ToString());
+                    preferencias.desempenioArbitros = bool.Parse(dr["desempenioArbitros"].ToString());
+                    //Sanciones
+                    preferencias.sanciones = bool.Parse(dr["sanciones"].ToString());
+                    preferencias.sancionesEquipos = bool.Parse(dr["sancionesEquipos"].ToString());
+                    preferencias.sancionesJugadores = bool.Parse(dr["sancionesJugadores"].ToString());
+                    //Canchas
+                    preferencias.canchas = bool.Parse(dr["canchaUnica"].ToString());
+                    preferencias.canchaUnica = bool.Parse(dr["canchaUnica"].ToString());
+                }
+                if (dr != null)
+                    dr.Close();
+                return preferencias;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar las preferencias de una Edición: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene los equipos  de una edición por Id. Si no tiene devuelve lista vacia
+        /// autor: Florencia Rojas
+        /// </summary>
+        public List<Equipo> obtenerEquiposPorId(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Equipo> equipos = new List<Equipo>();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT e.idEquipo,e.nombre 
+                                FROM Equipos e,EquipoXEdicion ee 
+                                WHERE e.idEquipo=ee.idEquipo and ee.idEdicion=@idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Equipo equipo = new Equipo()
+                        {   idEquipo = int.Parse(dr["idEquipo"].ToString()),
+                            nombre = dr["nombre"].ToString(),
+                        };
+                    equipos.Add(equipo);
+                }
+                if (dr != null)
+                    dr.Close();
+                return equipos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar los equipos de una Edición: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

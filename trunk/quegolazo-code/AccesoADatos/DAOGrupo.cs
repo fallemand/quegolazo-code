@@ -48,5 +48,47 @@ namespace AccesoADatos
                 throw new Exception("No se pudo registrar el grupo:" + ex.Message);
             }
         }
+
+        public void obtenerGrupos(Fase fase, SqlConnection con, SqlTransaction trans)
+        {
+            SqlDataReader dr;
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                cmd.Transaction = trans; 
+                            string sql = @"SELECT * 
+                                                    FROM Grupos
+                                                    WHERE idFase=@idFase AND idEdicion=@idEdicion";
+                            cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                            cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                            cmd.CommandText = sql;
+                            dr = cmd.ExecuteReader();
+                            while (dr.Read())
+                            {
+                                Grupo grupo=new Grupo()
+                                {
+                                    idGrupo = int.Parse(dr["idGrupo"].ToString()),
+                                    idEdicion=fase.idEdicion,
+                                    idFase=fase.idFase,
+                                    nombre= int.Parse(dr["nombre"].ToString()),                                 
+                                };
+                                fase.grupos.Add(grupo);
+                            }
+                            if (dr != null)
+                                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo obtener los datos del grupo" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

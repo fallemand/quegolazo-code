@@ -55,5 +55,51 @@ namespace AccesoADatos
                 throw new Exception("No se pudo registrar la fecha:" + ex.Message);
             }
         }
+
+        public void obtenerFechas(Fase fase, SqlConnection con, SqlTransaction trans)
+        {
+            SqlDataReader dr;
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+                foreach (Grupo g in fase.grupos)
+                {
+                    cmd.Connection = con;
+                    string sql = @"SELECT * 
+                                                    FROM Fechas
+                                                    WHERE idGrupo=@idGrupo AND idFase=@idFase AND idEdicion=@idEdicion";
+                    cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
+                    cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                    cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                    cmd.CommandText = sql;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Fecha fecha = new Fecha()
+                        {
+                            idFecha = int.Parse(dr["idPartido"].ToString()),
+                            estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
+                            nombre = dr["nombre"].ToString(),
+                        };
+                        g.fixture.Add(fecha);
+                    }
+                    if (dr != null)
+                        dr.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo obtener los datos de la fecha" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

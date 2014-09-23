@@ -73,6 +73,69 @@ namespace AccesoADatos
             {
                 throw new Exception("No se pudo registrar el partido" + ex.Message);
             }
+          
         }
+
+        public void obtenerPartidos(Fase fase, SqlConnection con, SqlTransaction trans)
+        {
+            
+            SqlDataReader dr;
+            SqlCommand cmd = new SqlCommand();
+             try
+             {
+                 if (con.State == ConnectionState.Closed)
+                     con.Open();
+                 cmd.Connection = con;
+                 cmd.Transaction = trans;
+                 foreach (Grupo g in fase.grupos)
+                 {
+                     foreach (Fecha f in g.fixture)
+                     {
+                         foreach (Partido p in f.partidos)
+                         {
+                             cmd.Connection = con;
+                             string sql = @"SELECT * 
+                                                    FROM Partidos
+                                                    WHERE idFecha=@idFecha AND idGrupo=@idGrupo AND idFase=@idFase AND idEdicion=@idEdicion";
+                             cmd.Parameters.AddWithValue("@idFecha", f.idFecha);
+                             cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
+                             cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                             cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                             cmd.CommandText = sql;
+                             dr = cmd.ExecuteReader();
+                             while (dr.Read())
+                             {
+                                 Partido partido = new Partido()
+                                 {
+                                    
+                                     idPartido = int.Parse(dr["idPartido"].ToString()),
+                                     fecha = DateTime.Parse( dr["fecha"].ToString()).Date.ToString(),
+                                     hora = DateTime.Parse(dr["fecha"].ToString()).Hour.ToString(),
+                                     estado= new Estado(){ idEstado= int.Parse(dr["idEstado"].ToString())},
+                                     local=new Equipo(){ idEquipo= int.Parse(dr["idEquipoLocal"].ToString())},
+                                     visita = new Equipo() { idEquipo = int.Parse(dr["idEquipoVisitante"].ToString())}, 
+                                 };
+                                 f.partidos.Add(partido);
+                             }
+                             if (dr != null)
+                                 dr.Close();  
+                         }
+                     }
+                 }
+             }
+             catch (Exception ex)
+             {
+                 throw new Exception("No se pudo obtener los datos del partido" + ex.Message);
+             }
+             finally
+             {
+                 if (con != null && con.State == ConnectionState.Open)
+                     con.Close();
+             }
+
+
+        }
+
+
     }
 }
