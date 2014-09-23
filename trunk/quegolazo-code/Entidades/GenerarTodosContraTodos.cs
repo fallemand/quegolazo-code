@@ -25,7 +25,7 @@ namespace Entidades
 
             for (int i = 0; i < cantidadFechas; i++)
             {
-                Fecha fechaNueva = new Fecha() { idFecha = i + 1, estado = new Estado { ambito = new Ambito { idAmbito=Ambito.FECHA},idEstado=Estado.DIAGRAMADA } };
+                Fecha fechaNueva = new Fecha() { idFecha = i + 1, estado = new Estado { ambito = new Ambito { idAmbito=Ambito.FECHA},idEstado=7 } };
 
                 for (int j = 0, k = equiposParticipantes.Count - 1; j < cantidadPartidos && j < k; j++, k--)
                 {
@@ -34,7 +34,7 @@ namespace Entidades
                         idPartido = j + 1,
                         local = equiposParticipantes[j],
                         visita = equiposParticipantes[k],
-                        estado = new Estado { ambito = new Ambito { idAmbito = Ambito.PARTIDO,},idEstado=Estado.DIAGRAMADO },
+                        estado = new Estado { ambito = new Ambito { idAmbito = Ambito.PARTIDO,},idEstado=10 },
 
                     };
                     fechaNueva.partidos.Add(partidoNuevo);

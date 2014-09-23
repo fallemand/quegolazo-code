@@ -91,18 +91,27 @@
                         </div>
                       </div>
                             </ItemTemplate>
-
                         </asp:Repeater>
-
                     </div>
                 </div>
             </div>
+            <asp:UpdatePanel ID="pnlConfigurar" runat="server">
+                 <Triggers>
+                    <asp:AsyncPostBackTrigger controlid="btnRegistrar" eventname="Click" />
+                </Triggers>
+                <ContentTemplate>
             <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                 <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
             </asp:Panel>
+                    </ContentTemplate>
+                    </asp:UpdatePanel>
         </div>
+         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
         <div class="panel-footer clearfix ">
             <asp:Button ID="btnRegistrar" runat="server" Text="Registrar Configuración" OnClick="btnRegistrar_Click" CssClass="btn btn-success pull-right"/>
         </div>
+              </ContentTemplate>
+             </asp:UpdatePanel>
     </div>
 </asp:Content>

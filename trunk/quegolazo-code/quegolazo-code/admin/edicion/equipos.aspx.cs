@@ -11,27 +11,17 @@ namespace quegolazo_code.admin.edicion
 {
     public partial class equipos : System.Web.UI.Page
     {
-        GestorEquipo gestorEquipo = null;
-        GestorEdicion gestorEdicion = null;
+        GestorEquipo gestorEquipo=new GestorEquipo();
+        GestorEdicion gestorEdicion = new GestorEdicion();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorEquipo = Sesion.getGestorEquipo();
-            gestorEdicion = Sesion.getGestorEdicion();
-            limpiarPaneles();
-
-            ////TORNEO HARDCODEADO
-            ////TORNEO HARDCODEADO
-            //Sesion.setTorneo(new Torneo() { idTorneo = 88 });
-            ////TORNEO HARDCODEADO
-            ////TORNEO HARDCODEADO
-
-            ////EDICION HARDCODEADA
-            ////EDICION HARDCODEADA
-            //Sesion.setEdicion(new Edicion() {idEdicion=14});
-            ////EDICION HARDCODEADA
-            ////EDICION HARDCODEADA
-
-            cargarEquipos();
+          
+                gestorEquipo = Sesion.getGestorEquipo();
+                gestorEdicion = Sesion.getGestorEdicion();
+                limpiarPaneles();
+                cargarEquipos();
+            
         }
 
         public void cargarEquipos()
@@ -40,6 +30,7 @@ namespace quegolazo_code.admin.edicion
             lstEquiposSeleccionados.DataValueField = "idEquipo";
             lstEquiposSeleccionados.DataTextField = "nombre";
             lstEquiposSeleccionados.DataBind();
+            
         }
 
         protected void btnSiguiente_Click(object sender, EventArgs e)

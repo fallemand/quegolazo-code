@@ -18,55 +18,61 @@ namespace quegolazo_code.admin.edicion
             //Tomar gestores de la sesión
             gestorEdicion = Sesion.getGestorEdicion();
             gestorFase = Sesion.getGestorFase();
+            if (!Page.IsPostBack)
+            {
+                //Edición
+                LitEdicion.Text = gestorEdicion.edicion.nombre;
 
-            //Edición
-            LitEdicion.Text = gestorEdicion.edicion.nombre;
+                //Equipos
+                rptEquipos.DataSource = gestorEdicion.edicion.equipos;
+                rptEquipos.DataBind();
 
-            //Equipos
-            rptEquipos.DataSource = gestorEdicion.edicion.equipos;
-            rptEquipos.DataBind();
+                //Sanciones
+                if (gestorEdicion.edicion.preferencias.sanciones)
+                    rSancionesSi.Visible = true;
+                else
+                    rSancionesNo.Visible = true;
 
-            //Sanciones
-            if (gestorEdicion.edicion.preferencias.sanciones)
-                rSancionesSi.Visible = true;
-            else
-                rSancionesNo.Visible = true;
+                //Arbitros
+                if (gestorEdicion.edicion.preferencias.arbitros)
+                    rArbitrosSi.Visible = true;
+                else
+                    rArbitrosNo.Visible = true;
 
-            //Arbitros
-            if (gestorEdicion.edicion.preferencias.arbitros)
-                rArbitrosSi.Visible = true;
-            else
-                rArbitrosNo.Visible = true;
+                //Jugadores
+                if (gestorEdicion.edicion.preferencias.jugadores)
+                    rJugadoresSi.Visible = true;
+                else
+                    rJugadoresNo.Visible = true;
 
-            //Jugadores
-            if (gestorEdicion.edicion.preferencias.jugadores)
-                rJugadoresSi.Visible = true;
-            else
-                rJugadoresNo.Visible = true;
+                //Cancha
+                if (gestorEdicion.edicion.preferencias.canchas)
+                    rCanchasSi.Visible = true;
+                else
+                    rCanchasNo.Visible = true;
 
-            //Cancha
-            if (gestorEdicion.edicion.preferencias.canchas)
-                rCanchasSi.Visible = true;
-            else
-                rCanchasNo.Visible = true;
-
-            //Fases
-            rptFases.DataSource = gestorFase.fases;
-            rptFases.DataBind();
-
+                //Fases
+                rptFases.DataSource = gestorFase.fases;
+                rptFases.DataBind();
+            }
         }
 
+        /// <summary>
+        /// Metodo para  registrar las Fases 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
-            //Tomar gestores de la sesión
-            gestorEdicion = Sesion.getGestorEdicion();
-            gestorFase = Sesion.getGestorFase();
+            ////Tomar gestores de la sesión
+            //gestorEdicion = Sesion.getGestorEdicion();
+            //gestorFase = Sesion.getGestorFase();
             try
             {
                 gestorEdicion.registrarPreferencias(); //registra configuraciones
                 gestorEdicion.registrarEquiposEnEdicion();//registra equipos de la edición
                 gestorFase.registrarFase();//registra fases
-               // Response.Redirect(); redirigir a la pag de administración de partidos
+                Response.Redirect(GestorUrl.aFECHAS);
             }
             catch(Exception ex)
             {

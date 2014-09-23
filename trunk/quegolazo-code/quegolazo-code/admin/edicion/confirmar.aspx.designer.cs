@@ -112,6 +112,15 @@ namespace quegolazo_code.admin.edicion {
         protected global::System.Web.UI.WebControls.Repeater rptFases;
         
         /// <summary>
+        /// Control pnlConfigurar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel pnlConfigurar;
+        
+        /// <summary>
         /// Control panelFracaso.
         /// </summary>
         /// <remarks>
@@ -128,6 +137,15 @@ namespace quegolazo_code.admin.edicion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litFracaso;
+        
+        /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
         /// Control btnRegistrar.

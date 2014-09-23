@@ -216,12 +216,23 @@
                     </div>
                 </div>
             </div>
+            <asp:UpdatePanel ID="pnlConfigurar" runat="server">
+                 <Triggers>
+                    <asp:AsyncPostBackTrigger controlid="btnSiguiente" eventname="Click" />
+                </Triggers>
+                <ContentTemplate>
             <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                 <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
             </asp:Panel>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
         </div>
+         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
         <div class="panel-footer clearfix ">
             <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClick="btnSiguiente_Click" />
         </div>
+                        </ContentTemplate>
+             </asp:UpdatePanel>
     </div>
 </asp:Content>
