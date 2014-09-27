@@ -63,7 +63,7 @@
                                                             <strong>Tamaño Máximo</strong><br />
                                                             1 Mb
                                                         </p>
-                                                    </div>
+                                                    </div>                                                  
                                                 </div>
                                             </div>
                                         </div>               

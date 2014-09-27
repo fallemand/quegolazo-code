@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Entidades;
 using Logica;
 using Utils;
+using AccesoADatos;
 
 namespace quegolazo_code.admin
 {
@@ -186,6 +187,17 @@ namespace quegolazo_code.admin
             litFracaso.Text = "";
             litFracasoListaArbitros.Text = "";
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.ARBITRO, GestorImagen.MEDIANA);
+        }
+
+        protected void btnAgregarGol_Click(object sender, EventArgs e)
+        {
+            DAOPartido daoPartido = new DAOPartido();
+            Gol gol = new Gol();
+            gol.minuto = 15;
+            gol.idJugador = 1;
+            gol.idEquipo = 21;
+           // daoPartido.registrarGol();
+            
         }  
     }
 }
