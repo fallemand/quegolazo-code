@@ -77,15 +77,12 @@
         labelFixture.appendTo(divTipoFixture);
         comboTipoFixture.appendTo(divTipoFixture);
         divTipoFixture.appendTo(row);
-
         var divCantidades = $("<div/>", { class: 'col-md-4', id: 'divCantidadesFase' + numeroDeFase });
         var labelCantidad = $("<label/>").attr("id", "lbl-cantidad-Fase" + numeroDeFase).text("Cantidad de equipos:");
         var comboCantidades = createDropDownList("ddlCantidad-Fase" + numeroDeFase, this.options.cantEquipos);
         labelCantidad.appendTo(divCantidades);
         comboCantidades.appendTo(divCantidades);
         divCantidades.appendTo(row);
-
-
         var divBoton = $("<div/>", { class: 'col-md-3' });
         var botonMostrar = $('<input/>').attr({ type: 'button', id: 'btnMostrarFase' + numeroDeFase, value: 'Mostrar Fase', class: 'btn btn-success' }).css("margin-top", "23px").on("click", function () { widget.presentarFase(numeroDeFase); });;
         botonMostrar.appendTo(divBoton);        
@@ -122,7 +119,7 @@
             comboCant = createDropDownList("ddlCantidad-Fase"+numFase, widget.options.cantEquipos);
         }
         comboCant.appendTo($("#divCantidadesFase" + numFase));
-
+        widget.actualizarTipoDeFixture(numFase);
     },
     agregarFase: function () {
         var widget = this;        
@@ -133,7 +130,7 @@
             "idTorneo": widget.options.idTorneo,
             "equipos": (numFase === 1) ? widget.options.equiposDeLaEdicion : [],
             "grupos": widget.obtenerGruposDeUnaFase(numFase),
-            "tipoFixture": widget.obtenerTipoFixtureDeUnaFase(numFase),
+            "tipoFixture": null,
             "cantidadDeEquipos": widget.obtenerCantidadDeEquiposDeUnaFase(numFase)
         };
         widget.options.fases.push(faseNueva);
@@ -145,6 +142,7 @@
         }
         return [];
     },
+    //devuelve un objeto TipoFxture con los valores seleccionados en el combo
     obtenerTipoFixtureDeUnaFase: function (numFase) {
         var widget = this;
         var tipoDeFixture = {
@@ -152,6 +150,11 @@
             "nombre": $("#ddlTipoFixtureFase" + numFase +" option:selected").text()
         };
         return tipoDeFixture;
+    },
+    //setea el tipo de fixture segun el valor seleccionado por el usuario para una fase determinada
+    actualizarTipoDeFixture: function (numFase) {
+        var widget = this;
+        widget.options.fases[numFase - 1].tipoFixture = widget.obtenerTipoFixtureDeUnaFase(numFase);
     },
     obtenerCantidadDeEquiposDeUnaFase: function (numFase) {
         var widget = this;
@@ -205,8 +208,9 @@
         var widget = this;
         var respuesta = false;
         widget.armarGrupos();
-        if (!widget.validarFasesCorrectas()) {
-            widget.mostrarMensajeDeError("Configuración de fases incorrecta, recordá que la diferencia de equipos entre los grupos no debe ser mayor a uno, y que debe haber al menos un grupo.");
+        var msj=widget.validarFasesCorrectas();
+        if (msj !== "OK") {
+            widget.mostrarMensajeDeError("ATENCION! "+msj);
             return respuesta;
         }        
         else {
@@ -237,20 +241,20 @@
     validarFasesCorrectas: function () {
         var widget = this;
         if (widget.options.fases.length < 1)
-            return false;
+            return "Debe crear al menos una fase para continuar.";
         for (var i = 0; i < widget.options.fases.length; i++) {
             var fase = widget.options.fases[i];
             if (fase.grupos.length < 1)
-                return false;
+                return "Debe crear al menos un grupo para continuar." ;
             for (var j = 0; j < fase.grupos.length; j++) {               
                 for (var k = 0; k < fase.grupos.length; k++) {
                     // si la diferencia entre cantidades de equipos es mayor a uno, o bien la cantidad de equipos de algun grupo es 1
                     if (Math.abs(fase.grupos[j].equipos.length - fase.grupos[k].equipos.length) > 1 || fase.grupos[j].length < 2)
-                        return false;
+                        return "La diferencia de equipos entre los grupos no debe ser mayor a uno.";
                     }
             }
         }
-        return true;
+        return "OK";
     },
     //setea los grupos en la opcion del widget, guardando los grupos en cada fase, basandose en lo que generó el usuario en la interfaz
     armarGrupos: function () {
