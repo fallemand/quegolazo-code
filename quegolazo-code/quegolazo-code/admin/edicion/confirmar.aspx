@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         <div class="col-md-10">
-                            <h4><asp:Literal ID="LitEdicion" runat="server"></asp:Literal><small>  Torneo <%= Logica.Sesion.getTorneo().nombre %></small></h4>
+                            <h4><asp:Literal ID="LitEdicion" runat="server"></asp:Literal><small> <%= Logica.Sesion.getTorneo().nombre %></small></h4>
                         </div>
                     </div>
                 </div>

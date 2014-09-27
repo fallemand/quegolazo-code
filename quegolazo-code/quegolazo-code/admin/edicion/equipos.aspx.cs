@@ -16,12 +16,22 @@ namespace quegolazo_code.admin.edicion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+            try
+            {
+
                 gestorEquipo = Sesion.getGestorEquipo();
                 gestorEdicion = Sesion.getGestorEdicion();
                 limpiarPaneles();
-                cargarEquipos();
-            
+
+                if (!Page.IsPostBack)
+                    cargarEquipos();
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
+
+
         }
 
         public void cargarEquipos()
@@ -30,9 +40,24 @@ namespace quegolazo_code.admin.edicion
             lstEquiposSeleccionados.DataValueField = "idEquipo";
             lstEquiposSeleccionados.DataTextField = "nombre";
             lstEquiposSeleccionados.DataBind();
-            
-        }
+            List<int> equipos = new List<int>();
+            foreach (Equipo equipo in gestorEdicion.edicion.equipos)
+                    equipos.Add(equipo.idEquipo);
 
+            foreach ( ListItem item in lstEquiposSeleccionados.Items)
+            {
+                if (equipos.Contains(int.Parse(item.Value)))
+                {
+                    item.Attributes.Add("selected", "selected");
+
+                }
+            }
+            string equiposInt= string.Join(",", equipos.ToArray());
+            equiposInt +=",";
+            hfEquiposSeleccionados.Value = equiposInt;
+
+        }
+        
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
             try

@@ -13,19 +13,7 @@ namespace quegolazo_code.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                Sesion.getTorneo();
-            }
-            catch (Exception)
-            {
-                //GestorTorneo gestorTorneo = new GestorTorneo();
-                //Torneo torneo = gestorTorneo.obtenerUltimoTorneoDelUsuario();
-                //if (torneo != null)
-                //    Sesion.setTorneo(gestorTorneo.obtenerUltimoTorneoDelUsuario());
-                //else
-                Response.Redirect(GestorUrl.aTORNEOS);
-            }
+           
         }
     }
 }

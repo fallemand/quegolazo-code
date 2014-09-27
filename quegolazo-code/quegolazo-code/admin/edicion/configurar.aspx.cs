@@ -13,10 +13,18 @@ namespace quegolazo_code.admin.edicion
         GestorEdicion gestorEdicion = new GestorEdicion();   
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            try
+            {
+
                 gestorEdicion = Sesion.getGestorEdicion();
-            if(!Page.IsPostBack)
-                cargarPreferencias();
+                if (!Page.IsPostBack)
+                    cargarPreferencias();
+            }
+            catch (Exception ex)
+            {
+                litFracaso.Text = ex.Message;
+                panelFracaso.Visible = true;   
+            }
 
         }
         protected void btnSiguiente_Click(object sender, EventArgs e)
