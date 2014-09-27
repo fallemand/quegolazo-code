@@ -217,19 +217,19 @@ namespace Logica
         /// Registra los Equipos en una Edición
         /// autor: Pau Pedrosa
         /// </summary>
-        public void registrarEquiposEnEdicion(List<Equipo> listaequipos)
-        {
-            try
-            {
-                DAOEquipo daoEquipo = new DAOEquipo();
-                int idEdicion = ((Edicion)System.Web.HttpContext.Current.Session["edicion"]).idEdicion;
-                daoEquipo.registrarEquiposEnEdicion(listaequipos, idEdicion);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //public void registrarEquiposEnEdicion(List<Equipo> listaequipos)
+        //{
+        //    try
+        //    {
+        //        DAOEquipo daoEquipo = new DAOEquipo();
+        //        int idEdicion = ((Edicion)System.Web.HttpContext.Current.Session["edicion"]).idEdicion;
+        //        daoEquipo.registrarEquiposEnEdicion(listaequipos, idEdicion);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
 
         /// <summary>
         /// Obtiene un Equipo por Id

@@ -282,16 +282,16 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idEquipo">Lista de los Id de los Equipos</param>
         /// <param name="idEdicion">Id de la Edición</param>
-        public void registrarEquiposEnEdicion(List<Equipo> equipos, int idEdicion)
+        public void registrarEquiposEnEdicion(List<Equipo> equipos, int idEdicion,SqlConnection con, SqlTransaction trans)
         {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            //SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlTransaction trans = null;   
+            //SqlTransaction trans = null;   
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                trans = con.BeginTransaction();
+                //trans = con.BeginTransaction();
                 cmd.Connection = con;
                 cmd.Transaction = trans;    
 
@@ -305,17 +305,11 @@ namespace AccesoADatos
                     cmd.CommandText = sql;
                     cmd.ExecuteNonQuery();                    
                 }
-                trans.Commit();
             }
             catch (SqlException ex)
             {
                 trans.Rollback();
                 throw new Exception("No se pudo registrar el equipo: " + ex.Message);
-            }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
             }
         }
     }

@@ -69,9 +69,11 @@ namespace quegolazo_code.admin.edicion
             //gestorFase = Sesion.getGestorFase();
             try
             {
-                gestorEdicion.registrarPreferencias(); //registra configuraciones
-                gestorEdicion.registrarEquiposEnEdicion();//registra equipos de la edición
-                gestorFase.registrarFase();//registra fases
+                //gestorEdicion.registrarPreferencias(); //registra configuraciones
+                //gestorEdicion.registrarEquiposEnEdicion();//registra equipos de la edición
+                //gestorFase.registrarFase();//registra fases
+                gestorEdicion.edicion.fases = gestorFase.fases;
+                gestorEdicion.confirmarEdicion();               
                 Response.Redirect(GestorUrl.aFECHAS);
             }
             catch(Exception ex)
@@ -79,7 +81,6 @@ namespace quegolazo_code.admin.edicion
                 panelFracaso.Visible = true;
                 litFracaso.Text = ex.Message;
             }
-
         }
     }
 }

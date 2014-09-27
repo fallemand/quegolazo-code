@@ -118,7 +118,7 @@
                                             <th class="col-md-2">Nombre</th>
                                             <th class="col-md-1">Celular</th>
                                             <th class="col-md-1">E-mail</th>
-                                            <th class="col-md-1"></th>
+                                            <th class="col-md-1">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tablaFiltro">
@@ -126,7 +126,7 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><img src="<%# ((Entidades.Arbitro)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
-                                                    <td><%# Eval("nombre") %></td>
+                                                    <td><strong><%# Eval("nombre") %></strong></td>
                                                     <td><%# Eval("celular") %></td>
                                                     <td><%# Eval("email") %></td>
                                                     <td>
