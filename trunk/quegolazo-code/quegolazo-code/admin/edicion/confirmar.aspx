@@ -84,8 +84,8 @@
                                 <b>Cantidad de Equipos por Grupo:</b> <%#  ((Entidades.Fase)Container.DataItem).grupos[0].equipos.Count %>  <br />
                               </div>
                               <div class="col-md-6">
-                                <b>Cantidad de Fechas:</b> <%#((Entidades.Fase)Container.DataItem).grupos[0].fixture.Count %> <br />
-                                <b>Partidos por Fecha:</b> <%#((Entidades.Fase)Container.DataItem).grupos[0].fixture[0].partidos.Count %> <br />
+                                <b>Cantidad de Fechas:</b> <%#((Entidades.Fase)Container.DataItem).grupos[0].fechas.Count %> <br />
+                                <b>Partidos por Fecha:</b> <%#((Entidades.Fase)Container.DataItem).grupos[0].fechas[0].partidos.Count %> <br />
                               </div>
                           </div>
                         </div>

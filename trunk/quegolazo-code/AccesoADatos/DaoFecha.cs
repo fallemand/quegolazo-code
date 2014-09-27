@@ -31,7 +31,7 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 foreach (Grupo g in fase.grupos)
                 {
-                    foreach (Fecha f in g.fixture)
+                    foreach (Fecha f in g.fechas)
                     {
                         string sql = @"INSERT INTO Fechas (idFecha,idGrupo,idFase,idEdicion,nombre,idEstado)
                                      VALUES (@idFecha,@idGrupo,@idFase,@idEdicion,@nombre,@idEstado)";
@@ -86,7 +86,7 @@ namespace AccesoADatos
                             estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
                             nombre = dr["nombre"].ToString(),
                         };
-                        g.fixture.Add(fecha);
+                        g.fechas.Add(fecha);
                     }
                     if (dr != null)
                         dr.Close();

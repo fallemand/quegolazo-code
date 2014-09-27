@@ -33,7 +33,7 @@ namespace Entidades
                     {
                         //idPartido = j + 1,
                         local = equiposParticipantes[j],
-                        visita = equiposParticipantes[k],
+                        visitante = equiposParticipantes[k],
                         estado = new Estado { ambito = new Ambito { idAmbito = Ambito.PARTIDO,},idEstado=10 },
 
                     };
@@ -87,8 +87,8 @@ namespace Entidades
                 for (int j = 0; j < fechas[i].partidos.Count; j++)
                 {
                     Equipo copia = (Equipo)fechas[i].partidos[j].local.Clone();
-                    fechas[i].partidos[j].local = (Equipo)fechas[i].partidos[j].visita.Clone();
-                    fechas[i].partidos[j].visita = copia;
+                    fechas[i].partidos[j].local = (Equipo)fechas[i].partidos[j].visitante.Clone();
+                    fechas[i].partidos[j].visitante = copia;
                 }
             }
 
