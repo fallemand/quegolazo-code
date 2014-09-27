@@ -139,6 +139,15 @@ namespace Logica
             return usuario;
        }
 
+       public Usuario obtenerUsuarioPorId(int idUsuario)
+       {
+           DAOUsuario gestorBD = new DAOUsuario();
+           Usuario usuario = gestorBD.obtenerUsuarioPorId(idUsuario);
+           if (usuario == null)
+               throw new Exception("No se encuentra registrado ningún usuario.");
+           return usuario;
+       }
+
        /// <summary>
        /// Metodo para generar codigo de recuperacicion cuando el usuario olvido su clave
        /// autor: Flor Rojas

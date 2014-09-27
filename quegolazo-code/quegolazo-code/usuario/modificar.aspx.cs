@@ -12,9 +12,9 @@ namespace quegolazo_code.usuario
     public partial class modificar_usuario : System.Web.UI.Page
     {
         GestorUsuario gestorUsuario = null;
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            limpiarPaneles();
             if (!Page.IsPostBack)
             {
                 gestorUsuario = Sesion.getGestorUsuario();
@@ -54,6 +54,7 @@ namespace quegolazo_code.usuario
                 {
                     panExito.Visible = true;
                     litMensaje.Text = "<strong>Se modificaron exitosamente sus datos.</strong>";
+                    obtenerNuevosDatos();
                 }
             }
             catch (Exception ex)
@@ -76,6 +77,34 @@ namespace quegolazo_code.usuario
         {
             panExito.Visible = false;
             panFracaso.Visible = false;
+        }
+
+        private void limpiarCampos()
+        {
+            txtNombre.Value = "";
+            txtApellido.Value = "";
+            txtEmailModif.Value = "";
+            txtClaveValidadora.Value = ""; 
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/admin/index.aspx");
+        }
+
+        public void obtenerNuevosDatos()
+        {
+            gestorUsuario = Sesion.getGestorUsuario();
+            gestorUsuario.usuario = Sesion.getUsuario();
+            gestorUsuario.usuario = gestorUsuario.obtenerUsuarioPorId(gestorUsuario.usuario.idUsuario); 
+        }
+
+        public void limpiarPaneles()
+        {
+            panFracaso.Visible = false;
+            litError.Text = "";
+            panExito.Visible = false;
+            litMensaje.Text = "";
         }
     }
 }

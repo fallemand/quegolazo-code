@@ -3,11 +3,13 @@
   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentAdmin" runat="server">
-    <div class="container">
-        
-          <h3>Mis Datos</h3>
-      <fieldset id="registrar" class="form-singin vgModificar">
-     <div class="margin-top"></div>
+    <div class="container">  
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">        
+      <ContentTemplate>
+      <fieldset id="modificar" class="form-singin vgModificar">
+      <h2>Mis Datos</h2>
+      <p>Modifique sus datos</p>
+      <div class="margin-top"></div>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -27,20 +29,15 @@
             </div>
           </div>
           
-          <p>Contraseña Actual</p>
+          <p>Confirmar modificación</p>
           <div class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
               <input type="password" runat="server" class="form-control" id="txtClaveValidadora" rangelength="6, 16" required="true" placeholder="Contraseña" />
             </div>
           </div>
-          <p><asp:LinkButton ID="Modificar_contraseña" runat="server" OnClick="Modificar_contraseña_Click">Modificar Contraseña</asp:LinkButton></p>
-          
-          <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                 <Triggers>
-                    <asp:AsyncPostBackTrigger controlid="btnModificar" eventname="Click" />
-                </Triggers>
-                <ContentTemplate>
+          <p><asp:LinkButton ID="Modificar_contraseña" runat="server" OnClick="Modificar_contraseña_Click">Modificar Contraseña</asp:LinkButton></p>         
+         
                      <div id="div_modifCave" runat="server" visible="false">
              <p>Escriba una Nueva Contraseña</p>
           <div class="form-group">
@@ -55,37 +52,26 @@
                     <input id="nuevaClave2" type="password" runat="server" class="form-control" rangelength="6, 16" maxlength="16" required="true" equalto="#ContentAdmin_nuevaClave" placeholder="Repita Nueva Contraseña" />
                 </div>
             </div>
-          </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-         
+          </div> 
+          <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success margin-top panelMensaje" Visible="False"><asp:Literal ID="litMensaje" runat="server"></asp:Literal></asp:Panel>
+            <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger margin-top panelMensaje" Visible="False"><strong><asp:Literal ID="litError" runat="server"></asp:Literal></strong></asp:Panel>        
           <div class="clearfix">
-
-            <div class="col-xs-5">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                    <ContentTemplate>
-                        <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CssClass="btn btn-success pull-right causesValidation vgModificar" />
-                    </ContentTemplate>
-                    </asp:UpdatePanel>
+            <div class="col-xs-9 col-xs-offset-3">
+                <asp:Button class="btn btn-default" ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click"/>
+                <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CssClass="btn btn-success causesValidation vgModificar" />                                     
             </div>
-          </div>
-          <asp:UpdatePanel ID="pnlRegistrar" runat="server">
-                 <Triggers>
-                    <asp:AsyncPostBackTrigger controlid="btnModificar" eventname="Click" />
-                </Triggers>
-                <ContentTemplate>
-                    <asp:UpdateProgress runat="server" id="PageUpdateProgress">
-                        <ProgressTemplate>
-                            <div class="col-xs-12">
-                                    <img src="/resources/img/theme/load.gif" class="img-responsive center-block"/>
-                            </div>
-                        </ProgressTemplate>
-                    </asp:UpdateProgress>
-                    <asp:Panel ID="panExito" runat="server" CssClass="alert alert-success" Visible="False"><asp:Literal ID="litMensaje" runat="server"></asp:Literal></asp:Panel>
-                    <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False"><strong><asp:Literal ID="litError" runat="server"></asp:Literal></strong></asp:Panel>
-                </ContentTemplate>
+          </div>            
+        <asp:UpdateProgress runat="server" id="PageUpdateProgress">
+            <ProgressTemplate>
+                <div class="col-xs-12">
+                        <img src="/resources/img/theme/load.gif" class="img-responsive center-block"/>
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>            
+          </fieldset>
+            </ContentTemplate>
             </asp:UpdatePanel>
-        </fieldset>
+        
   
 </div>
          
