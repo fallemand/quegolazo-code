@@ -41,21 +41,23 @@ namespace quegolazo_code.admin.edicion
             lstEquiposSeleccionados.DataTextField = "nombre";
             lstEquiposSeleccionados.DataBind();
             List<int> equipos = new List<int>();
-            foreach (Equipo equipo in gestorEdicion.edicion.equipos)
+            if (gestorEdicion.edicion.equipos.Count > 0)
+            {
+                foreach (Equipo equipo in gestorEdicion.edicion.equipos)
                     equipos.Add(equipo.idEquipo);
 
-            foreach ( ListItem item in lstEquiposSeleccionados.Items)
-            {
-                if (equipos.Contains(int.Parse(item.Value)))
+                foreach (ListItem item in lstEquiposSeleccionados.Items)
                 {
-                    item.Attributes.Add("selected", "selected");
+                    if (equipos.Contains(int.Parse(item.Value)))
+                    {
+                        item.Attributes.Add("selected", "selected");
 
+                    }
                 }
+                string equiposInt = string.Join(",", equipos.ToArray());
+                equiposInt += ",";
+                hfEquiposSeleccionados.Value = equiposInt;
             }
-            string equiposInt= string.Join(",", equipos.ToArray());
-            equiposInt +=",";
-            hfEquiposSeleccionados.Value = equiposInt;
-
         }
         
         protected void btnSiguiente_Click(object sender, EventArgs e)

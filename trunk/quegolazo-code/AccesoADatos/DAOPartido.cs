@@ -37,10 +37,10 @@ namespace AccesoADatos
                          foreach (Partido p in f.partidos)
                          {
                              
-                                 string sql = @"INSERT INTO Partidos (idPartido,idFecha,idGrupo,idFase,idEdicion,idEquipoLocal,idEquipoVisitante, idEstado)
-                                     VALUES (@idPartido,@idFecha,@idGrupo,@idFase,@idEdicion,@idEquipoLocal,@idEquipoVisitante, @idEstado)";
+                                 string sql = @"INSERT INTO Partidos (idFecha,idGrupo,idFase,idEdicion,idEquipoLocal,idEquipoVisitante, idEstado)
+                                     VALUES (@idFecha,@idGrupo,@idFase,@idEdicion,@idEquipoLocal,@idEquipoVisitante, @idEstado)";
                                  cmd.Parameters.Clear();
-                                 cmd.Parameters.AddWithValue("@idPartido", p.idPartido);
+                                 //cmd.Parameters.AddWithValue("@idPartido", p.idPartido);
                                  cmd.Parameters.AddWithValue("@idFecha", f.idFecha);
                                  cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                                  cmd.Parameters.AddWithValue("@idFase", fase.idFase);
