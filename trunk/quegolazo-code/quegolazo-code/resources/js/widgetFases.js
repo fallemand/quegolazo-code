@@ -34,7 +34,7 @@
     },
 
     _create: function () {
-          
+        this.options.fases = [];
     },
 
     //crea la estrucctura incial para presentar una fase
@@ -93,6 +93,7 @@
 
         return row;
     },
+    //agrega un nuevo grupo a una fase determinada, con la lista de equipos que se pasa por parámetro
     agregarGrupo: function (numFase, equipos) {
         var widget = this;
         var nuevoGrupo = {
@@ -104,10 +105,13 @@
         widget.options.fases[numFase - 1].grupos.push(nuevoGrupo);
         
     },
+    //prepara los controles de la fase ségun el tipo de fixture que se eligió, ademas setea la cantidad de grupos en 0.
     ocultarOMostrarBotones: function (combo) {
         var widget = this;
         $(".filaGrupo").remove();
+        $("#panelFracaso").hide();
         var numFase = combo.attr("id").substr(combo.attr("id").length - 1);
+        widget.options.fases[numFase - 1].grupos = [];
         $("#ddlCantidad-Fase" + numFase).remove();
         var comboCant ;
         if (combo.val().indexOf("TCT") >= 0) {
@@ -165,7 +169,8 @@
         var cantidadEquiposPorGrupo = parseInt(widget.options.equiposDeLaEdicion.length / cantidadGrupos);
         if (numFase == 1) {            
             grupos = widget.armarGruposParaPresentar(widget.options.equiposDeLaEdicion.sort(function() { return 0.5 - Math.random() }), cantidadGrupos);
-            //recorremos todos los grupos
+            //recorremos todos los grupos, previamente borramos los grupos que se han agregado antes.
+            widget.options.fases[numFase - 1].grupos = [];
             for (var i = 0; i < grupos.length; i++) {
                 widget.agregarGrupo(numFase, grupos[i]);
                 var tablaGrupo = widget.crearTablaParaGrupo(i + 1);
@@ -198,33 +203,66 @@
     // realiza la llamada final al servidor, mandando como parametro una lista de fases con sus atributos, y guardando las fases en sesión.
     guardarFasesEnSesion: function () {
         var widget = this;
+        var respuesta = false;
         widget.armarGrupos();
-        $.ajax({
-            type: "POST",
-            url: "fases.aspx/guardarFases",
-            contentType: "application/json",
-            dataType: "json",
-            async: false,
-            data: "{JSONFases :" + JSON.stringify(widget.options.fases) + " }",
-            success: function (response) {
-                alert("Se guardaron las fases en sesion!" + response);
-            },
-            failure: function (response) {
-                alert(response);
+        if (!widget.validarFasesCorrectas()) {
+            widget.mostrarMensajeDeError("Configuración de fases incorrecta, recordá que la diferencia de equipos entre los grupos no debe ser mayor a uno, y que debe haber al menos un grupo.");
+            return respuesta;
+        }        
+        else {
+            $.ajax({
+                type: "POST",
+                url: "fases.aspx/guardarFases",
+                contentType: "application/json",
+                dataType: "json",
+                async: false,
+                data: "{JSONFases :" + JSON.stringify(widget.options.fases) + " }",
+                success: function (response) {
+                    //Si hubo un error, hago esto
+                    if (response.d.StatusCode != 200) {
+                        widget.mostrarMensajeDeError(response.d.StatusDescription);                       
+                    } else {
+                        respuesta = true;
+                        $("#panelFracaso").hide();
+                    }
+                },
+                error: function (response) {
+                    alert(response);
+                }
+            });
+            return respuesta;
+        }
+    },
+    //valida que las fases estén generadas por el usuario y que la diferencia de equipos entre los grupos no sea mayor a uno
+    validarFasesCorrectas: function () {
+        var widget = this;
+        if (widget.options.fases.length < 1)
+            return false;
+        for (var i = 0; i < widget.options.fases.length; i++) {
+            var fase = widget.options.fases[i];
+            if (fase.grupos.length < 1)
+                return false;
+            for (var j = 0; j < fase.grupos.length; j++) {               
+                for (var k = 0; k < fase.grupos.length; k++) {
+                    // si la diferencia entre cantidades de equipos es mayor a uno, o bien la cantidad de equipos de algun grupo es 1
+                    if (Math.abs(fase.grupos[j].equipos.length - fase.grupos[k].equipos.length) > 1 || fase.grupos[j].length < 2)
+                        return false;
+                    }
             }
-        });
+        }
+        return true;
     },
     //setea los grupos en la opcion del widget, guardando los grupos en cada fase, basandose en lo que generó el usuario en la interfaz
     armarGrupos: function () {
         var widget = this;
+        //guardo los grupos segun lo uqe arm el usuario
         for (var i = 0; i < widget.options.fases.length; i++) {
             var fase = widget.options.fases[i];
             for (var j = 0; j < fase.grupos.length; j++) {
                 var grupo = fase.grupos[j];
                 grupo.equipos = widget.obtenerEquiposdeUnGrupo(fase.idFase, grupo.idGrupo);
             }
-        }
-        
+        }        
     },
     //devuelve un equipo pasando un id como parametro, si no lo encuentra devuelve null
     buscarEquipo: function (listaDeEquipos, idBuscado) {
@@ -236,13 +274,12 @@
         }
         return null;
     },
-
     //obtiene los equipos de un grupo para una fase determinada, basandose en como los ordenó el usuario en la UI
     obtenerEquiposdeUnGrupo: function (numFase, numGrupo) {
         var widget = this;
         var equipos = [];
         //este selector identifica los equipos que pertenecen a un grupo y a una fase determinada.
-        var idEquipos = $("ul[data-id-fase][data-idgrupo][data-id-fase='" + numFase + "'][data-idGrupo='" + numFase + "'] li");
+        var idEquipos = $("ul[data-id-fase][data-idgrupo][data-id-fase='" + numFase + "'][data-idGrupo='" + numGrupo + "'] li");
         //recorremos todos los id de equipos que pertenecen a un grupo
         for (var i = 0; i < idEquipos.length; i++) {
             //buscamos el equipo con el id determinado y lo guardamos en la lista de equipos
@@ -250,8 +287,7 @@
             equipos.push(equipo);
         }
         return equipos;
-    },
- 
+    }, 
     //divide una lista de equipos en cierta cantidad de grupos, teniendo en cuenta que como maximo puede haber una diferencia de un equipo entre cada grupo
     armarGruposParaPresentar: function (listaDeEquipos, cantGrupos) {
         //esta variable es la cantidad de equipos por grupo sin tener en cuenta los sobrantes        
@@ -298,11 +334,17 @@
         var cantidades = $("#ddlCantidad-Fase" + numeroFase).val();
         $(".connectedSortable").remove();
         $(".filaGrupo").remove();
+        $("#panelFracaso").hide();
         var widget = this;
         if (tipoFixture.indexOf("TCT") >= 0) {
             widget.mostrarEquiposEngrupo(numeroFase, cantidades);
         }
+    },
+    //muestra el mensaje que se pasa por parametro, haciendo el efecto de luz ;)
+    mostrarMensajeDeError: function (mensaje) {
+        $("#msjFracaso").text(mensaje);
+        $("#panelFracaso").show();
+        $("#panelFracaso").effect("highlight", 500);
     }
 
-    
 });

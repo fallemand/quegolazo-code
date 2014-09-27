@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.UI;
@@ -26,18 +27,25 @@ namespace quegolazo_code.admin.edicion
             
         }             
 
-        [WebMethod(enableSession : true)]    
-        public static void guardarFases(object JSONFases)
+        [WebMethod(enableSession : true)]        
+        public static object guardarFases(object JSONFases)
         {
-            JavaScriptSerializer serializador = new JavaScriptSerializer();
-            //string cad = JSONFases.ToString();
-            List<Fase> fases = serializador.ConvertToType<List<Fase>>(JSONFases);
-            gestorFase = Sesion.getGestorFase();
-            gestorFase.fases = fases;
-            gestorFase.generarFixture();
-            Sesion.setGestorFase(gestorFase);
-
+            try
+            {
+                JavaScriptSerializer serializador = new JavaScriptSerializer();
+                List<Fase> fases = serializador.ConvertToType<List<Fase>>(JSONFases);
+                gestorFase = Sesion.getGestorFase();
+                gestorFase.fases = fases;
+                gestorFase.generarFixture();
+                Sesion.setGestorFase(gestorFase);                
+                return new HttpStatusCodeResult(200, "OK");
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(500, "Ha ocurrido un error, intenta nuevamente luego, si el problema persiste contactate con nuestro soporte tecnico. Detalle técnico :{"+ex.Message +"}");
+            }
         }
+          
 
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
