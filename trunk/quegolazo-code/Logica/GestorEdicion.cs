@@ -90,6 +90,10 @@ namespace Logica
             string cadena = equipos.Substring(0, equipos.Length - 1);
             //transforma la cadena en una lista de enteros
             List<int> listaIdsSeleccionados = cadena.Split(',').Select(Int32.Parse).ToList();
+            //valido que tenga 3 o más equipos
+            if (listaIdsSeleccionados.Count < 2)
+                throw new Exception("Tiene que seleccionar al menos 2 equipos");
+             //agrego los equipos al equipos a la edición
             GestorEquipo gestorEquipo = new GestorEquipo();
             foreach (int id in listaIdsSeleccionados)
                 edicion.equipos.Add(gestorEquipo.obtenerEquipoPorId(id));

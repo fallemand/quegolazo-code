@@ -17,6 +17,7 @@ namespace quegolazo_code.admin
         GestorEdicion gestorEdicion;
         protected void Page_Load(object sender, EventArgs e)        
         {
+
             gestorTorneo = Sesion.getGestorTorneo();
             gestorEdicion = Sesion.getGestorEdicion(); 
             if (!Page.IsPostBack)

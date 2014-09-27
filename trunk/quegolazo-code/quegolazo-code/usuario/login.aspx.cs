@@ -25,6 +25,12 @@ namespace quegolazo_code.admin
                 gestorUsuario.usuario = gestorUsuario.validarUsuario(txtEmail.Value, txtContrasenia.Value);
                 Sesion.setUsuario(gestorUsuario.usuario);
                 FormsAuthentication.RedirectFromLoginPage(txtEmail.Value, noCerrarSesion.Checked);
+                GestorTorneo gestorTorneo = new GestorTorneo();
+                gestorTorneo.torneo = gestorTorneo.obtenerUltimoTorneoDelUsuario();
+                if (gestorTorneo.torneo != null)
+                    Sesion.setTorneo(gestorTorneo.torneo);
+                else
+                    Response.Redirect(GestorUrl.aTORNEOS);
             }
             catch (Exception ex)
             {
