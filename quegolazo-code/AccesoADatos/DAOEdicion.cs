@@ -124,11 +124,13 @@ namespace AccesoADatos
         /// autor: Florencia Rojas
         /// </summary>
         /// <param name="edicion">Objeto Edición</param>
-        public void registrarPreferencias(Edicion edicion)
+        public void registrarPreferencias(Edicion edicion, SqlConnection con, SqlTransaction trans)
         {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();       
-
+            //SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            //trans = con.BeginTransaction();
+            cmd.Connection = con;
+            cmd.Transaction = trans;
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -161,8 +163,38 @@ namespace AccesoADatos
             }
             catch (Exception e)
             {
+                trans.Rollback();
                 throw new Exception("No se pudo registrar las preferencias: " + e.Message);
             }
+        }
+
+        public void confirmarEdicion(Edicion edicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                trans = con.BeginTransaction();
+                registrarPreferencias(edicion, con, trans);
+                DAOEquipo daoEquipo = new DAOEquipo();
+                daoEquipo.registrarEquiposEnEdicion(edicion.equipos, edicion.idEdicion, con, trans);
+                DAOFase daoFase = new DAOFase();
+                daoFase.registrarFase(edicion.fases, con, trans);
+                trans.Commit();
+            }
+            catch (Exception e)
+            {
+                trans.Rollback();
+                throw new Exception("No se pudo registrar la confirmación de la edición: " + e.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            } 
         }
 
         /// <summary>

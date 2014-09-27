@@ -20,16 +20,16 @@ namespace AccesoADatos
         /// <param name="equipo">El objeto Equipo que se va a registrar</param>
         /// <param name="idTorneo">Id del torneo al que pertenece el equipo</param>
         /// <returns>El id del equipo registrado</returns>
-        public void registrarFase(List<Fase> fases)
+        public void registrarFase(List<Fase> fases, SqlConnection con, SqlTransaction trans)
         {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            //SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlTransaction trans = null;
+            //SqlTransaction trans = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                trans = con.BeginTransaction();
+                //trans = con.BeginTransaction();
                 cmd.Connection = con;
                 cmd.Transaction = trans;
 
@@ -61,18 +61,11 @@ namespace AccesoADatos
                         }
                     }
                 }
-
-                trans.Commit();
             }
             catch (SqlException ex)
             { 
                 trans.Rollback();
                 throw new Exception("No se pudo registrar la Fase: " + ex.Message);
-            }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
             }
         }
 

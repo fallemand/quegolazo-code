@@ -166,7 +166,7 @@
                                         <tr>
                                             <th class="col-md-1"></th>
                                             <th class="col-md-9">Nombre</th>
-                                            <th class="col-md-2"></th>
+                                            <th class="col-md-2">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tablaFiltro">
@@ -174,7 +174,7 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
-                                                    <td><%# Eval("nombre") %></td>
+                                                    <td><strong><%# Eval("nombre") %></strong></td>
                                                     <td>
                                                         <a href="<%=Logica.GestorUrl.aJUGADORES %>?idEquipo=<%#Eval("idEquipo")%>" title="Administrar Jugadores"  rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-user"></span></a>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarEquipo" title="Editar Equipo" runat="server" CommandName="editarEquipo" CommandArgument='<%#Eval("idEquipo")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>

@@ -112,7 +112,7 @@
                                             <th class="col-md-4">Nombre</th>
                                             <th class="col-md-3">Domicilio</th>
                                             <th class="col-md-3">Telefono</th>
-                                            <th class="col-md-1"></th>
+                                            <th class="col-md-1">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tablaFiltro">
@@ -120,7 +120,7 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><img src="<%# ((Entidades.Cancha)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
-                                                    <td><%# Eval("nombre") %></td>
+                                                    <td><strong><%# Eval("nombre") %></strong></td>
                                                     <td><%# Eval("domicilio") %></td>
                                                     <td><%# Eval("telefono") %></td>
                                                     <td>

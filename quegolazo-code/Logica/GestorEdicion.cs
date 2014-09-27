@@ -40,12 +40,12 @@ namespace Logica
         /// autor: Antonio Herrera
         /// </summary>
         /// <returns>El id de la edicion que se registro.</returns>
-        public void registrarPreferencias()
-        {
-            DAOEdicion daoEdicion = new DAOEdicion();
-            daoEdicion.registrarPreferencias(edicion);
-        }
-
+        //public void registrarPreferencias()
+        //{
+        //    DAOEdicion daoEdicion = new DAOEdicion();
+        //    daoEdicion.registrarPreferencias(edicion);
+        //}
+        
         /// <summary> 
         /// Carga los datos en el objeto edicion
         /// autor: Antonio Herrera
@@ -71,11 +71,11 @@ namespace Logica
         /// </summary>
         /// <param name="idEquipo">Id del Equipo</param>
         /// <param name="idEdicion">Id de la Edición</param>
-        public void registrarEquiposEnEdicion()
-        {
-            DAOEquipo daoEquipo = new DAOEquipo();
-            daoEquipo.registrarEquiposEnEdicion(edicion.equipos, edicion.idEdicion);                
-        }
+        //public void registrarEquiposEnEdicion()
+        //{
+        //    DAOEquipo daoEquipo = new DAOEquipo();
+        //    daoEquipo.registrarEquiposEnEdicion(edicion.equipos, edicion.idEdicion);
+        //}
 
         /// <summary>
         /// Agrega los equipos recibidos a la edición
@@ -130,6 +130,11 @@ namespace Logica
             return daoEdicion.obtenerEdicionPorId(idEdicion);
         }
 
+        public void confirmarEdicion()
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            daoEdicion.confirmarEdicion(edicion); 
+        }
         /// <summary>
         /// Elimina una edición de la BD
         /// autor: Pau Pedrosa

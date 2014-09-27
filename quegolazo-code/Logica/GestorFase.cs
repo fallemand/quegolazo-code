@@ -57,10 +57,10 @@ namespace Logica
           fases = new List<Fase>();
       }
 
-      public void registrarFase()
-      {
-          DAOFase daoFase = new DAOFase();
-          daoFase.registrarFase(fases);
-      }
+      //public void registrarFase()
+      //{
+      //    DAOFase daoFase = new DAOFase();
+      //    daoFase.registrarFase(fases);
+      //}
     }
 }
