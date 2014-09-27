@@ -31,7 +31,7 @@
             </div>
           </div>
         </div> 
-        <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" ClientIDMode="Static" >                
+        <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger margin-top" ClientIDMode="Static" >                
                 <p id="msjFracaso" runat="server" ClientIDMode="Static"></p>
             </asp:Panel>
         
