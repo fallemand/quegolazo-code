@@ -209,5 +209,11 @@ namespace Logica
             DAOFase daoFase = new DAOFase(); 
             return daoFase.obtenerFases(edicion.idEdicion);
         }
+
+        public void perteneceAUsuario(int idEdicion)
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            daoEdicion.perteneceAUsuario(idEdicion, Sesion.getUsuario().idUsuario);
+        }
     }
 }

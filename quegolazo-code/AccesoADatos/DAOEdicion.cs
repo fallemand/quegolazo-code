@@ -553,5 +553,40 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public bool perteneceAUsuario(int idEdicion, int idUsuario)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT e.idEdicion 
+                                FROM Ediciones e INNER JOIN Torneos t ON e.idTorneo = t.idTorneo 
+                                INNER JOIN Usuarios u ON t.idUsuario = u.idUsuario
+                                WHERE e.idEdicion = @idEdicion AND u.idUsuario = @idUsuario";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
