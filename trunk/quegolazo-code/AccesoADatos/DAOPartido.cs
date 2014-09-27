@@ -91,13 +91,12 @@ namespace AccesoADatos
                  {
                      foreach (Fecha f in g.fechas)
                      {
-                         foreach (Partido p in f.partidos)
-                         {
+                        
                              cmd.Parameters.Clear();
                              cmd.Connection = con;
-                             string sql = @"SELECT * 
-                                                    FROM Partidos
-                                                    WHERE idFecha=@idFecha AND idGrupo=@idGrupo AND idFase=@idFase AND idEdicion=@idEdicion";
+                             string sql = @"SELECT p.idPartido, p. idEstado, p.idEquipoLocal, p.idEquipoVisitante, p.idEquipoLocal, p.idEquipoVisitante, e.nombre AS 'local', e1.nombre AS 'visitante'
+                                                    FROM Partidos p, Equipos e, Equipos e1
+                                                    WHERE idFecha=@idFecha AND idGrupo=@idGrupo AND idFase=@idFase AND idEdicion=@idEdicion AND e.idEquipo=p.idEquipolocal AND e1.idEquipo=p.idEquipoVisitante ";
                              cmd.Parameters.AddWithValue("@idFecha", f.idFecha);
                              cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                              cmd.Parameters.AddWithValue("@idFase", fase.idFase);
@@ -110,17 +109,17 @@ namespace AccesoADatos
                                  {
                                     
                                      idPartido = int.Parse(dr["idPartido"].ToString()),
-                                     fecha = DateTime.Parse( dr["fecha"].ToString()).Date.ToString(),
-                                     hora = DateTime.Parse(dr["fecha"].ToString()).Hour.ToString(),
+                                    // fecha = DateTime.Parse( dr["fecha"].ToString()).Date.ToString(),
+                                    //hora = DateTime.Parse(dr["fecha"].ToString()).Hour.ToString(),
                                      estado= new Estado(){ idEstado= int.Parse(dr["idEstado"].ToString())},
-                                     local=new Equipo(){ idEquipo= int.Parse(dr["idEquipoLocal"].ToString())},
-                                     visitante = new Equipo() { idEquipo = int.Parse(dr["idEquipoVisitante"].ToString())}, 
+                                     local = new Equipo() { idEquipo = int.Parse(dr["idEquipoLocal"].ToString()), nombre = dr["local"].ToString() },
+                                     visitante = new Equipo() { idEquipo = int.Parse(dr["idEquipoVisitante"].ToString()), nombre = dr["visitante"].ToString() }, 
                                  };
                                  f.partidos.Add(partido);
                              }
                              if (dr != null)
                                  dr.Close();  
-                         }
+                         
                      }
                  }
              }

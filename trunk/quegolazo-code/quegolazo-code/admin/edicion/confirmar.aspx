@@ -80,7 +80,7 @@
                               <div class="col-md-6">
                                 <b>Tipo Fixture:</b> <%# Eval("TipoFixture.nombre") %><br />
                                 <b>Cantidad de Grupos:</b> <%# ((Entidades.Fase)Container.DataItem).grupos.Count %> <br />
-                                <b>Cantidad de Equipos:</b> <%# ((Entidades.Fase)Container.DataItem).grupos[0].equipos.Count*((Entidades.Fase)Container.DataItem).grupos.Count %> <br />
+                                <b>Cantidad de Equipos:</b> <%# ((Entidades.Fase)Container.DataItem).grupos.Count%> <br />
                                 <b>Cantidad de Equipos por Grupo:</b> <%#  ((Entidades.Fase)Container.DataItem).grupos[0].equipos.Count %>  <br />
                               </div>
                               <div class="col-md-6">
