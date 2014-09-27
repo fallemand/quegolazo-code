@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel-group" id="fases">
-                        <asp:Repeater  ID="rptFases" runat="server">
+                        <asp:Repeater  ID="rptFases" runat="server" OnItemDataBound="rptFases_ItemDataBound">
                             <ItemTemplate>
                                  <div class="panel panel-default">
                         <div class="panel-heading">
@@ -80,8 +80,8 @@
                               <div class="col-md-6">
                                 <b>Tipo Fixture:</b> <%# Eval("TipoFixture.nombre") %><br />
                                 <b>Cantidad de Grupos:</b> <%# ((Entidades.Fase)Container.DataItem).grupos.Count %> <br />
-                                <b>Cantidad de Equipos:</b> <%# ((Entidades.Fase)Container.DataItem).grupos.Count%> <br />
-                                <b>Cantidad de Equipos por Grupo:</b> <%#  ((Entidades.Fase)Container.DataItem).grupos[0].equipos.Count %>  <br />
+                                <b>Cantidad de Equipos:</b> <asp:Literal ID="litCantidadEquipos" runat="server"></asp:Literal><br />
+                                <b>Cantidad de Equipos por Grupo:</b> <asp:Literal ID="litCantidadEquiposGrupo" runat="server" ></asp:Literal> <br />
                               </div>
                               <div class="col-md-6">
                                 <b>Cantidad de Fechas:</b> <%#((Entidades.Fase)Container.DataItem).grupos[0].fechas.Count %> <br />
