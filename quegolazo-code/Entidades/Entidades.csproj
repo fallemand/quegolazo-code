@@ -41,10 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arbitro.cs" />
+    <Compile Include="Cambio.cs" />
     <Compile Include="ConfiguracionEdicion.cs" />
     <Compile Include="Fecha.cs" />
     <Compile Include="GenerarTodosContraTodos.cs" />
     <Compile Include="GeneroEdicion.cs" />
+    <Compile Include="Gol.cs" />
     <Compile Include="IGenerarFixture.cs" />
     <Compile Include="IPartido.cs" />
     <Compile Include="Jugador.cs" />
@@ -52,6 +54,9 @@
     <Compile Include="Partido.cs" />
     <Compile Include="PartidoComun.cs" />
     <Compile Include="PartidoEliminatorio.cs" />
+    <Compile Include="Sancion.cs" />
+    <Compile Include="Tarjeta.cs" />
+    <Compile Include="TipoGol.cs" />
     <Compile Include="Torneo.cs" />
     <Compile Include="Cancha.cs" />
     <Compile Include="Delegado.cs" />
