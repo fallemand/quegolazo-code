@@ -42,7 +42,7 @@ namespace Logica
                   foreach (Grupo g in f.grupos)
                   {
                       g.idGrupo = i;
-                      g.fixture = generadorFixture.generarFixture(g.equipos);
+                      g.fechas = generadorFixture.generarFixture(g.equipos);
                       i++;
                   }
               }
@@ -62,9 +62,5 @@ namespace Logica
           DAOFase daoFase = new DAOFase();
           daoFase.registrarFase(fases);
       }
-
-      
-
-
     }
 }

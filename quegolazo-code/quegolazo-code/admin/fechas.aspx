@@ -10,28 +10,32 @@
             <div class="col-md-5">
                 <div class="well">
                     <div class="row">
-                        <fieldset class="vgSeleccionarEdición">
+                        <fieldset class="vgSeleccionarEdicion">
                             <div class="col-md-8">
                                 <div id="selectEdiciones">
                                     <asp:DropDownList ID="ddlEquipos" runat="server" CssClass="form-control" required="true"></asp:DropDownList>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <asp:Button ID="btnSeleccionarEquipo" runat="server" Text="Seleccionar Edición" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEquipo" />
+                                <asp:Button ID="btnSeleccionarEdicion" runat="server" Text="Seleccionar Edición" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEdicion" OnClick="btnSeleccionarEdicion_Click" />
                             </div>
                         </fieldset>
                     </div>
                 </div>
                 <asp:UpdatePanel ID="upRegistrarNuevaCancha" runat="server">
                     <ContentTemplate>
-                        <div class="panel-group" id="fases">
-                            <div class="panel panel-default">
+                        <asp:Repeater ID="rptFases" runat="server" OnItemDataBound="rptFases_ItemDataBound">
+                            <HeaderTemplate>
+                                <div class="panel-group" id="fases">
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <div class="panel panel-default">
                                 <div class="panel-heading panel-heading-master">
                                      <div class="row clearfix">
                                         <div class="col-md-8">
                                             <a data-toggle="collapse" data-parent="#fases" href="#fase-1" class="text-muted" style="font-size:15px;">
                                                 <span class="glyphicon glyphicon-plus"></span>
-                                                Fase 1
+                                                Fase <%# Eval("idFase") %>
                                             </a> 
                                         </div>
                                         <div class="col-md-4">
@@ -41,303 +45,83 @@
                                 </div>
                                 <div id="fase-1" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        <div class="panel-group" id="fechas">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#fechas" href="#collapseOne" style="font-size:15px;">Fecha 1 <small>Ver Más Detalles</small>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse collapse">
-                                                    <div class="panel-body small-padding">
-                                                        <table class="table nomargin-bottom">
-                                                            <thead style="display:none;">
-                                                                <tr>
-                                                                    <th class="col-md-4">Equipo Local</th>
-                                                                    <th class="col-md-4">Equipo Visitante</th>
-                                                                    <th class="col-md-2">Resultado</th>
-                                                                    <th class="col-md-2"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="lnkConfigurar" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton1" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton2" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton3" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton4" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton5" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                        <asp:Repeater ID="rptFechas" runat="server" OnItemDataBound="rptFechas_ItemDataBound">
+                                            <HeaderTemplate>
+                                                <div class="panel-group" id="fechas">
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" data-parent="#fechas" href="#fase<%= idFaseActual() %>-fecha<%# Eval("idFecha") %>" style="font-size:15px;">
+                                                                Fecha <%# Eval("idFecha") %> <small>Ver Más Detalles</small>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="fase<%= idFaseActual() %>-fecha<%# Eval("idFecha") %>" class="panel-collapse collapse">
+                                                        <div class="panel-body small-padding">
+                                                            <table class="table nomargin-bottom">
+                                                                <thead style="display:none;">
+                                                                    <tr>
+                                                                        <th class="col-md-4">Equipo Local</th>
+                                                                        <th class="col-md-4">Equipo Visitante</th>
+                                                                        <th class="col-md-2">Resultado</th>
+                                                                        <th class="col-md-2"></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                        <asp:Repeater ID="rptPartidos" runat="server">
+                                                                            <ItemTemplate>
+                                                                                <tr>
+                                                                                    <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "local")).nombre %></td>
+                                                                                    <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "visitante")).nombre %></td>
+                                                                                    <td>2-0</td>
+                                                                                    <td>
+                                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="lnkConfigurar" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
+                                                                                </tr>
+                                                                            </ItemTemplate>
+                                                                        </asp:Repeater>
+                                                                        <asp:Panel ID="panelSinPartidos" runat="server">
+                                                                            <tr>
+                                                                                <td colspan="12">No hay partidos registrados para la fecha</td>
+                                                                            </tr>
+                                                                        </asp:Panel>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </ItemTemplate>
+
+                                            <FooterTemplate>
+                                                </div>
+                                            </FooterTemplate>
+                                        </asp:Repeater>
+                                        <asp:Panel ID="panelSinFechas" runat="server">
                                             <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#fechas" href="#collapseTwo" style="font-size:15px;">Fecha 1 <small>Ver Más Detalles</small>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseTwo" class="panel-collapse collapse">
-                                                    <div class="panel-body small-padding">
-                                                        <table class="table nomargin-bottom">
-                                                            <thead style="display:none;">
-                                                                <tr>
-                                                                    <th class="col-md-4">Equipo Local</th>
-                                                                    <th class="col-md-4">Equipo Visitante</th>
-                                                                    <th class="col-md-2">Resultado</th>
-                                                                    <th class="col-md-2"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton6" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton7" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton8" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton9" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton10" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton11" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                <div class="panel-body">
+                                                    <span>No hay fechas registradas para el partido</span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
-                                            <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
                                         </asp:Panel>
                                     </div>
                                 </div>
                             </div>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </div>
+                            </FooterTemplate>
+                        </asp:Repeater>
+                        <asp:Panel ID="panelSinFases" runat="server">
                             <div class="panel panel-default">
-                                <div class="panel-heading panel-heading-master">
-                                     <div class="row clearfix">
-                                        <div class="col-md-8">
-                                            <a data-toggle="collapse" data-parent="#fases" href="#fase-2" class="text-muted" style="font-size:15px;">
-                                                <span class="glyphicon glyphicon-plus"></span>
-                                                Fase 2
-                                            </a> 
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input type="text" id="Text2" class="pull-right form-control input-xs" placeholder="Filtrar Canchas"/>
-                                        </div>
-                                    </div>                                           
-                                </div>
-                                <div id="fase-2" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <div class="panel-group" id="Div2">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#fechas" href="#fase2-fecha1" style="font-size:15px;">Fecha 1 <small>Ver Más Detalles</small>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="fase2-fecha1" class="panel-collapse collapse">
-                                                    <div class="panel-body small-padding">
-                                                        <table class="table nomargin-bottom">
-                                                            <thead style="display:none;">
-                                                                <tr>
-                                                                    <th class="col-md-4">Equipo Local</th>
-                                                                    <th class="col-md-4">Equipo Visitante</th>
-                                                                    <th class="col-md-2">Resultado</th>
-                                                                    <th class="col-md-2"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton12" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton13" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton14" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton15" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton16" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton17" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#fechas" href="#fase2-fecha2" style="font-size:15px;">Fecha 1 <small>Ver Más Detalles</small>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="fase2-fecha2" class="panel-collapse collapse">
-                                                    <div class="panel-body small-padding">
-                                                        <table class="table nomargin-bottom">
-                                                            <thead style="display:none;">
-                                                                <tr>
-                                                                    <th class="col-md-4">Equipo Local</th>
-                                                                    <th class="col-md-4">Equipo Visitante</th>
-                                                                    <th class="col-md-2">Resultado</th>
-                                                                    <th class="col-md-2"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton18" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton19" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton20" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton21" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton22" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Boca Juniors</td>
-                                                                    <td>Almirante Brown</td>
-                                                                    <td>2-0</td>
-                                                                    <td>
-                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="LinkButton23" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <asp:Panel ID="panel1" runat="server" CssClass="alert alert-danger" Visible="False">
-                                            <asp:Literal ID="Literal1" runat="server"></asp:Literal>
-                                        </asp:Panel>
-                                    </div>
+                                <div class="panel-body">
+                                    <span>No hay fases registradas para la edición</span>
                                 </div>
                             </div>
-                        </div>
+                        </asp:Panel>
+                        <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
+                            <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
+                        </asp:Panel>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -374,62 +158,29 @@
                                 <div class="form-group">
                                     <label for="select" class="col-lg-2 control-label">Árbitro</label>
                                     <div class="col-lg-10">
-                                        <select class="form-control">
-                                            <option selected>Sin Árbitro</option>
-                                            <option>Juan Cacerez Jr</option>
-                                            <option>Floyd Myghtweather</option>
-                                        </select>
+                                        <asp:DropDownList ID="ddlArbitros" runat="server" CssClass="form-control">
+
+                                        </asp:DropDownList>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">Cancha</label>
                                     <div class="col-lg-10">
-                                        <select class="form-control">
-                                            <option>Sin Complejo</option>
-                                            <option>Complejo los Swingers</option>
-                                            <option>Complejo de edipo</option>
-                                        </select>
+                                        <asp:DropDownList ID="ddlCanchas" runat="server" CssClass="form-control">
+
+                                        </asp:DropDownList>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">Titulares</label>
                                     <div class="col-lg-10">
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
-                                        <div class="checkbox col-md-4">
-                                          <label><input type="checkbox"> Juan Perez</label>
-                                        </div>
+                                        <asp:Repeater ID="rptTitulares" runat="server">
+                                            <ItemTemplate>
+                                                <div class="checkbox col-md-4">
+                                                    <label><input type="checkbox"> Juan Perez</label>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
                                     </div>
                                 </div>
                                 <div class="form-group" style="background-color:#F8F8F8">

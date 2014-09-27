@@ -32,7 +32,7 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 foreach (Grupo g in fase.grupos)
                 {
-                    foreach (Fecha f in g.fixture)
+                    foreach (Fecha f in g.fechas)
                     {
                          foreach (Partido p in f.partidos)
                          {
@@ -53,9 +53,9 @@ namespace AccesoADatos
                                  {
                                      cmd.Parameters.AddWithValue("@idEquipoLocal", DBNull.Value);
                                  }
-                                 if (p.visita.idEquipo != 0)
+                                 if (p.visitante.idEquipo != 0)
                                  {
-                                     cmd.Parameters.AddWithValue("@idEquipoVisitante", p.visita.idEquipo);
+                                     cmd.Parameters.AddWithValue("@idEquipoVisitante", p.visitante.idEquipo);
                                  }
                                  else
                                  {
@@ -89,7 +89,7 @@ namespace AccesoADatos
                  cmd.Transaction = trans;
                  foreach (Grupo g in fase.grupos)
                  {
-                     foreach (Fecha f in g.fixture)
+                     foreach (Fecha f in g.fechas)
                      {
                          foreach (Partido p in f.partidos)
                          {
@@ -114,7 +114,7 @@ namespace AccesoADatos
                                      hora = DateTime.Parse(dr["fecha"].ToString()).Hour.ToString(),
                                      estado= new Estado(){ idEstado= int.Parse(dr["idEstado"].ToString())},
                                      local=new Equipo(){ idEquipo= int.Parse(dr["idEquipoLocal"].ToString())},
-                                     visita = new Equipo() { idEquipo = int.Parse(dr["idEquipoVisitante"].ToString())}, 
+                                     visitante = new Equipo() { idEquipo = int.Parse(dr["idEquipoVisitante"].ToString())}, 
                                  };
                                  f.partidos.Add(partido);
                              }
