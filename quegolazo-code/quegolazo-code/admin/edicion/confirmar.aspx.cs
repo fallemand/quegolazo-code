@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Logica;
+using Entidades;
 
 namespace quegolazo_code.admin.edicion
 {
@@ -80,6 +81,18 @@ namespace quegolazo_code.admin.edicion
             {
                 panelFracaso.Visible = true;
                 litFracaso.Text = ex.Message;
+            }
+        }
+
+        protected void rptFases_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Literal litCantEquipo = (Literal)e.Item.FindControl("litCantidadEquipos");
+                Literal litCantEquipoGrupo = (Literal)e.Item.FindControl("litCantidadEquiposGrupo");
+                litCantEquipo.Text = gestorEdicion.edicion.equipos.Count.ToString();
+                litCantEquipoGrupo.Text = (gestorEdicion.edicion.equipos.Count / ((Fase)e.Item.DataItem).grupos.Count).ToString();
+
             }
         }
     }
