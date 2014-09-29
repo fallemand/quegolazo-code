@@ -40,21 +40,29 @@ namespace Entidades
             //}
         }
 
-                //Estados Torneo
-                   public const int REGISTRADO = 1;
-               
-                    //Estados Edicion
-                   public const int REGISTRADA = 2;
-                   
-                    //Estados Fecha
-                   public const int DIAGRAMADA = 5;
-                    
-                    //Estados Partido
-                   public const int DIAGRAMADO = 6;
-                   
-                    //Estados Fase
-                   public const int CREADA = 4;
-                    
+        //Estados Torneo: 1
+        public const int REGISTRADO = 1;
+
+        //Estados Edicion: 2
+        public const int REGISTRADA = 2;
+        public const int PERSONALIZADA = 14;
+
+        //Estados Fecha: 3
+        public const int DIAGRAMADA = 7;
+        public const int COMPLETA = 8;
+        public const int INCOMPLETA = 9;
+
+        //Estados Partido: 4
+        public const int DIAGRAMADO = 10;
+        public const int CANCELADO = 12;
+        public const int JUGADO = 13;
+        public const int PROGRAMADO = 11;
+        
+        //Estados Fase: 5
+        public const int CERRADA = 6;
+        public const int DIAGRAMADAFASE = 4;
+        public const int ENJUEGO = 5;
+        public const int REGISTRADAFASE = 3;                    
 
     }
     /// <summary>
@@ -72,6 +80,5 @@ namespace Entidades
         public const int FASE = 5;
         public const int FECHA = 3;
         public const int PARTIDO = 4;
-
     }
 }

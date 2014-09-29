@@ -59,10 +59,10 @@ namespace quegolazo_code.admin.edicion
         }
 
         /// <summary>
-        /// Metodo para  registrar las Fases 
+        /// Metodo para Confirmar la Edición
+        /// Permite Registrar las preferencias, Registrar equipos en la edición y Registrar Fases
+        /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             ////Tomar gestores de la sesión
@@ -70,12 +70,10 @@ namespace quegolazo_code.admin.edicion
             //gestorFase = Sesion.getGestorFase();
             try
             {
-                //gestorEdicion.registrarPreferencias(); //registra configuraciones
-                //gestorEdicion.registrarEquiposEnEdicion();//registra equipos de la edición
-                //gestorFase.registrarFase();//registra fases
                 gestorEdicion.edicion.fases = gestorFase.fases;
-                gestorEdicion.confirmarEdicion();               
-                Response.Redirect(GestorUrl.aFECHAS);
+                gestorEdicion.confirmarEdicion(); //Registra las preferencias, Registra equipos en la edición y Registra Fases
+                gestorEdicion.cambiarEstadoAPersonalizada(); // Cambia el estado de la Edición "REGISTRADA" a "PERSONALIZADA"
+                //Response.Redirect(GestorUrl.aFECHAS);
             }
             catch(Exception ex)
             {
@@ -92,7 +90,6 @@ namespace quegolazo_code.admin.edicion
                 Literal litCantEquipoGrupo = (Literal)e.Item.FindControl("litCantidadEquiposGrupo");
                 litCantEquipo.Text = gestorEdicion.edicion.equipos.Count.ToString();
                 litCantEquipoGrupo.Text = (gestorEdicion.edicion.equipos.Count / ((Fase)e.Item.DataItem).grupos.Count).ToString();
-
             }
         }
     }

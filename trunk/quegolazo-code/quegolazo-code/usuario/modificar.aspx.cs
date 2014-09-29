@@ -89,7 +89,7 @@ namespace quegolazo_code.usuario
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/admin/index.aspx");
+            Response.Redirect(GestorUrl.aINDEX);
         }
 
         public void obtenerNuevosDatos()
