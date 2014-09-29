@@ -168,6 +168,14 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Transacción que permite confirmar una edición.
+        /// Permite registrar preferencias en la BD
+        /// Permite registrar Equipos en la Edición
+        /// Permite registrar Fase
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="edicion">Edición con las preferencias, con lista de equipos y con lista de fases</param>
         public void confirmarEdicion(Edicion edicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -446,8 +454,7 @@ namespace AccesoADatos
                     con.Close();
             }
         }
-
-
+        
         /// <summary>
         /// Obtiene las preferencias de una edición por Id. Si no tiene devuelve null
         /// autor: Florencia Rojas
@@ -553,6 +560,11 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Permite determinar si una edición pertenece a un usuario
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <returns>True: Si pertenece - False: No pertenece</returns>
         public bool perteneceAUsuario(int idEdicion, int idUsuario)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -580,6 +592,39 @@ namespace AccesoADatos
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Cambia de Estado a la Edición a PERSONALIZADA
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public void cambiarEstadoAPersonalizada(int idEdicion, int idEstado)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"UPDATE Ediciones
+                                SET idEstado = @idEstado
+                                WHERE idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEstado", idEstado);
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);                
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo cambiar el estado de la Edición: " + ex.Message);
             }
             finally
             {

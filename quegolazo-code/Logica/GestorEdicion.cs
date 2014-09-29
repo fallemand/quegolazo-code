@@ -130,6 +130,10 @@ namespace Logica
             return daoEdicion.obtenerEdicionPorId(idEdicion);
         }
 
+        /// <summary>
+        /// Permite confirmar la Edición
+        /// autor: Pau Pedrosa
+        /// </summary>
         public void confirmarEdicion()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
@@ -214,6 +218,12 @@ namespace Logica
         {
             DAOEdicion daoEdicion = new DAOEdicion();
             daoEdicion.perteneceAUsuario(idEdicion, Sesion.getUsuario().idUsuario);
+        }
+
+        public void cambiarEstadoAPersonalizada()
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            daoEdicion.cambiarEstadoAPersonalizada(edicion.idEdicion, Estado.PERSONALIZADA); 
         }
     }
 }
