@@ -19,10 +19,10 @@
                             </div>
                             <div class="col-md-3 switch">
                                 <div class="switch-toggle well nomargin-bottom" onclick="togglePanel('panelJugadores','rdJugadoresSi','rdJugadoresNo');return false;">
-                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdJugadoresSi">
-                                        <label for="rdJugadoresSi" onclick="">Si</label>
-                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdJugadoresNo">
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdJugadoresNo" name="rbgJugadores">
                                         <label for="rdJugadoresNo" onclick="">No</label>
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdJugadoresSi" name="rbgJugadores"> 
+                                        <label for="rdJugadoresSi" onclick="">Si</label>
                                     <a class="btn btn-success" onclick=""></a>
                                 </div>
                                 &nbsp;
@@ -34,10 +34,10 @@
                             <label class="control-label col-md-9" for="radios">¿Registrará que jugador juega cada partido?</label>
                             <div class="col-md-3">
                                 <label class="radio-inline">
-                                    <input type="radio" name="rbgJugadores" id="rdJugadoresRegistroSi" runat="server">
+                                    <input type="radio" name="rbgRegistraJugadores" id="rdJugadoresRegistroSi" runat="server">
                                     Si
                                 </label>
-                                &nbsp;<label class="radio-inline"><input type="radio" name="rbgJugadores" id="rdJugadoresRegistroNo" runat="server">
+                                &nbsp;<label class="radio-inline"><input type="radio" name="rbgRegistraJugadores" id="rdJugadoresRegistroNo" runat="server">
                                     No
                                 </label>
                                 &nbsp;
@@ -89,10 +89,10 @@
                             </div>
                             <div class="col-md-3 switch">
                                 <div class="switch-toggle well nomargin-bottom" onclick="togglePanel('panelSanciones','rdSancionesSi','rdSancionesNo');return false;">
-                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdSancionesSi">
-                                        <label for="rdSancionesSi" onclick="">Si</label>
-                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdSancionesNo">
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdSancionesNo" name="rbgSanciones">
                                         <label for="rdSancionesNo" onclick="">No</label>
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdSancionesSi" name="rbgSanciones">
+                                        <label for="rdSancionesSi" onclick="">Si</label>
                                     <a class="btn btn-success" onclick=""></a>
                                 </div>
                                 &nbsp;
@@ -137,10 +137,10 @@
                             </div>
                             <div class="col-md-3 switch">
                                 <div class="switch-toggle well nomargin-bottom" onclick="togglePanel('panelArbitros','rdArbitrosSi','rdArbitrosNo');return false;">
-                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdArbitrosSi">
-                                        <label for="rdArbitrosSi" onclick="">Si</label>
-                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdArbitrosNo">
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdArbitrosNo" name="rbgArbitros">
                                         <label for="rdArbitrosNo" onclick="">No</label>
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdArbitrosSi" name="rbgArbitros">
+                                        <label for="rdArbitrosSi" onclick="">Si</label>
                                     <a class="btn btn-success" onclick=""></a>
                                 </div>
                                 &nbsp;
@@ -184,11 +184,11 @@
                                 </h4>
                             </div>
                             <div class="col-md-3 switch">
-                                <div class="switch-toggle well nomargin-bottom" onclick="togglePanel('panelCanchas','rdCanchasSi','rdCanchasNo');return false;">
-                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdCanchasSi">
-                                        <label for="rdCanchasSi" onclick="">Si</label>
-                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdCanchasNo">
+                                <div class="switch-toggle well nomargin-bottom" onclick="togglePanel('panelCanchas','rdCanchasSi','rdCanchasNo');return false;" id="toggle12">
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdCanchasNo" name="rbgCanchas">
                                         <label for="rdCanchasNo" onclick="">No</label>
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdCanchasSi"  name="rbgCanchas">
+                                        <label for="rdCanchasSi" onclick="">Si</label>
                                     <a class="btn btn-success" onclick=""></a>
                                 </div>
                                 &nbsp;
