@@ -99,6 +99,9 @@ namespace Logica
                 edicion.equipos.Add(gestorEquipo.obtenerEquipoPorId(id));
         }
 
+
+
+
         /// <summary>
         /// Modifica de la BD una edición
         /// autor: Pau Pedrosa
@@ -224,6 +227,26 @@ namespace Logica
         {
             DAOEdicion daoEdicion = new DAOEdicion();
             daoEdicion.cambiarEstadoAPersonalizada(edicion.idEdicion, Estado.PERSONALIZADA); 
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public void verificarCambiosDeEquipos(string equipos)
+        {
+           string cadena = equipos.Substring(0, equipos.Length - 1);
+            List<int> listaIdsSeleccionados = cadena.Split(',').Select(Int32.Parse).ToList();
+            List<int> listaIdsEquiposAlmacenados = new List<int>();
+            foreach (Equipo e in edicion.equipos)
+            {
+                listaIdsEquiposAlmacenados.Add(e.idEquipo);
+            }
+            listaIdsSeleccionados.Sort();
+            listaIdsEquiposAlmacenados.Sort();
+            bool areEqual = listaIdsEquiposAlmacenados.SequenceEqual(listaIdsSeleccionados);
+            if (!areEqual)
+                throw new Exception("Modificación de equipos!!!");
+            
         }
     }
 }

@@ -64,12 +64,20 @@ namespace quegolazo_code.admin.edicion
         {
             try
             {
+                gestorEdicion.verificarCambiosDeEquipos(hfEquiposSeleccionados.Value);
                 gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
                 Response.Redirect(GestorUrl.eFASES);
             }
             catch (Exception ex)
             {
-                mostrarPanelFracaso(ex.Message);
+                if (ex.Message == "Modificación de equipos!!!")
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modificarEquipos');", true);
+                    
+                    
+                }
+                else
+                    mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -91,6 +99,15 @@ namespace quegolazo_code.admin.edicion
         {
             panelFracaso.Visible = false;
             litFracaso.Text = "";
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modificarEquipos", "closeModal('modificarEquipos');", true);
+            gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
+            gestorEdicion.edicion.fases = null;
+            Response.Redirect(GestorUrl.eFASES);
+
         }
     }
 }
