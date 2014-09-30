@@ -10,19 +10,26 @@ namespace Entidades
     {
         public Equipo local { get; set; }
         public Equipo visitante { get; set; }
-        public string fecha { get; set; }
-        public string hora { get; set; }
+        public Arbitro arbitro { get; set; }
+        public Cancha cancha { get; set; }
+        public DateTime fechaHora { get; set; }
+        public List<Jugador> titulares { get; set; }
+        public List<Gol> goles { get; set; }
+        public List<Tarjeta> tarjetas { get; set; }
+        public List<Cambio> cambios { get; set; }
         public int idPartido { get; set; }
-        public Estado estado { get; set; }
+        public Estado estado { get; set; }       
 
         public Partido()
         {
             local = new Equipo();
             visitante = new Equipo();
             estado = new Estado();
+            titulares = new List<Jugador>();
+            goles = new List<Gol>();
+            tarjetas = new List<Tarjeta>();
+            cambios = new List<Cambio>();
         }
-
-
     }
 }
 
