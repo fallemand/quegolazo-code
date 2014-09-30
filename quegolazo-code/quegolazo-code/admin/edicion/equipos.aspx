@@ -28,6 +28,23 @@
             <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClick="btnSiguiente_Click"/>
         </div>
     </div>
+     <div class="modal fade bs-example-modal-sm" id="modificarEquipos" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modificar Equipo</h4>
+                </div>
+                <div class="modal-body">
+                    Si modifica los equipos que participan en la edición, deberá volver a generar el fixture.¿Está seguro que desea continuar?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnEliminar_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         $('#lstEquiposSeleccionados').multiSelect({
             selectableHeader: "<div class='well well-sm alert-success nomargin-bottom'>Listado de Equipos <a href='#' id='select-all' class='btn btn-xs btn-default pull-right'>Seleccionar Todos <span class='glyphicon glyphicon-chevron-right'></span></a></div>",
