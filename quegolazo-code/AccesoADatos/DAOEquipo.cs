@@ -312,5 +312,39 @@ namespace AccesoADatos
                 throw new Exception("No se pudo registrar el equipo: " + ex.Message);
             }
         }
+
+        public void actualizarEquiposEnEdicion(List<Equipo> equipos, int idEdicion, SqlConnection con, SqlTransaction trans)
+        {
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+
+                string sqlEliminacion = "DELETE FROM EquipoXEdicion WHERE idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.CommandText = sqlEliminacion;
+                cmd.ExecuteNonQuery();
+
+                foreach (Equipo equipo in equipos)
+                {
+                    string sqlInsercion = @"INSERT INTO EquipoXEdicion (idEdicion, idEquipo)
+                                    VALUES (@idEdicion, @idEquipo)";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                    cmd.Parameters.AddWithValue("@idEquipo", equipo.idEquipo);
+                    cmd.CommandText = sqlInsercion;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            {
+                trans.Rollback();
+                throw new Exception("No se pudo registrar el equipo: " + ex.Message);
+            }
+        }
     }
 }

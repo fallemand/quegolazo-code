@@ -129,5 +129,59 @@ namespace AccesoADatos
                      con.Close();
              }
         }
+
+        public void actualizarFase(List<Fase> fases, SqlConnection con, SqlTransaction trans)
+        {
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+
+                
+                foreach (Fase fase in fases)
+                {
+                    if (fase != null)
+                    {
+                        string sqlEliminacion = "DELETE FROM Fases WHERE idFase = @idFase AND idEdicion = @idEdicion";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                        cmd.CommandText = sqlEliminacion;
+                        cmd.ExecuteNonQuery();
+
+                        string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture,idEstado)
+                                    VALUES (@idFase,@idEdicion,@tipoFixture,@idEstado)";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                        cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
+                        // cmd.Parameters.AddWithValue("@idEstado", fase.estado.idEstado);
+                        cmd.Parameters.AddWithValue("@idEstado", 4);
+                        cmd.CommandText = sql;
+                        cmd.ExecuteNonQuery();
+
+                        if (fase.grupos.Count != 0)
+                        {
+                            DAOGrupo DaoGrupo = new DAOGrupo();
+                            DaoGrupo.registrarGrupos(fase, con, trans);
+
+                            DAOFecha DaoFecha = new DAOFecha();
+                            DaoFecha.registrarFechas(fase, con, trans);
+
+                            DAOPartido DaoPartido = new DAOPartido();
+                            DaoPartido.registrarPartidos(fase, con, trans);
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                trans.Rollback();
+                throw new Exception("No se pudo registrar la Fase: " + ex.Message);
+            }
+        }
     }
 }

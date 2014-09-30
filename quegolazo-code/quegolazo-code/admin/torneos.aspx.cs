@@ -205,12 +205,15 @@ namespace quegolazo_code.admin
                 if (e.CommandName == "configurarEdicion")
                 {
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
-                    gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
-                    gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
-                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                    if (gestorEdicion.edicion.estado.idEstado == Estado.CONFIGURADA) // Si la edicion esta personalizada
+                    {
+                        gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
+                        gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
+                        gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();                        
+                    }
                     Sesion.setGestorEdicion(gestorEdicion);
                     Sesion.setTorneo(gestorTorneo.obtenerTorneoPorId(gestorEdicion.obtenerIdTorneo()));
-                    Response.Redirect(GestorUrl.eCONFIGURAR);
+                    Response.Redirect(GestorUrl.eCONFIGURAR); 
                 }
             }
             catch (Exception ex)
