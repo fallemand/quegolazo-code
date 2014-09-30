@@ -18,14 +18,13 @@
                                 </h4>
                             </div>
                             <div class="col-md-3 switch">
-                                <label class="switch-light well nomargin-bottom" onclick="togglePanel('panelJugadores');">
-                                    <input type="checkbox"  runat="server" id="rdJugadoresSi">
-                                    <span>
-                                        <span>No</span>
-                                        <span>Si</span>
-                                    </span>
+                                <div class="switch-toggle well nomargin-bottom" onclick="togglePanel('panelJugadores','rdJugadoresSi','rdJugadoresNo');return false;">
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdJugadoresSi">
+                                        <label for="rdJugadoresSi" onclick="">Si</label>
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdJugadoresNo">
+                                        <label for="rdJugadoresNo" onclick="">No</label>
                                     <a class="btn btn-success" onclick=""></a>
-                                </label>
+                                </div>
                                 &nbsp;
                             </div>
                         </div>
@@ -89,14 +88,13 @@
                                 </h4>
                             </div>
                             <div class="col-md-3 switch">
-                                <label class="switch-light well nomargin-bottom" onclick="togglePanel('panelSanciones');">
-                                    <input type="checkbox"  runat="server" id="rdSancionesSi">
-                                    <span>
-                                        <span>No</span>
-                                        <span>Si</span>
-                                    </span>
+                                <div class="switch-toggle well nomargin-bottom" onclick="togglePanel('panelSanciones','rdSancionesSi','rdSancionesNo');return false;">
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdSancionesSi">
+                                        <label for="rdSancionesSi" onclick="">Si</label>
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdSancionesNo">
+                                        <label for="rdSancionesNo" onclick="">No</label>
                                     <a class="btn btn-success" onclick=""></a>
-                                </label>
+                                </div>
                                 &nbsp;
                             </div>
                         </div>
@@ -138,14 +136,13 @@
                                 </h4>
                             </div>
                             <div class="col-md-3 switch">
-                                <label class="switch-light well nomargin-bottom" onclick="togglePanel('panelArbitros');">
-                                    <input type="checkbox" runat="server" id="rdArbitrosSi">
-                                    <span>
-                                        <span>No</span>
-                                        <span>Si</span>
-                                    </span>
+                                <div class="switch-toggle well nomargin-bottom" onclick="togglePanel('panelArbitros','rdArbitrosSi','rdArbitrosNo');return false;">
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdArbitrosSi">
+                                        <label for="rdArbitrosSi" onclick="">Si</label>
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdArbitrosNo">
+                                        <label for="rdArbitrosNo" onclick="">No</label>
                                     <a class="btn btn-success" onclick=""></a>
-                                </label>
+                                </div>
                                 &nbsp;
                             </div>
                         </div>
@@ -187,14 +184,13 @@
                                 </h4>
                             </div>
                             <div class="col-md-3 switch">
-                                <label class="switch-light well nomargin-bottom" onclick="togglePanel('panelCanchas');">
-                                    <input type="checkbox"  runat="server" id="rdCanchasSi">
-                                    <span>
-                                        <span>No</span>
-                                        <span>Si</span>
-                                    </span>
+                                <div class="switch-toggle well nomargin-bottom" onclick="togglePanel('panelCanchas','rdCanchasSi','rdCanchasNo');return false;">
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdCanchasSi">
+                                        <label for="rdCanchasSi" onclick="">Si</label>
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdCanchasNo">
+                                        <label for="rdCanchasNo" onclick="">No</label>
                                     <a class="btn btn-success" onclick=""></a>
-                                </label>
+                                </div>
                                 &nbsp;
                             </div>
                         </div>
@@ -217,22 +213,22 @@
                 </div>
             </div>
             <asp:UpdatePanel ID="pnlConfigurar" runat="server">
-                 <Triggers>
-                    <asp:AsyncPostBackTrigger controlid="btnSiguiente" eventname="Click" />
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="btnSiguiente" EventName="Click" />
                 </Triggers>
                 <ContentTemplate>
-            <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
-                <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
-            </asp:Panel>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                    <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
+                        <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
+                    </asp:Panel>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
-         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                    <ContentTemplate>
-        <div class="panel-footer clearfix ">
-            <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClick="btnSiguiente_Click" />
-        </div>
-                        </ContentTemplate>
-             </asp:UpdatePanel>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <div class="panel-footer clearfix ">
+                    <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClick="btnSiguiente_Click" />
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
 </asp:Content>

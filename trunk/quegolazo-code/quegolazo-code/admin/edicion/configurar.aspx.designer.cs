@@ -19,7 +19,16 @@ namespace quegolazo_code.admin.edicion {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox rdJugadoresSi;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresSi;
+        
+        /// <summary>
+        /// Control rdJugadoresNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadoresNo;
         
         /// <summary>
         /// Control rdJugadoresRegistroSi.
@@ -100,7 +109,16 @@ namespace quegolazo_code.admin.edicion {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox rdSancionesSi;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSancionesSi;
+        
+        /// <summary>
+        /// Control rdSancionesNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSancionesNo;
         
         /// <summary>
         /// Control rdSancionesEquiposSi.
@@ -145,7 +163,16 @@ namespace quegolazo_code.admin.edicion {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox rdArbitrosSi;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdArbitrosSi;
+        
+        /// <summary>
+        /// Control rdArbitrosNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdArbitrosNo;
         
         /// <summary>
         /// Control rdArbitrosPorPartidoSi.
@@ -190,7 +217,16 @@ namespace quegolazo_code.admin.edicion {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox rdCanchasSi;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdCanchasSi;
+        
+        /// <summary>
+        /// Control rdCanchasNo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdCanchasNo;
         
         /// <summary>
         /// Control rdCanchasComplejos.

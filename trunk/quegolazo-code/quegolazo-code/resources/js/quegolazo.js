@@ -24,7 +24,22 @@ function closeModal(idModal) {
 function openModal(idModal) {
     $('#' + idModal).modal('show');
 };
-function togglePanel(panelId) { $('#' + panelId + '').collapse('toggle'); };
+function togglePanel(panelId, idRadioSi, idRadioNo) {
+    if ($('#' + idRadioSi).is(':checked')) {
+        $('#' + idRadioSi).removeAttr('checked');
+        $('#' + idRadioNo).prop('checked', true);
+        $('#' + panelId).collapse('hide');
+    }
+    else {
+        $('#' + idRadioNo).removeAttr('checked');
+        $('#' + idRadioSi).prop('checked', true);
+        $('#' + panelId).collapse('show');
+    }
+};
+function showPanel(panelId) {
+    $('#' + panelId).collapse('show');
+};
+
 function activaTab(nombreGrupo, nombreTab) {
     $('#' + nombreGrupo + ' a[href="#' + nombreTab + '"]').tab('show');
 };
