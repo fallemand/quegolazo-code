@@ -64,7 +64,7 @@ namespace quegolazo_code.admin.edicion
         {
             try
             {
-                if(gestorEdicion.edicion.equipos.Count != 0)
+                if(gestorEdicion.edicion.estado.idEstado==Estado.CONFIGURADA)
                     gestorEdicion.verificarCambiosDeEquipos(hfEquiposSeleccionados.Value);
                 gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
                 Response.Redirect(GestorUrl.eFASES);
@@ -103,10 +103,17 @@ namespace quegolazo_code.admin.edicion
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "modificarEquipos", "closeModal('modificarEquipos');", true);
-            gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
-            gestorEdicion.edicion.fases = null;
-            Response.Redirect(GestorUrl.eFASES);
+            try
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "modificarEquipos", "closeModal('modificarEquipos');", true);
+                gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
+                gestorEdicion.edicion.fases = null;
+                Response.Redirect(GestorUrl.eFASES);
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
 
         }
     }
