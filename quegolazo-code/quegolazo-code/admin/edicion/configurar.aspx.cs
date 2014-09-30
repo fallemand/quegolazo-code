@@ -15,7 +15,6 @@ namespace quegolazo_code.admin.edicion
         {
             try
             {
-
                 gestorEdicion = Sesion.getGestorEdicion();
                 if (!Page.IsPostBack)
                     cargarPreferencias();
@@ -69,7 +68,6 @@ namespace quegolazo_code.admin.edicion
                 rdJugadoresTarjetasSi.Checked = gestorEdicion.edicion.preferencias.tarjetasJugadores;
                 rdJugadoresCambiosSi.Checked = gestorEdicion.edicion.preferencias.cambiosJugadores;
             }
-
             //Preferencias Árbitros
             if (gestorEdicion.edicion.preferencias.arbitros)
             {
@@ -78,7 +76,6 @@ namespace quegolazo_code.admin.edicion
                 rdArbitrosPorPartidoSi.Checked = gestorEdicion.edicion.preferencias.asignaArbitros;
                 rdArbitroDesempenioSi.Checked = gestorEdicion.edicion.preferencias.desempenioArbitros;
             }
-
             //Preferencias Sanciones
             if (gestorEdicion.edicion.preferencias.sanciones)
             {
@@ -87,7 +84,6 @@ namespace quegolazo_code.admin.edicion
                 rdSancionesEquiposSi.Checked = gestorEdicion.edicion.preferencias.sancionesEquipos;
                 rdSancionesJugadoresSi.Checked = gestorEdicion.edicion.preferencias.sancionesJugadores;
             }
-
             //Preferencia Canchas
             if (gestorEdicion.edicion.preferencias.canchas)
             {
