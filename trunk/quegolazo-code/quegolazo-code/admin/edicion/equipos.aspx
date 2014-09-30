@@ -16,8 +16,10 @@
             <asp:UpdatePanel ID="upSeleccionarEquipos" runat="server">
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="btnSiguiente" EventName="Click"/>
+                    <asp:AsyncPostBackTrigger ControlID="btnModificar" EventName="Click"/>
                 </Triggers>
-                <ContentTemplate>                    
+                <ContentTemplate>
+                                       
                     <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger col-md-12 text-center" Visible="False">
                         <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
                     </asp:Panel>
