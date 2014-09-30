@@ -74,7 +74,7 @@ namespace quegolazo_code.admin.edicion
             if (gestorEdicion.edicion.preferencias.arbitros)
             {
                 rdArbitrosSi.Checked = true;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelSanciones", "showPanel('panelSanciones');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelSanciones", "showPanel('panelArbitros');", true);
                 rdArbitrosPorPartidoSi.Checked = gestorEdicion.edicion.preferencias.asignaArbitros;
                 rdArbitroDesempenioSi.Checked = gestorEdicion.edicion.preferencias.desempenioArbitros;
             }
@@ -83,7 +83,7 @@ namespace quegolazo_code.admin.edicion
             if (gestorEdicion.edicion.preferencias.sanciones)
             {
                 rdSancionesSi.Checked = true;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelArbitros", "showPanel('panelArbitros');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelArbitros", "showPanel('panelSanciones');", true);
                 rdSancionesEquiposSi.Checked = gestorEdicion.edicion.preferencias.sancionesEquipos;
                 rdSancionesJugadoresSi.Checked = gestorEdicion.edicion.preferencias.sancionesJugadores;
             }
