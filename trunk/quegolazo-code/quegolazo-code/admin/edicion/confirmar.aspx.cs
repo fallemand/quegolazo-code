@@ -73,7 +73,7 @@ namespace quegolazo_code.admin.edicion
                 gestorEdicion.edicion.fases = gestorFase.fases;
                 gestorEdicion.confirmarEdicion(); //Registra las preferencias, Registra equipos en la edición y Registra Fases
                 gestorEdicion.cambiarEstadoAPersonalizada(); // Cambia el estado de la Edición "REGISTRADA" a "PERSONALIZADA"
-                //Response.Redirect(GestorUrl.aFECHAS);
+                Response.Redirect(GestorUrl.aFECHAS);
             }
             catch(Exception ex)
             {
