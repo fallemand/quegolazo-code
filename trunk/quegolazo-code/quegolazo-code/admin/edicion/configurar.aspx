@@ -200,10 +200,10 @@
                             <label class="control-label col-md-5" for="radios">¿Donde se jugarán los partidos?</label>
                             <div class="col-md-7">
                                 <label class="radio-inline">
-                                    <input type="radio" name="rbgCanchas" id="rdCanchasComplejos" runat="server">
+                                    <input type="radio" name="rbgCanchasSubPanel" id="rdCanchasComplejos" runat="server">
                                     Complejo/s propios del torneo
                                 </label>
-                                &nbsp;<label class="radio-inline"><input type="radio" name="rbgCanchas" id="rdCanchasEquipos" runat="server">
+                                &nbsp;<label class="radio-inline"><input type="radio" name="rbgCanchasSubPanel" id="rdCanchasEquipos" runat="server">
                                     Canchas de los equipos participantes
                                 </label>
                                 &nbsp;

@@ -142,6 +142,13 @@ namespace Logica
             DAOEdicion daoEdicion = new DAOEdicion();
             daoEdicion.confirmarEdicion(edicion); 
         }
+
+        public void actualizarconfirmacionEdicion()
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            daoEdicion.actualizarconfirmacionEdicion(edicion);    
+        }
+
         /// <summary>
         /// Elimina una edición de la BD
         /// autor: Pau Pedrosa
@@ -223,10 +230,10 @@ namespace Logica
             daoEdicion.perteneceAUsuario(idEdicion, Sesion.getUsuario().idUsuario);
         }
 
-        public void cambiarEstadoAPersonalizada()
+        public void cambiarEstadoAConfigurada()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            daoEdicion.cambiarEstadoAPersonalizada(edicion.idEdicion, Estado.PERSONALIZADA); 
+            daoEdicion.cambiarEstadoAConfigurada(edicion.idEdicion, Estado.CONFIGURADA); 
         }
 
         /// <summary>

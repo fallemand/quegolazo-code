@@ -71,8 +71,13 @@ namespace quegolazo_code.admin.edicion
             try
             {
                 gestorEdicion.edicion.fases = gestorFase.fases;
-                gestorEdicion.confirmarEdicion(); //Registra las preferencias, Registra equipos en la edición y Registra Fases
-                gestorEdicion.cambiarEstadoAPersonalizada(); // Cambia el estado de la Edición "REGISTRADA" a "PERSONALIZADA"
+                if (gestorEdicion.edicion.estado.idEstado == Estado.REGISTRADA)
+                {
+                    gestorEdicion.confirmarEdicion(); //Registra las preferencias, Registra equipos en la edición y Registra Fases
+                    gestorEdicion.cambiarEstadoAConfigurada(); // Cambia el estado de la Edición "REGISTRADA" a "PERSONALIZADA" 
+                }
+                else
+                    gestorEdicion.actualizarconfirmacionEdicion(); //Actualiza las Preferencias, Actualiza equipos en la edicion y Actualiza Fases
                 Response.Redirect(GestorUrl.aFECHAS);
             }
             catch(Exception ex)

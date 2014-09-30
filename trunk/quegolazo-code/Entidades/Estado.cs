@@ -45,7 +45,7 @@ namespace Entidades
 
         //Estados Edicion: 2
         public const int REGISTRADA = 2;
-        public const int PERSONALIZADA = 14;
+        public const int CONFIGURADA = 14;
 
         //Estados Fecha: 3
         public const int DIAGRAMADA = 7;

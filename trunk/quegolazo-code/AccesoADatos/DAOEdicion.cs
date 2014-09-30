@@ -204,6 +204,34 @@ namespace AccesoADatos
             } 
         }
 
+        public void actualizarconfirmacionEdicion(Edicion edicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                trans = con.BeginTransaction();
+                actualizarPreferencias(edicion, con, trans);
+                DAOEquipo daoEquipo = new DAOEquipo();
+                daoEquipo.actualizarEquiposEnEdicion(edicion.equipos, edicion.idEdicion, con, trans);
+                DAOFase daoFase = new DAOFase();
+                daoFase.actualizarFase(edicion.fases, con, trans);
+                trans.Commit();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("No se pudo actualizar la confirmación de la edición: " + e.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
         /// <summary>
         /// Obtiene de la BD una edición por Id
         /// autor: Paula Pedrosa
@@ -602,10 +630,10 @@ namespace AccesoADatos
         }
 
         /// <summary>
-        /// Cambia de Estado a la Edición a PERSONALIZADA
+        /// Cambia de Estado a la Edición a CONFIGURADA
         /// autor: Pau Pedrosa
         /// </summary>
-        public void cambiarEstadoAPersonalizada(int idEdicion, int idEstado)
+        public void cambiarEstadoAConfigurada(int idEdicion, int idEstado)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -631,6 +659,51 @@ namespace AccesoADatos
             {
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
+            }
+        }
+
+        public void actualizarPreferencias(Edicion edicion, SqlConnection con, SqlTransaction trans)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.Transaction = trans;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"UPDATE ConfiguracionesEdicion
+                                SET jugadores = @jugadores, cambiosJugadores = @cambiosJugadores, tarjetasJugadores = @tarjetasJugadores, 
+                                golesJugadores = @golesJugadores, asignacionArbitros = @asignacionArbitros, desempenioArbitros = @desempenioArbitros, 
+                                canchaUnica = @canchaUnica, sancionesEquipos = @sancionesEquipos, sancionesJugadores = @sancionesJugadores, arbitros = @arbitros,
+                                sanciones = @sanciones, jugadorXPartido = @jugadorXPartido
+                                WHERE idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                //Jugadores
+                cmd.Parameters.AddWithValue("@jugadores", edicion.preferencias.jugadores);
+                cmd.Parameters.AddWithValue("@cambiosJugadores", edicion.preferencias.cambiosJugadores);
+                cmd.Parameters.AddWithValue("@tarjetasJugadores", edicion.preferencias.tarjetasJugadores);
+                cmd.Parameters.AddWithValue("@golesJugadores", edicion.preferencias.golesJugadores);
+                cmd.Parameters.AddWithValue("@jugadorXPartido", edicion.preferencias.jugadoresXPartido);
+                //Arbitros
+                cmd.Parameters.AddWithValue("@arbitros", edicion.preferencias.arbitros);
+                cmd.Parameters.AddWithValue("@asignacionArbitros", edicion.preferencias.asignaArbitros);
+                cmd.Parameters.AddWithValue("@desempenioArbitros", edicion.preferencias.desempenioArbitros);
+                //Cancha
+                cmd.Parameters.AddWithValue("@canchaUnica", edicion.preferencias.canchaUnica);
+                //Sanciones
+                cmd.Parameters.AddWithValue("@sancionesEquipos", edicion.preferencias.sancionesEquipos);
+                cmd.Parameters.AddWithValue("@sancionesJugadores", edicion.preferencias.sancionesJugadores);
+                cmd.Parameters.AddWithValue("@sanciones", edicion.preferencias.sanciones);
+                //idEdición
+                cmd.Parameters.AddWithValue("@idEdicion", edicion.idEdicion);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                trans.Rollback();
+                throw new Exception("No se pudo actualizar las preferencias: " + e.Message);
             }
         }
     }
