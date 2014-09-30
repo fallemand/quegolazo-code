@@ -29,7 +29,7 @@ namespace Entidades
 
                 for (int j = 0, k = equiposParticipantes.Count - 1; j < cantidadPartidos && j < k; j++, k--)
                 {
-                    PartidoComun partidoNuevo = new PartidoComun()
+                    Partido partidoNuevo = new Partido()
                     {
                         //idPartido = j + 1,
                         local = equiposParticipantes[j],
