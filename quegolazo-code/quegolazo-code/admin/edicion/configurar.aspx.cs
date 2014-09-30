@@ -60,23 +60,41 @@ namespace quegolazo_code.admin.edicion
         private void cargarPreferencias()
         {
             //Preferencias Jugadores
-            rdJugadoresSi.Checked = gestorEdicion.edicion.preferencias.jugadores;
-            rdJugadoresRegistroSi.Checked = gestorEdicion.edicion.preferencias.jugadoresXPartido;
-            rdJugadoresGolesSi.Checked = gestorEdicion.edicion.preferencias.golesJugadores;
-            rdJugadoresTarjetasSi.Checked = gestorEdicion.edicion.preferencias.tarjetasJugadores;
-            rdJugadoresCambiosSi.Checked = gestorEdicion.edicion.preferencias.cambiosJugadores;
-            //Preferencias Árbitros
-            rdArbitrosSi.Checked = gestorEdicion.edicion.preferencias.arbitros;
-            rdArbitrosPorPartidoSi.Checked = gestorEdicion.edicion.preferencias.asignaArbitros;
-            rdArbitroDesempenioSi.Checked = gestorEdicion.edicion.preferencias.desempenioArbitros;
-            //Preferencias Sanciones
-            rdSancionesSi.Checked = gestorEdicion.edicion.preferencias.sanciones;
-            rdSancionesEquiposSi.Checked = gestorEdicion.edicion.preferencias.sancionesEquipos;
-            rdSancionesJugadoresSi.Checked = gestorEdicion.edicion.preferencias.sancionesJugadores;
-            //Preferencia Canchas
-            rdCanchasSi.Checked = gestorEdicion.edicion.preferencias.canchas;
-            rdCanchasComplejos.Checked = gestorEdicion.edicion.preferencias.canchaUnica;
-        }
+            if (gestorEdicion.edicion.preferencias.jugadores)
+            {
+                rdJugadoresSi.Checked = true;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelJugadores", "showPanel('panelJugadores');", true);
+                rdJugadoresRegistroSi.Checked = gestorEdicion.edicion.preferencias.jugadoresXPartido;
+                rdJugadoresGolesSi.Checked = gestorEdicion.edicion.preferencias.golesJugadores;
+                rdJugadoresTarjetasSi.Checked = gestorEdicion.edicion.preferencias.tarjetasJugadores;
+                rdJugadoresCambiosSi.Checked = gestorEdicion.edicion.preferencias.cambiosJugadores;
+            }
 
+            //Preferencias Árbitros
+            if (gestorEdicion.edicion.preferencias.arbitros)
+            {
+                rdArbitrosSi.Checked = true;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelSanciones", "showPanel('panelSanciones');", true);
+                rdArbitrosPorPartidoSi.Checked = gestorEdicion.edicion.preferencias.asignaArbitros;
+                rdArbitroDesempenioSi.Checked = gestorEdicion.edicion.preferencias.desempenioArbitros;
+            }
+
+            //Preferencias Sanciones
+            if (gestorEdicion.edicion.preferencias.sanciones)
+            {
+                rdSancionesSi.Checked = true;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelArbitros", "showPanel('panelArbitros');", true);
+                rdSancionesEquiposSi.Checked = gestorEdicion.edicion.preferencias.sancionesEquipos;
+                rdSancionesJugadoresSi.Checked = gestorEdicion.edicion.preferencias.sancionesJugadores;
+            }
+
+            //Preferencia Canchas
+            if (gestorEdicion.edicion.preferencias.canchas)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelCanchas", "showPanel('panelCanchas');", true);
+                rdCanchasSi.Checked = true;
+                rdCanchasComplejos.Checked = gestorEdicion.edicion.preferencias.canchaUnica;
+            }
+        }
     }
 }

@@ -18,7 +18,7 @@
                             <div class="list-group">
                                 <asp:UpdatePanel ID="upMaster" runat="server">
                                     <ContentTemplate>
-                                        <a href="mis-proyectos.aspx" class="list-group-item" rel="txtTooltip" data-toggle="tooltip" data-placement="bottom" title="Ver Mis Proyectos">
+                                        <a href="<%=Logica.GestorUrl.aTORNEOS %>" class="list-group-item" rel="txtTooltip" data-toggle="tooltip" data-placement="bottom" title="Ver Mis Ediciones">
                                             <strong><asp:Literal ID="litNombreEdicion" runat="server"></asp:Literal></strong>
                                         </a>
                                         <a href="configurar.aspx" class="list-group-item" id="lbCriterios" runat="server">
