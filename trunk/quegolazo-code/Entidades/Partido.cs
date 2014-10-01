@@ -13,10 +13,10 @@ namespace Entidades
         public Arbitro arbitro { get; set; }
         public Cancha cancha { get; set; }
         public DateTime fechaHora { get; set; }
-        public List<Jugador> titulares { get; set; }
-        public List<Gol> goles { get; set; }
-        public List<Tarjeta> tarjetas { get; set; }
-        public List<Cambio> cambios { get; set; }
+        public List<Jugador> titulares { get; set; } //listo
+        public List<Gol> goles { get; set; } //listo
+        public List<Tarjeta> tarjetas { get; set; } // listo
+        public List<Cambio> cambios { get; set; } // listo
         public int idPartido { get; set; }
         public Estado estado { get; set; }       
 

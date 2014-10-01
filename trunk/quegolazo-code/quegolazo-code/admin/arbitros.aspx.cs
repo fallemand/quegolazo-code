@@ -162,7 +162,6 @@ namespace quegolazo_code.admin
         }
         /// <summary>
         /// Habilita el panel de fracaso y deshabilita el panel de exito.
-        /// autor: Pau Pedrosa
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
@@ -188,16 +187,5 @@ namespace quegolazo_code.admin
             litFracasoListaArbitros.Text = "";
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.ARBITRO, GestorImagen.MEDIANA);
         }
-
-        protected void btnAgregarGol_Click(object sender, EventArgs e)
-        {
-            DAOPartido daoPartido = new DAOPartido();
-            Gol gol = new Gol();
-            gol.minuto = 15;
-            gol.idJugador = 1;
-            gol.idEquipo = 21;
-           // daoPartido.registrarGol();
-            
-        }  
     }
 }

@@ -231,7 +231,6 @@ namespace quegolazo_code.admin
         //------------------------------------------
         /// <summary>
         /// Carga el repeater de Equipos
-        /// autor: Pau Pedrosa
         /// </summary>
         private void cargarRepeaterEquipos()
         {
@@ -239,20 +238,16 @@ namespace quegolazo_code.admin
             rptEquipos.DataBind();
             sinequipos.Visible = (rptEquipos.Items.Count > 0) ? false : true;
         }
-
         /// <summary>
         /// Permite cargar el repeater de los delegados con el nombre del delegado
-        /// autor: Pau Pedrosa
         /// </summary>             
         private void cargarRepeaterDelegados()
         {
             rptDelegados.DataSource = gestorEquipo.obtenerDelegados();
             rptDelegados.DataBind();
         }
-
         /// <summary>
         /// limpia los campos del alta de delegado
-        /// autor: Pau Pedrosa
         /// </summary>
         public void limpiarCamposDelegado()
         {
@@ -263,11 +258,9 @@ namespace quegolazo_code.admin
             btnAgregarDelegado.Visible = true;
             btnModificarDelegado.Visible = false;
             btnCancelarDelegado.Visible = true;
-        }             
-
+        }
         /// <summary>
         /// Limpia los campos del alta de equipo
-        /// autor: Pau Pedrosa
         /// </summary>
         public void limpiarCamposEquipo()
         {
@@ -280,10 +273,8 @@ namespace quegolazo_code.admin
             rptDelegados.DataSource = null;
             rptDelegados.DataBind();
         }
-
         /// <summary>
         /// Limpia los paneles de éxito y fracaso
-        /// autor: Pau Pedrosa
         /// </summary>
         private void limpiarPaneles()
         {
@@ -293,20 +284,16 @@ namespace quegolazo_code.admin
             litFracasoListaEquipos.Text = "";
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
         }
-
         /// <summary>
         /// Habilita el panel de fracaso y deshabilita el panel de exito.
-        /// autor: Pau Pedrosa
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
             litFracaso.Text = mensaje;
             panelFracaso.Visible = true;
         }
-
         /// <summary>
         /// Habilita el panel de fracaso y deshabilita el panel de exito.
-        /// autor: Pau Pedrosa
         /// </summary>
         private void mostrarPanelFracasoListaEquipos(string mensaje)
         {

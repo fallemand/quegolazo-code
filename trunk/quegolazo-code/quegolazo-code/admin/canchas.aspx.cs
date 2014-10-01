@@ -119,6 +119,10 @@ namespace quegolazo_code.admin
             }
         }
 
+        /// <summary>
+        /// Permite eliminar un árbitro
+        /// autor: Pau Pedrosa
+        /// </summary>
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
             try
@@ -138,7 +142,6 @@ namespace quegolazo_code.admin
         //------------------------------------------
         /// <summary>
         /// Carga el repeater de canchas de un torneo
-        /// autor: Pau Pedrosa
         /// </summary>
         private void cargarRepeaterCanchas()
         {
@@ -146,30 +149,24 @@ namespace quegolazo_code.admin
             rptCanchas.DataBind();
             sinCanchas.Visible = (rptCanchas.Items.Count > 0) ? false : true;
         }
-
         /// <summary>
         /// Habilita el panel de fracaso y deshabilita el panel de exito.
-        /// autor: Pau Pedrosa
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
             litFracaso.Text = mensaje;
             panelFracaso.Visible = true;
-        }
-      
+        }      
         /// <summary>
         /// Habilita el panel de exito y deshabilita el panel de fracaso.
-        /// autor: Pau Pedrosa
         /// </summary>
         private void mostrarPanelFracasoListaCanchas(string mensaje)
         {
             litFracasoListaCanchas.Text = mensaje;
             panelFracasoListaCanchas.Visible = true;
         }
-
         /// <summary>
         /// Limpia los campos de la cancha
-        /// autor: Pau Pedrosa
         /// </summary>
         public void limpiarCamposCancha()
         {
@@ -177,10 +174,8 @@ namespace quegolazo_code.admin
             txtDomicilio.Value = "";
             txtTelefono.Value = "";
         }
-
         /// <summary>
         /// Limpia los paneles de éxito y fracaso
-        /// autor: Pau Pedrosa
         /// </summary>
         private void limpiarPaneles()
         {
