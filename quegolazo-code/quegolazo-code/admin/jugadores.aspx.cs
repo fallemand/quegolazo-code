@@ -36,20 +36,8 @@ namespace quegolazo_code.admin.edicion
             {
                 mostrarPanelFracasoListaJugadores(ex.Message);
             }
-        }
-        
-        /// <summary>
-        /// Obtiene Equipo Seleccionado
-        /// autor: Facu Allemand
-        /// </summary>
-        private void obtenerEquipoSeleccionado()
-        {
-            if (Request.QueryString["idEquipo"] != null)
-                gestorEquipo.getEquipo().idEquipo = Validador.castInt(Request.QueryString["idEquipo"]);
-            else
-                gestorEquipo.getEquipo().idEquipo = 0;
-        }
-
+        }       
+     
         /// <summary>
         /// Registra un Nuevo Jugador en la BD
         /// autor: Pau Pedrosa
@@ -172,6 +160,20 @@ namespace quegolazo_code.admin.edicion
             }
         }
 
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorJugador.eliminarJugador(gestorJugador.jugador.idJugador);
+                cargarRepeaterJugadores();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarJugador", "closeModal('eliminarJugador');", true);
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracasoListaJugadores(ex.Message);
+            }
+        }  
+
         //------------------------------------------
         //--------------Metodos Extras--------------
         //------------------------------------------
@@ -210,6 +212,17 @@ namespace quegolazo_code.admin.edicion
                 ddlEquipos.SelectedValue = gestorEquipo.equipo.idEquipo.ToString();
             else
                 itemSeleccionarEquipo.Selected = true;
+        }
+        /// <summary>
+        /// Obtiene Equipo Seleccionado
+        /// autor: Facu Allemand
+        /// </summary>
+        private void obtenerEquipoSeleccionado()
+        {
+            if (Request.QueryString["idEquipo"] != null)
+                gestorEquipo.getEquipo().idEquipo = Validador.castInt(Request.QueryString["idEquipo"]);
+            else
+                gestorEquipo.getEquipo().idEquipo = 0;
         }
         /// <summary>
         /// Limpiar Campos
@@ -271,18 +284,6 @@ namespace quegolazo_code.admin.edicion
             panelFracaso.Visible = true;
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                gestorJugador.eliminarJugador(gestorJugador.jugador.idJugador);
-                cargarRepeaterJugadores();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarJugador", "closeModal('eliminarJugador');", true);
-            }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaJugadores(ex.Message);
-            }
-        }  
+       
     }
 }

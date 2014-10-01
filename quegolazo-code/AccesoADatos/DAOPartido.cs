@@ -326,5 +326,296 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+       /// <summary>
+       /// Obtiene un partido por Id 
+       /// autor: Pau Pedrosa
+       /// </summary>
+       /// <param name="idPartido">Id de Partido a obtener</param>
+       /// <returns>
+       /// Objeto Partido
+       /// Devuelve: Equipos Local y Visitante - Árbitro - Cancha - Id, Hora y fecha del partido
+       /// </returns>
+        public Partido obtenerPartidoPorId(int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            Partido partido = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT p.idPartido AS 'idPartido', e1.idEquipo AS 'idEquipoLocal', e1.nombre AS 'nombreLocal',
+                                e2.idEquipo AS 'idEquipoVisitante', e2.nombre AS 'nombreVisitante', a.idArbitro AS 'idArbitro',
+                                a.nombre AS 'nombreArbitro', c.idCancha AS 'idCancha', c.nombre AS 'nombreCancha', e.idEstado AS 'idEstado',
+                                e.nombre AS 'nombreEstado', p.fechaHora AS 'fechaHora'
+                                FROM Partidos p 
+                                LEFT OUTER JOIN Equipos e1 ON p.idEquipoLocal = e1.idEquipo 
+                                LEFT OUTER JOIN Equipos e2 ON p.idEquipoVisitante = e2.idEquipo
+                                LEFT OUTER JOIN Arbitros a ON p.idArbitro = a.idArbitro 
+                                LEFT OUTER JOIN Canchas c ON p.idCancha = c.idCancha 
+                                LEFT OUTER JOIN Estados e ON e.idEstado = p.idEstado
+                                WHERE p.idPartido = @idPartido";
+                cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    partido = new Partido();
+                    partido.idPartido = Int32.Parse(dr["idPartido"].ToString());
+                    partido.local.idEquipo = Int32.Parse(dr["idEquipoLocal"].ToString());
+                    partido.local.nombre = dr["nombreLocal"].ToString();
+                    partido.visitante.idEquipo = Int32.Parse(dr["idEquipoLocal"].ToString());
+                    partido.visitante.nombre = dr["nombreVisitante"].ToString();
+                    partido.arbitro.idArbitro = Int32.Parse(dr["idArbitro"].ToString());
+                    partido.arbitro.nombre = dr["nombreArbitro"].ToString();
+                    partido.cancha.idCancha = Int32.Parse(dr["idCancha"].ToString());
+                    partido.cancha.nombre = dr["nombreCancha"].ToString();
+                    partido.estado.idEstado = Int32.Parse(dr["idEstado"].ToString());
+                    partido.estado.nombre = dr["nombreEstado"].ToString();
+                    partido.fechaHora = DateTime.Parse(dr["fechaHora"].ToString());                    
+                }
+                if (dr != null)
+                    dr.Close();
+                return partido;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el partido:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene Los Goles de un Partido
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idPartido">Id de Partido</param>
+        /// <returns>Lista genérica de objeto Gol</returns>
+        public List<Gol> obtenerGolesPorDeUnPartido(int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Gol> goles = new List<Gol>();
+            Gol gol = null; 
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT g.idGol AS 'idGol', tg.nombre AS 'tipoGol', g.minuto AS 'minuto',
+                                g.idPartido AS 'idPartido', g.idJugador AS 'idJugador', g.idEquipo AS 'idEquipo'
+                                FROM Goles g 
+                                INNER JOIN TiposGol tg ON tg.idTipoGol = g.idTipoGol
+                                WHERE g.idPartido = @idPartido";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    gol = new Gol();
+                    gol.idGol = Int32.Parse(dr["idGol"].ToString());
+                    gol.minuto = Int32.Parse(dr["minuto"].ToString());
+                    if (dr["idJugador"] != System.DBNull.Value)
+                        gol.idJugador = Int32.Parse(dr["idJugador"].ToString());
+                    else
+                        gol.idJugador = null;
+                    if (dr["idEquipo"] != System.DBNull.Value)
+                        gol.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
+                    else
+                        gol.idEquipo = null;
+                    if (dr["tipoGol"] != System.DBNull.Value)
+                        gol.tipoGol.nombre = dr["tipoGol"].ToString();
+                    else
+                        gol.tipoGol.nombre = null;
+                    goles.Add(gol);
+                }
+                if (dr != null)
+                    dr.Close();
+                return goles;            
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los goles del partido:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene Las Tarjetas de un Partido
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idPartido">Id de Partido</param>
+        /// <returns>Lista genérica de objeto Tarjeta</returns>
+        public List<Tarjeta> obtenerTarjetasPorDeUnPartido(int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Tarjeta> tarjetas = new List<Tarjeta>();
+            Tarjeta tarjeta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM Tarjetas  
+                                WHERE idPartido = @idPartido";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    tarjeta = new Tarjeta();
+                    tarjeta.idTarjeta = Int32.Parse(dr["idTarjeta"].ToString());
+                    tarjeta.minuto = Int32.Parse(dr["minuto"].ToString());
+                    tarjeta.idJugador = Int32.Parse(dr["idJugador"].ToString());
+                    tarjeta.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
+                    tarjeta.tipoTarjeta = char.Parse(dr["tipoTarjeta"].ToString());
+                    tarjetas.Add(tarjeta);
+                }
+                if (dr != null)
+                    dr.Close();
+                return tarjetas;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las tarjetas del partido:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene Los Cambios de un Partido
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idPartido">Id de Partido</param>
+        /// <returns>Lista genérica de objeto Cambio</returns>
+        public List<Cambio> obtenerCambiosPorDeUnPartido(int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Cambio> cambios = new List<Cambio>();
+            Cambio cambio = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM Cambios 
+                                WHERE idPartido = @idPartido";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    cambio = new Cambio();
+                    cambio.idCambio = Int32.Parse(dr["idCambio"].ToString());
+                    if (dr["minuto"] != System.DBNull.Value)
+                        cambio.minuto = Int32.Parse(dr["minuto"].ToString());
+                    else
+                        cambio.minuto = null;                    
+                    cambio.idJugadorEntra = Int32.Parse(dr["idJugadorEntra"].ToString());
+                    cambio.idJugadorSale = Int32.Parse(dr["idJugadorSale"].ToString());
+                    cambio.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
+                    cambios.Add(cambio);
+                }
+                if (dr != null)
+                    dr.Close();
+                return cambios;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los cambios del partido:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene Los Titulares de un Partido
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idPartido">Id de Partido</param>
+        /// <returns>Lista genérica de objeto Jugador</returns>
+        public List<Jugador> obtenerTitularesDeUnPartido(int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Jugador> titulares = new List<Jugador>();
+            Jugador jugador = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM Jugadores j 
+                                INNER JOIN TitularesXPartido txp ON j.idJugador = txp.idJugador
+                                WHERE txp.idPartido = @idPartido";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    jugador = new Jugador();
+                    jugador.idJugador = Int32.Parse(dr["idJugador"].ToString());
+                    jugador.nombre = dr["nombre"].ToString();
+                    jugador.dni = dr["dni"].ToString();
+                    if (dr["fechaNacimiento"] != System.DBNull.Value)
+                        jugador.fechaNacimiento = DateTime.Parse(dr["fechaNacimiento"].ToString());
+                    else
+                        jugador.fechaNacimiento = null;
+                    jugador.email = dr["email"].ToString();
+                    jugador.facebook = dr["facebook"].ToString();
+                    jugador.sexo = dr["sexo"].ToString();
+                    jugador.telefono = dr["telefono"].ToString();
+                    if (dr["numeroCamiseta"] != System.DBNull.Value)
+                        jugador.numeroCamiseta = Int32.Parse(dr["numeroCamiseta"].ToString());
+                    else
+                        jugador.numeroCamiseta = null;
+                    jugador.tieneFichaMedica = bool.Parse(dr["tieneFichaMedica"].ToString());
+                    titulares.Add(jugador);
+                }
+                if (dr != null)
+                    dr.Close();
+                return titulares;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los titulares del partido:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
