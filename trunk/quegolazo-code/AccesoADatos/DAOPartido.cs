@@ -134,18 +134,17 @@ namespace AccesoADatos
              }
         }
 
-        public int registrarGol(Gol gol, int idPartido)
+        public void registrarGol(Gol gol, int idPartido, SqlConnection con, SqlTransaction trans)
         {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
+                cmd.Transaction = trans;
                 string sql = @"INSERT INTO Goles (minuto, idJugador, idEquipo, idPartido, idTipoGol)
-                                    VALUES (@minuto, @idJugador, @idEquipo, @idPartido, @idTipoGol)
-                                    SELECT SCOPE_IDENTITY()";
+                                    VALUES (@minuto, @idJugador, @idEquipo, @idPartido, @idTipoGol)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@minuto", gol.minuto);
                 if (gol.idJugador != null)
@@ -162,32 +161,25 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@idTipoGol", DBNull.Value);
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.CommandText = sql;
-                int idGol = int.Parse(cmd.ExecuteScalar().ToString());
-                return idGol; //retorna el id del gol generado por la BD
+                cmd.ExecuteScalar().ToString();
             }
             catch (Exception ex)
             {
                 throw new Exception("No se pudo registrar el gol: " + ex.Message);
             }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
-            }
         }
 
-        public int registrarCambio(Cambio cambio, int idPartido)
+        public void registrarCambio(Cambio cambio, int idPartido, SqlConnection con, SqlTransaction trans)
         {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
+                cmd.Transaction = trans;
                 string sql = @"INSERT INTO Cambios (idEquipo, idJugadorEntra, idJugadorSale, minuto, idPartido)
-                                    VALUES (@idEquipo, @idJugadorEntra, @idJugadorSale, @minuto, @idPartido)
-                                    SELECT SCOPE_IDENTITY()";
+                                    VALUES (@idEquipo, @idJugadorEntra, @idJugadorSale, @minuto, @idPartido)";
                 cmd.Parameters.Clear();                
                 cmd.Parameters.AddWithValue("@idEquipo", cambio.idEquipo);
                 cmd.Parameters.AddWithValue("@idJugadorEntra", cambio.idJugadorEntra);
@@ -198,29 +190,23 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@minuto", DBNull.Value); 
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.CommandText = sql;
-                int idCambio = int.Parse(cmd.ExecuteScalar().ToString());
-                return idCambio; //retorna el id del cambio generado por la BD
+                cmd.ExecuteScalar().ToString();
             }
             catch (Exception ex)
             {
                 throw new Exception("No se pudo registrar el cambio: " + ex.Message);
             }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
-            }
         }
 
-        public int registrarTarjeta(Tarjeta tarjeta, int idPartido)
+        public void registrarTarjeta(Tarjeta tarjeta, int idPartido, SqlConnection con, SqlTransaction trans)
         {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
+                cmd.Transaction = trans;
                 string sql = @"INSERT INTO Tarjetas (idEquipo, idJugador, tipoTarjeta, minuto, idPartido)
                                     VALUES (@idEquipo, @idJugador, @tipoTarjeta, @minuto, @idPartido)
                                     SELECT SCOPE_IDENTITY()";
@@ -234,17 +220,11 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@minuto", DBNull.Value);
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.CommandText = sql;
-                int idTarjeta = int.Parse(cmd.ExecuteScalar().ToString());
-                return idTarjeta; //retorna el id de la tarjeta generado por la BD
+                cmd.ExecuteScalar().ToString();
             }
             catch (Exception ex)
             {
                 throw new Exception("No se pudo registrar la tarjeta: " + ex.Message);
-            }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
             }
         }
 
@@ -289,16 +269,13 @@ namespace AccesoADatos
             }
         }
 
-        public void registrarTitularesAPartido(List<Jugador> jugadores, int idEquipo, int idPartido)
+        public void registrarTitularesAPartido(List<Jugador> jugadores, int idEquipo, int idPartido, SqlConnection con, SqlTransaction trans)
         {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlTransaction trans = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                trans = con.BeginTransaction();
                 cmd.Connection = con;
                 cmd.Transaction = trans;
                 foreach (Jugador jugador in jugadores)
@@ -313,17 +290,10 @@ namespace AccesoADatos
                     cmd.CommandText = sql;
                     cmd.ExecuteNonQuery();
                 }
-                trans.Commit();
             }
             catch (SqlException ex)
             {
-                trans.Rollback();
                 throw new Exception("No se pudo registrar los jugadores titulares: " + ex.Message);
-            }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
             }
         }
 
@@ -610,6 +580,94 @@ namespace AccesoADatos
             catch (Exception ex)
             {
                 throw new Exception("Error al obtener los titulares del partido:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public int registrarPartido(Partido partido, int idFecha, int idGrupo, int idFase, int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                trans = con.BeginTransaction();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+                string sql = @"INSERT INTO Partidos(idFecha, idGrupo, idFase, idEdicion, idEquipoLocal, idEquipoVisitante, fecha, idEstado, idArbitro, idCancha, golesLocal, golesVisitante)
+                                VALUES (@idFecha, @idGrupo, @idFase, @idEdicion, @idEquipoLocal, @idEquipoVisitante, @fecha, @idEstado, @idArbitro, @idCancha, @golesLocal, @golesVisitante)
+                                SELECT SCOPE_IDENTITY()";
+                //falta partido posterior
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idFecha", idFecha);
+                cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
+                cmd.Parameters.AddWithValue("@idFase", idFase);
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                if (partido.local.idEquipo != null)
+                    cmd.Parameters.AddWithValue("@idEquipoLocal", partido.local.idEquipo);
+                else
+                {
+                    cmd.Parameters.AddWithValue("@idEquipoLocal", DBNull.Value);
+                    if (partido.visitante.idEquipo != null)
+                        throw new Exception();
+                }
+                if (partido.visitante.idEquipo != null)
+                    cmd.Parameters.AddWithValue("@idEquipoVisitante", partido.visitante.idEquipo);
+                else
+                    cmd.Parameters.AddWithValue("@idEquipoVisitante", DBNull.Value);
+                if (partido.fechaHora != null)
+                    cmd.Parameters.AddWithValue("@fecha", partido.fechaHora);
+                else
+                    cmd.Parameters.AddWithValue("@fecha", DBNull.Value);
+                cmd.Parameters.AddWithValue("@idEstado", partido.estado.idEstado);
+                if (partido.arbitro.idArbitro != null)
+                    cmd.Parameters.AddWithValue("@idArbitro", partido.arbitro.idArbitro);
+                else
+                    cmd.Parameters.AddWithValue("@idArbitro", DBNull.Value);
+                if (partido.cancha.idCancha != null)
+                    cmd.Parameters.AddWithValue("@idCancha", partido.cancha.idCancha);
+                else
+                    cmd.Parameters.AddWithValue("@idCancha", DBNull.Value);
+                if (partido.golesLocal != null)
+                    cmd.Parameters.AddWithValue("@golesLocal", partido.golesLocal);
+                else
+                    cmd.Parameters.AddWithValue("@golesLocal", DBNull.Value);
+                if (partido.golesVisitante != null)
+                    cmd.Parameters.AddWithValue("@golesVisitante", partido.golesVisitante);
+                else
+                    cmd.Parameters.AddWithValue("@golesVisitante", DBNull.Value);
+                cmd.CommandText = sql;
+                int idPartido = int.Parse(cmd.ExecuteScalar().ToString());
+
+                foreach (Gol gol in partido.goles)
+                {
+                    registrarGol(gol, idPartido, con, trans);
+                }
+                foreach (Tarjeta tarjeta in partido.tarjetas)
+                {
+                    registrarTarjeta(tarjeta, idPartido, con, trans);
+                }
+                foreach (Cambio cambio in partido.cambios)
+                {
+                    registrarCambio(cambio, idPartido, con, trans);
+                }
+                if(partido.local.idEquipo != null)
+                    registrarTitularesAPartido(partido.titularesLocal, partido.local.idEquipo, idPartido, con, trans);//titulares del equipo local
+                if(partido.visitante.idEquipo != null)
+                    registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, idPartido, con, trans);//titulares del equipo visitante}
+                trans.Commit();
+                return idPartido; //retorna el id del equipo generado por la BD
+            }
+            catch (Exception ex)
+            {  
+                trans.Rollback();
+                throw new Exception("No se pudo registrar el equipo: " + ex.Message);
             }
             finally
             {
