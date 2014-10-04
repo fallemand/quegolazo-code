@@ -60,6 +60,7 @@
   <ItemGroup>
     <Content Include="admin\arbitros.aspx" />
     <Content Include="admin\canchas.aspx" />
+    <Content Include="admin\ediciones.aspx" />
     <Content Include="admin\edicion\configurar.aspx" />
     <Content Include="admin\edicion\confirmar.aspx" />
     <Content Include="admin\edicion\equipos.aspx" />
@@ -143,6 +144,13 @@
     </Compile>
     <Compile Include="admin\canchas.aspx.designer.cs">
       <DependentUpon>canchas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\ediciones.aspx.cs">
+      <DependentUpon>ediciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\ediciones.aspx.designer.cs">
+      <DependentUpon>ediciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\edicion\configurar.aspx.cs">
       <DependentUpon>configurar.aspx</DependentUpon>

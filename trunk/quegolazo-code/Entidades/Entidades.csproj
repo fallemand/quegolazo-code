@@ -44,6 +44,7 @@
     <Compile Include="Cambio.cs" />
     <Compile Include="ConfiguracionEdicion.cs" />
     <Compile Include="Fecha.cs" />
+    <Compile Include="GenerarEliminatoria.cs" />
     <Compile Include="GenerarTodosContraTodos.cs" />
     <Compile Include="GeneroEdicion.cs" />
     <Compile Include="Gol.cs" />
