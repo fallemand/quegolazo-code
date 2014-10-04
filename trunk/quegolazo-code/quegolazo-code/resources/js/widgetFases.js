@@ -114,11 +114,10 @@
         if (combo.val().indexOf("TCT") >= 0) {
             $("#lbl-cantidad-Fase" + numFase).text("Cantidad de Grupos: ");
             comboCant = createDropDownList("ddlCantidad-Fase"+numFase, widget.obtenerGruposPosibles(widget.options.fases[numFase - 1].equipos.length));
+            comboCant.appendTo($("#divCantidadesFase" + numFase));
         } else {
-            $("#lbl-cantidad-Fase" + numFase).text("Cantidad de Equipos: ");
-            comboCant = createDropDownList("ddlCantidad-Fase"+numFase, widget.options.cantEquipos);
-        }
-        comboCant.appendTo($("#divCantidadesFase" + numFase));
+            $("#lbl-cantidad-Fase" + numFase).text("Cantidad de Equipos: " + widget.options.equiposDeLaEdicion.length);           
+        }        
         widget.actualizarTipoDeFixture(numFase);
     },
     agregarFase: function () {
@@ -177,7 +176,7 @@
             for (var i = 0; i < grupos.length; i++) {
                 widget.agregarGrupo(numFase, grupos[i]);
                 var tablaGrupo = widget.crearTablaParaGrupo(i + 1);
-                $("#panelFase" + numFase).append(tablaGrupo);
+                $("#cuerpoFase" + numFase).append(tablaGrupo);
                 var listaNueva = $("<ul/>", { class: "connectedSortable ui-sortable gruposFase" }).attr("data-id-fase", numFase).attr("data-idGrupo", widget.options.fases[numFase - 1].grupos[i].idGrupo);
                 for (var j = 0 ; j < grupos[i].length; j++) {
                     var unEquipo = $("<li/>").attr("data-id-equipo", grupos[i][j].idEquipo).text(grupos[i][j].nombre);
@@ -190,7 +189,7 @@
                 tablaGrupo = $("#tablaGrupo" + (i + 1));
                 listaNueva.appendTo(tablaGrupo.find("td"));
                 tablaGrupo.appendTo(row);
-                row.appendTo($("#panelFase" + numFase));
+                row.appendTo($("#cuerpoFase" + numFase));
             }
             $(".connectedSortable").sortable({
                 connectWith: ".connectedSortable"
@@ -336,12 +335,20 @@
     presentarFase: function (numeroFase) {
         var tipoFixture = $("#ddlTipoFixtureFase" + numeroFase).val();
         var cantidades = $("#ddlCantidad-Fase" + numeroFase).val();
-        $(".connectedSortable").remove();
-        $(".filaGrupo").remove();
+        if ($("#cuerpoFase" + numeroFase).length > 0)
+            $("#cuerpoFase" + numeroFase).remove();        
         $("#panelFracaso").hide();
         var widget = this;
+        $("<div/>").attr("id", "cuerpoFase" + numeroFase).appendTo($("#panelFase" + numeroFase));
         if (tipoFixture.indexOf("TCT") >= 0) {
             widget.mostrarEquiposEngrupo(numeroFase, cantidades);
+        } else {
+            $("#cuerpoFase" + numeroFase).css("overflow-x", "scroll");
+            $("#cuerpoFase" + numeroFase).generadorDeLlaves({
+                container: $("#cuerpoFase" + numeroFase),
+                equipos: widget.options.equiposDeLaEdicion,
+                mezclar: true
+            });
         }
     },
     //muestra el mensaje que se pasa por parametro, haciendo el efecto de luz ;)

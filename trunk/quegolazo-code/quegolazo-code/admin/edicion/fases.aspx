@@ -4,6 +4,9 @@
     <script src="../../resources/js/jquery.ui/jquery-ui.js"></script>  
     <script src="../../resources/js/quegolazo.js"></script>
     <script src="../../resources/js/widgetFases.js"></script>
+    <script src="../../resources/js/jquery.bracket.min.js"></script>
+    <link href="../../resources/css/jquery.bracket.min.css" rel="stylesheet" />
+    <script src="../../resources/js/widgetLlaves.js"></script>
     <script>  
         $(document).ready(function () {
             $("#panelFracaso").hide();
@@ -28,7 +31,7 @@
            <div class="col-md-12">
               <div class="panel-group" id="accordionFases">   
               
-            </div>
+              </div>
           </div>
         </div> 
         <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger margin-top" ClientIDMode="Static" >                
@@ -39,7 +42,6 @@
         <div class="panel-footer clearfix ">
             <asp:Button ID="btnAtras" runat="server" Text="Atrás" CssClass="btn btn-success pull-left" OnClick="btnAtras_Click"/>
             <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClientClick="return $('#contenedorFases').generadorDeFases('guardarFasesEnSesion');" OnClick="btnSiguiente_Click"/>
-             <%--<input id="btnSiguiente" type="button" class="btn btn-success pull-right"  onclick="$('#contenedorFases').generadorDeFases('guardarFasesEnSesion');" value="Siguiente" />--%>         
         </div>
     </div>
 </asp:Content>

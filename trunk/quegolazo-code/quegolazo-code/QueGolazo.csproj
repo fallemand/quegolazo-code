@@ -69,6 +69,7 @@
     <Content Include="admin\jugadores.aspx" />
     <Content Include="admin\equipos.aspx" />
     <Content Include="admin\noticias.aspx" />
+    <Content Include="resources\css\jquery.bracket.min.css" />
     <Content Include="resources\img\arbitros\default-bg.jpg" />
     <Content Include="resources\img\arbitros\default-nm.jpg" />
     <Content Include="resources\img\arbitros\default-sm.jpg" />
@@ -89,12 +90,14 @@
     <Content Include="resources\js\ajaxfileupload.js" />
     <Content Include="resources\js\bootstrap-datetimepicker.min.js" />
     <Content Include="resources\js\bootstrap-datetimepicker.es.js" />
+    <Content Include="resources\js\jquery.bracket.min.js" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
     <Content Include="resources\js\jquery.multi-select.js" />
     <Content Include="resources\js\jquery.ui\jquery-ui.js" />
     <Content Include="resources\js\moment.js" />
     <Content Include="resources\js\quegolazo.js" />
     <Content Include="resources\js\widgetFases.js" />
+    <Content Include="resources\js\widgetLlaves.js" />
     <Content Include="usuario\activar.aspx" />
     <Content Include="admin\index.aspx" />
     <Content Include="usuario\login.aspx" />
