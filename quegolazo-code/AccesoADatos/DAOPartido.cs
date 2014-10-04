@@ -588,7 +588,7 @@ namespace AccesoADatos
             }
         }
 
-        public int registrarPartido(Partido partido, int idFecha, int idGrupo, int idFase, int idEdicion)
+        public void modificarPartido(Partido partido, int idFecha, int idGrupo, int idFase, int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -600,9 +600,12 @@ namespace AccesoADatos
                 trans = con.BeginTransaction();
                 cmd.Connection = con;
                 cmd.Transaction = trans;
-                string sql = @"INSERT INTO Partidos(idFecha, idGrupo, idFase, idEdicion, idEquipoLocal, idEquipoVisitante, fecha, idEstado, idArbitro, idCancha, golesLocal, golesVisitante)
-                                VALUES (@idFecha, @idGrupo, @idFase, @idEdicion, @idEquipoLocal, @idEquipoVisitante, @fecha, @idEstado, @idArbitro, @idCancha, @golesLocal, @golesVisitante)
-                                SELECT SCOPE_IDENTITY()";
+                string sql = @"UPDATE Partidos
+                                SET idFecha = @idFecha, idGrupo = @idGrupo, idFase = @idFase, idEdicion = @idEdicion, 
+                                idEquipoLocal = @idEquipoLocal, idEquipoVisitante = @idEquipoVisitante, fecha = @fecha,
+                                idEstado = @idEstado, idArbitro = @idArbitro, idCancha = @idCancha, golesLocal = @golesLocal, 
+                                golesVisitante = @golesVisitante
+                                WHERE idPartido = @idPartido";
                 //falta partido posterior
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idFecha", idFecha);
@@ -642,32 +645,73 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@golesVisitante", partido.golesVisitante);
                 else
                     cmd.Parameters.AddWithValue("@golesVisitante", DBNull.Value);
+                cmd.Parameters.AddWithValue("@idPartido", partido.idPartido);
                 cmd.CommandText = sql;
-                int idPartido = int.Parse(cmd.ExecuteScalar().ToString());
+                cmd.ExecuteScalar().ToString();
 
                 foreach (Gol gol in partido.goles)
                 {
-                    registrarGol(gol, idPartido, con, trans);
+                    registrarGol(gol, partido.idPartido, con, trans);
                 }
                 foreach (Tarjeta tarjeta in partido.tarjetas)
                 {
-                    registrarTarjeta(tarjeta, idPartido, con, trans);
+                    registrarTarjeta(tarjeta, partido.idPartido, con, trans);
                 }
                 foreach (Cambio cambio in partido.cambios)
                 {
-                    registrarCambio(cambio, idPartido, con, trans);
+                    registrarCambio(cambio, partido.idPartido, con, trans);
                 }
                 if(partido.local.idEquipo != null)
-                    registrarTitularesAPartido(partido.titularesLocal, partido.local.idEquipo, idPartido, con, trans);//titulares del equipo local
+                    registrarTitularesAPartido(partido.titularesLocal, partido.local.idEquipo, partido.idPartido, con, trans);//titulares del equipo local
                 if(partido.visitante.idEquipo != null)
-                    registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, idPartido, con, trans);//titulares del equipo visitante}
+                    registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}
                 trans.Commit();
-                return idPartido; //retorna el id del equipo generado por la BD
             }
             catch (Exception ex)
             {  
                 trans.Rollback();
                 throw new Exception("No se pudo registrar el equipo: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public List<TipoGol> obtenerTiposGol()
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<TipoGol> respuesta = new List<TipoGol>();
+            TipoGol tipoGol = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT * 
+                                FROM TiposGol";
+                cmd.Parameters.Clear();
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    tipoGol = new TipoGol()
+                    {
+                        idTipoGol = Int32.Parse(dr["idTipoGol"].ToString()),
+                        nombre = dr["nombre"].ToString()
+                    };
+                    respuesta.Add(tipoGol);
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
             }
             finally
             {
