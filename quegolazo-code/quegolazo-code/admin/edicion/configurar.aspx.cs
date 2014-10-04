@@ -64,9 +64,13 @@ namespace quegolazo_code.admin.edicion
                 rdJugadoresSi.Checked = true;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelJugadores", "showPanel('panelJugadores');", true);
                 rdJugadoresRegistroSi.Checked = gestorEdicion.edicion.preferencias.jugadoresXPartido;
+                rdJugadoresRegistroNo.Checked = !gestorEdicion.edicion.preferencias.jugadoresXPartido;
                 rdJugadoresGolesSi.Checked = gestorEdicion.edicion.preferencias.golesJugadores;
+                rdJugadoresGolesNo.Checked = !gestorEdicion.edicion.preferencias.golesJugadores;
                 rdJugadoresTarjetasSi.Checked = gestorEdicion.edicion.preferencias.tarjetasJugadores;
+                rdJugadoresTarjetasNo.Checked = !gestorEdicion.edicion.preferencias.tarjetasJugadores;
                 rdJugadoresCambiosSi.Checked = gestorEdicion.edicion.preferencias.cambiosJugadores;
+                rdJugadoresCambiosNo.Checked = !gestorEdicion.edicion.preferencias.cambiosJugadores;
             }
             //Preferencias Árbitros
             if (gestorEdicion.edicion.preferencias.arbitros)
@@ -74,7 +78,9 @@ namespace quegolazo_code.admin.edicion
                 rdArbitrosSi.Checked = true;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelSanciones", "showPanel('panelArbitros');", true);
                 rdArbitrosPorPartidoSi.Checked = gestorEdicion.edicion.preferencias.asignaArbitros;
+                rdArbitrosPorPartidoNo.Checked = !gestorEdicion.edicion.preferencias.asignaArbitros;
                 rdArbitroDesempenioSi.Checked = gestorEdicion.edicion.preferencias.desempenioArbitros;
+                rdArbitroDesempenioNo.Checked = !gestorEdicion.edicion.preferencias.desempenioArbitros;
             }
             //Preferencias Sanciones
             if (gestorEdicion.edicion.preferencias.sanciones)
@@ -82,7 +88,9 @@ namespace quegolazo_code.admin.edicion
                 rdSancionesSi.Checked = true;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelArbitros", "showPanel('panelSanciones');", true);
                 rdSancionesEquiposSi.Checked = gestorEdicion.edicion.preferencias.sancionesEquipos;
+                rdSancionesEquiposNo.Checked = !gestorEdicion.edicion.preferencias.sancionesEquipos;
                 rdSancionesJugadoresSi.Checked = gestorEdicion.edicion.preferencias.sancionesJugadores;
+                rdSancionesJugadoresNo.Checked = !gestorEdicion.edicion.preferencias.sancionesJugadores;
             }
             //Preferencia Canchas
             if (gestorEdicion.edicion.preferencias.canchas)
@@ -90,6 +98,7 @@ namespace quegolazo_code.admin.edicion
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelCanchas", "showPanel('panelCanchas');", true);
                 rdCanchasSi.Checked = true;
                 rdCanchasComplejos.Checked = gestorEdicion.edicion.preferencias.canchaUnica;
+                rdCanchasEquipos.Checked = !gestorEdicion.edicion.preferencias.canchaUnica;
             }
         }
     }
