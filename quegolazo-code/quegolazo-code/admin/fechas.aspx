@@ -13,7 +13,7 @@
                         <fieldset class="vgSeleccionarEdicion">
                             <div class="col-md-8">
                                 <div id="selectEdiciones">
-                                    <asp:DropDownList ID="ddlEquipos" runat="server" CssClass="form-control" required="true"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true"></asp:DropDownList>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -53,12 +53,12 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <h4 class="panel-title">
-                                                            <a data-toggle="collapse" data-parent="#fechas" href="#fase<%= idFaseActual() %>-fecha<%# Eval("idFecha") %>" style="font-size:15px;">
+                                                            <a data-toggle="collapse" data-parent="#fechas" href="#fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>" style="font-size:15px;">
                                                                 Fecha <%# Eval("idFecha") %> <small>Ver Más Detalles</small>
                                                             </a>
                                                         </h4>
                                                     </div>
-                                                    <div id="fase<%= idFaseActual() %>-fecha<%# Eval("idFecha") %>" class="panel-collapse collapse">
+                                                    <div id="fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>" class="panel-collapse collapse">
                                                         <div class="panel-body small-padding">
                                                             <table class="table nomargin-bottom">
                                                                 <thead style="display:none;">
@@ -70,14 +70,14 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                        <asp:Repeater ID="rptPartidos" runat="server">
+                                                                        <asp:Repeater ID="rptPartidos" runat="server" OnItemCommand="rptPartidos_ItemCommand">
                                                                             <ItemTemplate>
                                                                                 <tr>
                                                                                     <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "local")).nombre %></td>
                                                                                     <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "visitante")).nombre %></td>
                                                                                     <td>2-0</td>
                                                                                     <td>
-                                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="lnkConfigurar" runat="server"><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
+                                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="lnkAdministrarPartido" runat="server" CommandName="administrarPartido" CommandArgument='<%#Eval("idPartido")%>' ><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
                                                                                 </tr>
                                                                             </ItemTemplate>
                                                                         </asp:Repeater>
@@ -100,7 +100,7 @@
                                         <asp:Panel ID="panelSinFechas" runat="server">
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
-                                                    <span>No hay fechas registradas para el partido</span>
+                                                    <span>No hay fechas registradas para la fase</span>
                                                 </div>
                                             </div>
                                         </asp:Panel>
@@ -137,20 +137,20 @@
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">Equipos</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" runat="server" id="txtEquipoLocal" value="Boca Juniors" required="true" disabled="true">
+                                        <input type="text" class="form-control" runat="server" id="txtEquipoLocal" required="true" disabled="true">
                                     </div>
                                     <div class="col-lg-1">
                                         VS
                                     </div>
                                     <div class="col-lg-5">
-                                        <input type="text" class="form-control" runat="server" id="txtEquipoVisitante" value="River Plate" required="true" disabled="true">
+                                        <input type="text" class="form-control" runat="server" id="txtEquipoVisitante" required="true" disabled="true">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">Fecha</label>
                                     <div id="divFechaPartido" class="col-lg-10 input-append date">
                                         <div class="input-group input-group-md">
-                                            <input type="text" data-format="dd/MM/yyyy hh:mm" class="form-control" runat="server" id="txtFecha" placeholder="Sin Asignar" required="true">
+                                            <input type="text" data-format="dd/MM/yyyy hh:mm" class="form-control" runat="server" id="txtFecha" placeholder="Sin Asignar" required="true" fecha="true">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -172,12 +172,24 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="text" class="col-lg-2 control-label">Titulares</label>
+                                    <label for="text" class="col-lg-2 control-label">Titulares Local</label>
                                     <div class="col-lg-10">
-                                        <asp:Repeater ID="rptTitulares" runat="server">
+                                        <asp:Repeater ID="rptJugadoresEquipoLocal" runat="server">
                                             <ItemTemplate>
                                                 <div class="checkbox col-md-4">
-                                                    <label><input type="checkbox"> Juan Perez</label>
+                                                    <label><input type="checkbox" runat="server" value="<%#((Entidades.Jugador)Container.DataItem).idJugador %>"><%#((Entidades.Jugador)Container.DataItem).nombre %></label>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="text" class="col-lg-2 control-label">Titulares Visitante</label>
+                                    <div class="col-lg-10">
+                                        <asp:Repeater ID="rptJugadoresEquipoVisitante" runat="server">
+                                            <ItemTemplate>
+                                                <div class="checkbox col-md-4">
+                                                    <label><input type="checkbox" runat="server" value="<%#((Entidades.Jugador)Container.DataItem).idJugador %>"><%#((Entidades.Jugador)Container.DataItem).nombre %></label>
                                                 </div>
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -191,59 +203,38 @@
                                     <div class="col-lg-10">
                                         <p class="nomargin-bottom">
                                             <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Gol" onclick="showSubform('goles');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Gol</a>
-                                            <span class="label label-default label-md">18' Javier Mascherano
-                                                <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminar" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                            </span>
-                                            <span class="label label-default label-md">18' Javier Mascherano
-                                                <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton24" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                            </span>
+                                            <asp:Repeater ID="rptGoles" runat="server">
+                                                <ItemTemplate>
+                                                    <span class="label label-default label-md"><%# Eval("minuto")%>' <%# Eval("nombre")%>
+                                                        <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminarGol" runat="server" CommandName="eliminarGol" CommandArgument='<%# Eval("idGol") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                    </span>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
                                         </p>
                                         <div id="goles" style="display: none;" class="col-md-11 well well-sm alert-success">
                                             <fieldset class="vgGoles">
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
                                                     <div class="col-md-10">
-                                                        <select id="ddlGolEquipos" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Boca Juniors</option>
-                                                            <option>River Plate</option>
-                                                        </select>
+                                                        <asp:DropDownList id="ddlGolesEquipos" CssClass="form-control margin-xs input-sm" runat="server" required="true"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Jugador</label>
                                                     <div class="col-md-10">
-                                                        <select id="ddlGolJugadores" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                        </select>
+                                                        <asp:DropDownList ID="ddlGolesJugadores"  runat="server" CssClass="form-control margin-xs input-sm"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Tipo</label>
                                                     <div class="col-md-10">
-                                                        <select id="ddlGolTipos" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Cabeza</option>
-                                                            <option>Penal</option>
-                                                            <option>Tiro Libre</option>
-                                                            <option>Jugada</option>
-                                                            <option>En Contra</option>
-                                                        </select>
+                                                        <asp:DropDownList ID="ddlGolesTipos"  runat="server" CssClass="form-control margin-xs input-sm"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Minuto</label>
                                                     <div class="col-md-10">
-                                                        <input type="text" class="form-control margin-xs input-sm" id="txtGolMinuto" placeholder="Minuto" runat="server" maxlength="100" disabled >
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtGolesMinuto" placeholder="Minuto" runat="server" maxlength="3">
                                                     </div>
                                                 </div>
                                                 <asp:Button class="btn btn-default btn-xs causesValidation vgGoles pull-right" ID="btnGolAgregar" runat="server" Text="Agregar Gol" />
@@ -260,70 +251,40 @@
                                     <div class="col-lg-10">
                                         <p class="nomargin-bottom">
                                             <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Cambio" onclick="showSubform('cambios');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Cambio</a>
-                                            <span class="label label-default label-md">18' 
-                                                <span class="glyphicon glyphicon-arrow-up" style="color:green"></span> Javier Mascherano 
-                                                <span class="glyphicon glyphicon-arrow-down" style="color:red"></span> Javier Mascherano
-                                                <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton26" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                            </span>
-                                            <span class="label label-default label-md">18' 
-                                                <span class="glyphicon glyphicon-arrow-up" style="color:green"></span> Javier Mascherano 
-                                                <span class="glyphicon glyphicon-arrow-down" style="color:red"></span> Javier Mascherano
-                                                <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton27" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                            </span>
+                                            <asp:Repeater ID="rptCambios" runat="server">
+                                                <ItemTemplate>
+                                                    <span class="label label-default label-md"><%# Eval("minuto")%>' 
+                                                        <span class="glyphicon glyphicon-arrow-up" style="color:green"></span> <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %>
+                                                        <span class="glyphicon glyphicon-arrow-down" style="color:red"></span> <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %>
+                                                        <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminarCambio" runat="server" CommandName="eliminarCambio" CommandArgument='<%# Eval("idCambio") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                    </span>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
                                         </p>
                                         <div id="cambios" style="display: none;" class="col-md-11 well well-sm alert-success">
                                             <fieldset class="vgCambios">
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
                                                     <div class="col-md-10">
-                                                        <select id="ddlCambiosEquipos" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Boca Juniors</option>
-                                                            <option>River Plate</option>
-                                                        </select>
+                                                        <asp:DropDownList id="ddlCambiosEquipos" CssClass="form-control margin-xs input-sm" runat="server"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Entra</label>
                                                     <div class="col-md-10">
-                                                        <select id="ddlCambiosEntra" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                        </select>
+                                                        <asp:DropDownList ID="ddlCambiosJugadoresEntra" runat="server" CssClass="form-control margin-xs input-sm" required></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Sale</label>
                                                     <div class="col-md-10">
-                                                        <select id="ddlCambiosSale" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                        </select>
+                                                        <asp:DropDownList ID="ddlCambiosJugadoresSale" runat="server" CssClass="form-control margin-xs input-sm" required></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Minuto</label>
                                                     <div class="col-md-10">
-                                                        <input type="text" class="form-control margin-xs input-sm" id="txtCambiosMinuto" placeholder="Minuto" runat="server" maxlength="100" disabled >
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtCambiosMinuto" placeholder="Minuto" runat="server" maxLenght="3" />
                                                     </div>
                                                 </div>
                                                 <asp:Button class="btn btn-default btn-xs causesValidation vgCambios pull-right" ID="btnCambiosAgregar" runat="server" Text="Agregar Cambio" />
@@ -340,119 +301,51 @@
                                     <div class="col-lg-10">
                                            <p class="nomargin-bottom">
                                             <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Tarjeta" onclick="showSubform('tarjetas');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Tarjeta</a>
-                                            <span class="label label-default label-md">18' Javier Mascherano
-                                                <span class="glyphicon glyphicon-stop" style="color:yellow"></span>
-                                                <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton25" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                            </span>
-                                            <span class="label label-default label-md">18' Javier Mascherano
-                                                <span class="glyphicon glyphicon-stop" style="color:red"></span>
-                                                <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton28" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                            </span>
+                                            <asp:Repeater ID="rptTarjetas" runat="server">
+                                                <ItemTemplate>
+                                                    <span class="label label-default label-md"><%#Eval("minuto") %>' <%# Eval("nombre") %>
+                                                        <asp:Panel ID="panelTarjetaAmarilla" runat="server" Visible="False">
+                                                            <span class="glyphicon glyphicon-stop" style="color:yellow"></span>
+                                                        </asp:Panel>
+                                                        <asp:Panel ID="panel1" runat="server" Visible="False">
+                                                            <span class="glyphicon glyphicon-stop" style="color:red"></span>
+                                                        </asp:Panel>
+                                                        <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminarTarjeta" runat="server" CommandName="eliminarTarjeta" CommandArgument='<%# Eval("idTarjeta") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                    </span>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
                                         </p>
                                         <div id="tarjetas" style="display: none;" class="col-md-11 well well-sm alert-success">
                                             <fieldset class="vgTarjetas">
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
                                                     <div class="col-md-10">
-                                                        <select id="ddlTarjetasEquipo" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Boca Juniors</option>
-                                                            <option>River Plate</option>
-                                                        </select>
+                                                        <asp:DropDownList id="ddlTarjetasEquipos" CssClass="form-control margin-xs input-sm" runat="server"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Jugador</label>
                                                     <div class="col-md-10">
-                                                        <select id="ddlTarjetasJugador" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                        </select>
+                                                        <asp:DropDownList id="ddlTarjetasJugador" CssClass="form-control margin-xs input-sm" runat="server" required></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Tipo</label>
                                                     <div class="col-md-10">
-                                                        <select id="ddlTarjetasTipo" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Amarilla</option>
-                                                            <option>Roja</option>
+                                                        <select id="ddlTarjetasTipo" class="form-control margin-xs input-sm" required>
+                                                            <option value="A">Amarilla</option>
+                                                            <option value="R">Roja</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Minuto</label>
                                                     <div class="col-md-10">
-                                                        <input type="text" class="form-control margin-xs input-sm" id="Text3" placeholder="Minuto" runat="server" maxlength="100" disabled >
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtTarjetasMinuto" placeholder="Minuto" runat="server" maxlength="3" >
                                                     </div>
                                                 </div>
                                                 <asp:Button class="btn btn-default btn-xs causesValidation vgTarjetas pull-right" ID="btnTarjetaAgregar" runat="server" Text="Agregar Tarjeta" />
                                                 <button class="btn btn-default btn-xs pull-right" OnClick="hideSubform('tarjetas');return false;">Cancelar</button>
-                                            </fieldset>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="background-color:#F8F8F8">
-                                    <label class="col-lg-2 control-label" for="radios">
-                                        <span class="flaticon-whistle2 flaticon-form"></span>
-                                        Sanciones
-                                    </label>
-                                    <div class="col-lg-10">
-                                        <p class="nomargin-bottom">
-                                            <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Sanción" onclick="showSubform('sanciones');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Sanción</a>
-                                            <span class="label label-default label-md">Javier Mascherano
-                                                <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton29" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                            </span>
-                                            <span class="label label-default label-md">Boca Juniors
-                                                <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="LinkButton30" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                            </span>
-                                        </p>
-                                        <div id="sanciones" style="display: none;" class="col-md-11 well well-sm alert-success">
-                                            <fieldset class="vgSanciones">
-                                                <div class="form-group nomargin-bottom">
-                                                    <label for="text" class="col-md-2 control-label">Equipo</label>
-                                                    <div class="col-md-10">
-                                                        <select id="ddlSancionesEquipos" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Boca Juniors</option>
-                                                            <option>River Plate</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group nomargin-bottom">
-                                                    <label for="text" class="col-md-2 control-label">Jugador</label>
-                                                    <div class="col-md-10">
-                                                        <select id="ddlSancionesJugadores" class="form-control margin-xs input-sm" required disabled>
-                                                            <option>Sanción a Equipo</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                            <option>Javies Mascherano</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group nomargin-bottom">
-                                                    <label for="text" class="col-md-2 control-label">Motivo</label>
-                                                    <div class="col-md-10">
-                                                        <input type="text" class="form-control margin-xs input-sm" id="txtSancionesMotivo" placeholder="Motivo / Observación" runat="server" maxlength="100" disabled >
-                                                    </div>
-                                                </div>
-                                                <asp:Button class="btn btn-default btn-xs causesValidation vgSanciones pull-right" ID="btnSancionesAgregar" runat="server" Text="Agregar Sanción" />
-                                                <button class="btn btn-default btn-xs pull-right" OnClick="hideSubform('sanciones');return false;">Cancelar</button>
                                             </fieldset>
                                         </div>
                                     </div>

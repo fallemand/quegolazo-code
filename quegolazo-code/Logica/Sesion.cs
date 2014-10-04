@@ -78,15 +78,6 @@ namespace Logica
             System.Web.HttpContext.Current.Session["equipo"] = equipo;
         }       
         /// <summary>
-        /// Devuelve el objeto GestorEquipo que esta en la sesion, si es nulo, crea uno nuevo.
-        /// </summary>       
-        public static GestorEquipo getGestorEquipo()
-        {
-            if (System.Web.HttpContext.Current.Session["gestorEquipo"] == null)
-                System.Web.HttpContext.Current.Session["gestorEquipo"] = new GestorEquipo();
-            return (GestorEquipo)System.Web.HttpContext.Current.Session["gestorEquipo"];               
-        }
-        /// <summary>
         /// Devuelve el objeto GestorTorneo que se encuentra en Session, si es nulo, crea uno nuevo.
         /// </summary>
         /// <returns></returns>
@@ -112,6 +103,15 @@ namespace Logica
             return (GestorCancha)System.Web.HttpContext.Current.Session["gestorCancha"];
         }
         /// <summary>
+        /// Devuelve el objeto cancha que se encuentra en Session, si es nulo, crea uno nuevo
+        /// </summary>        
+        public static GestorPartido getGestorPartido()
+        {
+            if (System.Web.HttpContext.Current.Session["gestorPartido"] == null)
+                System.Web.HttpContext.Current.Session["gestorPartido"] = new GestorPartido();
+            return (GestorPartido)System.Web.HttpContext.Current.Session["gestorPartido"];
+        }
+        /// <summary>
         /// Devuelve el objeto GestorJugador que se encuentra en Session, si es nulo, crea uno nuevo
         /// </summary>        
         public static GestorJugador getGestorJugador()
@@ -128,6 +128,15 @@ namespace Logica
             if (System.Web.HttpContext.Current.Session["gestorArbitro"] == null)
                 System.Web.HttpContext.Current.Session["gestorArbitro"] = new GestorArbitro();
             return (GestorArbitro)System.Web.HttpContext.Current.Session["gestorArbitro"];
+        }
+        /// <summary>
+        /// Devuelve el objeto GestorEquipo que se encuentra en Session, si es nulo, crea uno nuevo
+        /// </summary>        
+        public static GestorEquipo getGestorEquipo()
+        {
+            if (System.Web.HttpContext.Current.Session["gestorEquipo"] == null)
+                System.Web.HttpContext.Current.Session["gestorEquipo"] = new GestorEquipo();
+            return (GestorEquipo)System.Web.HttpContext.Current.Session["gestorEquipo"];
         }
         /// <summary>
         /// Devuelve el objeto GestorNoticia que se encuentra en Session, si es nulo, crea uno nuevo

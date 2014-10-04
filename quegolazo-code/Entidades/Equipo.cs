@@ -14,6 +14,7 @@ namespace Entidades
         public string colorCamisetaPrimario { get; set; }
         public string colorCamisetaSecundario { get; set; }
         public string directorTecnico { get; set; }
+        public List<Jugador> jugadores { get; set; } 
         public Delegado delegadoPrincipal { get; set; }
         public Delegado delegadoOpcional { get; set; }
 
