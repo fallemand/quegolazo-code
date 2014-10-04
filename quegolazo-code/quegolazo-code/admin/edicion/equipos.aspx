@@ -60,10 +60,6 @@
             }
         });
         $('#select-all').click(function () {
-            $('#hfEquiposSeleccionados').val("");
-            //$("#lstEquiposSeleccionados option").each(function () {
-            //     $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + $(this).val() + ',');
-            //});
             $('#lstEquiposSeleccionados').multiSelect('select_all');
             return false;
         });
