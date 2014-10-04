@@ -60,12 +60,16 @@
             }
         });
         $('#select-all').click(function () {
+            $('#hfEquiposSeleccionados').val("");
+            //$("#lstEquiposSeleccionados option").each(function () {
+            //     $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + $(this).val() + ',');
+            //});
             $('#lstEquiposSeleccionados').multiSelect('select_all');
             return false;
         });
         $('#deselect-all').click(function () {
-            $('#hfEquiposSeleccionados').val("");
             $('#lstEquiposSeleccionados').multiSelect('deselect_all');
+            $('#hfEquiposSeleccionados').val("");
             return false;
         });
     </script>
