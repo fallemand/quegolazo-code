@@ -182,8 +182,8 @@ namespace AccesoADatos
                                     VALUES (@idEquipo, @idJugadorEntra, @idJugadorSale, @minuto, @idPartido)";
                 cmd.Parameters.Clear();                
                 cmd.Parameters.AddWithValue("@idEquipo", cambio.idEquipo);
-                cmd.Parameters.AddWithValue("@idJugadorEntra", cambio.idJugadorEntra);
-                cmd.Parameters.AddWithValue("@idJugadorSale", cambio.idJugadorSale);
+                cmd.Parameters.AddWithValue("@idJugadorEntra", cambio.jugadorEntra.idJugador);
+                cmd.Parameters.AddWithValue("@idJugadorSale", cambio.jugadorSale.idJugador);
                 if(cambio.minuto != null)
                     cmd.Parameters.AddWithValue("@minuto", cambio.minuto);  
                 else
@@ -368,7 +368,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idPartido">Id de Partido</param>
         /// <returns>Lista genérica de objeto Gol</returns>
-        public List<Gol> obtenerGolesPorDeUnPartido(int idPartido)
+        public List<Gol> obtenerGolesDePartido(int idPartido)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -479,7 +479,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idPartido">Id de Partido</param>
         /// <returns>Lista genérica de objeto Cambio</returns>
-        public List<Cambio> obtenerCambiosPorDeUnPartido(int idPartido)
+        public List<Cambio> obtenerCambiosDePartido(int idPartido)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -506,8 +506,8 @@ namespace AccesoADatos
                         cambio.minuto = Int32.Parse(dr["minuto"].ToString());
                     else
                         cambio.minuto = null;                    
-                    cambio.idJugadorEntra = Int32.Parse(dr["idJugadorEntra"].ToString());
-                    cambio.idJugadorSale = Int32.Parse(dr["idJugadorSale"].ToString());
+                    cambio.jugadorEntra.idJugador = Int32.Parse(dr["idJugadorEntra"].ToString());
+                    cambio.jugadorSale.idJugador = Int32.Parse(dr["idJugadorSale"].ToString());
                     cambio.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
                     cambios.Add(cambio);
                 }
