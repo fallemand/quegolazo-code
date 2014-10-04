@@ -320,7 +320,7 @@ namespace AccesoADatos
                 string sql = @"SELECT p.idPartido AS 'idPartido', e1.idEquipo AS 'idEquipoLocal', e1.nombre AS 'nombreLocal',
                                 e2.idEquipo AS 'idEquipoVisitante', e2.nombre AS 'nombreVisitante', a.idArbitro AS 'idArbitro',
                                 a.nombre AS 'nombreArbitro', c.idCancha AS 'idCancha', c.nombre AS 'nombreCancha', e.idEstado AS 'idEstado',
-                                e.nombre AS 'nombreEstado', p.fechaHora AS 'fechaHora'
+                                e.nombre AS 'nombreEstado', p.fecha AS 'fecha'
                                 FROM Partidos p 
                                 LEFT OUTER JOIN Equipos e1 ON p.idEquipoLocal = e1.idEquipo 
                                 LEFT OUTER JOIN Equipos e2 ON p.idEquipoVisitante = e2.idEquipo
@@ -345,23 +345,20 @@ namespace AccesoADatos
                         partido.arbitro.nombre = dr["nombreArbitro"].ToString();
                     }
                     else
-                    {
-                        partido.arbitro.idArbitro = 0;
                         partido.arbitro = null;
-                    }
                     if (dr["idCancha"] != System.DBNull.Value)
                     {
                         partido.cancha.idCancha = Int32.Parse(dr["idCancha"].ToString());
                         partido.cancha.nombre = dr["nombreCancha"].ToString();
                     }
                     else
-                    {
-                        partido.cancha.idCancha = 0;
-                        partido.cancha = null;
-                    }                        
+                        partido.cancha = null;                     
                     partido.estado.idEstado = Int32.Parse(dr["idEstado"].ToString());
                     partido.estado.nombre = dr["nombreEstado"].ToString();
-                    partido.fechaHora = DateTime.Parse(dr["fechaHora"].ToString());                    
+                    if (dr["fecha"] != System.DBNull.Value)
+                        partido.fecha = DateTime.Parse(dr["fecha"].ToString());
+                    else
+                        partido.fecha = null;
                 }
                 if (dr != null)
                     dr.Close();
@@ -384,7 +381,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idPartido">Id de Partido</param>
         /// <returns>Lista genérica de objeto Gol</returns>
-        public List<Gol> obtenerGolesDePartido(int idPartido)
+        public List<Gol> obtenerGoles(int idPartido)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -445,7 +442,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idPartido">Id de Partido</param>
         /// <returns>Lista genérica de objeto Tarjeta</returns>
-        public List<Tarjeta> obtenerTarjetasPorDeUnPartido(int idPartido)
+        public List<Tarjeta> obtenerTarjetas(int idPartido)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -495,7 +492,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idPartido">Id de Partido</param>
         /// <returns>Lista genérica de objeto Cambio</returns>
-        public List<Cambio> obtenerCambiosDePartido(int idPartido)
+        public List<Cambio> obtenerCambios(int idPartido)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -640,8 +637,8 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@idEquipoVisitante", partido.visitante.idEquipo);
                 else
                     cmd.Parameters.AddWithValue("@idEquipoVisitante", DBNull.Value);
-                if (partido.fechaHora != null)
-                    cmd.Parameters.AddWithValue("@fecha", partido.fechaHora);
+                if (partido.fecha != null)
+                    cmd.Parameters.AddWithValue("@fecha", partido.fecha);
                 else
                     cmd.Parameters.AddWithValue("@fecha", DBNull.Value);
                 cmd.Parameters.AddWithValue("@idEstado", partido.estado.idEstado);

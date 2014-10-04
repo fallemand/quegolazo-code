@@ -13,13 +13,13 @@ namespace quegolazo_code.admin {
     public partial class fechas {
         
         /// <summary>
-        /// Control ddlEquipos.
+        /// Control ddlEdiciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEquipos;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEdiciones;
         
         /// <summary>
         /// Control btnSeleccionarEdicion.
@@ -121,40 +121,67 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.DropDownList ddlCanchas;
         
         /// <summary>
-        /// Control rptTitulares.
+        /// Control rptJugadoresEquipoLocal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptTitulares;
+        protected global::System.Web.UI.WebControls.Repeater rptJugadoresEquipoLocal;
         
         /// <summary>
-        /// Control lnkEliminar.
+        /// Control rptJugadoresEquipoVisitante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkEliminar;
+        protected global::System.Web.UI.WebControls.Repeater rptJugadoresEquipoVisitante;
         
         /// <summary>
-        /// Control LinkButton24.
+        /// Control rptGoles.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton24;
+        protected global::System.Web.UI.WebControls.Repeater rptGoles;
         
         /// <summary>
-        /// Control txtGolMinuto.
+        /// Control ddlGolesEquipos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtGolMinuto;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGolesEquipos;
+        
+        /// <summary>
+        /// Control ddlGolesJugadores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGolesJugadores;
+        
+        /// <summary>
+        /// Control ddlGolesTipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGolesTipos;
+        
+        /// <summary>
+        /// Control txtGolesMinuto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtGolesMinuto;
         
         /// <summary>
         /// Control btnGolAgregar.
@@ -166,22 +193,40 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnGolAgregar;
         
         /// <summary>
-        /// Control LinkButton26.
+        /// Control rptCambios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton26;
+        protected global::System.Web.UI.WebControls.Repeater rptCambios;
         
         /// <summary>
-        /// Control LinkButton27.
+        /// Control ddlCambiosEquipos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton27;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCambiosEquipos;
+        
+        /// <summary>
+        /// Control ddlCambiosJugadoresEntra.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCambiosJugadoresEntra;
+        
+        /// <summary>
+        /// Control ddlCambiosJugadoresSale.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCambiosJugadoresSale;
         
         /// <summary>
         /// Control txtCambiosMinuto.
@@ -202,31 +247,40 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnCambiosAgregar;
         
         /// <summary>
-        /// Control LinkButton25.
+        /// Control rptTarjetas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton25;
+        protected global::System.Web.UI.WebControls.Repeater rptTarjetas;
         
         /// <summary>
-        /// Control LinkButton28.
+        /// Control ddlTarjetasEquipos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton28;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTarjetasEquipos;
         
         /// <summary>
-        /// Control Text3.
+        /// Control ddlTarjetasJugador.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text3;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTarjetasJugador;
+        
+        /// <summary>
+        /// Control txtTarjetasMinuto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTarjetasMinuto;
         
         /// <summary>
         /// Control btnTarjetaAgregar.
@@ -236,42 +290,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnTarjetaAgregar;
-        
-        /// <summary>
-        /// Control LinkButton29.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton29;
-        
-        /// <summary>
-        /// Control LinkButton30.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton30;
-        
-        /// <summary>
-        /// Control txtSancionesMotivo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtSancionesMotivo;
-        
-        /// <summary>
-        /// Control btnSancionesAgregar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSancionesAgregar;
         
         /// <summary>
         /// Control panel2.

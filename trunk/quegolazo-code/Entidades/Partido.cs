@@ -12,7 +12,7 @@ namespace Entidades
         public Equipo visitante { get; set; }
         public Arbitro arbitro { get; set; }
         public Cancha cancha { get; set; }
-        public DateTime fechaHora { get; set; }
+        public DateTime? fecha { get; set; }
         public List<Jugador> titularesLocal { get; set; } //listo
         public List<Jugador> titularesVisitante { get; set; } //listo
         public List<Gol> goles { get; set; } //listo
@@ -29,9 +29,13 @@ namespace Entidades
             visitante = new Equipo();
             estado = new Estado();
             titularesLocal = new List<Jugador>();
+            titularesVisitante = new List<Jugador>();
             goles = new List<Gol>();
             tarjetas = new List<Tarjeta>();
             cambios = new List<Cambio>();
+            arbitro = new Arbitro();
+            cancha = new Cancha();
+
         }
     }
 }
