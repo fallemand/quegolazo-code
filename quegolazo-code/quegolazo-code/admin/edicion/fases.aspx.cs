@@ -25,7 +25,17 @@ namespace quegolazo_code.admin.edicion
             //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ idEdicion:" + Sesion.getGestorEdicion().edicion.idEdicion + ", idTorneo:" + Sesion.getTorneo().idTorneo + " , equiposDeLaEdicion: " + equipos + "});", true);
             
-        }             
+        }
+
+        protected void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(GestorUrl.eCONFIRMAR);
+        }
+
+        protected void btnAtras_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(GestorUrl.eEQUIPOS);
+        }
 
         [WebMethod(enableSession : true)]        
         public static object guardarFases(object JSONFases)
@@ -45,12 +55,5 @@ namespace quegolazo_code.admin.edicion
                 return new HttpStatusCodeResult(500, "Ha ocurrido un error, intenta nuevamente luego, si el problema persiste contactate con nuestro soporte tecnico. Detalle técnico :{"+ex.Message +"}");
             }
         }
-          
-
-        protected void btnSiguiente_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(GestorUrl.eCONFIRMAR);
-        }
-
     }
 }

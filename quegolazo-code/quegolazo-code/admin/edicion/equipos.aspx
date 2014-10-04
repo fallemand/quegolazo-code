@@ -27,6 +27,7 @@
             </asp:UpdatePanel>
         </div>
         <div class="panel-footer clearfix ">
+            <asp:Button ID="btnAtras" runat="server" Text="Atrás" CssClass="btn btn-success pull-left" OnClick="btnAtras_Click"/>
             <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClick="btnSiguiente_Click"/>
         </div>
     </div>
@@ -50,7 +51,7 @@
     <script>
         $('#lstEquiposSeleccionados').multiSelect({
             selectableHeader: "<div class='well well-sm alert-success nomargin-bottom'>Listado de Equipos <a href='#' id='select-all' class='btn btn-xs btn-default pull-right'>Seleccionar Todos <span class='glyphicon glyphicon-chevron-right'></span></a></div>",
-            selectionHeader: "<div class='well well-sm alert-success nomargin-bottom'>Equipos Seleccionados <a href='#' id='deselect-all' class='btn btn-xs btn-default pull-right'><span class='glyphicon glyphicon-chevron-right'></span> Quitar Todos</a></div>",
+            selectionHeader: "<div class='well well-sm alert-success nomargin-bottom'>Equipos Seleccionados <a href='#' id='deselect-all' class='btn btn-xs btn-default pull-right'><span class='glyphicon glyphicon-chevron-left'></span> Quitar Todos</a></div>",
             afterSelect: function (values) {
                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + values + ',');
             },
@@ -63,6 +64,7 @@
             return false;
         });
         $('#deselect-all').click(function () {
+            $('#hfEquiposSeleccionados').val("");
             $('#lstEquiposSeleccionados').multiSelect('deselect_all');
             return false;
         });

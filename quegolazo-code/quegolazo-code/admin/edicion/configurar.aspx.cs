@@ -32,21 +32,31 @@ namespace quegolazo_code.admin.edicion
             {
                 //Preferencias Jugadores
                 gestorEdicion.edicion.preferencias.jugadores = rdJugadoresSi.Checked;
-                gestorEdicion.edicion.preferencias.jugadoresXPartido = rdJugadoresRegistroSi.Checked;
-                gestorEdicion.edicion.preferencias.golesJugadores = rdJugadoresGolesSi.Checked;
-                gestorEdicion.edicion.preferencias.tarjetasJugadores = rdJugadoresTarjetasSi.Checked;
-                gestorEdicion.edicion.preferencias.cambiosJugadores = rdJugadoresCambiosSi.Checked;
-                //Preferencias Árbitros
+                if (rdJugadoresSi.Checked)
+                {                    
+                    gestorEdicion.edicion.preferencias.jugadoresXPartido = rdJugadoresRegistroSi.Checked;
+                    gestorEdicion.edicion.preferencias.golesJugadores = rdJugadoresGolesSi.Checked;
+                    gestorEdicion.edicion.preferencias.tarjetasJugadores = rdJugadoresTarjetasSi.Checked;
+                    gestorEdicion.edicion.preferencias.cambiosJugadores = rdJugadoresCambiosSi.Checked;
+                }
                 gestorEdicion.edicion.preferencias.arbitros = rdArbitrosSi.Checked;
-                gestorEdicion.edicion.preferencias.asignaArbitros = rdArbitrosPorPartidoSi.Checked;
-                gestorEdicion.edicion.preferencias.desempenioArbitros = rdArbitroDesempenioSi.Checked;
-                //Preferencias Sanciones
+                //Preferencias Árbitros
+                if (rdArbitrosSi.Checked)
+                {                    
+                    gestorEdicion.edicion.preferencias.asignaArbitros = rdArbitrosPorPartidoSi.Checked;
+                    gestorEdicion.edicion.preferencias.desempenioArbitros = rdArbitroDesempenioSi.Checked;
+                }
                 gestorEdicion.edicion.preferencias.sanciones = rdSancionesSi.Checked;
-                gestorEdicion.edicion.preferencias.sancionesEquipos = rdSancionesEquiposSi.Checked;
-                gestorEdicion.edicion.preferencias.sancionesJugadores = rdSancionesJugadoresSi.Checked;
-                //Preferencia Canchas
+                //Preferencias Sanciones
+                if (rdSancionesSi.Checked)
+                {                    
+                    gestorEdicion.edicion.preferencias.sancionesEquipos = rdSancionesEquiposSi.Checked;
+                    gestorEdicion.edicion.preferencias.sancionesJugadores = rdSancionesJugadoresSi.Checked; 
+                }
                 gestorEdicion.edicion.preferencias.canchas = rdCanchasSi.Checked;
-                gestorEdicion.edicion.preferencias.canchaUnica = rdCanchasComplejos.Checked;
+                //Preferencia Canchas
+                if (rdCanchasSi.Checked)
+                    gestorEdicion.edicion.preferencias.canchaUnica = rdCanchasComplejos.Checked;                 
                 Response.Redirect(GestorUrl.eEQUIPOS); 
             }
             catch (Exception ex)
@@ -97,7 +107,10 @@ namespace quegolazo_code.admin.edicion
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelCanchas", "showPanel('panelCanchas');", true);
                 rdCanchasSi.Checked = true;
-                rdCanchasComplejos.Checked = gestorEdicion.edicion.preferencias.canchaUnica;
+                if (gestorEdicion.edicion.preferencias.canchaUnica)
+                    rdCanchasComplejos.Checked = true;
+                else
+                    rdCanchasEquipos.Checked = true;                 
                 rdCanchasEquipos.Checked = !gestorEdicion.edicion.preferencias.canchaUnica;
             }
         }

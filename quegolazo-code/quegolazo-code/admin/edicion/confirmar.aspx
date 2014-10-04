@@ -109,6 +109,7 @@
          <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
         <div class="panel-footer clearfix ">
+            <asp:Button ID="btnAtras" runat="server" Text="Atrás" CssClass="btn btn-success pull-left" OnClick="btnAtras_Click"/>
             <asp:Button ID="btnRegistrar" runat="server" Text="Registrar Configuración" OnClick="btnRegistrar_Click" CssClass="btn btn-success pull-right"/>
         </div>
               </ContentTemplate>

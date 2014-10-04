@@ -13,12 +13,10 @@ namespace quegolazo_code.admin.edicion
     {
         GestorEquipo gestorEquipo=new GestorEquipo();
         GestorEdicion gestorEdicion = new GestorEdicion();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 gestorEquipo = Sesion.getGestorEquipo();
                 gestorEdicion = Sesion.getGestorEdicion();
                 limpiarPaneles();
@@ -30,8 +28,11 @@ namespace quegolazo_code.admin.edicion
             {
                 mostrarPanelFracaso(ex.Message);
             }
+        }
 
-
+        protected void btnAtras_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(GestorUrl.eCONFIGURAR);
         }
 
         public void cargarEquipos()
