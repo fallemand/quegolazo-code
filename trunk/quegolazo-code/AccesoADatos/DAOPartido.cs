@@ -339,10 +339,26 @@ namespace AccesoADatos
                     partido.local.nombre = dr["nombreLocal"].ToString();
                     partido.visitante.idEquipo = Int32.Parse(dr["idEquipoLocal"].ToString());
                     partido.visitante.nombre = dr["nombreVisitante"].ToString();
-                    partido.arbitro.idArbitro = Int32.Parse(dr["idArbitro"].ToString());
-                    partido.arbitro.nombre = dr["nombreArbitro"].ToString();
-                    partido.cancha.idCancha = Int32.Parse(dr["idCancha"].ToString());
-                    partido.cancha.nombre = dr["nombreCancha"].ToString();
+                    if (dr["idArbitro"] != System.DBNull.Value)
+                    {
+                        partido.arbitro.idArbitro = Int32.Parse(dr["idArbitro"].ToString());
+                        partido.arbitro.nombre = dr["nombreArbitro"].ToString();
+                    }
+                    else
+                    {
+                        partido.arbitro.idArbitro = 0;
+                        partido.arbitro = null;
+                    }
+                    if (dr["idCancha"] != System.DBNull.Value)
+                    {
+                        partido.cancha.idCancha = Int32.Parse(dr["idCancha"].ToString());
+                        partido.cancha.nombre = dr["nombreCancha"].ToString();
+                    }
+                    else
+                    {
+                        partido.cancha.idCancha = 0;
+                        partido.cancha = null;
+                    }                        
                     partido.estado.idEstado = Int32.Parse(dr["idEstado"].ToString());
                     partido.estado.nombre = dr["nombreEstado"].ToString();
                     partido.fechaHora = DateTime.Parse(dr["fechaHora"].ToString());                    
