@@ -136,8 +136,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"INSERT INTO ConfiguracionesEdicion (jugadores,cambiosJugadores, tarjetasJugadores, golesJugadores,asignacionArbitros, desempenioArbitros,canchaUnica,sancionesEquipos, sancionesJugadores, arbitros ,sanciones , idEdicion, jugadorXPartido )
-                                              VALUES (@jugadores,@cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @canchaUnica, @sancionesEquipos, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion, @jugadorXPartido)";
+                string sql = @"INSERT INTO ConfiguracionesEdicion (jugadores,cambiosJugadores, tarjetasJugadores, golesJugadores,asignacionArbitros, desempenioArbitros, canchas, canchaUnica,sancionesEquipos, sancionesJugadores, arbitros ,sanciones , idEdicion, jugadorXPartido )
+                                              VALUES (@jugadores,@cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @canchas, @canchaUnica, @sancionesEquipos, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion, @jugadorXPartido)";
                 cmd.Parameters.Clear();
                 //Jugadores
                 cmd.Parameters.AddWithValue("@jugadores", edicion.preferencias.jugadores);
@@ -150,6 +150,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@asignacionArbitros", edicion.preferencias.asignaArbitros);
                 cmd.Parameters.AddWithValue("@desempenioArbitros", edicion.preferencias.desempenioArbitros);
                 //Cancha
+                cmd.Parameters.AddWithValue("@canchas", edicion.preferencias.canchas);
                 cmd.Parameters.AddWithValue("@canchaUnica", edicion.preferencias.canchaUnica);
                 //Sanciones
                 cmd.Parameters.AddWithValue("@sancionesEquipos", edicion.preferencias.sancionesEquipos);
@@ -505,8 +506,6 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                 cmd.CommandText = sql;
-                DAOTipoSuperficie daoTipoSupericie = new DAOTipoSuperficie();
-                DAOCancha daoCancha = new DAOCancha();
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
@@ -526,7 +525,7 @@ namespace AccesoADatos
                     preferencias.sancionesEquipos = bool.Parse(dr["sancionesEquipos"].ToString());
                     preferencias.sancionesJugadores = bool.Parse(dr["sancionesJugadores"].ToString());
                     //Canchas
-                    preferencias.canchas = bool.Parse(dr["canchaUnica"].ToString());
+                    preferencias.canchas = bool.Parse(dr["canchas"].ToString());
                     preferencias.canchaUnica = bool.Parse(dr["canchaUnica"].ToString());
                 }
                 if (dr != null)
@@ -690,6 +689,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@asignacionArbitros", edicion.preferencias.asignaArbitros);
                 cmd.Parameters.AddWithValue("@desempenioArbitros", edicion.preferencias.desempenioArbitros);
                 //Cancha
+                cmd.Parameters.AddWithValue("@canchas", edicion.preferencias.canchas);
                 cmd.Parameters.AddWithValue("@canchaUnica", edicion.preferencias.canchaUnica);
                 //Sanciones
                 cmd.Parameters.AddWithValue("@sancionesEquipos", edicion.preferencias.sancionesEquipos);

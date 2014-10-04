@@ -97,5 +97,10 @@ namespace quegolazo_code.admin.edicion
                 litCantEquipoGrupo.Text = (gestorEdicion.edicion.equipos.Count / ((Fase)e.Item.DataItem).grupos.Count).ToString();
             }
         }
+
+        protected void btnAtras_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(GestorUrl.eFASES);
+        }
     }
 }

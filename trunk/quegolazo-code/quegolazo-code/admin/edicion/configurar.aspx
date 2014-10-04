@@ -197,7 +197,7 @@
                     </div>
                     <div id="panelCanchas" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <label class="control-label col-md-5" for="radios">¿Donde se jugarán los partidos?</label>
+                            <label class="control-label col-md-5" for="radios">¿Dónde se jugarán los partidos?</label>
                             <div class="col-md-7">
                                 <label class="radio-inline">
                                     <input type="radio" name="rbgCanchasSubPanel" id="rdCanchasComplejos" runat="server">
