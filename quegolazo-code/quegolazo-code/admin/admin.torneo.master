@@ -12,7 +12,7 @@
             <div class="container">
                 <ul class="mainnav">
                     <li class="active"><a href="<%=Logica.GestorUrl.aINDEX %>"><i class="flaticon-football141"></i><span>Principal</span> </a></li>
-                    <li><a href="<%=Logica.GestorUrl.aTORNEOS %>"><i class="flaticon-trophy5"></i><span></span>Torneos</a> </li>
+                    <li><a href="<%=Logica.GestorUrl.aEDICIONES %>"><i class="flaticon-trophy5"></i><span></span>Ediciones</a> </li>
                     <li><a href="<%=Logica.GestorUrl.aEQUIPOS %>"><i class="flaticon-soccer18"></i><span>Equipos</span> </a></li>
                     <li><a href="<%=Logica.GestorUrl.aJUGADORES %>"><i class="flaticon-football99"></i><span>Jugadores</span> </a></li>
                     <li><a href="<%=Logica.GestorUrl.aARBITROS %>"><i class="flaticon-football85"></i><span>Arbitros</span> </a></li>

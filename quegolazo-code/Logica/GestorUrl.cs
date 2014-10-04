@@ -18,6 +18,7 @@ namespace Logica
         public const string aTORNEOS = "/admin/torneos.aspx";
         public const string aNOTICIAS = "/admin/noticias.aspx";
         public const string aFECHAS = "/admin/fechas.aspx";
+        public const string aEDICIONES = "/admin/ediciones.aspx";
 
         //Forms en carpeta Edición
         public const string eCONFIGURAR = "/admin/edicion/configurar.aspx";
