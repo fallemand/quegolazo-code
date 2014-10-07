@@ -19,6 +19,10 @@ namespace quegolazo_code.admin.edicion
             //Tomar gestores de la sesión
             gestorEdicion = Sesion.getGestorEdicion();
             gestorFase = Sesion.getGestorFase();
+            if (gestorEdicion.edicion.equipos.Count < 2)
+            {
+                Response.Redirect(GestorUrl.eEQUIPOS);
+            }
             if (!Page.IsPostBack)
             {
                 //Edición

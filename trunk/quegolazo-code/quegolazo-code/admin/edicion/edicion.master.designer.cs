@@ -40,42 +40,6 @@ namespace quegolazo_code.admin.edicion {
         protected global::System.Web.UI.WebControls.Literal litNombreEdicion;
         
         /// <summary>
-        /// Control lbCriterios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lbCriterios;
-        
-        /// <summary>
-        /// Control lbVaribles.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lbVaribles;
-        
-        /// <summary>
-        /// Control lbAlterntivas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lbAlterntivas;
-        
-        /// <summary>
-        /// Control lbGenerarInforme.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lbGenerarInforme;
-        
-        /// <summary>
         /// Control barraProgreso.
         /// </summary>
         /// <remarks>

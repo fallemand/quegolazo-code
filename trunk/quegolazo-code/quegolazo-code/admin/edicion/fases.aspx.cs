@@ -19,7 +19,11 @@ namespace quegolazo_code.admin.edicion
         protected void Page_Load(object sender, EventArgs e)
         {
             gestorFase = Sesion.getGestorFase();
-            gestorEdicion = Sesion.getGestorEdicion();            
+            gestorEdicion = Sesion.getGestorEdicion();     
+            if(gestorEdicion.edicion.equipos.Count<2)
+            {
+                Response.Redirect(GestorUrl.eEQUIPOS);
+            }
             string equipos = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.equipos);
             if(!IsPostBack)
             //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
