@@ -70,8 +70,8 @@ namespace Utils
             msg.IsBodyHtml = true;
             smtp.Port = 587;
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.Credentials = new System.Net.NetworkCredential("florenciarojasamaya@gmail.com", "pinky345");
-            //smtp.Credentials = new System.Net.NetworkCredential("quegolazo.soporte@gmail.com", "quegolazo123");
+          
+            smtp.Credentials = new System.Net.NetworkCredential("quegolazo.soporte@gmail.com", "quegolazo123");
             smtp.EnableSsl = true;
             smtp.Send(msg);
         }
