@@ -18,19 +18,19 @@
                             <div class="list-group">
                                 <asp:UpdatePanel ID="upMaster" runat="server">
                                     <ContentTemplate>
-                                        <a href="<%=Logica.GestorUrl.aTORNEOS %>" class="list-group-item" rel="txtTooltip" data-toggle="tooltip" data-placement="bottom" title="Ver Mis Ediciones">
+                                        <a href="<%=Logica.GestorUrl.aEDICIONES%>" class="list-group-item" rel="txtTooltip" data-toggle="tooltip" data-placement="bottom" title="Ver Mis Ediciones">
                                             <strong><asp:Literal ID="litNombreEdicion" runat="server"></asp:Literal></strong>
                                         </a>
-                                        <a href="configurar.aspx" class="list-group-item" id="lbCriterios" runat="server">
+                                        <a href="<%=Logica.GestorUrl.eCONFIGURAR%>" class="list-group-item" id="lbCriterios" >
                                             1. Configurar Preferencias
                                         </a>
-                                        <a href="equipos.aspx" class="list-group-item" id="lbVaribles" runat="server">
+                                        <a href="<%=Logica.GestorUrl.eEQUIPOS%>" class="list-group-item" id="lbVaribles" >
                                             2. Asignar Equipos
                                         </a>
-                                        <a href="fases.aspx" class="list-group-item" id="lbAlterntivas" runat="server">
+                                        <a href="<%=Logica.GestorUrl.eFASES%>" class="list-group-item" id="lbAlterntivas" >
                                             3. Generar Fases
                                         </a>
-                                        <a href="generar-informe.aspx" class="list-group-item" id="lbGenerarInforme" runat="server">
+                                        <a href="<%=Logica.GestorUrl.eCONFIRMAR%>" class="list-group-item" id="lbGenerarInforme" >
                                             4. Editar Fechas
                                         </a>
                                         <a href="#" class="list-group-item disabled">
