@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/edicion/edicion.master" AutoEventWireup="true" CodeBehind="fases.aspx.cs" Inherits="quegolazo_code.admin.edicion.fases" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeaderEdicion" runat="server">    
-    <script src="../../resources/js/jquery.ui/jquery-ui.js"></script>  
+    <script src="../../resources/js/jquery.ui/jquery-ui.min.js"></script>
     <script src="../../resources/js/quegolazo.js"></script>
     <script src="../../resources/js/widgetFases.js"></script>
     <script src="../../resources/js/jquery.bracket.min.js"></script>
@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-md-12" id="contenedorFases">
                     <p class="bs-component">    
-                        <input id="agregarFase" type="button" class="btn btn-lg btn-success" onclick="$('#contenedorFases').generadorDeFases('crearFase');" value="Agregar Fase" />                                        
+                        <input id="agregarFase" type="button" class="btn btn-lg btn-success" onclick="$('#contenedorFases').generadorDeFases('agregarNuevaFase');" value="Agregar Fase" />                                        
                      
                 </div>
             </div>
@@ -40,7 +40,7 @@
         
     </div>
         <div class="panel-footer clearfix ">
-            <asp:Button ID="btnAtras" runat="server" Text="Atrás" CssClass="btn btn-success pull-left" OnClick="btnAtras_Click"/>
+            <asp:Button ID="btnAtras" runat="server" Text="Atrás" CssClass="btn btn-success pull-left" ClientIDMode="Static" OnClick="btnAtras_Click"/>
             <asp:Button ID="btnSiguiente" runat="server" Text="Siguiente" CssClass="btn btn-success pull-right" OnClientClick="return $('#contenedorFases').generadorDeFases('guardarFasesEnSesion');" OnClick="btnSiguiente_Click"/>
         </div>
     </div>
