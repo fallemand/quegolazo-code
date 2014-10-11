@@ -9,9 +9,16 @@ namespace Entidades
     public class Cambio
     {
         public int idCambio { get; set; }
-        public int idEquipo { get; set; }
+        public Equipo equipo { get; set; }
         public Jugador jugadorEntra { get; set; }
         public Jugador jugadorSale { get; set; }
         public int? minuto { get; set; }
+
+        public Cambio()
+        {
+            equipo = new Equipo();
+            jugadorEntra = new Jugador();
+            jugadorSale = new Jugador();
+        }
     }
 }

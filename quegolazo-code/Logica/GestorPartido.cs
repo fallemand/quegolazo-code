@@ -60,5 +60,40 @@ namespace Logica
         {
             return daoPartido.obtenerTiposGol();
         }
+
+        public void agregarGol(string idEquipo, string idJugador, string idTipoGol, string minuto)
+        {
+            GestorJugador gestorJugador = new GestorJugador();
+            Gol gol = new Gol();
+            gol.equipo.idEquipo = Validador.castInt(Validador.isNotEmpty(idEquipo));
+            gol.jugador = gestorJugador.obtenerJugadorPorId(Validador.castInt(Validador.isNotEmpty(idJugador)));
+            if(idTipoGol!="")
+                gol.tipoGol.idTipoGol = Validador.castInt(idTipoGol);
+            if(minuto!="")
+                gol.minuto = Validador.castInt(minuto);
+            partido.goles.Add(gol);
+        }
+
+        public void eliminarGol(string idGolTemp)
+        {
+            int idGol = Validador.castInt(idGolTemp);
+            Gol golAEliminar = new Gol();
+            foreach (Gol gol in partido.goles)
+                if (gol.idGol == idGol)
+                    golAEliminar = gol;
+            partido.goles.Remove(golAEliminar);
+        }
+
+        public void agregarCambio(string idEquipo, string idJugadorEntra, string idJugadorSale, string minuto)
+        {
+            GestorJugador gestorJugador = new GestorJugador();
+            Cambio cambio = new Cambio();
+            cambio.equipo.idEquipo = Validador.castInt(Validador.isNotEmpty(idEquipo));
+            cambio.jugadorEntra = gestorJugador.obtenerJugadorPorId(Validador.castInt(Validador.isNotEmpty(idJugadorEntra)));
+            cambio.jugadorSale = gestorJugador.obtenerJugadorPorId(Validador.castInt(Validador.isNotEmpty(idJugadorSale)));
+            if (minuto != "")
+                cambio.minuto = Validador.castInt(minuto);
+            partido.cambios.Add(cambio);
+        }
     }
 }

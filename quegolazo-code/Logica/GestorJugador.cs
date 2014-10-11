@@ -60,10 +60,11 @@ namespace Logica
         /// Obtiene un Jugador por Id
         /// autor: Pau Pedrosa
         /// </summary>
-        public void obtenerJugadorPorId(int idJugador)
+        public Jugador obtenerJugadorPorId(int idJugador)
         {
             DAOJugador daoJugador = new DAOJugador();
             jugador = daoJugador.obtenerJugadorPorId(idJugador);
+            return jugador;
         }
 
         /// <summary>

@@ -158,7 +158,7 @@
                                 Jugadores del Equipo
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar por Nombre" />
+                                <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Jugadores" />
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                                             <th class="col-md-1">Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="tablaFiltro">
                                         <asp:Repeater ID="rptJugadores" runat="server" OnItemCommand="rptJugadores_ItemCommand">
                                             <ItemTemplate>
                                                 <tr>
@@ -240,6 +240,13 @@
                 previewImage(this, 'ContentAdmin_ContentAdminTorneo_imagenpreview');
                 ajaxFileUpload('ContentAdmin_ContentAdminTorneo_imagenUpload');
             });
+        });
+        $('body').on('keyup', '#filtro', function () {
+            var rex = new RegExp($(this).val(), 'i');
+            $('.tablaFiltro tr').hide();
+            $('.tablaFiltro tr').filter(function () {
+                return rex.test($(this).text());
+            }).show();
         });
     </script>
 </asp:Content>

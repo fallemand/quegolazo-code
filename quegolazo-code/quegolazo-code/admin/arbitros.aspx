@@ -2,6 +2,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
+
+        <div id="alertmsg1"  class="alert alert-danger alert-dismissible flyover flyover-bottom" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <strong>Warning!</strong> Better check yourself, you're not looking too good.
+        </div>
         <div class="row">
             <div class="col-md-5">
                 <asp:UpdatePanel ID="upRegistrarNuevoArbitro" runat="server">
@@ -189,6 +194,7 @@
                     return rex.test($(this).text());
                 }).show();
             });
+            $('#alertmsg1').toggleClass('in');
         });
     </script>
 </asp:Content>
