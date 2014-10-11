@@ -10,8 +10,8 @@
     <div class="subnavbar hidden-sm hidden-xs">
         <div class="subnavbar-inner">
             <div class="container">
-                <ul class="mainnav">
-                    <li class="active"><a href="<%=Logica.GestorUrl.aINDEX %>"><i class="flaticon-football141"></i><span>Principal</span> </a></li>
+                <ul id="menuTorneo" class="mainnav">
+                    <li><a href="<%=Logica.GestorUrl.aINDEX %>"><i class="flaticon-football141"></i><span>Principal</span> </a></li>
                     <li><a href="<%=Logica.GestorUrl.aEDICIONES %>"><i class="flaticon-trophy5"></i><span></span>Ediciones</a> </li>
                     <li><a href="<%=Logica.GestorUrl.aEQUIPOS %>"><i class="flaticon-soccer18"></i><span>Equipos</span> </a></li>
                     <li><a href="<%=Logica.GestorUrl.aJUGADORES %>"><i class="flaticon-football99"></i><span>Jugadores</span> </a></li>
@@ -21,7 +21,6 @@
                     <li><a href="#"><i class="flaticon-football79"></i><span>Sanciones</span> </a></li>
                     <li><a href="<%=Logica.GestorUrl.aNOTICIAS %>"><i class="glyphicon glyphicon-list-alt"></i><span>Noticias</span> </a></li>
                     <li><a href="#"><i class="glyphicon glyphicon-cog"></i><span>Opciones</span> </a></li>
-                    <li><%=Logica.Sesion.getTorneo().nombre %></li>
                 </ul>
             </div>
         </div>
@@ -33,4 +32,11 @@
     </asp:ContentPlaceHolder>
     <!-- ContentPage -->
 
+    <!-- Script -->
+    <script>
+        jQuery(document).ready(function () {
+            setActiveMenu();
+        });
+    </script>
+    <!-- Script -->
 </asp:Content>

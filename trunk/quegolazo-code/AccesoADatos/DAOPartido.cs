@@ -337,7 +337,7 @@ namespace AccesoADatos
                     partido.idPartido = Int32.Parse(dr["idPartido"].ToString());
                     partido.local.idEquipo = Int32.Parse(dr["idEquipoLocal"].ToString());
                     partido.local.nombre = dr["nombreLocal"].ToString();
-                    partido.visitante.idEquipo = Int32.Parse(dr["idEquipoLocal"].ToString());
+                    partido.visitante.idEquipo = Int32.Parse(dr["idEquipoVisitante"].ToString());
                     partido.visitante.nombre = dr["nombreVisitante"].ToString();
                     if (dr["idArbitro"] != System.DBNull.Value)
                     {

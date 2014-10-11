@@ -77,7 +77,7 @@
                                                                                     <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "visitante")).nombre %></td>
                                                                                     <td>2-0</td>
                                                                                     <td>
-                                                                                        <asp:LinkButton ClientIDMode="AutoID" title="Administrar Partido" rel="txtTooltip" ID="lnkAdministrarPartido" runat="server" CommandName="administrarPartido" CommandArgument='<%#Eval("idPartido")%>' ><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
+                                                                                        <asp:LinkButton title="Administrar Partido" rel="txtTooltip" ID="lnkAdministrarPartido" runat="server" CommandName="administrarPartido" CommandArgument='<%#Eval("idPartido")%>' ><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
                                                                                 </tr>
                                                                             </ItemTemplate>
                                                                         </asp:Repeater>
@@ -150,7 +150,7 @@
                                     <label for="text" class="col-lg-2 control-label">Fecha</label>
                                     <div id="divFechaPartido" class="col-lg-10 input-append date">
                                         <div class="input-group input-group-md">
-                                            <input type="text" data-format="dd/MM/yyyy hh:mm" class="form-control" runat="server" id="txtFecha" placeholder="Sin Asignar" required="true" fecha="true">
+                                            <input type="text" data-format="dd/MM/yyyy hh:mm" class="form-control" runat="server" id="txtFecha" placeholder="Sin Asignar" fechaHora="true">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -216,7 +216,7 @@
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
                                                     <div class="col-md-10">
-                                                        <asp:DropDownList id="ddlGolesEquipos" CssClass="form-control margin-xs input-sm" runat="server" required="true"></asp:DropDownList>
+                                                        <asp:DropDownList id="ddlGolesEquipos" CssClass="form-control margin-xs input-sm" runat="server" required="true" AutoPostBack="true" OnSelectedIndexChanged="ddlGolesEquipos_SelectedIndexChanged"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">

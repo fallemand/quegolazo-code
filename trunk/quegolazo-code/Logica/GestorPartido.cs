@@ -46,11 +46,19 @@ namespace Logica
 
         public void obtenerPartidoporId(string idPartido)
         {
+            DAOJugador daoJugadores = new DAOJugador();
             partido.idPartido = Validador.castInt(idPartido);
             partido = daoPartido.obtenerPartidoPorId(partido.idPartido);
             partido.goles = daoPartido.obtenerGoles(partido.idPartido);
             partido.tarjetas = daoPartido.obtenerTarjetas(partido.idPartido);
             partido.cambios = daoPartido.obtenerCambios(partido.idPartido);
+            partido.local.jugadores = daoJugadores.obtenerJugadoresDeUnEquipo(partido.local.idEquipo);
+            partido.visitante.jugadores = daoJugadores.obtenerJugadoresDeUnEquipo(partido.visitante.idEquipo);
+        }
+
+        public List<TipoGol> obtenerTiposGol()
+        {
+            return daoPartido.obtenerTiposGol();
         }
     }
 }

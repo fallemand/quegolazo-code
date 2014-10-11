@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Logica;
 using Entidades;
+using System.Web.UI.HtmlControls;
 
 namespace quegolazo_code.admin
 {
@@ -13,7 +14,6 @@ namespace quegolazo_code.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
         }
     }
 }
