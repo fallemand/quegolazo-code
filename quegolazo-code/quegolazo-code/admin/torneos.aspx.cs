@@ -24,7 +24,7 @@ namespace quegolazo_code.admin
             {
                 try
                 {
-                    cargarCombos();
+                    //cargarCombos();
                     cargarRepeaterTorneos();           
                 }
                 catch (Exception ex)

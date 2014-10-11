@@ -49,6 +49,16 @@ function addClass(id, clase) {
 function removeClass(id, clase) {
     $('#' + id).removeClass(clase);
 };
+
+function setActiveMenu() {
+    $("#menuTorneo li").each(function (index) {
+        var href = $("a", this).attr('href');
+        var pathname = window.location.pathname;
+        if (href == pathname) {
+            $(this).addClass('active');
+        }
+    });
+}
 //function limpiarModalTorneo() {
 //    $('.modal-body').find('input[type=text], input[type=password], input[type=number], input[type=email], textarea').val('');
 //    $('.modal-body').find('div').removeClass('has-success has-error');

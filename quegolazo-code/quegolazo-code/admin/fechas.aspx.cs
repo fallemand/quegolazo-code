@@ -86,13 +86,32 @@ namespace quegolazo_code.admin
                 if (e.CommandName == "administrarPartido")
                 {
                     gestorPartido.obtenerPartidoporId(e.CommandArgument.ToString());
-                    cargarPartido(); return;
+                    cargarPartido(); 
                 }
             }
             catch (Exception ex)
             {
                 mostrarPanelFracaso(ex.Message);
             }
+        }
+
+        protected void ddlGolesEquipos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (gestorPartido.partido.local.idEquipo == int.Parse(ddlGolesEquipos.SelectedValue)) 
+                    ddlGolesJugadores.DataSource = gestorPartido.partido.local.jugadores;
+                else
+                    ddlGolesJugadores.DataSource = gestorPartido.partido.visitante.jugadores;
+                ddlGolesJugadores.DataValueField = "idJugador";
+                ddlGolesJugadores.DataTextField = "nombre";
+                ddlGolesJugadores.DataBind();
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
+            
         }
 
         /// <summary>
@@ -109,15 +128,43 @@ namespace quegolazo_code.admin
         {
             txtEquipoLocal.Value = gestorPartido.partido.local.nombre;
             txtEquipoVisitante.Value = gestorPartido.partido.visitante.nombre;
-
-            txtFecha.Value = (gestorPartido.partido.fecha!=null) ? gestorPartido.partido.fecha.Value.ToString("{0:dd/mm/yyyy HH:mm}") : "Sin asignar";
-            ddlArbitros.SelectedValue = (gestorPartido.partido.arbitro!=null) ? gestorPartido.partido.arbitro.idArbitro.ToString() : "";
-            ddlCanchas.SelectedValue = (gestorPartido.partido.cancha!=null) ? gestorPartido.partido.cancha.idCancha.ToString() : "";
+            txtFecha.Value = (gestorPartido.partido.fecha != null) ? gestorPartido.partido.fecha.Value.ToString("{0:dd/mm/yyyy HH:mm}") : "Sin asignar";
+            ddlArbitros.SelectedValue = (gestorPartido.partido.arbitro != null) ? gestorPartido.partido.arbitro.idArbitro.ToString() : "";
+            ddlCanchas.SelectedValue = (gestorPartido.partido.cancha != null) ? gestorPartido.partido.cancha.idCancha.ToString() : "";
             cargarRepeaterJugadoresEquipoLocal();
             cargarRepeaterJugadoresEquipoVisitante();
             cargarRepeaterGoles();
+            cargarABMGoles();
             cargarRepeaterCambios();
+            cargarABMCambios();
             cargarRepeaterTarjetas();
+            cargarABMTarjetas();
+        }
+
+        private void cargarABMTarjetas()
+        {
+            
+        }
+
+
+        private void cargarABMCambios()
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void cargarABMGoles()
+        {
+            ddlGolesEquipos.Items.Clear();
+            ddlGolesEquipos.Items.Add(new ListItem(gestorPartido.partido.local.nombre, gestorPartido.partido.local.idEquipo.ToString()));
+            ddlGolesEquipos.Items.Add(new ListItem(gestorPartido.partido.visitante.nombre, gestorPartido.partido.visitante.idEquipo.ToString()));
+            ddlGolesJugadores.DataSource = gestorPartido.partido.local.jugadores;
+            ddlGolesJugadores.DataValueField = "idJugador";
+            ddlGolesJugadores.DataTextField = "nombre";
+            ddlGolesJugadores.DataBind();
+            ddlGolesTipos.DataSource = gestorPartido.obtenerTiposGol();
+            ddlGolesTipos.DataValueField = "idTipoGol";
+            ddlGolesTipos.DataTextField = "nombre";
+            ddlGolesTipos.DataBind();
         }
 
         /// <summary>
@@ -240,15 +287,6 @@ namespace quegolazo_code.admin
             ddlCanchas.DataBind();
             ListItem itemSinCancha = new ListItem("Sin Cancha Asignada", "", true);
             ddlCanchas.Items.Insert(0, itemSinCancha);
-        }
-
-        /// <summary>
-        /// Método necesario para cargar los toggle panels
-        /// autor: Facu Allemand
-        /// </summary>
-        protected int idFaseActual()
-        {
-            return gestorEdicion.gestorFase.faseActual.idFase;
         }
 
         /// <summary>
