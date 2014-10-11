@@ -128,7 +128,7 @@ namespace quegolazo_code.admin
         {
             txtEquipoLocal.Value = gestorPartido.partido.local.nombre;
             txtEquipoVisitante.Value = gestorPartido.partido.visitante.nombre;
-            txtFecha.Value = (gestorPartido.partido.fecha != null) ? gestorPartido.partido.fecha.Value.ToString("{0:dd/mm/yyyy HH:mm}") : "Sin asignar";
+            txtFecha.Value = (gestorPartido.partido.fecha != null) ? gestorPartido.partido.fecha.Value.ToString("{0:dd/mm/yyyy HH:mm}") : "";
             ddlArbitros.SelectedValue = (gestorPartido.partido.arbitro != null) ? gestorPartido.partido.arbitro.idArbitro.ToString() : "";
             ddlCanchas.SelectedValue = (gestorPartido.partido.cancha != null) ? gestorPartido.partido.cancha.idCancha.ToString() : "";
             cargarRepeaterJugadoresEquipoLocal();

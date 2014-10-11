@@ -25,19 +25,33 @@ namespace quegolazo_code.admin
                     }
                     catch (Exception)
                     {
-                        
+
                     }
-                   
+                }
+                else
+                {
+                    cerrarSesion();
                 }
             }
         }
 
         protected void hlCerrarSesion_Click(object sender, EventArgs e)
         {
-            Session.Clear();
-            Session.Abandon();
-            FormsAuthentication.SignOut();
-            Response.Redirect(GestorUrl.uLOGIN);
+            cerrarSesion(); 
+        }
+
+        private void cerrarSesion()
+        {
+            //Si estas en el login, no redirijas (sino ocurre un bucle de redireccionamiento)
+            if (Session["login"] == null)
+            {
+                Session.Clear();
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                Response.Redirect(GestorUrl.uLOGIN);
+            }
+            else
+                Session["login"] = null;
         }
     }
 }

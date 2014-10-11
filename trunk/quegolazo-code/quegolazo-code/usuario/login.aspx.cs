@@ -13,7 +13,8 @@ namespace quegolazo_code.admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //Bandera que sirve para indicar que nos encontramos en el login
+            Session["login"] = true;
         }
 
         protected void btnLoguearse_Click(object sender, EventArgs e)
