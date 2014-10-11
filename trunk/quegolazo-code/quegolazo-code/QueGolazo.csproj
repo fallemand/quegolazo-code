@@ -93,7 +93,7 @@
     <Content Include="resources\js\jquery.bracket.min.js" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
     <Content Include="resources\js\jquery.multi-select.js" />
-    <Content Include="resources\js\jquery.ui\jquery-ui.js" />
+    <Content Include="resources\js\jquery.ui\jquery-ui.min.js" />
     <Content Include="resources\js\moment.js" />
     <Content Include="resources\js\quegolazo.js" />
     <Content Include="resources\js\widgetFases.js" />

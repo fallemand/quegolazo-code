@@ -22,6 +22,7 @@ namespace quegolazo_code.admin
             try
             {
                 ocultarPaneles();
+                Session.Clear();
                 GestorUsuario gestorUsuario = new GestorUsuario();
                 gestorUsuario.usuario = gestorUsuario.validarUsuario(txtEmail.Value, txtContrasenia.Value);
                 Sesion.setUsuario(gestorUsuario.usuario);

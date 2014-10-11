@@ -25,9 +25,10 @@ namespace quegolazo_code.admin.edicion
                 Response.Redirect(GestorUrl.eEQUIPOS);
             }
             string equipos = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.equipos);
+            string fases = (new JavaScriptSerializer()).Serialize(gestorFase.fases);
             if(!IsPostBack)
             //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ idEdicion:" + Sesion.getGestorEdicion().edicion.idEdicion + ", idTorneo:" + Sesion.getTorneo().idTorneo + " , equiposDeLaEdicion: " + equipos + "});", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ idEdicion:" + Sesion.getGestorEdicion().edicion.idEdicion + ", idTorneo:" + Sesion.getTorneo().idTorneo + " , equiposDeLaEdicion: " + equipos + ", fases: " + fases + "});", true);
             
         }
 
@@ -54,9 +55,9 @@ namespace quegolazo_code.admin.edicion
                 Sesion.setGestorFase(gestorFase);                
                 return new HttpStatusCodeResult(200, "OK");
             }
-            catch (Exception ex)
+            catch (Exception ex) 
             {
-                return new HttpStatusCodeResult(500, "Ha ocurrido un error, intenta nuevamente luego, si el problema persiste contactate con nuestro soporte tecnico. Detalle técnico :{"+ex.Message +"}");
+                return new HttpStatusCodeResult(500, "Ha ocurrido un error. Detalle técnico :'"+ex.Message +"'");
             }
         }
     }

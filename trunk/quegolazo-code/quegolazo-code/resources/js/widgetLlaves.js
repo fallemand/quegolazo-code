@@ -25,8 +25,8 @@
         var widget = this;
         var llaves = [];
         var partido = [];
-        if(widget.options.mezclar)
-        shuffle(widget.options.equipos);        
+        if (widget.options.mezclar)//sort(function () { return 0.5 - Math.random() }) sirve para randomizar la lista.
+         widget.options.equipos.sort(function () { return 0.5 - Math.random() });
         for (var i = 0; i < widget.options.equipos.length; i++) {
             var equipo = { nombre: widget.options.equipos[i].nombre, idEquipo: widget.options.equipos[i].idEquipo };
             partido.push(equipo);
@@ -41,13 +41,16 @@
     renderizarLlaves: function (equipos) {
         var widget = this;
         widget.options.datosEquipos.teams = widget.armarLlaves();
-        widget.options.container.bracket({
+        widget.element.bracket({
             init: widget.options.datosEquipos, /* data to initialize the bracket with */            
             decorator: {
                 edit: function () {},
                 render: widget.options.alRenderizar}
         });
     
+    },
+    reiniciar: function () {
+        this._create();
     },
     _destroy: function () {
         $(".jQBracket").remove();
