@@ -50,8 +50,6 @@ namespace quegolazo_code.admin
                 FormsAuthentication.SignOut();
                 Response.Redirect(GestorUrl.uLOGIN);
             }
-            else
-                Session["login"] = null;
         }
     }
 }

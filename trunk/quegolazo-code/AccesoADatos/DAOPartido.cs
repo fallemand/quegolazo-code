@@ -147,12 +147,12 @@ namespace AccesoADatos
                                     VALUES (@minuto, @idJugador, @idEquipo, @idPartido, @idTipoGol)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@minuto", gol.minuto);
-                if (gol.idJugador != null)
-                    cmd.Parameters.AddWithValue("@idJugador", gol.idJugador);
+                if (gol.jugador.idJugador != null)
+                    cmd.Parameters.AddWithValue("@idJugador", gol.jugador.idJugador);
                 else
                     cmd.Parameters.AddWithValue("@idJugador", DBNull.Value);
-                if (gol.idEquipo != null)
-                    cmd.Parameters.AddWithValue("@idEquipo", gol.idEquipo);
+                if (gol.equipo.idEquipo != null)
+                    cmd.Parameters.AddWithValue("@idEquipo", gol.equipo.idEquipo);
                 else
                     cmd.Parameters.AddWithValue("@idEquipo", DBNull.Value);
                 if(gol.tipoGol != null)
@@ -181,7 +181,7 @@ namespace AccesoADatos
                 string sql = @"INSERT INTO Cambios (idEquipo, idJugadorEntra, idJugadorSale, minuto, idPartido)
                                     VALUES (@idEquipo, @idJugadorEntra, @idJugadorSale, @minuto, @idPartido)";
                 cmd.Parameters.Clear();                
-                cmd.Parameters.AddWithValue("@idEquipo", cambio.idEquipo);
+                cmd.Parameters.AddWithValue("@idEquipo", cambio.equipo.idEquipo);
                 cmd.Parameters.AddWithValue("@idJugadorEntra", cambio.jugadorEntra.idJugador);
                 cmd.Parameters.AddWithValue("@idJugadorSale", cambio.jugadorSale.idJugador);
                 if(cambio.minuto != null)
@@ -408,17 +408,17 @@ namespace AccesoADatos
                     gol.idGol = Int32.Parse(dr["idGol"].ToString());
                     gol.minuto = Int32.Parse(dr["minuto"].ToString());
                     if (dr["idJugador"] != System.DBNull.Value)
-                        gol.idJugador = Int32.Parse(dr["idJugador"].ToString());
+                        gol.jugador.idJugador = Int32.Parse(dr["idJugador"].ToString());
                     else
-                        gol.idJugador = null;
+                        gol.jugador = null;
                     if (dr["idEquipo"] != System.DBNull.Value)
-                        gol.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
+                        gol.equipo.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
                     else
-                        gol.idEquipo = null;
+                        gol.equipo = null;
                     if (dr["tipoGol"] != System.DBNull.Value)
                         gol.tipoGol.nombre = dr["tipoGol"].ToString();
                     else
-                        gol.tipoGol.nombre = null;
+                        gol.tipoGol = null;
                     goles.Add(gol);
                 }
                 if (dr != null)
@@ -521,7 +521,7 @@ namespace AccesoADatos
                         cambio.minuto = null;                    
                     cambio.jugadorEntra.idJugador = Int32.Parse(dr["idJugadorEntra"].ToString());
                     cambio.jugadorSale.idJugador = Int32.Parse(dr["idJugadorSale"].ToString());
-                    cambio.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
+                    cambio.equipo.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
                     cambios.Add(cambio);
                 }
                 if (dr != null)

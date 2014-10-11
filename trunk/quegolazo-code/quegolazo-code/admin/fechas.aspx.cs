@@ -28,10 +28,7 @@ namespace quegolazo_code.admin
                     cargarComboArbitros();
                     cargarComboCanchas();
                 }
-                catch (Exception ex)
-                {
-                    mostrarPanelFracaso(ex.Message);
-                }
+                catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
             }
         }
 
@@ -46,37 +43,42 @@ namespace quegolazo_code.admin
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 cargarRepeaterFases();
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         protected void rptFases_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            try
             {
-                Repeater rptFechas = (Repeater)e.Item.FindControl("rptFechas");
-                int idFase = ((Fase)e.Item.DataItem).idFase;
-                gestorEdicion.gestorFase.faseActual = ((Fase)e.Item.DataItem);
-                rptFechas.DataSource = ((Fase)e.Item.DataItem).obtenerFechas();
-                rptFechas.DataBind();
-                Panel panelSinFechas = e.Item.FindControl("panelSinFechas") as Panel;
-                panelSinFechas.Visible = (rptFechas.Items.Count > 0) ? false : true;
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                {
+                    Repeater rptFechas = (Repeater)e.Item.FindControl("rptFechas");
+                    int idFase = ((Fase)e.Item.DataItem).idFase;
+                    gestorEdicion.gestorFase.faseActual = ((Fase)e.Item.DataItem);
+                    rptFechas.DataSource = ((Fase)e.Item.DataItem).obtenerFechas();
+                    rptFechas.DataBind();
+                    Panel panelSinFechas = e.Item.FindControl("panelSinFechas") as Panel;
+                    panelSinFechas.Visible = (rptFechas.Items.Count > 0) ? false : true;
+                }
             }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         protected void rptFechas_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            try
             {
-                Repeater rptPartidos = (Repeater)e.Item.FindControl("rptPartidos");
-                int idFecha = ((Fecha)e.Item.DataItem).idFecha;
-                rptPartidos.DataSource = ((Fecha)e.Item.DataItem).partidos;
-                rptPartidos.DataBind();
-                Panel panelSinPartidos = e.Item.FindControl("panelSinPartidos") as Panel;
-                panelSinPartidos.Visible = (rptPartidos.Items.Count > 0) ? false : true;
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                {
+                    Repeater rptPartidos = (Repeater)e.Item.FindControl("rptPartidos");
+                    int idFecha = ((Fecha)e.Item.DataItem).idFecha;
+                    rptPartidos.DataSource = ((Fecha)e.Item.DataItem).partidos;
+                    rptPartidos.DataBind();
+                    Panel panelSinPartidos = e.Item.FindControl("panelSinPartidos") as Panel;
+                    panelSinPartidos.Visible = (rptPartidos.Items.Count > 0) ? false : true;
+                }
             }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         protected void rptPartidos_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -89,12 +91,12 @@ namespace quegolazo_code.admin
                     cargarPartido(); 
                 }
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //Subform Goles
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         protected void ddlGolesEquipos_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -107,11 +109,59 @@ namespace quegolazo_code.admin
                 ddlGolesJugadores.DataTextField = "nombre";
                 ddlGolesJugadores.DataBind();
             }
-            catch (Exception ex)
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+        }
+
+        protected void btnGolAgregar_Click(object sender, EventArgs e)
+        {
+            try
             {
-                mostrarPanelFracaso(ex.Message);
+                gestorPartido.agregarGol(ddlGolesEquipos.SelectedValue, ddlGolesJugadores.SelectedValue, ddlGolesTipos.SelectedValue, txtGolesMinuto.Value);
+                cargarRepeaterGoles();
             }
-            
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+        }
+
+        protected void rptGoles_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "eliminarGol")
+                    gestorPartido.eliminarGol(e.CommandArgument.ToString());
+                cargarRepeaterGoles();
+            }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+        }
+
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //Subform Cambios
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        protected void rptCambios_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        protected void ddlCambiosEquipos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+               
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        protected void btnCambiosAgregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorPartido.agregarCambio(ddlCambiosEquipos.SelectedValue,ddlCambiosJugadoresEntra.SelectedValue,ddlCambiosJugadoresSale.SelectedValue,txtCambiosMinuto.Value);
+                cargarRepeaterCambios();
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -146,12 +196,27 @@ namespace quegolazo_code.admin
             
         }
 
-
+        /// <summary>
+        /// Carga todos los controles del subform de Cambios
+        /// autor: Facu Allemand
+        /// </summary>
         private void cargarABMCambios()
         {
-            //throw new NotImplementedException();
+            ddlCambiosEquipos.Items.Clear();
+            ddlCambiosEquipos.Items.Add(new ListItem(gestorPartido.partido.local.nombre, gestorPartido.partido.local.idEquipo.ToString()));
+            ddlCambiosEquipos.Items.Add(new ListItem(gestorPartido.partido.visitante.nombre, gestorPartido.partido.visitante.idEquipo.ToString()));
+            ddlCambiosJugadoresEntra.DataSource = gestorPartido.partido.local.jugadores;
+            ddlCambiosJugadoresEntra.DataValueField = "idJugador";
+            ddlCambiosJugadoresEntra.DataTextField = "nombre";
+            ddlCambiosJugadoresSale.DataSource = gestorPartido.partido.local.jugadores;
+            ddlCambiosJugadoresSale.DataValueField = "idJugador";
+            ddlCambiosJugadoresSale.DataTextField = "nombre";
         }
 
+        /// <summary>
+        /// Carga todos los controles del subform de Goles
+        /// autor: Facu Allemand
+        /// </summary>
         private void cargarABMGoles()
         {
             ddlGolesEquipos.Items.Clear();
@@ -234,7 +299,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void obtenerEdiciónSeleccionada()
         {
-            if (gestorEdicion.edicion.idEdicion > 0)
+            if (gestorEdicion.edicion!=null && gestorEdicion.edicion.idEdicion > 0)
             {
                 gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(gestorEdicion.edicion.idEdicion);
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();

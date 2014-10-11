@@ -33,17 +33,17 @@
                                 <div class="panel-heading panel-heading-master">
                                      <div class="row clearfix">
                                         <div class="col-md-8">
-                                            <a data-toggle="collapse" data-parent="#fases" href="#fase-1" class="text-muted" style="font-size:15px;">
+                                            <a data-toggle="collapse" data-parent="#fases" href="#fase-<%# Eval("idFase") %>" class="text-muted" style="font-size:15px;">
                                                 <span class="glyphicon glyphicon-plus"></span>
                                                 Fase <%# Eval("idFase") %>
                                             </a> 
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" id="Text1" class="pull-right form-control input-xs" placeholder="Filtrar Canchas"/>
+                                            <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Fechas" />
                                         </div>
                                     </div>                                           
                                 </div>
-                                <div id="fase-1" class="panel-collapse collapse">
+                                <div id="fase-<%# Eval("idFase") %>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <asp:Repeater ID="rptFechas" runat="server" OnItemDataBound="rptFechas_ItemDataBound">
                                             <HeaderTemplate>
@@ -69,7 +69,7 @@
                                                                         <th class="col-md-2"></th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
+                                                                <tbody class="tablaFiltro">
                                                                         <asp:Repeater ID="rptPartidos" runat="server" OnItemCommand="rptPartidos_ItemCommand">
                                                                             <ItemTemplate>
                                                                                 <tr>
@@ -136,13 +136,13 @@
                             <div class="form-horizontal">
                                 <div class="form-group">
                                     <label for="text" class="col-lg-2 control-label">Equipos</label>
-                                    <div class="col-lg-4">
+                                    <div class="col-md-4 nopadding-right">
                                         <input type="text" class="form-control" runat="server" id="txtEquipoLocal" required="true" disabled="true">
                                     </div>
-                                    <div class="col-lg-1">
+                                    <div class="col-md-1" style="padding-left: 20px;line-height: 33px;">
                                         VS
                                     </div>
-                                    <div class="col-lg-5">
+                                    <div class="col-md-5">
                                         <input type="text" class="form-control" runat="server" id="txtEquipoVisitante" required="true" disabled="true">
                                     </div>
                                 </div>
@@ -203,9 +203,9 @@
                                     <div class="col-lg-10">
                                         <p class="nomargin-bottom">
                                             <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Gol" onclick="showSubform('goles');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Gol</a>
-                                            <asp:Repeater ID="rptGoles" runat="server">
+                                            <asp:Repeater ID="rptGoles" runat="server" OnItemCommand="rptGoles_ItemCommand">
                                                 <ItemTemplate>
-                                                    <span class="label label-default label-md"><%# Eval("minuto")%>' <%# Eval("nombre")%>
+                                                    <span class="label label-default label-md"><%# Eval("minuto")%>' <%# ((Entidades.Jugador)DataBinder.Eval(Container.DataItem, "jugador")).nombre%>
                                                         <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminarGol" runat="server" CommandName="eliminarGol" CommandArgument='<%# Eval("idGol") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                                     </span>
                                                 </ItemTemplate>
@@ -234,10 +234,10 @@
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Minuto</label>
                                                     <div class="col-md-10">
-                                                        <input type="text" class="form-control margin-xs input-sm" id="txtGolesMinuto" placeholder="Minuto" runat="server" maxlength="3">
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtGolesMinuto" placeholder="Minuto" runat="server" maxlength="3" digits="true">
                                                     </div>
                                                 </div>
-                                                <asp:Button class="btn btn-default btn-xs causesValidation vgGoles pull-right" ID="btnGolAgregar" runat="server" Text="Agregar Gol" />
+                                                <asp:Button class="btn btn-default btn-xs causesValidation vgGoles pull-right" ID="btnGolAgregar" runat="server" Text="Agregar Gol" OnClick="btnGolAgregar_Click"/>
                                                 <button class="btn btn-default btn-xs pull-right" OnClick="hideSubform('goles');return false;">Cancelar</button>
                                             </fieldset>
                                         </div>
@@ -251,7 +251,7 @@
                                     <div class="col-lg-10">
                                         <p class="nomargin-bottom">
                                             <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Cambio" onclick="showSubform('cambios');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Cambio</a>
-                                            <asp:Repeater ID="rptCambios" runat="server">
+                                            <asp:Repeater ID="rptCambios" runat="server" OnItemCommand="rptCambios_ItemCommand">
                                                 <ItemTemplate>
                                                     <span class="label label-default label-md"><%# Eval("minuto")%>' 
                                                         <span class="glyphicon glyphicon-arrow-up" style="color:green"></span> <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %>
@@ -266,7 +266,7 @@
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
                                                     <div class="col-md-10">
-                                                        <asp:DropDownList id="ddlCambiosEquipos" CssClass="form-control margin-xs input-sm" runat="server"></asp:DropDownList>
+                                                        <asp:DropDownList id="ddlCambiosEquipos" CssClass="form-control margin-xs input-sm" runat="server" OnSelectedIndexChanged="ddlCambiosEquipos_SelectedIndexChanged"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
@@ -284,10 +284,10 @@
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Minuto</label>
                                                     <div class="col-md-10">
-                                                        <input type="text" class="form-control margin-xs input-sm" id="txtCambiosMinuto" placeholder="Minuto" runat="server" maxLenght="3" />
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtCambiosMinuto" placeholder="Minuto" runat="server" maxLenght="3" digits="true" />
                                                     </div>
                                                 </div>
-                                                <asp:Button class="btn btn-default btn-xs causesValidation vgCambios pull-right" ID="btnCambiosAgregar" runat="server" Text="Agregar Cambio" />
+                                                <asp:Button class="btn btn-default btn-xs causesValidation vgCambios pull-right" ID="btnCambiosAgregar" runat="server" Text="Agregar Cambio" OnClick="btnCambiosAgregar_Click"/>
                                                 <button class="btn btn-default btn-xs pull-right" OnClick="hideSubform('cambios');return false;">Cancelar</button>
                                             </fieldset>
                                         </div>
@@ -379,6 +379,22 @@
             $('#divFechaPartido').datetimepicker({
                 language: 'es'
             });
+        });
+        $('body').on('keyup', '#filtro', function () {
+            if ($(this).val().length > 0) {
+                $('.panel-collapse').collapse('show');
+                $('.panel-title').attr('data-toggle', '');
+            } 
+            else {
+                $('.panel-collapse').collapse('hide');
+                $('.panel-title').attr('data-toggle', 'collapse');
+            }
+            
+            var rex = new RegExp($(this).val(), 'i');
+            $('.tablaFiltro tr').hide();
+            $('.tablaFiltro tr').filter(function () {
+                return rex.test($(this).text());
+            }).show();
         });
     </script>
 </asp:Content>

@@ -1380,6 +1380,38 @@ width : 50%;
     line-height: 30px;
 }
 
+/*Mensaje de error*/
+.flyover {
+   left: 150%;
+   overflow: hidden;
+   position: fixed;
+   width: 50%;
+   opacity: 0.9;
+   z-index: 1050;
+   transition: left 0.6s ease-out 0s;
+}
+ 
+.flyover-centered {
+   top: 50%;
+   transform: translate(-50%, -50%);
+}
+
+.flyover.in {
+   left: 48%;
+}
+
+.flyover-bottom {
+   bottom: 10px;
+}
+
+.alert .close {
+color: #464646;
+text-decoration: none;
+}
+
+.alert .close:hover, .alert .close:focus {
+color: #BEBEBE;
+}
 
 
 /*!
