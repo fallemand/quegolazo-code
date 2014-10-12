@@ -1413,6 +1413,25 @@ text-decoration: none;
 color: #BEBEBE;
 }
 
+/* --------------------- PopOver ------------------------- */
+.popover {
+    color: #B80000;
+}
+.popover {
+    background-color: #F8DADA;
+    border: 1px solid rgb(243, 163, 163);
+}
+.popover.right > .arrow {
+    border-right-color: rgba(245, 209, 209, 1);
+}
+
+.popover-title {
+    background-color: #F8DADA;
+    border-bottom: 1px solid #F1B4B4;
+}
+.popover.right > .arrow:after {
+    border-right-color: #DB9B9B;
+}
 
 /*!
  * Datetimepicker for Bootstrap v3
