@@ -601,7 +601,7 @@ namespace AccesoADatos
             }
         }
 
-        public void modificarPartido(Partido partido, int idFecha, int idGrupo, int idFase, int idEdicion)
+        public void modificarPartido(Partido partido)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -614,29 +614,11 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 cmd.Transaction = trans;
                 string sql = @"UPDATE Partidos
-                                SET idFecha = @idFecha, idGrupo = @idGrupo, idFase = @idFase, idEdicion = @idEdicion, 
-                                idEquipoLocal = @idEquipoLocal, idEquipoVisitante = @idEquipoVisitante, fecha = @fecha,
+                                SET fecha = @fecha,
                                 idEstado = @idEstado, idArbitro = @idArbitro, idCancha = @idCancha, golesLocal = @golesLocal, 
                                 golesVisitante = @golesVisitante
                                 WHERE idPartido = @idPartido";
-                //falta partido posterior
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idFecha", idFecha);
-                cmd.Parameters.AddWithValue("@idGrupo", idGrupo);
-                cmd.Parameters.AddWithValue("@idFase", idFase);
-                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
-                if (partido.local.idEquipo != null)
-                    cmd.Parameters.AddWithValue("@idEquipoLocal", partido.local.idEquipo);
-                else
-                {
-                    cmd.Parameters.AddWithValue("@idEquipoLocal", DBNull.Value);
-                    if (partido.visitante.idEquipo != null)
-                        throw new Exception();
-                }
-                if (partido.visitante.idEquipo != null)
-                    cmd.Parameters.AddWithValue("@idEquipoVisitante", partido.visitante.idEquipo);
-                else
-                    cmd.Parameters.AddWithValue("@idEquipoVisitante", DBNull.Value);
                 if (partido.fecha != null)
                     cmd.Parameters.AddWithValue("@fecha", partido.fecha);
                 else
