@@ -57,7 +57,7 @@ namespace quegolazo_code.admin.edicion
             }
             catch (Exception ex) 
             {
-                return new HttpStatusCodeResult(500, "Ha ocurrido un error. Detalle técnico :'"+ex.Message +"'");
+                return new HttpStatusCodeResult(500, "Ha ocurrido un error en el servidor. :'"+ex.Message +"'");
             }
         }
     }
