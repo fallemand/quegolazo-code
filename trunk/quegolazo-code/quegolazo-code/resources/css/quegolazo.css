@@ -1380,6 +1380,24 @@ width : 50%;
     line-height: 30px;
 }
 
+.arrastrando {
+    cursor:-webkit-grabbing !important;
+    z-index:10000 !important;
+    background-color: #dcdcdc !important;
+    color:black;
+}
+.drop-hover {
+background-color:green !important;
+z-index:10000 !important;
+}
+.target {
+    position: relative;
+    z-index: 1;
+    float: left;    
+    width: 180px;
+    cursor: -webkit-grab;    
+}
+
 /*Mensaje de error*/
 .flyover {
    left: 150%;

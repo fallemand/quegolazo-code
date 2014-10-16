@@ -11,14 +11,19 @@
         alRenderizar :  function render_fn(container, data, score) {
             if (!data.idEquipo || !data.nombre)
                 return
-            container.append(data.nombre).attr("data-idEquipo", data.idEquipo)
+            //container es el label, el parent es el div que lo contiene
+            container.append(data.nombre);
+            container.parent().attr("data-idequipo", data.idEquipo);
+            
         }
     },
 
     _create: function () { 
         this.renderizarLlaves();
         //workaround para eliminar los controles de customizacion
-        $(".tools").remove(); 
+        $(".tools").remove();
+        this.habilitarSwap();
+
     },
 
     armarLlaves: function () {
@@ -48,6 +53,38 @@
                 render: widget.options.alRenderizar}
         });
     
+    },
+    habilitarSwap: function ()  {
+        var droppableParent;
+       
+        $('[data-idequipo]').wrap("<div class='target'><div/>");
+	
+        $('[data-idequipo]').draggable({
+            revert: 'invalid',
+            revertDuration: 200,
+            start: function () {
+                droppableParent = $(this).parent();		
+                $(this).addClass('arrastrando');
+                
+            },
+            stop: function () {
+                $(this).removeClass('arrastrando');
+            }
+        });
+	
+        $('.target').droppable({
+            hoverClass: 'drop-hover',
+            drop: function (event, ui) {
+                var draggable = $(ui.draggable[0]),
+                    draggableOffset = draggable.offset(),
+                    container = $(event.target),
+                    containerOffset = container.offset();
+			
+                $('[data-idequipo]', event.target).appendTo(droppableParent).css({ opacity: 0 }).animate({ opacity: 1 }, 500);
+			
+                draggable.appendTo(container).css({left: draggableOffset.left - containerOffset.left, top: draggableOffset.top - containerOffset.top}).animate({left: 0, top: 0}, 200);
+            }
+        });
     },
     reiniciar: function () {
         this._create();

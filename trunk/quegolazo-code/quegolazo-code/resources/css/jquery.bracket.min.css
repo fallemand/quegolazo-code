@@ -63,9 +63,9 @@ div.jQBracket .team {
     z-index: 1;
     float: left;
     background-color: #eee;
-    width: 180px;
-    cursor: default;
+    width: 180px;    
     border-radius:3px;
+    border: 1px solid #c2c2c2;
 }
 
 div.jQBracket .team:first-child {
@@ -156,6 +156,7 @@ div.jQBracket .team.highlightLoser {
 div.jQBracket .team.highlight {
     background-color: #60A64F;
     color: #000;
+    z-index: -1;
 }
 
 div.jQBracket .teamContainer {

@@ -10,10 +10,12 @@
     <script>  
         $(document).ready(function () {
             $("#panelFracaso").hide();
+          
         });
     </script>
   </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentEdicion" runat="server">
+     
     <div class="panel panel-default">
         <div class="panel-heading panel-heading-master">
             <span class="glyphicon glyphicon-cog"></span>

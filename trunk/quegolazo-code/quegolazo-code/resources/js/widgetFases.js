@@ -83,7 +83,7 @@
         var divCentro = $("<div/>", { class: 'col-md-4', id: 'divCentroFase' + numFase });
         var labelCantidad = $("<label/>").attr("id", "lbl-cantidad-Fase" + numFase).text("Cantidad de equipos:");        
         labelCantidad.appendTo(divCentro);
-        var comboCant = createDropDownList("ddlCantidad-Fase" + numFase, widget.obtenerGruposPosibles(widget.options.fases[numFase - 1].cantidadDeEquipos));
+        var comboCant = createDropDownList("ddlCantidad-Fase" + numFase, widget.obtenerGruposPosibles(widget.options.fases[numFase - 1].equipos.length));
         comboCant.appendTo(divCentro);
         divCentro.appendTo(row);
         var divDerecha = $("<div/>", { class: 'col-md-3' });
@@ -195,7 +195,7 @@
                 row.appendTo($("#cuerpoFase" + numFase));
             }
             $(".connectedSortable").sortable({
-                connectWith: ".connectedSortable"
+                connectWith: ".connectedSortable"               
             }).disableSelection();        
     },
     //crea una tabla para presentar el grupo
@@ -206,35 +206,41 @@
     guardarFasesEnSesion: function () {
         var widget = this;
         var respuesta = false;
-        widget.armarGrupos();
-        var msj=widget.validarFasesCorrectas();
-        if (msj !== "OK") {
-            widget.mostrarMensajeDeError("ATENCION! "+msj);
-            return respuesta;
-        }        
-        else {
-            $.ajax({
-                type: "POST",
-                url: "fases.aspx/guardarFases",
-                contentType: "application/json",
-                dataType: "json",
-                async: false,
-                data: "{JSONFases :" + JSON.stringify(widget.options.fases) + " }",
-                success: function (response) {
-                    //Si hubo un error, hago esto
-                    if (response.d.StatusCode != 200) {
-                        widget.mostrarMensajeDeError(response.d.StatusDescription);                       
-                    } else {
-                        respuesta = true;
-                        $("#panelFracaso").hide();
+        try {
+            widget.armarFases();
+            var msj = widget.validarFasesCorrectas();
+            if (msj !== "OK") {
+                widget.mostrarMensajeDeError(msj);
+                return respuesta;
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "fases.aspx/guardarFases",
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: false,
+                    data: "{JSONFases :" + JSON.stringify(widget.options.fases) + " }",
+                    success: function (response) {
+                        //Si hubo un error, hago esto
+                        if (response.d.StatusCode != 200) {
+                            widget.mostrarMensajeDeError(response.d.StatusDescription);
+                        } else {
+                            respuesta = true;
+                            $("#panelFracaso").hide();
+                        }
+                    },
+                    error: function (response) {
+                        alert(response);
                     }
-                },
-                error: function (response) {
-                    alert(response);
-                }
-            });
+                });
+                return respuesta;
+            }
+        } catch (e) {
+            widget.mostrarMensajeDeError(e.message);
             return respuesta;
         }
+        
     },
     //valida que las fases estén generadas por el usuario y que la diferencia de equipos entre los grupos no sea mayor a uno
     validarFasesCorrectas: function () {
@@ -256,16 +262,43 @@
         return "OK";
     },
     //setea los grupos en la opcion del widget, guardando los grupos en cada fase, basandose en lo que generó el usuario en la interfaz
-    armarGrupos: function () {
+    armarFases: function () {
         var widget = this;
-        //guardo los grupos segun lo uqe arm el usuario
+        //guardo los grupos segun lo que arm el usuario
         for (var i = 0; i < widget.options.fases.length; i++) {
             var fase = widget.options.fases[i];
-            for (var j = 0; j < fase.grupos.length; j++) {
-                var grupo = fase.grupos[j];
-                grupo.equipos = widget.obtenerEquiposdeUnGrupo(fase.idFase, grupo.idGrupo);
-            }
-        }        
+            if (fase.tipoFixture.idTipoFixture.indexOf("TCT") >= 0) {//si es todos contra todos
+                for (var j = 0; j < fase.grupos.length; j++) {
+                    var grupo = fase.grupos[j];
+                    grupo.equipos = widget.obtenerEquiposdeUnGrupo(fase.idFase, grupo.idGrupo);
+                }            
+            }else {
+                widget.armarLlaves(fase.idFase);
+                  }              
+            }            
+        },
+    //arma un grupo con una fecha, que corresponde a todas las llaves de la primera ronda, guarda en objetos tipo PartidoEliminatorio
+    armarLlaves: function (numFase) {
+        var widget = this;
+        var idEquipos = $("[data-idequipo]");
+        var partido = { local: null, visitante: null };
+        var fecha = { idFecha: 0, partidos: [], nombre: "" };
+        var equiposDelGrupo = [];
+        for (var i = 0; i < idEquipos.length; i++) {
+           var equipo = widget.buscarEquipo(widget.options.fases[numFase-1].equipos, $(idEquipos[i]).attr("data-idequipo"));
+            //cada 2 equipos viene el visitante
+           equiposDelGrupo.push(equipo);
+            if ((i + 1) % 2 == 0 && i != 0) {
+                partido.visitante = equipo;
+                fecha.partidos.push(partido);
+            } else {
+                //sino es el local
+                partido.local = equipo;
+            }          
+        }
+        //le asigno a la fase indicada el grupo con la fecha que corresponde a la primera fase
+        widget.options.fases[numFase - 1].grupos.push({ idGrupo: 1, idFase: numFase + 1, fechas: [fecha], equipos: equiposDelGrupo });
+            
     },
     //devuelve un equipo pasando un id como parametro, si no lo encuentra devuelve null
     buscarEquipo: function (listaDeEquipos, idBuscado) {
@@ -286,14 +319,12 @@
         //recorremos todos los id de equipos que pertenecen a un grupo
         for (var i = 0; i < idEquipos.length; i++) {
             //buscamos el equipo con el id determinado y lo guardamos en la lista de equipos
-            for (var j = 0; j < widget.options.fases[numFase-1].grupos.length; j++) {
-                var equipo = widget.buscarEquipo(widget.options.fases[numFase - 1].grupos[j].equipos, $(idEquipos[i]).attr("data-id-equipo"));
-                if (equipo != null) {
-                    equipos.push(equipo);
-                    break;
-                }
-                }
-            
+            var equipo = widget.buscarEquipo(widget.options.fases[numFase - 1].equipos, $(idEquipos[i]).attr("data-id-equipo"));
+            if (equipo != null) {
+                equipos.push(equipo);               
+            } else {
+                throw new Error("Ha ocurrido un error inesperado. Por favor actualice la pagina e intente nuevamente");
+            }
         }
         return equipos;
     }, 
@@ -371,9 +402,14 @@
     },
     //muestra el mensaje que se pasa por parametro, haciendo el efecto de luz ;)
     mostrarMensajeDeError: function (mensaje) {
+        //var msj = "<div id='alertmsg1'  class='alert alert-danger alert-dismissible flyover flyover-bottom' role='alert'>" +
+        //    "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>"+
+        // " <strong>Atención :</strong> <span id='msjError'></span></div>"       
+        //$('body').append(msj);
+        //$("#msjError").text(mensaje);
+        //$("#alertmsg1").addClass("in");
         $("#msjFracaso").text(mensaje);
         $("#panelFracaso").show();
-        $("#panelFracaso").effect("highlight", 500);
     }
 
 });
