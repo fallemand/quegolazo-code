@@ -13,15 +13,18 @@ namespace Entidades
         public Arbitro arbitro { get; set; }
         public Cancha cancha { get; set; }
         public DateTime? fecha { get; set; }
-        public List<Jugador> titularesLocal { get; set; } //listo
-        public List<Jugador> titularesVisitante { get; set; } //listo
-        public List<Gol> goles { get; set; } //listo
-        public List<Tarjeta> tarjetas { get; set; } // listo
-        public List<Cambio> cambios { get; set; } // listo
+        public List<Jugador> titularesLocal { get; set; } 
+        public List<Jugador> titularesVisitante { get; set; } 
+        public List<Gol> goles { get; set; } 
+        public List<Tarjeta> tarjetas { get; set; } 
+        public List<Cambio> cambios { get; set; } 
         public int idPartido { get; set; }
         public Estado estado { get; set; }
-        public int golesLocal { get; set; }
-        public int golesVisitante { get; set; } 
+        public int? golesLocal { get; set; }
+        public int? golesVisitante { get; set; }
+        public int? idGanador { get; set; }
+        public int? idPerdedor { get; set; }
+        public bool? empate { get; set; }
 
         public Partido()
         {
