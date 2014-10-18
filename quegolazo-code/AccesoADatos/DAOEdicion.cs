@@ -706,5 +706,63 @@ namespace AccesoADatos
                 throw new Exception("No se pudo actualizar las preferencias: " + e.Message);
             }
         }
+
+
+        public Edicion obtenerUltimaEdicionTorneo(int idTorneo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Edicion> respuesta = new List<Edicion>();
+            Edicion edicion = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+
+                string sql = @"SELECT TOP 1
+                                FROM Ediciones
+                                WHERE idTorneo = @idTorneo
+                                ORDER BY idEdicion DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                DAOCancha daoCancha = new DAOCancha();
+                DAOEdicion daoEdicion = new DAOEdicion();
+                DAOTipoSuperficie daoTipoSuperficie = new DAOTipoSuperficie();
+                DAOEstado daoEstado = new DAOEstado();
+                DAOTorneo daoTorneo = new DAOTorneo();
+                while (dr.Read())
+                {
+                    edicion = new Edicion();
+                    edicion.idEdicion = Int32.Parse(dr["idEdicion"].ToString());
+                    edicion.nombre = dr["nombre"].ToString();
+                    edicion.tamanioCancha = daoCancha.obtenerTamanioCanchaPorId(Int32.Parse(dr["idTamanioCancha"].ToString()));
+                    edicion.tipoSuperficie = daoTipoSuperficie.obtenerTipoSuperficiePorId(Int32.Parse(dr["idTipoSuperficie"].ToString()));
+                    edicion.estado = daoEstado.obtenerEstadoPorId(Int32.Parse(dr["idEstado"].ToString()));
+                    edicion.cancha = daoCancha.obtenerCanchasDeEdicion(Int32.Parse(dr["idEdicion"].ToString()));
+                    edicion.puntosEmpatado = Int32.Parse(dr["puntosEmpatado"].ToString());
+                    edicion.puntosGanado = Int32.Parse(dr["puntosGanado"].ToString());
+                    edicion.puntosPerdido = Int32.Parse(dr["puntosPerdido"].ToString());
+                    edicion.generoEdicion = daoEdicion.obtenerGeneroEdicionPorId(Int32.Parse(dr["idGeneroEdicion"].ToString()));
+     
+                }
+                dr.Close();
+                return edicion;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+       
     }
 }
