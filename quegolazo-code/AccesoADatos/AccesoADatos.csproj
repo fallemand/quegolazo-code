@@ -45,6 +45,7 @@
     <Compile Include="DAODelegado.cs" />
     <Compile Include="DAOEdicion.cs" />
     <Compile Include="DAOEquipo.cs" />
+    <Compile Include="DAOEstadisticas.cs" />
     <Compile Include="DAOEstado.cs" />
     <Compile Include="DAOFase.cs" />
     <Compile Include="DAOFecha.cs" />
