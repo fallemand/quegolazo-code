@@ -26,6 +26,21 @@ namespace Utils
         }
 
         /// <summary>
+        /// Castea la cadena a un char
+        /// </summary>
+        public static char castChar(string cadena)
+        {
+            try
+            {
+                return char.Parse(cadena);
+            }
+            catch (Exception)
+            {
+                throw new Exception("El valor ingresado no es un caracter");
+            }
+        }
+
+        /// <summary>
         /// Castea la cadena a una fecha valida
         /// </summary>
         /// <param name="numero">cadena a castear</param>

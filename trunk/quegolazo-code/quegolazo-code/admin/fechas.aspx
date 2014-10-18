@@ -266,7 +266,7 @@
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
                                                     <div class="col-md-10">
-                                                        <asp:DropDownList id="ddlCambiosEquipos" CssClass="form-control margin-xs input-sm" runat="server" OnSelectedIndexChanged="ddlCambiosEquipos_SelectedIndexChanged"></asp:DropDownList>
+                                                        <asp:DropDownList id="ddlCambiosEquipos" CssClass="form-control margin-xs input-sm" runat="server" OnSelectedIndexChanged="ddlCambiosEquipos_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
@@ -301,13 +301,13 @@
                                     <div class="col-lg-10">
                                            <p class="nomargin-bottom">
                                             <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Tarjeta" onclick="showSubform('tarjetas');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Tarjeta</a>
-                                            <asp:Repeater ID="rptTarjetas" runat="server">
+                                            <asp:Repeater ID="rptTarjetas" runat="server" OnItemCommand="rptTarjetas_ItemCommand">
                                                 <ItemTemplate>
                                                     <span class="label label-default label-md"><%#Eval("minuto") %>' <%# Eval("nombre") %>
                                                         <asp:Panel ID="panelTarjetaAmarilla" runat="server" Visible="False">
                                                             <span class="glyphicon glyphicon-stop" style="color:yellow"></span>
                                                         </asp:Panel>
-                                                        <asp:Panel ID="panel1" runat="server" Visible="False">
+                                                        <asp:Panel ID="panelTarjetaRoja" runat="server" Visible="False">
                                                             <span class="glyphicon glyphicon-stop" style="color:red"></span>
                                                         </asp:Panel>
                                                         <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminarTarjeta" runat="server" CommandName="eliminarTarjeta" CommandArgument='<%# Eval("idTarjeta") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
@@ -320,31 +320,31 @@
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Equipo</label>
                                                     <div class="col-md-10">
-                                                        <asp:DropDownList id="ddlTarjetasEquipos" CssClass="form-control margin-xs input-sm" runat="server"></asp:DropDownList>
+                                                        <asp:DropDownList id="ddlTarjetasEquipos" CssClass="form-control margin-xs input-sm" OnSelectedIndexChanged="ddlTarjetasEquipos_SelectedIndexChanged" runat="server"></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Jugador</label>
                                                     <div class="col-md-10">
-                                                        <asp:DropDownList id="ddlTarjetasJugador" CssClass="form-control margin-xs input-sm" runat="server" required></asp:DropDownList>
+                                                        <asp:DropDownList id="ddlTarjetasJugadores" CssClass="form-control margin-xs input-sm" runat="server" required></asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Tipo</label>
                                                     <div class="col-md-10">
-                                                        <select id="ddlTarjetasTipo" class="form-control margin-xs input-sm" required>
-                                                            <option value="A">Amarilla</option>
-                                                            <option value="R">Roja</option>
-                                                        </select>
+                                                         <asp:DropDownList id="ddlTarjetasTipo" CssClass="form-control margin-xs input-sm" runat="server" required>
+                                                             <asp:ListItem Text="Amarilla" Value="A"></asp:ListItem>
+                                                             <asp:ListItem Text="Roja" Value="R"></asp:ListItem>
+                                                         </asp:DropDownList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group nomargin-bottom">
                                                     <label for="text" class="col-md-2 control-label">Minuto</label>
                                                     <div class="col-md-10">
-                                                        <input type="text" class="form-control margin-xs input-sm" id="txtTarjetasMinuto" placeholder="Minuto" runat="server" maxlength="3" >
+                                                        <input type="text" class="form-control margin-xs input-sm" id="txtTarjetasMinuto" placeholder="Minuto" runat="server" maxlength="3" digits="true">
                                                     </div>
                                                 </div>
-                                                <asp:Button class="btn btn-default btn-xs causesValidation vgTarjetas pull-right" ID="btnTarjetaAgregar" runat="server" Text="Agregar Tarjeta" />
+                                                <asp:Button class="btn btn-default btn-xs causesValidation vgTarjetas pull-right" ID="btnTarjetaAgregar" runat="server" OnClick="btnTarjetaAgregar_Click" Text="Agregar Tarjeta" />
                                                 <button class="btn btn-default btn-xs pull-right" OnClick="hideSubform('tarjetas');return false;">Cancelar</button>
                                             </fieldset>
                                         </div>
