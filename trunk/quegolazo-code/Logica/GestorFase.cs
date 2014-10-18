@@ -37,6 +37,8 @@ namespace Logica
                       generadorFixture = new GenerarTodosContraTodos();
                       generadorFixture.setCantidadRondas(2);
                   }
+                  if (f.tipoFixture.idTipoFixture == "ELIM" || f.tipoFixture.idTipoFixture == "ELIM-IV")
+                      break;
 
                   int i = 1;
                   foreach (Grupo g in f.grupos)

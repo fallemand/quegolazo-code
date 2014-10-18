@@ -18,7 +18,10 @@ namespace Logica
 
        public GestorEstadisticas()
        {
-           edicion = Sesion.getEdicion();
+           edicion = Sesion.getGestorEdicion().edicion;
+           if (edicion == null)
+            edicion = buscarUltimaEdicionTorneo();
+           Sesion.setEdicion(edicion);
        }
 
        public DataTable obtenerTablaPosiciones()
@@ -44,6 +47,12 @@ namespace Logica
        public DataTable obtenerAvanceEdicion()
        {
            return DaoEstadisticas.obtenerAvanceEdicion(edicion.idEdicion);
+       }
+
+       private Edicion buscarUltimaEdicionTorneo()
+       {
+           DAOEdicion daoEdicion = new DAOEdicion();
+           return daoEdicion.obtenerUltimaEdicionTorneo(Sesion.getTorneo().idTorneo);
        }
 
     }
