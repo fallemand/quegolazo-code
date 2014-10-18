@@ -61,7 +61,7 @@ namespace AccesoADatos
                                  {
                                      cmd.Parameters.AddWithValue("@idEquipoVisitante", DBNull.Value);
                                  }
-                                 cmd.Parameters.AddWithValue("@idEstado", p.estado.idEstado);
+                                 cmd.Parameters.AddWithValue("@idEstado", 10);
                                  cmd.CommandText = sql;
                                  cmd.ExecuteNonQuery();
                              
