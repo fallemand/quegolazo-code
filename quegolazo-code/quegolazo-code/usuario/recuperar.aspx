@@ -11,7 +11,7 @@
                         <div class="input-group">
                             <input type="text" id="email" class="form-control" runat="server" name="email" minlength="5" maxlength="60" required="true" email="true" placeholder="Email" />
                             <span class="input-group-btn">
-                                <asp:Button ID="btnEnviarMail" runat="server" Text="Enviar" OnClick="btnEnviarMail_Click" CssClass="btn btn-default causesValidation vgRecuperar" />
+                                <asp:Button ID="btnEnviarMail" runat="server" Text="Enviar" OnClick="btnEnviarMail_Click" CssClass="btn btn-success pull-right causesValidation vgRecuperar" />
                             </span>
                         </div>
                     </div>

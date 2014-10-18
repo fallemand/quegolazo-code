@@ -616,7 +616,7 @@ namespace AccesoADatos
                 string sql = @"UPDATE Partidos
                                 SET fecha = @fecha,
                                 idEstado = @idEstado, idArbitro = @idArbitro, idCancha = @idCancha, golesLocal = @golesLocal, 
-                                golesVisitante = @golesVisitante
+                                golesVisitante = @golesVisitante, idGanador = @idGanador, idPerdedor = @idPerdedor, empate = @empate
                                 WHERE idPartido = @idPartido";
                 cmd.Parameters.Clear();
                 if (partido.fecha != null)
@@ -640,6 +640,18 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@golesVisitante", partido.golesVisitante);
                 else
                     cmd.Parameters.AddWithValue("@golesVisitante", DBNull.Value);
+                if (partido.idGanador != null)
+                    cmd.Parameters.AddWithValue("@idGanador", partido.idGanador);
+                else
+                    cmd.Parameters.AddWithValue("@idGanador", DBNull.Value);
+                if (partido.idPerdedor != null)
+                    cmd.Parameters.AddWithValue("@idPerdedor", partido.idPerdedor);
+                else
+                    cmd.Parameters.AddWithValue("@idPerdedor", DBNull.Value);
+                if (partido.empate != null)
+                    cmd.Parameters.AddWithValue("@empate", partido.empate);
+                else
+                    cmd.Parameters.AddWithValue("@empate", DBNull.Value);
                 cmd.Parameters.AddWithValue("@idPartido", partido.idPartido);
                 cmd.CommandText = sql;
                 cmd.ExecuteScalar().ToString();
