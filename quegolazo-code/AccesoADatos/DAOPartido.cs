@@ -211,8 +211,8 @@ namespace AccesoADatos
                                     VALUES (@idEquipo, @idJugador, @tipoTarjeta, @minuto, @idPartido)
                                     SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idEquipo", tarjeta.idEquipo);
-                cmd.Parameters.AddWithValue("@idJugador", tarjeta.idJugador);
+                cmd.Parameters.AddWithValue("@idEquipo", tarjeta.equipo.idEquipo);
+                cmd.Parameters.AddWithValue("@idJugador", tarjeta.jugador.idJugador);
                 cmd.Parameters.AddWithValue("@tipoTarjeta", tarjeta.tipoTarjeta);
                 if (tarjeta.minuto != null)
                     cmd.Parameters.AddWithValue("@minuto", tarjeta.minuto);
@@ -466,8 +466,8 @@ namespace AccesoADatos
                     tarjeta = new Tarjeta();
                     tarjeta.idTarjeta = Int32.Parse(dr["idTarjeta"].ToString());
                     tarjeta.minuto = Int32.Parse(dr["minuto"].ToString());
-                    tarjeta.idJugador = Int32.Parse(dr["idJugador"].ToString());
-                    tarjeta.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
+                    tarjeta.jugador.idJugador = Int32.Parse(dr["idJugador"].ToString());
+                    tarjeta.equipo.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
                     tarjeta.tipoTarjeta = char.Parse(dr["tipoTarjeta"].ToString());
                     tarjetas.Add(tarjeta);
                 }

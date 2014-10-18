@@ -265,13 +265,22 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.DropDownList ddlTarjetasEquipos;
         
         /// <summary>
-        /// Control ddlTarjetasJugador.
+        /// Control ddlTarjetasJugadores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTarjetasJugador;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTarjetasJugadores;
+        
+        /// <summary>
+        /// Control ddlTarjetasTipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTarjetasTipo;
         
         /// <summary>
         /// Control txtTarjetasMinuto.

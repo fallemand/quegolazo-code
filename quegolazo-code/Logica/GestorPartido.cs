@@ -41,7 +41,7 @@ namespace Logica
                 partido.titularesLocal.Add(new Jugador() { idJugador = idJugador });
             foreach (int idJugador in titularesVisitante)
                 partido.titularesVisitante.Add(new Jugador() { idJugador = idJugador });
-            //daoPartido.(partido);
+            daoPartido.modificarPartido(partido);
         }
 
         public void obtenerPartidoporId(string idPartido)
@@ -74,6 +74,20 @@ namespace Logica
             partido.goles.Add(gol);
         }
 
+        public void agregarTarjeta(string idEquipo, string idJugador, string idTipoTarjeta, string minuto)
+        {
+            if (!idTipoTarjeta.Equals("A") && !idTipoTarjeta.Equals("R"))
+                throw new Exception("El tipo de tarjeta seleccionada no es válida");
+            GestorJugador gestorJugador = new GestorJugador();
+            Tarjeta tarjeta = new Tarjeta();
+            tarjeta.equipo.idEquipo = Validador.castInt(Validador.isNotEmpty(idEquipo));
+            tarjeta.jugador = gestorJugador.obtenerJugadorPorId(Validador.castInt(Validador.isNotEmpty(idJugador)));
+            tarjeta.tipoTarjeta = Validador.castChar(Validador.isNotEmpty(idTipoTarjeta));
+            if (minuto != "")
+                tarjeta.minuto = Validador.castInt(minuto);
+            partido.tarjetas.Add(tarjeta);
+        }
+
         public void eliminarGol(string idGolTemp)
         {
             int idGol = Validador.castInt(idGolTemp);
@@ -84,8 +98,30 @@ namespace Logica
             partido.goles.Remove(golAEliminar);
         }
 
+        public void eliminarCambio(string idCambioTemp)
+        {
+            int idCambio = Validador.castInt(idCambioTemp);
+            Cambio cambioAEliminar = new Cambio();
+            foreach (Cambio cambio in partido.cambios)
+                if (cambio.idCambio == idCambio)
+                    cambioAEliminar = cambio;
+            partido.cambios.Remove(cambioAEliminar);
+        }
+
+        public void eliminarTarjeta(string idTarjetaTemp)
+        {
+            int idTarjeta = Validador.castInt(idTarjetaTemp);
+            Tarjeta tarjetaAEliminar = new Tarjeta();
+            foreach (Tarjeta tarjeta in partido.tarjetas)
+                if (tarjeta.idTarjeta == idTarjeta)
+                    tarjetaAEliminar = tarjeta;
+            partido.tarjetas.Remove(tarjetaAEliminar);
+        }
+
         public void agregarCambio(string idEquipo, string idJugadorEntra, string idJugadorSale, string minuto)
         {
+            if (Validador.castInt(Validador.isNotEmpty(idJugadorEntra)) == Validador.castInt(Validador.isNotEmpty(idJugadorSale)))
+                throw new Exception("El jugador que entra no puedo ser el mismo que sale");
             GestorJugador gestorJugador = new GestorJugador();
             Cambio cambio = new Cambio();
             cambio.equipo.idEquipo = Validador.castInt(Validador.isNotEmpty(idEquipo));

@@ -95,6 +95,45 @@ namespace quegolazo_code.admin
         }
 
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //Subform Tarjetas
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        protected void ddlTarjetasEquipos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (gestorPartido.partido.local.idEquipo == int.Parse(ddlGolesEquipos.SelectedValue))
+                    ddlTarjetasJugadores.DataSource = gestorPartido.partido.local.jugadores;
+                else
+                    ddlTarjetasJugadores.DataSource = gestorPartido.partido.visitante.jugadores;
+                ddlTarjetasJugadores.DataValueField = "idJugador";
+                ddlTarjetasJugadores.DataTextField = "nombre";
+                ddlTarjetasJugadores.DataBind();
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        protected void btnTarjetaAgregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorPartido.agregarTarjeta(ddlTarjetasEquipos.SelectedValue, ddlTarjetasJugadores.SelectedValue, ddlTarjetasTipo.SelectedValue, txtTarjetasMinuto.Value);
+                cargarRepeaterTarjetas();
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        protected void rptTarjetas_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "eliminarTarjeta")
+                    gestorPartido.eliminarTarjeta(e.CommandArgument.ToString());
+                cargarRepeaterGoles();
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //Subform Goles
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         protected void ddlGolesEquipos_SelectedIndexChanged(object sender, EventArgs e)
@@ -140,7 +179,9 @@ namespace quegolazo_code.admin
         {
             try
             {
-                
+                if (e.CommandName == "eliminarCambio")
+                    gestorPartido.eliminarCambio(e.CommandArgument.ToString());
+                cargarRepeaterGoles();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
@@ -149,7 +190,22 @@ namespace quegolazo_code.admin
         {
             try
             {
-               
+                if (gestorPartido.partido.local.idEquipo == int.Parse(ddlCambiosEquipos.SelectedValue))
+                {
+                    ddlCambiosJugadoresEntra.DataSource = gestorPartido.partido.local.jugadores;
+                    ddlCambiosJugadoresSale.DataSource = gestorPartido.partido.local.jugadores;
+                }
+                else
+                {
+                    ddlCambiosJugadoresEntra.DataSource = gestorPartido.partido.visitante.jugadores;
+                    ddlCambiosJugadoresSale.DataSource = gestorPartido.partido.visitante.jugadores;
+                }
+                ddlCambiosJugadoresEntra.DataValueField = "idJugador";
+                ddlCambiosJugadoresEntra.DataTextField = "nombre";
+                ddlCambiosJugadoresEntra.DataBind();
+                ddlCambiosJugadoresSale.DataValueField = "idJugador";
+                ddlCambiosJugadoresSale.DataTextField = "nombre";
+                ddlCambiosJugadoresSale.DataBind();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
@@ -166,7 +222,7 @@ namespace quegolazo_code.admin
 
         /// <summary>
         /// -------------------------------------------------------------------------
-        /// ------------------------- Metodos Extra---------------------------------
+        /// --------------------------Metodos Extra---------------------------------
         /// -------------------------------------------------------------------------
         /// </summary>
 
@@ -191,9 +247,19 @@ namespace quegolazo_code.admin
             cargarABMTarjetas();
         }
 
+        /// <summary>
+        /// Carga todos los controles del subform de Tarjetas
+        /// autor: Facu Allemand
+        /// </summary>
         private void cargarABMTarjetas()
         {
-            
+            ddlTarjetasEquipos.Items.Clear();
+            ddlTarjetasEquipos.Items.Add(new ListItem(gestorPartido.partido.local.nombre, gestorPartido.partido.local.idEquipo.ToString()));
+            ddlTarjetasEquipos.Items.Add(new ListItem(gestorPartido.partido.visitante.nombre, gestorPartido.partido.visitante.idEquipo.ToString()));
+            ddlTarjetasJugadores.DataSource = gestorPartido.partido.local.jugadores;
+            ddlTarjetasJugadores.DataValueField = "idJugador";
+            ddlTarjetasJugadores.DataTextField = "nombre";
+            ddlTarjetasJugadores.DataBind();
         }
 
         /// <summary>
@@ -208,9 +274,11 @@ namespace quegolazo_code.admin
             ddlCambiosJugadoresEntra.DataSource = gestorPartido.partido.local.jugadores;
             ddlCambiosJugadoresEntra.DataValueField = "idJugador";
             ddlCambiosJugadoresEntra.DataTextField = "nombre";
+            ddlCambiosJugadoresEntra.DataBind();
             ddlCambiosJugadoresSale.DataSource = gestorPartido.partido.local.jugadores;
             ddlCambiosJugadoresSale.DataValueField = "idJugador";
             ddlCambiosJugadoresSale.DataTextField = "nombre";
+            ddlCambiosJugadoresSale.DataBind();
         }
 
         /// <summary>
@@ -289,8 +357,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterJugadoresEquipoVisitante()
         {
-            rptJugadoresEquipoLocal.DataSource = gestorPartido.partido.visitante.jugadores;
-            rptJugadoresEquipoLocal.DataBind();
+            rptJugadoresEquipoVisitante.DataSource = gestorPartido.partido.visitante.jugadores;
+            rptJugadoresEquipoVisitante.DataBind();
         }
 
         /// <summary>
