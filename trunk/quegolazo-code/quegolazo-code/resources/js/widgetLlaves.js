@@ -22,7 +22,8 @@
         this.renderizarLlaves();
         //workaround para eliminar los controles de customizacion
         $(".tools").remove();
-        this.habilitarSwap();
+        //$(".team").unbind();
+        this.habilitarSwap();    
 
     },
 
@@ -30,18 +31,32 @@
         var widget = this;
         var llaves = [];
         var partido = [];
+        //si mezclar viene en false, no habia fase precargada
         if (widget.options.mezclar)//sort(function () { return 0.5 - Math.random() }) sirve para randomizar la lista.
-         widget.options.equipos.sort(function () { return 0.5 - Math.random() });
-        for (var i = 0; i < widget.options.equipos.length; i++) {
-            var equipo = { nombre: widget.options.equipos[i].nombre, idEquipo: widget.options.equipos[i].idEquipo };
-            partido.push(equipo);
-            //cada 2 equipos forman un partido
-            if ((i + 1) % 2 == 0 && i != 0) {
-                llaves.push(partido);
-                partido = [];
+        {
+            widget.options.equipos.sort(function () { return 0.5 - Math.random() });
+            for (var i = 0; i < widget.options.equipos.length; i++) {
+                var equipo = { nombre: widget.options.equipos[i].nombre, idEquipo: widget.options.equipos[i].idEquipo };
+                partido.push(equipo);
+                //cada 2 equipos forman un partido
+                if ((i + 1) % 2 == 0 && i != 0) {
+                    llaves.push(partido);
+                    partido = [];
+                }
             }
+            return llaves;
+        } else {
+            var equipos = [];
+            for (var i = 0; i < widget.options.equipos.length; i++) {
+                var partidos = [];
+                partidos.push(widget.options.equipos[i].local);
+                partidos.push(widget.options.equipos[i].visitante);
+                equipos.push(partidos);
+            }
+            return equipos;
         }
-        return llaves;
+            
+          
     },
     renderizarLlaves: function (equipos) {
         var widget = this;

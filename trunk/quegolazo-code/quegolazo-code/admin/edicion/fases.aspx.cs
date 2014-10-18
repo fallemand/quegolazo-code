@@ -51,7 +51,7 @@ namespace quegolazo_code.admin.edicion
                 List<Fase> fases = serializador.ConvertToType<List<Fase>>(JSONFases);
                 gestorFase = Sesion.getGestorFase();
                 gestorFase.fases = fases;
-                gestorFase.generarFixture();
+                //gestorFase.generarFixture();
                 Sesion.setGestorFase(gestorFase);                
                 return new HttpStatusCodeResult(200, "OK");
             }
