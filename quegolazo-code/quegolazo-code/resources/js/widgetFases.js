@@ -34,7 +34,7 @@
         }
         widget.agregarFase();
         widget.crearHtmlFaseNueva(widget.options.fases.length);
-        widget.ocultarOMostrarBotones($("#ddlTipoFixtureFase" + widget.options.fases.length));
+        widget.cambioEnTipoDeFixture($("#ddlTipoFixtureFase" + widget.options.fases.length));
     },
     crearHtmlFaseNueva: function (numFase) {
         var widget = this;
@@ -76,7 +76,7 @@
         var divIzquierda = $("<div/>", { class: 'col-md-5', id: 'divIzquierda' + numFase });
         var labelFixture = $("<label/>").text("Tipo de Fixture:");
         var comboTipoFixture = createDropDownList("ddlTipoFixtureFase" + numFase, this.options.tiposDeFixture);
-        comboTipoFixture.on("change", function () { widget.ocultarOMostrarBotones($(this)); })
+        comboTipoFixture.on("change", function () { widget.cambioEnTipoDeFixture($(this)); })
         labelFixture.appendTo(divIzquierda);
         comboTipoFixture.appendTo(divIzquierda);
         divIzquierda.appendTo(row);
@@ -105,7 +105,7 @@
         
     },
     //prepara los controles de la fase ségun el tipo de fixture que se eligió, ademas setea la cantidad de grupos en 0.
-    ocultarOMostrarBotones: function (combo) {
+    cambioEnTipoDeFixture: function (combo) {
         var widget = this;        
         $("#panelFracaso").hide(); //se esconde el panel de fracaso.
         var numFase = combo.attr("id").substr(combo.attr("id").length - 1);
@@ -121,7 +121,8 @@
         } else {
             $("#divCentroFase" + numFase).hide();
             widget.validarCantidadDeEquiposEliminatorio(numFase);
-        }        
+        }
+        widget.options.fases[numFase - 1].grupos = [];
        
     },    
     //agrega un objeto fase a las opciones del widget
@@ -208,13 +209,8 @@
         var respuesta = false;
         try {
             widget.armarFases();
-            var msj = widget.validarFasesCorrectas();
-            if (msj !== "OK") {
-                widget.mostrarMensajeDeError(msj);
-                return respuesta;
-            }
-            else {
-                $.ajax({
+            widget.validarFasesCorrectas();
+            $.ajax({
                     type: "POST",
                     url: "fases.aspx/guardarFases",
                     contentType: "application/json",
@@ -235,7 +231,7 @@
                     }
                 });
                 return respuesta;
-            }
+            
         } catch (e) {
             widget.mostrarMensajeDeError(e.message);
             return respuesta;
@@ -246,20 +242,20 @@
     validarFasesCorrectas: function () {
         var widget = this;
         if (widget.options.fases.length < 1)
-            return "Debe crear al menos una fase para continuar.";
+            throw new Error("Debe crear al menos una fase para continuar.");
         for (var i = 0; i < widget.options.fases.length; i++) {
             var fase = widget.options.fases[i];
             if (fase.grupos.length < 1)
-                return "Debe crear al menos un grupo para continuar." ;
+                throw new Error("Debe crear al menos un grupo para continuar.") ;
             for (var j = 0; j < fase.grupos.length; j++) {               
                 for (var k = 0; k < fase.grupos.length; k++) {
                     // si la diferencia entre cantidades de equipos es mayor a uno, o bien la cantidad de equipos de algun grupo es 1
                     if (Math.abs(fase.grupos[j].equipos.length - fase.grupos[k].equipos.length) > 1 || fase.grupos[j].length < 2)
-                        return "La diferencia de equipos entre los grupos no debe ser mayor a uno.";
+                        throw new Error("La diferencia de equipos entre los grupos no debe ser mayor a uno.");
                     }
             }
         }
-        return "OK";
+       
     },
     //setea los grupos en la opcion del widget, guardando los grupos en cada fase, basandose en lo que generó el usuario en la interfaz
     armarFases: function () {
@@ -281,6 +277,8 @@
     armarLlaves: function (numFase) {
         var widget = this;
         var idEquipos = $("[data-idequipo]");
+        if (idEquipos.length == 0)
+            throw new Error("ATENCION : Debe configurar los partidos de la eliminaoria para continuar");
         var partido = { local: null, visitante: null };
         var fecha = { idFecha: 0, partidos: [], nombre: "" };
         var equiposDelGrupo = [];
@@ -289,16 +287,22 @@
             //cada 2 equipos viene el visitante
            equiposDelGrupo.push(equipo);
             if ((i + 1) % 2 == 0 && i != 0) {
-                partido.visitante = equipo;
-                fecha.partidos.push(partido);
+                partido.visitante = equipo;               
+                fecha.partidos.push( $.extend({}, partido));
             } else {
                 //sino es el local
                 partido.local = equipo;
             }          
         }
         //le asigno a la fase indicada el grupo con la fecha que corresponde a la primera fase
-        widget.options.fases[numFase - 1].grupos.push({ idGrupo: 1, idFase: numFase + 1, fechas: [fecha], equipos: equiposDelGrupo });
-            
+        var grupo = { idGrupo: 1, idFase: numFase + 1, fechas: [fecha], equipos: equiposDelGrupo };
+        if (widget.options.fases[numFase - 1].grupos.length === 0)
+            widget.options.fases[numFase - 1].grupos.push(grupo);
+        else
+            widget.options.fases[numFase - 1].grupos[0] = grupo;
+
+
+        
     },
     //devuelve un equipo pasando un id como parametro, si no lo encuentra devuelve null
     buscarEquipo: function (listaDeEquipos, idBuscado) {
@@ -393,18 +397,24 @@
             $('#ddlCantidad-Fase'+ fase.idFase + ' option:contains("'+fase.grupos.length+'")').prop('selected', true);
             widget.mostrarEquiposEngrupo(numFase, cantidades, fase);
         } else {
+            if (fasePreCargada) {
+                $('#ddlTipoFixtureFase' + fase.idFase).val(fase.tipoFixture.idTipoFixture);
+                $("#divCentroFase" + fase.idFase).hide();
+                widget.validarCantidadDeEquiposEliminatorio(fase.idFase);
+            }
             $("#cuerpoFase" + numFase).css("overflow-x", "scroll");
             $("#cuerpoFase" + numFase).generadorDeLlaves({                
-                equipos: (fase != null) ? fase.equipos : widget.options.fases[numFase -1].equipos,
+                equipos: (fasePreCargada) ? fase.grupos[0].fechas[0].partidos : widget.options.fases[numFase - 1].equipos,
                 mezclar: !fasePreCargada
             });
         }
+        widget.armarFases();
     },
     //muestra el mensaje que se pasa por parametro, haciendo el efecto de luz ;)
     mostrarMensajeDeError: function (mensaje) {
         //var msj = "<div id='alertmsg1'  class='alert alert-danger alert-dismissible flyover flyover-bottom' role='alert'>" +
-        //    "<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>"+
-        // " <strong>Atención :</strong> <span id='msjError'></span></div>"       
+        //"<button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>"+
+        //"<strong>Atención :</strong> <span id='msjError'></span></div>"       
         //$('body').append(msj);
         //$("#msjError").text(mensaje);
         //$("#alertmsg1").addClass("in");
