@@ -24,6 +24,15 @@ function closeModal(idModal) {
 function openModal(idModal) {
     $('#' + idModal).modal('show');
 };
+function cbPenalesClick(cbId) {
+    if ($('#' + cbId).prop('checked')) {
+        $('#ContentAdmin_ContentAdminTorneo_txtPenalesLocal').show('slow');
+        $('#ContentAdmin_ContentAdminTorneo_txtPenalesVisitante').show('slow');
+    } else {
+        $('#ContentAdmin_ContentAdminTorneo_txtPenalesLocal').hide('slow');
+        $('#ContentAdmin_ContentAdminTorneo_txtPenalesVisitante').hide('slow');
+    }
+};
 function togglePanel(panelId, idRadioSi, idRadioNo) {
     if ($('#' + idRadioSi).is(':checked')) {
         $('#' + idRadioSi).removeAttr('checked');

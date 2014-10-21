@@ -18,18 +18,19 @@ namespace quegolazo_code.admin
         {
             gestorEdicion = Sesion.getGestorEdicion();
             gestorPartido = Sesion.getGestorPartido();
-            if (!Page.IsPostBack)
+            try
             {
-                verificarTorneoExistente();
-                try
+                //limpiarPaneles();
+                if (!Page.IsPostBack)
                 {
+                    verificarTorneoExistente();
                     obtenerEdiciónSeleccionada();
                     cargarComboEdiciones();
                     cargarComboArbitros();
                     cargarComboCanchas();
                 }
-                catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
             }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         protected void btnSeleccionarEdicion_Click(object sender, EventArgs e)
@@ -43,7 +44,7 @@ namespace quegolazo_code.admin
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 cargarRepeaterFases();
             }
-            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         protected void rptFases_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -61,7 +62,7 @@ namespace quegolazo_code.admin
                     panelSinFechas.Visible = (rptFechas.Items.Count > 0) ? false : true;
                 }
             }
-            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         protected void rptFechas_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -78,7 +79,7 @@ namespace quegolazo_code.admin
                     panelSinPartidos.Visible = (rptPartidos.Items.Count > 0) ? false : true;
                 }
             }
-            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         protected void rptPartidos_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -87,11 +88,24 @@ namespace quegolazo_code.admin
             {
                 if (e.CommandName == "administrarPartido")
                 {
+                    limpiarCampos();
                     gestorPartido.obtenerPartidoporId(e.CommandArgument.ToString());
-                    cargarPartido(); 
+                    cargarPartido();
                 }
             }
-            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        protected void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorPartido.modificarPartido(txtFecha.Value, ddlArbitros.SelectedValue, ddlCanchas.SelectedValue, obtenerTitularesLocal(), obtenerTitularesVisitante());
+            }
+            catch (Exception ex)
+            {
+                mostrarPanelFracaso(ex.Message);
+            }
         }
 
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -128,9 +142,27 @@ namespace quegolazo_code.admin
             {
                 if (e.CommandName == "eliminarTarjeta")
                     gestorPartido.eliminarTarjeta(e.CommandArgument.ToString());
-                cargarRepeaterGoles();
+                cargarRepeaterTarjetas();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        protected void rptTarjetas_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                char tipoTarjeta = ((Tarjeta)e.Item.DataItem).tipoTarjeta;
+                if (tipoTarjeta.ToString().Equals("R"))
+                {
+                    Label panelTarjetaRoja = e.Item.FindControl("panelTarjetaRoja") as Label;
+                    panelTarjetaRoja.Visible = true;
+                }
+                else if (tipoTarjeta.ToString().Equals("A"))
+                {
+                    Label panelTarjetaAmarilla = e.Item.FindControl("panelTarjetaAmarilla") as Label;
+                    panelTarjetaAmarilla.Visible = true;
+                }
+            }
         }
 
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -140,7 +172,7 @@ namespace quegolazo_code.admin
         {
             try
             {
-                if (gestorPartido.partido.local.idEquipo == int.Parse(ddlGolesEquipos.SelectedValue)) 
+                if (gestorPartido.partido.local.idEquipo == int.Parse(ddlGolesEquipos.SelectedValue))
                     ddlGolesJugadores.DataSource = gestorPartido.partido.local.jugadores;
                 else
                     ddlGolesJugadores.DataSource = gestorPartido.partido.visitante.jugadores;
@@ -148,7 +180,7 @@ namespace quegolazo_code.admin
                 ddlGolesJugadores.DataTextField = "nombre";
                 ddlGolesJugadores.DataBind();
             }
-            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         protected void btnGolAgregar_Click(object sender, EventArgs e)
@@ -158,7 +190,7 @@ namespace quegolazo_code.admin
                 gestorPartido.agregarGol(ddlGolesEquipos.SelectedValue, ddlGolesJugadores.SelectedValue, ddlGolesTipos.SelectedValue, txtGolesMinuto.Value);
                 cargarRepeaterGoles();
             }
-            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         protected void rptGoles_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -169,7 +201,7 @@ namespace quegolazo_code.admin
                     gestorPartido.eliminarGol(e.CommandArgument.ToString());
                 cargarRepeaterGoles();
             }
-            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -181,7 +213,7 @@ namespace quegolazo_code.admin
             {
                 if (e.CommandName == "eliminarCambio")
                     gestorPartido.eliminarCambio(e.CommandArgument.ToString());
-                cargarRepeaterGoles();
+                cargarRepeaterCambios();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
@@ -214,7 +246,7 @@ namespace quegolazo_code.admin
         {
             try
             {
-                gestorPartido.agregarCambio(ddlCambiosEquipos.SelectedValue,ddlCambiosJugadoresEntra.SelectedValue,ddlCambiosJugadoresSale.SelectedValue,txtCambiosMinuto.Value);
+                gestorPartido.agregarCambio(ddlCambiosEquipos.SelectedValue, ddlCambiosJugadoresEntra.SelectedValue, ddlCambiosJugadoresSale.SelectedValue, txtCambiosMinuto.Value);
                 cargarRepeaterCambios();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -237,8 +269,8 @@ namespace quegolazo_code.admin
             txtFecha.Value = (gestorPartido.partido.fecha != null) ? gestorPartido.partido.fecha.Value.ToString("{0:dd/mm/yyyy HH:mm}") : "";
             ddlArbitros.SelectedValue = (gestorPartido.partido.arbitro != null) ? gestorPartido.partido.arbitro.idArbitro.ToString() : "";
             ddlCanchas.SelectedValue = (gestorPartido.partido.cancha != null) ? gestorPartido.partido.cancha.idCancha.ToString() : "";
-            cargarRepeaterJugadoresEquipoLocal();
-            cargarRepeaterJugadoresEquipoVisitante();
+            cargarListaJugadoresEquipoLocal();
+            cargarListaJugadoresEquipoVisitante();
             cargarRepeaterGoles();
             cargarABMGoles();
             cargarRepeaterCambios();
@@ -337,7 +369,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterTarjetas()
         {
-            rptTarjetas.DataSource = gestorPartido.partido.cambios;
+            rptTarjetas.DataSource = gestorPartido.partido.tarjetas;
             rptTarjetas.DataBind();
         }
 
@@ -345,20 +377,24 @@ namespace quegolazo_code.admin
         /// Carga el repeater de jugadores equipo local
         /// autor: Facu Allemand
         /// </summary>
-        private void cargarRepeaterJugadoresEquipoLocal()
+        private void cargarListaJugadoresEquipoLocal()
         {
-            rptJugadoresEquipoLocal.DataSource = gestorPartido.partido.local.jugadores;
-            rptJugadoresEquipoLocal.DataBind();
+            cblJugadoresEquipoLocal.DataSource = gestorPartido.partido.local.jugadores;
+            cblJugadoresEquipoLocal.DataTextField = "nombre";
+            cblJugadoresEquipoLocal.DataValueField = "idJugador";
+            cblJugadoresEquipoLocal.DataBind();
         }
 
         /// <summary>
         /// Carga el repeater de jugadores equipo visitante
         /// autor: Facu Allemand
         /// </summary>
-        private void cargarRepeaterJugadoresEquipoVisitante()
+        private void cargarListaJugadoresEquipoVisitante()
         {
-            rptJugadoresEquipoVisitante.DataSource = gestorPartido.partido.visitante.jugadores;
-            rptJugadoresEquipoVisitante.DataBind();
+            cblJugadoresEquipoVisitante.DataSource = gestorPartido.partido.visitante.jugadores;
+            cblJugadoresEquipoVisitante.DataTextField = "nombre";
+            cblJugadoresEquipoVisitante.DataValueField = "idJugador";
+            cblJugadoresEquipoVisitante.DataBind();
         }
 
         /// <summary>
@@ -367,7 +403,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void obtenerEdiciónSeleccionada()
         {
-            if (gestorEdicion.edicion!=null && gestorEdicion.edicion.idEdicion > 0)
+            if (gestorEdicion.edicion != null && gestorEdicion.edicion.idEdicion > 0)
             {
                 gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(gestorEdicion.edicion.idEdicion);
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
@@ -444,8 +480,59 @@ namespace quegolazo_code.admin
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showError", "$('#panelFracaso').toggleClass('in');", true);
             litFracaso.Text = mensaje;
             panelFracaso.Visible = true;
+        }
+
+        /// <summary>
+        /// Limpia los paneles de éxito y fracaso
+        /// </summary>
+        private void limpiarPaneles()
+        {
+            panelFracaso.Visible = false;
+            litFracaso.Text = "";
+        }
+
+        /// <summary>
+        /// Obtiene la lista de jugadores titulares del equipo local
+        /// </summary>
+        private List<int> obtenerTitularesLocal()
+        {
+            List<int> idTitulares = new List<int>();
+            foreach (ListItem item in cblJugadoresEquipoLocal.Items)
+                if (item.Selected)
+                    idTitulares.Add(Validador.castInt(item.Value));
+            return idTitulares;
+        }
+
+        /// <summary>
+        /// Obtiene la lista de jugadores titulares del equipo visitante
+        /// </summary>
+        private List<int> obtenerTitularesVisitante()
+        {
+            List<int> idTitulares = new List<int>();
+            foreach (ListItem item in cblJugadoresEquipoVisitante.Items)
+                if (item.Selected)
+                    idTitulares.Add(Validador.castInt(item.Value));
+            return idTitulares;
+        }
+
+        /// <summary>
+        /// Limpiar todos los campos del formulario de Administración de Partidos
+        /// </summary>
+        private void limpiarCampos()
+        {
+            txtEquipoLocal.Value = "";
+            txtEquipoVisitante.Value = "";
+            txtGolesLocal.Value = "";
+            txtGolesVisitante.Value = "";
+            txtPenalesLocal.Value = "";
+            txtPenalesVisitante.Value = "";
+            txtFecha.Value = "";
+            ddlArbitros.SelectedValue = "";
+            ddlCanchas.SelectedValue = "";
+            cbPenales.Checked = false;
         }
     }
 }
