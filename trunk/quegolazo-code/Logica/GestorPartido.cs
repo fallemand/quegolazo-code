@@ -74,18 +74,35 @@ namespace Logica
             partido.goles.Add(gol);
         }
 
-        public void agregarTarjeta(string idEquipo, string idJugador, string idTipoTarjeta, string minuto)
+        public void agregarTarjeta(string idEquipo, string idJugador, string tipoTarjeta, string minuto)
         {
-            if (!idTipoTarjeta.Equals("A") && !idTipoTarjeta.Equals("R"))
-                throw new Exception("El tipo de tarjeta seleccionada no es válida");
+            validarAgregarTarjeta(Validador.castInt(Validador.isNotEmpty(idJugador)), tipoTarjeta);
             GestorJugador gestorJugador = new GestorJugador();
             Tarjeta tarjeta = new Tarjeta();
             tarjeta.equipo.idEquipo = Validador.castInt(Validador.isNotEmpty(idEquipo));
             tarjeta.jugador = gestorJugador.obtenerJugadorPorId(Validador.castInt(Validador.isNotEmpty(idJugador)));
-            tarjeta.tipoTarjeta = Validador.castChar(Validador.isNotEmpty(idTipoTarjeta));
+            tarjeta.tipoTarjeta = Validador.castChar(Validador.isNotEmpty(tipoTarjeta));
             if (minuto != "")
                 tarjeta.minuto = Validador.castInt(minuto);
             partido.tarjetas.Add(tarjeta);
+        }
+
+        public void validarAgregarTarjeta(int idJugador, string tipoTarjeta)
+        {
+            if (!tipoTarjeta.Equals("A") && !tipoTarjeta.Equals("R"))
+                throw new Exception("El tipo de tarjeta seleccionada no es válida");
+            int cantRojas=0;
+            int cantAmarillas=0;
+            foreach (Tarjeta tarjeta in partido.tarjetas)
+            {
+                if (idJugador == tarjeta.jugador.idJugador && tarjeta.tipoTarjeta.ToString().Equals("A"))
+                    cantAmarillas++;
+                else if (idJugador == tarjeta.jugador.idJugador && tarjeta.tipoTarjeta.ToString().Equals("R"))
+                    cantRojas++;
+            }
+            if (cantAmarillas >= 2 || cantRojas >= 1)
+                throw new Exception("Ya no puede agregar más tarjetas");
+
         }
 
         public void eliminarGol(string idGolTemp)

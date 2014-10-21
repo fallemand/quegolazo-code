@@ -13,6 +13,15 @@ namespace quegolazo_code.admin {
     public partial class fechas {
         
         /// <summary>
+        /// Control upListadoFases.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upListadoFases;
+        
+        /// <summary>
         /// Control ddlEdiciones.
         /// </summary>
         /// <remarks>
@@ -29,15 +38,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSeleccionarEdicion;
-        
-        /// <summary>
-        /// Control upRegistrarNuevaCancha.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upRegistrarNuevaCancha;
         
         /// <summary>
         /// Control rptFases.
@@ -58,22 +58,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Panel panelSinFases;
         
         /// <summary>
-        /// Control panelFracaso.
+        /// Control upAdministrarFecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelFracaso;
-        
-        /// <summary>
-        /// Control litFracaso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litFracaso;
+        protected global::System.Web.UI.UpdatePanel upAdministrarFecha;
         
         /// <summary>
         /// Control txtEquipoLocal.
@@ -92,6 +83,51 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtEquipoVisitante;
+        
+        /// <summary>
+        /// Control txtGolesLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtGolesLocal;
+        
+        /// <summary>
+        /// Control txtPenalesLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPenalesLocal;
+        
+        /// <summary>
+        /// Control cbPenales.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox cbPenales;
+        
+        /// <summary>
+        /// Control txtGolesVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtGolesVisitante;
+        
+        /// <summary>
+        /// Control txtPenalesVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPenalesVisitante;
         
         /// <summary>
         /// Control txtFecha.
@@ -121,22 +157,22 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.DropDownList ddlCanchas;
         
         /// <summary>
-        /// Control rptJugadoresEquipoLocal.
+        /// Control cblJugadoresEquipoLocal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptJugadoresEquipoLocal;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblJugadoresEquipoLocal;
         
         /// <summary>
-        /// Control rptJugadoresEquipoVisitante.
+        /// Control cblJugadoresEquipoVisitante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptJugadoresEquipoVisitante;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblJugadoresEquipoVisitante;
         
         /// <summary>
         /// Control rptGoles.
@@ -301,49 +337,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnTarjetaAgregar;
         
         /// <summary>
-        /// Control panel2.
+        /// Control btnRegistrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel2;
-        
-        /// <summary>
-        /// Control Literal2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal2;
-        
-        /// <summary>
-        /// Control btnCancelarModificacionJugador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarModificacionJugador;
-        
-        /// <summary>
-        /// Control btnModificarJugador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarJugador;
-        
-        /// <summary>
-        /// Control btnRegistrarJugador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegistrarJugador;
+        protected global::System.Web.UI.WebControls.Button btnRegistrar;
         
         /// <summary>
         /// Control UpdateProgressModalTorneo.
@@ -353,5 +353,23 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgressModalTorneo;
+        
+        /// <summary>
+        /// Control panelFracaso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelFracaso;
+        
+        /// <summary>
+        /// Control litFracaso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litFracaso;
     }
 }
