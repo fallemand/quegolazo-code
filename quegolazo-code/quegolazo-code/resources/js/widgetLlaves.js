@@ -3,19 +3,14 @@
         container: null,
         equipos: null,
         mezclar: false,
+        numFase: null,
+        generica : false,
         llaves: [],
         datosEquipos: {teams:[], results:[]},
         //cuando se hace click en el label de un equipo.
-        alEditar : undefined,
+        alEditar : undefined
         //cuando se renderiza en la UI el label de los equipos.
-        alRenderizar :  function render_fn(container, data, score) {
-            if (!data.idEquipo || !data.nombre)
-                return
-            //container es el label, el parent es el div que lo contiene
-            container.append(data.nombre);
-            container.parent().attr("data-idequipo", data.idEquipo);
-            
-        }
+        
     },
 
     _create: function () { 
@@ -23,16 +18,17 @@
         //workaround para eliminar los controles de customizacion
         $(".tools").remove();
         //$(".team").unbind();
+        if(!this.options.generica)
         this.habilitarSwap();    
 
     },
-
+    
     armarLlaves: function () {
         var widget = this;
         var llaves = [];
         var partido = [];
         //si mezclar viene en false, no habia fase precargada
-        if (widget.options.mezclar)//sort(function () { return 0.5 - Math.random() }) sirve para randomizar la lista.
+        if (widget.options.mezclar || widget.options.generica)//sort(function () { return 0.5 - Math.random() }) sirve para randomizar la lista.
         {
             widget.options.equipos.sort(function () { return 0.5 - Math.random() });
             for (var i = 0; i < widget.options.equipos.length; i++) {
@@ -65,15 +61,23 @@
             init: widget.options.datosEquipos, /* data to initialize the bracket with */            
             decorator: {
                 edit: function () {},
-                render: widget.options.alRenderizar}
+                render: function render_fn(container, data, score) {
+                        if (!data.idEquipo || !data.nombre)
+                        return
+                    //container es el label, el parent es el div que lo contiene
+                    container.append(data.nombre);
+                    if (!widget.options.generica) //si no es generica le asigno el idEquipo al div.
+                        container.parent().attr("data-idequipo", data.idEquipo);
+
+                }
+            }
         });
     
     },
     habilitarSwap: function ()  {
         var droppableParent;
-       
-        $('[data-idequipo]').wrap("<div class='target'><div/>");
-	
+        var widget = this;
+        $('[data-idequipo]').wrap("<div class='target'><div/>");	
         $('[data-idequipo]').draggable({
             revert: 'invalid',
             revertDuration: 200,
