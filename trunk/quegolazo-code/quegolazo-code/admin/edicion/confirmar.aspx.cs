@@ -95,10 +95,17 @@ namespace quegolazo_code.admin.edicion
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
+                Literal LitCantidadGrupos = (Literal)e.Item.FindControl("LitCantidadGrupos");
                 Literal litCantEquipo = (Literal)e.Item.FindControl("litCantidadEquipos");
                 Literal litCantEquipoGrupo = (Literal)e.Item.FindControl("litCantidadEquiposGrupo");
-                litCantEquipo.Text = gestorEdicion.edicion.equipos.Count.ToString();
-                litCantEquipoGrupo.Text = (gestorEdicion.edicion.equipos.Count / ((Fase)e.Item.DataItem).grupos.Count).ToString();
+                Literal LitCantidadFechas = (Literal)e.Item.FindControl("LitCantidadFechas");
+                Literal LitPartidosPorFecha = (Literal)e.Item.FindControl("LitPartidosPorFecha");
+            
+                litCantEquipo.Text = (gestorEdicion.edicion.equipos.Count>0) ? gestorEdicion.edicion.equipos.Count.ToString() : "S/D";
+                litCantEquipoGrupo.Text = (((Fase)e.Item.DataItem).grupos.Count > 0) ?(gestorEdicion.edicion.equipos.Count / ((Fase)e.Item.DataItem).grupos.Count).ToString() : "S/D";
+                LitCantidadGrupos.Text = (((Fase)e.Item.DataItem).grupos.Count>0) ? ((Fase)e.Item.DataItem).grupos.Count.ToString() : "S/D";
+                LitCantidadFechas.Text = (((Fase)e.Item.DataItem).grupos.Count > 0) ? ((Fase)e.Item.DataItem).grupos[0].fechas.Count.ToString() : "S/D";
+                LitPartidosPorFecha.Text = (((Fase)e.Item.DataItem).grupos.Count > 0) ? ((Fase)e.Item.DataItem).grupos[0].fechas[0].partidos.Count.ToString() : "S/D";
             }
         }
 

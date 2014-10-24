@@ -71,7 +71,7 @@
                         <div class="panel-heading">
                           <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#fases" href="#collapseOne">
-                              Fase  <%# Eval("idFase") %><small>Ver Más Detalles</small>
+                              Fase  <%# Eval("idFase") %> <small>Ver Más Detalles</small>
                             </a>
                           </h4>
                         </div>
@@ -79,13 +79,13 @@
                           <div class="panel-body">
                               <div class="col-md-6">
                                 <b>Tipo Fixture:</b> <%# Eval("TipoFixture.nombre") %><br />
-                                <b>Cantidad de Grupos:</b> <%# ((Entidades.Fase)Container.DataItem).grupos.Count %> <br />
+                                <b>Cantidad de Grupos:</b><asp:Literal ID="LitCantidadGrupos" runat="server"></asp:Literal><br />
                                 <b>Cantidad de Equipos:</b> <asp:Literal ID="litCantidadEquipos" runat="server"></asp:Literal><br />
                                 <b>Cantidad de Equipos por Grupo:</b> <asp:Literal ID="litCantidadEquiposGrupo" runat="server" ></asp:Literal> <br />
                               </div>
                               <div class="col-md-6">
-                                <b>Cantidad de Fechas:</b> <%#((Entidades.Fase)Container.DataItem).grupos[0].fechas.Count %> <br />
-                                <b>Partidos por Fecha:</b> <%#((Entidades.Fase)Container.DataItem).grupos[0].fechas[0].partidos.Count %> <br />
+                               <b>Cantidad de Fechas:</b><asp:Literal ID="LitCantidadFechas" runat="server"></asp:Literal> <br />
+                               <b>Partidos por Fecha:</b> <asp:Literal ID="LitPartidosPorFecha" runat="server"></asp:Literal><br />
                               </div>
                           </div>
                         </div>
