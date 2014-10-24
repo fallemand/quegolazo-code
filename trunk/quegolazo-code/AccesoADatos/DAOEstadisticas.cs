@@ -209,8 +209,9 @@ namespace AccesoADatos
 	                            INNER JOIN EquipoXEdicion exe ON p.idEdicion=exe.idEdicion
 	                            INNER JOIN Equipos e ON exe.idEquipo=e.idEquipo 
 	                            INNER JOIN Ediciones ed ON ed.idEdicion=exe.idEdicion 
-	                            WHERE  p.idEdicion=@idEdicion AND e.idEquipo=p.idEquipoLocal OR e.idEquipo=p.idEquipoVisitante
-	                            GROUP BY e.nombre, ed.puntosGanado, ed.puntosPerdido, ed.puntosEmpatado
+	                            WHERE e.idEquipo=p.idEquipoLocal OR e.idEquipo=p.idEquipoVisitante
+	                            GROUP BY p.idEdicion, e.nombre, ed.puntosGanado, ed.puntosPerdido, ed.puntosEmpatado
+								HAVING p.idEdicion=@idEdicion 
 	                            ORDER BY 'Puntos' DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
