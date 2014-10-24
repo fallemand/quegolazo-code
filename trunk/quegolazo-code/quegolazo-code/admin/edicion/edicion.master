@@ -25,13 +25,13 @@
                                             1. Configurar Preferencias
                                         </a>
                                         <a href="<%=Logica.GestorUrl.eEQUIPOS%>" class="list-group-item" id="lbVaribles" >
-                                            2. Asignar Equipos
+                                            2. Seleccionar Equipos
                                         </a>
                                         <a href="<%=Logica.GestorUrl.eFASES%>" class="list-group-item" id="lbAlterntivas" >
-                                            3. Generar Fases
+                                            3. Configurar Fases
                                         </a>
                                         <a href="<%=Logica.GestorUrl.eCONFIRMAR%>" class="list-group-item" id="lbGenerarInforme" >
-                                            4. Editar Fechas
+                                            4. Confirmar Edición
                                         </a>
                                         <a href="#" class="list-group-item disabled">
                                             <div class="progress progress-striped active">
