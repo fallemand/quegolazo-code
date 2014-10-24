@@ -25,7 +25,7 @@ namespace Logica
       {
           foreach (Fase f in fases)
           {
-              if (f != null)
+              if (f != null && f==fases[0])
               {
                   if (f.tipoFixture.idTipoFixture == "TCT")//Todos contra todos ida
                   {
