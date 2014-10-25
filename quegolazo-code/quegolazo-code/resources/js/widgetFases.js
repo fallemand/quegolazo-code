@@ -22,6 +22,7 @@
 
     _create: function () {
         var widget = this;
+        $("#agregarFase").tooltip({title:"Presiona este botón para generar nuevas fases.", placement:"right"});
         widget.cargarEstructuraDeFases();
     },
 
@@ -46,30 +47,30 @@
                 $("#panelContenedorFase" + numFase).remove();
                 widget.options.fases.pop();
                 if(numFase>1)
-                $("#btnEliminarFase" + (numFase - 1)).show();
+                $("#btnEliminarFase" + (numFase - 1)).show("slow");
             }).tooltip({ title: "Eliminar Fase" });
-        btnEliminar.appendTo(headerContenedor);
-        //elimino el boton eliminar de una fase que no sea la ultima.
-        if (numFase > 1)
-            $("#btnEliminarFase" + (numFase - 1)).hide();
-        
-        var contenedorTitulo = $("<h4/>", { class: 'panel-title' });
-        var linkTitulo = $("<a/>").attr("data-toggle", "collapse").attr("data-parent", "#accordionFases").attr("href", "#collapseFase" + numFase).text("Fase N° " + numFase);
+        btnEliminar.appendTo(headerContenedor);           
+        var contenedorTitulo = $("<h4/>", { class: 'panel-title text-center' }).text("Fase N° " + numFase).css("font-weight", "400");
+        var linkTitulo = $("<a/>").attr("data-toggle", "collapse").attr("data-parent", "#accordionFases").attr("id", "collapsableFase" + numFase).attr("href", "#collapseFase" + numFase);
         var contenedorDeLaFase = $("<div/>", { class: 'panel-collapse collapse in' }).attr("id", "collapseFase" + numFase);
         var cuerpoDeLaFase = $("<div/>", { class: 'panel-body' }).attr("id", "panelFase" + numFase);
         var contenedorControles = widget.crearControlesDeFase(numFase);
         contenedorControles.appendTo(cuerpoDeLaFase);
         cuerpoDeLaFase.appendTo(contenedorDeLaFase);
-        linkTitulo.appendTo(contenedorTitulo);
-        contenedorTitulo.appendTo(headerContenedor);
+        contenedorTitulo.appendTo(linkTitulo);       
+        linkTitulo.appendTo(headerContenedor);
         headerContenedor.appendTo(contenedorGeneral);
         contenedorDeLaFase.appendTo(contenedorGeneral);
-        contenedorGeneral.appendTo(panelFases);    
+        contenedorGeneral.appendTo(panelFases);
         $("<div/>").attr("id", "cuerpoFase" + numFase).appendTo(cuerpoDeLaFase);
         //si la fase es mayor a uno, cargo los equipos genericos para el primer caso.
         if (numFase > 1) {
             widget.generarListaDeEquiposParaFase(numFase, $("#ddlCantidadParticipantesFase" + numFase).val());
             $("#ddlCantidadParticipantesFase" + numFase).tooltip({ placemenent:'bottom',title: "Indica la cantidad de equipos que clasifican de la fase anterior"});
+            //elimino el boton eliminar de una fase que no sea la ultima.  
+            $("#btnEliminarFase" + (numFase - 1)).hide();
+            //cierro el panel de la fase anterior.
+            $("#collapseFase" + (numFase - 1)).addClass("collapse").removeClass("in");
         } else
             //agrego el tooltip al boton
             $("#btnMostrarFase" + numFase).tooltip({ title: "Presiona nuevamente este botón para generar una nueva configuracion de la fase." });
@@ -114,7 +115,7 @@
                 widget.generarListaDeEquiposParaFase(numFase, $(this).val());
                 $("#cuerpoFase" + numFase).remove();
                 widget.eliminarFasesSiguientes(numFase);
-                $("#btnEliminarFase" + numFase).show();
+                $("#btnEliminarFase" + numFase).show("slow");
                 if ($("#ddlTipoFixtureFase" + numFase).val().indexOf("ELIM") >= 0) {
                     widget.validarCantidadDeEquiposEliminatorio(numFase);
                 }
@@ -283,6 +284,7 @@
                 tablaGrupo.appendTo(row);
                 row.appendTo($("#cuerpoFase" + numFase));
             }
+        if(numFase ==1) // si no es la primera fase, 
         $(".gruposFase"+numFase).sortable({
             connectWith: ".gruposFase" + numFase
             }).disableSelection();        
@@ -339,7 +341,7 @@
                 for (var k = 0; k < fase.grupos.length; k++) {
                     // si la diferencia entre cantidades de equipos es mayor a uno, o bien la cantidad de equipos de algun grupo es 1
                     if (Math.abs(fase.grupos[j].equipos.length - fase.grupos[k].equipos.length) > 1 || fase.grupos[j].length < 2)
-                        throw new Error("La diferencia de equipos entre los grupos no debe ser mayor a uno.");
+                        throw new Error("La diferencia de equipos entre los grupos generados en la Fase 1 no debe ser mayor a uno.");
                     }
             }
         }
