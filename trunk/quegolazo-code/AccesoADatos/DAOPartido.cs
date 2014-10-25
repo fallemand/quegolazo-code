@@ -595,7 +595,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idPartido">Id de Partido</param>
         /// <returns>Lista genérica de objeto Jugador</returns>
-        public List<Jugador> obtenerTitularesDeUnPartido(int idPartido)
+        public List<Jugador> obtenerTitularesDeUnPartido(int idPartido, int idEquipo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -610,9 +610,10 @@ namespace AccesoADatos
                 string sql = @"SELECT *
                                 FROM Jugadores j 
                                 INNER JOIN TitularesXPartido txp ON j.idJugador = txp.idJugador
-                                WHERE txp.idPartido = @idPartido";
+                                WHERE txp.idPartido = @idPartido AND txp.idEquipo = @idEquipo";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
+                cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
@@ -653,6 +654,7 @@ namespace AccesoADatos
 
         public void modificarPartido(Partido partido)
         {
+            eliminarTitularesDePartido(partido.idPartido);
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlTransaction trans = null;
@@ -812,6 +814,37 @@ namespace AccesoADatos
             catch (SqlException ex)
             {
                 throw new Exception("No se pudo eliminar el gol: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Eliminar los titulares de un partido
+        /// autor: Facundo Allemand
+        /// </summary>
+        public void eliminarTitularesDePartido(int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"DELETE FROM TitularesXPartido
+                                WHERE idPartido = @idPartido";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idPartido", idPartido);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("No se pudo eliminar los titulares del partido: " + ex.Message);
             }
             finally
             {

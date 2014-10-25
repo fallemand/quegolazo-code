@@ -36,14 +36,20 @@ function cbPenalesClick(cbId) {
 
 function showPanelFracaso() {
     setTimeout(function () {
-        $('#panelFracaso').toggleClass('in').delay(800);
+        $('#panelFracaso').toggleClass('in');
     }, 1);
 };
 
 function showPanelExito() {
     setTimeout(function () {
-        $('#panelExito').toggleClass('in').delay(800);
+        $('#panelExito').toggleClass('in');
     }, 1);
+};
+
+function showCollapsablePanel(idPanelCollapse, hasParent) {
+    $('#' + idPanelCollapse).addClass('in');
+    if(hasParent)
+        $('#' + idPanelCollapse).parents('.panel-collapse').addClass('in');
 };
 
 function togglePanel(panelId, idRadioSi, idRadioNo) {

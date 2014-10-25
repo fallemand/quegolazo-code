@@ -14,19 +14,18 @@ namespace Logica
         public Partido partido;
         public DAOPartido daoPartido= new DAOPartido();
 
+        /// <summary>
+        /// Constructores
+        /// autor: Facundo Allemand
+        /// </summary>
         public GestorPartido(Partido partido)
         {
             this.partido = partido;
         }
-
         public GestorPartido()
         {
             partido = new Partido();
         }
-
-        //public Partido obtenerPartidoPorId(int idPartido) {
-        //    daoPartido.obtenerPartidos
-        //}
 
         /// <summary>
         /// Modifica los datos del partido
@@ -38,6 +37,33 @@ namespace Logica
                 throw new Exception("Debe cargar los goles de ambos equipos o ninguno de ellos");
             partido.golesLocal = (!txtGolesLocal.Equals("")) ? (int?)Validador.castInt(txtGolesLocal) : null;
             partido.golesVisitante = (!txtGolesVisitante.Equals("")) ? (int?)Validador.castInt(txtGolesVisitante) : null;
+            if (partido.golesLocal < 0 || partido.golesVisitante<0)
+                throw new Exception("Los goles no pueden ser negativos");
+            cargarPenales(huboPenales, txtPenalesLocal, txtPenalesVisitante);
+            validarGoles();
+            partido.fecha = (!fechaHora.Equals("")) ? (DateTime?)Validador.castDate(fechaHora) : null;
+            partido.arbitro = (!idArbitro.Equals("")) ? new Arbitro() : null;
+            if(partido.arbitro!=null)
+                partido.arbitro.idArbitro = Validador.castInt(idArbitro);
+            partido.cancha = (!idCancha.Equals("")) ? new Cancha() : null;
+            if(partido.cancha!=null)
+                partido.cancha.idCancha = Validador.castInt(idCancha);
+            partido.titularesLocal.Clear();
+            foreach (int idJugador in titularesLocal)
+                partido.titularesLocal.Add(new Jugador() { idJugador = idJugador });
+            partido.titularesVisitante.Clear();
+            foreach (int idJugador in titularesVisitante)
+                partido.titularesVisitante.Add(new Jugador() { idJugador = idJugador });
+            calcularGanador();
+            daoPartido.modificarPartido(partido);
+        }
+
+        /// <summary>
+        /// Valida y carga los penales
+        /// autor: Facundo Allemand
+        /// </summary>
+        private void cargarPenales(bool huboPenales, string txtPenalesLocal, string txtPenalesVisitante)
+        {
             if (huboPenales == true)
             {
                 if (partido.golesLocal != partido.golesVisitante)
@@ -49,6 +75,8 @@ namespace Logica
                 partido.penalesVisitante = Validador.castInt(txtPenalesVisitante);
                 if (partido.penalesLocal == partido.penalesVisitante)
                     throw new Exception("Un equipo debe ganar en definición por penales");
+                if (partido.penalesLocal < 0 || partido.penalesVisitante <0)
+                    throw new Exception("Los penales no pueden ser negativos");
             }
             else
             {
@@ -56,27 +84,6 @@ namespace Logica
                 partido.penalesLocal = null;
                 partido.penalesVisitante = null;
             }
-            validarGoles();
-            if (!fechaHora.Equals(""))
-                partido.fecha = Validador.castDate(fechaHora);
-            if (!idArbitro.Equals(""))
-            {
-                if (partido.arbitro == null)
-                    partido.arbitro = new Arbitro();
-                partido.arbitro.idArbitro = Validador.castInt(idArbitro);
-            }
-            if (!idCancha.Equals(""))
-            {
-                if (partido.cancha == null)
-                    partido.cancha = new Cancha();
-                partido.cancha.idCancha = Validador.castInt(idCancha);
-            }
-            foreach (int idJugador in titularesLocal)
-                partido.titularesLocal.Add(new Jugador() { idJugador = idJugador });
-            foreach (int idJugador in titularesVisitante)
-                partido.titularesVisitante.Add(new Jugador() { idJugador = idJugador });
-            calcularGanador();
-            daoPartido.modificarPartido(partido);
         }
 
         /// <summary>
@@ -113,9 +120,9 @@ namespace Logica
                 int golesVisitante = 0;
                 foreach (Gol gol in partido.goles)
                 {
-                    if (gol.equipo.idEquipo == partido.local.idEquipo)
+                    if (gol.equipo.idEquipo == partido.local.idEquipo || (gol.tipoGol.idTipoGol == TipoGol.EN_CONTRA && gol.equipo.idEquipo == partido.visitante.idEquipo))
                         golesLocal++;
-                    else if (gol.equipo.idEquipo == partido.visitante.idEquipo)
+                    else if (gol.equipo.idEquipo == partido.visitante.idEquipo || (gol.tipoGol.idTipoGol == TipoGol.EN_CONTRA && gol.equipo.idEquipo == partido.local.idEquipo))
                         golesVisitante++;
                 }
                 if (golesLocal != partido.golesLocal || golesVisitante != partido.golesVisitante)
@@ -123,6 +130,10 @@ namespace Logica
             }
         }
 
+        /// <summary>
+        /// Obtiene un partido con todos sus objetos desde la BD
+        /// autor: Facundo Allemand
+        /// </summary>
         public void obtenerPartidoporId(string idPartido)
         {
             DAOJugador daoJugadores = new DAOJugador();
@@ -133,13 +144,47 @@ namespace Logica
             partido.cambios = daoPartido.obtenerCambios(partido.idPartido);
             partido.local.jugadores = daoJugadores.obtenerJugadoresDeUnEquipo(partido.local.idEquipo);
             partido.visitante.jugadores = daoJugadores.obtenerJugadoresDeUnEquipo(partido.visitante.idEquipo);
+            partido.titularesLocal = daoPartido.obtenerTitularesDeUnPartido(partido.idPartido, partido.local.idEquipo);
+            partido.titularesVisitante = daoPartido.obtenerTitularesDeUnPartido(partido.idPartido, partido.visitante.idEquipo);
         }
 
+        /// <summary>
+        /// Retorna si un jugador es titular en el equipo local
+        /// autor: Facundo Allemand
+        /// </summary>
+        public bool esTitularLocal(int idJugador)
+        {
+            foreach (Jugador jugador in partido.titularesLocal)
+                if (idJugador == jugador.idJugador)
+                    return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Retorna si un jugador es titular en el equipo visitante
+        /// autor: Facundo Allemand
+        /// </summary>
+        public bool esTitularVisitante(int idJugador)
+        {
+            foreach (Jugador jugador in partido.titularesVisitante)
+                if (idJugador == jugador.idJugador)
+                    return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Obtiene los tipos de gol desde la BD
+        /// autor: Facundo Allemand
+        /// </summary>
         public List<TipoGol> obtenerTiposGol()
         {
             return daoPartido.obtenerTiposGol();
         }
 
+        /// <summary>
+        /// Agrega un gol en el objeto partido.goles
+        /// autor: Facundo Allemand
+        /// </summary>
         public void agregarGol(string idEquipo, string idJugador, string idTipoGol, string minuto)
         {
             GestorJugador gestorJugador = new GestorJugador();
@@ -153,6 +198,10 @@ namespace Logica
             partido.goles.Add(gol);
         }
 
+        /// <summary>
+        /// Agrega una tarjeta en el objeto partido.tarjetas
+        /// autor: Facundo Allemand
+        /// </summary>
         public void agregarTarjeta(string idEquipo, string idJugador, string tipoTarjeta, string minuto)
         {
             validarAgregarTarjeta(Validador.castInt(Validador.isNotEmpty(idJugador)), tipoTarjeta);
@@ -166,6 +215,28 @@ namespace Logica
             partido.tarjetas.Add(tarjeta);
         }
 
+        /// <summary>
+        /// Agrega un cambio en el objeto partido.cambios
+        /// autor: Facundo Allemand
+        /// </summary>
+        public void agregarCambio(string idEquipo, string idJugadorEntra, string idJugadorSale, string minuto)
+        {
+            if (Validador.castInt(Validador.isNotEmpty(idJugadorEntra)) == Validador.castInt(Validador.isNotEmpty(idJugadorSale)))
+                throw new Exception("El jugador que entra no puedo ser el mismo que sale");
+            GestorJugador gestorJugador = new GestorJugador();
+            Cambio cambio = new Cambio();
+            cambio.equipo.idEquipo = Validador.castInt(Validador.isNotEmpty(idEquipo));
+            cambio.jugadorEntra = gestorJugador.obtenerJugadorPorId(Validador.castInt(Validador.isNotEmpty(idJugadorEntra)));
+            cambio.jugadorSale = gestorJugador.obtenerJugadorPorId(Validador.castInt(Validador.isNotEmpty(idJugadorSale)));
+            if (minuto != "")
+                cambio.minuto = Validador.castInt(minuto);
+            partido.cambios.Add(cambio);
+        }
+
+        /// <summary>
+        /// Valida la cantidad de tarjetas para el jugador
+        /// autor: Facundo Allemand
+        /// </summary>
         public void validarAgregarTarjeta(int idJugador, string tipoTarjeta)
         {
             if (!tipoTarjeta.Equals("A") && !tipoTarjeta.Equals("R"))
@@ -181,9 +252,12 @@ namespace Logica
             }
             if (cantAmarillas >= 2 || cantRojas >= 1)
                 throw new Exception("Ya no puede agregar más tarjetas");
-
         }
 
+        /// <summary>
+        /// Elimina un gol del objeto partido.goles
+        /// autor: Facundo Allemand
+        /// </summary>
         public void eliminarGol(string idGolTemp)
         {
             int idGol = Validador.castInt(idGolTemp);
@@ -194,6 +268,10 @@ namespace Logica
             partido.goles.Remove(golAEliminar);
         }
 
+        /// <summary>
+        /// Elimina un cambio del objeto partido.cambios
+        /// autor: Facundo Allemand
+        /// </summary>
         public void eliminarCambio(string idCambioTemp)
         {
             int idCambio = Validador.castInt(idCambioTemp);
@@ -204,6 +282,10 @@ namespace Logica
             partido.cambios.Remove(cambioAEliminar);
         }
 
+        /// <summary>
+        /// Elimina una tarjeta del objeto partido.tarjetas
+        /// autor: Facundo Allemand
+        /// </summary>
         public void eliminarTarjeta(string idTarjetaTemp)
         {
             int idTarjeta = Validador.castInt(idTarjetaTemp);
@@ -212,20 +294,6 @@ namespace Logica
                 if (tarjeta.idTarjeta == idTarjeta)
                     tarjetaAEliminar = tarjeta;
             partido.tarjetas.Remove(tarjetaAEliminar);
-        }
-
-        public void agregarCambio(string idEquipo, string idJugadorEntra, string idJugadorSale, string minuto)
-        {
-            if (Validador.castInt(Validador.isNotEmpty(idJugadorEntra)) == Validador.castInt(Validador.isNotEmpty(idJugadorSale)))
-                throw new Exception("El jugador que entra no puedo ser el mismo que sale");
-            GestorJugador gestorJugador = new GestorJugador();
-            Cambio cambio = new Cambio();
-            cambio.equipo.idEquipo = Validador.castInt(Validador.isNotEmpty(idEquipo));
-            cambio.jugadorEntra = gestorJugador.obtenerJugadorPorId(Validador.castInt(Validador.isNotEmpty(idJugadorEntra)));
-            cambio.jugadorSale = gestorJugador.obtenerJugadorPorId(Validador.castInt(Validador.isNotEmpty(idJugadorSale)));
-            if (minuto != "")
-                cambio.minuto = Validador.castInt(minuto);
-            partido.cambios.Add(cambio);
         }
     }
 }

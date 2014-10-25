@@ -79,7 +79,7 @@ namespace Utils
        /// </summary>
         public static string isNotEmpty(string cadena) {
             if (cadena.Equals(""))
-                throw new Exception("El valor ingresado no puede estarvacío");
+                throw new Exception("El valor ingresado no puede estar vacío");
             else
                 return cadena;
         }
