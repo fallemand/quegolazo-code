@@ -54,8 +54,20 @@ namespace Logica
             partido.titularesVisitante.Clear();
             foreach (int idJugador in titularesVisitante)
                 partido.titularesVisitante.Add(new Jugador() { idJugador = idJugador });
+            if (partido.golesLocal != null && partido.golesVisitante != null)
+                partido.estado.idEstado = Estado.JUGADO;
+            else
+            {
+                if (partido.fecha != null)
+                    partido.estado.idEstado = Estado.PROGRAMADO;
+            }
+            
             calcularGanador();
             daoPartido.modificarPartido(partido);
+            (new DAOFecha()).actualizarFecha(partido.idPartido);
+
+
+            
         }
 
         /// <summary>

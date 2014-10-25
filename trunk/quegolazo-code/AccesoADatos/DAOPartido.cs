@@ -670,7 +670,7 @@ namespace AccesoADatos
                                 idEstado = @idEstado, idArbitro = @idArbitro, idCancha = @idCancha, golesLocal = @golesLocal, 
                                 huboPenales = @huboPenales, penalesLocal = @penalesLocal, penalesVisitante = @penalesVisitante,
                                 golesVisitante = @golesVisitante, idGanador = @idGanador, idPerdedor = @idPerdedor, empate = @empate
-                                WHERE idPartido = @idPartido";
+                                WHERE idPartido = @idPartido ";
                 cmd.Parameters.Clear();
                 if (partido.fecha != null)
                     cmd.Parameters.AddWithValue("@fecha", partido.fecha);
