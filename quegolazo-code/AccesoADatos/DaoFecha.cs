@@ -102,5 +102,47 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+       /// <summary>
+       /// Cambia el estado de la fecha a Completa cuando se jugaron todos los partidos
+       /// </summary>
+       /// <param name="idPartido"></param>
+        public void actualizarFecha(int idPartido)
+        {
+
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+             cmd.Connection = con;
+
+             string sql = @"
+                            declare @idPartido as int =1
+                            declare @idFecha as int = (select idFecha from Partidos where idPartido=@idPartido)
+                            declare @idGrupo as int = (select idFecha from Partidos where idPartido=@idPartido)
+                            declare @idFase as int = (select idFecha from Partidos where idPartido=@idPartido)
+                            declare @idEdicion as int = (select idEdicion from Partidos where idPartido=@idPartido)
+                            declare @cantidad as int = (select count(*) from partidos p where p.idFecha=2 and p.idEdicion=14 and p.idEstado not in (select idEstado from Estados where idAmbito=4 and idEstado<>13 ))
+					                            if(@cantidad=0)
+						                            begin
+							update Fechas set idEstado=8 where idFecha=@idFecha and idGrupo=@idGrupo and idFase=@idFase and idEdicion=@idEdicion
+						END";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idPartido", idPartido);
+                cmd.CommandText=sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo actualizar el estado de la fecha: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
