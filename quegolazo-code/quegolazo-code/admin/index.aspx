@@ -137,9 +137,7 @@
                                     <tbody class="tablaFiltro">
                                         <asp:Repeater ID="rptFecha" runat="server">
                                             <ItemTemplate>
-                                                <tr>      
-                                                    <td><%--<img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " />--%><%# Eval("Equipo") %></td>                                              
-                                                    <td><%# Eval("idFecha") %></td>  
+                                                <tr>              
                                                     <td><%# Eval("local") %></td>  
                                                     <td>vs</td>  
                                                     <td><%# Eval("visitante") %></td>  
@@ -148,8 +146,8 @@
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
-                                        <tr id="Tr1" runat="server" visible="false">
-                                            <td colspan="4">Todavia no hay partidos registrados.</td>
+                                        <tr id="noFixture" runat="server" visible="false">
+                                            <td colspan="4">Todavia no hay un fixture generado.</td>
                                         </tr>
                                     </tbody>
                     </table>

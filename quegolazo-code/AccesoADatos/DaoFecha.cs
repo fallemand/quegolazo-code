@@ -118,8 +118,7 @@ namespace AccesoADatos
                     con.Open();
              cmd.Connection = con;
 
-             string sql = @"
-                            declare @idPartido as int =1
+             string sql = @"                            
                             declare @idFecha as int = (select idFecha from Partidos where idPartido=@idPartido)
                             declare @idGrupo as int = (select idFecha from Partidos where idPartido=@idPartido)
                             declare @idFase as int = (select idFecha from Partidos where idPartido=@idPartido)

@@ -85,13 +85,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Repeater rptFecha;
         
         /// <summary>
-        /// Control Tr1.
+        /// Control noFixture.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow Tr1;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow noFixture;
         
         /// <summary>
         /// Control gvFixture.
