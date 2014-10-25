@@ -50,7 +50,7 @@
                 $("#btnEliminarFase" + (numFase - 1)).show("slow");
             }).tooltip({ title: "Eliminar Fase" });
         btnEliminar.appendTo(headerContenedor);           
-        var contenedorTitulo = $("<h4/>", { class: 'panel-title text-center' }).text("Fase N° " + numFase).css("font-weight", "400");
+        var contenedorTitulo = $("<h4/>", { class: 'panel-title text-center' }).text("Fase N° " + numFase).css("font-weight", "700");
         var linkTitulo = $("<a/>").attr("data-toggle", "collapse").attr("data-parent", "#accordionFases").attr("id", "collapsableFase" + numFase).attr("href", "#collapseFase" + numFase);
         var contenedorDeLaFase = $("<div/>", { class: 'panel-collapse collapse in' }).attr("id", "collapseFase" + numFase);
         var cuerpoDeLaFase = $("<div/>", { class: 'panel-body' }).attr("id", "panelFase" + numFase);

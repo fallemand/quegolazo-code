@@ -106,7 +106,7 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @" SELECT f.idFecha, elocal.nombre as 'Local', p.golesLocal , p.golesVisitante, eVisitante.nombre as 'Visitante',
-		                            ar.nombre as 'Árbitro', 
+		                            ar.nombre as 'arbitro', 
                                     can.nombre as 'Complejo/Cancha',
                                     p.fecha, 
                                     es.nombre as 'Estado'
@@ -255,7 +255,7 @@ namespace AccesoADatos
 	                                     JOIN Jugadores j ON g.idJugador=j.idJugador
 	                                     JOIN Partidos p ON p.idPartido=g.idPartido
 	                                     GROUP BY p.idEdicion, j.nombre, E.nombre 
-	                                     HAVING p.idEdicion=@idEdición
+	                                     HAVING p.idEdicion=@idEdicion
 	                                     ORDER BY 'GOLES' desc";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));

@@ -42,7 +42,7 @@ namespace AccesoADatos
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                        cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
+                        cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.idTipoFixture);
                         cmd.Parameters.AddWithValue("@idEstado", 4);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
