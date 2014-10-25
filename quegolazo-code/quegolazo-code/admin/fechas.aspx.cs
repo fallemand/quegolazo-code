@@ -20,7 +20,6 @@ namespace quegolazo_code.admin
             gestorPartido = Sesion.getGestorPartido();
             try
             {
-                //limpiarPaneles();
                 if (!Page.IsPostBack)
                 {
                     verificarTorneoExistente();
@@ -33,6 +32,10 @@ namespace quegolazo_code.admin
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Carga todas las referencias de una edición en sesión, y carga todas las fases
+        /// autor: Facu Allemand
+        /// </summary>
         protected void btnSeleccionarEdicion_Click(object sender, EventArgs e)
         {
             try
@@ -47,6 +50,10 @@ namespace quegolazo_code.admin
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Cada vez que se genera una fase, generar todas las fechas
+        /// autor: Facu Allemand
+        /// </summary>
         protected void rptFases_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             try
@@ -65,6 +72,10 @@ namespace quegolazo_code.admin
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Cada vez que se genera una fecha, generar todos los partidos
+        /// autor: Facu Allemand
+        /// </summary>
         protected void rptFechas_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             try
@@ -82,42 +93,60 @@ namespace quegolazo_code.admin
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Opciones para cada partido
+        /// autor: Facu Allemand
+        /// </summary>
         protected void rptPartidos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             try
             {
+                //obtengo el command argument y el id del panel collapsable seleccionado para abrirlo.
+                string[] paramentros = e.CommandArgument.ToString().Split(new char[] { ';' });
+                string commandArgument = paramentros[0];
+                string idPanelCollapse = paramentros[1];
+                Session["idPanelCollapse"] = idPanelCollapse;
                 if (e.CommandName == "administrarPartido")
                 {
                     limpiarCampos();
-                    gestorPartido.obtenerPartidoporId(e.CommandArgument.ToString());
+                    gestorPartido.obtenerPartidoporId(commandArgument);
                     cargarPartido();
+                    mostrarFechaCollapsablePanel();
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Registra la modificación del partido
+        /// autor: Facu Allemand
+        /// </summary>
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             try
             {
+                mostrarFechaCollapsablePanel();
                 gestorPartido.modificarPartido(txtFecha.Value, txtGolesLocal.Value,txtGolesVisitante.Value,cbPenales.Checked, txtPenalesLocal.Value,txtPenalesVisitante.Value, ddlArbitros.SelectedValue, ddlCanchas.SelectedValue, obtenerTitularesLocal(), obtenerTitularesVisitante());
                 mostrarPanelExito("Partido Modificado con éxito");
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 cargarRepeaterFases();
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //Subform Tarjetas
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        /// <summary>
+        /// Cada vez que se selecciona un equipo, cargar los jugadores de ese equipo
+        /// autor: Facu Allemand
+        /// </summary>
         protected void ddlTarjetasEquipos_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
+                mostrarFechaCollapsablePanel();
                 if (gestorPartido.partido.local.idEquipo == int.Parse(ddlTarjetasEquipos.SelectedValue))
                     ddlTarjetasJugadores.DataSource = gestorPartido.partido.local.jugadores;
                 else
@@ -131,16 +160,25 @@ namespace quegolazo_code.admin
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Agrega una tarjeta en el objeto partido del gestorPartido
+        /// autor: Facu Allemand
+        /// </summary>
         protected void btnTarjetaAgregar_Click(object sender, EventArgs e)
         {
             try
             {
+                mostrarFechaCollapsablePanel();
                 gestorPartido.agregarTarjeta(ddlTarjetasEquipos.SelectedValue, ddlTarjetasJugadores.SelectedValue, ddlTarjetasTipo.SelectedValue, txtTarjetasMinuto.Value);
                 cargarRepeaterTarjetas();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Elimina una tarjeta del objeto partido del gestorPartido
+        /// autor: Facu Allemand
+        /// </summary>
         protected void rptTarjetas_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             try
@@ -152,6 +190,10 @@ namespace quegolazo_code.admin
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Cada vez que se genera una tarjeta en el repeater, mostrar la imagen de tarjeta roja o amarilla
+        /// autor: Facu Allemand
+        /// </summary>
         protected void rptTarjetas_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
@@ -173,10 +215,16 @@ namespace quegolazo_code.admin
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //Subform Goles
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        /// <summary>
+        /// Cada vez que se selecciona un equipo, cargar los jugadores
+        /// autor: Facu Allemand
+        /// </summary>
         protected void ddlGolesEquipos_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
+                mostrarFechaCollapsablePanel();
                 if (gestorPartido.partido.local.idEquipo == int.Parse(ddlGolesEquipos.SelectedValue))
                     ddlGolesJugadores.DataSource = gestorPartido.partido.local.jugadores;
                 else
@@ -189,16 +237,25 @@ namespace quegolazo_code.admin
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Agregar un gol en el objeto partido del gestorPartido
+        /// autor: Facu Allemand
+        /// </summary>
         protected void btnGolAgregar_Click(object sender, EventArgs e)
         {
             try
             {
+                mostrarFechaCollapsablePanel();
                 gestorPartido.agregarGol(ddlGolesEquipos.SelectedValue, ddlGolesJugadores.SelectedValue, ddlGolesTipos.SelectedValue, txtGolesMinuto.Value);
                 cargarRepeaterGoles();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Elimina un gol del objeto partido del gestorPartido
+        /// autor: Facu Allemand
+        /// </summary>
         protected void rptGoles_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             try
@@ -213,21 +270,16 @@ namespace quegolazo_code.admin
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //Subform Cambios
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        protected void rptCambios_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-            try
-            {
-                if (e.CommandName == "eliminarCambio")
-                    gestorPartido.eliminarCambio(e.CommandArgument.ToString());
-                cargarRepeaterCambios();
-            }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
-        }
 
+        /// <summary>
+        /// Cuando se selecciona un equipo, carga los jugadores del equipo
+        /// autor: Facu Allemand
+        /// </summary>
         protected void ddlCambiosEquipos_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
+                mostrarFechaCollapsablePanel();
                 if (gestorPartido.partido.local.idEquipo == int.Parse(ddlCambiosEquipos.SelectedValue))
                 {
                     ddlCambiosJugadoresEntra.DataSource = gestorPartido.partido.local.jugadores;
@@ -249,11 +301,31 @@ namespace quegolazo_code.admin
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
+        /// <summary>
+        /// Agrega un cambio en el objeto partido del gestorPartido
+        /// autor: Facu Allemand
+        /// </summary>
         protected void btnCambiosAgregar_Click(object sender, EventArgs e)
         {
             try
             {
+                mostrarFechaCollapsablePanel();
                 gestorPartido.agregarCambio(ddlCambiosEquipos.SelectedValue, ddlCambiosJugadoresEntra.SelectedValue, ddlCambiosJugadoresSale.SelectedValue, txtCambiosMinuto.Value);
+                cargarRepeaterCambios();
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        /// <summary>
+        /// Elimina un cambio del objeto partido del gestorPartido
+        /// autor: Facu Allemand
+        /// </summary>
+        protected void rptCambios_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "eliminarCambio")
+                    gestorPartido.eliminarCambio(e.CommandArgument.ToString());
                 cargarRepeaterCambios();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -395,6 +467,9 @@ namespace quegolazo_code.admin
             cblJugadoresEquipoLocal.DataTextField = "nombre";
             cblJugadoresEquipoLocal.DataValueField = "idJugador";
             cblJugadoresEquipoLocal.DataBind();
+            foreach (ListItem item in cblJugadoresEquipoLocal.Items)
+                if (gestorPartido.esTitularLocal(Int32.Parse(item.Value)))
+                    item.Selected = true;
         }
 
         /// <summary>
@@ -407,6 +482,9 @@ namespace quegolazo_code.admin
             cblJugadoresEquipoVisitante.DataTextField = "nombre";
             cblJugadoresEquipoVisitante.DataValueField = "idJugador";
             cblJugadoresEquipoVisitante.DataBind();
+            foreach (ListItem item in cblJugadoresEquipoVisitante.Items)
+                if (gestorPartido.esTitularVisitante(Int32.Parse(item.Value)))
+                    item.Selected = true;
         }
 
         /// <summary>
@@ -556,6 +634,16 @@ namespace quegolazo_code.admin
             ddlArbitros.SelectedValue = "";
             ddlCanchas.SelectedValue = "";
             cbPenales.Checked = false;
+        }
+
+        /// <summary>
+        /// Abre el collapsable de fases y fechas para la fecha clickeada
+        /// autor: Facu Allemand
+        /// </summary>
+        private void mostrarFechaCollapsablePanel()
+        {
+            if (Session["idPanelCollapse"] != null)
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelCollapse", "showCollapsablePanel('" + Session["idPanelCollapse"] + "', true)", true);
         }
     }
 }

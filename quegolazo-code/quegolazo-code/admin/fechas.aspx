@@ -66,8 +66,8 @@
                                                                     <thead style="display: none;">
                                                                         <tr>
                                                                             <th class="col-md-4">Equipo Local</th>
-                                                                            <th class="col-md-4">Equipo Visitante</th>
                                                                             <th class="col-md-2">Resultado</th>
+                                                                            <th class="col-md-4">Equipo Visitante</th>
                                                                             <th class="col-md-2"></th>
                                                                         </tr>
                                                                     </thead>
@@ -76,13 +76,15 @@
                                                                             <ItemTemplate>
                                                                                 <tr>
                                                                                     <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "local")).nombre %></td>
-                                                                                    <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "visitante")).nombre %></td>
                                                                                     <td><%# ((Entidades.Partido)Container.DataItem).golesLocal %>
                                                                                         <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesLocal.ToString()+")" : "" %>
                                                                                         - <%# ((Entidades.Partido)Container.DataItem).golesVisitante%>
                                                                                         <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesVisitante.ToString()+")" : "" %>
+                                                                                    </td>
+                                                                                    <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "visitante")).nombre %></td>
                                                                                     <td>
-                                                                                        <asp:LinkButton title="Administrar Partido" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkAdministrarPartido" runat="server" CommandName="administrarPartido" CommandArgument='<%#Eval("idPartido")%>'><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
+                                                                                        <asp:LinkButton title="Administrar Partido" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkAdministrarPartido" runat="server" CommandName="administrarPartido" CommandArgument='<%# Eval("idPartido") + ";fase" + ((Entidades.Fase)((((RepeaterItem)Container.Parent.Parent.Parent.Parent)).DataItem)).idFase +"-fecha"+((Entidades.Fecha)((RepeaterItem)Container.Parent.Parent).DataItem).idFecha %>'><span class="glyphicon glyphicon-cog"></span></asp:LinkButton>
+                                                                                    </td>
                                                                                 </tr>
                                                                             </ItemTemplate>
                                                                         </asp:Repeater>
@@ -405,6 +407,12 @@
         $('#divFechaPartido').datetimepicker({
             language: 'es'
         });
+        function EndRequestHandler(sender, args) {
+            $('#divFechaPartido').datetimepicker({
+                language: 'es'
+            });
+            cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
+        };
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
         function EndRequestHandler(sender, args) {
             $('#divFechaPartido').datetimepicker({
