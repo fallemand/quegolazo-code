@@ -22,6 +22,9 @@ namespace Entidades
         public Estado estado { get; set; }
         public int? golesLocal { get; set; }
         public int? golesVisitante { get; set; }
+        public bool? huboPenales { get; set; }
+        public int? penalesLocal { get; set; }
+        public int? penalesVisitante { get; set; }
         public int? idGanador { get; set; }
         public int? idPerdedor { get; set; }
         public bool? empate { get; set; }
