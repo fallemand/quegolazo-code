@@ -15,32 +15,39 @@ namespace quegolazo_code.admin
         GestorEstadisticas gestorEstadisticas;
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorEstadisticas = new GestorEstadisticas();
-            //Sesion.setEdicion(gestorEdicion.obtenerEdicionPorId(14));
+            gestorEstadisticas = new GestorEstadisticas();            
             if (!Page.IsPostBack)
             {
                 try
                 {
-                    //gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(14);                    
-                    //Sesion.setGestorEdicion(gestorEdicion);                    
-                    rptPosiciones.DataSource = gestorEstadisticas.obtenerTablaPosiciones();
-                    rptPosiciones.DataBind();
-                    sinequipos.Visible = (rptPosiciones.Items.Count > 0) ? false : true;
-                    cargarUltimaFecha();
-                    cargarPorcentajeDeAvanceDeLaFecha();
-                    cargarPorcentajeDeAvanceEdicion();                   
+                    cargarTablaDePosiciones();
                     cargarGoleadoresDeLaEdicion();
+                    cargarPorcentajeDeAvanceDeLaFecha();
+                    cargarPorcentajeDeAvanceEdicion();
+                    cargarUltimaFecha();                    
                 }
                 catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
             }
         }
-
+        /// <summary>
+        /// Carga la tabla de posiciones de la edicion que esta en la sesion.
+        /// </summary>
+        private void cargarTablaDePosiciones()
+        {
+            rptPosiciones.DataSource = gestorEstadisticas.obtenerTablaPosiciones();
+            rptPosiciones.DataBind();
+            sinequipos.Visible = (rptPosiciones.Items.Count > 0) ? false : true;
+        }
+        /// <summary>
+        /// Carga la ultima fecha incompleta de la edicion que esta en sesion
+        /// </summary>
         private void cargarUltimaFecha()
         {
-            var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(Entidades.Estado.DIAGRAMADA);
+            var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(Entidades.Estado.INCOMPLETA);
             rptFecha.DataSource = ultimaFecha;
             rptFecha.DataBind();
             ltFecha.Text = ultimaFecha.Rows[0]["idFecha"].ToString();
+            noFixture.Visible = (rptFecha.Items.Count > 0) ? false : true;
             
         }
         /// <summary>
