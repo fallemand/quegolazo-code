@@ -1404,9 +1404,9 @@ z-index:10000 !important;
    overflow: hidden;
    position: fixed;
    width: 50%;
-   opacity: 0.9;
+   /*opacity: 0.9;*/
    z-index: 1050;
-   transition: left 0.6s ease-out 0s;
+   transition: left 0.3s ease-out 0s;
 }
  
 .flyover-centered {

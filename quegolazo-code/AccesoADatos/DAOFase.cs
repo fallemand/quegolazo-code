@@ -120,7 +120,7 @@ namespace AccesoADatos
              }
              catch (Exception ex)
              {
-                 throw new Exception("Error al intentar recuperar los equipos de una Edición: " + ex.Message);
+                 throw new Exception("Error al intentar recuperar las fases de una Edición: " + ex.Message);
              }
              finally
              {

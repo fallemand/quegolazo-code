@@ -33,6 +33,19 @@ function cbPenalesClick(cbId) {
         $('#ContentAdmin_ContentAdminTorneo_txtPenalesVisitante').hide('slow');
     }
 };
+
+function showPanelFracaso() {
+    setTimeout(function () {
+        $('#panelFracaso').toggleClass('in').delay(800);
+    }, 1);
+};
+
+function showPanelExito() {
+    setTimeout(function () {
+        $('#panelExito').toggleClass('in').delay(800);
+    }, 1);
+};
+
 function togglePanel(panelId, idRadioSi, idRadioNo) {
     if ($('#' + idRadioSi).is(':checked')) {
         $('#' + idRadioSi).removeAttr('checked');
@@ -160,6 +173,15 @@ function shuffle(list) {
 
 function showSubform(id) {
     $('#' + id).toggle("fast", function fildsetActivator() {
+        if ($('#' + id).is(":visible"))
+            $('#' + id).find('input,select').prop('disabled', false);
+        else
+            $('#' + id).find('input,select').attr('disabled', 'disabled');
+    });
+};
+
+function showSubformFast(id) {
+    $('#' + id).toggle(0, function fildsetActivator() {
         if ($('#' + id).is(":visible"))
             $('#' + id).find('input,select').prop('disabled', false);
         else

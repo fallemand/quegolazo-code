@@ -100,7 +100,10 @@ namespace quegolazo_code.admin
         {
             try
             {
-                gestorPartido.modificarPartido(txtFecha.Value, ddlArbitros.SelectedValue, ddlCanchas.SelectedValue, obtenerTitularesLocal(), obtenerTitularesVisitante());
+                gestorPartido.modificarPartido(txtFecha.Value, txtGolesLocal.Value,txtGolesVisitante.Value,cbPenales.Checked, txtPenalesLocal.Value,txtPenalesVisitante.Value, ddlArbitros.SelectedValue, ddlCanchas.SelectedValue, obtenerTitularesLocal(), obtenerTitularesVisitante());
+                mostrarPanelExito("Partido Modificado con éxito");
+                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                cargarRepeaterFases();
             }
             catch (Exception ex)
             {
@@ -115,13 +118,15 @@ namespace quegolazo_code.admin
         {
             try
             {
-                if (gestorPartido.partido.local.idEquipo == int.Parse(ddlGolesEquipos.SelectedValue))
+                if (gestorPartido.partido.local.idEquipo == int.Parse(ddlTarjetasEquipos.SelectedValue))
                     ddlTarjetasJugadores.DataSource = gestorPartido.partido.local.jugadores;
                 else
                     ddlTarjetasJugadores.DataSource = gestorPartido.partido.visitante.jugadores;
                 ddlTarjetasJugadores.DataValueField = "idJugador";
                 ddlTarjetasJugadores.DataTextField = "nombre";
                 ddlTarjetasJugadores.DataBind();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showSubForm", "showSubformFast('tarjetas');", true);
+                
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
@@ -179,6 +184,7 @@ namespace quegolazo_code.admin
                 ddlGolesJugadores.DataValueField = "idJugador";
                 ddlGolesJugadores.DataTextField = "nombre";
                 ddlGolesJugadores.DataBind();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showSubForm", "showSubformFast('goles');", true);
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
@@ -238,6 +244,7 @@ namespace quegolazo_code.admin
                 ddlCambiosJugadoresSale.DataValueField = "idJugador";
                 ddlCambiosJugadoresSale.DataTextField = "nombre";
                 ddlCambiosJugadoresSale.DataBind();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showSubForm", "showSubformFast('cambios');", true);
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
@@ -266,7 +273,12 @@ namespace quegolazo_code.admin
         {
             txtEquipoLocal.Value = gestorPartido.partido.local.nombre;
             txtEquipoVisitante.Value = gestorPartido.partido.visitante.nombre;
-            txtFecha.Value = (gestorPartido.partido.fecha != null) ? gestorPartido.partido.fecha.Value.ToString("{0:dd/mm/yyyy HH:mm}") : "";
+            txtGolesLocal.Value = (gestorPartido.partido.golesLocal!=null) ? gestorPartido.partido.golesLocal.ToString() : "";
+            txtGolesVisitante.Value = (gestorPartido.partido.golesVisitante!=null) ? gestorPartido.partido.golesVisitante.ToString() : "";
+            cbPenales.Checked = (gestorPartido.partido.huboPenales != null && gestorPartido.partido.huboPenales == true) ? true : false;
+            txtPenalesLocal.Value = (gestorPartido.partido.penalesLocal!=null) ? gestorPartido.partido.penalesLocal.ToString(): "";
+            txtPenalesVisitante.Value = (gestorPartido.partido.penalesVisitante != null) ? gestorPartido.partido.penalesVisitante.ToString() : "";
+            txtFecha.Value = (gestorPartido.partido.fecha != null) ? gestorPartido.partido.fecha.Value.ToString("dd/mm/yyyy HH:mm") : "";
             ddlArbitros.SelectedValue = (gestorPartido.partido.arbitro != null) ? gestorPartido.partido.arbitro.idArbitro.ToString() : "";
             ddlCanchas.SelectedValue = (gestorPartido.partido.cancha != null) ? gestorPartido.partido.cancha.idCancha.ToString() : "";
             cargarListaJugadoresEquipoLocal();
@@ -480,9 +492,20 @@ namespace quegolazo_code.admin
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "showError", "$('#panelFracaso').toggleClass('in');", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showError", "showPanelFracaso();", true);
             litFracaso.Text = mensaje;
             panelFracaso.Visible = true;
+        }
+
+        /// <summary>
+        /// Habilita el panel de exito, y muestra el mensaje.
+        /// autor: Facu Allemand
+        /// </summary>
+        private void mostrarPanelExito(string mensaje)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showExito", "showPanelExito();", true);
+            litExito.Text = mensaje;
+            panelExito.Visible = true;
         }
 
         /// <summary>

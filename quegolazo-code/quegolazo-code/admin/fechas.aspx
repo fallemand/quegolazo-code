@@ -9,6 +9,9 @@
         <div class="row">
             <div class="col-md-5">
                 <asp:UpdatePanel ID="upListadoFases" runat="server">
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnRegistrar" EventName="Click" />
+                    </Triggers>
                     <ContentTemplate>
                         <div class="well">
                             <div class="row">
@@ -74,7 +77,10 @@
                                                                                 <tr>
                                                                                     <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "local")).nombre %></td>
                                                                                     <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "visitante")).nombre %></td>
-                                                                                    <td>2-0</td>
+                                                                                    <td><%# ((Entidades.Partido)Container.DataItem).golesLocal %>
+                                                                                        <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesLocal.ToString()+")" : "" %>
+                                                                                        - <%# ((Entidades.Partido)Container.DataItem).golesVisitante%>
+                                                                                        <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesVisitante.ToString()+")" : "" %>
                                                                                     <td>
                                                                                         <asp:LinkButton title="Administrar Partido" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkAdministrarPartido" runat="server" CommandName="administrarPartido" CommandArgument='<%#Eval("idPartido")%>'><span class="glyphicon glyphicon-cog"></span></asp:LinkButton></td>
                                                                                 </tr>
@@ -147,21 +153,21 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Resultado</label>
                                             <div class="col-md-2 nopadding-right">
-                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesLocal" rel="txtTooltip" title="Goles Equipo Local" required="true" min="0" maxlength="2" digits="true" placeholder="EJ: 2">
+                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesLocal" rel="txtTooltip" title="Goles Equipo Local" maxlength="2" digits="true" placeholder="EJ: 2">
                                             </div>
                                             <div class="col-md-1 nopadding-right nopadding-left" style="padding-left:5px">
-                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPenalesLocal"  rel="txtTooltip" title="Goles en penales" min="0" maxlength="2" digits="true" style="display:none">
+                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPenalesLocal"  rel="txtTooltip" title="Goles en penales" maxlength="2" digits="true" style="display:none">
                                             </div>
                                             <div class="col-md-2 nopadding-right text-center"style="padding-left:40px;">
                                                 <label>
-                                                    <input type="checkbox" id="cbPenales" onclick="cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');" runat="server"> ¿Penales?
+                                                    <input type="checkbox" id="cbPenales" onclick="cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');"  data-container="body" rel="txtTooltip" title="¿Se definió por penales?" runat="server"> ¿Penales?
                                                 </label>
                                             </div>
                                             <div class="col-md-2 nopadding-right">
-                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesVisitante" rel="txtTooltip" title="Goles Equipo Visitante" maxlength="2" required="true" min="0" digits="true" placeholder="EJ: 0">
+                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesVisitante" rel="txtTooltip" title="Goles Equipo Visitante" maxlength="2" digits="true" placeholder="EJ: 0">
                                             </div>
                                             <div class="col-md-1 nopadding-right nopadding-left" style="padding-left:5px">
-                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPenalesVisitante" min="0" rel="txtTooltip" title="Goles en penales" maxlength="2" digits="true" style="display:none">
+                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPenalesVisitante" rel="txtTooltip" title="Goles en penales" maxlength="2" digits="true" style="display:none">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -320,7 +326,7 @@
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Equipo</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlTarjetasEquipos" CssClass="form-control margin-xs input-sm" OnSelectedIndexChanged="ddlTarjetasEquipos_SelectedIndexChanged" runat="server"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlTarjetasEquipos" CssClass="form-control margin-xs input-sm" OnSelectedIndexChanged="ddlTarjetasEquipos_SelectedIndexChanged" runat="server" AutoPostBack="True"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
@@ -367,7 +373,11 @@
                             </div>
                             <asp:Panel ID="panelFracaso" ClientIDMode="Static" runat="server" CssClass="alert alert-danger alert-dismissible flyover flyover-bottom" role="alert">
                                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
+                                <b>Error:</b> <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
+                            </asp:Panel>
+                            <asp:Panel ID="panelExito" ClientIDMode="Static" runat="server" CssClass="alert alert-success alert-dismissible flyover flyover-bottom" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <b>Exito:</b> <asp:Literal ID="litExito" runat="server"></asp:Literal>
                             </asp:Panel>
                         </div>
                     </ContentTemplate>

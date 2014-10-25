@@ -32,16 +32,95 @@ namespace Logica
         /// Modifica los datos del partido
         /// autor: Facundo Allemand
         /// </summary>
-        public void modificarPartido(string fechaHora, string idArbitro, string idCancha, List<int> titularesLocal, List<int> titularesVisitante)
+        public void modificarPartido(string fechaHora, string txtGolesLocal, string txtGolesVisitante, bool huboPenales, string txtPenalesLocal, string txtPenalesVisitante,string idArbitro, string idCancha, List<int> titularesLocal, List<int> titularesVisitante)
         {
-            partido.fecha = Validador.castDate(fechaHora);
-            partido.arbitro.idArbitro = Validador.castInt(idArbitro);
-            partido.cancha.idCancha = Validador.castInt(idArbitro);
+            if (!txtGolesLocal.Equals("") && txtGolesVisitante.Equals("") || txtGolesLocal.Equals("") && !txtGolesVisitante.Equals(""))
+                throw new Exception("Debe cargar los goles de ambos equipos o ninguno de ellos");
+            partido.golesLocal = (!txtGolesLocal.Equals("")) ? (int?)Validador.castInt(txtGolesLocal) : null;
+            partido.golesVisitante = (!txtGolesVisitante.Equals("")) ? (int?)Validador.castInt(txtGolesVisitante) : null;
+            if (huboPenales == true)
+            {
+                if (partido.golesLocal != partido.golesVisitante)
+                    throw new Exception("Para cargar penales el resultado debe ser un empate");
+                if (txtPenalesLocal.Equals("") || txtPenalesVisitante.Equals(""))
+                    throw new Exception("Debe cargar los penales de ambos equipos");
+                partido.huboPenales = huboPenales;
+                partido.penalesLocal = Validador.castInt(txtPenalesLocal);
+                partido.penalesVisitante = Validador.castInt(txtPenalesVisitante);
+                if (partido.penalesLocal == partido.penalesVisitante)
+                    throw new Exception("Un equipo debe ganar en definición por penales");
+            }
+            else
+            {
+                partido.huboPenales = false;
+                partido.penalesLocal = null;
+                partido.penalesVisitante = null;
+            }
+            validarGoles();
+            if (!fechaHora.Equals(""))
+                partido.fecha = Validador.castDate(fechaHora);
+            if (!idArbitro.Equals(""))
+            {
+                if (partido.arbitro == null)
+                    partido.arbitro = new Arbitro();
+                partido.arbitro.idArbitro = Validador.castInt(idArbitro);
+            }
+            if (!idCancha.Equals(""))
+            {
+                if (partido.cancha == null)
+                    partido.cancha = new Cancha();
+                partido.cancha.idCancha = Validador.castInt(idCancha);
+            }
             foreach (int idJugador in titularesLocal)
                 partido.titularesLocal.Add(new Jugador() { idJugador = idJugador });
             foreach (int idJugador in titularesVisitante)
                 partido.titularesVisitante.Add(new Jugador() { idJugador = idJugador });
+            calcularGanador();
             daoPartido.modificarPartido(partido);
+        }
+
+        /// <summary>
+        /// Calcula cual es el equipo ganador y guarda los atributos asociados
+        /// autor: Facundo Allemand
+        /// </summary>
+        public void calcularGanador()
+        {
+            if (partido.golesLocal > partido.golesVisitante || (partido.huboPenales == true && partido.penalesLocal > partido.penalesVisitante))
+            {
+                partido.empate = false;
+                partido.idGanador = partido.local.idEquipo;
+                partido.idPerdedor = partido.visitante.idEquipo;
+            }
+            else if (partido.golesLocal < partido.golesVisitante || (partido.huboPenales == true && partido.penalesLocal < partido.penalesVisitante))
+            {
+                partido.empate = false;
+                partido.idGanador = partido.visitante.idEquipo;
+                partido.idPerdedor = partido.local.idEquipo;
+            }
+            else
+                partido.empate = true;
+        }
+
+        /// <summary>
+        /// Valida que si hay goles cargados, coincida con el resultado.
+        /// autor: Facundo Allemand
+        /// </summary>
+        public void validarGoles()
+        {
+            if (partido.goles.Count > 0)
+            {
+                int golesLocal = 0;
+                int golesVisitante = 0;
+                foreach (Gol gol in partido.goles)
+                {
+                    if (gol.equipo.idEquipo == partido.local.idEquipo)
+                        golesLocal++;
+                    else if (gol.equipo.idEquipo == partido.visitante.idEquipo)
+                        golesVisitante++;
+                }
+                if (golesLocal != partido.golesLocal || golesVisitante != partido.golesVisitante)
+                    throw new Exception("El resultado no coincide con los goles cargados");
+            }
         }
 
         public void obtenerPartidoporId(string idPartido)
