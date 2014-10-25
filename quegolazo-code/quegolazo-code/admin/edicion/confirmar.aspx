@@ -85,7 +85,7 @@
                               </div>
                               <div class="col-md-6">
                                <b>Cantidad de Fechas:</b><asp:Literal ID="LitCantidadFechas" runat="server"></asp:Literal> <br />
-                               <b>Partidos por Fecha:</b> <asp:Literal ID="LitPartidosPorFecha" runat="server"></asp:Literal><br />
+                               <%--<b>Partidos por Fecha:</b> <asp:Literal ID="LitPartidosPorFecha" runat="server"></asp:Literal><br />--%>
                               </div>
                           </div>
                         </div>
