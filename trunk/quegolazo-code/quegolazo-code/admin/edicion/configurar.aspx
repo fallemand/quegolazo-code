@@ -4,7 +4,7 @@
     <div class="panel panel-default">
         <div class="panel-heading panel-heading-master">
             <span class="glyphicon glyphicon-cog"></span>
-            Configuración de la edición
+           Configurar Preferencias
         </div>
         <div class="panel-body">
             <div class="panel-group opciones" id="accordion">

@@ -105,7 +105,7 @@ namespace quegolazo_code.admin.edicion
                 litCantEquipoGrupo.Text = (((Fase)e.Item.DataItem).grupos.Count > 0) ?(gestorEdicion.edicion.equipos.Count / ((Fase)e.Item.DataItem).grupos.Count).ToString() : "S/D";
                 LitCantidadGrupos.Text = (((Fase)e.Item.DataItem).grupos.Count>0) ? ((Fase)e.Item.DataItem).grupos.Count.ToString() : "S/D";
                 LitCantidadFechas.Text = (((Fase)e.Item.DataItem).grupos.Count > 0) ? ((Fase)e.Item.DataItem).grupos[0].fechas.Count.ToString() : "S/D";
-                LitPartidosPorFecha.Text = (((Fase)e.Item.DataItem).grupos.Count > 0) ? ((Fase)e.Item.DataItem).grupos[0].fechas[0].partidos.Count.ToString() : "S/D";
+                //LitPartidosPorFecha.Text = (((Fase)e.Item.DataItem).grupos.Count > 0 && ((Fase)e.Item.DataItem).grupos.Count!=null) ? ((Fase)e.Item.DataItem).grupos[0].fechas[0].partidos.Count.ToString() : "S/D";
             }
         }
 
