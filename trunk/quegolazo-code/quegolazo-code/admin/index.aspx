@@ -1,4 +1,8 @@
 ﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="quegolazo_code.admin.index" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
+    <link href="../resources/css/jquery.percentageloader-0.1.css" rel="stylesheet" />
+    <script src="../resources/js/jquery.percentageloader-0.1.js"></script>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <!-- Contenido -->
     <asp:Literal ID="LitEdicion" runat="server"></asp:Literal>
@@ -33,10 +37,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon-circle-arrow-up"></span>
-                    Avance del Torneo
+                    Avance de la Edición
                 </div>
                 <div class="panel-body" >
-                     
+                    <div id="avanceTorneo"></div>
                 </div>
             </div>
         </div>

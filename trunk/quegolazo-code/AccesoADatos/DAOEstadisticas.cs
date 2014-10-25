@@ -28,7 +28,7 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 string sql = @"SELECT COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END) AS 'Partidos Jugados',
                                       COUNT(p.idPartido) AS 'Partidos', 
-                                      COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS '% Avance'
+                                      COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance'
                                       FROM Partidos p where p.idEdicion=@idEdicion";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
@@ -63,7 +63,7 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 string sql = @"SELECT top 1 f.idFecha, COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END) AS 'Partidos Jugados',
                                             COUNT(p.idPartido) AS 'Partidos', 
-                                            COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS '% Avance',
+                                            COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance',
 		                                    COUNT(CASE T.tipoTarjeta WHEN 'A' THEN 1 ELSE NULL END) AS 'AMARILLAS', 
                                             COUNT(CASE T.tipoTarjeta WHEN 'R' THEN 1 ELSE NULL END) AS 'ROJAS'
                                             FROM Partidos p 
