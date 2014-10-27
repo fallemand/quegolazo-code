@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Logica;
 using System.Globalization;
+using Utils;
 
 namespace quegolazo_code.admin
 {
@@ -20,6 +21,8 @@ namespace quegolazo_code.admin
             {
                 try
                 {
+                    obtenerEdiciónSeleccionada();
+                    cargarComboEdiciones();
                     cargarTablaDePosiciones();
                     cargarGoleadoresDeLaEdicion();
                     cargarPorcentajeDeAvanceDeLaFecha();
@@ -29,6 +32,56 @@ namespace quegolazo_code.admin
                 catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
             }
         }
+
+        /// <summary>
+        /// Obtiene la Edición de Sesión
+        /// autor: Facu Allemand
+        /// </summary>
+        private void obtenerEdiciónSeleccionada()
+        {
+            if (gestorEdicion.edicion != null && gestorEdicion.edicion.idEdicion > 0)
+            {
+                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(gestorEdicion.edicion.idEdicion);
+                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
+            }
+        }
+
+        /// <summary>
+        /// Carga Combo Ediciones
+        /// </summary>
+        private void cargarComboEdiciones()
+        {
+            ddlEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo);
+            ddlEdiciones.DataTextField = "nombre";
+            ddlEdiciones.DataValueField = "idEdicion";
+            ddlEdiciones.DataBind();
+            ListItem itemSeleccionarEdicion = new ListItem("Seleccionar Edicion", "", true);
+            itemSeleccionarEdicion.Attributes.Add("disabled", "disabled");
+            ddlEdiciones.Items.Insert(0, itemSeleccionarEdicion);
+            if (gestorEdicion.edicion.idEdicion > 0)
+                ddlEdiciones.SelectedValue = gestorEdicion.edicion.idEdicion.ToString();
+            else
+                itemSeleccionarEdicion.Selected = true;
+        }
+
+        /// <summary>
+        /// Carga todas las referencias de una edición en sesión, y carga todas las fases
+        /// autor: Facu Allemand
+        /// </summary>
+        protected void btnSeleccionarEdicion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idEdicion = Validador.castInt(ddlEdiciones.SelectedValue);
+                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
+                gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
+                gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
+                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
         /// <summary>
         /// Carga la tabla de posiciones de la edicion que esta en la sesion.
         /// </summary>

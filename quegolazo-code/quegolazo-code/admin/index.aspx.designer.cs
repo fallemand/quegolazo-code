@@ -22,6 +22,24 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Literal LitEdicion;
         
         /// <summary>
+        /// Control ddlEdiciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEdiciones;
+        
+        /// <summary>
+        /// Control btnSeleccionarEdicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSeleccionarEdicion;
+        
+        /// <summary>
         /// Control rptPosiciones.
         /// </summary>
         /// <remarks>

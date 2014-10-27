@@ -7,12 +7,25 @@
     <!-- Contenido -->
     <asp:Literal ID="LitEdicion" runat="server"></asp:Literal>
     <div class="container padding-top">
-      
-         <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="well">
+                <fieldset class="vgSeleccionarEdicion">
+                    <div class="col-md-5">
+                        <div id="selectEdiciones">
+                            <asp:DropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <asp:Button ID="btnSeleccionarEdicion" runat="server" Text="Seleccionar Edición" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEdicion" OnClick="btnSeleccionarEdicion_Click" />
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    Goleadores de la Edición
+                    <span class="icon-size flaticon-football31"></span>
+                    Tabla de Posiciones
                    
                 </div>
                 <div class="panel-body">
@@ -46,7 +59,7 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinequipos" runat="server" visible="false">
-                                            <td colspan="4">Todavia no hay partidos registrados.</td>
+                                            <td colspan="12">Todavia no hay partidos registrados.</td>
                                         </tr>
                                     </tbody>
                     </table>
@@ -56,9 +69,9 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="glyphicon glyphicon-calendar"></span>
+                    <span class="icon-size flaticon-flaming"></span>
                     Goleadores de la Edición
-                    <asp:Literal ID="Literal1" Text="1" runat="server"></asp:Literal>
+                    <asp:Literal ID="Literal1" Text="" runat="server"></asp:Literal>
                 </div>
                 <div class="panel-body">
                    
@@ -95,7 +108,7 @@
      <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="glyphicon-circle-arrow-up"></span>
+                    <span class="glyphicon glyphicon-stats"></span>
                     Avance de la Edición
                 </div>
                 <div class="panel-body" >
@@ -107,7 +120,7 @@
       <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="glyphicon-circle-arrow-up"></span>
+                    <span class="glyphicon glyphicon-stats"></span>
                     Avance de la Fecha 
                 </div>
                 <div class="panel-body" >
@@ -120,7 +133,7 @@
         <div class="col-md-6 ">
              <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="glyphicon-circle-arrow-up"></span>
+                    <span class="glyphicon glyphicon-stats"></span>
                     Última fecha sin jugar : Fecha <asp:Literal  ID="ltFecha" runat="server" />
                 </div>
                 <div class="panel-body" >
