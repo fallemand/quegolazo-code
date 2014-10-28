@@ -118,7 +118,7 @@ namespace AccesoADatos
 	                            LEFT JOIN Arbitros ar ON p.idArbitro=ar.idArbitro
 	                            LEFT JOIN Canchas can ON p.idCancha=can.idCancha
 	                            LEFT JOIN Estados es ON p.idEstado=es.idEstado
-	                            WHERE p.idEdicion=@idEdicion AND f.idFecha=(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado=@idEstadoFecha ORDER BY idFecha DESC)
+	                            WHERE p.idEdicion=@idEdicion AND f.idFecha=(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado=@idEstadoFecha ORDER BY idFecha)
 	                            GROUP BY f.idFecha, elocal.nombre, p.golesLocal ,  eVisitante.nombre, p.golesVisitante, ar.nombre, can.nombre,  p.fecha, es.nombre
 	                            ORDER BY f.idFecha";
                 cmd.Parameters.Clear();

@@ -87,7 +87,8 @@
                                         <asp:Repeater ID="rptGoleadores" runat="server">
                                             <ItemTemplate>
                                                 <tr>                                                       
-                                                    <td><%# Eval("JUGADOR") %></td>                                              
+                                                    <td><%# Eval("JUGADOR") %></td>
+                                                    <td><%# Eval("EQUIPO") %></td>                                               
                                                     <%--<td><img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /> <%# Eval("EQUIPO") %></td>--%>  
                                                     <td><%# Eval("GOLES") %></td>                                                   
                                                 </tr>
@@ -134,7 +135,7 @@
              <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-stats"></span>
-                    Última fecha sin jugar : Fecha <asp:Literal  ID="ltFecha" runat="server" />
+                    Última fecha  : Fecha <asp:Literal  ID="ltFecha" runat="server" />
                 </div>
                 <div class="panel-body" >
                      <table class="table">
