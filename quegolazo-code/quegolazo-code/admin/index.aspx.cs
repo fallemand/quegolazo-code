@@ -102,6 +102,13 @@ namespace quegolazo_code.admin
             var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(Entidades.Estado.INCOMPLETA);
             rptFecha.DataSource = ultimaFecha;
             rptFecha.DataBind();
+            if (rptFecha.Items.Count == 0)
+            {
+                ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(Entidades.Estado.COMPLETA);
+                rptFecha.DataSource = ultimaFecha;
+                rptFecha.DataBind();
+            }
+
             ltFecha.Text = ultimaFecha.Rows[0]["idFecha"].ToString();
             noFixture.Visible = (rptFecha.Items.Count > 0) ? false : true;
             
