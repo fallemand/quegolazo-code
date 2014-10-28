@@ -81,6 +81,12 @@ namespace quegolazo_code.admin
                 gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
                 gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+
+                cargarTablaDePosiciones();
+                cargarGoleadoresDeLaEdicion();
+                cargarPorcentajeDeAvanceDeLaFecha();
+                cargarPorcentajeDeAvanceEdicion();
+                cargarUltimaFecha();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
