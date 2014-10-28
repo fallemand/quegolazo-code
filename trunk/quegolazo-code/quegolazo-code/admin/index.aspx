@@ -88,7 +88,7 @@
                                             <ItemTemplate>
                                                 <tr>                                                       
                                                     <td><%# Eval("JUGADOR") %></td>                                              
-                                                    <td><img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /> <%# Eval("EQUIPO") %></td>  
+                                                    <%--<td><img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /> <%# Eval("EQUIPO") %></td>--%>  
                                                     <td><%# Eval("GOLES") %></td>                                                   
                                                 </tr>
                                             </ItemTemplate>

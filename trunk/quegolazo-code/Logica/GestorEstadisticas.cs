@@ -19,8 +19,8 @@ namespace Logica
        public GestorEstadisticas()
        {
            edicion = Sesion.getGestorEdicion().edicion;
-           if (edicion == null)
-            edicion = buscarUltimaEdicionTorneo();
+           if(edicion.idEdicion==0)
+           edicion = buscarUltimaEdicionTorneo();
            Sesion.setEdicion(edicion);
        }
 

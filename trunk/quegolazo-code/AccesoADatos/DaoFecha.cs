@@ -40,7 +40,7 @@ namespace AccesoADatos
                         cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                        cmd.Parameters.AddWithValue("@idEstado", 1);
+                        cmd.Parameters.AddWithValue("@idEstado", 9);
                         if(f.nombre != null)
                             cmd.Parameters.AddWithValue("@nombre",  f.nombre );
                         else
@@ -123,7 +123,7 @@ namespace AccesoADatos
                             declare @idGrupo as int = (select idFecha from Partidos where idPartido=@idPartido)
                             declare @idFase as int = (select idFecha from Partidos where idPartido=@idPartido)
                             declare @idEdicion as int = (select idEdicion from Partidos where idPartido=@idPartido)
-                            declare @cantidad as int = (select count(*) from partidos p where p.idFecha=2 and p.idEdicion=14 and p.idEstado not in (select idEstado from Estados where idAmbito=4 and idEstado<>13 ))
+                            declare @cantidad as int = (select count(*) from partidos p where p.idFecha=@idFecha and p.idEdicion=@idEdicion and p.idEstado not in (select idEstado from Estados where idAmbito=4 and idEstado<>13 ))
 					                            if(@cantidad=0)
 						                            begin
 							update Fechas set idEstado=8 where idFecha=@idFecha and idGrupo=@idGrupo and idFase=@idFase and idEdicion=@idEdicion

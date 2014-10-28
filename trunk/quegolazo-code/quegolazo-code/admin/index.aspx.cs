@@ -16,11 +16,14 @@ namespace quegolazo_code.admin
         GestorEstadisticas gestorEstadisticas;
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorEstadisticas = new GestorEstadisticas();            
+            try
+            {
+                
+                gestorEdicion = Sesion.getGestorEdicion();
+                gestorEstadisticas = new GestorEstadisticas();            
             if (!Page.IsPostBack)
             {
-                try
-                {
+                
                     obtenerEdiciónSeleccionada();
                     cargarComboEdiciones();
                     cargarTablaDePosiciones();
@@ -28,9 +31,9 @@ namespace quegolazo_code.admin
                     cargarPorcentajeDeAvanceDeLaFecha();
                     cargarPorcentajeDeAvanceEdicion();
                     cargarUltimaFecha();                    
+             }
                 }
-                catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
-            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
