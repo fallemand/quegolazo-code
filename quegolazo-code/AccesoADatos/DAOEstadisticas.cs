@@ -70,7 +70,7 @@ namespace AccesoADatos
 	                                        INNER JOIN Fechas f ON p.idFecha=f.idFecha
 	                                        LEFT JOIN Tarjetas t ON p.idPartido = t.idPartido
 	                                        LEFT JOIN Sanciones s ON s.idPartido = s.idPartido
-	                                        WHERE p.idEdicion=@idEdicion AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado=@idEstadoFecha ORDER BY idFecha DESC)
+	                                        WHERE p.idEdicion=@idEdicion AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado=@idEstadoFecha ORDER BY idFecha)
 	                                        GROUP BY f.idFecha 
 	                                        ORDER BY f.idFecha";
                 cmd.Parameters.Clear();
