@@ -249,7 +249,7 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @" SELECT  j.nombre AS 'JUGADOR', e.nombre AS 'EQUIPO', count(g.idGol) AS 'GOLES'
+                string sql = @" SELECT TOP 11  j.nombre AS 'JUGADOR', e.nombre AS 'EQUIPO', count(g.idGol) AS 'GOLES'
                                     FROM Goles g
 	                                     JOIN Equipos e ON e.idEquipo=g.idEquipo 
 	                                     JOIN Jugadores j ON g.idJugador=j.idJugador
