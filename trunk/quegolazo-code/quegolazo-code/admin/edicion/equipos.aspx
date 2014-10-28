@@ -48,10 +48,11 @@
             </div>
         </div>
     </div>
+   
     <script>
         $('#lstEquiposSeleccionados').multiSelect({
             selectableHeader: "<div class='well well-sm alert-success nomargin-bottom'>Listado de Equipos <a href='#' id='select-all' class='btn btn-xs btn-default pull-right'>Seleccionar Todos <span class='glyphicon glyphicon-chevron-right'></span></a></div>",
-            selectionHeader: "<div class='well well-sm alert-success nomargin-bottom'>Equipos Seleccionados <a href='#' id='deselect-all' class='btn btn-xs btn-default pull-right'><span class='glyphicon glyphicon-chevron-left'></span> Quitar Todos</a></div>",
+            selectionHeader: "<div class='well well-sm alert-success nomargin-bottom'>Equipos Seleccionados: <span id='spanSeleccionados'>0</span>  <a href='#' id='deselect-all' class='btn btn-xs btn-default pull-right'><span class='glyphicon glyphicon-chevron-left'></span> Quitar Todos</a></div>",
             afterSelect: function (values) {
                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + values + ',');
             },
@@ -61,12 +62,24 @@
         });
         $('#select-all').click(function () {
             $('#lstEquiposSeleccionados').multiSelect('select_all');
+            actualizarCantidades();
             return false;
         });
         $('#deselect-all').click(function () {
             $('#lstEquiposSeleccionados').multiSelect('deselect_all');
             $('#hfEquiposSeleccionados').val("");
+            actualizarCantidades();
             return false;
         });
+        $(document).on('click', '.ms-selectable li,.ms-selection li', function (event) {
+            actualizarCantidades();
+        });        
+        function actualizarCantidades() {
+            var arr = $("#hfEquiposSeleccionados").val().split(",");
+            var valor = $.grep(arr, function( a ) {
+                return a != "";
+            }).length;
+            $("#spanSeleccionados").text(valor);                
+        }
     </script>
 </asp:Content>
