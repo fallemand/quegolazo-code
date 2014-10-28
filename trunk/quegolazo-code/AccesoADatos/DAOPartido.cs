@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using Entidades;
+using System.Globalization;
 
 
 namespace AccesoADatos
@@ -390,8 +391,9 @@ namespace AccesoADatos
                         partido.cancha = null;                     
                     partido.estado.idEstado = Int32.Parse(dr["idEstado"].ToString());
                     partido.estado.nombre = dr["nombreEstado"].ToString();
-                    if (dr["fecha"] != System.DBNull.Value)
+                    if (dr["fecha"] != System.DBNull.Value) {
                         partido.fecha = DateTime.Parse(dr["fecha"].ToString());
+                    }
                     else
                         partido.fecha = null;
                 }

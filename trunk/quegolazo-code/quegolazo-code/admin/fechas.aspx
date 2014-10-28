@@ -228,25 +228,25 @@
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Equipo</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlGolesEquipos" CssClass="form-control margin-xs input-sm" runat="server" required="true" AutoPostBack="true" OnSelectedIndexChanged="ddlGolesEquipos_SelectedIndexChanged"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlGolesEquipos" CssClass="form-control margin-xs input-sm" runat="server" required="true" AutoPostBack="true" OnSelectedIndexChanged="ddlGolesEquipos_SelectedIndexChanged" disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Jugador</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlGolesJugadores" runat="server" CssClass="form-control margin-xs input-sm"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlGolesJugadores" runat="server" CssClass="form-control margin-xs input-sm" disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Tipo</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlGolesTipos" runat="server" CssClass="form-control margin-xs input-sm"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlGolesTipos" runat="server" CssClass="form-control margin-xs input-sm" disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Minuto</label>
                                                             <div class="col-md-10">
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtGolesMinuto" placeholder="Minuto" runat="server" maxlength="3" digits="true">
+                                                                <input type="text" class="form-control margin-xs input-sm" id="txtGolesMinuto" placeholder="Minuto" runat="server" maxlength="3" digits="true" disabled="true">
                                                             </div>
                                                         </div>
                                                         <asp:Button class="btn btn-default btn-xs causesValidation vgGoles pull-right" ID="btnGolAgregar" runat="server" Text="Agregar Gol" OnClick="btnGolAgregar_Click" />
@@ -278,25 +278,25 @@
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Equipo</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlCambiosEquipos" CssClass="form-control margin-xs input-sm" runat="server" OnSelectedIndexChanged="ddlCambiosEquipos_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlCambiosEquipos" CssClass="form-control margin-xs input-sm" runat="server" OnSelectedIndexChanged="ddlCambiosEquipos_SelectedIndexChanged" AutoPostBack="True" disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Entra</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlCambiosJugadoresEntra" runat="server" CssClass="form-control margin-xs input-sm" required></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlCambiosJugadoresEntra" runat="server" CssClass="form-control margin-xs input-sm" required disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Sale</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlCambiosJugadoresSale" runat="server" CssClass="form-control margin-xs input-sm" required></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlCambiosJugadoresSale" runat="server" CssClass="form-control margin-xs input-sm" required disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Minuto</label>
                                                             <div class="col-md-10">
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtCambiosMinuto" placeholder="Minuto" runat="server" maxlength="3" digits="true" />
+                                                                <input type="text" class="form-control margin-xs input-sm" id="txtCambiosMinuto" placeholder="Minuto" runat="server" maxlength="3" digits="true" disabled="true"/>
                                                             </div>
                                                         </div>
                                                         <asp:Button class="btn btn-default btn-xs causesValidation vgCambios pull-right" ID="btnCambiosAgregar" runat="server" Text="Agregar Cambio" OnClick="btnCambiosAgregar_Click" />
@@ -328,19 +328,19 @@
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Equipo</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlTarjetasEquipos" CssClass="form-control margin-xs input-sm" OnSelectedIndexChanged="ddlTarjetasEquipos_SelectedIndexChanged" runat="server" AutoPostBack="True"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlTarjetasEquipos" CssClass="form-control margin-xs input-sm" OnSelectedIndexChanged="ddlTarjetasEquipos_SelectedIndexChanged" runat="server" disabled="true" AutoPostBack="True"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Jugador</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlTarjetasJugadores" CssClass="form-control margin-xs input-sm" runat="server" required></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlTarjetasJugadores" CssClass="form-control margin-xs input-sm" runat="server" required disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Tipo</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlTarjetasTipo" CssClass="form-control margin-xs input-sm" runat="server" required>
+                                                                <asp:DropDownList ID="ddlTarjetasTipo" CssClass="form-control margin-xs input-sm" runat="server" required disabled="true">
                                                                     <asp:ListItem Text="Amarilla" Value="A"></asp:ListItem>
                                                                     <asp:ListItem Text="Roja" Value="R"></asp:ListItem>
                                                                 </asp:DropDownList>
@@ -349,7 +349,7 @@
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Minuto</label>
                                                             <div class="col-md-10">
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtTarjetasMinuto" placeholder="Minuto" runat="server" maxlength="3" digits="true">
+                                                                <input type="text" class="form-control margin-xs input-sm" id="txtTarjetasMinuto" placeholder="Minuto" runat="server" maxlength="3" digits="true" disabled="true">
                                                             </div>
                                                         </div>
                                                         <asp:Button class="btn btn-default btn-xs causesValidation vgTarjetas pull-right" ID="btnTarjetaAgregar" runat="server" OnClick="btnTarjetaAgregar_Click" Text="Agregar Tarjeta" />
