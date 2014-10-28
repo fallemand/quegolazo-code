@@ -78,8 +78,8 @@
                     <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-5">JUGADOR</th>
-                                            <th class="col-md-1">EQUIPO</th>
+                                            <th class="col-md-6">JUGADOR</th>
+                                            <th class="col-md-5">EQUIPO</th>
                                             <th class="col-md-1">GOLES</th>                                       
                                         </tr>
                                     </thead>
@@ -122,7 +122,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-stats"></span>
-                    Avance de la Fecha 
+                    Avance de la última Fecha 
                 </div>
                 <div class="panel-body" >
                     <div id="avanceFecha"></div>

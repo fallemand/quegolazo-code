@@ -16,11 +16,12 @@ namespace quegolazo_code.admin
         GestorEstadisticas gestorEstadisticas;
         protected void Page_Load(object sender, EventArgs e)
         {
+            panelFracaso.Visible = false;
             try
             {
-                
                 gestorEdicion = Sesion.getGestorEdicion();
-                gestorEstadisticas = new GestorEstadisticas();            
+                gestorEstadisticas = new GestorEstadisticas();               
+                gestorEdicion.edicion = Sesion.getEdicion();
             if (!Page.IsPostBack)
             {
                 
