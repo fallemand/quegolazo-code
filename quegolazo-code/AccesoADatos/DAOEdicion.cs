@@ -721,7 +721,7 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
 
-                string sql = @"SELECT TOP 1
+                string sql = @"SELECT TOP 1 *
                                 FROM Ediciones
                                 WHERE idTorneo = @idTorneo
                                 ORDER BY idEdicion DESC";
