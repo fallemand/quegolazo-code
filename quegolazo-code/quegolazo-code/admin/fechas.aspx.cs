@@ -350,7 +350,7 @@ namespace quegolazo_code.admin
             cbPenales.Checked = (gestorPartido.partido.huboPenales != null && gestorPartido.partido.huboPenales == true) ? true : false;
             txtPenalesLocal.Value = (gestorPartido.partido.penalesLocal!=null) ? gestorPartido.partido.penalesLocal.ToString(): "";
             txtPenalesVisitante.Value = (gestorPartido.partido.penalesVisitante != null) ? gestorPartido.partido.penalesVisitante.ToString() : "";
-            txtFecha.Value = (gestorPartido.partido.fecha != null) ? gestorPartido.partido.fecha.Value.ToString("dd/mm/yyyy HH:mm") : "";
+            txtFecha.Value = (gestorPartido.partido.fecha != null) ? gestorPartido.partido.fecha.Value.ToString("dd/MM/yyyy HH:mm") : "";
             ddlArbitros.SelectedValue = (gestorPartido.partido.arbitro != null) ? gestorPartido.partido.arbitro.idArbitro.ToString() : "";
             ddlCanchas.SelectedValue = (gestorPartido.partido.cancha != null) ? gestorPartido.partido.cancha.idCancha.ToString() : "";
             cargarListaJugadoresEquipoLocal();
