@@ -212,7 +212,7 @@ namespace AccesoADatos
 	                            WHERE e.idEquipo=p.idEquipoLocal OR e.idEquipo=p.idEquipoVisitante
 	                            GROUP BY p.idEdicion, e.nombre, ed.puntosGanado, ed.puntosPerdido, ed.puntosEmpatado
 								HAVING p.idEdicion=@idEdicion 
-	                            ORDER BY 'Puntos' DESC";
+	                            ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.CommandText = sql;
