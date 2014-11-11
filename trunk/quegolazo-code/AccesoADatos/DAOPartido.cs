@@ -47,7 +47,7 @@ namespace AccesoADatos
                              cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                              cmd.Parameters.AddWithValue("@idEquipoLocal", DAOUtils.dbValueInt(p.local.idEquipo));
                              cmd.Parameters.AddWithValue("@idEquipoVisitante", DAOUtils.dbValueInt(p.visitante.idEquipo));                             
-                             cmd.Parameters.AddWithValue("@idEstado", 10);
+                             cmd.Parameters.AddWithValue("@idEstado", Estado.partidoDIAGRAMADO);
                              cmd.CommandText = sql;
                              cmd.ExecuteNonQuery();    
                         }

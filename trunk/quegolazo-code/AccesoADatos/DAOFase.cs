@@ -22,14 +22,11 @@ namespace AccesoADatos
         /// <returns>El id del equipo registrado</returns>
         public void registrarFase(List<Fase> fases, SqlConnection con, SqlTransaction trans)
         {
-            //SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            //SqlTransaction trans = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                //trans = con.BeginTransaction();
                 cmd.Connection = con;
                 cmd.Transaction = trans;
 
@@ -37,26 +34,26 @@ namespace AccesoADatos
                 {
                     if (fase != null)
                     {
-                        string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture,idEstado)
-                                    VALUES (@idFase,@idEdicion,@tipoFixture,@idEstado)";
+                        string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado)
+                                        VALUES (@idFase, @idEdicion, @tipoFixture, @idEstado)";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                         cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.idTipoFixture);
-                        cmd.Parameters.AddWithValue("@idEstado", 4);
+                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseDIAGRAMADA);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
 
                         if (fase.grupos.Count != 0)
                         {
-                            DAOGrupo DaoGrupo = new DAOGrupo();
-                            DaoGrupo.registrarGrupos(fase, con, trans);
+                            DAOGrupo daoGrupo = new DAOGrupo();
+                            daoGrupo.registrarGrupos(fase, con, trans);
 
-                            DAOFecha DaoFecha = new DAOFecha();
-                            DaoFecha.registrarFechas(fase, con, trans);
+                            DAOFecha daoFecha = new DAOFecha();
+                            daoFecha.registrarFechas(fase, con, trans);
 
-                            DAOPartido DaoPartido = new DAOPartido();
-                            DaoPartido.registrarPartidos(fase, con, trans);
+                            DAOPartido daoPartido = new DAOPartido();
+                            daoPartido.registrarPartidos(fase, con, trans);
                         }
                     }
                 }
@@ -79,9 +76,9 @@ namespace AccesoADatos
              SqlDataReader dr;
              SqlTransaction trans = null;
              List<Fase> fases = new List<Fase>();
-             DAOGrupo DaoGrupo= new DAOGrupo();
-             DAOFecha DaoFecha=new DAOFecha();
-             DAOPartido DaoPartido=new DAOPartido();
+             DAOGrupo daoGrupo= new DAOGrupo();
+             DAOFecha daoFecha=new DAOFecha();
+             DAOPartido daoPartido=new DAOPartido();
              try
              {
                  if (con.State == ConnectionState.Closed)
@@ -112,9 +109,9 @@ namespace AccesoADatos
 
                  foreach (Fase fase in fases)
                  {
-                     DaoGrupo.obtenerGrupos(fase, con, trans);
-                     DaoFecha.obtenerFechas(fase, con, trans);
-                     DaoPartido.obtenerPartidos(fase, con, trans);
+                     daoGrupo.obtenerGrupos(fase, con, trans);
+                     daoFecha.obtenerFechas(fase, con, trans);
+                     daoPartido.obtenerPartidos(fase, con, trans);
                  }
                  return fases;
              }
@@ -157,21 +154,20 @@ namespace AccesoADatos
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                         cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
-                        // cmd.Parameters.AddWithValue("@idEstado", fase.estado.idEstado);
-                        cmd.Parameters.AddWithValue("@idEstado", 4);
+                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseDIAGRAMADA);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
 
                         if (fase.grupos.Count != 0)
                         {
-                            DAOGrupo DaoGrupo = new DAOGrupo();
-                            DaoGrupo.registrarGrupos(fase, con, trans);
+                            DAOGrupo daoGrupo = new DAOGrupo();
+                            daoGrupo.registrarGrupos(fase, con, trans);
 
-                            DAOFecha DaoFecha = new DAOFecha();
-                            DaoFecha.registrarFechas(fase, con, trans);
+                            DAOFecha daoFecha = new DAOFecha();
+                            daoFecha.registrarFechas(fase, con, trans);
 
-                            DAOPartido DaoPartido = new DAOPartido();
-                            DaoPartido.registrarPartidos(fase, con, trans);
+                            DAOPartido daoPartido = new DAOPartido();
+                            daoPartido.registrarPartidos(fase, con, trans);
                         }
                     }
                 }
