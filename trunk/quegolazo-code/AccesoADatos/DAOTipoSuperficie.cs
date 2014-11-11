@@ -12,7 +12,6 @@ namespace AccesoADatos
     public class DAOTipoSuperficie
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-
         /// <summary>
         /// Ontiene un TipoSuperficie por su id
         /// autor: Paula Pedrosa

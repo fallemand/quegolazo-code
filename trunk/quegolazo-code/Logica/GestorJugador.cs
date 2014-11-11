@@ -22,14 +22,8 @@ namespace Logica
                 jugador = new Jugador();
             jugador.nombre = nombre;
             jugador.dni = dni;
-            if (!fechaNacimiento.Equals(""))
-                jugador.fechaNacimiento = Validador.castDate(fechaNacimiento);
-            else
-                jugador.fechaNacimiento = null;
-            if (!numeroCamiseta.Equals(""))
-                jugador.numeroCamiseta = Validador.castInt(numeroCamiseta);
-            else
-                jugador.numeroCamiseta = null;
+            jugador.fechaNacimiento = (!fechaNacimiento.Equals("")) ? (DateTime?) Validador.castDate(fechaNacimiento) : null;
+            jugador.numeroCamiseta = (!numeroCamiseta.Equals("")) ? (Int32?) Validador.castInt(numeroCamiseta) : null; 
             jugador.telefono = telefono;
             jugador.email = email;
             jugador.facebook = facebook;

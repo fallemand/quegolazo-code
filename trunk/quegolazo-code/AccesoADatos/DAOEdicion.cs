@@ -126,9 +126,7 @@ namespace AccesoADatos
         /// <param name="edicion">Objeto Edición</param>
         public void registrarPreferencias(Edicion edicion, SqlConnection con, SqlTransaction trans)
         {
-            //SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            //trans = con.BeginTransaction();
             cmd.Connection = con;
             cmd.Transaction = trans;
             try
@@ -568,7 +566,8 @@ namespace AccesoADatos
                 while (dr.Read())
                 {
                     Equipo equipo = new Equipo()
-                        {   idEquipo = int.Parse(dr["idEquipo"].ToString()),
+                        {   
+                            idEquipo = int.Parse(dr["idEquipo"].ToString()),
                             nombre = dr["nombre"].ToString(),
                         };
                     equipos.Add(equipo);
@@ -761,8 +760,6 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-        }
-
-       
+        }       
     }
 }

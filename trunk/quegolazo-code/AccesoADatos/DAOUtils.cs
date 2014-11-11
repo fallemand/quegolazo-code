@@ -10,7 +10,7 @@ namespace AccesoADatos
     {
         public static Object dbValue(Object value)
         {
-            if (value == null)
+            if (value == null || value.Equals(""))
                 return DBNull.Value;
             return value;
         }

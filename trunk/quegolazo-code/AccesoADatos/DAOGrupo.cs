@@ -32,8 +32,8 @@ namespace AccesoADatos
                 foreach (Grupo g in fase.grupos)
                 {
                     string sql = @"INSERT INTO Grupos (idGrupo,idFase,idEdicion,nombre)
-                                VALUES (@idGrupo,@idFase,@idEdicion,@nombre) 
-                                SELECT SCOPE_IDENTITY()";
+                                    VALUES (@idGrupo,@idFase,@idEdicion,@nombre) 
+                                    SELECT SCOPE_IDENTITY()";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                     cmd.Parameters.AddWithValue("@idFase", fase.idFase);
@@ -60,8 +60,8 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 cmd.Transaction = trans; 
                             string sql = @"SELECT * 
-                                                    FROM Grupos
-                                                    WHERE idFase=@idFase AND idEdicion=@idEdicion";
+                                            FROM Grupos
+                                            WHERE idFase=@idFase AND idEdicion = @idEdicion";
                             cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                             cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                             cmd.CommandText = sql;
