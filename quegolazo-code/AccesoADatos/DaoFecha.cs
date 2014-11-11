@@ -33,8 +33,8 @@ namespace AccesoADatos
                 {
                     foreach (Fecha f in g.fechas)
                     {
-                        string sql = @"INSERT INTO Fechas (idFecha,idGrupo,idFase,idEdicion,nombre,idEstado)
-                                     VALUES (@idFecha,@idGrupo,@idFase,@idEdicion,@nombre,@idEstado)";
+                        string sql = @"INSERT INTO Fechas (idFecha, idGrupo, idFase, idEdicion, nombre, idEstado)
+                                        VALUES (@idFecha, @idGrupo, @idFase, @idEdicion, @nombre, @idEstado)";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idFecha", f.idFecha);
                         cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);

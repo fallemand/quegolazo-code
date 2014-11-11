@@ -12,7 +12,6 @@ namespace AccesoADatos
     public class DAOJugador
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-
         /// <summary>
         /// Registra un nuevo Jugador en la BD
         /// autor: Pau Pedrosa
@@ -32,26 +31,11 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", jugador.nombre);
                 cmd.Parameters.AddWithValue("@dni", jugador.dni);
-                if(jugador.fechaNacimiento != null)
-                    cmd.Parameters.AddWithValue("@fechaNacimiento", jugador.fechaNacimiento);
-                else
-                    cmd.Parameters.AddWithValue("@fechaNacimiento", DBNull.Value);
-                if (jugador.numeroCamiseta!= null)
-                    cmd.Parameters.AddWithValue("@numeroCamiseta", jugador.numeroCamiseta);
-                else
-                    cmd.Parameters.AddWithValue("@numeroCamiseta", DBNull.Value);
-                if (jugador.telefono != null)
-                    cmd.Parameters.AddWithValue("@telefono", jugador.telefono);
-                else
-                    cmd.Parameters.AddWithValue("@telefono", DBNull.Value);
-                if (jugador.email != null)
-                    cmd.Parameters.AddWithValue("@email", jugador.email);
-                else
-                    cmd.Parameters.AddWithValue("@email", DBNull.Value);
-                if (jugador.facebook != null)
-                    cmd.Parameters.AddWithValue("@facebook", jugador.facebook);
-                else
-                    cmd.Parameters.AddWithValue("@facebook", DBNull.Value);
+                cmd.Parameters.AddWithValue("@fechaNacimiento", DAOUtils.dbValue(jugador.fechaNacimiento));
+                cmd.Parameters.AddWithValue("@numeroCamiseta", DAOUtils.dbValue(jugador.numeroCamiseta));
+                cmd.Parameters.AddWithValue("@telefono", DAOUtils.dbValue(jugador.telefono));
+                cmd.Parameters.AddWithValue("@email", DAOUtils.dbValue(jugador.email));
+                cmd.Parameters.AddWithValue("@facebook", DAOUtils.dbValue(jugador.facebook));
                 cmd.Parameters.AddWithValue("@sexo", jugador.sexo);
                 cmd.Parameters.AddWithValue("@tieneFichaMedica", jugador.tieneFichaMedica);
                 cmd.Parameters.AddWithValue("@idEquipo", idEquipo);             
@@ -104,14 +88,8 @@ namespace AccesoADatos
                     jugador.idJugador = Int32.Parse(dr["idJugador"].ToString());
                     jugador.nombre = dr["nombre"].ToString();
                     jugador.dni = dr["dni"].ToString();
-                    if(dr["fechaNacimiento"] != System.DBNull.Value)
-                        jugador.fechaNacimiento = DateTime.Parse(dr["fechaNacimiento"].ToString());
-                    else
-                        jugador.fechaNacimiento = null;
-                    if (dr["numeroCamiseta"] != System.DBNull.Value)
-                        jugador.numeroCamiseta = Int32.Parse(dr["numeroCamiseta"].ToString());
-                    else
-                        jugador.numeroCamiseta = null;
+                    jugador.fechaNacimiento = (dr["fechaNacimiento"] != DBNull.Value) ? (DateTime?) DateTime.Parse(dr["fechaNacimiento"].ToString()) : null;
+                    jugador.numeroCamiseta = (dr["numeroCamiseta"] != DBNull.Value) ? (Int32?) Int32.Parse(dr["numeroCamiseta"].ToString()) : null;                   
                     jugador.email = dr["email"].ToString();
                     jugador.facebook = dr["facebook"].ToString();
                     jugador.sexo = dr["sexo"].ToString();
@@ -161,26 +139,11 @@ namespace AccesoADatos
                     respuesta.idJugador = Int32.Parse(dr["idJugador"].ToString());
                     respuesta.nombre = dr["nombre"].ToString();
                     respuesta.dni = dr["dni"].ToString();
-                    if (dr["fechaNacimiento"] != System.DBNull.Value)
-                        respuesta.fechaNacimiento = DateTime.Parse(dr["fechaNacimiento"].ToString());                                 
-                    else
-                        respuesta.fechaNacimiento = null;
-                    if (dr["numeroCamiseta"] != System.DBNull.Value)
-                        respuesta.numeroCamiseta = Int32.Parse(dr["numeroCamiseta"].ToString());
-                    else
-                        respuesta.numeroCamiseta = null;
-                    if (dr["telefono"] != System.DBNull.Value)
-                        respuesta.telefono = dr["telefono"].ToString();
-                    else
-                        respuesta.telefono = null;
-                    if (dr["email"] != System.DBNull.Value)
-                        respuesta.email = dr["email"].ToString();
-                    else
-                        respuesta.email = null;
-                    if (dr["facebook"] != System.DBNull.Value)
-                        respuesta.facebook = dr["facebook"].ToString();
-                    else
-                        respuesta.facebook = null;
+                    respuesta.fechaNacimiento = (dr["fechaNacimiento"] != DBNull.Value) ? (DateTime?) DateTime.Parse(dr["fechaNacimiento"].ToString()) : null;
+                    respuesta.numeroCamiseta = (dr["numeroCamiseta"] != DBNull.Value) ? (Int32?) Int32.Parse(dr["numeroCamiseta"].ToString()) : null;
+                    respuesta.telefono = (dr["telefono"] != DBNull.Value) ? dr["telefono"].ToString() : null;
+                    respuesta.email = (dr["email"] != DBNull.Value) ? dr["email"].ToString() : null;
+                    respuesta.facebook = (dr["facebook"] != DBNull.Value) ? dr["facebook"].ToString() : null;
                     respuesta.sexo = dr["sexo"].ToString();
                     respuesta.tieneFichaMedica = bool.Parse(dr["tieneFichaMedica"].ToString());
                 }
@@ -220,26 +183,11 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@nombre", jugador.nombre);
                 cmd.Parameters.AddWithValue("@dni", jugador.dni);
                 cmd.Parameters.AddWithValue("@idJugador", jugador.idJugador);
-                if (jugador.fechaNacimiento != null)
-                    cmd.Parameters.AddWithValue("@fechaNacimiento", jugador.fechaNacimiento);
-                else
-                    cmd.Parameters.AddWithValue("@fechaNacimiento", DBNull.Value);
-                if (jugador.numeroCamiseta != null)
-                    cmd.Parameters.AddWithValue("@numeroCamiseta", jugador.numeroCamiseta);
-                else
-                    cmd.Parameters.AddWithValue("@numeroCamiseta", DBNull.Value);
-                if (jugador.telefono != null)
-                    cmd.Parameters.AddWithValue("@telefono", jugador.telefono);
-                else
-                    cmd.Parameters.AddWithValue("@telefono", DBNull.Value);
-                if (jugador.email != null)
-                    cmd.Parameters.AddWithValue("@email", jugador.email);
-                else
-                    cmd.Parameters.AddWithValue("@email", DBNull.Value);
-                if (jugador.facebook != null)
-                    cmd.Parameters.AddWithValue("@facebook", jugador.facebook);
-                else
-                    cmd.Parameters.AddWithValue("@facebook", DBNull.Value);
+                cmd.Parameters.AddWithValue("@fechaNacimiento", DAOUtils.dbValue(jugador.fechaNacimiento));
+                cmd.Parameters.AddWithValue("@numeroCamiseta", DAOUtils.dbValue(jugador.numeroCamiseta));
+                cmd.Parameters.AddWithValue("@telefono", DAOUtils.dbValue(jugador.telefono));
+                cmd.Parameters.AddWithValue("@email", DAOUtils.dbValue(jugador.email));
+                cmd.Parameters.AddWithValue("@facebook", DAOUtils.dbValue(jugador.facebook));
                 cmd.Parameters.AddWithValue("@sexo", jugador.sexo);
                 cmd.Parameters.AddWithValue("@tieneFichaMedica", jugador.tieneFichaMedica);               
                 cmd.CommandText = sql;

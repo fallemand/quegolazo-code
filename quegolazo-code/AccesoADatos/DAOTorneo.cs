@@ -13,7 +13,6 @@ namespace AccesoADatos
     public class DAOTorneo
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-
         /// <summary>
         /// Obtiene todos los Torneos de un Usuario
         /// autor: Pau Pedrosa
@@ -224,7 +223,7 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 string sql = @"UPDATE Torneos 
                                      SET descripcion = @descripcion, nombre = @nombre 
-                                     WHERE idTorneo=@idTorneo";
+                                     WHERE idTorneo = @idTorneo";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", torneoNuevo.nombre);
                 cmd.Parameters.AddWithValue("@descripcion", torneoNuevo.descripcion);
@@ -294,7 +293,7 @@ namespace AccesoADatos
                 string sql = @"SELECT TOP 1 * 
                              FROM Torneos
                              WHERE idUsuario = @idUsuario
-                             ORDER BY idTorneo ASC"; // Hay que poner DESC
+                             ORDER BY idTorneo DESC"; 
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idUsuario", idUsuario));
                 cmd.CommandText = sql;

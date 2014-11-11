@@ -12,7 +12,6 @@ namespace AccesoADatos
     public class DAOUsuario
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-
         /// <summary>
         /// Registra un nuevo usuario en la BD
         /// autor: Flor Rojas
@@ -128,7 +127,7 @@ namespace AccesoADatos
                     //obtener si es activo o no
                     string sql = @"SELECT esActivo
                                     FROM Usuarios
-                                    WHERE codigo=@userCodigo";
+                                    WHERE codigo = @userCodigo";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@userCodigo", codigo);
                     cmd.CommandText = sql;
@@ -145,7 +144,7 @@ namespace AccesoADatos
                         cmd.CommandText = sql;
                         string mail= cmd.ExecuteScalar().ToString();
 
-                        sql = @"UPDATE Usuarios SET  codigo = @codigoVacio  , email=@mail , emailNuevo=@emailNuevo
+                        sql = @"UPDATE Usuarios SET codigo = @codigoVacio, email = @mail, emailNuevo = @emailNuevo
                                     WHERE codigo = @userCodigo";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@userCodigo ", codigo);
@@ -376,21 +375,14 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"UPDATE Usuarios 
-                                SET nombre=@nombre, apellido=@apellido,contrasenia=@contrasenia, codigo=@codigo , emailNuevo=@emailNuevo
-                                WHERE idUsuario=@idUsuario";
-     
+                                SET nombre = @nombre, apellido = @apellido, contrasenia = @contrasenia, codigo = @codigo, emailNuevo = @emailNuevo
+                                WHERE idUsuario = @idUsuario";     
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idUsuario", usuarioModificado.idUsuario));
                 cmd.Parameters.Add(new SqlParameter("@nombre", usuarioModificado.nombre));
                 cmd.Parameters.Add(new SqlParameter("@apellido", usuarioModificado.apellido));
-                if (usuarioModificado.emailNuevo != null)
-                    cmd.Parameters.Add(new SqlParameter("@emailNuevo", usuarioModificado.emailNuevo));
-                else
-                    cmd.Parameters.Add(new SqlParameter("@emailNuevo", DBNull.Value));
-                if(usuarioModificado.codigo != null)
-                cmd.Parameters.Add(new SqlParameter("@codigo", usuarioModificado.codigo));
-                else
-                    cmd.Parameters.Add(new SqlParameter("@codigo", DBNull.Value));
+                cmd.Parameters.AddWithValue("@emailNuevo", DAOUtils.dbValue(usuarioModificado.emailNuevo));
+                cmd.Parameters.AddWithValue("@codigo", DAOUtils.dbValue(usuarioModificado.codigo));
                 cmd.Parameters.Add(new SqlParameter("@contrasenia", usuarioModificado.contrasenia));
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();

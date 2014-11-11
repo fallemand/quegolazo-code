@@ -31,11 +31,8 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@titulo", noticia.titulo);
                 cmd.Parameters.AddWithValue("@tipoNoticia", noticia.tipoNoticia);
-                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);            
-                if (noticia.descripcion != null)
-                    cmd.Parameters.AddWithValue("@descripcion", noticia.descripcion);
-                else
-                    cmd.Parameters.AddWithValue("@descripcion", DBNull.Value);
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValue(noticia.descripcion));
                 cmd.Parameters.AddWithValue("@fecha", noticia.fecha);   
                 cmd.CommandText = sql;
                 int idNoticia = int.Parse(cmd.ExecuteScalar().ToString());
@@ -119,11 +116,8 @@ namespace AccesoADatos
                     respuesta.titulo = dr["titulo"].ToString();
                     respuesta.tipoNoticia = dr["tipoNoticia"].ToString();
                     respuesta.idEdicion = Int32.Parse(dr["idEdicion"].ToString());
-                    respuesta.fecha = DateTime.Parse(dr["fecha"].ToString());  
-                    if (dr["descripcion"] != System.DBNull.Value)
-                        respuesta.descripcion = dr["descripcion"].ToString();
-                    else
-                        respuesta.descripcion = null;
+                    respuesta.fecha = DateTime.Parse(dr["fecha"].ToString());
+                    respuesta.descripcion = (dr["descripcion"] != System.DBNull.Value) ? dr["descripcion"].ToString() : null;
                 }
                 if (dr != null)
                     dr.Close();
@@ -160,10 +154,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idNoticia", noticia.idNoticia);
                 cmd.Parameters.AddWithValue("@titulo", noticia.titulo);
                 cmd.Parameters.AddWithValue("@tipoNoticia", noticia.tipoNoticia);
-                if (noticia.descripcion != null)
-                    cmd.Parameters.AddWithValue("@descripcion", noticia.descripcion);
-                else
-                    cmd.Parameters.AddWithValue("@descripcion", DBNull.Value);
+                cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValue(noticia.descripcion));
                 cmd.Parameters.AddWithValue("@fecha", noticia.fecha);               
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();

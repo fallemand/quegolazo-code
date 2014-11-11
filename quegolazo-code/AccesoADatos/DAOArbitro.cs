@@ -34,14 +34,8 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", arbitro.nombre);
                 cmd.Parameters.AddWithValue("@celular", DAOUtils.dbValue(arbitro.celular));
-                if (arbitro.email != null)
-                    cmd.Parameters.AddWithValue("@email", arbitro.email);
-                else
-                    cmd.Parameters.AddWithValue("@email", DBNull.Value);
-                if (arbitro.matricula != null)
-                    cmd.Parameters.AddWithValue("@matricula", arbitro.matricula);
-                else
-                    cmd.Parameters.AddWithValue("@matricula", DBNull.Value);
+                cmd.Parameters.AddWithValue("@email", DAOUtils.dbValue(arbitro.email));
+                cmd.Parameters.AddWithValue("@matricula", DAOUtils.dbValue(arbitro.matricula));
                 cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
                 cmd.CommandText = sql;
                 int idArbitro = int.Parse(cmd.ExecuteScalar().ToString());
@@ -93,9 +87,9 @@ namespace AccesoADatos
                     {
                         idArbitro = Int32.Parse(dr["idArbitro"].ToString()),
                         nombre = dr["nombre"].ToString(),
-                        celular = (dr["celular"] != System.DBNull.Value) ? dr["celular"].ToString() : null,
-                        email = (dr["email"] != System.DBNull.Value) ? dr["email"].ToString() : null,
-                        matricula = (dr["matricula"] != System.DBNull.Value) ? dr["matricula"].ToString() : null,
+                        celular = (dr["celular"] != DBNull.Value) ? dr["celular"].ToString() : null,
+                        email = (dr["email"] != DBNull.Value) ? dr["email"].ToString() : null,
+                        matricula = (dr["matricula"] != DBNull.Value) ? dr["matricula"].ToString() : null,
                     };
                     respuesta.Add(arbitro);
                 }
@@ -143,18 +137,9 @@ namespace AccesoADatos
                     respuesta = new Arbitro();
                     respuesta.idArbitro = Int32.Parse(dr["idArbitro"].ToString());
                     respuesta.nombre = dr["nombre"].ToString();
-                    if (dr["celular"] != System.DBNull.Value)
-                        respuesta.celular = dr["celular"].ToString();
-                    else
-                        respuesta.celular = null;
-                    if (dr["email"] != System.DBNull.Value)
-                        respuesta.email = dr["email"].ToString();
-                    else
-                        respuesta.email = null;
-                    if (dr["matricula"] != System.DBNull.Value)
-                        respuesta.matricula = dr["matricula"].ToString();
-                    else
-                        respuesta.matricula = null;
+                    respuesta.celular = (dr["celular"] != DBNull.Value) ? dr["celular"].ToString() : null;
+                    respuesta.email = (dr["email"] != DBNull.Value) ? dr["email"].ToString() : null;
+                    respuesta.matricula = (dr["matricula"] != DBNull.Value) ? dr["matricula"].ToString() : null;
                 }
                 if (dr != null)
                     dr.Close();
@@ -191,18 +176,9 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", arbitro.nombre);
                 cmd.Parameters.AddWithValue("@idArbitro", arbitro.idArbitro);
-                if (arbitro.celular != null)
-                    cmd.Parameters.AddWithValue("@celular", arbitro.celular);
-                else
-                    cmd.Parameters.AddWithValue("@celular", DBNull.Value);
-                if (arbitro.email != null)
-                    cmd.Parameters.AddWithValue("@email", arbitro.email);
-                else
-                    cmd.Parameters.AddWithValue("@email", DBNull.Value);
-                if (arbitro.matricula != null)
-                    cmd.Parameters.AddWithValue("@matricula", arbitro.matricula);
-                else
-                    cmd.Parameters.AddWithValue("@matricula", DBNull.Value);
+                cmd.Parameters.AddWithValue("@celular", DAOUtils.dbValue(arbitro.celular));
+                cmd.Parameters.AddWithValue("@email", DAOUtils.dbValue(arbitro.email));
+                cmd.Parameters.AddWithValue("@matricula", DAOUtils.dbValue(arbitro.matricula));
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }

@@ -13,7 +13,6 @@ namespace AccesoADatos
     public class DAOEstadisticas
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-
        
         public DataTable obtenerAvanceEdicion(int idEdicion)
         {

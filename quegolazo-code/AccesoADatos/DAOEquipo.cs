@@ -332,7 +332,7 @@ namespace AccesoADatos
                 foreach (Equipo equipo in equipos)
                 {
                     string sqlInsercion = @"INSERT INTO EquipoXEdicion (idEdicion, idEquipo)
-                                    VALUES (@idEdicion, @idEquipo)";
+                                                VALUES (@idEdicion, @idEquipo)";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                     cmd.Parameters.AddWithValue("@idEquipo", equipo.idEquipo);

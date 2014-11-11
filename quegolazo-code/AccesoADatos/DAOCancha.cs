@@ -174,14 +174,8 @@ namespace AccesoADatos
                                     SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", cancha.nombre);
-                if(cancha.domicilio != null)
-                    cmd.Parameters.AddWithValue("@domicilio", cancha.domicilio);
-                else
-                    cmd.Parameters.AddWithValue("@domicilio", DBNull.Value);
-                if(cancha.telefono != null)
-                    cmd.Parameters.AddWithValue("@telefono", cancha.telefono);
-                else
-                    cmd.Parameters.AddWithValue("@telefono", DBNull.Value);               
+                cmd.Parameters.AddWithValue("@domicilio", DAOUtils.dbValue(cancha.domicilio));
+                cmd.Parameters.AddWithValue("@telefono", DAOUtils.dbValue(cancha.telefono));              
                 cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
                 cmd.CommandText = sql;
                 int idCancha = int.Parse(cmd.ExecuteScalar().ToString());
@@ -320,14 +314,8 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", cancha.nombre);
                 cmd.Parameters.AddWithValue("@idCancha", cancha.idCancha);
-                if (cancha.domicilio != null)
-                    cmd.Parameters.AddWithValue("@domicilio", cancha.domicilio);
-                else
-                    cmd.Parameters.AddWithValue("@domicilio", DBNull.Value);
-                if(cancha.telefono != null)
-                    cmd.Parameters.AddWithValue("@telefono", cancha.telefono);
-                else
-                    cmd.Parameters.AddWithValue("@telefono", DBNull.Value);
+                cmd.Parameters.AddWithValue("@domicilio", DAOUtils.dbValue(cancha.domicilio));
+                cmd.Parameters.AddWithValue("@telefono", DAOUtils.dbValue(cancha.telefono));                
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
@@ -374,14 +362,8 @@ namespace AccesoADatos
                     respuesta = new Cancha();
                     respuesta.idCancha = Int32.Parse(dr["idCancha"].ToString());
                     respuesta.nombre = dr["nombre"].ToString();
-                    if (dr["domicilio"] != System.DBNull.Value)
-                        respuesta.domicilio = dr["domicilio"].ToString();
-                    else
-                        respuesta.domicilio = null;
-                    if (dr["telefono"] != System.DBNull.Value)
-                        respuesta.telefono = dr["telefono"].ToString();
-                    else
-                        respuesta.telefono = null; 
+                    respuesta.domicilio = (dr["domicilio"] != DBNull.Value) ? dr["domicilio"].ToString() : null;
+                    respuesta.telefono = (dr["telefono"] != DBNull.Value) ? dr["telefono"].ToString() : null;
                 }
                 if (dr != null)
                     dr.Close();
