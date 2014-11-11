@@ -174,8 +174,8 @@ namespace AccesoADatos
                                     SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", cancha.nombre);
-                cmd.Parameters.AddWithValue("@domicilio", DAOUtils.dbValue(cancha.domicilio));
-                cmd.Parameters.AddWithValue("@telefono", DAOUtils.dbValue(cancha.telefono));              
+                cmd.Parameters.AddWithValue("@domicilio", DAOUtils.dbValueNull(cancha.domicilio));
+                cmd.Parameters.AddWithValue("@telefono", DAOUtils.dbValueNull(cancha.telefono));              
                 cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
                 cmd.CommandText = sql;
                 int idCancha = int.Parse(cmd.ExecuteScalar().ToString());
@@ -314,8 +314,8 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", cancha.nombre);
                 cmd.Parameters.AddWithValue("@idCancha", cancha.idCancha);
-                cmd.Parameters.AddWithValue("@domicilio", DAOUtils.dbValue(cancha.domicilio));
-                cmd.Parameters.AddWithValue("@telefono", DAOUtils.dbValue(cancha.telefono));                
+                cmd.Parameters.AddWithValue("@domicilio", DAOUtils.dbValueNull(cancha.domicilio));
+                cmd.Parameters.AddWithValue("@telefono", DAOUtils.dbValueNull(cancha.telefono));                
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
