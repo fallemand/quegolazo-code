@@ -381,8 +381,8 @@ namespace AccesoADatos
                 cmd.Parameters.Add(new SqlParameter("@idUsuario", usuarioModificado.idUsuario));
                 cmd.Parameters.Add(new SqlParameter("@nombre", usuarioModificado.nombre));
                 cmd.Parameters.Add(new SqlParameter("@apellido", usuarioModificado.apellido));
-                cmd.Parameters.AddWithValue("@emailNuevo", DAOUtils.dbValue(usuarioModificado.emailNuevo));
-                cmd.Parameters.AddWithValue("@codigo", DAOUtils.dbValue(usuarioModificado.codigo));
+                cmd.Parameters.AddWithValue("@emailNuevo", DAOUtils.dbValueNull(usuarioModificado.emailNuevo));
+                cmd.Parameters.AddWithValue("@codigo", DAOUtils.dbValueNull(usuarioModificado.codigo));
                 cmd.Parameters.Add(new SqlParameter("@contrasenia", usuarioModificado.contrasenia));
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();

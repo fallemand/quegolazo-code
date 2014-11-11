@@ -32,7 +32,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@titulo", noticia.titulo);
                 cmd.Parameters.AddWithValue("@tipoNoticia", noticia.tipoNoticia);
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
-                cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValue(noticia.descripcion));
+                cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValueNull(noticia.descripcion));
                 cmd.Parameters.AddWithValue("@fecha", noticia.fecha);   
                 cmd.CommandText = sql;
                 int idNoticia = int.Parse(cmd.ExecuteScalar().ToString());
@@ -154,7 +154,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idNoticia", noticia.idNoticia);
                 cmd.Parameters.AddWithValue("@titulo", noticia.titulo);
                 cmd.Parameters.AddWithValue("@tipoNoticia", noticia.tipoNoticia);
-                cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValue(noticia.descripcion));
+                cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValueNull(noticia.descripcion));
                 cmd.Parameters.AddWithValue("@fecha", noticia.fecha);               
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();

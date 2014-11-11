@@ -33,9 +33,9 @@ namespace AccesoADatos
                                     SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", arbitro.nombre);
-                cmd.Parameters.AddWithValue("@celular", DAOUtils.dbValue(arbitro.celular));
-                cmd.Parameters.AddWithValue("@email", DAOUtils.dbValue(arbitro.email));
-                cmd.Parameters.AddWithValue("@matricula", DAOUtils.dbValue(arbitro.matricula));
+                cmd.Parameters.AddWithValue("@celular", DAOUtils.dbValueNull(arbitro.celular));
+                cmd.Parameters.AddWithValue("@email", DAOUtils.dbValueNull(arbitro.email));
+                cmd.Parameters.AddWithValue("@matricula", DAOUtils.dbValueNull(arbitro.matricula));
                 cmd.Parameters.AddWithValue("@idTorneo", idTorneo);
                 cmd.CommandText = sql;
                 int idArbitro = int.Parse(cmd.ExecuteScalar().ToString());
@@ -176,9 +176,9 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", arbitro.nombre);
                 cmd.Parameters.AddWithValue("@idArbitro", arbitro.idArbitro);
-                cmd.Parameters.AddWithValue("@celular", DAOUtils.dbValue(arbitro.celular));
-                cmd.Parameters.AddWithValue("@email", DAOUtils.dbValue(arbitro.email));
-                cmd.Parameters.AddWithValue("@matricula", DAOUtils.dbValue(arbitro.matricula));
+                cmd.Parameters.AddWithValue("@celular", DAOUtils.dbValueNull(arbitro.celular));
+                cmd.Parameters.AddWithValue("@email", DAOUtils.dbValueNull(arbitro.email));
+                cmd.Parameters.AddWithValue("@matricula", DAOUtils.dbValueNull(arbitro.matricula));
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
