@@ -158,22 +158,10 @@ namespace AccesoADatos
                 string sql = @"INSERT INTO Goles (minuto, idJugador, idEquipo, idPartido, idTipoGol)
                                     VALUES (@minuto, @idJugador, @idEquipo, @idPartido, @idTipoGol)";
                 cmd.Parameters.Clear();
-                if (gol.jugador != null)
-                    cmd.Parameters.AddWithValue("@idJugador", gol.jugador.idJugador);
-                else
-                    cmd.Parameters.AddWithValue("@idJugador", DBNull.Value);
-                if (gol.equipo != null)
-                    cmd.Parameters.AddWithValue("@idEquipo", gol.equipo.idEquipo);
-                else
-                    cmd.Parameters.AddWithValue("@idEquipo", DBNull.Value);
-                if(gol.tipoGol != null)
-                    cmd.Parameters.AddWithValue("@idTipoGol", gol.tipoGol.idTipoGol);
-                else
-                    cmd.Parameters.AddWithValue("@idTipoGol", DBNull.Value);
-                if (gol.minuto != null)
-                    cmd.Parameters.AddWithValue("@minuto", gol.minuto);
-                else
-                    cmd.Parameters.AddWithValue("@minuto", DBNull.Value);
+                cmd.Parameters.AddWithValue("@idJugador", DAOUtils.dbValue((gol.jugador != null) ? (int?)gol.jugador.idJugador : null));
+                cmd.Parameters.AddWithValue("@idEquipo", DAOUtils.dbValue((gol.equipo != null) ? (int?)gol.equipo.idEquipo : null));
+                cmd.Parameters.AddWithValue("@idTipoGol", DAOUtils.dbValue((gol.tipoGol != null) ? (int?)gol.tipoGol.idTipoGol : null));
+                cmd.Parameters.AddWithValue("@minuto", DAOUtils.dbValue(gol.minuto));
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -199,10 +187,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idEquipo", cambio.equipo.idEquipo);
                 cmd.Parameters.AddWithValue("@idJugadorEntra", cambio.jugadorEntra.idJugador);
                 cmd.Parameters.AddWithValue("@idJugadorSale", cambio.jugadorSale.idJugador);
-                if(cambio.minuto != null)
-                    cmd.Parameters.AddWithValue("@minuto", cambio.minuto);  
-                else
-                    cmd.Parameters.AddWithValue("@minuto", DBNull.Value); 
+                cmd.Parameters.AddWithValue("@minuto", DAOUtils.dbValue(cambio.minuto));
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -229,10 +214,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idEquipo", tarjeta.equipo.idEquipo);
                 cmd.Parameters.AddWithValue("@idJugador", tarjeta.jugador.idJugador);
                 cmd.Parameters.AddWithValue("@tipoTarjeta", tarjeta.tipoTarjeta);
-                if (tarjeta.minuto != null)
-                    cmd.Parameters.AddWithValue("@minuto", tarjeta.minuto);
-                else
-                    cmd.Parameters.AddWithValue("@minuto", DBNull.Value);
+                cmd.Parameters.AddWithValue("@minuto", DAOUtils.dbValue(tarjeta.minuto));
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.CommandText = sql;
                 cmd.ExecuteScalar().ToString();
@@ -256,19 +238,10 @@ namespace AccesoADatos
                                     VALUES (@idEquipo, @idJugador, @motivo, @idPartido)
                                     SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idEquipo", sancion.idEquipo);                
-                if(sancion.idJugador != null)
-                    cmd.Parameters.AddWithValue("@idJugador", sancion.idJugador);
-                else
-                    cmd.Parameters.AddWithValue("@idJugador", DBNull.Value);                
-                if (sancion.motivo != null)
-                    cmd.Parameters.AddWithValue("@motivo", sancion.motivo);
-                else
-                    cmd.Parameters.AddWithValue("@motivo", DBNull.Value);
-                if(idPartido != null)
-                    cmd.Parameters.AddWithValue("@idPartido", idPartido);
-                else
-                    cmd.Parameters.AddWithValue("@idPartido", DBNull.Value); 
+                cmd.Parameters.AddWithValue("@idEquipo", sancion.idEquipo);
+                cmd.Parameters.AddWithValue("@idJugador", DAOUtils.dbValue(sancion.idJugador));
+                cmd.Parameters.AddWithValue("@motivo", DAOUtils.dbValue(sancion.motivo));
+                cmd.Parameters.AddWithValue("@idPartido", DAOUtils.dbValue(idPartido));
                 cmd.CommandText = sql;
                 int idSancion = int.Parse(cmd.ExecuteScalar().ToString());
                 return idSancion; //retorna el id de la sanción generado por la BD
@@ -355,34 +328,19 @@ namespace AccesoADatos
                     partido.local.nombre = dr["nombreLocal"].ToString();
                     partido.visitante.idEquipo = Int32.Parse(dr["idEquipoVisitante"].ToString());
                     partido.visitante.nombre = dr["nombreVisitante"].ToString();
-                    if (dr["golesLocal"] != System.DBNull.Value)
-                        partido.golesLocal = Int32.Parse(dr["golesLocal"].ToString());
-                    else
-                        partido.golesLocal = null;
-                    if (dr["golesVisitante"] != System.DBNull.Value)
-                        partido.golesVisitante = Int32.Parse(dr["golesVisitante"].ToString());
-                    else
-                        partido.golesVisitante = null;
-                    if (dr["huboPenales"] != System.DBNull.Value)
-                        partido.huboPenales = bool.Parse(dr["huboPenales"].ToString());
-                    else
-                        partido.huboPenales = null;
-                    if (dr["penalesLocal"] != System.DBNull.Value)
-                        partido.penalesLocal = Int32.Parse(dr["penalesLocal"].ToString());
-                    else
-                        partido.penalesLocal = null;
-                    if (dr["penalesVisitante"] != System.DBNull.Value)
-                        partido.penalesVisitante = Int32.Parse(dr["penalesVisitante"].ToString());
-                    else
-                        partido.penalesVisitante = null;
-                    if (dr["idArbitro"] != System.DBNull.Value)
+                    partido.golesLocal = (dr["golesLocal"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["golesLocal"].ToString()) : null;
+                    partido.golesVisitante = (dr["golesVisitante"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["golesVisitante"].ToString()) : null;
+                    partido.huboPenales = (dr["huboPenales"] != DBNull.Value) ? (bool?)bool.Parse(dr["huboPenales"].ToString()) : null;
+                    partido.penalesLocal = (dr["penalesLocal"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["penalesLocal"].ToString()) : null;
+                    partido.penalesVisitante = (dr["penalesVisitante"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["penalesVisitante"].ToString()) : null;                   
+                    if (dr["idArbitro"] != DBNull.Value)
                     {
                         partido.arbitro.idArbitro = Int32.Parse(dr["idArbitro"].ToString());
                         partido.arbitro.nombre = dr["nombreArbitro"].ToString();
                     }
                     else
                         partido.arbitro = null;
-                    if (dr["idCancha"] != System.DBNull.Value)
+                    if (dr["idCancha"] != DBNull.Value)
                     {
                         partido.cancha.idCancha = Int32.Parse(dr["idCancha"].ToString());
                         partido.cancha.nombre = dr["nombreCancha"].ToString();
@@ -391,11 +349,7 @@ namespace AccesoADatos
                         partido.cancha = null;                     
                     partido.estado.idEstado = Int32.Parse(dr["idEstado"].ToString());
                     partido.estado.nombre = dr["nombreEstado"].ToString();
-                    if (dr["fecha"] != System.DBNull.Value) {
-                        partido.fecha = DateTime.Parse(dr["fecha"].ToString());
-                    }
-                    else
-                        partido.fecha = null;
+                    partido.fecha = (dr["fecha"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fecha"].ToString()) : null;                    
                 }
                 if (dr != null)
                     dr.Close();
@@ -444,10 +398,7 @@ namespace AccesoADatos
                 {
                     gol = new Gol();
                     gol.idGol = Int32.Parse(dr["idGol"].ToString());
-                    if (dr["minuto"] != System.DBNull.Value)
-                        gol.minuto = Int32.Parse(dr["minuto"].ToString());
-                    else
-                        gol.minuto = null;
+                    gol.minuto = (dr["minuto"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["minuto"].ToString()) : null;                   
                     if (dr["idJugador"] != System.DBNull.Value)
                     {
                         gol.jugador.idJugador = Int32.Parse(dr["idJugador"].ToString());
