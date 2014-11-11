@@ -33,10 +33,7 @@ namespace AccesoADatos
                                     SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nombre", arbitro.nombre);
-                if (arbitro.celular != null)
-                    cmd.Parameters.AddWithValue("@celular", arbitro.celular);
-                else
-                    cmd.Parameters.AddWithValue("@celular", DBNull.Value);
+                cmd.Parameters.AddWithValue("@celular", DAOUtils.dbValue(arbitro.celular));
                 if (arbitro.email != null)
                     cmd.Parameters.AddWithValue("@email", arbitro.email);
                 else

@@ -57,6 +57,7 @@
     <Compile Include="DAOTipoUsuario.cs" />
     <Compile Include="DAOTorneo.cs" />
     <Compile Include="DAOUsuario.cs" />
+    <Compile Include="DAOUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
