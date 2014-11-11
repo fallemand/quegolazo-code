@@ -40,11 +40,8 @@ namespace AccesoADatos
                         cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                        cmd.Parameters.AddWithValue("@idEstado", 9);
-                        if(f.nombre != null)
-                            cmd.Parameters.AddWithValue("@nombre",  f.nombre );
-                        else
-                            cmd.Parameters.AddWithValue("@nombre",  DBNull.Value);
+                        cmd.Parameters.AddWithValue("@idEstado", Estado.fechaINCOMPLETA);
+                        cmd.Parameters.AddWithValue("@nombre", DAOUtils.dbValueNull(f.nombre));
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
                     }
@@ -71,8 +68,8 @@ namespace AccesoADatos
                     cmd.Parameters.Clear();
                     cmd.Connection = con;
                     string sql = @"SELECT * 
-                                                    FROM Fechas
-                                                    WHERE idGrupo=@idGrupo AND idFase=@idFase AND idEdicion=@idEdicion";
+                                    FROM Fechas
+                                    WHERE idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion";
                     cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                     cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                     cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
@@ -126,10 +123,11 @@ namespace AccesoADatos
                             declare @cantidad as int = (select count(*) from partidos p where p.idFecha=@idFecha and p.idEdicion=@idEdicion and p.idEstado not in (select idEstado from Estados where idAmbito=4 and idEstado<>13 ))
 					                            if(@cantidad=0)
 						                            begin
-							update Fechas set idEstado=8 where idFecha=@idFecha and idGrupo=@idGrupo and idFase=@idFase and idEdicion=@idEdicion
+							update Fechas set idEstado = @idEstado where idFecha=@idFecha and idGrupo=@idGrupo and idFase=@idFase and idEdicion=@idEdicion
 						END";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
+                cmd.Parameters.AddWithValue("@idEstado", Estado.fechaCOMPLETA);
                 cmd.CommandText=sql;
                 cmd.ExecuteNonQuery();
             }
