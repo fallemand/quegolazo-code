@@ -38,9 +38,8 @@ namespace AccesoADatos
                         foreach (Partido p in f.partidos)
                          {
                              string sql = @"INSERT INTO Partidos (idFecha, idGrupo, idFase, idEdicion, idEquipoLocal, idEquipoVisitante, idEstado)
-                                     VALUES (@idFecha, @idGrupo, @idFase, @idEdicion, @idEquipoLocal, @idEquipoVisitante, @idEstado)";
+                                                VALUES (@idFecha, @idGrupo, @idFase, @idEdicion, @idEquipoLocal, @idEquipoVisitante, @idEstado)";
                              cmd.Parameters.Clear();
-                             //cmd.Parameters.AddWithValue("@idPartido", p.idPartido);
                              cmd.Parameters.AddWithValue("@idFecha", f.idFecha);
                              cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
                              cmd.Parameters.AddWithValue("@idFase", fase.idFase);
@@ -60,61 +59,60 @@ namespace AccesoADatos
             }          
         }
 
+       /// <summary>
+       /// Obtiene todos los datos del Partido
+       /// autor: Pau Pedrosa
+       /// </summary>
         public void obtenerPartidos(Fase fase, SqlConnection con, SqlTransaction trans)
         {
             SqlDataReader dr;
             SqlCommand cmd = new SqlCommand();
-             try
-             {
-                 if (con.State == ConnectionState.Closed)
-                     con.Open();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
                  cmd.Connection = con;
                  cmd.Transaction = trans;
                  foreach (Grupo grupo in fase.grupos)
                  {
                      foreach (Fecha faseActual in grupo.fechas)
                      {
-                             cmd.Parameters.Clear();
-                             cmd.Connection = con;
-                             string sql = @"SELECT p.idPartido, p. idEstado, p.idEquipoLocal, p.idEquipoVisitante, p.idEquipoLocal, p.idEquipoVisitante, e.nombre AS 'local', e1.nombre AS 'visitante',
-                                                    p.golesLocal, p.golesVisitante, p.huboPenales, p.penalesLocal, p.penalesVisitante
-                                                    FROM Partidos p, Equipos e, Equipos e1
-                                                    WHERE idFecha=@idFecha AND idGrupo=@idGrupo AND idFase=@idFase AND idEdicion=@idEdicion AND e.idEquipo=p.idEquipolocal AND e1.idEquipo=p.idEquipoVisitante ";
-                             cmd.Parameters.AddWithValue("@idFecha", faseActual.idFecha);
-                             cmd.Parameters.AddWithValue("@idGrupo", grupo.idGrupo);
-                             cmd.Parameters.AddWithValue("@idFase", fase.idFase);
-                             cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                             cmd.CommandText = sql;
-                             dr = cmd.ExecuteReader();
-                             while (dr.Read())
-                             {
-                                 Partido partido = new Partido()
-                                 {
-                                    
-                                    idPartido = int.Parse(dr["idPartido"].ToString()),
-                                    // fecha = DateTime.Parse( dr["fecha"].ToString()).Date.ToString(),
-                                    //hora = DateTime.Parse(dr["fecha"].ToString()).Hour.ToString(),
-                                    estado= new Estado(){ idEstado= int.Parse(dr["idEstado"].ToString())},
-                                    local = new Equipo() { idEquipo = int.Parse(dr["idEquipoLocal"].ToString()), nombre = dr["local"].ToString() },
-                                    visitante = new Equipo() { idEquipo = int.Parse(dr["idEquipoVisitante"].ToString()), nombre = dr["visitante"].ToString() }, 
-                                 };
-                                 if (dr["golesLocal"] != System.DBNull.Value)
-                                    partido.golesLocal=int.Parse(dr["golesLocal"].ToString());
-                                 if (dr["golesVisitante"] != System.DBNull.Value)
-                                    partido.golesVisitante = int.Parse(dr["golesVisitante"].ToString());
-                                 if (dr["huboPenales"] != System.DBNull.Value)
-                                 {
-                                     partido.huboPenales = bool.Parse(dr["huboPenales"].ToString());
-                                     if (dr["penalesLocal"] != System.DBNull.Value)
-                                         partido.penalesLocal = int.Parse(dr["penalesLocal"].ToString());
-                                     if (dr["penalesVisitante"] != System.DBNull.Value)
-                                         partido.penalesVisitante = int.Parse(dr["penalesVisitante"].ToString());
-                                 }
-                                 faseActual.partidos.Add(partido);
-                             }
-                             if (dr != null)
-                                 dr.Close();  
-                         
+                         cmd.Parameters.Clear();
+                         cmd.Connection = con;
+                         string sql = @"SELECT *
+                                        FROM Partidos p
+                                        WHERE idFecha = @idFecha AND idGrupo = @idGrupo 
+                                        AND idFase = @idFase AND idEdicion = @idEdicion";                         
+                         cmd.Parameters.AddWithValue("@idFecha", faseActual.idFecha);
+                         cmd.Parameters.AddWithValue("@idGrupo", grupo.idGrupo);
+                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                         cmd.CommandText = sql;
+                         dr = cmd.ExecuteReader();
+                         while (dr.Read())
+                         {
+                             DAOEquipo daoEquipo = new DAOEquipo();
+                             DAOEstado daoEstado = new DAOEstado();
+                             DAOArbitro daoArbitro = new DAOArbitro();
+                             DAOCancha daoCancha = new DAOCancha();
+                             Partido partido = new Partido();
+                             partido.idPartido = int.Parse(dr["idPartido"].ToString());
+                             partido.fecha = (dr["fecha"] != DBNull.Value) ? (DateTime?) DateTime.Parse( dr["fecha"].ToString()) : null;
+                             partido.golesLocal = (dr["golesLocal"] != DBNull.Value) ? (int?) int.Parse(dr["golesLocal"].ToString()) : null;
+                             partido.golesVisitante = (dr["golesVisitante"] != DBNull.Value) ? (int?) int.Parse(dr["golesVisitante"].ToString()) : null;
+                             partido.empate = (dr["empate"] != DBNull.Value) ? (bool?)bool.Parse(dr["empate"].ToString()) : null;
+                             partido.huboPenales = (dr["huboPenales"] != DBNull.Value) ? (bool?) bool.Parse(dr["huboPenales"].ToString()) : null;
+                             partido.penalesLocal = (dr["penalesLocal"] != DBNull.Value) ? (int?) int.Parse(dr["penalesLocal"].ToString()) : null;
+                             partido.penalesVisitante = (dr["penalesVisitante"] != DBNull.Value) ? (int?) int.Parse(dr["penalesVisitante"].ToString()) : null;
+                             partido.local = (dr["idEquipoLocal"] != DBNull.Value) ? daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoLocal"].ToString())) : null;
+                             partido.visitante = (dr["idEquipoVisitante"] != DBNull.Value) ? daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString())) : null;
+                             partido.estado = daoEstado.obtenerEstadoPorId(int.Parse(dr["idEstado"].ToString()));
+                             partido.arbitro = (dr["idArbitro"] != DBNull.Value) ? daoArbitro.obtenerArbitroPorId(int.Parse(dr["idArbitro"].ToString())) : null;
+                             partido.cancha = (dr["idCancha"] != DBNull.Value) ? daoCancha.obtenerCanchaPorId(int.Parse(dr["idArbitro"].ToString())) : null;                             
+                             faseActual.partidos.Add(partido);
+                         }
+                         if (dr != null)
+                             dr.Close(); 
                      }
                  }
              }
@@ -129,6 +127,10 @@ namespace AccesoADatos
              }
         }
 
+       /// <summary>
+       /// Registra un Gol en la BD
+       /// autor: Pau Pedrosa
+       /// </summary>
         public void registrarGol(Gol gol, int idPartido, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
@@ -155,6 +157,10 @@ namespace AccesoADatos
             }
         }
 
+       /// <summary>
+       /// Registra un Cambio en la BD
+       /// autor: Pau Pedrosa
+       /// </summary>
         public void registrarCambio(Cambio cambio, int idPartido, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
@@ -181,6 +187,10 @@ namespace AccesoADatos
             }
         }
 
+       /// <summary>
+       /// Registra una Tarjeta en la BD
+       /// autor: Pau Pedrosa
+       /// </summary>
         public void registrarTarjeta(Tarjeta tarjeta, int idPartido, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
@@ -208,6 +218,10 @@ namespace AccesoADatos
             }
         }
 
+       /// <summary>
+       /// Registra una sanción en la BD
+       /// autor: Pau Pedrosa
+       /// </summary>
         public int registrarSancion(Sancion sancion, int idPartido)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -240,6 +254,10 @@ namespace AccesoADatos
             }
         }
 
+       /// <summary>
+       /// Registra los Titulares de un Partido en la BD
+       /// autor: Pau Pedrosa
+       /// </summary>
         public void registrarTitularesAPartido(List<Jugador> jugadores, int idEquipo, int idPartido, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
@@ -288,17 +306,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT p.idPartido AS 'idPartido', p.golesLocal, p.golesVisitante, p.huboPenales, p.penalesLocal,
-                                p.penalesVisitante, e1.idEquipo AS 'idEquipoLocal', e1.nombre AS 'nombreLocal',
-                                e2.idEquipo AS 'idEquipoVisitante', e2.nombre AS 'nombreVisitante', a.idArbitro AS 'idArbitro',
-                                a.nombre AS 'nombreArbitro', c.idCancha AS 'idCancha', c.nombre AS 'nombreCancha', e.idEstado AS 'idEstado',
-                                e.nombre AS 'nombreEstado', p.fecha AS 'fecha'
-                                FROM Partidos p 
-                                LEFT OUTER JOIN Equipos e1 ON p.idEquipoLocal = e1.idEquipo 
-                                LEFT OUTER JOIN Equipos e2 ON p.idEquipoVisitante = e2.idEquipo
-                                LEFT OUTER JOIN Arbitros a ON p.idArbitro = a.idArbitro 
-                                LEFT OUTER JOIN Canchas c ON p.idCancha = c.idCancha 
-                                LEFT OUTER JOIN Estados e ON e.idEstado = p.idEstado
+                string sql = @"SELECT *
+                                FROM Partidos p
                                 WHERE p.idPartido = @idPartido";
                 cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
                 cmd.CommandText = sql;
@@ -306,33 +315,23 @@ namespace AccesoADatos
                 while (dr.Read())
                 {
                     partido = new Partido();
-                    partido.idPartido = Int32.Parse(dr["idPartido"].ToString());
-                    partido.local.idEquipo = Int32.Parse(dr["idEquipoLocal"].ToString());
-                    partido.local.nombre = dr["nombreLocal"].ToString();
-                    partido.visitante.idEquipo = Int32.Parse(dr["idEquipoVisitante"].ToString());
-                    partido.visitante.nombre = dr["nombreVisitante"].ToString();
-                    partido.golesLocal = (dr["golesLocal"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["golesLocal"].ToString()) : null;
-                    partido.golesVisitante = (dr["golesVisitante"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["golesVisitante"].ToString()) : null;
+                    DAOEquipo daoEquipo = new DAOEquipo();
+                    DAOEstado daoEstado = new DAOEstado();
+                    DAOArbitro daoArbitro = new DAOArbitro();
+                    DAOCancha daoCancha = new DAOCancha();
+                    partido.idPartido = int.Parse(dr["idPartido"].ToString());
+                    partido.fecha = (dr["fecha"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fecha"].ToString()) : null;
+                    partido.golesLocal = (dr["golesLocal"] != DBNull.Value) ? (int?)int.Parse(dr["golesLocal"].ToString()) : null;
+                    partido.golesVisitante = (dr["golesVisitante"] != DBNull.Value) ? (int?)int.Parse(dr["golesVisitante"].ToString()) : null;
+                    partido.empate = (dr["empate"] != DBNull.Value) ? (bool?)bool.Parse(dr["empate"].ToString()) : null;
                     partido.huboPenales = (dr["huboPenales"] != DBNull.Value) ? (bool?)bool.Parse(dr["huboPenales"].ToString()) : null;
-                    partido.penalesLocal = (dr["penalesLocal"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["penalesLocal"].ToString()) : null;
-                    partido.penalesVisitante = (dr["penalesVisitante"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["penalesVisitante"].ToString()) : null;                   
-                    if (dr["idArbitro"] != DBNull.Value)
-                    {
-                        partido.arbitro.idArbitro = Int32.Parse(dr["idArbitro"].ToString());
-                        partido.arbitro.nombre = dr["nombreArbitro"].ToString();
-                    }
-                    else
-                        partido.arbitro = null;
-                    if (dr["idCancha"] != DBNull.Value)
-                    {
-                        partido.cancha.idCancha = Int32.Parse(dr["idCancha"].ToString());
-                        partido.cancha.nombre = dr["nombreCancha"].ToString();
-                    }
-                    else
-                        partido.cancha = null;                     
-                    partido.estado.idEstado = Int32.Parse(dr["idEstado"].ToString());
-                    partido.estado.nombre = dr["nombreEstado"].ToString();
-                    partido.fecha = (dr["fecha"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fecha"].ToString()) : null;                    
+                    partido.penalesLocal = (dr["penalesLocal"] != DBNull.Value) ? (int?)int.Parse(dr["penalesLocal"].ToString()) : null;
+                    partido.penalesVisitante = (dr["penalesVisitante"] != DBNull.Value) ? (int?)int.Parse(dr["penalesVisitante"].ToString()) : null;
+                    partido.local = (dr["idEquipoLocal"] != DBNull.Value) ? daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoLocal"].ToString())) : null;
+                    partido.visitante = (dr["idEquipoVisitante"] != DBNull.Value) ? daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString())) : null;
+                    partido.estado = daoEstado.obtenerEstadoPorId(int.Parse(dr["idEstado"].ToString()));
+                    partido.arbitro = (dr["idArbitro"] != DBNull.Value) ? daoArbitro.obtenerArbitroPorId(int.Parse(dr["idArbitro"].ToString())) : null;
+                    partido.cancha = (dr["idCancha"] != DBNull.Value) ? daoCancha.obtenerCanchaPorId(int.Parse(dr["idArbitro"].ToString())) : null;                                   
                 }
                 if (dr != null)
                     dr.Close();
@@ -367,12 +366,9 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT g.idGol AS 'idGol', tg.nombre AS 'tipoGol', tg.idTipoGol, g.minuto AS 'minuto',
-                                g.idPartido AS 'idPartido', g.idJugador AS 'idJugador', g.idEquipo AS 'idEquipo', j.nombre as 'nombreJugador'
-                                FROM Goles g 
-                                INNER JOIN TiposGol tg ON tg.idTipoGol = g.idTipoGol
-                                INNER JOIN Jugadores j ON g.idJugador = j.idJugador
-                                WHERE g.idPartido = @idPartido";
+                string sql = @"SELECT *
+                                FROM Goles
+                                WHERE idPartido = @idPartido";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
                 cmd.CommandText = sql;
@@ -380,22 +376,13 @@ namespace AccesoADatos
                 while (dr.Read())
                 {
                     gol = new Gol();
+                    DAOJugador daoJugador = new DAOJugador();
+                    DAOEquipo daoEquipo = new DAOEquipo();
                     gol.idGol = Int32.Parse(dr["idGol"].ToString());
-                    gol.minuto = (dr["minuto"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["minuto"].ToString()) : null;                   
-                    if (dr["idJugador"] != DBNull.Value)
-                    {
-                        gol.jugador.idJugador = Int32.Parse(dr["idJugador"].ToString());
-                        gol.jugador.nombre = dr["nombreJugador"].ToString();
-                    }
-                    else
-                        gol.jugador = null;
-                    if (dr["idEquipo"] != DBNull.Value)
-                        gol.equipo.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
-                    else
-                        gol.equipo = null;
-                    gol.tipoGol.nombre = (dr["tipoGol"] != DBNull.Value) ? dr["tipoGol"].ToString() : null;
-                    if (dr["idTipoGol"] != System.DBNull.Value)
-                        gol.tipoGol.idTipoGol = Int32.Parse(dr["idTipoGol"].ToString());
+                    gol.minuto = (dr["minuto"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["minuto"].ToString()) : null;
+                    gol.jugador = (dr["idJugador"] != DBNull.Value) ? daoJugador.obtenerJugadorPorId(Int32.Parse(dr["idJugador"].ToString())) : null;
+                    gol.equipo = (dr["idEquipo"] != DBNull.Value) ? daoEquipo.obtenerEquipoPorId(Int32.Parse(dr["idEquipo"].ToString())) : null;
+                    gol.tipoGol = obtenerTipoGolPorId(Int32.Parse(dr["idTipoGol"].ToString()));                    
                     goles.Add(gol);
                 }
                 if (dr != null)
@@ -431,9 +418,9 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT t.*, j.nombre as 'nombreJugador'
-                                FROM Tarjetas t, Jugadores j
-                                WHERE t.idJugador=j.idJugador AND idPartido = @idPartido";
+                string sql = @"SELECT *
+                                FROM Tarjetas 
+                                WHERE idPartido = @idPartido";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
                 cmd.CommandText = sql;
@@ -441,11 +428,12 @@ namespace AccesoADatos
                 while (dr.Read())
                 {
                     tarjeta = new Tarjeta();
+                    DAOJugador daoJugador = new DAOJugador();
+                    DAOEquipo daoEquipo = new DAOEquipo();
                     tarjeta.idTarjeta = Int32.Parse(dr["idTarjeta"].ToString());
                     tarjeta.minuto = (dr["minuto"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["minuto"].ToString()) : null;
-                    tarjeta.jugador.idJugador = Int32.Parse(dr["idJugador"].ToString());
-                    tarjeta.jugador.nombre = dr["nombreJugador"].ToString();
-                    tarjeta.equipo.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
+                    tarjeta.jugador = daoJugador.obtenerJugadorPorId(Int32.Parse(dr["idJugador"].ToString()));                    
+                    tarjeta.equipo = daoEquipo.obtenerEquipoPorId(Int32.Parse(dr["idEquipo"].ToString()));
                     tarjeta.tipoTarjeta = char.Parse(dr["tipoTarjeta"].ToString());
                     tarjetas.Add(tarjeta);
                 }
@@ -482,9 +470,9 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT c.*, je.nombre as 'jugadorEntra', js.nombre as 'jugadorSale' 
-                                FROM Cambios c, Jugadores je, Jugadores js 
-                                WHERE idPartido = @idPartido AND je.idJugador = c.idJugadorEntra AND js.idJugador = c.idJugadorSale";
+                string sql = @"SELECT * 
+                                FROM Cambios 
+                                WHERE idPartido = @idPartido";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
                 cmd.CommandText = sql;
@@ -492,13 +480,13 @@ namespace AccesoADatos
                 while (dr.Read())
                 {
                     cambio = new Cambio();
+                    DAOJugador daoJugador = new DAOJugador();
+                    DAOEquipo daoEquipo = new DAOEquipo();
                     cambio.idCambio = Int32.Parse(dr["idCambio"].ToString());
-                    cambio.minuto = (dr["minuto"] != System.DBNull.Value) ? (Int32?)Int32.Parse(dr["minuto"].ToString()) : null;                 
-                    cambio.jugadorEntra.idJugador = Int32.Parse(dr["idJugadorEntra"].ToString());
-                    cambio.jugadorEntra.nombre = dr["jugadorEntra"].ToString();
-                    cambio.jugadorSale.idJugador = Int32.Parse(dr["idJugadorSale"].ToString());
-                    cambio.jugadorSale.nombre = dr["jugadorSale"].ToString();
-                    cambio.equipo.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
+                    cambio.minuto = (dr["minuto"] != System.DBNull.Value) ? (Int32?)Int32.Parse(dr["minuto"].ToString()) : null;
+                    cambio.jugadorEntra = daoJugador.obtenerJugadorPorId(Int32.Parse(dr["idJugadorEntra"].ToString()));
+                    cambio.jugadorSale = daoJugador.obtenerJugadorPorId(Int32.Parse(dr["idJugadorSale"].ToString()));
+                    cambio.equipo = daoEquipo.obtenerEquipoPorId(Int32.Parse(dr["idEquipo"].ToString()));
                     cambios.Add(cambio);
                 }
                 if (dr != null)
@@ -535,9 +523,8 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"SELECT *
-                                FROM Jugadores j 
-                                INNER JOIN TitularesXPartido txp ON j.idJugador = txp.idJugador
-                                WHERE txp.idPartido = @idPartido AND txp.idEquipo = @idEquipo";
+                                FROM TitularesXPartido
+                                WHERE idPartido = @idPartido AND idEquipo = @idEquipo";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
                 cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
@@ -546,16 +533,8 @@ namespace AccesoADatos
                 while (dr.Read())
                 {
                     jugador = new Jugador();
-                    jugador.idJugador = Int32.Parse(dr["idJugador"].ToString());
-                    jugador.nombre = dr["nombre"].ToString();
-                    jugador.dni = dr["dni"].ToString();
-                    jugador.fechaNacimiento = (dr["fechaNacimiento"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fechaNacimiento"].ToString()) : null;
-                    jugador.email = dr["email"].ToString();
-                    jugador.facebook = dr["facebook"].ToString();
-                    jugador.sexo = dr["sexo"].ToString();
-                    jugador.telefono = dr["telefono"].ToString();
-                    jugador.numeroCamiseta = (dr["numeroCamiseta"] != DBNull.Value) ? (Int32?)Int32.Parse(dr["numeroCamiseta"].ToString()) : null;
-                    jugador.tieneFichaMedica = bool.Parse(dr["tieneFichaMedica"].ToString());
+                    DAOJugador daoJugador = new DAOJugador();
+                    jugador = daoJugador.obtenerJugadorPorId(Int32.Parse(dr["idJugador"].ToString()));
                     titulares.Add(jugador);
                 }
                 if (dr != null)
@@ -573,6 +552,10 @@ namespace AccesoADatos
             }
         }
 
+       /// <summary>
+       /// Modifica un partido en la BD
+       /// autor: Pau Pedrosa
+       /// </summary>
         public void modificarPartido(Partido partido)
         {
             eliminarTitularesDePartido(partido.idPartido);
@@ -641,6 +624,10 @@ namespace AccesoADatos
             }
         }
 
+       /// <summary>
+       /// Obtiene los Tipos Goles de la BD
+       /// autor: Pau Pedrosa
+       /// </summary>
         public List<TipoGol> obtenerTiposGol()
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -674,6 +661,49 @@ namespace AccesoADatos
             catch (Exception ex)
             {
                 throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+       /// <summary>
+       /// Obtener Tipo gol por Id
+       /// autor: Pau Pedrosa
+       /// </summary>
+        public TipoGol obtenerTipoGolPorId(int idTipoGol)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            TipoGol respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM TiposGol
+                                WHERE idTipoGol = @idTipoGol";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idTipoGol", idTipoGol);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    respuesta = new TipoGol();
+                    respuesta.idTipoGol = Int32.Parse(dr["idTipoGol"].ToString());
+                    respuesta.nombre = dr["nombre"].ToString();                    
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar el Tipo Gol: " + ex.Message);
             }
             finally
             {

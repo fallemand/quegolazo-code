@@ -280,13 +280,9 @@ namespace AccesoADatos
         /// Registrar equipos para una edición
         /// autor: Pau Pedrosa
         /// </summary>
-        /// <param name="idEquipo">Lista de los Id de los Equipos</param>
-        /// <param name="idEdicion">Id de la Edición</param>
-        public void registrarEquiposEnEdicion(List<Equipo> equipos, int idEdicion,SqlConnection con, SqlTransaction trans)
+        public void registrarEquiposEnEdicion(List<Equipo> equipos, int idEdicion, SqlConnection con, SqlTransaction trans)
         {
-            //SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            //SqlTransaction trans = null;   
             try
             {
                 if (con.State == ConnectionState.Closed)
@@ -313,6 +309,10 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Actualiza en la Bd equipos a participar en la edición
+        /// autor: Pau Pedrosa
+        /// </summary>
         public void actualizarEquiposEnEdicion(List<Equipo> equipos, int idEdicion, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
@@ -323,7 +323,8 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 cmd.Transaction = trans;
 
-                string sqlEliminacion = "DELETE FROM EquipoXEdicion WHERE idEdicion = @idEdicion";
+                string sqlEliminacion = @"DELETE FROM EquipoXEdicion 
+                                            WHERE idEdicion = @idEdicion";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                 cmd.CommandText = sqlEliminacion;

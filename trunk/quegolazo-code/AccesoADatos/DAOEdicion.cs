@@ -17,7 +17,7 @@ namespace AccesoADatos
         /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="idTorneo">Id del torneo</param>
-        /// <returns>Lista de Objeto Ediciones, o null sino existen ediciones de ese torneo</returns>
+        /// <returns>Lista genérica de Objeto Ediciones, o null sino existen ediciones de ese torneo</returns>
         public List<Edicion> obtenerEdicionesPorIdTorneo(int idTorneo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -77,7 +77,7 @@ namespace AccesoADatos
         /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="edicionNueva">Objeto nueva Edición</param>
-        /// <param name="idTorneo">El id del torneo al cual se agregara la edicion</param>
+        /// <param name="idTorneo">El id del torneo al cual se agregará la edicion</param>
         public void registrarEdicion(Edicion edicionNueva, int idTorneo)
         {          
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -120,10 +120,10 @@ namespace AccesoADatos
             }
         }
         /// <summary>
-        /// Registrar Configuracion
+        /// Registrar Preferencias de Edición: si maneja jugadores, árbitros, canchas y/o sanciones
         /// autor: Florencia Rojas
         /// </summary>
-        /// <param name="edicion">Objeto Edición</param>
+        /// <param name="edicion">Objeto Edición, Conexión y Transacción</param>
         public void registrarPreferencias(Edicion edicion, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
@@ -135,7 +135,7 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"INSERT INTO ConfiguracionesEdicion (jugadores,cambiosJugadores, tarjetasJugadores, golesJugadores,asignacionArbitros, desempenioArbitros, canchas, canchaUnica,sancionesEquipos, sancionesJugadores, arbitros ,sanciones , idEdicion, jugadorXPartido )
-                                              VALUES (@jugadores,@cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @canchas, @canchaUnica, @sancionesEquipos, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion, @jugadorXPartido)";
+                                              VALUES (@jugadores, @cambiosJugadores, @tarjetasJugadores, @golesJugadores, @asignacionArbitros, @desempenioArbitros, @canchas, @canchaUnica, @sancionesEquipos, @sancionesJugadores, @arbitros ,@sanciones , @idEdicion, @jugadorXPartido)";
                 cmd.Parameters.Clear();
                 //Jugadores
                 cmd.Parameters.AddWithValue("@jugadores", edicion.preferencias.jugadores);
@@ -155,15 +155,14 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@sancionesJugadores", edicion.preferencias.sancionesJugadores);
                 cmd.Parameters.AddWithValue("@sanciones", edicion.preferencias.sanciones);
                 //idEdición
-                cmd.Parameters.AddWithValue("@idEdicion", edicion.idEdicion);
-                
+                cmd.Parameters.AddWithValue("@idEdicion", edicion.idEdicion);                
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
             catch (Exception e)
             {
                 trans.Rollback();
-                throw new Exception("No se pudo registrar las preferencias: " + e.Message);
+                throw new Exception("No se pudo registrar las Preferencias de la Edición: " + e.Message);
             }
         }
 
@@ -203,6 +202,14 @@ namespace AccesoADatos
             } 
         }
 
+        /// <summary>
+        /// Actualiza la configuración de la edición 
+        /// Permite actualizar preferencias
+        /// Permite actualizar los equipos de la edición
+        /// permite actualizar la fase
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="edicion">Edición con las preferencias, con lista de equipos y con lista de fases actualizados</param>
         public void actualizarconfirmacionEdicion(Edicion edicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -251,10 +258,11 @@ namespace AccesoADatos
                                 WHERE idEdicion = @idEdicion";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
-                cmd.CommandText = sql;
+                cmd.CommandText = sql;                
+                dr = cmd.ExecuteReader();
+
                 DAOTipoSuperficie daoTipoSupericie = new DAOTipoSuperficie();
                 DAOCancha daoCancha = new DAOCancha();
-                dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
                     respuesta = new Edicion();
@@ -451,7 +459,7 @@ namespace AccesoADatos
         }
 
         /// <summary>
-        /// Obtiene ídTorneo
+        /// Obtiene Id Torneo de una determinada edición
         /// autor: Flor Rojas
         /// </summary>
         public int obtenerTorneoPorId(int idEdicion)
@@ -545,7 +553,7 @@ namespace AccesoADatos
         /// Obtiene los equipos  de una edición por Id. Si no tiene devuelve lista vacia
         /// autor: Florencia Rojas
         /// </summary>
-        public List<Equipo> obtenerEquiposPorId(int idEdicion)
+        public List<Equipo> obtenerEquiposPorIdEdicion(int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -556,20 +564,18 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT e.idEquipo,e.nombre 
-                                FROM Equipos e,EquipoXEdicion ee 
-                                WHERE e.idEquipo=ee.idEquipo and ee.idEdicion=@idEdicion";
+                string sql = @"SELECT *
+                                FROM EquipoXEdicion 
+                                WHERE idEdicion = @idEdicion";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    Equipo equipo = new Equipo()
-                        {   
-                            idEquipo = int.Parse(dr["idEquipo"].ToString()),
-                            nombre = dr["nombre"].ToString(),
-                        };
+                    Equipo equipo = new Equipo();
+                    DAOEquipo daoEquipo = new DAOEquipo();
+                    equipo = daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipo"].ToString()));
                     equipos.Add(equipo);
                 }
                 if (dr != null)
@@ -660,6 +666,13 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Actualiza en la Bd las preferencias de la edición
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="edicion">Edición</param>
+        /// <param name="con">Conexión</param>
+        /// <param name="trans">Transacción</param>
         public void actualizarPreferencias(Edicion edicion, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
@@ -706,7 +719,11 @@ namespace AccesoADatos
             }
         }
 
-
+        /// <summary>
+        /// Obtiene última edición de torneo
+        /// autor: Flor Rojas
+        /// </summary>
+        /// <returns>Objeto Edición</returns>
         public Edicion obtenerUltimaEdicionTorneo(int idTorneo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);

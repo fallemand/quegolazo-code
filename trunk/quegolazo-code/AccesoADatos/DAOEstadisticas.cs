@@ -13,7 +13,10 @@ namespace AccesoADatos
     public class DAOEstadisticas
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-       
+        /// <summary>
+        /// Permite obtener el avance de la edición a partir de su Id
+        /// autor: Flor Rojas
+        /// </summary>      
         public DataTable obtenerAvanceEdicion(int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -28,7 +31,7 @@ namespace AccesoADatos
                 string sql = @"SELECT COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END) AS 'Partidos Jugados',
                                       COUNT(p.idPartido) AS 'Partidos', 
                                       COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance'
-                                      FROM Partidos p where p.idEdicion=@idEdicion";
+                                      FROM Partidos p where p.idEdicion = @idEdicion";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.CommandText = sql;
@@ -49,6 +52,10 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Permite obtener el avance de la edición a partir de su Id
+        /// autor: Flor Rojas
+        /// </summary>  
         public DataTable obtenerAvanceFecha(int idEdicion, int idEstadoFecha)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -93,6 +100,10 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Obtiene el Fixture de la última fecha
+        /// autor: Flor Rojas
+        /// </summary>
         public DataTable obtenerFixtureUltimaFecha(int idEdicion, int idEstadoFecha)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -141,6 +152,10 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Obtiene el fixture de la fecha
+        /// autor: Flor Rojas
+        /// </summary>
         public DataTable obtenerFixtureFecha(int idEdicion, int idFecha)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -186,6 +201,10 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Obtiene la tabla de Posiciones
+        /// autor: Flor Rojas
+        /// </summary>
         public DataTable obtenerTablaPosiciones(int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -233,10 +252,9 @@ namespace AccesoADatos
         }
 
         /// <summary>
-        /// Devueleve la tabla de goleadores de una edición
+        /// Devuelve la tabla de goleadores de una edición
+        /// autor: Flor Rojas
         /// </summary>
-        /// <param name="idEdicion">id Edicion</param>
-        /// <returns></returns>
         public DataTable obtenerTablaGoleadores(int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);

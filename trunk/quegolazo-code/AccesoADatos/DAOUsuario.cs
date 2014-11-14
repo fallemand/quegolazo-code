@@ -396,48 +396,7 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-        }
-        /// <summary>
-        /// Validar contrasenia para corroborar identidad del usuario
-        /// </summary>
-        /// <parameters>contrasenia</parameters>
-        /// <returns>Usuario</returns>
-        public void validarUsuario(string idUsuario, string contrasenia)
-        {
-//            SqlConnection con = new SqlConnection(cadenaDeConexion);
-//            SqlCommand cmd = new SqlCommand();
-//            SqlDataReader dr;
-//            Usuario respuesta = null;
-//            try
-//            {
-//                DAOTipoUsuario gestorTipoUsuario = new DAOTipoUsuario();
-//                if (con.State == ConnectionState.Closed)
-//                    con.Open();
-//                cmd.Connection = con;
-//                string sql = @"SELECT * 
-//                                FROM Usuarios
-//                                WHERE idUsuario = @idUsuario AND contrasenia = @contrasenia";
-//                cmd.Parameters.Clear();
-//                cmd.Parameters.Add(new SqlParameter("@idUsuario", idUsuario));
-//                cmd.Parameters.Add(new SqlParameter("@contrasenia", contrasenia));
-//                cmd.CommandText = sql;
-//                //ifcmd.ExecuteReader();
-//                while (dr.Read())
-//                {
-           
-//                }
-               
-//            }
-//            catch (Exception ex)
-//            {
-//                throw new Exception("Ocurrio un error al obtener el usuario" + ex.Message);
-//            }
-//            finally
-//            {
-//                if (con != null && con.State == ConnectionState.Open)
-//                    con.Close();
-//            }
-        }
+        }       
     }
 }
 
