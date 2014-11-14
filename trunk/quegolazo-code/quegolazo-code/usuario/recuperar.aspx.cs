@@ -11,11 +11,9 @@ namespace quegolazo_code
 {
     public partial class olvide_contrasenia : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Enviar mail de confirmación
+        /// </summary>
         protected void btnEnviarMail_Click(object sender, EventArgs e)
         {
             try
@@ -34,7 +32,6 @@ namespace quegolazo_code
                 gestorMail.mandarMailRecuperacion(mail, "Recuperación de Contraseña",RecuperacionUrl);
                 panExito.Visible = true;
                 LitExito.Text = "<strong>Revise su casilla de correo</strong>Se ha enviado un mail con los detalles para restablecer su contraseña<br />.";
-
             }
             catch (Exception ex)
             {
@@ -43,6 +40,9 @@ namespace quegolazo_code
             }
         }
 
+        /// <summary>
+        /// Ocultar los paneles de exito y fracaso
+        /// </summary>
         private void ocultarPaneles()
         {
             panExito.Visible = false;

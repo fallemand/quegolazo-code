@@ -29,6 +29,9 @@ namespace quegolazo_code.usuario
             }
         }
 
+        /// <summary>
+        /// Modificar los datos
+        /// </summary>
         protected void btnModificar_Click(object sender, EventArgs e)
         {
             try
@@ -63,6 +66,15 @@ namespace quegolazo_code.usuario
                 litError.Text = ex.Message;
             }
         }
+
+        /// <summary>
+        /// Volver al index
+        /// </summary>
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(GestorUrl.aINDEX);
+        }
+
         /// <summary>
         /// muestra el panel para cambiar contraseña 
         /// </summary>
@@ -70,6 +82,7 @@ namespace quegolazo_code.usuario
         {
             div_modifCave.Visible = true;
         }
+
         /// <summary>
         /// ocultar Paneles de mensajes de exito o fracaso
         /// </summary>
@@ -79,19 +92,17 @@ namespace quegolazo_code.usuario
             panFracaso.Visible = false;
         }
 
+        /// <summary>
+        /// Limpiar campos
+        /// </summary>
         private void limpiarCampos()
         {
-            txtNombre.Value = "";
-            txtApellido.Value = "";
-            txtEmailModif.Value = "";
-            txtClaveValidadora.Value = ""; 
+            GestorControles.cleanControls(new List<Object> { txtNombre ,txtApellido,txtEmailModif,txtClaveValidadora});
         }
 
-        protected void btnCancelar_Click(object sender, EventArgs e)
-        {
-            Response.Redirect(GestorUrl.aINDEX);
-        }
-
+        /// <summary>
+        /// Obtener el usuario de sesión
+        /// </summary>
         public void obtenerNuevosDatos()
         {
             gestorUsuario = Sesion.getGestorUsuario();
@@ -99,6 +110,9 @@ namespace quegolazo_code.usuario
             gestorUsuario.usuario = gestorUsuario.obtenerUsuarioPorId(gestorUsuario.usuario.idUsuario); 
         }
 
+        /// <summary>
+        /// Limpiar los paneles de exito y fracaso
+        /// </summary>
         public void limpiarPaneles()
         {
             panFracaso.Visible = false;

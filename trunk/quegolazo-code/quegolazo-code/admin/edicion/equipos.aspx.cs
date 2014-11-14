@@ -20,21 +20,91 @@ namespace quegolazo_code.admin.edicion
                 gestorEquipo = Sesion.getGestorEquipo();
                 gestorEdicion = Sesion.getGestorEdicion();
                 limpiarPaneles();
-
                 if (!Page.IsPostBack)
                     cargarEquipos();
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
+        /// <summary>
+        /// Volver al paso anterior
+        /// </summary>
         protected void btnAtras_Click(object sender, EventArgs e)
         {
             Response.Redirect(GestorUrl.eCONFIGURAR);
         }
 
+        /// <summary>
+        /// Carga los equipos seleccionados para la edición
+        /// autor: Facundo Allemand
+        /// </summary>
+        protected void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(gestorEdicion.edicion.estado.idEstado==Estado.edicionCONFIGURADA)
+                    gestorEdicion.verificarCambiosDeEquipos(hfEquiposSeleccionados.Value);                
+                gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
+                //se limpian las fases que hayan sido generadas anteriormente
+                //gestorEdicion.edicion.fases = new List<Fase>();
+                Sesion.setGestorFase(new GestorFase());
+                Response.Redirect(GestorUrl.eFASES);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "Modificación de equipos!!!")
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modificarEquipos');", true); 
+                else
+                    mostrarPanelFracaso(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Modifica los Equipos seleccionados de la edición
+        /// autor: Facundo Allemand
+        /// </summary>
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "modificarEquipos", "closeModal('modificarEquipos');", true);
+                gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
+                gestorEdicion.edicion.fases = null;
+                Response.Redirect(GestorUrl.eFASES);
+            }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+        }
+
+        /// <summary>
+        /// -------------------------------------------------------------------------
+        /// --------------------------Metodos Extra---------------------------------
+        /// -------------------------------------------------------------------------
+        /// </summary>
+
+        /// <summary>
+        /// Habilita el panel de fracaso y muestra el error
+        /// autor: Facundo Allemand
+        /// </summary>
+        private void mostrarPanelFracaso(string mensaje)
+        {
+            panelFracaso.Visible = true;
+            litFracaso.Text = mensaje;
+        }
+
+        /// <summary>
+        /// Limpiar panel de error
+        /// autor: Facundo Allemand
+        /// </summary>
+        private void limpiarPaneles()
+        {
+            panelFracaso.Visible = false;
+            litFracaso.Text = "";
+        }
+
+        /// <summary>
+        /// Carga los equipos
+        /// autor: Facundo Allemand
+        /// </summary>
         public void cargarEquipos()
         {
             lstEquiposSeleccionados.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo();
@@ -59,66 +129,6 @@ namespace quegolazo_code.admin.edicion
                 equiposInt += ",";
                 hfEquiposSeleccionados.Value = equiposInt;
             }
-        }
-        
-        protected void btnSiguiente_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if(gestorEdicion.edicion.estado.idEstado==Estado.edicionCONFIGURADA)
-                    gestorEdicion.verificarCambiosDeEquipos(hfEquiposSeleccionados.Value);                
-                gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
-                //se limpian las fases que hayan sido generadas anteriormente
-                //gestorEdicion.edicion.fases = new List<Fase>();
-                Sesion.setGestorFase(new GestorFase());
-                Response.Redirect(GestorUrl.eFASES);
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message == "Modificación de equipos!!!")
-                {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modificarEquipos');", true);
-                           
-                }
-                else
-                    mostrarPanelFracaso(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Habilita el panel de fracaso y muestra el error
-        /// autor: Facundo Allemand
-        /// </summary>
-        private void mostrarPanelFracaso(string mensaje)
-        {
-            panelFracaso.Visible = true;
-            litFracaso.Text = mensaje;
-        }
-
-        /// <summary>
-        /// Limpiar panel de error
-        /// autor: Facundo Allemand
-        /// </summary>
-        private void limpiarPaneles()
-        {
-            panelFracaso.Visible = false;
-            litFracaso.Text = "";
-        }
-
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "modificarEquipos", "closeModal('modificarEquipos');", true);
-                gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
-                gestorEdicion.edicion.fases = null;
-                Response.Redirect(GestorUrl.eFASES);
-            }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
-
         }
     }
 }

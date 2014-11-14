@@ -17,6 +17,9 @@ namespace quegolazo_code.admin
             Session["login"] = true;
         }
 
+        /// <summary>
+        /// Verifica que los datos sean correctos y loguea al usuario
+        /// </summary>
         protected void btnLoguearse_Click(object sender, EventArgs e)
         {
             try
@@ -42,6 +45,9 @@ namespace quegolazo_code.admin
             }
         }
 
+        /// <summary>
+        /// Ocultar paneles
+        /// </summary>
         private void ocultarPaneles()
         {
             panExito.Visible = false;
