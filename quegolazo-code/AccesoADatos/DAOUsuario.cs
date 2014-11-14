@@ -333,7 +333,6 @@ namespace AccesoADatos
                 int idUsuario = 0;
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                cmd.Connection = con;
                 if (codigo != string.Empty)
                 {                    
                     cmd.Connection = con;

@@ -78,9 +78,9 @@ function removeClass(id, clase) {
     $('#' + id).removeClass(clase);
 };
 
-function setActiveMenu() {
-    $("#menuTorneo li").each(function (index) {
-        var href = $("a", this).attr('href');
+function setActiveMenu(element) {
+    $("#" +element).each(function (index) {
+        var href = $(this).attr('href');
         var pathname = window.location.pathname;
         if (href == pathname) {
             $(this).addClass('active');

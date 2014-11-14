@@ -135,7 +135,7 @@ namespace Logica
             DAOUsuario gestorBD = new DAOUsuario();
             Usuario usuario = gestorBD.obtenerUsuarioPorEmail(mail);
             if (usuario == null)
-                throw new Exception("No se encuentra registrado ningún usuario con ese e-mail.");
+                throw new Exception("No existe ningún usuario con ese e-mail.");
             return usuario;
        }
 

@@ -19,9 +19,9 @@ namespace quegolazo_code.usuario
             {
                 gestorUsuario = Sesion.getGestorUsuario();
                 gestorUsuario.usuario = Sesion.getUsuario();
-                gestorUsuario.mailUsuario = gestorUsuario.usuario.email;
                 if (gestorUsuario.usuario != null)
                 {
+                    gestorUsuario.mailUsuario = gestorUsuario.usuario.email;
                     txtApellido.Value = gestorUsuario.usuario.apellido;
                     txtNombre.Value = gestorUsuario.usuario.nombre;
                     txtEmailModif.Value = gestorUsuario.usuario.email;
@@ -80,7 +80,7 @@ namespace quegolazo_code.usuario
         /// </summary>
         protected void Modificar_contraseña_Click(object sender, EventArgs e)
         {
-            div_modifCave.Visible = true;
+            div_modifCave.Visible = (div_modifCave.Visible) ? false : true;
         }
 
         /// <summary>

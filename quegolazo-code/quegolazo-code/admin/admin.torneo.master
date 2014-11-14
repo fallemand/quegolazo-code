@@ -35,7 +35,7 @@
     <!-- Script -->
     <script>
         jQuery(document).ready(function () {
-            setActiveMenu();
+            setActiveMenu('menuTorneo li');
         });
     </script>
     <!-- Script -->
