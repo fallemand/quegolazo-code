@@ -13,13 +13,13 @@ namespace quegolazo_code.usuario {
     public partial class modificar_usuario {
         
         /// <summary>
-        /// Control UpdatePanel1.
+        /// Control upModificarDatos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel upModificarDatos;
         
         /// <summary>
         /// Control txtNombre.

@@ -25,23 +25,18 @@ namespace quegolazo_code.admin
         protected void btnGuardarClave_Click(object sender, EventArgs e)
         {
             string codigo = Request.QueryString["Code"];
-            if (codigo != null)
+            try
             {
-                try
-                {
-                    int idUsuario = gestorUsuario.reestablecerContrasenia(codigo, txtClave.Value);
-                    if (idUsuario == 0)
-                    {
-                        throw new Exception("");
-                    }
-                    panExito.Visible = true;
-                    LitExito.Text = "Se ha registrado exitosamente su nueva clave de acceso. <strong><a href='"+GestorUrl.uLOGIN +"'>Ingresa Aquí</a></strong>";
-                }
-                catch (Exception ex)
-                {
-                    panFracaso.Visible = true;
-                    LitError.Text = ex.Message;
-                }
+                if (codigo == null)
+                    throw new Exception("El código para recuperar la contraseña no es correcto");
+                int idUsuario = gestorUsuario.reestablecerContrasenia(codigo, txtClave.Value);
+                panExito.Visible = true;
+                LitExito.Text = "Se ha registrado exitosamente su nueva clave de acceso. <strong><a href='"+GestorUrl.uLOGIN +"'>Ingresa Aquí</a></strong>";
+            }
+            catch (Exception ex)
+            {
+                panFracaso.Visible = true;
+                LitError.Text = ex.Message;
             }
         }
     }

@@ -1467,3 +1467,10 @@ color: #BEBEBE;
     font-size:18px;
     line-height:12px;
 }
+
+a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
+z-index: 2;
+color: #ffffff;
+background-color: #8FCA82;
+border-color: #33572B;
+}

@@ -56,4 +56,11 @@
             </div>
         </div>
     </div>
+    <!-- Script -->
+    <script>
+        jQuery(document).ready(function () {
+            setActiveMenu('ContentAdmin_ContentAdminTorneo_upMaster a');
+        });
+    </script>
+    <!-- Script -->
 </asp:Content>

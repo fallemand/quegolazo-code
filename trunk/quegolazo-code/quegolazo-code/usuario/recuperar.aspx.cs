@@ -31,7 +31,7 @@ namespace quegolazo_code
                 GestorMails gestorMail = new GestorMails();
                 gestorMail.mandarMailRecuperacion(mail, "Recuperación de Contraseña",RecuperacionUrl);
                 panExito.Visible = true;
-                LitExito.Text = "<strong>Revise su casilla de correo</strong>Se ha enviado un mail con los detalles para restablecer su contraseña<br />.";
+                LitExito.Text = "<strong>Revise su casilla de correo</strong> Se ha enviado un mail con los detalles para restablecer su contraseña.";
             }
             catch (Exception ex)
             {
