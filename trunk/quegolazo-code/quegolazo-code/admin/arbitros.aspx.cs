@@ -22,10 +22,7 @@ namespace quegolazo_code.admin
                 limpiarPaneles();
                 cargarRepeaterArbitros();
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaArbitros(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracasoListaArbitros(ex.Message);}
         }
 
         /// <summary>
@@ -76,10 +73,7 @@ namespace quegolazo_code.admin
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarArbitro');", true);
                 }
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaArbitros(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracasoListaArbitros(ex.Message);}
         }
 
         /// <summary>
@@ -114,10 +108,7 @@ namespace quegolazo_code.admin
                 btnModificarArbitro.Visible = false;
                 btnCancelarModificacionArbitro.Visible = false;
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
@@ -132,10 +123,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterArbitros();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarArbitro", "closeModal('eliminarArbitro');", true);
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaArbitros(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracasoListaArbitros(ex.Message);}
         }
 
         //------------------------------------------
@@ -146,9 +134,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterArbitros()
         {
-            rptArbitros.DataSource = gestorArbitro.obtenerArbitrosDeUnTorneo();
-            rptArbitros.DataBind();
-            sinArbitros.Visible = (rptArbitros.Items.Count > 0) ? false : true;
+            sinArbitros.Visible = GestorControles.cargarRepeaterList(rptArbitros, gestorArbitro.obtenerArbitrosDeUnTorneo()) 
+                    ? false : true;
         }
         /// <summary>
         /// Limpia los campos

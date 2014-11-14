@@ -54,10 +54,9 @@ namespace quegolazo_code.admin
             {
                 Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
                 int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
-                rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorTorneo(idTorneo);
-                rptEdiciones.DataBind();
                 Panel panelSinEdiciones = e.Item.FindControl("panelSinEdiciones") as Panel;
-                panelSinEdiciones.Visible = (rptEdiciones.Items.Count > 0) ? false : true;
+                panelSinEdiciones.Visible = (GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(idTorneo))) ? 
+                    false : true;
             }
         }
 
@@ -78,8 +77,6 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "removeClass", "removeClass('modalTorneo','fade');", true);
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
                 imagenpreview.Src = GestorImagen.obtenerImagenTemporal(GestorImagen.TORNEO, GestorImagen.MEDIANA);
                 mostrarPanelFracasoTorneo(ex.Message);
             }
@@ -288,38 +285,23 @@ namespace quegolazo_code.admin
         //------------------------------------------
         /// <summary>
         /// Carga el Repeater de los torneos de un usuario con una lista de Torneos
-        /// autor: Paula Pedrosa
         /// </summary>
         private void cargarRepeaterTorneos()
         {
-            rptTorneos.DataSource = gestorTorneo.obtenerTorneosPorUsuario();
-            rptTorneos.DataBind();
-            panelSinTorneos.Visible = (rptTorneos.Items.Count>0) ? false : true;
+            panelSinTorneos.Visible = (GestorControles.cargarRepeaterList(rptTorneos, gestorTorneo.obtenerTorneosPorUsuario())) ?
+                false : true;
         }
 
         /// <summary>
         /// Carga los combos de los tamaños de cancha y de los tipos de superficie
-        /// autor: Paula Pedrosa
         /// </summary>
         public void cargarCombos()
         {
             GestorCancha gestorCancha = new GestorCancha();
             GestorTipoSuperficie gestorTipoSuperficie = new GestorTipoSuperficie();
-
-            ddlTamañoCancha.DataSource = gestorCancha.obtenerTodos();
-            ddlTamañoCancha.DataValueField = "idTamanioCancha";
-            ddlTamañoCancha.DataTextField = "nombre";
-            ddlTamañoCancha.DataBind();
-
-            ddlTipoSuperficie.DataSource = gestorTipoSuperficie.obtenerTodos();
-            ddlTipoSuperficie.DataValueField = "idTipoSuperficie";
-            ddlTipoSuperficie.DataTextField = "nombre";
-            ddlTipoSuperficie.DataBind();
-
-            ddlGenero.DataSource = gestorEdicion.obtenerGenerosEdicion();
-            ddlGenero.DataValueField = "idGeneroEdicion";
-            ddlGenero.DataTextField = "nombre";
-            ddlGenero.DataBind();
+            GestorControles.cargarComboList(ddlTamañoCancha, gestorCancha.obtenerTodos(), "idTamanioCancha", "nombre");
+            GestorControles.cargarComboList(ddlTipoSuperficie, gestorTipoSuperficie.obtenerTodos(), "idTipoSuperficie", "nombre");
+            GestorControles.cargarComboList(ddlGenero, gestorEdicion.obtenerGenerosEdicion(), "idGeneroEdicion", "nombre");
         }
 
         /// <summary>
@@ -327,12 +309,8 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void limpiarPaneles()
         {
-            panFracaso.Visible = false;
-            litFracaso.Text = "";
-            panFracasoTorneo.Visible = false;
-            litFracasoTorneo.Text = "";
-            panFracasoEdicion.Visible = false;
-            litFracasoEdicion.Text = "";
+            GestorControles.cleanControls(new List<Object> { panFracaso, panFracasoTorneo, panFracasoEdicion });
+            GestorControles.hideControls(new List<Object> { panFracaso, litFracasoTorneo, litFracasoEdicion });
         }
 
         /// <summary>
@@ -341,13 +319,10 @@ namespace quegolazo_code.admin
         protected void limpiarModalTorneo()
         {
             lblTituloModalTorneo.Text = "Crear nuevo torneo";
-            txtUrlTorneo.Value = "";
-            txtUrlTorneo.Disabled = false;
-            txtNombreTorneo.Value = "";
-            txtDescripcion.Value = "";
-            btnModificarTorneo.Visible = false;
-            btnRegistrarTorneo.Visible = true;
-            panFracasoTorneo.Visible = false;
+            GestorControles.cleanControls(new List<Object> { txtUrlTorneo, txtNombreTorneo, txtDescripcion });
+            GestorControles.disableControls(new List<Object> { txtUrlTorneo });
+            GestorControles.showControls(new List<Object> { btnRegistrarTorneo });
+            GestorControles.hideControls(new List<Object> { btnModificarTorneo, panFracasoTorneo });
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.TORNEO,GestorImagen.MEDIANA);
         }
 
@@ -357,10 +332,7 @@ namespace quegolazo_code.admin
         protected void limpiarModalEdicion()
         {
             txtTorneoAsociado.Value = "Nombre del Torneo";
-            txtNombreEdicion.Value = "";
-            ddlTamañoCancha.ClearSelection();
-            ddlTipoSuperficie.ClearSelection();
-            ddlGenero.ClearSelection();
+            GestorControles.cleanControls(new List<Object> { txtNombreEdicion, ddlTamañoCancha, ddlTipoSuperficie, ddlGenero });
             txtPuntosPorGanar.Value = "3";
             txtPuntosPorEmpatar.Value = "1";
             txtPuntosPorPerder.Value = "0";

@@ -27,10 +27,7 @@ namespace quegolazo_code.admin
                     cargarCombos();
                     cargarRepeaterEdiciones();
                 }
-                catch (Exception ex)
-                {
-                    mostrarPanelFracaso(ex.Message);
-                }
+                catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
             }
         }
 
@@ -72,72 +69,7 @@ namespace quegolazo_code.admin
                     Response.Redirect(GestorUrl.eCONFIGURAR);
                 }
             }
-            catch (Exception ex)
-            {
-               //
-            }
-
-        }
-
-        private void cargarRepeaterEdiciones()
-        {
-
-            rptEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo);
-            rptEdiciones.DataBind();
-        }
-
-
-        /// <summary>
-        /// Carga los combos de los tamaños de cancha y de los tipos de superficie
-        /// autor: Paula Pedrosa
-        /// </summary>
-        public void cargarCombos()
-        {
-            GestorCancha gestorCancha = new GestorCancha();
-            GestorTipoSuperficie gestorTipoSuperficie = new GestorTipoSuperficie();
-
-            ddlTamañoCancha.DataSource = gestorCancha.obtenerTodos();
-            ddlTamañoCancha.DataValueField = "idTamanioCancha";
-            ddlTamañoCancha.DataTextField = "nombre";
-            ddlTamañoCancha.DataBind();
-
-            ddlTipoSuperficie.DataSource = gestorTipoSuperficie.obtenerTodos();
-            ddlTipoSuperficie.DataValueField = "idTipoSuperficie";
-            ddlTipoSuperficie.DataTextField = "nombre";
-            ddlTipoSuperficie.DataBind();
-
-            ddlGenero.DataSource = gestorEdicion.obtenerGenerosEdicion();
-            ddlGenero.DataValueField = "idGeneroEdicion";
-            ddlGenero.DataTextField = "nombre";
-            ddlGenero.DataBind();
-        }
-
-        /// <summary>
-        /// Oculta los paneles de Errores y limpia los Literal
-        /// </summary>
-        protected void limpiarPaneles()
-        {
-            panFracaso.Visible = false;
-            litFracaso.Text = "";
-            panFracasoEdicion.Visible = false;
-            litFracasoEdicion.Text = "";
-        }
-
-        /// <summary>
-        /// setea vacias las cadenas de los inputs del modal de la edicion
-        /// </summary>
-        protected void limpiarModalEdicion()
-        {
-            txtTorneoAsociado.Value = "Nombre del Torneo";
-            txtNombreEdicion.Value = "";
-            ddlTamañoCancha.ClearSelection();
-            ddlTipoSuperficie.ClearSelection();
-            ddlGenero.ClearSelection();
-            txtPuntosPorGanar.Value = "3";
-            txtPuntosPorEmpatar.Value = "1";
-            txtPuntosPorPerder.Value = "0";
-            panFracasoEdicion.Visible = false;
-            btnSiguienteEdicion.Visible = true;
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         protected void btnSiguienteEdicion_Click(object sender, EventArgs e)
@@ -150,10 +82,7 @@ namespace quegolazo_code.admin
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
                 cargarRepeaterEdiciones();
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         protected void btnModificarEdicion_Click(object sender, EventArgs e)
@@ -185,10 +114,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterEdiciones();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarEdicion", "closeModal('eliminarEdicion');", true);
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         protected void rptEdiciones_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -196,10 +122,61 @@ namespace quegolazo_code.admin
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 Repeater rptEquipos = (Repeater)e.Item.FindControl("rptEquipos");
-                gestorEdicion.edicion =(Edicion) e.Item.DataItem;
-                rptEquipos.DataSource = gestorEdicion.obtenerEquipos();
-                rptEquipos.DataBind();
+                gestorEdicion.edicion = (Edicion)e.Item.DataItem;
+                GestorControles.cargarRepeaterList(rptEquipos, gestorEdicion.obtenerEquipos());
             }
+        }
+
+        //------------------------------------------
+        //--------------Metodos Extras--------------
+        //------------------------------------------
+        /// <summary>
+        /// Oculta los paneles de Errores y limpia los Literal
+        /// </summary>
+        protected void limpiarPaneles()
+        {
+            panFracaso.Visible = false;
+            litFracaso.Text = "";
+            panFracasoEdicion.Visible = false;
+            litFracasoEdicion.Text = "";
+        }
+
+        /// <summary>
+        /// setea vacias las cadenas de los inputs del modal de la edicion
+        /// </summary>
+        protected void limpiarModalEdicion()
+        {
+            txtTorneoAsociado.Value = "Nombre del Torneo";
+            txtNombreEdicion.Value = "";
+            ddlTamañoCancha.ClearSelection();
+            ddlTipoSuperficie.ClearSelection();
+            ddlGenero.ClearSelection();
+            txtPuntosPorGanar.Value = "3";
+            txtPuntosPorEmpatar.Value = "1";
+            txtPuntosPorPerder.Value = "0";
+            panFracasoEdicion.Visible = false;
+            btnSiguienteEdicion.Visible = true;
+        }
+
+        /// <summary>
+        /// Carga el repeater con todas las ediciones
+        /// </summary>
+        private void cargarRepeaterEdiciones()
+        {
+            GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo));
+        }
+
+        /// <summary>
+        /// Carga los combos de los tamaños de cancha y de los tipos de superficie
+        /// autor: Paula Pedrosa
+        /// </summary>
+        public void cargarCombos()
+        {
+            GestorCancha gestorCancha = new GestorCancha();
+            GestorTipoSuperficie gestorTipoSuperficie = new GestorTipoSuperficie();
+            GestorControles.cargarComboList(ddlTamañoCancha, gestorCancha.obtenerTodos(), "idTamanioCancha", "nombre");
+            GestorControles.cargarComboList(ddlTipoSuperficie, gestorTipoSuperficie.obtenerTodos(), "idTipoSuperficie", "nombre");
+            GestorControles.cargarComboList(ddlGenero, gestorEdicion.obtenerGenerosEdicion(), "idGeneroEdicion", "nombre");
         }
 
         /// <summary>

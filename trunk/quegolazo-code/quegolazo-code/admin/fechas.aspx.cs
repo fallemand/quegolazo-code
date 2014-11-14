@@ -22,7 +22,6 @@ namespace quegolazo_code.admin
             {
                 if (!Page.IsPostBack)
                 {
-                    verificarTorneoExistente();
                     obtenerEdiciónSeleccionada();
                     cargarComboEdiciones();
                     cargarComboArbitros();
@@ -63,10 +62,9 @@ namespace quegolazo_code.admin
                     Repeater rptFechas = (Repeater)e.Item.FindControl("rptFechas");
                     int idFase = ((Fase)e.Item.DataItem).idFase;
                     gestorEdicion.gestorFase.faseActual = ((Fase)e.Item.DataItem);
-                    rptFechas.DataSource = ((Fase)e.Item.DataItem).obtenerFechas();
-                    rptFechas.DataBind();
                     Panel panelSinFechas = e.Item.FindControl("panelSinFechas") as Panel;
-                    panelSinFechas.Visible = (rptFechas.Items.Count > 0) ? false : true;
+                    panelSinFechas.Visible = GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas()) 
+                        ? false : true;
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -84,10 +82,9 @@ namespace quegolazo_code.admin
                 {
                     Repeater rptPartidos = (Repeater)e.Item.FindControl("rptPartidos");
                     int idFecha = ((Fecha)e.Item.DataItem).idFecha;
-                    rptPartidos.DataSource = ((Fecha)e.Item.DataItem).partidos;
-                    rptPartidos.DataBind();
                     Panel panelSinPartidos = e.Item.FindControl("panelSinPartidos") as Panel;
-                    panelSinPartidos.Visible = (rptPartidos.Items.Count > 0) ? false : true;
+                    panelSinPartidos.Visible = GestorControles.cargarRepeaterList(rptPartidos, ((Fecha)e.Item.DataItem).partidos)
+                            ? false : true;
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -372,10 +369,7 @@ namespace quegolazo_code.admin
             ddlTarjetasEquipos.Items.Clear();
             ddlTarjetasEquipos.Items.Add(new ListItem(gestorPartido.partido.local.nombre, gestorPartido.partido.local.idEquipo.ToString()));
             ddlTarjetasEquipos.Items.Add(new ListItem(gestorPartido.partido.visitante.nombre, gestorPartido.partido.visitante.idEquipo.ToString()));
-            ddlTarjetasJugadores.DataSource = gestorPartido.partido.local.jugadores;
-            ddlTarjetasJugadores.DataValueField = "idJugador";
-            ddlTarjetasJugadores.DataTextField = "nombre";
-            ddlTarjetasJugadores.DataBind();
+            GestorControles.cargarComboList(ddlTarjetasJugadores, gestorPartido.partido.local.jugadores, "idJugador", "nombre");
         }
 
         /// <summary>
@@ -387,14 +381,8 @@ namespace quegolazo_code.admin
             ddlCambiosEquipos.Items.Clear();
             ddlCambiosEquipos.Items.Add(new ListItem(gestorPartido.partido.local.nombre, gestorPartido.partido.local.idEquipo.ToString()));
             ddlCambiosEquipos.Items.Add(new ListItem(gestorPartido.partido.visitante.nombre, gestorPartido.partido.visitante.idEquipo.ToString()));
-            ddlCambiosJugadoresEntra.DataSource = gestorPartido.partido.local.jugadores;
-            ddlCambiosJugadoresEntra.DataValueField = "idJugador";
-            ddlCambiosJugadoresEntra.DataTextField = "nombre";
-            ddlCambiosJugadoresEntra.DataBind();
-            ddlCambiosJugadoresSale.DataSource = gestorPartido.partido.local.jugadores;
-            ddlCambiosJugadoresSale.DataValueField = "idJugador";
-            ddlCambiosJugadoresSale.DataTextField = "nombre";
-            ddlCambiosJugadoresSale.DataBind();
+            GestorControles.cargarComboList(ddlCambiosJugadoresEntra, gestorPartido.partido.local.jugadores, "idJugador", "nombre");
+            GestorControles.cargarComboList(ddlCambiosJugadoresSale, gestorPartido.partido.local.jugadores, "idJugador", "nombre");
         }
 
         /// <summary>
@@ -406,14 +394,8 @@ namespace quegolazo_code.admin
             ddlGolesEquipos.Items.Clear();
             ddlGolesEquipos.Items.Add(new ListItem(gestorPartido.partido.local.nombre, gestorPartido.partido.local.idEquipo.ToString()));
             ddlGolesEquipos.Items.Add(new ListItem(gestorPartido.partido.visitante.nombre, gestorPartido.partido.visitante.idEquipo.ToString()));
-            ddlGolesJugadores.DataSource = gestorPartido.partido.local.jugadores;
-            ddlGolesJugadores.DataValueField = "idJugador";
-            ddlGolesJugadores.DataTextField = "nombre";
-            ddlGolesJugadores.DataBind();
-            ddlGolesTipos.DataSource = gestorPartido.obtenerTiposGol();
-            ddlGolesTipos.DataValueField = "idTipoGol";
-            ddlGolesTipos.DataTextField = "nombre";
-            ddlGolesTipos.DataBind();
+            GestorControles.cargarComboList(ddlGolesJugadores, gestorPartido.partido.local.jugadores, "idJugador", "nombre");
+            GestorControles.cargarComboList(ddlGolesTipos, gestorPartido.obtenerTiposGol(), "idTipoGol", "nombre");
         }
 
         /// <summary>
@@ -478,10 +460,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarListaJugadoresEquipoVisitante()
         {
-            cblJugadoresEquipoVisitante.DataSource = gestorPartido.partido.visitante.jugadores;
-            cblJugadoresEquipoVisitante.DataTextField = "nombre";
-            cblJugadoresEquipoVisitante.DataValueField = "idJugador";
-            cblJugadoresEquipoVisitante.DataBind();
+            GestorControles.cargarCheckBoxList(cblJugadoresEquipoVisitante,
+                    gestorPartido.partido.visitante.jugadores, "idJugador", "nombre");
             foreach (ListItem item in cblJugadoresEquipoVisitante.Items)
                 if (gestorPartido.esTitularVisitante(Int32.Parse(item.Value)))
                     item.Selected = true;
@@ -507,17 +487,9 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarComboEdiciones()
         {
-            ddlEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo);
-            ddlEdiciones.DataTextField = "nombre";
-            ddlEdiciones.DataValueField = "idEdicion";
-            ddlEdiciones.DataBind();
-            ListItem itemSeleccionarEdicion = new ListItem("Seleccionar Edicion", "", true);
-            itemSeleccionarEdicion.Attributes.Add("disabled", "disabled");
-            ddlEdiciones.Items.Insert(0, itemSeleccionarEdicion);
-            if (gestorEdicion.edicion.idEdicion > 0)
-                ddlEdiciones.SelectedValue = gestorEdicion.edicion.idEdicion.ToString();
-            else
-                itemSeleccionarEdicion.Selected = true;
+            GestorControles.cargarComboList(ddlEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo),
+                "idEdicion", "nombre", "Seleccionar Edicion", false);
+            ddlEdiciones.SelectedValue = (gestorEdicion.edicion.idEdicion > 0) ? gestorEdicion.edicion.idEdicion.ToString() : "";
         }
 
         /// <summary>
@@ -526,12 +498,8 @@ namespace quegolazo_code.admin
         private void cargarComboArbitros()
         {
             GestorArbitro gestorArbitro = new GestorArbitro();
-            ddlArbitros.DataSource = gestorArbitro.obtenerArbitrosDeUnTorneo();
-            ddlArbitros.DataTextField = "nombre";
-            ddlArbitros.DataValueField = "idArbitro";
-            ddlArbitros.DataBind();
-            ListItem itemSinArbitro = new ListItem("Sin Árbitro Asignado", "", true);
-            ddlArbitros.Items.Insert(0, itemSinArbitro);
+            GestorControles.cargarComboList(ddlArbitros, gestorArbitro.obtenerArbitrosDeUnTorneo(),
+                "idArbitro", "nombre", "Sin Árbitro Asignado", true);
         }
 
         /// <summary>
@@ -540,28 +508,8 @@ namespace quegolazo_code.admin
         private void cargarComboCanchas()
         {
             GestorCancha gestorCancha = new GestorCancha();
-            ddlCanchas.DataSource = gestorCancha.obtenerCanchasDeUnTorneo();
-            ddlCanchas.DataTextField = "nombre";
-            ddlCanchas.DataValueField = "idCancha";
-            ddlCanchas.DataBind();
-            ListItem itemSinCancha = new ListItem("Sin Cancha Asignada", "", true);
-            ddlCanchas.Items.Insert(0, itemSinCancha);
-        }
-
-        /// <summary>
-        /// Verifica si hay un torneo seleccionado
-        /// autor: Facu Allemand
-        /// </summary>
-        private void verificarTorneoExistente()
-        {
-            try
-            {
-                Sesion.getTorneo();
-            }
-            catch (Exception)
-            {
-                Response.Redirect(GestorUrl.aTORNEOS);
-            }
+            GestorControles.cargarComboList(ddlCanchas, gestorCancha.obtenerCanchasDeUnTorneo(),
+                "idCancha", "nombre", "Sin Cancha Asignada", true);
         }
 
         /// <summary>
@@ -624,15 +572,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void limpiarCampos()
         {
-            txtEquipoLocal.Value = "";
-            txtEquipoVisitante.Value = "";
-            txtGolesLocal.Value = "";
-            txtGolesVisitante.Value = "";
-            txtPenalesLocal.Value = "";
-            txtPenalesVisitante.Value = "";
-            txtFecha.Value = "";
-            ddlArbitros.SelectedValue = "";
-            ddlCanchas.SelectedValue = "";
+            GestorControles.cleanControls(new List<Object>{txtEquipoLocal,txtEquipoVisitante,txtGolesLocal,txtGolesVisitante,
+                    txtPenalesLocal, txtPenalesVisitante,txtFecha,ddlArbitros,ddlCanchas});
             cbPenales.Checked = false;
         }
 
