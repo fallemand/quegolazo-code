@@ -59,6 +59,9 @@ namespace Logica
           fases = new List<Fase>();
       }
 
+      public void armarpija(List<Object> lista){
+         
+      }
       //public void registrarFase()
       //{
       //    DAOFase daoFase = new DAOFase();

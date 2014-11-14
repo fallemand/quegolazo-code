@@ -100,7 +100,7 @@ namespace AccesoADatos
                           idFase = int.Parse(dr["idFase"].ToString()),
                           idEdicion = idEdicion,
                           estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
-                          tipoFixture = new TipoFixture() { nombre = dr["tipoFixture"].ToString() },
+                          tipoFixture = new TipoFixture(dr["tipoFixture"].ToString()),
                       };        
                      fases.Add(fase);
                  }
@@ -111,6 +111,7 @@ namespace AccesoADatos
                  {
                      daoGrupo.obtenerGrupos(fase, con, trans);
                      daoFecha.obtenerFechas(fase, con, trans);
+                     fase.equipos = obtenerEquiposAPartirDeGrupos(fase);
                      daoPartido.obtenerPartidos(fase, con, trans);
                  }
                  return fases;
@@ -124,6 +125,24 @@ namespace AccesoADatos
                  if (con != null && con.State == ConnectionState.Open)
                      con.Close();
              }
+        }
+
+        /// <summary>
+        /// Llena la lista de equipos de una fase, a partir de todos los grupos que esta posee.
+        /// </summary>
+        /// <param name="fase">La fase que contiene los grupos armados, de la cual vamos aobtener una unica lista.</param>
+        /// <returns>La lista de todos los equipos que participan de una fase. Si los grupos estan vacios, devuelve una lista vacia. </returns>
+        private List<Equipo> obtenerEquiposAPartirDeGrupos(Fase fase)
+        {
+            List<Equipo> respuesta = new List<Equipo>();
+            foreach (var grupo in fase.grupos)
+            {
+                foreach (var equipo in grupo.equipos)
+                {
+                    respuesta.Add(equipo);
+                }
+            }
+            return respuesta;
         }
 
         public void actualizarFase(List<Fase> fases, SqlConnection con, SqlTransaction trans)
