@@ -117,7 +117,6 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
              cmd.Connection = con;
-
              string sql = @"                            
                             DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idGrupo AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
