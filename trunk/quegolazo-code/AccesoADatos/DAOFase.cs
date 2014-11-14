@@ -34,15 +34,18 @@ namespace AccesoADatos
                 {
                     if (fase != null)
                     {
-                        string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado)
-                                        VALUES (@idFase, @idEdicion, @tipoFixture, @idEstado)";
+                        string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado, cantidadEquipos)
+                                        VALUES (@idFase, @idEdicion, @tipoFixture, @idEstado , @cantidadEquipos)";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                         cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.idTipoFixture);
                         cmd.Parameters.AddWithValue("@idEstado", Estado.faseDIAGRAMADA);
+                        cmd.Parameters.AddWithValue("@cantidadEquipos", fase.equipos.Count);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
+
+                        
 
                         if (fase.grupos.Count != 0)
                         {
