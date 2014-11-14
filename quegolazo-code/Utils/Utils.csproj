@@ -44,11 +44,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GestorControles.cs" />
     <Compile Include="GestorExtra.cs" />
     <Compile Include="GestorImagen.cs" />
     <Compile Include="GestorMails.cs" />
     <Compile Include="OperacionesAccesoADatos.cs" />
-    <Compile Include="GestorDropDownLists.cs" />
     <Compile Include="GestorColeccioness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validador.cs" />

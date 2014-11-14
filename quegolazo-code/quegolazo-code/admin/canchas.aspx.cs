@@ -21,10 +21,7 @@ namespace quegolazo_code.admin
                 limpiarPaneles();
                 cargarRepeaterCanchas();
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaCanchas(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracasoListaCanchas(ex.Message);}
         }       
 
         /// <summary>
@@ -75,10 +72,7 @@ namespace quegolazo_code.admin
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarCancha');", true);
                 }
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaCanchas(ex.Message);                
-            }            
+            catch (Exception ex) {mostrarPanelFracasoListaCanchas(ex.Message);}            
         }
 
         /// <summary>
@@ -113,10 +107,7 @@ namespace quegolazo_code.admin
                 btnModificarCancha.Visible = false;
                 btnCancelarModificacionCancha.Visible = false;
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
@@ -131,10 +122,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterCanchas();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarCancha", "closeModal('eliminarCancha');", true);
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaCanchas(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracasoListaCanchas(ex.Message);}
         }
 
         //------------------------------------------
@@ -145,9 +133,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterCanchas()
         {
-            rptCanchas.DataSource = gestorCancha.obtenerCanchasDeUnTorneo();
-            rptCanchas.DataBind();
-            sinCanchas.Visible = (rptCanchas.Items.Count > 0) ? false : true;
+            sinCanchas.Visible = GestorControles.cargarRepeaterList(rptCanchas, gestorCancha.obtenerCanchasDeUnTorneo()) 
+                    ? false : true;
         }
         /// <summary>
         /// Habilita el panel de fracaso y deshabilita el panel de exito.

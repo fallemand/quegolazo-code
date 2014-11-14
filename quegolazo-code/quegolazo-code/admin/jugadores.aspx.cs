@@ -182,17 +182,8 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         private void habilitarCampos()
         {
-            txtNombreJugador.Disabled = false;
-            txtDni.Disabled = false;
-            txtFechaNacimiento.Disabled = false;
-            txtNumeroCamiseta.Disabled = false;
-            txtTelefono.Disabled = false;
-            txtEmail.Disabled = false;
-            txtFacebook.Disabled = false;
-            rdSexoFemenino.Disabled = false;
-            rdSexoMasculino.Disabled = false;
-            rdTieneFichaMedicaSi.Disabled = false;
-            rdTieneFichaMedicaNo.Disabled = false;
+            GestorControles.disableControls(new List<Object>{txtNombreJugador,txtDni,txtFechaNacimiento, txtNumeroCamiseta,
+                txtTelefono,txtEmail,txtFacebook,rdSexoFemenino,rdSexoMasculino,rdTieneFichaMedicaSi,rdTieneFichaMedicaNo});
             btnRegistrarJugador.Enabled = true;
             imagenUpload.Enabled = true;
         }
@@ -201,17 +192,8 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         private void cargarComboEquipos()
         {
-            ddlEquipos.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo();
-            ddlEquipos.DataTextField = "nombre";
-            ddlEquipos.DataValueField = "idEquipo";
-            ddlEquipos.DataBind();
-            ListItem itemSeleccionarEquipo = new ListItem("Seleccionar Equipo", "", true);
-            itemSeleccionarEquipo.Attributes.Add("disabled", "disabled");
-            ddlEquipos.Items.Insert(0, itemSeleccionarEquipo);
-            if (gestorEquipo.equipo.idEquipo > 0)
-                ddlEquipos.SelectedValue = gestorEquipo.equipo.idEquipo.ToString();
-            else
-                itemSeleccionarEquipo.Selected = true;
+            GestorControles.cargarComboList(ddlEquipos, gestorEquipo.obtenerEquiposDeUnTorneo(), "idEquipo", "nombre", "Seleccionar Equipo", false);
+            ddlEquipos.SelectedValue = (gestorEquipo.equipo.idEquipo > 0) ? gestorEquipo.equipo.idEquipo.ToString() : "";
         }
         /// <summary>
         /// Obtiene Equipo Seleccionado
@@ -219,23 +201,16 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         private void obtenerEquipoSeleccionado()
         {
-            if (Request.QueryString["idEquipo"] != null)
-                gestorEquipo.getEquipo().idEquipo = Validador.castInt(Request.QueryString["idEquipo"]);
-            else
-                gestorEquipo.getEquipo().idEquipo = 0;
+            gestorEquipo.getEquipo().idEquipo = (Request.QueryString["idEquipo"] != null) ? 
+                Validador.castInt(Request.QueryString["idEquipo"]) : gestorEquipo.getEquipo().idEquipo = 0;
         }
         /// <summary>
         /// Limpiar Campos
         /// </summary>
         public void limpiarCampos()
         {
-            txtNombreJugador.Value = "";
-            txtDni.Value = "";
-            txtFechaNacimiento.Value = "";
-            txtNumeroCamiseta.Value = "";
-            txtTelefono.Value = "";
-            txtEmail.Value = "";
-            txtFacebook.Value = "";
+            GestorControles.cleanControls(new List<Object> {txtNombreJugador, txtDni, txtFechaNacimiento, 
+                txtNumeroCamiseta, txtTelefono, txtEmail, txtFacebook});
             rdSexoFemenino.Checked = false;
             rdSexoMasculino.Checked = false;
             rdTieneFichaMedicaSi.Checked = false;
@@ -254,9 +229,8 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         private void cargarRepeaterJugadores()
         {
-            rptJugadores.DataSource = gestorJugador.obtenerJugadoresDeUnEquipo();
-            rptJugadores.DataBind();
-            sinJugadores.Visible = (rptJugadores.Items.Count > 0) ? false : true;
+            sinJugadores.Visible = (GestorControles.cargarRepeaterList(rptJugadores, gestorJugador.obtenerJugadoresDeUnEquipo())) ?
+                false : true;
         }
         /// <summary>
         /// Limpia los paneles de éxito y fracaso
@@ -283,7 +257,5 @@ namespace quegolazo_code.admin.edicion
             litFracaso.Text = mensaje;
             panelFracaso.Visible = true;
         }
-
-       
     }
 }

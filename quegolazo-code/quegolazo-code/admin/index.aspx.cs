@@ -22,9 +22,8 @@ namespace quegolazo_code.admin
                 gestorEdicion = Sesion.getGestorEdicion();
                 gestorEstadisticas = new GestorEstadisticas();               
                 gestorEdicion.edicion = Sesion.getEdicion();
-            if (!Page.IsPostBack)
-            {
-                
+                if (!Page.IsPostBack)
+                {
                     obtenerEdiciónSeleccionada();
                     cargarComboEdiciones();
                     cargarTablaDePosiciones();
@@ -32,8 +31,8 @@ namespace quegolazo_code.admin
                     cargarPorcentajeDeAvanceDeLaFecha();
                     cargarPorcentajeDeAvanceEdicion();
                     cargarUltimaFecha();                    
-             }
                 }
+             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
@@ -56,17 +55,10 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarComboEdiciones()
         {
-            ddlEdiciones.DataSource = gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo);
-            ddlEdiciones.DataTextField = "nombre";
-            ddlEdiciones.DataValueField = "idEdicion";
-            ddlEdiciones.DataBind();
-            ListItem itemSeleccionarEdicion = new ListItem("Seleccionar Edicion", "", true);
-            itemSeleccionarEdicion.Attributes.Add("disabled", "disabled");
-            ddlEdiciones.Items.Insert(0, itemSeleccionarEdicion);
-            if (gestorEdicion.edicion.idEdicion > 0)
-                ddlEdiciones.SelectedValue = gestorEdicion.edicion.idEdicion.ToString();
-            else
-                itemSeleccionarEdicion.Selected = true;
+            GestorControles.cargarComboList(ddlEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo),
+                "idEdicion", "nombre", "Seleccionar Edicion", false);
+            ddlEdiciones.SelectedValue = (gestorEdicion.edicion.idEdicion > 0) ? 
+                gestorEdicion.edicion.idEdicion.ToString() : "";
         }
 
         /// <summary>
@@ -149,9 +141,8 @@ namespace quegolazo_code.admin
         /// Carga la tabla de goleadores de la edicion que esta en sesion.
         /// </summary>
         private void cargarGoleadoresDeLaEdicion() {
-            rptGoleadores.DataSource = gestorEstadisticas.obtenerTablaGoleadores();
-            rptGoleadores.DataBind();
-            sinpartidosGoleadores.Visible = (rptPosiciones.Items.Count > 0) ? false : true;
+            sinpartidosGoleadores.Visible = GestorControles.cargarRepeaterTable(rptGoleadores, gestorEstadisticas.obtenerTablaGoleadores()) ? 
+                false : true;
         }
 
         /// <summary>

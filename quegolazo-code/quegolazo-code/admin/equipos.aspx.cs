@@ -22,10 +22,7 @@ namespace quegolazo_code.admin
                 limpiarPaneles();
                 cargarRepeaterEquipos();
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaEquipos(ex.Message);
-            }                        
+            catch (Exception ex) {mostrarPanelFracasoListaEquipos(ex.Message);}                        
         }  
 
         /// <summary>
@@ -234,17 +231,15 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterEquipos()
         {
-            rptEquipos.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo();
-            rptEquipos.DataBind();
-            sinequipos.Visible = (rptEquipos.Items.Count > 0) ? false : true;
+            sinequipos.Visible = GestorControles.cargarRepeaterList(rptEquipos, gestorEquipo.obtenerEquiposDeUnTorneo()) 
+                    ? false : true;
         }
         /// <summary>
         /// Permite cargar el repeater de los delegados con el nombre del delegado
         /// </summary>             
         private void cargarRepeaterDelegados()
         {
-            rptDelegados.DataSource = gestorEquipo.obtenerDelegados();
-            rptDelegados.DataBind();
+            GestorControles.cargarRepeaterList(rptDelegados, gestorEquipo.obtenerDelegados());
         }
         /// <summary>
         /// limpia los campos del alta de delegado

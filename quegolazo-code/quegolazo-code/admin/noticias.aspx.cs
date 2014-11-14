@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Logica;
+using Utils;
 
 namespace quegolazo_code.admin
 {
@@ -143,9 +144,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterNoticias()
         {
-            rptNoticias.DataSource = gestorNoticia.obtenerNoticiasDeUnTorneo();
-            rptNoticias.DataBind();
-            sinNoticias.Visible = (rptNoticias.Items.Count > 0) ? false : true;
+            sinNoticias.Visible = (GestorControles.cargarRepeaterTable(rptNoticias, gestorNoticia.obtenerNoticiasDeUnTorneo())) ?
+                false : true;
         }
         /// <summary>
         /// Limpia los campos de noticia
@@ -178,10 +178,8 @@ namespace quegolazo_code.admin
         public void cargarComboEdiciones()
         {
             GestorEdicion gestorEdicion = new GestorEdicion();
-            ddlEdicion.DataSource = gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo);
-            ddlEdicion.DataValueField = "idEdicion";
-            ddlEdicion.DataTextField = "nombre";
-            ddlEdicion.DataBind();
+            GestorControles.cargarComboList(ddlEdicion, gestorEdicion.obtenerEdicionesPorTorneo(
+                Sesion.getTorneo().idTorneo), "idEdicion", "nombre");
         }
         /// <summary>
         /// Limpia Paneles
