@@ -65,7 +65,7 @@ namespace quegolazo_code.admin.edicion
         {
             try
             {
-                if(gestorEdicion.edicion.estado.idEstado==Estado.CONFIGURADA)
+                if(gestorEdicion.edicion.estado.idEstado==Estado.edicionCONFIGURADA)
                     gestorEdicion.verificarCambiosDeEquipos(hfEquiposSeleccionados.Value);
                 gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
                 Sesion.setGestorFase(new GestorFase());

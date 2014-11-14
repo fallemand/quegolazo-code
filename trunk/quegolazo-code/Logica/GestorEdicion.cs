@@ -53,7 +53,7 @@ namespace Logica
         /// <returns>El id de la edicion que se registro.</returns>
         public void cargarDatos(string nombre, string idTamanioCancha, string idSuperficie, string ptosGanado, string ptosEmpatado, string ptosPerdido, string idGeneroEdicion)
         {
-            edicion.estado.idEstado = Estado.REGISTRADA;
+            edicion.estado.idEstado = Estado.edicionREGISTRADA;
             edicion.estado.ambito.idAmbito = Ambito.EDICION; 
             edicion.puntosGanado = Validador.castInt(ptosGanado);
             edicion.puntosPerdido = Validador.castInt(ptosPerdido);
@@ -156,7 +156,7 @@ namespace Logica
         public void eliminarEdicion(int idEdicion)
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            daoEdicion.eliminarEdicion(idEdicion, Estado.REGISTRADA);
+            daoEdicion.eliminarEdicion(idEdicion, Estado.edicionREGISTRADA);
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace Logica
         public void cambiarEstadoAConfigurada()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            daoEdicion.cambiarEstadoAConfigurada(edicion.idEdicion, Estado.CONFIGURADA); 
+            daoEdicion.cambiarEstadoAConfigurada(edicion.idEdicion, Estado.edicionCONFIGURADA); 
         }
 
         /// <summary>

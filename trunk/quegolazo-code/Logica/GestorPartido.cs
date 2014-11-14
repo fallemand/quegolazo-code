@@ -55,11 +55,11 @@ namespace Logica
             foreach (int idJugador in titularesVisitante)
                 partido.titularesVisitante.Add(new Jugador() { idJugador = idJugador });
             if (partido.golesLocal != null && partido.golesVisitante != null)
-                partido.estado.idEstado = Estado.JUGADO;
+                partido.estado.idEstado = Estado.partidoJUGADO;
             else
             {
                 if (partido.fecha != null)
-                    partido.estado.idEstado = Estado.PROGRAMADO;
+                    partido.estado.idEstado = Estado.partidoPROGRAMADO;
             }
             
             calcularGanador();

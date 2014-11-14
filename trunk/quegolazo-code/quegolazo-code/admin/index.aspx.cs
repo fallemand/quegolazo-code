@@ -106,12 +106,12 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarUltimaFecha()
         {
-            var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(Entidades.Estado.INCOMPLETA);
+            var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(Entidades.Estado.fechaINCOMPLETA);
             rptFecha.DataSource = ultimaFecha;
             rptFecha.DataBind();
             if (rptFecha.Items.Count == 0)
             {
-                ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(Entidades.Estado.COMPLETA);
+                ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(Entidades.Estado.fechaCOMPLETA);
                 rptFecha.DataSource = ultimaFecha;
                 rptFecha.DataBind();
             }
