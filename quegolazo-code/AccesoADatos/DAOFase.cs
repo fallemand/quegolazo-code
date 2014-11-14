@@ -12,7 +12,6 @@ namespace AccesoADatos
     public class DAOFase
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-
         /// <summary> 
         /// Registrar una nueva Fase 
         /// autor: Florencia Rojas        
@@ -29,23 +28,19 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 cmd.Transaction = trans;
-
                 foreach (Fase fase in fases)
                 {
                     if (fase != null)
                     {
-                        string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado, cantidadEquipos)
-                                        VALUES (@idFase, @idEdicion, @tipoFixture, @idEstado , @cantidadEquipos)";
+                        string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado)
+                                        VALUES (@idFase, @idEdicion, @tipoFixture, @idEstado)";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                         cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.idTipoFixture);
                         cmd.Parameters.AddWithValue("@idEstado", Estado.faseDIAGRAMADA);
-                        cmd.Parameters.AddWithValue("@cantidadEquipos", fase.equipos.Count);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
-
-                        
 
                         if (fase.grupos.Count != 0)
                         {
@@ -91,7 +86,7 @@ namespace AccesoADatos
                  cmd.Transaction = trans;
                  string sql = @"SELECT * 
                                 FROM  Fases
-                                WHERE idEdicion=@idEdicion";
+                                WHERE idEdicion = @idEdicion";
                  cmd.Parameters.Clear();
                  cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                  cmd.CommandText = sql;
@@ -103,7 +98,7 @@ namespace AccesoADatos
                           idFase = int.Parse(dr["idFase"].ToString()),
                           idEdicion = idEdicion,
                           estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
-                          tipoFixture = new TipoFixture(dr["tipoFixture"].ToString()),
+                          tipoFixture = new TipoFixture() { nombre = dr["tipoFixture"].ToString() },
                       };        
                      fases.Add(fase);
                  }
@@ -114,7 +109,6 @@ namespace AccesoADatos
                  {
                      daoGrupo.obtenerGrupos(fase, con, trans);
                      daoFecha.obtenerFechas(fase, con, trans);
-                     fase.equipos = obtenerEquiposAPartirDeGrupos(fase);
                      daoPartido.obtenerPartidos(fase, con, trans);
                  }
                  return fases;
@@ -131,23 +125,12 @@ namespace AccesoADatos
         }
 
         /// <summary>
-        /// Llena la lista de equipos de una fase, a partir de todos los grupos que esta posee.
+        /// Actualiza las fases
+        /// autor: Flor Rojas
         /// </summary>
-        /// <param name="fase">La fase que contiene los grupos armados, de la cual vamos aobtener una unica lista.</param>
-        /// <returns>La lista de todos los equipos que participan de una fase. Si los grupos estan vacios, devuelve una lista vacia. </returns>
-        private List<Equipo> obtenerEquiposAPartirDeGrupos(Fase fase)
-        {
-            List<Equipo> respuesta = new List<Equipo>();
-            foreach (var grupo in fase.grupos)
-            {
-                foreach (var equipo in grupo.equipos)
-                {
-                    respuesta.Add(equipo);
-                }
-            }
-            return respuesta;
-        }
-
+        /// <param name="fases">Lista de Fases</param>
+        /// <param name="con">Conexión</param>
+        /// <param name="trans">Transacción</param>
         public void actualizarFase(List<Fase> fases, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
@@ -171,7 +154,7 @@ namespace AccesoADatos
                         cmd.ExecuteNonQuery();
 
                         string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture,idEstado)
-                                    VALUES (@idFase,@idEdicion,@tipoFixture,@idEstado)";
+                                        VALUES (@idFase,@idEdicion,@tipoFixture,@idEstado)";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);

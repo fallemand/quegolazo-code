@@ -122,10 +122,9 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT c.*
-                               FROM Canchas c INNER JOIN CanchaXEdicion ce 
-                               ON c.idCancha = ce.idCancha
-                               WHERE ce.idEdicion = @idEdicion";
+                string sql = @"SELECT *
+                               FROM CanchaXEdicion 
+                               WHERE idEdicion = @idEdicion";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                 cmd.CommandText = sql;
@@ -133,10 +132,7 @@ namespace AccesoADatos
                 while (dr.Read())
                 {
                     cancha = new Cancha();
-                    cancha.idCancha = Int32.Parse(dr["idCancha"].ToString());
-                    cancha.nombre = dr["nombre"].ToString();
-                    cancha.telefono = dr["telefono"].ToString();
-                    cancha.domicilio = dr["domicilio"].ToString();
+                    cancha = obtenerCanchaPorId(Int32.Parse(dr["idCancha"].ToString()));
                     respuesta.Add(cancha);
                 }
                 dr.Close();

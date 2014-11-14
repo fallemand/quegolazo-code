@@ -12,7 +12,6 @@ namespace AccesoADatos
     public class DAOTipoUsuario
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-
         /// <summary>
         /// Obtiene el Tipo Usuario por id de Tipo usuario
         /// autor: Paula Pedrosa

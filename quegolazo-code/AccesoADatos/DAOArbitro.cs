@@ -17,7 +17,7 @@ namespace AccesoADatos
         /// autor: Pau Pedrosa
         /// </summary>
         /// <param name="arbitro">Árbitro a registrar</param>
-        /// <param name="idTorneo">id del torneo </param>
+        /// <param name="idTorneo">Id del torneo </param>
         /// <returns>Id del nuevo árbitro generado por la BD</returns>
         public int registrarArbitro(Arbitro arbitro, int idTorneo)
         {

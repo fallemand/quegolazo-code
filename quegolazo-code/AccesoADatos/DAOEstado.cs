@@ -12,7 +12,6 @@ namespace AccesoADatos
     public class DAOEstado
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
-
         /// <summary>
         /// Obtiene un estado de la base de datos
         /// autor: Pau Pedrosa
@@ -64,6 +63,10 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Obtiene id de estado por estado y por ambito
+        /// autor: Flor Rojas
+        /// </summary>
         public int obtenerIdEstadoPorEstadoYAmbito(string estado, string ambito)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);

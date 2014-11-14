@@ -210,7 +210,7 @@ namespace Logica
         public List<Equipo> obtenerEquipos()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            return daoEdicion.obtenerEquiposPorId(edicion.idEdicion);
+            return daoEdicion.obtenerEquiposPorIdEdicion(edicion.idEdicion);
         }
 
         /// <summary>

@@ -53,6 +53,10 @@ namespace AccesoADatos
             }
         }
 
+       /// <summary>
+       /// Obtiene las fechas de una fase
+       /// autor: Flor Rojas
+       /// </summary>
         public void obtenerFechas(Fase fase, SqlConnection con, SqlTransaction trans)
         {
             SqlDataReader dr;
@@ -102,11 +106,10 @@ namespace AccesoADatos
 
        /// <summary>
        /// Cambia el estado de la fecha a Completa cuando se jugaron todos los partidos
+       /// autor: Flor Rojas
        /// </summary>
-       /// <param name="idPartido"></param>
         public void actualizarFecha(int idPartido)
         {
-
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             try
@@ -116,15 +119,15 @@ namespace AccesoADatos
              cmd.Connection = con;
 
              string sql = @"                            
-                            declare @idFecha as int = (select idFecha from Partidos where idPartido=@idPartido)
-                            declare @idGrupo as int = (select idFecha from Partidos where idPartido=@idPartido)
-                            declare @idFase as int = (select idFecha from Partidos where idPartido=@idPartido)
-                            declare @idEdicion as int = (select idEdicion from Partidos where idPartido=@idPartido)
-                            declare @cantidad as int = (select count(*) from partidos p where p.idFecha=@idFecha and p.idEdicion=@idEdicion and p.idEstado not in (select idEstado from Estados where idAmbito=4 and idEstado<>13 ))
+                            DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idGrupo AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idFase AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idEdicion = @idEdicion AND p.idEstado NOT IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13 ))
 					                            if(@cantidad=0)
-						                            begin
-							update Fechas set idEstado = @idEstado where idFecha=@idFecha and idGrupo=@idGrupo and idFase=@idFase and idEdicion=@idEdicion
-						END";
+						                            BEGIN
+							UPDATE Fechas SET idEstado = @idEstado WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
+						    END";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.Parameters.AddWithValue("@idEstado", Estado.fechaCOMPLETA);

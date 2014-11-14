@@ -279,6 +279,10 @@ namespace AccesoADatos
             }
         }
 
+        /// <summary>
+        /// Obtiene el último torneo del usuario por Id de usuario
+        /// autor: Flor Rojas
+        /// </summary>
         public Torneo obtenerUltimoTorneoDelUsuario(int idUsuario)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
