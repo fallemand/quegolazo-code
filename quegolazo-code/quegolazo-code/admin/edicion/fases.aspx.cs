@@ -31,16 +31,26 @@ namespace quegolazo_code.admin.edicion
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ idEdicion:" + Sesion.getGestorEdicion().edicion.idEdicion + ", idTorneo:" + Sesion.getTorneo().idTorneo + " , equiposDeLaEdicion: " + equipos + ", fases: " + fases + "});", true);
             }
 
+        /// <summary>
+        /// Siguiente paso: Confirmar
+        /// </summary>
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
             Response.Redirect(GestorUrl.eCONFIRMAR);
         }
 
+        /// <summary>
+        /// Paso anterior: Seleccionar equipos
+        /// </summary>
         protected void btnAtras_Click(object sender, EventArgs e)
         {
             Response.Redirect(GestorUrl.eEQUIPOS);
         }
 
+        /// <summary>
+        /// Guarda en sesión la configuración de fases
+        /// autor: Antonio Herrera
+        /// </summary>
         [WebMethod(enableSession : true)]        
         public static object guardarFases(object JSONFases)
         {

@@ -43,7 +43,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnEliminar_Click" />
+                    <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnModificar_Click" />
                 </div>
             </div>
         </div>

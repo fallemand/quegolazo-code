@@ -39,22 +39,22 @@ namespace quegolazo_code.admin.edicion
                     gestorEdicion.edicion.preferencias.tarjetasJugadores = rdJugadoresTarjetasSi.Checked;
                     gestorEdicion.edicion.preferencias.cambiosJugadores = rdJugadoresCambiosSi.Checked;
                 }
-                gestorEdicion.edicion.preferencias.arbitros = rdArbitrosSi.Checked;
                 //Preferencias Árbitros
+                gestorEdicion.edicion.preferencias.arbitros = rdArbitrosSi.Checked;
                 if (rdArbitrosSi.Checked)
                 {                    
                     gestorEdicion.edicion.preferencias.asignaArbitros = rdArbitrosPorPartidoSi.Checked;
                     gestorEdicion.edicion.preferencias.desempenioArbitros = rdArbitroDesempenioSi.Checked;
                 }
-                gestorEdicion.edicion.preferencias.sanciones = rdSancionesSi.Checked;
                 //Preferencias Sanciones
+                gestorEdicion.edicion.preferencias.sanciones = rdSancionesSi.Checked;
                 if (rdSancionesSi.Checked)
                 {                    
                     gestorEdicion.edicion.preferencias.sancionesEquipos = rdSancionesEquiposSi.Checked;
                     gestorEdicion.edicion.preferencias.sancionesJugadores = rdSancionesJugadoresSi.Checked; 
                 }
-                gestorEdicion.edicion.preferencias.canchas = rdCanchasSi.Checked;
                 //Preferencia Canchas
+                gestorEdicion.edicion.preferencias.canchas = rdCanchasSi.Checked;
                 if (rdCanchasSi.Checked)
                     gestorEdicion.edicion.preferencias.canchaUnica = rdCanchasComplejos.Checked;                 
                 Response.Redirect(GestorUrl.eEQUIPOS); 
