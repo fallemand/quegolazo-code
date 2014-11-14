@@ -66,8 +66,10 @@ namespace quegolazo_code.admin.edicion
             try
             {
                 if(gestorEdicion.edicion.estado.idEstado==Estado.edicionCONFIGURADA)
-                    gestorEdicion.verificarCambiosDeEquipos(hfEquiposSeleccionados.Value);
+                    gestorEdicion.verificarCambiosDeEquipos(hfEquiposSeleccionados.Value);                
                 gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
+                //se limpian las fases que hayan sido generadas anteriormente
+                //gestorEdicion.edicion.fases = new List<Fase>();
                 Sesion.setGestorFase(new GestorFase());
                 Response.Redirect(GestorUrl.eFASES);
             }
@@ -75,8 +77,8 @@ namespace quegolazo_code.admin.edicion
             {
                 if (ex.Message == "Modificación de equipos!!!")
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modificarEquipos');", true);                   
-                    
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modificarEquipos');", true);
+                           
                 }
                 else
                     mostrarPanelFracaso(ex.Message);

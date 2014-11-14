@@ -29,8 +29,7 @@ namespace quegolazo_code.admin.edicion
             if(!IsPostBack)
             //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ idEdicion:" + Sesion.getGestorEdicion().edicion.idEdicion + ", idTorneo:" + Sesion.getTorneo().idTorneo + " , equiposDeLaEdicion: " + equipos + ", fases: " + fases + "});", true);
-            
-        }
+            }
 
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
