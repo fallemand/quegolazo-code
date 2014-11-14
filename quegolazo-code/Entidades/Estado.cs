@@ -41,28 +41,28 @@ namespace Entidades
         }
 
         //Estados Torneo: 1
-        public const int REGISTRADO = 1;
+        public const int torneoREGISTRADO = 1;
 
         //Estados Edicion: 2
-        public const int REGISTRADA = 2;
-        public const int CONFIGURADA = 14;
+        public const int edicionREGISTRADA = 2;
+        public const int edicionCONFIGURADA = 14;
 
         //Estados Fecha: 3
-        public const int DIAGRAMADA = 7;
-        public const int COMPLETA = 8;
-        public const int INCOMPLETA = 9;
+        public const int fechaDIAGRAMADA = 7;
+        public const int fechaCOMPLETA = 8;
+        public const int fechaINCOMPLETA = 9;
 
         //Estados Partido: 4
-        public const int DIAGRAMADO = 10;
-        public const int CANCELADO = 12;
-        public const int JUGADO = 13;
-        public const int PROGRAMADO = 11;
+        public const int partidoDIAGRAMADO = 10;
+        public const int partidoCANCELADO = 12;
+        public const int partidoJUGADO = 13;
+        public const int partidoPROGRAMADO = 11;
         
         //Estados Fase: 5
-        public const int CERRADA = 6;
-        public const int DIAGRAMADAFASE = 4;
-        public const int ENJUEGO = 5;
-        public const int REGISTRADAFASE = 3;                    
+        public const int faseCERRADA = 6;
+        public const int faseDIAGRAMADA = 4;
+        public const int faseENJUEGO = 5;
+        public const int faseREGISTRADA = 3;                    
 
     }
     /// <summary>

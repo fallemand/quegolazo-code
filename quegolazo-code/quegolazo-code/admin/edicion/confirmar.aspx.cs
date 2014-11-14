@@ -75,7 +75,7 @@ namespace quegolazo_code.admin.edicion
             try
             {
                 gestorEdicion.edicion.fases = gestorFase.fases;
-                if (gestorEdicion.edicion.estado.idEstado == Estado.REGISTRADA)
+                if (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA)
                 {
                     gestorEdicion.confirmarEdicion(); //Registra las preferencias, Registra equipos en la edición y Registra Fases
                     gestorEdicion.cambiarEstadoAConfigurada(); // Cambia el estado de la Edición "REGISTRADA" a "PERSONALIZADA" 

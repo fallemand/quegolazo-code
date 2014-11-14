@@ -205,7 +205,7 @@ namespace quegolazo_code.admin
                 if (e.CommandName == "configurarEdicion")
                 {
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
-                    if (gestorEdicion.edicion.estado.idEstado == Estado.CONFIGURADA) // Si la edicion esta personalizada
+                    if (gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA) // Si la edicion esta personalizada
                     {
                         gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
                         gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
