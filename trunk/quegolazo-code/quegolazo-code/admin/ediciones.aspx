@@ -7,6 +7,12 @@
             <ContentTemplate>             
                 <div class="row">
                     <div class="col-md-12">
+                         <div class="row">
+                    <div class="col-xs-12">
+                        <asp:Button ID="btnRegistrarNuevaEdicion" runat="server" Text="Crear una Nueva Edición" CssClass="btn btn-success" OnClick="btnRegistrarNuevaEdicion_Click" />
+                    </div>
+                </div>
+   
                         <asp:Repeater ID="rptEdiciones" runat="server"  OnItemCommand="rptEdiciones_ItemCommand" OnItemDataBound="rptEdiciones_ItemDataBound">
                             <ItemTemplate>
                                 <div class="panel panel-default lista-torneos shadow-sm">
@@ -125,22 +131,24 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Puntos</label>
                                             <div class="col-lg-10">
-                                                <div class="col-lg-3">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
-                                                        <input type="number" class="form-control" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3" required="required">
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
+                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3" required="required">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">=</span>
-                                                        <input type="number" class="form-control" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1" required="required">
+                                                    <div class="col-xs-4">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">=</span>
+                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1" required="required">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
-                                                        <input type="number" class="form-control" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0" required="required">
+                                                    <div class="col-xs-4">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0" required="required">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,7 +159,7 @@
                              </asp:Panel>                      
                         </div>
                         <div class="modal-footer">
-                            <div class="col-xs-5 col-xs-offset-6">
+                            <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <asp:Button ID="btnSiguienteEdicion" runat="server" Text="Guardar" CssClass="btn btn-success causesValidation vgDatosEdicion" OnClick="btnSiguienteEdicion_Click" />
                                 <asp:Button ID="btnModificarEdicion" runat="server" Text="Modificar" Visible="false" CssClass="btn btn-success causesValidation vgDatosEdicion" OnClick="btnModificarEdicion_Click"/>
@@ -170,8 +178,8 @@
         </div>
     </div>
     <!-- Modal Agregar Edicion -->
-   
-    <!-- Modal Eliminar Edición -->
+
+        <!-- Modal Eliminar Edición -->
       <div class="modal fade bs-example-modal-sm" id="eliminarEdicion" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -196,6 +204,7 @@
         </div>
     </div>
     <!-- Modal Eliminar Edición -->
+   
     <!-- Script -->
     <script>
         $(document).ready(function () {

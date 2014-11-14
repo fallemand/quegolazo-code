@@ -19,6 +19,7 @@ namespace quegolazo_code.admin
         protected void Page_Load(object sender, EventArgs e)
         {
             gestorTorneo = Sesion.getGestorTorneo();
+            gestorTorneo.torneo = Sesion.getTorneo();
             gestorEdicion = Sesion.getGestorEdicion();
             if (!Page.IsPostBack)
             {
@@ -187,5 +188,14 @@ namespace quegolazo_code.admin
             litFracaso.Text = mensaje;
             panFracaso.Visible = true;
         }
+
+        protected void btnRegistrarNuevaEdicion_Click(object sender, EventArgs e)
+        {
+            limpiarModalEdicion();
+            txtTorneoAsociado.Value = gestorTorneo.torneo.nombre;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
+        }
+
+    
     }
 }
