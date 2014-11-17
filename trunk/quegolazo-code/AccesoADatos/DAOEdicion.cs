@@ -57,6 +57,7 @@ namespace AccesoADatos
                     edicion.puntosGanado = Int32.Parse(dr["puntosGanado"].ToString());
                     edicion.puntosPerdido = Int32.Parse(dr["puntosPerdido"].ToString());
                     edicion.generoEdicion = daoEdicion.obtenerGeneroEdicionPorId(Int32.Parse(dr["idGeneroEdicion"].ToString()));
+                    edicion.preferencias = obtenerPreferenciasPorId(edicion.idEdicion);
                     respuesta.Add(edicion);
                 }
                 dr.Close();
