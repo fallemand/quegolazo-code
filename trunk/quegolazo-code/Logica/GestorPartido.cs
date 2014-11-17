@@ -194,19 +194,27 @@ namespace Logica
         }
 
         /// <summary>
+        /// Obtiene el tipo de gol desde la BD
+        /// autor: Facundo Allemand
+        /// </summary>
+        public TipoGol obtenerTipoGolPorId(int idTipoGol)
+        {
+            return daoPartido.obtenerTipoGolPorId(idTipoGol);
+        }
+
+        /// <summary>
         /// Agrega un gol en el objeto partido.goles
         /// autor: Facundo Allemand
         /// </summary>
         public void agregarGol(string idEquipo, string idJugador, string idTipoGol, string minuto)
         {
             GestorJugador gestorJugador = new GestorJugador();
+            GestorEquipo gestorEquipo = new GestorEquipo();
             Gol gol = new Gol();
-            gol.equipo.idEquipo = Validador.castInt(Validador.isNotEmpty(idEquipo));
-            gol.jugador = gestorJugador.obtenerJugadorPorId(Validador.castInt(Validador.isNotEmpty(idJugador)));
-            if(idTipoGol!="")
-                gol.tipoGol.idTipoGol = Validador.castInt(idTipoGol);
-            if(minuto!="")
-                gol.minuto = Validador.castInt(minuto);
+            gol.equipo =gestorEquipo.obtenerEquipoPorId(Validador.castInt(Validador.isNotEmpty(idEquipo)));
+            gol.jugador = (idJugador!="") ? gestorJugador.obtenerJugadorPorId(Validador.castInt(idJugador)) : null;
+            gol.tipoGol = (idTipoGol!="") ? obtenerTipoGolPorId(Validador.castInt(idTipoGol)) : null;
+            gol.minuto = (minuto!="") ? (int?)Validador.castInt(minuto) : null;
             partido.goles.Add(gol);
         }
 

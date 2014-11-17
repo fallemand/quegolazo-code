@@ -140,17 +140,17 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 //Jugadores
                 cmd.Parameters.AddWithValue("@jugadores", edicion.preferencias.jugadores);
-                cmd.Parameters.AddWithValue("@cambiosJugadores", edicion.preferencias.cambiosJugadores);
-                cmd.Parameters.AddWithValue("@tarjetasJugadores", edicion.preferencias.tarjetasJugadores);
-                cmd.Parameters.AddWithValue("@golesJugadores", edicion.preferencias.golesJugadores);
+                cmd.Parameters.AddWithValue("@cambiosJugadores", edicion.preferencias.jugadoresCambios);
+                cmd.Parameters.AddWithValue("@tarjetasJugadores", edicion.preferencias.jugadoresTarjetas);
+                cmd.Parameters.AddWithValue("@golesJugadores", edicion.preferencias.jugadoresGoles);
                 cmd.Parameters.AddWithValue("@jugadorXPartido", edicion.preferencias.jugadoresXPartido);
                 //Arbitros
                 cmd.Parameters.AddWithValue("@arbitros", edicion.preferencias.arbitros);
-                cmd.Parameters.AddWithValue("@asignacionArbitros", edicion.preferencias.asignaArbitros);
-                cmd.Parameters.AddWithValue("@desempenioArbitros", edicion.preferencias.desempenioArbitros);
+                cmd.Parameters.AddWithValue("@asignacionArbitros", edicion.preferencias.arbitrosAsignaXPartido);
+                cmd.Parameters.AddWithValue("@desempenioArbitros", edicion.preferencias.arbitrosRegistraDesempenio);
                 //Cancha
                 cmd.Parameters.AddWithValue("@canchas", edicion.preferencias.canchas);
-                cmd.Parameters.AddWithValue("@canchaUnica", edicion.preferencias.canchaUnica);
+                cmd.Parameters.AddWithValue("@canchaUnica", edicion.preferencias.canchaJueganEnComplejo);
                 //Sanciones
                 cmd.Parameters.AddWithValue("@sancionesEquipos", edicion.preferencias.sancionesEquipos);
                 cmd.Parameters.AddWithValue("@sancionesJugadores", edicion.preferencias.sancionesJugadores);
@@ -520,20 +520,20 @@ namespace AccesoADatos
                     //Jugadores
                     preferencias.jugadores = bool.Parse(dr["jugadores"].ToString());
                     preferencias.jugadoresXPartido = bool.Parse(dr["jugadorXPartido"].ToString());
-                    preferencias.golesJugadores = bool.Parse(dr["golesJugadores"].ToString());
-                    preferencias.tarjetasJugadores = bool.Parse(dr["tarjetasJugadores"].ToString());
-                    preferencias.cambiosJugadores = bool.Parse(dr["cambiosJugadores"].ToString());
+                    preferencias.jugadoresGoles = bool.Parse(dr["golesJugadores"].ToString());
+                    preferencias.jugadoresTarjetas = bool.Parse(dr["tarjetasJugadores"].ToString());
+                    preferencias.jugadoresCambios = bool.Parse(dr["cambiosJugadores"].ToString());
                     //Arbitros
                     preferencias.arbitros = bool.Parse(dr["arbitros"].ToString());
-                    preferencias.asignaArbitros = bool.Parse(dr["asignacionArbitros"].ToString());
-                    preferencias.desempenioArbitros = bool.Parse(dr["desempenioArbitros"].ToString());
+                    preferencias.arbitrosAsignaXPartido = bool.Parse(dr["asignacionArbitros"].ToString());
+                    preferencias.arbitrosRegistraDesempenio = bool.Parse(dr["desempenioArbitros"].ToString());
                     //Sanciones
                     preferencias.sanciones = bool.Parse(dr["sanciones"].ToString());
                     preferencias.sancionesEquipos = bool.Parse(dr["sancionesEquipos"].ToString());
                     preferencias.sancionesJugadores = bool.Parse(dr["sancionesJugadores"].ToString());
                     //Canchas
                     preferencias.canchas = bool.Parse(dr["canchas"].ToString());
-                    preferencias.canchaUnica = bool.Parse(dr["canchaUnica"].ToString());
+                    preferencias.canchaJueganEnComplejo = bool.Parse(dr["canchaUnica"].ToString());
                 }
                 if (dr != null)
                     dr.Close();
@@ -693,17 +693,17 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 //Jugadores
                 cmd.Parameters.AddWithValue("@jugadores", edicion.preferencias.jugadores);
-                cmd.Parameters.AddWithValue("@cambiosJugadores", edicion.preferencias.cambiosJugadores);
-                cmd.Parameters.AddWithValue("@tarjetasJugadores", edicion.preferencias.tarjetasJugadores);
-                cmd.Parameters.AddWithValue("@golesJugadores", edicion.preferencias.golesJugadores);
+                cmd.Parameters.AddWithValue("@cambiosJugadores", edicion.preferencias.jugadoresCambios);
+                cmd.Parameters.AddWithValue("@tarjetasJugadores", edicion.preferencias.jugadoresTarjetas);
+                cmd.Parameters.AddWithValue("@golesJugadores", edicion.preferencias.jugadoresGoles);
                 cmd.Parameters.AddWithValue("@jugadorXPartido", edicion.preferencias.jugadoresXPartido);
                 //Arbitros
                 cmd.Parameters.AddWithValue("@arbitros", edicion.preferencias.arbitros);
-                cmd.Parameters.AddWithValue("@asignacionArbitros", edicion.preferencias.asignaArbitros);
-                cmd.Parameters.AddWithValue("@desempenioArbitros", edicion.preferencias.desempenioArbitros);
+                cmd.Parameters.AddWithValue("@asignacionArbitros", edicion.preferencias.arbitrosAsignaXPartido);
+                cmd.Parameters.AddWithValue("@desempenioArbitros", edicion.preferencias.arbitrosRegistraDesempenio);
                 //Cancha
                 cmd.Parameters.AddWithValue("@canchas", edicion.preferencias.canchas);
-                cmd.Parameters.AddWithValue("@canchaUnica", edicion.preferencias.canchaUnica);
+                cmd.Parameters.AddWithValue("@canchaUnica", edicion.preferencias.canchaJueganEnComplejo);
                 //Sanciones
                 cmd.Parameters.AddWithValue("@sancionesEquipos", edicion.preferencias.sancionesEquipos);
                 cmd.Parameters.AddWithValue("@sancionesJugadores", edicion.preferencias.sancionesJugadores);

@@ -10,15 +10,15 @@ namespace Entidades
     {
         //Jugadores
         public bool jugadores { get; set; }
-        public bool cambiosJugadores { get; set; }
-        public bool golesJugadores { get; set; }
-        public bool tarjetasJugadores { get; set; }
+        public bool jugadoresCambios { get; set; }
+        public bool jugadoresGoles { get; set; }
+        public bool jugadoresTarjetas { get; set; }
         public bool jugadoresXPartido { get; set; }
 
         //Arbitros
         public bool arbitros { get; set; }
-        public bool asignaArbitros { get; set; }
-        public bool desempenioArbitros { get; set; }
+        public bool arbitrosAsignaXPartido { get; set; }
+        public bool arbitrosRegistraDesempenio { get; set; }
 
         //Sanciones
         public bool sanciones{ get; set; }
@@ -27,7 +27,7 @@ namespace Entidades
 
         //Complejos
         public bool canchas { get; set; } 
-        public bool canchaUnica { get; set; } 
+        public bool canchaJueganEnComplejo { get; set; } 
     }
 
 }
