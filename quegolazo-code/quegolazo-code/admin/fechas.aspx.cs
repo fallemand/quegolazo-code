@@ -12,7 +12,7 @@ namespace quegolazo_code.admin
 {
     public partial class fechas : System.Web.UI.Page
     {
-        GestorEdicion gestorEdicion;
+        protected GestorEdicion gestorEdicion;
         GestorPartido gestorPartido;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -222,13 +222,12 @@ namespace quegolazo_code.admin
             try
             {
                 mostrarFechaCollapsablePanel();
+                List<Jugador> jugadores = new List<Jugador>();
                 if (gestorPartido.partido.local.idEquipo == int.Parse(ddlGolesEquipos.SelectedValue))
-                    ddlGolesJugadores.DataSource = gestorPartido.partido.local.jugadores;
+                    jugadores = gestorPartido.partido.local.jugadores;
                 else
-                    ddlGolesJugadores.DataSource = gestorPartido.partido.visitante.jugadores;
-                ddlGolesJugadores.DataValueField = "idJugador";
-                ddlGolesJugadores.DataTextField = "nombre";
-                ddlGolesJugadores.DataBind();
+                    jugadores = gestorPartido.partido.visitante.jugadores;
+                GestorControles.cargarComboList(ddlGolesJugadores, jugadores, "idJugador", "nombre", "Sin asignar", true);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showSubForm", "showSubformFast('goles');", true);
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -394,7 +393,7 @@ namespace quegolazo_code.admin
             ddlGolesEquipos.Items.Clear();
             ddlGolesEquipos.Items.Add(new ListItem(gestorPartido.partido.local.nombre, gestorPartido.partido.local.idEquipo.ToString()));
             ddlGolesEquipos.Items.Add(new ListItem(gestorPartido.partido.visitante.nombre, gestorPartido.partido.visitante.idEquipo.ToString()));
-            GestorControles.cargarComboList(ddlGolesJugadores, gestorPartido.partido.local.jugadores, "idJugador", "nombre");
+            GestorControles.cargarComboList(ddlGolesJugadores, gestorPartido.partido.local.jugadores, "idJugador", "nombre", "Sin asignar", true);
             GestorControles.cargarComboList(ddlGolesTipos, gestorPartido.obtenerTiposGol(), "idTipoGol", "nombre");
         }
 
