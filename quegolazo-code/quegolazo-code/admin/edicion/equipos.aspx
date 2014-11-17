@@ -55,25 +55,26 @@
             selectionHeader: "<div class='well well-sm alert-success nomargin-bottom'>Equipos Seleccionados: <span id='spanSeleccionados'>0</span>  <a href='#' id='deselect-all' class='btn btn-xs btn-default pull-right'><span class='glyphicon glyphicon-chevron-left'></span> Quitar Todos</a></div>",
             afterSelect: function (values) {
                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + values + ',');
+                actualizarCantidades();
             },
             afterDeselect: function (values) {
                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val().replace(values + ',', ''));
+                actualizarCantidades();
             }
         });
         $('#select-all').click(function () {
             $('#lstEquiposSeleccionados').multiSelect('select_all');
-            actualizarCantidades();
             return false;
         });
         $('#deselect-all').click(function () {
             $('#lstEquiposSeleccionados').multiSelect('deselect_all');
             $('#hfEquiposSeleccionados').val("");
-            actualizarCantidades();
+            $("#spanSeleccionados").text("0");
             return false;
         });
-        $(document).on('click', '.ms-selectable li,.ms-selection li', function (event) {
+        $(function () {
             actualizarCantidades();
-        });        
+        });
         function actualizarCantidades() {
             var arr = $("#hfEquiposSeleccionados").val().split(",");
             var valor = $.grep(arr, function( a ) {
