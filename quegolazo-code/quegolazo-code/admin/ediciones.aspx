@@ -33,10 +33,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    <div class="row">
                                  <div class="panel-body">
-                                     <div class="col-md-12">
-                            <div class="panel panel-default">
+                                     <div class="col-md-8">
+                            <div class="panel panel-default" id="panelEquipos" runat="server">
                                 <div class="panel-heading">
                                     <span class="flaticon-soccer18" style="font-size: 18px;line-height: 12px;"></span>
                                     Equipos Participantes
@@ -46,7 +46,7 @@
                                          <asp:Repeater ID="rptEquipos" runat="server">
                                                         
                                              <ItemTemplate>
-                                                         <tr class="col-md-4">
+                                                         <tr class="col-md-3">
                                                             <td><img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>"  class="img-responsive" alt="" style="height:22px; max-width:30px; margin-right:4px;"  /></td>
                                                             <td><%# Eval("nombre") %></td> 
                                                         </tr>
@@ -56,20 +56,52 @@
                                 </div>
                             </div>
                     </div>
-                                 <div class="col-md-6">
-                                <b>Tamaño: </b> <%# Eval("tamanioCancha.nombre") %><br />
-                                <b>Tipo de Superficie:</b> <%# Eval("tipoSuperficie.nombre") %> <br />
-                                <b>Género: </b> <%# Eval("generoEdicion.nombre") %><br />
-                                <b>Estado:</b> <%# Eval("estado.nombre")%><br />
-                              </div>
-                                      <div class="col-md-4">
-                                <b>Fase Actual: Fase 1 </b><br />
-                                <b>Próxima Fecha: </b>Fecha 11  <br />
-                     
-                              </div>
+
+                                     <div class="col-md-4">
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                    Opciones
+                                </div>
+                                <div class="panel-body small-padding">
+                                    Registra Jugadores: <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rJugadoresSi"></span></b></span>
+                                                        <span class="text-danger"><b><span class="glyphicon glyphicon-remove" runat="server" visible="false" id="rJugadoresNo"></span></b></span><br />
+                                    Registra Arbitros:  <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rArbitrosSi"></span></b></span>
+                                                        <span class="text-danger"><b><span  class="glyphicon glyphicon-remove" runat="server" visible="false" id="rArbitrosNo" ></span></b></span><br />
+                                    Registra Sanciones: <span class="text-success"><b><span  class="glyphicon glyphicon-ok" runat="server" visible="false" id="rSancionesSi"></span></b></span>
+                                                        <span class="text-danger"><b><span  class="glyphicon glyphicon-remove" runat="server" visible="false" id="rSancionesNo"></span></b></span><br />
+                                    Registra Canchas:   <span class="text-success"><b><span  class="glyphicon glyphicon-ok" runat="server" visible="false" id="rCanchasSi"></span></b></span>
+                                                        <span class="text-danger"><b><span  class="glyphicon glyphicon-remove" runat="server" visible="false" id="rCanchasNo"></span></b></span><br />
+                                </div>
+                            </div>
+                        </div>
+                                     </div>
+                                        </div>
+                                    <div class="row">
+                                 <div class="col-md-3">
+                                <b>Tamaño: </b> <%# Eval("tamanioCancha.nombre") %>
+                           
+                                 </div>
+                                     <div class="col-md-3">
+                              <b>Tipo de Superficie:</b> <%# Eval("tipoSuperficie.nombre") %> 
+                                         
+                                 </div>
+                                     <div class="col-md-3">
+                               <b>Género: </b> <%# Eval("generoEdicion.nombre") %>
+                                        
+                                 </div>
+                                     <div class="col-md-3">
+                               <b>Estado:</b> <%# Eval("estado.nombre")%>
+                                        
+                                 </div>
+                                
+                               </div>
+                              
+                              
+                                     
                                  </div>
                                  
-                                </div>
+                              
                             </ItemTemplate>
                         </asp:Repeater>
                         <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
