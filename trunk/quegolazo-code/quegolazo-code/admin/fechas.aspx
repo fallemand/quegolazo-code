@@ -155,10 +155,10 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Resultado</label>
                                             <div class="col-md-2 nopadding-right">
-                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesLocal" rel="txtTooltip" title="Goles Equipo Local" maxlength="2" digits="true" placeholder="EJ: 2">
+                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesLocal" rel="txtTooltip" title="Goles Equipo Local" maxlength="2" min="0" digits="true" placeholder="EJ: 2">
                                             </div>
                                             <div class="col-md-1 nopadding-right nopadding-left" style="padding-left:5px">
-                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPenalesLocal"  rel="txtTooltip" title="Goles en penales" maxlength="2" digits="true" style="display:none">
+                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPenalesLocal"  rel="txtTooltip" title="Goles en penales" maxlength="2" min="0" digits="true" style="display:none">
                                             </div>
                                             <div class="col-md-2 nopadding-right text-center"style="padding-left:40px;">
                                                 <label>
@@ -166,10 +166,10 @@
                                                 </label>
                                             </div>
                                             <div class="col-md-2 nopadding-right">
-                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesVisitante" rel="txtTooltip" title="Goles Equipo Visitante" maxlength="2" digits="true" placeholder="EJ: 0">
+                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesVisitante" rel="txtTooltip" title="Goles Equipo Visitante" maxlength="2" digits="true" min="0" placeholder="EJ: 0">
                                             </div>
                                             <div class="col-md-1 nopadding-right nopadding-left" style="padding-left:5px">
-                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPenalesVisitante" rel="txtTooltip" title="Goles en penales" maxlength="2" digits="true" style="display:none">
+                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPenalesVisitante" rel="txtTooltip" title="Goles en penales" maxlength="2" min="0" digits="true" style="display:none">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -181,6 +181,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <% if(gestorEdicion.edicion.preferencias.arbitrosAsignaXPartido) { %>
                                         <div class="form-group">
                                             <label for="select" class="col-lg-2 control-label">Árbitro</label>
                                             <div class="col-lg-10">
@@ -188,6 +189,8 @@
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
+                                        <% } 
+                                           if(gestorEdicion.edicion.preferencias.canchaJueganEnComplejo) { %>
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Cancha</label>
                                             <div class="col-lg-10">
@@ -195,6 +198,8 @@
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
+                                        <% } 
+                                           if(gestorEdicion.edicion.preferencias.jugadoresXPartido) { %>
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Titulares Local</label>
                                             <div class="col-lg-10">
@@ -207,6 +212,7 @@
                                                 <asp:CheckBoxList ID="cblJugadoresEquipoVisitante" runat="server" RepeatLayout="Table" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
                                             </div>
                                         </div>
+                                        <% } %>
                                         <div class="form-group" style="background-color: #F8F8F8">
                                             <label for="text" class="col-lg-2 control-label">
                                                 <span class="flaticon-football37 flaticon-form"></span>
@@ -217,7 +223,9 @@
                                                     <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Gol" onclick="showSubform('goles');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Gol</a>
                                                     <asp:Repeater ID="rptGoles" runat="server" OnItemCommand="rptGoles_ItemCommand">
                                                         <ItemTemplate>
-                                                            <span class="label label-default label-md"><%# Eval("minuto")%>' <%# ((Entidades.Jugador)DataBinder.Eval(Container.DataItem, "jugador")).nombre%>
+                                                            <span class="label label-default label-md">
+                                                                <%# ((((Entidades.Gol)Container.DataItem).minuto!=null))? Eval("minuto") + "'": "" %>
+                                                                <%# (((Entidades.Gol)Container.DataItem).jugador!=null) ? ((Entidades.Gol)Container.DataItem).jugador.nombre : ((Entidades.Gol)Container.DataItem).equipo.nombre%>
                                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminarGol" runat="server" CommandName="eliminarGol" CommandArgument='<%# Eval("idGol") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                                             </span>
                                                         </ItemTemplate>
@@ -231,12 +239,14 @@
                                                                 <asp:DropDownList ID="ddlGolesEquipos" CssClass="form-control margin-xs input-sm" runat="server" required="true" AutoPostBack="true" OnSelectedIndexChanged="ddlGolesEquipos_SelectedIndexChanged" disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
+                                                        <% if(gestorEdicion.edicion.preferencias.jugadoresGoles) { %>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Jugador</label>
                                                             <div class="col-md-10">
                                                                 <asp:DropDownList ID="ddlGolesJugadores" runat="server" CssClass="form-control margin-xs input-sm" disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
+                                                        <% } %>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Tipo</label>
                                                             <div class="col-md-10">
@@ -255,6 +265,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <% if(gestorEdicion.edicion.preferencias.jugadoresCambios) { %>
                                         <div class="form-group" style="background-color: #F8F8F8">
                                             <label for="text" class="col-lg-2 control-label">
                                                 <span class="flaticon-up23 flaticon-form"></span>
@@ -265,7 +276,8 @@
                                                     <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Cambio" onclick="showSubform('cambios');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Cambio</a>
                                                     <asp:Repeater ID="rptCambios" runat="server" OnItemCommand="rptCambios_ItemCommand">
                                                         <ItemTemplate>
-                                                            <span class="label label-default label-md"><%# Eval("minuto")%>' 
+                                                            <span class="label label-default label-md">
+                                                                <%# ((((Entidades.Cambio)Container.DataItem).minuto!=null))? Eval("minuto") + "'": "" %>
                                                         <span class="glyphicon glyphicon-arrow-up" style="color: green"></span><%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %>
                                                                 <span class="glyphicon glyphicon-arrow-down" style="color: red"></span><%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %>
                                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminarCambio" runat="server" CommandName="eliminarCambio" CommandArgument='<%# Eval("idCambio") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
@@ -305,6 +317,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <% } if(gestorEdicion.edicion.preferencias.jugadoresTarjetas) {%>
                                         <div class="form-group" style="background-color: #F8F8F8">
                                             <label class="col-lg-2 control-label">
                                                 <span class="flaticon-football108 flaticon-form"></span>
@@ -315,7 +328,9 @@
                                                     <a class="btn btn-success btn-xs" rel="txtTooltip" title="Agregar Tarjeta" onclick="showSubform('tarjetas');return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Tarjeta</a>
                                                     <asp:Repeater ID="rptTarjetas" runat="server" OnItemCommand="rptTarjetas_ItemCommand" OnItemDataBound="rptTarjetas_ItemDataBound">
                                                         <ItemTemplate>
-                                                            <span class="label label-default label-md"><%#Eval("minuto") %>' <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %>
+                                                            <span class="label label-default label-md">
+                                                                <%# ((((Entidades.Tarjeta)Container.DataItem).minuto!=null))? Eval("minuto") + "'": "" %>
+                                                                <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %>
                                                                 <asp:Label ID="panelTarjetaRoja" CssClass="glyphicon glyphicon-stop" runat="server" Style="color: red;" Visible="false"></asp:Label>
                                                                 <asp:Label ID="panelTarjetaAmarilla" CssClass="glyphicon glyphicon-stop" runat="server" Style="color: yellow;" Visible="false"></asp:Label>
                                                                 <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminarTarjeta" runat="server" CommandName="eliminarTarjeta" CommandArgument='<%# Eval("idTarjeta") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
@@ -358,6 +373,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <% } %>
                                     </div>
                                 </fieldset>
                             </div>

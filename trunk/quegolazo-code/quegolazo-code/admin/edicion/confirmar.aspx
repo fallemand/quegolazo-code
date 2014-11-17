@@ -29,7 +29,7 @@
                                     Equipos Participantes
                                 </div>
                                 <div class="panel-body small-padding">
-                                    <table>
+                                    <table style="width:100%;">
                                          <asp:Repeater ID="rptEquipos" runat="server">
                                                         
                                              <ItemTemplate>

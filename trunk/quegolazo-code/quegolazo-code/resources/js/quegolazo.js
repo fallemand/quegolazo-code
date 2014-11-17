@@ -79,8 +79,18 @@ function removeClass(id, clase) {
 };
 
 function setActiveMenu(element) {
-    $("#" +element).each(function (index) {
+    $("#" + element).each(function (index) {
         var href = $(this).attr('href');
+        var pathname = window.location.pathname;
+        if (href == pathname) {
+            $(this).addClass('active');
+        }
+    });
+}
+
+function setActiveParentMenu(element) {
+    $("#" +element).each(function (index) {
+        var href = $("a",this).attr('href');
         var pathname = window.location.pathname;
         if (href == pathname) {
             $(this).addClass('active');
@@ -197,9 +207,13 @@ function showSubformFast(id) {
 
 function hideSubform(id) {
     $('#' + id).toggle("fast", function fildsetDesactivator() {
-        if ($('#' + id).is(":visible"))
+        if ($('#' + id).is(":visible")) {
             $('#' + id).find('input,select').prop('disabled', false);
-        else
+            $('#' + id).find('input:text').val("");
+        }
+        else {
             $('#' + id).find('input,select').attr('disabled', 'disabled');
+            $('#' + id).find('input:text').val("");
+        }
     });
 };
