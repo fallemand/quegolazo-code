@@ -38,12 +38,15 @@ namespace Utils
             combo.DataBind();
         }
 
-        public static void cargarCheckBoxList<T>(CheckBoxList combo, List<T> dataSource, String valueField, String textField)
+        public static bool cargarCheckBoxList<T>(CheckBoxList combo, List<T> dataSource, String valueField, String textField)
         {
             combo.DataSource = dataSource;
             combo.DataValueField = valueField;
             combo.DataTextField = textField;
             combo.DataBind();
+            if (combo.Items.Count > 0)
+                return true;
+            return false;
         }
 
         public static void cargarComboList<T>(DropDownList combo, List<T> dataSource, String valueField, String textField, String defaultItemText, bool puedeSeleccionarse)

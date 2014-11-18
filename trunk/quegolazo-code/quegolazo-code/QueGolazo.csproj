@@ -48,7 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -90,6 +90,8 @@
     <Content Include="resources\js\ajaxfileupload.js" />
     <Content Include="resources\js\bootstrap-datetimepicker.min.js" />
     <Content Include="resources\js\bootstrap-datetimepicker.es.js" />
+    <Content Include="resources\js\bootstrap-select.min.js" />
+    <Content Include="resources\js\defaults-es_CL.min.js" />
     <Content Include="resources\js\jquery.bracket.min.js" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
     <Content Include="resources\js\jquery.multi-select.js" />
