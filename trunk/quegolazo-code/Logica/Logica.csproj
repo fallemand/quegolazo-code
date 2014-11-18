@@ -58,6 +58,7 @@
     <Compile Include="GestorArbitro.cs" />
     <Compile Include="GestorEstadisticas.cs" />
     <Compile Include="GestorPartido.cs" />
+    <Compile Include="GestorSancion.cs" />
     <Compile Include="Properties\GestorCancha.cs" />
     <Compile Include="GestorEdicion.cs" />
     <Compile Include="GestorEquipo.cs" />
