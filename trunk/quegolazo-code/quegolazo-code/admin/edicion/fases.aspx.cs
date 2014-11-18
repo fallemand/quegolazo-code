@@ -14,7 +14,7 @@ namespace quegolazo_code.admin.edicion
 {
     public partial class fases : System.Web.UI.Page
     {
-       private GestorEdicion gestorEdicion = new GestorEdicion();
+       private static GestorEdicion gestorEdicion = new GestorEdicion();
        private static GestorFase gestorFase = new GestorFase();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,7 +28,7 @@ namespace quegolazo_code.admin.edicion
             string fases = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.fases);
             if(!IsPostBack)
             //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ idEdicion:" + Sesion.getGestorEdicion().edicion.idEdicion + ", idTorneo:" + Sesion.getTorneo().idTorneo + " , equiposDeLaEdicion: " + equipos + ", fases: " + fases + "});", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + "});", true);
             }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace quegolazo_code.admin.edicion
                 JavaScriptSerializer serializador = new JavaScriptSerializer();
                 List<Fase> fases = serializador.ConvertToType<List<Fase>>(JSONFases);
                 gestorFase = Sesion.getGestorEdicion().gestorFase;
-                gestorFase.fases = fases;              
-                gestorFase.generarFixture();
+                gestorEdicion.edicion.fases = fases;             
+                gestorFase.generarFixture(gestorEdicion.edicion.fases);
                 Sesion.setGestorFase(gestorFase);                
                 return new HttpStatusCodeResult(200, "OK");
             }

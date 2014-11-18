@@ -134,8 +134,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterArbitros()
         {
-            sinArbitros.Visible = GestorControles.cargarRepeaterList(rptArbitros, gestorArbitro.obtenerArbitrosDeUnTorneo()) 
-                    ? false : true;
+            sinArbitros.Visible = !GestorControles.cargarRepeaterList(rptArbitros, gestorArbitro.obtenerArbitrosDeUnTorneo());
         }
         /// <summary>
         /// Limpia los campos

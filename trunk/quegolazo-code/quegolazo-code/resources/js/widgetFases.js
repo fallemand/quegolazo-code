@@ -1,7 +1,7 @@
 ﻿$.widget("quegolazo.generadorDeFases", {
     options: {
+        idFase: null,
         idEdicion: null,
-        idTorneo: null,
         equiposDeLaEdicion: [],
         fases: [],
         error : false,
@@ -65,7 +65,7 @@
         $("<div/>").attr("id", "cuerpoFase" + numFase).appendTo(cuerpoDeLaFase);
         //si la fase es mayor a uno, cargo los equipos genericos para el primer caso.
         if (numFase > 1) {
-            widget.generarListaDeEquiposParaFase(numFase, $("#ddlCantidadParticipantesFase" + numFase).val());
+             widget.generarListaDeEquiposParaFase(numFase, $("#ddlCantidadParticipantesFase" + numFase).val());
             $("#ddlCantidadParticipantesFase" + numFase).tooltip({ placemenent:'bottom',title: "Indica la cantidad de equipos que clasifican de la fase anterior"});
             //elimino el boton eliminar de una fase que no sea la ultima.  
             $("#btnEliminarFase" + (numFase - 1)).hide();
@@ -98,11 +98,13 @@
         comboTipoFixture.on("change", function () { widget.cambioEnTipoDeFixture($(this)); })
         labelFixture.appendTo(divIzquierda);
         comboTipoFixture.appendTo(divIzquierda);
-        divIzquierda.appendTo(row);       
+        divIzquierda.appendTo(row);
+
         var divCentro = $("<div/>", { class: 'col-md-4', id: 'divCentroFase' + numFase });
-        var labelCantidad = $("<label/>").attr("id", "lblCantidadFase" + numFase).text("Cantidad de grupos:");        
-        var comboCant = createDropDownList("ddlCantidadFase" + numFase, widget.obtenerGruposPosibles((numFase > 1) ? 2 : widget.options.fases[numFase - 1].equipos.length));
+        var labelCantidad = $("<label/>").attr("id", "lblCantidadFase" + numFase).text("Cantidad de grupos:");
+        var comboCant = createDropDownList("ddlCantidadFase" + numFase, widget.obtenerGruposPosibles((numFase > 1) ? (widget.options.fases[numFase - 1].equipos.length > 0) ? widget.options.fases[numFase - 1].equipos.length - 2 : $("#ddlCantidadParticipantesFase" + numFase).length : widget.options.fases[numFase - 1].equipos.length));
         comboCant.on("change", function () { $("#cuerpoFase" + numFase).remove(); })
+
         // si la fase es mayor a uno, armos dos divs para que la cantidad de participantes y de grupos se alineen en un solo div central
         if (numFase > 1) {
             var divCantidadParticipantes = $("<div/>", { class: 'col-md-6 faseGenerica', id: 'divCantidadParticipantesFase' + numFase });
@@ -110,6 +112,7 @@
             labelCantidadParticpantes.appendTo(divCantidadParticipantes);
             var comboCantParticipantes = createDropDownList("ddlCantidadParticipantesFase" + numFase, widget.obtenerArrayDeParticipantes(widget.options.fases[numFase - 2].equipos.length));
             comboCantParticipantes.appendTo(divCantidadParticipantes);
+            $(comboCantParticipantes).prop('selectedIndex', (widget.options.fases[numFase - 1].equipos.length > 0) ? widget.options.fases[numFase - 1].equipos.length-2 : $("#ddlCantidadParticipantesFase" + numFase).length);
             comboCantParticipantes.on("change", function () {
                 createDropDownList("ddlCantidadFase" + numFase, widget.obtenerGruposPosibles($("#ddlCantidadParticipantesFase" + numFase).val()));
                 widget.generarListaDeEquiposParaFase(numFase, $(this).val());
@@ -120,6 +123,8 @@
                     widget.validarCantidadDeEquiposEliminatorio(numFase);
                 }
             });
+
+
             var divCantidadGrupos = $("<div/>", { class: 'col-md-6', id: 'divCantidadGruposFase' + numFase });
             labelCantidad.text("Grupos:");
             labelCantidad.appendTo(divCantidadGrupos);
@@ -499,7 +504,7 @@
             }
             $("#cuerpoFase" + numFase).css("overflow-x", "scroll");
             $("#cuerpoFase" + numFase).generadorDeLlaves({                
-                equipos: (fasePreCargada) ? fase.grupos[0].fechas[0].partidos : widget.options.fases[numFase - 1].equipos,
+                equipos: (fasePreCargada && !(numFase > 1)) ? fase.grupos[0].fechas[0].partidos : widget.options.fases[numFase - 1].equipos,
                 mezclar: !fasePreCargada,
                 generica : (numFase>1)
             });

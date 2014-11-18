@@ -11,17 +11,15 @@ namespace Logica
 {
   public class GestorFase
     {
-      public List<Equipo> equipos { get; set; }
-      public Fase faseActual { get; set; }
-      public List<Fase> fases { get; set; }
-      public IGenerarFixture generadorFixture { get; set; }
 
+      public IGenerarFixture generadorFixture { get; set; }
+      public Fase faseActual{ get; set; }
      
       /// <summary>
       /// método para generar fixture
       /// autor=Flor
       /// </summary>
-      public void generarFixture()
+      public void generarFixture(List<Fase> fases)
       {
           foreach (Fase f in fases)
           {
@@ -54,9 +52,7 @@ namespace Logica
 
       public GestorFase()
       {
-          equipos = new List<Equipo>();
-          faseActual = new Fase();
-          fases = new List<Fase>();
+          faseActual =  new Fase();
       }
 
       public void armarpija(List<Object> lista){

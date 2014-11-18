@@ -63,8 +63,7 @@ namespace quegolazo_code.admin
                     int idFase = ((Fase)e.Item.DataItem).idFase;
                     gestorEdicion.gestorFase.faseActual = ((Fase)e.Item.DataItem);
                     Panel panelSinFechas = e.Item.FindControl("panelSinFechas") as Panel;
-                    panelSinFechas.Visible = GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas()) 
-                        ? false : true;
+                    panelSinFechas.Visible = !GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas());
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -83,8 +82,7 @@ namespace quegolazo_code.admin
                     Repeater rptPartidos = (Repeater)e.Item.FindControl("rptPartidos");
                     int idFecha = ((Fecha)e.Item.DataItem).idFecha;
                     Panel panelSinPartidos = e.Item.FindControl("panelSinPartidos") as Panel;
-                    panelSinPartidos.Visible = GestorControles.cargarRepeaterList(rptPartidos, ((Fecha)e.Item.DataItem).partidos)
-                            ? false : true;
+                    panelSinPartidos.Visible = !GestorControles.cargarRepeaterList(rptPartidos, ((Fecha)e.Item.DataItem).partidos);
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
