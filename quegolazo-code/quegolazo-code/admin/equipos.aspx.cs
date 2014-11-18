@@ -231,8 +231,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterEquipos()
         {
-            sinequipos.Visible = GestorControles.cargarRepeaterList(rptEquipos, gestorEquipo.obtenerEquiposDeUnTorneo()) 
-                    ? false : true;
+            sinequipos.Visible = !GestorControles.cargarRepeaterList(rptEquipos, gestorEquipo.obtenerEquiposDeUnTorneo());
         }
         /// <summary>
         /// Permite cargar el repeater de los delegados con el nombre del delegado

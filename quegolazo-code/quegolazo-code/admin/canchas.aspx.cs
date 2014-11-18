@@ -133,8 +133,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterCanchas()
         {
-            sinCanchas.Visible = GestorControles.cargarRepeaterList(rptCanchas, gestorCancha.obtenerCanchasDeUnTorneo()) 
-                    ? false : true;
+            sinCanchas.Visible = !GestorControles.cargarRepeaterList(rptCanchas, gestorCancha.obtenerCanchasDeUnTorneo());
         }
         /// <summary>
         /// Habilita el panel de fracaso y deshabilita el panel de exito.

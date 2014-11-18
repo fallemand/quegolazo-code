@@ -55,8 +55,7 @@ namespace quegolazo_code.admin
                 Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
                 int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
                 Panel panelSinEdiciones = e.Item.FindControl("panelSinEdiciones") as Panel;
-                panelSinEdiciones.Visible = (GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(idTorneo))) ? 
-                    false : true;
+                panelSinEdiciones.Visible = !(GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(idTorneo)));
             }
         }
 
@@ -288,8 +287,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterTorneos()
         {
-            panelSinTorneos.Visible = (GestorControles.cargarRepeaterList(rptTorneos, gestorTorneo.obtenerTorneosPorUsuario())) ?
-                false : true;
+            panelSinTorneos.Visible = !(GestorControles.cargarRepeaterList(rptTorneos, gestorTorneo.obtenerTorneosPorUsuario()));
         }
 
         /// <summary>

@@ -18,7 +18,7 @@ namespace quegolazo_code.admin.edicion
         {
             //Tomar gestores de la sesión
             gestorEdicion = Sesion.getGestorEdicion();
-            gestorFase = Sesion.getGestorFase();
+            gestorFase = gestorEdicion.gestorFase;
             if (gestorEdicion.edicion.equipos.Count < 2)
             {
                 Response.Redirect(GestorUrl.eEQUIPOS);
@@ -57,7 +57,7 @@ namespace quegolazo_code.admin.edicion
                     rCanchasNo.Visible = true;
 
                 //Fases
-                rptFases.DataSource = gestorFase.fases;
+                rptFases.DataSource = gestorEdicion.edicion.fases;
                 rptFases.DataBind();
             }
         }
@@ -74,7 +74,7 @@ namespace quegolazo_code.admin.edicion
             //gestorFase = Sesion.getGestorFase();
             try
             {
-                gestorEdicion.edicion.fases = gestorFase.fases;
+                //gestorEdicion.edicion.fases = gestorFase.fases;
                 if (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA)
                 {
                     gestorEdicion.confirmarEdicion(); //Registra las preferencias, Registra equipos en la edición y Registra Fases

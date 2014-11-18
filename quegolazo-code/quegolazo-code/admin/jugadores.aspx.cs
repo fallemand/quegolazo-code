@@ -229,8 +229,7 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         private void cargarRepeaterJugadores()
         {
-            sinJugadores.Visible = (GestorControles.cargarRepeaterList(rptJugadores, gestorJugador.obtenerJugadoresDeUnEquipo())) ?
-                false : true;
+            sinJugadores.Visible = !(GestorControles.cargarRepeaterList(rptJugadores, gestorJugador.obtenerJugadoresDeUnEquipo()));
         }
         /// <summary>
         /// Limpia los paneles de éxito y fracaso
