@@ -149,6 +149,7 @@ namespace Logica
         public void obtenerPartidoporId(string idPartido)
         {
             DAOJugador daoJugadores = new DAOJugador();
+            partido = new Partido();
             partido.idPartido = Validador.castInt(idPartido);
             partido = daoPartido.obtenerPartidoPorId(partido.idPartido);
             partido.goles = daoPartido.obtenerGoles(partido.idPartido);

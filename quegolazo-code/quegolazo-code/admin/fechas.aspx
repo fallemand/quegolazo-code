@@ -3,6 +3,8 @@
     <script type="text/javascript" src="../resources/js/moment.js"></script>
     <script type="text/javascript" src="../resources/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="../resources/js/bootstrap-datetimepicker.es.js"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="../resources/js/defaults-es_CL.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
@@ -204,12 +206,18 @@
                                             <label for="text" class="col-lg-2 control-label">Titulares Local</label>
                                             <div class="col-lg-10">
                                                 <asp:CheckBoxList ID="cblJugadoresEquipoLocal" runat="server" RepeatLayout="Table" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
+                                                <asp:Panel ID="panelSinJugadoresLocal" runat="server" style="padding-top: 10px;">
+                                                    <small>No hay jugadores registrados para el equipo</small>
+                                                </asp:Panel>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Titulares Visitante</label>
                                             <div class="col-lg-10">
                                                 <asp:CheckBoxList ID="cblJugadoresEquipoVisitante" runat="server" RepeatLayout="Table" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
+                                                <asp:Panel ID="panelSinJugadoresVisitante" runat="server" style="padding-top: 10px;" >
+                                                    <small>No hay jugadores registrados para el equipo</small>
+                                                </asp:Panel>
                                             </div>
                                         </div>
                                         <% } %>
@@ -423,10 +431,12 @@
         $('#divFechaPartido').datetimepicker({
             language: 'es'
         });
+        $('.selectpicker').selectpicker();
         function EndRequestHandler(sender, args) {
             $('#divFechaPartido').datetimepicker({
                 language: 'es'
             });
+            $('.selectpicker').selectpicker();
             cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
         };
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
@@ -434,6 +444,7 @@
             $('#divFechaPartido').datetimepicker({
                 language: 'es'
             });
+            $('.selectpicker').selectpicker();
             cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
         };
     </script>

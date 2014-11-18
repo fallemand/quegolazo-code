@@ -13,7 +13,7 @@ namespace quegolazo_code.admin
     public partial class fechas : System.Web.UI.Page
     {
         protected GestorEdicion gestorEdicion;
-        GestorPartido gestorPartido;
+        protected GestorPartido gestorPartido;
         protected void Page_Load(object sender, EventArgs e)
         {
             gestorEdicion = Sesion.getGestorEdicion();
@@ -22,6 +22,7 @@ namespace quegolazo_code.admin
             {
                 if (!Page.IsPostBack)
                 {
+                    gestorPartido.partido = null;
                     obtenerEdiciónSeleccionada();
                     cargarComboEdiciones();
                     cargarComboArbitros();
@@ -120,6 +121,8 @@ namespace quegolazo_code.admin
         {
             try
             {
+                if (gestorPartido.partido == null)
+                    throw new Exception("Debe seleccionar un partido desde la lista de fechas");
                 mostrarFechaCollapsablePanel();
                 gestorPartido.modificarPartido(txtFecha.Value, txtGolesLocal.Value,txtGolesVisitante.Value,cbPenales.Checked, txtPenalesLocal.Value,txtPenalesVisitante.Value, ddlArbitros.SelectedValue, ddlCanchas.SelectedValue, obtenerTitularesLocal(), obtenerTitularesVisitante());
                 mostrarPanelExito("Partido Modificado con éxito");
@@ -442,10 +445,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarListaJugadoresEquipoLocal()
         {
-            cblJugadoresEquipoLocal.DataSource = gestorPartido.partido.local.jugadores;
-            cblJugadoresEquipoLocal.DataTextField = "nombre";
-            cblJugadoresEquipoLocal.DataValueField = "idJugador";
-            cblJugadoresEquipoLocal.DataBind();
+            panelSinJugadoresLocal.Visible = !GestorControles.cargarCheckBoxList(cblJugadoresEquipoLocal,
+                    gestorPartido.partido.local.jugadores, "idJugador", "nombre");
             foreach (ListItem item in cblJugadoresEquipoLocal.Items)
                 if (gestorPartido.esTitularLocal(Int32.Parse(item.Value)))
                     item.Selected = true;
@@ -457,7 +458,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarListaJugadoresEquipoVisitante()
         {
-            GestorControles.cargarCheckBoxList(cblJugadoresEquipoVisitante,
+            panelSinJugadoresVisitante.Visible = !GestorControles.cargarCheckBoxList(cblJugadoresEquipoVisitante,
                     gestorPartido.partido.visitante.jugadores, "idJugador", "nombre");
             foreach (ListItem item in cblJugadoresEquipoVisitante.Items)
                 if (gestorPartido.esTitularVisitante(Int32.Parse(item.Value)))

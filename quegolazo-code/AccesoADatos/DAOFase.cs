@@ -99,7 +99,7 @@ namespace AccesoADatos
                           idEdicion = idEdicion,
                           estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
                           tipoFixture = new TipoFixture() { nombre = dr["tipoFixture"].ToString() },
-                          equipos =
+                          //equipos =
                       };        
                      fases.Add(fase);
                  }

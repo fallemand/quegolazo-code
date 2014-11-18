@@ -166,6 +166,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.CheckBoxList cblJugadoresEquipoLocal;
         
         /// <summary>
+        /// Control panelSinJugadoresLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelSinJugadoresLocal;
+        
+        /// <summary>
         /// Control cblJugadoresEquipoVisitante.
         /// </summary>
         /// <remarks>
@@ -173,6 +182,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblJugadoresEquipoVisitante;
+        
+        /// <summary>
+        /// Control panelSinJugadoresVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelSinJugadoresVisitante;
         
         /// <summary>
         /// Control rptGoles.

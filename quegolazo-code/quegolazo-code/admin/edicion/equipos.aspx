@@ -9,8 +9,6 @@
             Seleccionar Equipos
         </div>
         <div class="panel-body">
-            
-            
             <asp:ListBox ClientIDMode="Static" ID="lstEquiposSeleccionados" runat="server" SelectionMode="Multiple"></asp:ListBox>
             <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />
             <asp:UpdatePanel ID="upSeleccionarEquipos" runat="server">
