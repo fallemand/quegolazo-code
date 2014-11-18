@@ -53,6 +53,7 @@
     <Compile Include="DAOJugador.cs" />
     <Compile Include="DAONoticia.cs" />
     <Compile Include="DAOPartido.cs" />
+    <Compile Include="DAOSancion.cs" />
     <Compile Include="DAOTipoSuperficie.cs" />
     <Compile Include="DAOTipoUsuario.cs" />
     <Compile Include="DAOTorneo.cs" />
