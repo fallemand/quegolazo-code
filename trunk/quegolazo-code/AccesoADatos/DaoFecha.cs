@@ -119,8 +119,8 @@ namespace AccesoADatos
              cmd.Connection = con;
              string sql = @"                            
                             DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @idGrupo AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @idFase AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13  ))
 					                            if(@cantidad=0)
