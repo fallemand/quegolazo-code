@@ -105,10 +105,10 @@ namespace AccesoADatos
         }
 
        /// <summary>
-       /// Cambia el estado de la fecha a Completa cuando se jugaron todos los partidos
+       /// Cambia el estado de la fecha a Completa cuando se jugaron todos los partidos y devuelve true si se completó la fecha
        /// autor: Flor Rojas
        /// </summary>
-        public void actualizarFecha(int idPartido)
+        public bool actualizarFecha(int idPartido)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -122,7 +122,7 @@ namespace AccesoADatos
                             DECLARE @idGrupo AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idFase AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idEdicion = @idEdicion AND p.idEstado NOT IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13 ))
+                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13  ))
 					                            if(@cantidad=0)
 						                            BEGIN
 							UPDATE Fechas SET idEstado = @idEstado WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
@@ -131,7 +131,8 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.Parameters.AddWithValue("@idEstado", Estado.fechaCOMPLETA);
                 cmd.CommandText=sql;
-                cmd.ExecuteNonQuery();
+                bool b= (cmd.ExecuteNonQuery() > 0) ? true : false;
+                return b;
             }
             catch (Exception ex)
             {
