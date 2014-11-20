@@ -68,6 +68,14 @@ function showPanel(panelId) {
     $('#' + panelId).collapse('show');
 };
 
+function showDiv(DivId) {
+    $('#' + DivId).show();
+};
+
+function hideDiv(DivId) {
+    $('#' + DivId).hide();
+};
+
 function activaTab(nombreGrupo, nombreTab) {
     $('#' + nombreGrupo + ' a[href="#' + nombreTab + '"]').tab('show');
 };

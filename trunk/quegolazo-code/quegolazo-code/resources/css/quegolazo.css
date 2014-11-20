@@ -470,8 +470,10 @@ color: #559645;
 	padding: 20px;
 	padding-bottom: 0px;
 }
-.help-block {
-	margin-bottom: 0px;
+
+.modal-sm .modal-body {
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 /* --------------------- Tablas ------------------------- */
@@ -1473,6 +1475,18 @@ z-index: 2;
 color: #ffffff;
 background-color: #8FCA82;
 border-color: #DDDDDD;
+}
+
+.label-big {
+    font-size: 12px;
+}
+
+.label-green {
+    background-color: #70BD82;
+}
+
+.label-green:hover {
+    background-color: #77B37C;
 }
 
 /*!
