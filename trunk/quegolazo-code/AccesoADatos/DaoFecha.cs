@@ -131,8 +131,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.Parameters.AddWithValue("@idEstado", Estado.fechaCOMPLETA);
                 cmd.CommandText=sql;
-                bool b= (cmd.ExecuteNonQuery() > 0) ? true : false;
-                return b;
+                return (cmd.ExecuteNonQuery() > 0);
             }
             catch (Exception ex)
             {
