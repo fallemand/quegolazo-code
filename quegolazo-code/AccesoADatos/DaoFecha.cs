@@ -86,6 +86,7 @@ namespace AccesoADatos
                             idFecha = int.Parse(dr["idFecha"].ToString()),
                             estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
                             nombre = dr["nombre"].ToString(),
+                            nombreCompleto ="Fecha " + int.Parse(dr["idFecha"].ToString())
                         };
                         g.fechas.Add(fecha);
                     }

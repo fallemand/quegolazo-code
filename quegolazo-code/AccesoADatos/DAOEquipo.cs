@@ -155,6 +155,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idEquipo", idEquipo);
                 cmd.CommandText = sql;
                 DAODelegado daoDelegado = new DAODelegado();
+                DAOJugador daoJugador = new DAOJugador();
                 DAOTorneo daoTorneo = new DAOTorneo();
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
@@ -167,6 +168,7 @@ namespace AccesoADatos
                     respuesta.colorCamisetaSecundario = dr["colorCamisetaSecundario"].ToString();
                     respuesta.delegadoPrincipal = daoDelegado.obtenerDelegadoPorId(Int32.Parse(dr["idDelegadoPrincipal"].ToString()));                                    
                     respuesta.delegadoOpcional = (dr["idDelegadoOpcional"] != System.DBNull.Value) ? daoDelegado.obtenerDelegadoPorId(Int32.Parse(dr["idDelegadoOpcional"].ToString())) : null;
+                    respuesta.jugadores = daoJugador.obtenerJugadoresDeUnEquipo(Int32.Parse(dr["idEquipo"].ToString()));
                 }
                 if (dr != null)
                     dr.Close();
