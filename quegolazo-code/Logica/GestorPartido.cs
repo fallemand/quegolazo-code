@@ -16,7 +16,6 @@ namespace Logica
 
         /// <summary>
         /// Constructores
-        /// autor: Facundo Allemand
         /// </summary>
         public GestorPartido(Partido partido)
         {
@@ -56,18 +55,11 @@ namespace Logica
                 partido.titularesVisitante.Add(new Jugador() { idJugador = idJugador });
             if (partido.golesLocal != null && partido.golesVisitante != null)
                 partido.estado.idEstado = Estado.partidoJUGADO;
-            else
-            {
-                if (partido.fecha != null)
-                    partido.estado.idEstado = Estado.partidoPROGRAMADO;
-            }
-            
+            else if (partido.fecha != null)
+                partido.estado.idEstado = Estado.partidoPROGRAMADO;
             calcularGanador();
             daoPartido.modificarPartido(partido);
             (new DAOFecha()).actualizarFecha(partido.idPartido);
-
-
-            
         }
 
         /// <summary>

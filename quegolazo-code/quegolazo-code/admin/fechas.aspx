@@ -37,7 +37,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading panel-heading-master">
                                         <div class="row clearfix">
-                                            <div class="col-md-8">
+                                            <div class="col-md-6">
                                                 <a data-toggle="collapse" data-parent="#fases" href="#fase-<%# Eval("idFase") %>" class="text-muted" style="font-size: 15px;">
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                     Fase <%# Eval("idFase") %>
@@ -45,6 +45,10 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Fechas" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <asp:LinkButton title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-container="body" runat="server" CommandName="finalizarFase" CommandArgument=''>
+                                                    <span class="label label-info">Finalizar</span></asp:LinkButton>
                                             </div>
                                         </div>
                                     </div>
