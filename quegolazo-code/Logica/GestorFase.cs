@@ -43,7 +43,7 @@ namespace Logica
                   {
                       g.idGrupo = i;
                       g.fechas = generadorFixture.generarFixture(g.equipos);
-                      i++;
+                      i++; 
                   }
               }
           }
@@ -58,6 +58,14 @@ namespace Logica
       public void armarpija(List<Object> lista){
          
       }
+
+      public bool estaFinalizada(Fase fase)
+      {
+        return  (new DAOFase()).finalizoFase(fase.idFase,fase.idEdicion);
+      }
+
+
+
       //public void registrarFase()
       //{
       //    DAOFase daoFase = new DAOFase();
