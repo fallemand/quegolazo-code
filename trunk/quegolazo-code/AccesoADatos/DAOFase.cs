@@ -190,7 +190,46 @@ namespace AccesoADatos
        /// Cambia el estado de la fase a Cerrada cuando se jugaron todos los partidos y devuelve true si se cerró y false si aún no
        /// autor: Flor Rojas
        /// </summary>
-        public bool cerrarFase(int idPartido)
+//        public bool cerrarFase(int idPartido)
+//        {
+//            SqlConnection con = new SqlConnection(cadenaDeConexion);
+//            SqlCommand cmd = new SqlCommand();
+//            try
+//            {
+//                if (con.State == ConnectionState.Closed)
+//                    con.Open();
+//             cmd.Connection = con;
+//             string sql = @"                            
+//                            DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
+//                            DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
+//                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE  p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13  ))
+//	                            if(@cantidad=0)
+//	                             BEGIN
+//	                             UPDATE Fases SET idEstado =6 WHERE idFase = @idFase AND idEdicion = @idEdicion
+//                                 END";
+//             cmd.Parameters.Clear();
+//             cmd.Parameters.AddWithValue("@idPartido", idPartido);
+//             cmd.Parameters.AddWithValue("@idEstado", Estado.faseCERRADA);
+//             cmd.CommandText=sql;
+//             bool b= (cmd.ExecuteNonQuery() > 0) ? true : false;
+//             return b;
+//            }
+//            catch (Exception ex)
+//            {
+//                throw new Exception("No se pudo cerrar la fase: " + ex.Message);
+//            }
+//            finally
+//            {
+//                if (con != null && con.State == ConnectionState.Open)
+//                    con.Close();
+//            }
+//        }
+
+        /// <summary>
+        /// Cambia el estado de la fase a Cerrada cuando se jugaron todos los partidos y devuelve true si se cerró y false si aún no
+        /// autor: Flor Rojas
+        /// </summary>
+        public bool finalizoFase(int idFase,int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -198,25 +237,57 @@ namespace AccesoADatos
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-             cmd.Connection = con;
-             string sql = @"                            
+                cmd.Connection = con;
+                string sql = @"         
+                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE  p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13  ))
+	                            if(@cantidad=0)
+	                             BEGIN
+	                             SELECT 1
+                                 END";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idFase", idFase);
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion); 
+                cmd.CommandText = sql;
+                SqlDataReader dr = cmd.ExecuteReader();
+                return dr.HasRows;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public bool finalizoFase(int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"                            
                             DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE  p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13  ))
 	                            if(@cantidad=0)
 	                             BEGIN
-	                             UPDATE Fases SET idEstado =6 WHERE idFase = @idFase AND idEdicion = @idEdicion
+	                             SELECT 1
                                  END";
-             cmd.Parameters.Clear();
-             cmd.Parameters.AddWithValue("@idPartido", idPartido);
-             cmd.Parameters.AddWithValue("@idEstado", Estado.faseCERRADA);
-             cmd.CommandText=sql;
-             bool b= (cmd.ExecuteNonQuery() > 0) ? true : false;
-             return b;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idPartido", idPartido);
+                cmd.CommandText = sql;
+                SqlDataReader dr = cmd.ExecuteReader();
+                return dr.HasRows;
             }
             catch (Exception ex)
             {
-                throw new Exception("No se pudo cerrar la fase: " + ex.Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
