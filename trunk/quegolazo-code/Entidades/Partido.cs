@@ -28,6 +28,7 @@ namespace Entidades
         public int? idGanador { get; set; }
         public int? idPerdedor { get; set; }
         public bool? empate { get; set; }
+        public string nombreCompleto { get; set; }
 
         public Partido()
         {
@@ -41,7 +42,6 @@ namespace Entidades
             cambios = new List<Cambio>();
             arbitro = new Arbitro();
             cancha = new Cancha();
-
         }
     }
 }

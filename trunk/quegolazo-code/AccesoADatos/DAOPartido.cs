@@ -108,7 +108,9 @@ namespace AccesoADatos
                              partido.visitante = (dr["idEquipoVisitante"] != DBNull.Value) ? daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString())) : null;
                              partido.estado = daoEstado.obtenerEstadoPorId(int.Parse(dr["idEstado"].ToString()));
                              partido.arbitro = (dr["idArbitro"] != DBNull.Value) ? daoArbitro.obtenerArbitroPorId(int.Parse(dr["idArbitro"].ToString())) : null;
-                             partido.cancha = (dr["idCancha"] != DBNull.Value) ? daoCancha.obtenerCanchaPorId(int.Parse(dr["idArbitro"].ToString())) : null;                             
+                             partido.cancha = (dr["idCancha"] != DBNull.Value) ? daoCancha.obtenerCanchaPorId(int.Parse(dr["idArbitro"].ToString())) : null;
+                             if (dr["idEquipoLocal"] != DBNull.Value && dr["idEquipoVisitante"] != DBNull.Value)
+                                partido.nombreCompleto = daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoLocal"].ToString())).nombre + " vs. " + daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString())).nombre;
                              faseActual.partidos.Add(partido);
                          }
                          if (dr != null)
@@ -502,7 +504,7 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-        }
+        }       
 
         /// <summary>
         /// Obtiene Los Titulares de un Partido

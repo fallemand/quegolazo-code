@@ -44,5 +44,43 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public List<MotivoSancion> obtenerMotivos()
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<MotivoSancion> respuesta = new List<MotivoSancion>();
+            MotivoSancion motivoSancion = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                               FROM MotivosSancion";
+                cmd.Parameters.Clear();
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    motivoSancion = new MotivoSancion();
+                    motivoSancion.idMotivoSancion = Int32.Parse(dr["idMotivoSancion"].ToString());
+                    motivoSancion.nombre = dr["nombre"].ToString();
+                    respuesta.Add(motivoSancion);
+                }
+                dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

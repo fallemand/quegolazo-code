@@ -12,12 +12,12 @@ namespace Entidades
         public List<Partido> partidos { get; set; }
         public string nombre { get; set; }
         public Estado estado { get; set; }
+        public string nombreCompleto { get; set; }
 
         public Fecha()
         {
             partidos = new List<Partido>();
             estado = new Estado();
         }
-
     }
 }

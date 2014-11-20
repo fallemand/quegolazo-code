@@ -54,6 +54,7 @@ namespace Entidades
                             {
                                 fechaFase.nombre = fecha.nombre;
                                 fechaFase.estado = fecha.estado;
+                                fechaFase.nombreCompleto = fecha.nombreCompleto;
                                 foreach (Partido partido in fecha.partidos)
                                 {
                                     fechaFase.partidos.Add(partido);
