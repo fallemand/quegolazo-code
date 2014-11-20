@@ -29,26 +29,26 @@
                                 </fieldset>
                             </div>
                         </div>
-                        <asp:Repeater ID="rptFases" runat="server" OnItemDataBound="rptFases_ItemDataBound">
+                        <asp:Repeater ID="rptFases" runat="server" OnItemDataBound="rptFases_ItemDataBound" OnItemCommand="rptFases_ItemCommand">
                             <HeaderTemplate>
                                 <div class="panel-group" id="fases">
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <div class="panel panel-default">
                                     <div class="panel-heading panel-heading-master">
-                                        <div class="row clearfix">
-                                            <div class="col-md-6">
+                                        <div class="row clearfix" id="masterContainer">
+                                            <div class="col-md-5">
                                                 <a data-toggle="collapse" data-parent="#fases" href="#fase-<%# Eval("idFase") %>" class="text-muted" style="font-size: 15px;">
                                                     <span class="glyphicon glyphicon-plus"></span>
                                                     Fase <%# Eval("idFase") %>
                                                 </a>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 nopadding-left">
                                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Fechas" />
                                             </div>
-                                            <div class="col-md-2">
-                                                <asp:LinkButton title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-container="body" runat="server" CommandName="finalizarFase" CommandArgument=''>
-                                                    <span class="label label-info">Finalizar</span></asp:LinkButton>
+                                            <div class="col-md-3">
+                                                <asp:LinkButton title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
+                                                    <span class="label label-green label-big">Finalizar</span></asp:LinkButton>
                                             </div>
                                         </div>
                                     </div>
@@ -415,6 +415,124 @@
             </div>
         </div>
     </div>
+    <div class="modal fade bs-example-modal-sm" id="modalConfirmarFinalizarFase" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Finalizar Fase</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="panelFaseNoCompleta" class="alert alert-danger" style="display:none;">
+                        <b>Atención:</b> Esta fase posee fechas que no han sido completadas.
+                    </div>  
+                    ¿Esta seguro que desea finalizar la fase?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-success" Text="Finalizar" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Agregar Edicion -->
+    <div class="modal fade" id="modalFinalizarFase" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <asp:UpdatePanel ID="upModalEdicion" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                            
+                            <h4 class="modal-title" id="H1"><i class="flaticon-trophy5"></i>
+                                <asp:Label ID="lblTituloModalEdicion" runat="server" Text="Agregar Nueva Edición"></asp:Label>
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                           <fieldset class="form-horizontal vgDatosEdicion">
+                                        <div class="form-group">
+                                            <label for="text" class="col-lg-2 control-label">Torneo</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="txtTorneoAsociado" runat="server" name="nombreTorneoEdicion" placeholder="Nombre del Torneo" disabled>
+                                                <span class="help-block">Torneo para el cual esta creando una nueva Edición</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="text" class="col-lg-2 control-label">Nombre</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="txtNombreEdicion" runat="server" rangelength="3, 50" required="true" name="nombreEdicion" placeholder="Nombre de la Edición">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="select" class="col-lg-2 control-label">Tamaño</label>
+                                            <div class="col-lg-10">
+                                                <asp:DropDownList ID="ddlTamañoCancha" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="select" class="col-lg-2 control-label">Superficie</label>
+                                            <div class="col-lg-10">
+                                                <asp:DropDownList ID="ddlTipoSuperficie" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="select" class="col-lg-2 control-label">Género</label>
+                                            <div class="col-lg-10">
+                                                <asp:DropDownList ID="ddlGenero" runat="server" CssClass="form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>                                        
+                                 
+                                        <div class="form-group">
+                                            <label for="text" class="col-lg-2 control-label">Puntos</label>
+                                            <div class="col-lg-10">
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
+                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3" required="required">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">=</span>
+                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1" required="required">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0" required="required">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                             <asp:Panel ID="panFracasoEdicion" runat="server" CssClass="alert alert-danger" Visible="False">
+                               <asp:Literal ID="litFracasoEdicion" runat="server"></asp:Literal>
+                             </asp:Panel>                      
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <asp:Button ID="btnSiguienteEdicion" runat="server" Text="Guardar" CssClass="btn btn-success causesValidation vgDatosEdicion" />
+                                <asp:Button ID="btnModificarEdicion" runat="server" Text="Modificar" Visible="false" CssClass="btn btn-success causesValidation vgDatosEdicion" />
+                           </div>
+                            <div class="col-xs-1">
+                                <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
+                                    <ProgressTemplate>
+                                        <img src="/resources/img/theme/load3.gif" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Agregar Edicion -->
+
     <script type="text/javascript">
         $('body').on('keyup', '#filtro', function () {
             if ($(this).val().length > 0) {

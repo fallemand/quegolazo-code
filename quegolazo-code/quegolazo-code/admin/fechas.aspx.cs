@@ -51,6 +51,28 @@ namespace quegolazo_code.admin
         }
 
         /// <summary>
+        /// Eventos para botones del repeater de fases
+        /// autor: Facu Allemand
+        /// </summary>
+        protected void rptFases_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "finalizarFase")
+                {
+                    //gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
+                    //litNombreEdicion.Text = gestorEdicion.edicion.nombre;
+                    if(!gestorEdicion.gestorFase.estaFinalizada(Validador.castInt(e.CommandArgument.ToString()),gestorEdicion.edicion.idEdicion))
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "showDiv", "showDiv('panelFaseNoCompleta');", true);
+                    else
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "showDiv", "hideDiv('panelFaseNoCompleta');", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalConfirmarFinalizarFase');", true);
+                }
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        /// <summary>
         /// Cada vez que se genera una fase, generar todas las fechas
         /// autor: Facu Allemand
         /// </summary>

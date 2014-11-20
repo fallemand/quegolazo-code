@@ -59,9 +59,9 @@ namespace Logica
          
       }
 
-      public bool estaFinalizada(Fase fase)
+      public bool estaFinalizada(int idFase, int idEdicion)
       {
-        return  (new DAOFase()).finalizoFase(fase.idFase,fase.idEdicion);
+        return  (new DAOFase()).finalizoFase(idFase,idEdicion);
       }
 
 

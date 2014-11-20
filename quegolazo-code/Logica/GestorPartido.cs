@@ -57,6 +57,8 @@ namespace Logica
                 partido.estado.idEstado = Estado.partidoJUGADO;
             else if (partido.fecha != null)
                 partido.estado.idEstado = Estado.partidoPROGRAMADO;
+            else
+                partido.estado.idEstado = Estado.partidoDIAGRAMADO;
             calcularGanador();
             daoPartido.modificarPartido(partido);
             (new DAOFecha()).actualizarFecha(partido.idPartido);
