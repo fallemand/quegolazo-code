@@ -307,6 +307,7 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void limpiarPaneles()
         {
+            txtNombreTorneo.Disabled = false;
             GestorControles.cleanControls(new List<Object> { panFracaso, panFracasoTorneo, panFracasoEdicion });
             GestorControles.hideControls(new List<Object> { panFracaso, litFracasoTorneo, litFracasoEdicion });
         }
@@ -318,7 +319,7 @@ namespace quegolazo_code.admin
         {
             lblTituloModalTorneo.Text = "Crear nuevo torneo";
             GestorControles.cleanControls(new List<Object> { txtUrlTorneo, txtNombreTorneo, txtDescripcion });
-            GestorControles.disableControls(new List<Object> { txtUrlTorneo });
+            txtUrlTorneo.Disabled = false;
             GestorControles.showControls(new List<Object> { btnRegistrarTorneo });
             GestorControles.hideControls(new List<Object> { btnModificarTorneo, panFracasoTorneo });
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.TORNEO,GestorImagen.MEDIANA);
