@@ -28,9 +28,9 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT e.idEstado, e.nombre, e.idAmbito, a.nombre as nombreAmbito
-                             FROM Estados e, EstadoAmbitos a
-                             WHERE e.idEstado = @idEstado AND e.idAmbito=a.idAmbito";
+                string sql = @"SELECT *
+                                FROM viewEstados
+                                WHERE idEstado = @idEstado";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEstado", idEstado);
                 cmd.CommandText = sql;
@@ -41,10 +41,10 @@ namespace AccesoADatos
                     Estado nuevoEstado = new Estado()
                     {
                         idEstado = Int32.Parse(dr["idEstado"].ToString()),
-                        nombre = dr["nombre"].ToString(),
+                        nombre = dr["estado"].ToString(),
                         ambito = new Ambito() {
                             idAmbito = Int32.Parse(dr["idAmbito"].ToString()),
-                            nombre = dr["nombreAmbito"].ToString()
+                            nombre = dr["ambito"].ToString()
                         }
                     };
                     respuesta = nuevoEstado;
@@ -77,9 +77,9 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT e.idEstado AS 'idEstado'
-                             FROM Estados e INNER JOIN EstadoAmbitos a ON e.idAmbito = a.idAmbito
-                             WHERE e.nombre = @estado AND a.nombre = @ambito";
+                string sql = @"SELECT *
+                                FROM viewEstados
+                                WHERE estado = @estado AND ambito = @ambito";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@estado", estado);
                 cmd.Parameters.AddWithValue("@ambito", ambito);

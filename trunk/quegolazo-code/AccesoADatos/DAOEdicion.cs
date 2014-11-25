@@ -30,7 +30,6 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-
                 string sql = @"SELECT *
                                 FROM Ediciones
                                 WHERE idTorneo = @idTorneo
@@ -611,9 +610,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT e.idEdicion 
-                                FROM Ediciones e INNER JOIN Torneos t ON e.idTorneo = t.idTorneo 
-                                INNER JOIN Usuarios u ON t.idUsuario = u.idUsuario
+                string sql = @"SELECT * 
+                                FROM viewTorneosUsuario
                                 WHERE e.idEdicion = @idEdicion AND u.idUsuario = @idUsuario";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
@@ -640,7 +638,7 @@ namespace AccesoADatos
         /// Cambia de Estado a la Edición a CONFIGURADA
         /// autor: Pau Pedrosa
         /// </summary>
-        public void cambiarEstadoAConfigurada(int idEdicion, int idEstado)
+        public void cambiarEstadoAConfigurada(int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -653,7 +651,7 @@ namespace AccesoADatos
                                 SET idEstado = @idEstado
                                 WHERE idEdicion = @idEdicion";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idEstado", idEstado);
+                cmd.Parameters.AddWithValue("@idEstado", Estado.edicionCONFIGURADA);
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);                
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();

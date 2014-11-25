@@ -233,7 +233,7 @@ namespace Logica
         public void cambiarEstadoAConfigurada()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            daoEdicion.cambiarEstadoAConfigurada(edicion.idEdicion, Estado.edicionCONFIGURADA); 
+            daoEdicion.cambiarEstadoAConfigurada(edicion.idEdicion); 
         }
 
         /// <summary>
