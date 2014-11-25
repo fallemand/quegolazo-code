@@ -156,7 +156,7 @@ namespace Logica
         public void eliminarEdicion(int idEdicion)
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            daoEdicion.eliminarEdicion(idEdicion, Estado.edicionREGISTRADA);
+            daoEdicion.eliminarEdicion(idEdicion);
         }
 
         /// <summary>
