@@ -216,21 +216,17 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @" SELECT e.nombre as 'Equipo', COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END) as 'PJ',  
-				                        COUNT(CASE p.idGanador WHEN e.idEquipo THEN 1 ELSE NULL END) as 'PG',
-				                        COUNT(CASE P.empate WHEN 1 THEN 1 ELSE NULL END) as 'PE',
-				                        COUNT(CASE p.idPerdedor WHEN e.idEquipo THEN 1 ELSE NULL END) as 'PP',
-				                        SUM(CASE p.idEquipoLocal WHEN e.idEquipo THEN p.golesLocal ELSE 0 END)+ SUM(CASE p.idEquipoVisitante WHEN e.idEquipo THEN p.golesVisitante ELSE 0 END) as 'GF',
-				                        SUM(CASE p.idEquipoLocal WHEN e.idEquipo THEN p.golesVisitante ELSE 0 END)+ SUM(CASE p.idEquipoVisitante WHEN e.idEquipo THEN p.golesLocal ELSE 0 END) as 'GC',
-				                        COUNT(CASE p.idGanador WHEN e.idEquipo THEN 1 ELSE NULL END) * ed.puntosGanado + COUNT(CASE P.empate WHEN 1 THEN 1 ELSE NULL END)*ed.puntosEmpatado+ COUNT(CASE p.idPerdedor WHEN e.idEquipo THEN 1 ELSE NULL END)*ed.puntosPerdido as 'Puntos'
-                                FROM  Partidos p 
-	                            INNER JOIN EquipoXEdicion exe ON p.idEdicion=exe.idEdicion
-	                            INNER JOIN Equipos e ON exe.idEquipo=e.idEquipo 
-	                            INNER JOIN Ediciones ed ON ed.idEdicion=exe.idEdicion 
-	                            WHERE e.idEquipo=p.idEquipoLocal OR e.idEquipo=p.idEquipoVisitante
-	                            GROUP BY p.idEdicion, e.nombre, ed.puntosGanado, ed.puntosPerdido, ed.puntosEmpatado
-								HAVING p.idEdicion=@idEdicion 
-	                            ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
+                string sql = @"SELECT Equipo, COUNT(CASE idEstadoPartido WHEN 13 THEN 1 ELSE NULL END) AS 'PJ',  
+                                COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) AS 'PG',
+                                COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END) AS 'PE',
+                                COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END) AS 'PP',
+                                SUM(CASE idEquipoLocal WHEN idEquipo THEN golesLocal ELSE 0 END) + SUM(CASE idEquipoVisitante WHEN idEquipo THEN golesVisitante ELSE 0 END) AS 'GF',
+                                SUM(CASE idEquipoLocal WHEN idEquipo THEN golesVisitante ELSE 0 END)+ SUM(CASE idEquipoVisitante WHEN idEquipo THEN golesLocal ELSE 0 END) AS 'GC',
+                                COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
+                                FROM viewTablaPosiciones
+                                GROUP BY Equipo, idEdicion, nombre, puntosGanado, puntosPerdido, puntosEmpatado
+                                HAVING idEdicion = @idEdicion
+                                ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.CommandText = sql;
