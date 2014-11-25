@@ -1,10 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="fechas.aspx.cs" Inherits="quegolazo_code.admin.fechas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
-    <script type="text/javascript" src="../resources/js/moment.js"></script>
-    <script type="text/javascript" src="../resources/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="../resources/js/bootstrap-datetimepicker.es.js"></script>
-    <script type="text/javascript" src="../resources/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="../resources/js/defaults-es_CL.min.js"></script>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
@@ -191,7 +187,7 @@
                                         <div class="form-group">
                                             <label for="select" class="col-lg-2 control-label">Árbitro</label>
                                             <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlArbitros" runat="server" CssClass="form-control">
+                                                <asp:DropDownList ID="ddlArbitros" runat="server" CssClass="form-control selectpicker" data-live-search="true">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
@@ -200,7 +196,7 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Cancha</label>
                                             <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlCanchas" runat="server" CssClass="form-control">
+                                                <asp:DropDownList ID="ddlCanchas" runat="server" CssClass="form-control searchableSelect">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
@@ -255,7 +251,7 @@
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Jugador</label>
                                                             <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlGolesJugadores" runat="server" CssClass="form-control margin-xs input-sm" disabled="true"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlGolesJugadores" runat="server" CssClass="form-control margin-xs input-sm selectpicker" data-live-search="true" disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <% } %>
@@ -307,8 +303,8 @@
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
                                                             <label for="text" class="col-md-2 control-label">Entra</label>
-                                                            <div class="col-md-10">
-                                                                <asp:DropDownList ID="ddlCambiosJugadoresEntra" runat="server" CssClass="form-control margin-xs input-sm" required disabled="true"></asp:DropDownList>
+                                                            <div class="col-md-10 select-sm">
+                                                                <asp:DropDownList ID="ddlCambiosJugadoresEntra" runat="server" CssClass="form-control margin-xs input-sm searchableSelect" required disabled="true"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                         <div class="form-group nomargin-bottom">
@@ -553,21 +549,12 @@
         $('#divFechaPartido').datetimepicker({
             language: 'es'
         });
-        $('.selectpicker').selectpicker();
         function EndRequestHandler(sender, args) {
             $('#divFechaPartido').datetimepicker({
                 language: 'es'
             });
-            $('.selectpicker').selectpicker();
             cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
         };
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
-        function EndRequestHandler(sender, args) {
-            $('#divFechaPartido').datetimepicker({
-                language: 'es'
-            });
-            $('.selectpicker').selectpicker();
-            cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
-        };
     </script>
 </asp:Content>
