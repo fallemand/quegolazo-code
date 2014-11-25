@@ -1,5 +1,9 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="admin.torneo.master.cs" Inherits="quegolazo_code.admin.admin_torneo" %>
 <asp:Content ContentPlaceHolderID="ContentHeader" runat="server">
+    <script type="text/javascript" src="../resources/js/moment.js"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap-datetimepicker.es.js"></script>
+    <script type="text/javascript" src="../resources/js/jquery.searchableSelect.js"></script>
     <!-- ContentPage Header -->
     <asp:ContentPlaceHolder ID="ContentHeaderAdminTorneo" runat="server">
     </asp:ContentPlaceHolder>
@@ -37,6 +41,15 @@
         jQuery(document).ready(function () {
             setActiveParentMenu('menuTorneo li');
         });
+        $('.searchableSelect').searchableSelect();
+        function EndRequestHandler(sender, args) {
+            $('#divFechaPartido').datetimepicker({
+                language: 'es'
+            });
+            $('.searchableSelect').searchableSelect();
+            cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
+        };
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
     </script>
     <!-- Script -->
 </asp:Content>
