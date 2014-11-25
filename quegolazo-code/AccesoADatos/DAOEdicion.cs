@@ -341,7 +341,7 @@ namespace AccesoADatos
         /// </summary>
         /// <param name="idEdicion">Id de la edición a eliminar</param>
         /// <param name="idEstado">Id del estado</param>
-        public void eliminarEdicion(int idEdicion, int idEstado)
+        public void eliminarEdicion(int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -352,16 +352,18 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 string sql = @"DELETE FROM Ediciones
                                 WHERE idEdicion = @idEdicion 
-                                AND idEstado = @idEstado";
+                                AND idEstado IN (@idEstado1, @idEstado2)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
-                cmd.Parameters.AddWithValue("@idEstado", idEstado);
+                cmd.Parameters.AddWithValue("@idEstado1", Estado.edicionREGISTRADA);
+                cmd.Parameters.AddWithValue("@idEstado2", Estado.edicionCONFIGURADA);
                 cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
+                if (cmd.ExecuteNonQuery() == 0)
+                    throw new Exception();
             }
             catch (SqlException ex)
             {
-                throw new Exception("No se pudo eliminar la cancha: " + ex.Message);
+                throw new Exception("No se pudo eliminar la Edición porque tiene partidos jugados");
             }
             finally
             {
