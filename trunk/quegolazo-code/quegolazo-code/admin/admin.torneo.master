@@ -1,9 +1,9 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="admin.torneo.master.cs" Inherits="quegolazo_code.admin.admin_torneo" %>
 <asp:Content ContentPlaceHolderID="ContentHeader" runat="server">
-    <script type="text/javascript" src="../resources/js/moment.js"></script>
-    <script type="text/javascript" src="../resources/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="../resources/js/bootstrap-datetimepicker.es.js"></script>
-    <script type="text/javascript" src="../resources/js/jquery.searchableSelect.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.cRESOURCES %>/js/moment.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.cRESOURCES %>/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.cRESOURCES %>/js/bootstrap-datetimepicker.es.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.cRESOURCES %>/js/jquery.searchableSelect.js"></script>
     <!-- ContentPage Header -->
     <asp:ContentPlaceHolder ID="ContentHeaderAdminTorneo" runat="server">
     </asp:ContentPlaceHolder>

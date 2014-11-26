@@ -1563,6 +1563,8 @@ Date: 2014-11-05
   max-height: 400px;
   overflow-y: scroll;
   position: relative;
+  font-size: 14px;
+  line-height: 13px;
 }
 
 .searchable-select-items::-webkit-scrollbar {
@@ -1591,5 +1593,10 @@ Date: 2014-11-05
 
 .select-sm .searchable-select-holder{
     padding-left:11px;
+}
+
+.select-sm  .searchable-select-items {
+  font-size: 12px;
+  line-height: 11px;
 }
 
