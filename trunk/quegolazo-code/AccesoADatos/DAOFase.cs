@@ -295,5 +295,54 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fase"></param>
+        public void modificarFase(Fase fase)
+        {
+            SqlTransaction trans = null;
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                cmd.Connection = new SqlConnection(cadenaDeConexion);
+                trans = con.BeginTransaction();
+                cmd.Transaction = trans;
+                
+                if (fase != null)
+                {
+                    string sql = @"UPDATE Fases SET tipoFixture=@tipoFixture,idEstado=@idEstado 
+                                    WHERE idFase=@idFase AND idEdicion=@idEdicion";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                    cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                    cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
+                    cmd.Parameters.AddWithValue("@idEstado", fase.estado.idEstado);
+                    cmd.CommandText = sql;
+                    cmd.ExecuteNonQuery();
+                    if (fase.grupos.Count != 0)
+                    {
+                        DAOGrupo daoGrupo = new DAOGrupo();
+                        daoGrupo.registrarGrupos(fase, con, trans);
+
+                        DAOFecha daoFecha = new DAOFecha();
+                        daoFecha.registrarFechas(fase, con, trans);
+
+                        DAOPartido daoPartido = new DAOPartido();
+                        daoPartido.registrarPartidos(fase, con, trans);
+                    }
+                    trans.Commit();
+                }
+            }
+            catch (SqlException ex)
+            {
+                trans.Rollback();
+                throw new Exception("No se pudo registrar la Fase: " + ex.Message);
+            }
+        }
+
     }
 }

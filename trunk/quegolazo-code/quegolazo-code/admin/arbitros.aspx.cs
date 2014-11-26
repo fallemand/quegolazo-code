@@ -4,10 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entidades;
 using Logica;
 using Utils;
-using AccesoADatos;
 
 namespace quegolazo_code.admin
 {
@@ -16,9 +14,9 @@ namespace quegolazo_code.admin
         GestorArbitro gestorArbitro = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorArbitro = Sesion.getGestorArbitro();
             try
             {
+                gestorArbitro = Sesion.getGestorArbitro();
                 limpiarPaneles();
                 cargarRepeaterArbitros();
             }
@@ -82,11 +80,15 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void btnCancelarModificacionArbitro_Click(object sender, EventArgs e)
         {
-            limpiarCamposArbitros();
-            btnRegistrarArbitro.Visible = true;
-            btnModificarArbitro.Visible = false;
-            btnCancelarModificacionArbitro.Visible = false;
-            gestorArbitro.arbitro = null; // le setea null al árbitro
+            try
+            {
+                limpiarCamposArbitros();
+                btnRegistrarArbitro.Visible = true;
+                btnModificarArbitro.Visible = false;
+                btnCancelarModificacionArbitro.Visible = false;
+                gestorArbitro.arbitro = null; // le setea null al árbitro
+            }
+            catch (Exception ex) { mostrarPanelFracasoListaArbitros(ex.Message); }
         }
 
         /// <summary>

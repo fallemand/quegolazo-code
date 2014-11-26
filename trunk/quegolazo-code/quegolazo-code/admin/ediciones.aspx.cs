@@ -19,18 +19,18 @@ namespace quegolazo_code.admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorTorneo = Sesion.getGestorTorneo();
-            gestorTorneo.torneo = Sesion.getTorneo();
-            gestorEdicion = Sesion.getGestorEdicion();
-            if (!Page.IsPostBack)
+            try
             {
-                try
+                gestorTorneo = Sesion.getGestorTorneo();
+                gestorTorneo.torneo = Sesion.getTorneo();
+                gestorEdicion = Sesion.getGestorEdicion();
+                if (!Page.IsPostBack)
                 {
                     cargarCombos();
                     cargarRepeaterEdiciones();
                 }
-                catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
             }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         protected void rptEdiciones_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -121,62 +121,77 @@ namespace quegolazo_code.admin
 
         protected void rptEdiciones_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            try
             {
-                Repeater rptEquipos = (Repeater)e.Item.FindControl("rptEquipos");
-                gestorEdicion.edicion = (Edicion)e.Item.DataItem;
-                GestorControles.cargarRepeaterList(rptEquipos, gestorEdicion.obtenerEquipos());
-                if (rptEquipos.Items.Count == 0)
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
                 {
-                  HtmlGenericControl panelEquipos = (HtmlGenericControl)e.Item.FindControl("panelEquipos");
-                  panelEquipos.Visible = false;
-                }
-                //Sanciones
-                if (gestorEdicion.edicion.preferencias.sanciones)
-                {
-                    HtmlGenericControl rSancionesSi = (HtmlGenericControl)e.Item.FindControl("rSancionesSi");
-                    rSancionesSi.Visible = true;
-                }
-                else
-                {
-                    HtmlGenericControl rSancionesNo = (HtmlGenericControl)e.Item.FindControl("rSancionesNo");
-                    rSancionesNo.Visible = true;
-                }   
-                //Arbitros
-                if (gestorEdicion.edicion.preferencias.arbitros)
-                {
-                    HtmlGenericControl rArbitrosSi = (HtmlGenericControl)e.Item.FindControl("rArbitrosSi");
-                    rArbitrosSi.Visible = true;
-                }
-                else
-                {
-                    HtmlGenericControl rArbitrosNo = (HtmlGenericControl)e.Item.FindControl("rArbitrosNo");
-                    rArbitrosNo.Visible = true;
-                }
+                    Repeater rptEquipos = (Repeater)e.Item.FindControl("rptEquipos");
+                    gestorEdicion.edicion = (Edicion)e.Item.DataItem;
+                    GestorControles.cargarRepeaterList(rptEquipos, gestorEdicion.obtenerEquipos());
+                    if (rptEquipos.Items.Count == 0)
+                    {
+                        HtmlGenericControl panelEquipos = (HtmlGenericControl)e.Item.FindControl("panelEquipos");
+                        panelEquipos.Visible = false;
+                    }
+                    //Sanciones
+                    if (gestorEdicion.edicion.preferencias.sanciones)
+                    {
+                        HtmlGenericControl rSancionesSi = (HtmlGenericControl)e.Item.FindControl("rSancionesSi");
+                        rSancionesSi.Visible = true;
+                    }
+                    else
+                    {
+                        HtmlGenericControl rSancionesNo = (HtmlGenericControl)e.Item.FindControl("rSancionesNo");
+                        rSancionesNo.Visible = true;
+                    }
+                    //Arbitros
+                    if (gestorEdicion.edicion.preferencias.arbitros)
+                    {
+                        HtmlGenericControl rArbitrosSi = (HtmlGenericControl)e.Item.FindControl("rArbitrosSi");
+                        rArbitrosSi.Visible = true;
+                    }
+                    else
+                    {
+                        HtmlGenericControl rArbitrosNo = (HtmlGenericControl)e.Item.FindControl("rArbitrosNo");
+                        rArbitrosNo.Visible = true;
+                    }
 
-                //Jugadores
-                if (gestorEdicion.edicion.preferencias.jugadores)
-                {
-                    HtmlGenericControl rJugadoresSi = (HtmlGenericControl)e.Item.FindControl("rJugadoresSi");
-                    rJugadoresSi.Visible = true;
+                    //Jugadores
+                    if (gestorEdicion.edicion.preferencias.jugadores)
+                    {
+                        HtmlGenericControl rJugadoresSi = (HtmlGenericControl)e.Item.FindControl("rJugadoresSi");
+                        rJugadoresSi.Visible = true;
+                    }
+                    else
+                    {
+                        HtmlGenericControl rJugadoresNo = (HtmlGenericControl)e.Item.FindControl("rJugadoresNo");
+                        rJugadoresNo.Visible = true;
+                    }
+                    //Cancha
+                    if (gestorEdicion.edicion.preferencias.canchas)
+                    {
+                        HtmlGenericControl rCanchasSi = (HtmlGenericControl)e.Item.FindControl("rCanchasSi");
+                        rCanchasSi.Visible = true;
+                    }
+                    else
+                    {
+                        HtmlGenericControl rCanchasNo = (HtmlGenericControl)e.Item.FindControl("rCanchasNo");
+                        rCanchasNo.Visible = true;
+                    }
                 }
-                else
-                {
-                    HtmlGenericControl rJugadoresNo = (HtmlGenericControl)e.Item.FindControl("rJugadoresNo");
-                    rJugadoresNo.Visible = true;
-                }
-                //Cancha
-                if (gestorEdicion.edicion.preferencias.canchas)
-                {
-                    HtmlGenericControl rCanchasSi = (HtmlGenericControl)e.Item.FindControl("rCanchasSi");
-                    rCanchasSi.Visible = true;
-                }
-                else
-                {
-                    HtmlGenericControl rCanchasNo = (HtmlGenericControl)e.Item.FindControl("rCanchasNo");
-                    rCanchasNo.Visible = true;
-                }      
             }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        protected void btnRegistrarNuevaEdicion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                limpiarModalEdicion();
+                txtTorneoAsociado.Value = gestorTorneo.torneo.nombre;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         //------------------------------------------
@@ -240,13 +255,5 @@ namespace quegolazo_code.admin
             panFracaso.Visible = true;
         }
 
-        protected void btnRegistrarNuevaEdicion_Click(object sender, EventArgs e)
-        {
-            limpiarModalEdicion();
-            txtTorneoAsociado.Value = gestorTorneo.torneo.nombre;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
-        }
-
-    
     }
 }
