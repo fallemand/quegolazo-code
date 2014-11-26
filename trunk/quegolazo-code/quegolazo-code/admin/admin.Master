@@ -5,18 +5,18 @@
     <title>Que Golazo! | Sistema de Gestión de Torneos de Fútbol</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="/resources/css/bootstrap.css" />
-    <link rel="stylesheet" href="/resources/css/flaticon.css" />
-    <link rel="stylesheet" href="/resources/css/quegolazo.css" />
-    <link rel="shortcut icon" href="/resources/img/theme/favicon.ico" />
+    <link rel="stylesheet" href="<%=Logica.GestorUrl.rCSS %>/bootstrap.css" />
+    <link rel="stylesheet" href="<%=Logica.GestorUrl.rCSS %>/flaticon.css" />
+    <link rel="stylesheet" href="<%=Logica.GestorUrl.rCSS %>/quegolazo.css" />
+    <link rel="shortcut icon" href="<%=Logica.GestorUrl.rIMG %>/theme/favicon.ico" />
     <!-- Archivos JavaScript -->
-    <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.validate.js"></script>
-    <script type="text/javascript" src="/resources/js/messages_es_AR.js"></script>
-    <script type="text/javascript" src="/resources/js/jquery.colorPicker.min.js"></script>
-    <script type="text/javascript" src="/resources/js/quegolazo.js"></script>
-    <script type="text/javascript" src="/resources/js/ajaxfileupload.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/jquery.validate.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/messages_es_AR.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/jquery.colorPicker.min.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/quegolazo.js"></script>
+    <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/ajaxfileupload.js"></script>
     <!-- Archivos JavaScript -->
     <!-- Content Head -->
     <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
