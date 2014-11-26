@@ -38,5 +38,8 @@ namespace Logica
 
         //Forms en el root 
         public const string rINDEX = "/index.aspx";
+
+        //Carpetas 
+        public const string cRESOURCES = "/resources";
     }
 }
