@@ -42,8 +42,11 @@
             setActiveParentMenu('menuTorneo li');
         });
         $('.searchableSelect').searchableSelect();
+        $('.date').datetimepicker({
+            language: 'es'
+        });
         function EndRequestHandler(sender, args) {
-            $('#divFechaPartido').datetimepicker({
+            $('.date').datetimepicker({
                 language: 'es'
             });
             $('.searchableSelect').searchableSelect();
