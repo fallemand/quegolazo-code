@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="fechas.aspx.cs" Inherits="quegolazo_code.admin.fechas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
-    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
@@ -77,7 +76,7 @@
                                                                         <asp:Repeater ID="rptPartidos" runat="server" OnItemCommand="rptPartidos_ItemCommand">
                                                                             <ItemTemplate>
                                                                                 <tr>
-                                                                                    <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "local")).nombre %></td>
+                                                                                    <td><%# ((Entidades.Partido)Container.DataItem).local.nombre %></td>
                                                                                     <td><%# ((Entidades.Partido)Container.DataItem).golesLocal %>
                                                                                         <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesLocal.ToString()+")" : "" %>
                                                                                         - <%# ((Entidades.Partido)Container.DataItem).golesVisitante%>
@@ -176,7 +175,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Fecha</label>
-                                            <div id="divFechaPartido" class="col-lg-10 input-append date">
+                                            <div class="col-lg-10 input-append date">
                                                 <div class="input-group input-group-md">
                                                     <input type="text" data-format="dd/MM/yyyy hh:mm" class="form-control" runat="server" id="txtFecha" placeholder="Sin Asignar" fechahora="true">
                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -539,20 +538,14 @@
                 $('.panel-collapse').collapse('hide');
                 $('.panel-title').attr('data-toggle', 'collapse');
             }
-
             var rex = new RegExp($(this).val(), 'i');
             $('.tablaFiltro tr').hide();
             $('.tablaFiltro tr').filter(function () {
                 return rex.test($(this).text());
             }).show();
         });
-        $('#divFechaPartido').datetimepicker({
-            language: 'es'
-        });
+
         function EndRequestHandler(sender, args) {
-            $('#divFechaPartido').datetimepicker({
-                language: 'es'
-            });
             cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
         };
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);

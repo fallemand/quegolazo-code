@@ -1,9 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="arbitros.aspx.cs" Inherits="quegolazo_code.admin.arbitros" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
-
-
         <div class="row">
             <div class="col-md-5">
                 <asp:UpdatePanel ID="upRegistrarNuevoArbitro" runat="server">
