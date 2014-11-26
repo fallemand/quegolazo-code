@@ -27,7 +27,8 @@ namespace quegolazo_code.admin.edicion
             string equipos = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.equipos);
             string fases = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.fases);
             if(!IsPostBack)
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + "});", true);
+            //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:"+gestorEdicion.edicion.idEdicion +"});", true);
             }
 
         /// <summary>

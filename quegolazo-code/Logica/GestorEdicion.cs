@@ -96,7 +96,7 @@ namespace Logica
              //agrego los equipos al equipos a la edición
             GestorEquipo gestorEquipo = new GestorEquipo();
             foreach (int id in listaIdsSeleccionados)
-                edicion.equipos.Add(gestorEquipo.obtenerEquipoPorId(id));
+                edicion.equipos.Add(gestorEquipo.obtenerEquipoReducidoPorId(id));
         }
 
 

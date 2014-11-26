@@ -185,6 +185,57 @@ namespace AccesoADatos
             }
         }
 
+          /// <summary>
+        /// Obtiene un Equipo por Id, pero el objeto no tiene todos sus atributos, solo el nombre y el ID.
+        /// autor: Antonio Herrera
+        /// </summary>
+        /// <param name="idEquipo">id del equipo</param>
+        /// <returns>Objeto Equipo</returns>
+        public Equipo obtenerEquipoReducidoPorId(int idEquipo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            Equipo respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM Equipos
+                                WHERE idEquipo = @idEquipo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEquipo", idEquipo);
+                cmd.CommandText = sql;
+                DAODelegado daoDelegado = new DAODelegado();
+                DAOJugador daoJugador = new DAOJugador();
+                DAOTorneo daoTorneo = new DAOTorneo();
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    respuesta = new Equipo();
+                    respuesta.idEquipo = Int32.Parse(dr["idEquipo"].ToString());
+                    respuesta.nombre = dr["nombre"].ToString();
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar el Equipo: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+
+      
+
         /// <summary>
         /// Modifica en la BD el equipo
         /// autor: Pau Pedrosa
