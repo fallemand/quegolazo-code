@@ -37,19 +37,19 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Partido</label>
                                             <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlPartido" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPartido_SelectedIndexChanged"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlPartido" runat="server" CssClass="form-control searchableSelect" AutoPostBack="true" OnSelectedIndexChanged="ddlPartido_SelectedIndexChanged"></asp:DropDownList>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Equipo</label>
                                             <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlEquipo" runat="server" CssClass="form-control" required="true" AutoPostBack="true" OnSelectedIndexChanged="ddlEquipo_SelectedIndexChanged"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlEquipo" runat="server" CssClass="form-control searchableSelect" required="true" AutoPostBack="true" OnSelectedIndexChanged="ddlEquipo_SelectedIndexChanged"></asp:DropDownList>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="select" class="col-lg-2 control-label">Jugador</label>
                                             <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlJugador" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlJugador" runat="server" CssClass="form-control searchableSelect"></asp:DropDownList>
                                             </div>
                                         </div>
                                         <div class="form-group">

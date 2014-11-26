@@ -42,7 +42,9 @@ namespace quegolazo_code.admin
                 litError.Text = ex.Message;
             }
         }
-
+        ///
+        /// ---Métodos Extras---
+        ///
         /// <summary>
         /// ocultar Paneles de mensajes de exito o fracaso
         /// </summary>

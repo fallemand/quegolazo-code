@@ -15,23 +15,20 @@ namespace quegolazo_code.admin
     {
         GestorTorneo gestorTorneo;
         GestorEdicion gestorEdicion;
+
         protected void Page_Load(object sender, EventArgs e)        
         {
-
-            gestorTorneo = Sesion.getGestorTorneo();
-            gestorEdicion = Sesion.getGestorEdicion(); 
-            if (!Page.IsPostBack)
+            try
             {
-                try
+                gestorTorneo = Sesion.getGestorTorneo();
+                gestorEdicion = Sesion.getGestorEdicion();
+                if (!Page.IsPostBack)
                 {
-                    cargarCombos();
-                    cargarRepeaterTorneos();           
+                        cargarCombos();
+                        cargarRepeaterTorneos();
                 }
-                catch (Exception ex)
-                {
-                    mostrarPanelFracaso(ex.Message);
-                }                             
             }
+            catch (Exception ex){mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
@@ -40,8 +37,12 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void btnRegistrarNuevoTorneo_Click(object sender, EventArgs e)
         {
-            limpiarModalTorneo();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
+            try
+            {
+                limpiarModalTorneo();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -50,13 +51,18 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void rptTorneosItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            try
             {
-                Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
-                int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
-                Panel panelSinEdiciones = e.Item.FindControl("panelSinEdiciones") as Panel;
-                panelSinEdiciones.Visible = !(GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(idTorneo)));
+
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                {
+                    Repeater rptEdiciones = (Repeater)e.Item.FindControl("rptEdiciones");
+                    int idTorneo = ((Torneo)e.Item.DataItem).idTorneo;
+                    Panel panelSinEdiciones = e.Item.FindControl("panelSinEdiciones") as Panel;
+                    panelSinEdiciones.Visible = !(GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(idTorneo)));
+                }
             }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -95,10 +101,7 @@ namespace quegolazo_code.admin
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
                 cargarRepeaterTorneos(); 
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoEdicion(ex.Message);
-            }
+            catch (Exception ex){mostrarPanelFracasoEdicion(ex.Message);}
         }
 
         /// <summary>
@@ -141,10 +144,7 @@ namespace quegolazo_code.admin
                     limpiarPaneles();
                 }                
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex){mostrarPanelFracaso(ex.Message);}
         }
         
         /// <summary>
@@ -212,10 +212,7 @@ namespace quegolazo_code.admin
                     Response.Redirect(GestorUrl.eCONFIGURAR); 
                 }
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -255,10 +252,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterTorneos();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarEdicion", "closeModal('eliminarEdicion');", true);
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex){mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
@@ -273,10 +267,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterTorneos();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarTorneo", "closeModal('eliminarTorneo');", true);
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex){mostrarPanelFracaso(ex.Message);}
         }
 
         //------------------------------------------

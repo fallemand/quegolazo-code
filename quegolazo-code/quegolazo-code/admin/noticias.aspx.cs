@@ -110,10 +110,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterNoticias();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarArbitro", "closeModal('eliminarNoticia');", true);
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaNoticias(ex.Message);
-            }
+            catch (Exception ex){ mostrarPanelFracasoListaNoticias(ex.Message);}
         }
 
         /// <summary>
@@ -122,12 +119,17 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void btnCancelarModificacionNoticia_Click(object sender, EventArgs e)
         {
-            limpiarCamposNoticias();
-            btnRegistrarNoticia.Visible = true;
-            btnModificarNoticia.Visible = false;
-            btnCancelarModificacionNoticia.Visible = false;
-            gestorNoticia.noticia = null;// le setea null a la noticia
+            try
+            {
+                limpiarCamposNoticias();
+                btnRegistrarNoticia.Visible = true;
+                btnModificarNoticia.Visible = false;
+                btnCancelarModificacionNoticia.Visible = false;
+                gestorNoticia.noticia = null;// le setea null a la noticia
+            }
+            catch (Exception ex) { mostrarPanelFracasoListaNoticias(ex.Message); }
         }
+
         //------------------------------------------
         //--------------Metodos Extras--------------
         //------------------------------------------
@@ -170,8 +172,7 @@ namespace quegolazo_code.admin
         public void cargarComboEdiciones()
         {
             GestorEdicion gestorEdicion = new GestorEdicion();
-            GestorControles.cargarComboList(ddlEdicion, gestorEdicion.obtenerEdicionesPorTorneo(
-                Sesion.getTorneo().idTorneo), "idEdicion", "nombre");
+            GestorControles.cargarComboList(ddlEdicion, gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo), "idEdicion", "nombre");
         }
         /// <summary>
         /// Limpia Paneles

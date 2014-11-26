@@ -11,22 +11,27 @@ namespace quegolazo_code.usuario
 {
     public partial class modificar_usuario : System.Web.UI.Page
     {
-        GestorUsuario gestorUsuario = null;
+        GestorUsuario gestorUsuario;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            limpiarPaneles();
-            if (!Page.IsPostBack)
+            try
             {
-                gestorUsuario = Sesion.getGestorUsuario();
-                gestorUsuario.usuario = Sesion.getUsuario();
-                if (gestorUsuario.usuario != null)
+                limpiarPaneles();
+                if (!Page.IsPostBack)
                 {
-                    gestorUsuario.mailUsuario = gestorUsuario.usuario.email;
-                    txtApellido.Value = gestorUsuario.usuario.apellido;
-                    txtNombre.Value = gestorUsuario.usuario.nombre;
-                    txtEmailModif.Value = gestorUsuario.usuario.email;
+                    gestorUsuario = Sesion.getGestorUsuario();
+                    gestorUsuario.usuario = Sesion.getUsuario();
+                    if (gestorUsuario.usuario != null)
+                    {
+                        gestorUsuario.mailUsuario = gestorUsuario.usuario.email;
+                        txtApellido.Value = gestorUsuario.usuario.apellido;
+                        txtNombre.Value = gestorUsuario.usuario.nombre;
+                        txtEmailModif.Value = gestorUsuario.usuario.email;
+                    }
                 }
             }
+            catch (Exception ex){mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
@@ -60,11 +65,7 @@ namespace quegolazo_code.usuario
                     obtenerNuevosDatos();
                 }
             }
-            catch (Exception ex)
-            {
-                panFracaso.Visible = true;
-                litError.Text = ex.Message;
-            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
@@ -119,6 +120,14 @@ namespace quegolazo_code.usuario
             litError.Text = "";
             panExito.Visible = false;
             litMensaje.Text = "";
+        }
+        /// <summary>
+        /// Panel Fracaso de lista Noticia
+        /// </summary>
+        private void mostrarPanelFracaso(string mensaje)
+        {
+            litError.Text = mensaje;
+            panFracaso.Visible = true;
         }
     }
 }

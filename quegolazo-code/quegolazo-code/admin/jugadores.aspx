@@ -141,7 +141,7 @@
                         <fieldset class="vgSeleccionarEquipo">
                             <div class="col-md-8">
                                 <div id="selectEquipos">
-                                    <asp:DropDownList ID="ddlEquipos" runat="server" CssClass="form-control" required="true"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlEquipos" runat="server" CssClass="form-control searchableSelect" required="true"></asp:DropDownList>
                                 </div>
                             </div>
                             <div class="col-md-4">
