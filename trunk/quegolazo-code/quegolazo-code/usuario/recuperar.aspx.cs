@@ -21,7 +21,6 @@ namespace quegolazo_code
                 ocultarPaneles();
                 GestorUsuario gestorUsuario=new GestorUsuario();
                 string codigo= gestorUsuario.generarCodigoRecuperacion(email.Value);
-
                 //parámetros para mandar mail
                 string RecuperacionUrl = string.Empty;
                 string mail = email.Value;
@@ -40,6 +39,9 @@ namespace quegolazo_code
             }
         }
 
+        ///
+        /// ---Métodos Extras---
+        ///
         /// <summary>
         /// Ocultar los paneles de exito y fracaso
         /// </summary>

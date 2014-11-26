@@ -15,14 +15,15 @@ namespace quegolazo_code.admin
     {
         GestorSancion gestorSancion;
         GestorEdicion gestorEdicion;
-        GestorFase gestorFase;        
+        GestorFase gestorFase; 
+       
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorSancion = Sesion.getGestorSancion();
-            gestorEdicion = Sesion.getGestorEdicion();
-            gestorFase = Sesion.getGestorFase();
             try
             {
+                gestorSancion = Sesion.getGestorSancion();
+                gestorEdicion = Sesion.getGestorEdicion();
+                gestorFase = Sesion.getGestorFase();
                 if (!Page.IsPostBack)
                 {
                     //limpiarPaneles();

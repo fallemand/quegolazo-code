@@ -13,12 +13,13 @@ namespace quegolazo_code.admin
     public partial class activar_usuario : System.Web.UI.Page
     {
         GestorUsuario gestorUsuario = new GestorUsuario();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            string codigo = Request.QueryString["UserCode"];
-            if (!Page.IsPostBack)
+            try
             {
-                try
+                string codigo = Request.QueryString["UserCode"];
+                if (!Page.IsPostBack)
                 {
                     if (codigo != null)
                     {
@@ -39,12 +40,13 @@ namespace quegolazo_code.admin
                             email.Value = u.email;
                         }
                     }
+
                 }
-                catch (Exception ex)
-                {
-                    panFracaso.Visible = true;
-                    litError.Text = ex.Message;
-                }
+            }
+            catch (Exception ex)
+            {
+                panFracaso.Visible = true;
+                litError.Text = ex.Message;
             }
         }
 
@@ -92,5 +94,6 @@ namespace quegolazo_code.admin
             panExito.Visible = true;
             litMensaje.Text = "Ha sido activada. <strong><a href='" + GestorUrl.uLOGIN + "'>Ingresa Aquí</a></strong>";
         }
+
     }
 }
