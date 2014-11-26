@@ -12,13 +12,14 @@ namespace quegolazo_code.admin
 {
     public partial class index : System.Web.UI.Page
     {
-        GestorEdicion gestorEdicion = new GestorEdicion();
+        GestorEdicion gestorEdicion;
         GestorEstadisticas gestorEstadisticas;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            panelFracaso.Visible = false;
             try
             {
+                panelFracaso.Visible = false;
                 gestorEdicion = Sesion.getGestorEdicion();
                 gestorEstadisticas = new GestorEstadisticas();               
                 gestorEdicion.edicion = Sesion.getEdicion();
@@ -85,6 +86,12 @@ namespace quegolazo_code.admin
         }
 
         /// <summary>
+        /// -------------------------------------------------------------------------
+        /// --------------------------Metodos Extra---------------------------------
+        /// -------------------------------------------------------------------------
+        /// </summary>
+
+        /// <summary>
         /// Carga la tabla de posiciones de la edicion que esta en la sesion.
         /// </summary>
         private void cargarTablaDePosiciones()
@@ -107,7 +114,6 @@ namespace quegolazo_code.admin
                 rptFecha.DataSource = ultimaFecha;
                 rptFecha.DataBind();
             }
-
             ltFecha.Text = ultimaFecha.Rows[0]["idFecha"].ToString();
             noFixture.Visible = (rptFecha.Items.Count > 0) ? false : true;
             
@@ -122,27 +128,27 @@ namespace quegolazo_code.admin
             try { avance = double.Parse(valores.Rows[0]["porcentajeAvance"].ToString()); }
             catch (IndexOutOfRangeException) { }           
             ScriptManager.RegisterStartupScript(this, this.GetType(), "AvanceFecha", "$('#avanceFecha').percentageLoader({ width : 180, height : 180, progress :" + (avance / 100).ToString("0.00", CultureInfo.InvariantCulture) + ", value : ''});", true);
-           
         }
 
         /// <summary>
         /// Carga el porcentaje de avance de la edicion que esta en sesion en la pantalla usando el plugin "pecentageLoader"
         /// </summary>
-        private void cargarPorcentajeDeAvanceEdicion() {
+        private void cargarPorcentajeDeAvanceEdicion() 
+        {
             double avance = 0;
             var valores = gestorEstadisticas.obtenerAvanceEdicion(); 
             try{avance = double.Parse(valores.Rows[0]["porcentajeAvance"].ToString());}
             catch (IndexOutOfRangeException){}
             ScriptManager.RegisterStartupScript(this, this.GetType(), "AvanceEdicion", "$('#avanceTorneo').percentageLoader({ width : 180, height : 180, progress :" + (avance / 100).ToString("0.00", CultureInfo.InvariantCulture) + ", value : ''});", true);
-           
         }
 
         /// <summary>
         /// Carga la tabla de goleadores de la edicion que esta en sesion.
         /// </summary>
-        private void cargarGoleadoresDeLaEdicion() {
+        private void cargarGoleadoresDeLaEdicion() 
+        {
             sinpartidosGoleadores.Visible = GestorControles.cargarRepeaterTable(rptGoleadores, gestorEstadisticas.obtenerTablaGoleadores()) ? 
-                false : true;
+            false : true;
         }
 
         /// <summary>

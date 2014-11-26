@@ -12,8 +12,9 @@ namespace quegolazo_code.admin.edicion
 {
     public partial class jugadores : System.Web.UI.Page
     {
-        GestorJugador gestorJugador = null;
-        GestorEquipo gestorEquipo = null;
+        GestorJugador gestorJugador;
+        GestorEquipo gestorEquipo;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -32,10 +33,7 @@ namespace quegolazo_code.admin.edicion
                         imagenUpload.Enabled = false;
                 }
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaJugadores(ex.Message);
-            }
+            catch (Exception ex) { mostrarPanelFracasoListaJugadores(ex.Message);}
         }       
      
         /// <summary>
@@ -54,7 +52,6 @@ namespace quegolazo_code.admin.edicion
             }
             catch (Exception ex)
             {
-
                 imagenpreview.Src = GestorImagen.obtenerImagenTemporal(GestorImagen.JUGADOR, GestorImagen.MEDIANA);
                 mostrarPanelFracaso(ex.Message);
             }
@@ -97,10 +94,7 @@ namespace quegolazo_code.admin.edicion
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarJugador');", true);
                 }
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaJugadores(ex.Message);
-            }     
+            catch (Exception ex){ mostrarPanelFracasoListaJugadores(ex.Message);}     
         }           
 
         /// <summary>
@@ -109,11 +103,15 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         protected void btnCancelarModificacionJugador_Click(object sender, EventArgs e)
         {
-            limpiarCampos();
-            btnRegistrarJugador.Visible = true;
-            btnModificarJugador.Visible = false;
-            btnCancelarModificacionJugador.Visible = false;
-            gestorJugador.jugador = null; // le setea null al jugador
+            try
+            {
+                limpiarCampos();
+                btnRegistrarJugador.Visible = true;
+                btnModificarJugador.Visible = false;
+                btnCancelarModificacionJugador.Visible = false;
+                gestorJugador.jugador = null; // le setea null al jugador
+            }
+            catch (Exception ex) { mostrarPanelFracasoListaJugadores(ex.Message); } 
         }
 
         /// <summary>
@@ -135,10 +133,7 @@ namespace quegolazo_code.admin.edicion
                 btnModificarJugador.Visible = false;
                 btnCancelarModificacionJugador.Visible = false;
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex){mostrarPanelFracaso(ex.Message); }
         }      
 
         /// <summary>
@@ -168,10 +163,7 @@ namespace quegolazo_code.admin.edicion
                 cargarRepeaterJugadores();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarJugador", "closeModal('eliminarJugador');", true);
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaJugadores(ex.Message);
-            }
+            catch (Exception ex){mostrarPanelFracasoListaJugadores(ex.Message);}
         }  
 
         //------------------------------------------

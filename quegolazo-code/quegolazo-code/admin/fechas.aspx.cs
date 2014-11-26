@@ -16,10 +16,10 @@ namespace quegolazo_code.admin
         protected GestorPartido gestorPartido;
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorEdicion = Sesion.getGestorEdicion();
-            gestorPartido = Sesion.getGestorPartido();
             try
             {
+                gestorEdicion = Sesion.getGestorEdicion();
+                gestorPartido = Sesion.getGestorPartido();
                 if (!Page.IsPostBack)
                 {
                     gestorPartido.partido = null;
@@ -216,20 +216,24 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void rptTarjetas_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            try
             {
-                char tipoTarjeta = ((Tarjeta)e.Item.DataItem).tipoTarjeta;
-                if (tipoTarjeta.ToString().Equals("R"))
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
                 {
-                    Label panelTarjetaRoja = e.Item.FindControl("panelTarjetaRoja") as Label;
-                    panelTarjetaRoja.Visible = true;
-                }
-                else if (tipoTarjeta.ToString().Equals("A"))
-                {
-                    Label panelTarjetaAmarilla = e.Item.FindControl("panelTarjetaAmarilla") as Label;
-                    panelTarjetaAmarilla.Visible = true;
+                    char tipoTarjeta = ((Tarjeta)e.Item.DataItem).tipoTarjeta;
+                    if (tipoTarjeta.ToString().Equals("R"))
+                    {
+                        Label panelTarjetaRoja = e.Item.FindControl("panelTarjetaRoja") as Label;
+                        panelTarjetaRoja.Visible = true;
+                    }
+                    else if (tipoTarjeta.ToString().Equals("A"))
+                    {
+                        Label panelTarjetaAmarilla = e.Item.FindControl("panelTarjetaAmarilla") as Label;
+                        panelTarjetaAmarilla.Visible = true;
+                    }
                 }
             }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

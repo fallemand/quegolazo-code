@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entidades;
 using Logica;
 using Utils;
 
@@ -15,9 +14,9 @@ namespace quegolazo_code.admin
         GestorCancha gestorCancha = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorCancha = Sesion.getGestorCancha();         
             try
             {
+                gestorCancha = Sesion.getGestorCancha();       
                 limpiarPaneles();
                 cargarRepeaterCanchas();
             }
@@ -81,11 +80,15 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void btnCancelarModificacionCancha_Click(object sender, EventArgs e)
         {
-            limpiarCamposCancha();
-            btnRegistrarCancha.Visible = true;
-            btnModificarCancha.Visible = false;
-            btnCancelarModificacionCancha.Visible = false;
-            gestorCancha.cancha = null; // le setea null a la cancha
+            try
+            {
+                limpiarCamposCancha();
+                btnRegistrarCancha.Visible = true;
+                btnModificarCancha.Visible = false;
+                btnCancelarModificacionCancha.Visible = false;
+                gestorCancha.cancha = null; // le setea null a la cancha
+            }
+            catch (Exception ex) { mostrarPanelFracasoListaCanchas(ex.Message); }  
         }
 
         /// <summary>

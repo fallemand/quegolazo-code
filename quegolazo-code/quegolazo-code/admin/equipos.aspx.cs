@@ -13,12 +13,13 @@ namespace quegolazo_code.admin
 {
     public partial class equipos : System.Web.UI.Page
     {
-        GestorEquipo gestorEquipo = null;
+        private GestorEquipo gestorEquipo;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorEquipo = Sesion.getGestorEquipo();
             try
             {
+                gestorEquipo = Sesion.getGestorEquipo();
                 limpiarPaneles();
                 cargarRepeaterEquipos();
             }
@@ -133,27 +134,31 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void rptEquipos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName == "editarEquipo")
-            {   //por CommandArgument recibe el ID del equipo a modificar               
-                gestorEquipo.obtenerEquipoAModificar(Int32.Parse(e.CommandArgument.ToString()));                
-                txtNombreEquipo.Value = gestorEquipo.equipo.nombre;
-                txtNombreDirector.Value = gestorEquipo.equipo.directorTecnico;
-                txtColorPrimario.Value = gestorEquipo.equipo.colorCamisetaPrimario;
-                txtColorSecundario.Value = gestorEquipo.equipo.colorCamisetaSecundario;
-                rptDelegados.DataSource = gestorEquipo.obtenerDelegados();
-                rptDelegados.DataBind();
-                btnRegistrarEquipo.Visible = false;
-                btnModificarEquipo.Visible = true;
-                btnCancelarModificacionEquipo.Visible = true;
-                imagenpreview.Src = gestorEquipo.equipo.obtenerImagenMediana();              
-            }
+            try
+            {
+                if (e.CommandName == "editarEquipo")
+                {   //por CommandArgument recibe el ID del equipo a modificar               
+                    gestorEquipo.obtenerEquipoAModificar(Int32.Parse(e.CommandArgument.ToString()));
+                    txtNombreEquipo.Value = gestorEquipo.equipo.nombre;
+                    txtNombreDirector.Value = gestorEquipo.equipo.directorTecnico;
+                    txtColorPrimario.Value = gestorEquipo.equipo.colorCamisetaPrimario;
+                    txtColorSecundario.Value = gestorEquipo.equipo.colorCamisetaSecundario;
+                    rptDelegados.DataSource = gestorEquipo.obtenerDelegados();
+                    rptDelegados.DataBind();
+                    btnRegistrarEquipo.Visible = false;
+                    btnModificarEquipo.Visible = true;
+                    btnCancelarModificacionEquipo.Visible = true;
+                    imagenpreview.Src = gestorEquipo.equipo.obtenerImagenMediana();
+                }
 
-            if (e.CommandName == "eliminarEquipo")
-            {//por CommandArgument recibe el ID del equipo a eliminar   
-                gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(e.CommandArgument.ToString()));
-                litNombreEquipo.Text = gestorEquipo.equipo.nombre;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarEquipo');", true);
+                if (e.CommandName == "eliminarEquipo")
+                {//por CommandArgument recibe el ID del equipo a eliminar   
+                    gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(e.CommandArgument.ToString()));
+                    litNombreEquipo.Text = gestorEquipo.equipo.nombre;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarEquipo');", true);
+                }
             }
+            catch (Exception ex) { mostrarPanelFracasoListaEquipos(ex.Message); }  
         }
 
         /// <summary>
@@ -176,10 +181,7 @@ namespace quegolazo_code.admin
                 btnModificarEquipo.Visible = false;
                 btnCancelarModificacionEquipo.Visible = false;
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex){mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
@@ -188,7 +190,11 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void btnCancelarDelegado_Click(object sender, EventArgs e)
         {
-            limpiarCamposDelegado();
+            try
+            {
+                limpiarCamposDelegado();
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -197,12 +203,16 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void btnCancelarModificacionEquipo_Click(object sender, EventArgs e)
         {
-            limpiarCamposEquipo();
-            limpiarCamposDelegado();
-            btnRegistrarEquipo.Visible = true;
-            btnModificarEquipo.Visible = false;
-            btnCancelarModificacionEquipo.Visible = false;
-            gestorEquipo.equipo = null; // le setea null al equipo 
+            try
+            {
+                limpiarCamposEquipo();
+                limpiarCamposDelegado();
+                btnRegistrarEquipo.Visible = true;
+                btnModificarEquipo.Visible = false;
+                btnCancelarModificacionEquipo.Visible = false;
+                gestorEquipo.equipo = null; // le setea null al equipo
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -217,10 +227,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterEquipos();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarEquipo", "closeModal('eliminarEquipo');", true);
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaEquipos(ex.Message);
-            }
+            catch (Exception ex) { mostrarPanelFracasoListaEquipos(ex.Message);}
         }
 
         //------------------------------------------
@@ -264,7 +271,7 @@ namespace quegolazo_code.admin
             txtColorSecundario.Value = "#E1E1E1";
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
             limpiarCamposDelegado();
-            rptDelegados.DataSource = null;
+            rptDelegados.DataSource =null;
             rptDelegados.DataBind();
         }
         /// <summary>

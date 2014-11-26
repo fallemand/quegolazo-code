@@ -11,23 +11,21 @@ namespace quegolazo_code.admin
 {
     public partial class noticias : System.Web.UI.Page
     {
-        GestorNoticia gestorNoticia = new GestorNoticia();
+        GestorNoticia gestorNoticia;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorNoticia = Sesion.getGestorNoticia();
-            if (!Page.IsPostBack)
+            try
             {
-                try
+                gestorNoticia = Sesion.getGestorNoticia();
+                if (!Page.IsPostBack)
                 {
-                    cargarComboEdiciones();
-                    //limpiarPaneles();
-                    cargarRepeaterNoticias();
-                }
-                catch (Exception ex)
-                {
-                    mostrarPanelFracasoListaNoticias(ex.Message);
+                        cargarComboEdiciones();
+                        //limpiarPaneles();
+                        cargarRepeaterNoticias(); 
                 }
             }
+            catch (Exception ex){mostrarPanelFracasoListaNoticias(ex.Message);}
         }
 
         /// <summary>
@@ -76,10 +74,7 @@ namespace quegolazo_code.admin
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarNoticia');", true);
                 }
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracasoListaNoticias(ex.Message);
-            }
+            catch (Exception ex){mostrarPanelFracasoListaNoticias(ex.Message); }
         }
 
         /// <summary>
@@ -100,10 +95,7 @@ namespace quegolazo_code.admin
                 btnCancelarModificacionNoticia.Visible = false;
                 ddlEdicion.Enabled = true;
             }
-            catch (Exception ex)
-            {
-                mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex){mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
