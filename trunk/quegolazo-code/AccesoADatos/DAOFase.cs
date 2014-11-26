@@ -99,7 +99,7 @@ namespace AccesoADatos
                           idEdicion = idEdicion,
                           estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
                           tipoFixture = new TipoFixture() { nombre = dr["tipoFixture"].ToString() },
-                          //equipos =
+                          
                       };        
                      fases.Add(fase);
                  }
@@ -111,6 +111,10 @@ namespace AccesoADatos
                      daoGrupo.obtenerGrupos(fase, con, trans);
                      daoFecha.obtenerFechas(fase, con, trans);
                      daoPartido.obtenerPartidos(fase, con, trans);
+                     foreach (Grupo grupo in fase.grupos)
+                     {
+                         fase.equipos.AddRange(grupo.equipos);
+                     }
                  }
                  return fases;
              }

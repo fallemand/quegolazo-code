@@ -41,6 +41,19 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@nombre", g.nombre);
                     cmd.CommandText = sql;
                     cmd.ExecuteNonQuery();
+
+                    foreach (Equipo equipo in g.equipos)
+                    {
+                        sql = @"INSERT INTO EquiposXGrupo (idEquipo, idGrupo, idFase, idEdicion)
+                                VALUES (@idEquipo,@idGrupo, @idFase, @idEdicion)";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
+                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                        cmd.Parameters.AddWithValue("@idEquipo", equipo.idEquipo);
+                        cmd.CommandText = sql;
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception ex)
@@ -79,6 +92,7 @@ namespace AccesoADatos
                         idFase=fase.idFase,
                         nombre= int.Parse(dr["nombre"].ToString()),                                 
                     };
+                    grupo.equipos = obtenerEquiposDeUnGrupo(grupo.idGrupo, grupo.idFase, grupo.idEdicion);
                     fase.grupos.Add(grupo);
                 }
                 if (dr != null)
@@ -92,6 +106,50 @@ namespace AccesoADatos
             {
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene todos equipos de un determinado grupo.
+        /// autor: Antonio Herrera
+        /// </summary>
+        public List<Equipo> obtenerEquiposDeUnGrupo(int idGrupo, int idFase, int idEdicion)
+        {
+           try
+            {
+            SqlDataReader dr;
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            List<Equipo> respuesta = new List<Equipo>();          
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT idEquipo 
+                               FROM EquiposXGrupo 
+                               WHERE idEdicion=@idEdicion AND idFase=@idFase AND idGrupo=@idGrupo ";
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("@idFase", idFase);
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@idGrupo", idEdicion);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    int idEquipo = int.Parse(dr["idEquipo"].ToString());
+                    respuesta.Add(new DAOEquipo().obtenerEquipoReducidoPorId(idEquipo));   
+                }
+                con.Close();
+                return respuesta;                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo obtener los equipos del grupo" + ex.Message);
+            
+            }
+            finally
+            {
+              
+                    
             }
         }
     }

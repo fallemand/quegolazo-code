@@ -240,5 +240,15 @@ namespace Logica
             DAOEquipo daoEquipo = new DAOEquipo();
             return daoEquipo.obtenerEquipoPorId(idEquipo);
         }
+
+        /// <summary>
+        /// Obtiene un Equipo por Id, pero el objeto no tiene todos sus atributos, solo el nombre y el ID.
+        /// autor: Antonio Herrera
+        /// </summary>
+        public Equipo obtenerEquipoReducidoPorId(int idEquipo)
+        {
+            DAOEquipo daoEquipo = new DAOEquipo();
+            return daoEquipo.obtenerEquipoReducidoPorId(idEquipo);
+        }
     }
 }

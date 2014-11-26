@@ -17,9 +17,18 @@ namespace Entidades
         
         public Fase()
         {
-            tipoFixture = new TipoFixture();
-            estado = new Estado();
-            grupos = new List<Grupo>();
+            try
+            {
+                tipoFixture = new TipoFixture();
+                estado = new Estado();
+                grupos = new List<Grupo>();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+            
         }
 
         public List<Fecha> obtenerFechas()
