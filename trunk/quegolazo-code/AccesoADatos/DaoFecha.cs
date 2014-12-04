@@ -57,7 +57,7 @@ namespace AccesoADatos
        /// Obtiene las fechas de una fase
        /// autor: Flor Rojas
        /// </summary>
-        public void obtenerFechas(Fase fase, SqlConnection con, SqlTransaction trans)
+        public void obtenerFechas(Fase fase, SqlConnection con)
         {
             SqlDataReader dr;
             SqlCommand cmd = new SqlCommand();
@@ -65,8 +65,7 @@ namespace AccesoADatos
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                cmd.Connection = con;
-                cmd.Transaction = trans;
+                cmd.Connection = con;                
                 foreach (Grupo g in fase.grupos)
                 {
                     cmd.Parameters.Clear();

@@ -322,7 +322,7 @@
                         }
                     },
                     error: function (response) {
-                        widget.mostrarMensajeDeError(response.d.StatusDescription);
+                        widget.mostrarMensajeDeError(response.responseJSON.Message);
                     }
                 });
                 return respuesta;

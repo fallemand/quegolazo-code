@@ -55,16 +55,26 @@ namespace Logica
           faseActual =  new Fase();
       }
 
-      public void armarpija(List<Object> lista){
-         
-      }
-
       public bool estaFinalizada(int idFase, int idEdicion)
       {
         return  (new DAOFase()).finalizoFase(idFase,idEdicion);
       }
 
+      /// <summary>
+      /// Obtiene la minima informacion necesaria de las fases. Sin tener en cuenta el detalle de todos los objetos que la conforman.
+      /// </summary>
+      public List<Fase> obtenerFasesReducidas(int idEdicion) {
+          return new DAOFase().obtenerFasesReducidas(idEdicion);
+      }
 
+      /// <summary>
+      ///Elimina la configuracion de fases que tenia el usuario guardada en sesión y en la base de datos
+      /// </summary>
+      public void eliminarConfiguracionGuardada(List<Fase> fases)
+      {
+          Sesion.getGestorEdicion().edicion.fases = new List<Fase>();
+          new DAOFase().eliminarFases(fases);
+      }
 
       //public void registrarFase()
       //{
