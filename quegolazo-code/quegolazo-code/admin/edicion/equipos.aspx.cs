@@ -69,7 +69,7 @@ namespace quegolazo_code.admin.edicion
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "modificarEquipos", "closeModal('modificarEquipos');", true);
                 gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
-                gestorEdicion.edicion.fases = null;
+                new GestorFase().eliminarConfiguracionGuardada(gestorEdicion.edicion.fases);
                 Response.Redirect(GestorUrl.eFASES);
             }
             catch (Exception ex) {mostrarPanelFracaso(ex.Message);}

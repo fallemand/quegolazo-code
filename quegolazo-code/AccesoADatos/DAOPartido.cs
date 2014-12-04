@@ -63,7 +63,7 @@ namespace AccesoADatos
        /// Obtiene todos los datos del Partido
        /// autor: Pau Pedrosa
        /// </summary>
-        public void obtenerPartidos(Fase fase, SqlConnection con, SqlTransaction trans)
+        public void obtenerPartidos(Fase fase, SqlConnection con)
         {
             SqlDataReader dr;
             SqlCommand cmd = new SqlCommand();
@@ -71,8 +71,7 @@ namespace AccesoADatos
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                 cmd.Connection = con;
-                 cmd.Transaction = trans;
+                 cmd.Connection = con;                 
                  foreach (Grupo grupo in fase.grupos)
                  {
                      foreach (Fecha faseActual in grupo.fechas)

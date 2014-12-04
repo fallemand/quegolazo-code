@@ -71,8 +71,7 @@ namespace AccesoADatos
         {
              SqlConnection con = new SqlConnection(cadenaDeConexion);
              SqlCommand cmd = new SqlCommand();
-             SqlDataReader dr;
-             SqlTransaction trans = null;
+             SqlDataReader dr;             
              List<Fase> fases = new List<Fase>();
              DAOGrupo daoGrupo= new DAOGrupo();
              DAOFecha daoFecha=new DAOFecha();
@@ -80,10 +79,8 @@ namespace AccesoADatos
              try
              {
                  if (con.State == ConnectionState.Closed)
-                     con.Open();
-                 trans = con.BeginTransaction();
-                 cmd.Connection = con;
-                 cmd.Transaction = trans;
+                     con.Open();               
+                 cmd.Connection = con;                 
                  string sql = @"SELECT * 
                                 FROM  Fases
                                 WHERE idEdicion = @idEdicion";
@@ -98,8 +95,8 @@ namespace AccesoADatos
                           idFase = int.Parse(dr["idFase"].ToString()),
                           idEdicion = idEdicion,
                           estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
-                          tipoFixture = new TipoFixture() { nombre = dr["tipoFixture"].ToString() },
-                          
+                          tipoFixture = new TipoFixture(dr["tipoFixture"].ToString()),
+                          equipos = new List<Equipo>()
                       };        
                      fases.Add(fase);
                  }
@@ -108,9 +105,9 @@ namespace AccesoADatos
 
                  foreach (Fase fase in fases)
                  {
-                     daoGrupo.obtenerGrupos(fase, con, trans);
-                     daoFecha.obtenerFechas(fase, con, trans);
-                     daoPartido.obtenerPartidos(fase, con, trans);
+                     daoGrupo.obtenerGrupos(fase, con, true);
+                     daoFecha.obtenerFechas(fase, con);
+                     daoPartido.obtenerPartidos(fase, con);
                      foreach (Grupo grupo in fase.grupos)
                      {
                          fase.equipos.AddRange(grupo.equipos);
@@ -127,6 +124,70 @@ namespace AccesoADatos
                  if (con != null && con.State == ConnectionState.Open)
                      con.Close();
              }
+        }
+
+
+        /// <summary>
+        /// Obtiene las fases  de una edición por Id. Obteniendo solo los valores necesarios para mostrar la informacion básica de la fase y sus equipos.
+        /// autor: Antonio Herrera
+        /// </summary>
+        public List<Fase> obtenerFasesReducidas(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;           
+            List<Fase> fases = new List<Fase>();
+            DAOGrupo daoGrupo = new DAOGrupo();
+            DAOFecha daoFecha = new DAOFecha();
+            DAOPartido daoPartido = new DAOPartido();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();           
+                cmd.Connection = con;
+               
+                string sql = @"SELECT * 
+                                FROM  Fases
+                                WHERE idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Fase fase = new Fase()
+                    {
+                        idFase = int.Parse(dr["idFase"].ToString()),
+                        idEdicion = idEdicion,
+                        estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
+                        tipoFixture = new TipoFixture(dr["tipoFixture"].ToString()),
+                        equipos = new List<Equipo>()
+                    };
+                    fases.Add(fase);
+                }
+                if (dr != null)
+                    dr.Close();
+
+                foreach (Fase fase in fases)
+                {
+                    daoGrupo.obtenerGrupos(fase, con , false);
+
+                    foreach (Grupo grupo in fase.grupos)
+                    {
+                        fase.equipos.AddRange(grupo.equipos);
+                    }
+                }
+                return fases;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar las fases de una Edición: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
         }
 
         /// <summary>
@@ -163,7 +224,7 @@ namespace AccesoADatos
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                        cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
+                        cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.idTipoFixture);
                         cmd.Parameters.AddWithValue("@idEstado", Estado.faseDIAGRAMADA);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
@@ -186,6 +247,47 @@ namespace AccesoADatos
             {
                 trans.Rollback();
                 throw new Exception("No se pudo registrar la Fase: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Actualiza las fases
+        /// autor: Flor Rojas
+        /// </summary>
+        /// <param name="fases">Lista de Fases</param>
+        /// <param name="con">Conexión</param>
+        /// <param name="trans">Transacción</param>
+        public void eliminarFases(List<Fase> fases)
+        {
+            SqlCommand cmd = new SqlCommand();
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlTransaction trans = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                trans = con.BeginTransaction();
+                cmd.Transaction = trans;
+
+                foreach (Fase fase in fases)
+                {
+                    if (fase != null)
+                    {
+                        string sqlEliminacion = "DELETE FROM Fases WHERE idFase = @idFase AND idEdicion = @idEdicion";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                        cmd.CommandText = sqlEliminacion;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                trans.Commit();
+            }
+            catch (SqlException ex)
+            {
+                trans.Rollback();
+                throw new Exception("Error al intentar actualizar la edición: " + ex.Message);
             }
         }
 
@@ -301,52 +403,6 @@ namespace AccesoADatos
         }
 
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fase"></param>
-        public void modificarFase(Fase fase)
-        {
-            SqlTransaction trans = null;
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();
-            try
-            {
-                cmd.Connection = new SqlConnection(cadenaDeConexion);
-                trans = con.BeginTransaction();
-                cmd.Transaction = trans;
-                
-                if (fase != null)
-                {
-                    string sql = @"UPDATE Fases SET tipoFixture=@tipoFixture,idEstado=@idEstado 
-                                    WHERE idFase=@idFase AND idEdicion=@idEdicion";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@idFase", fase.idFase);
-                    cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                    cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.nombre);
-                    cmd.Parameters.AddWithValue("@idEstado", fase.estado.idEstado);
-                    cmd.CommandText = sql;
-                    cmd.ExecuteNonQuery();
-                    if (fase.grupos.Count != 0)
-                    {
-                        DAOGrupo daoGrupo = new DAOGrupo();
-                        daoGrupo.registrarGrupos(fase, con, trans);
-
-                        DAOFecha daoFecha = new DAOFecha();
-                        daoFecha.registrarFechas(fase, con, trans);
-
-                        DAOPartido daoPartido = new DAOPartido();
-                        daoPartido.registrarPartidos(fase, con, trans);
-                    }
-                    trans.Commit();
-                }
-            }
-            catch (SqlException ex)
-            {
-                trans.Rollback();
-                throw new Exception("No se pudo registrar la Fase: " + ex.Message);
-            }
-        }
 
     }
 }
