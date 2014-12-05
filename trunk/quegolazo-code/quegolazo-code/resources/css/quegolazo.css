@@ -1601,3 +1601,25 @@ Date: 2014-11-05
   line-height: 11px;
 }
 
+.ediciones h1 {
+  margin-bottom:0px;
+}
+
+.ediciones h3 {
+  margin-bottom:0px;
+  margin-top:10px;
+}
+
+.ediciones .btn {
+  margin-top:0px;
+}
+
+.ediciones .page-header {
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+.ediciones .panel-heading .icon-size {
+    font-size: 32px;
+    line-height: 37px;
+}

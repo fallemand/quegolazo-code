@@ -610,5 +610,32 @@ namespace quegolazo_code.admin
             if (Session["idPanelCollapse"] != null)
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelCollapse", "showCollapsablePanel('" + Session["idPanelCollapse"] + "', true)", true);
         }
+
+        /// <summary>
+        /// Ver si el partido es una fecha libre o un partido normal
+        /// autor: Facu Allemand
+        /// </summary>
+        protected void rptPartidos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                {
+                    
+                    Partido partido = ((Partido)e.Item.DataItem);
+                    if (partido.local != null && partido.visitante != null)
+                    {
+                        Panel panelPartidoNormal = (Panel)e.Item.FindControl("panelPartidoNormal");
+                        panelPartidoNormal.Visible = true;
+                    }
+                    else
+                    {
+                        Panel panelPartidoLibre = (Panel)e.Item.FindControl("panelPartidoLibre");
+                        panelPartidoLibre.Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
     }
 }
