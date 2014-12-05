@@ -73,20 +73,28 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody class="tablaFiltro">
-                                                                        <asp:Repeater ID="rptPartidos" runat="server" OnItemCommand="rptPartidos_ItemCommand">
+                                                                        <asp:Repeater ID="rptPartidos" runat="server" OnItemCommand="rptPartidos_ItemCommand" OnItemDataBound="rptPartidos_ItemDataBound">
                                                                             <ItemTemplate>
-                                                                                <tr>
-                                                                                    <td><%# ((Entidades.Partido)Container.DataItem).local.nombre %></td>
-                                                                                    <td><%# ((Entidades.Partido)Container.DataItem).golesLocal %>
-                                                                                        <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesLocal.ToString()+")" : "" %>
-                                                                                        - <%# ((Entidades.Partido)Container.DataItem).golesVisitante%>
-                                                                                        <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesVisitante.ToString()+")" : "" %>
-                                                                                    </td>
-                                                                                    <td><%# ((Entidades.Equipo)DataBinder.Eval(Container.DataItem, "visitante")).nombre %></td>
-                                                                                    <td>
-                                                                                        <asp:LinkButton title="Administrar Partido" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkAdministrarPartido" runat="server" CommandName="administrarPartido" CommandArgument='<%# Eval("idPartido") + ";fase" + ((Entidades.Fase)((((RepeaterItem)Container.Parent.Parent.Parent.Parent)).DataItem)).idFase +"-fecha"+((Entidades.Fecha)((RepeaterItem)Container.Parent.Parent).DataItem).idFecha %>'><span class="glyphicon glyphicon-cog"></span></asp:LinkButton>
-                                                                                    </td>
-                                                                                </tr>
+                                                                                <asp:Panel ID="panelPartidoNormal" runat="server" Visible="false">
+                                                                                    <tr>
+                                                                                        <td><%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : "" %></td>
+                                                                                        <td><%# ((Entidades.Partido)Container.DataItem).golesLocal %>
+                                                                                            <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesLocal.ToString()+")" : "" %>
+                                                                                            - <%# ((Entidades.Partido)Container.DataItem).golesVisitante%>
+                                                                                            <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesVisitante.ToString()+")" : "" %>
+                                                                                        </td>
+                                                                                        <td><%# ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.nombre : "" %></td>
+                                                                                        <td>
+                                                                                            <asp:LinkButton title="Administrar Partido" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkAdministrarPartido" runat="server" CommandName="administrarPartido" CommandArgument='<%# Eval("idPartido") + ";fase" + ((Entidades.Fase)((((RepeaterItem)Container.Parent.Parent.Parent.Parent)).DataItem)).idFase +"-fecha"+((Entidades.Fecha)((RepeaterItem)Container.Parent.Parent).DataItem).idFecha %>'><span class="glyphicon glyphicon-cog"></span></asp:LinkButton>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </asp:Panel>
+                                                                                <asp:Panel ID="panelPartidoLibre" runat="server" Visible="false">
+                                                                                    <tr>
+                                                                                        <td colspan="4">Libre: <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : ((Entidades.Partido)Container.DataItem).visitante.nombre %> </td>
+                                                                                    </tr>
+                                                                                </asp:Panel>
+                                                                                
                                                                             </ItemTemplate>
                                                                         </asp:Repeater>
                                                                         <asp:Panel ID="panelSinPartidos" runat="server">

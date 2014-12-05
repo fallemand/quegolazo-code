@@ -4,110 +4,101 @@
     <!-- Pantalla Principal -->
     <div class="container padding-top">
         <asp:UpdatePanel ID="upTorneos" runat="server">
-            <ContentTemplate>             
+            <ContentTemplate>
+                <div class="ediciones">
                 <div class="row">
                     <div class="col-md-12">
-                         <div class="row">
-                    <div class="col-xs-12">
-                        <asp:Button ID="btnRegistrarNuevaEdicion" runat="server" Text="Crear una Nueva Edición" CssClass="btn btn-success" OnClick="btnRegistrarNuevaEdicion_Click" />
-                    </div>
-                </div>
-   
-                        <asp:Repeater ID="rptEdiciones" runat="server"  OnItemCommand="rptEdiciones_ItemCommand" OnItemDataBound="rptEdiciones_ItemDataBound">
-                            <ItemTemplate>
-                                <div class="panel panel-default lista-torneos shadow-sm">
-                                    <div class="panel-heading header clearfix">
-                                        <div class="col-md-1">
-                                           <div class="thumbnail nomargin-bottom">
-                                                <img id='img<%# Logica.Sesion.getTorneo().idTorneo %>' src="<%# Logica.Sesion.getTorneo().obtenerImagenChicha() %>" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5"> 
-                                            <h3><%# Eval("nombre") %></h3>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="pull-right botones">
-                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkConfigurarEdicion" title="Ir al Panel de Configuración" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip">Configurar Edición</asp:LinkButton>
-                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkModificarEdicion" title="Editar Edición" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarEdicin" title="Eliminar Edición" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="eliminarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                            </div>
-                                        </div>
+                        <div class="row">
+                            <div class="page-header clearfix" role="tab" id="headingOne">
+                                <div class="col-md-1">
+                                    <div class="thumbnail nomargin-bottom">
+                                        <img src="http://localhost:12434/resources/img/torneos/87-sm.jpg" />
                                     </div>
-                                    <div class="row">
-                                 <div class="panel-body">
-                                     <div class="col-md-8">
-                            <div class="panel panel-default" id="panelEquipos" runat="server">
-                                <div class="panel-heading">
-                                    <span class="flaticon-soccer18" style="font-size: 18px;line-height: 12px;"></span>
-                                    Equipos Participantes
                                 </div>
-                                <div class="panel-body small-padding">
-                                    <table>
-                                         <asp:Repeater ID="rptEquipos" runat="server">
-                                                        
-                                             <ItemTemplate>
-                                                         <tr class="col-md-3">
-                                                            <td><img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>"  class="img-responsive" alt="" style="height:22px; max-width:30px; margin-right:4px;"  /></td>
-                                                            <td><%# Eval("nombre") %></td> 
-                                                        </tr>
-                                           </ItemTemplate>
-                                                    </asp:Repeater>
-                                    </table>
+                                <div class="col-md-9">
+                                    <h1 id="type">Torneo la Cachiporra</h1>
                                 </div>
-                            </div>
-                    </div>
-
-                                     <div class="col-md-4">
-                        <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <span class="glyphicon glyphicon-cog"></span>
-                                    Opciones
-                                </div>
-                                <div class="panel-body small-padding">
-                                    Registra Jugadores: <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rJugadoresSi"></span></b></span>
-                                                        <span class="text-danger"><b><span class="glyphicon glyphicon-remove" runat="server" visible="false" id="rJugadoresNo"></span></b></span><br />
-                                    Registra Arbitros:  <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rArbitrosSi"></span></b></span>
-                                                        <span class="text-danger"><b><span  class="glyphicon glyphicon-remove" runat="server" visible="false" id="rArbitrosNo" ></span></b></span><br />
-                                    Registra Sanciones: <span class="text-success"><b><span  class="glyphicon glyphicon-ok" runat="server" visible="false" id="rSancionesSi"></span></b></span>
-                                                        <span class="text-danger"><b><span  class="glyphicon glyphicon-remove" runat="server" visible="false" id="rSancionesNo"></span></b></span><br />
-                                    Registra Canchas:   <span class="text-success"><b><span  class="glyphicon glyphicon-ok" runat="server" visible="false" id="rCanchasSi"></span></b></span>
-                                                        <span class="text-danger"><b><span  class="glyphicon glyphicon-remove" runat="server" visible="false" id="rCanchasNo"></span></b></span><br />
+                                <div class="col-md-2 nopadding-right margin-top">
+                                    <asp:Button ID="btnRegistrarNuevaEdicion" runat="server" Text="Nueva Edición" CssClass="btn btn-success" OnClick="btnRegistrarNuevaEdicion_Click" />
                                 </div>
                             </div>
                         </div>
-                                     </div>
+                        <div class="panel-group well" id="accordion" role="tablist" aria-multiselectable="true">
+                            <asp:Repeater ID="rptEdiciones" runat="server" OnItemCommand="rptEdiciones_ItemCommand" OnItemDataBound="rptEdiciones_ItemDataBound">
+                                <ItemTemplate>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading header clearfix">
+                                            <div class="col-md-1 text-center">
+                                                <i class="icon-size flaticon-trophy5"></i>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#edicion<%# Eval("idEdicion") %>" aria-expanded="true" aria-controls="collapseOne">
+                                                    <h3><%# Eval("nombre") %></h3>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="pull-right botones">
+                                                    <asp:LinkButton ClientIDMode="AutoID" ID="lnkConfigurarEdicion" title="Ir al Panel de Configuración" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip">Configurar Edición</asp:LinkButton>
+                                                    <asp:LinkButton ClientIDMode="AutoID" ID="lnkModificarEdicion" title="Editar Edición" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                    <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarEdicin" title="Eliminar Edición" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="eliminarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                </div>
+                                            </div>
                                         </div>
-                                    <div class="row">
-                                 <div class="col-md-3">
-                                <b>Tamaño: </b> <%# Eval("tamanioCancha.nombre") %>
-                           
-                                 </div>
-                                     <div class="col-md-3">
-                              <b>Tipo de Superficie:</b> <%# Eval("tipoSuperficie.nombre") %> 
-                                         
-                                 </div>
-                                     <div class="col-md-3">
-                               <b>Género: </b> <%# Eval("generoEdicion.nombre") %>
-                                        
-                                 </div>
-                                     <div class="col-md-3">
-                               <b>Estado:</b> <%# Eval("estado.nombre")%>
-                                        
-                                 </div>
-                                
-                               </div>
-                              
-                              
-                                     
-                                 </div>
-                                 
-                              
-                            </ItemTemplate>
-                        </asp:Repeater>
+                                        <div id="edicion<%# Eval("idEdicion") %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="panel panel-default" id="panelEquipos" runat="server">
+                                                            <div class="panel-heading">
+                                                                <span class="flaticon-soccer18" style="font-size: 18px; line-height: 12px;"></span>
+                                                                Equipos Participantes
+                                                            </div>
+                                                            <div class="panel-body small-padding">
+                                                                <table>
+                                                                    <asp:Repeater ID="rptEquipos" runat="server">
+                                                                        <ItemTemplate>
+                                                                            <tr class="col-md-6">
+                                                                                <td>
+                                                                                    <img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px; margin-right: 4px;" /></td>
+                                                                                <td><%# Eval("nombre") %></td>
+                                                                            </tr>
+                                                                        </ItemTemplate>
+                                                                    </asp:Repeater>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                                Registra Jugadores: <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rJugadoresSi"></span></b></span>
+                                                                <span class="text-danger"><b><span class="glyphicon glyphicon-remove" runat="server" visible="false" id="rJugadoresNo"></span></b></span>
+                                                                <br />
+                                                                Registra Arbitros:  <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rArbitrosSi"></span></b></span>
+                                                                <span class="text-danger"><b><span class="glyphicon glyphicon-remove" runat="server" visible="false" id="rArbitrosNo"></span></b></span>
+                                                                <br />
+                                                                Registra Sanciones: <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rSancionesSi"></span></b></span>
+                                                                <span class="text-danger"><b><span class="glyphicon glyphicon-remove" runat="server" visible="false" id="rSancionesNo"></span></b></span>
+                                                                <br />
+                                                                Registra Canchas:   <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rCanchasSi"></span></b></span>
+                                                                <span class="text-danger"><b><span class="glyphicon glyphicon-remove" runat="server" visible="false" id="rCanchasNo"></span></b></span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <b>Tamaño: </b><%# Eval("tamanioCancha.nombre") %> <br />
+                                                        <b>Tipo de Superficie:</b> <%# Eval("tipoSuperficie.nombre") %> <br />
+                                                        <b>Género: </b><%# Eval("generoEdicion.nombre") %> <br />
+                                                        <b>Estado:</b> <%# Eval("estado.nombre")%>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
                         <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                             <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
                         </asp:Panel>
                     </div>
+                </div>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -121,74 +112,74 @@
                 <asp:UpdatePanel ID="upModalEdicion" runat="server">
                     <ContentTemplate>
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                            
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title" id="H1"><i class="flaticon-trophy5"></i>
                                 <asp:Label ID="lblTituloModalEdicion" runat="server" Text="Agregar Nueva Edición"></asp:Label>
                             </h4>
                         </div>
                         <div class="modal-body">
-                           <fieldset class="form-horizontal vgDatosEdicion">
-                                        <div class="form-group">
-                                            <label for="text" class="col-lg-2 control-label">Torneo</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtTorneoAsociado" runat="server" name="nombreTorneoEdicion" placeholder="Nombre del Torneo" disabled>
-                                                <span class="help-block">Torneo para el cual esta creando una nueva Edición</span>
+                            <fieldset class="form-horizontal vgDatosEdicion">
+                                <div class="form-group">
+                                    <label for="text" class="col-lg-2 control-label">Torneo</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" class="form-control" id="txtTorneoAsociado" runat="server" name="nombreTorneoEdicion" placeholder="Nombre del Torneo" disabled>
+                                        <span class="help-block">Torneo para el cual esta creando una nueva Edición</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="text" class="col-lg-2 control-label">Nombre</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" class="form-control" id="txtNombreEdicion" runat="server" rangelength="3, 50" required="true" name="nombreEdicion" placeholder="Nombre de la Edición">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="select" class="col-lg-2 control-label">Tamaño</label>
+                                    <div class="col-lg-10">
+                                        <asp:DropDownList ID="ddlTamañoCancha" runat="server" CssClass="form-control"></asp:DropDownList>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="select" class="col-lg-2 control-label">Superficie</label>
+                                    <div class="col-lg-10">
+                                        <asp:DropDownList ID="ddlTipoSuperficie" runat="server" CssClass="form-control"></asp:DropDownList>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="select" class="col-lg-2 control-label">Género</label>
+                                    <div class="col-lg-10">
+                                        <asp:DropDownList ID="ddlGenero" runat="server" CssClass="form-control"></asp:DropDownList>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="text" class="col-lg-2 control-label">Puntos</label>
+                                    <div class="col-lg-10">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
+                                                    <input type="number" class="form-control" digits="true" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3" required="required">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="text" class="col-lg-2 control-label">Nombre</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtNombreEdicion" runat="server" rangelength="3, 50" required="true" name="nombreEdicion" placeholder="Nombre de la Edición">
+                                            <div class="col-xs-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">=</span>
+                                                    <input type="number" class="form-control" digits="true" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1" required="required">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="select" class="col-lg-2 control-label">Tamaño</label>
-                                            <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlTamañoCancha" runat="server" CssClass="form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="select" class="col-lg-2 control-label">Superficie</label>
-                                            <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlTipoSuperficie" runat="server" CssClass="form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="select" class="col-lg-2 control-label">Género</label>
-                                            <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlGenero" runat="server" CssClass="form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>                                        
-                                 
-                                        <div class="form-group">
-                                            <label for="text" class="col-lg-2 control-label">Puntos</label>
-                                            <div class="col-lg-10">
-                                                <div class="row">
-                                                    <div class="col-xs-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
-                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3" required="required">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">=</span>
-                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1" required="required">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
-                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0" required="required">
-                                                        </div>
-                                                    </div>
+                                            <div class="col-xs-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                                                    <input type="number" class="form-control" digits="true" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0" required="required">
                                                 </div>
                                             </div>
                                         </div>
-                                    </fieldset>
-                             <asp:Panel ID="panFracasoEdicion" runat="server" CssClass="alert alert-danger" Visible="False">
-                               <asp:Literal ID="litFracasoEdicion" runat="server"></asp:Literal>
-                             </asp:Panel>                      
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <asp:Panel ID="panFracasoEdicion" runat="server" CssClass="alert alert-danger" Visible="False">
+                                <asp:Literal ID="litFracasoEdicion" runat="server"></asp:Literal>
+                            </asp:Panel>
                         </div>
                         <div class="modal-footer">
                             <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
