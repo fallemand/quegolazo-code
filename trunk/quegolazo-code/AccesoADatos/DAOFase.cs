@@ -12,6 +12,7 @@ namespace AccesoADatos
     public class DAOFase
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
+       
         /// <summary> 
         /// Registrar una nueva Fase 
         /// autor: Florencia Rojas        
@@ -32,17 +33,26 @@ namespace AccesoADatos
                 {
                     if (fase != null)
                     {
-                        string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado)
-                                        VALUES (@idFase, @idEdicion, @tipoFixture, @idEstado)";
+                        string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado, cantidadEquipos, cantidadGrupos)
+                                        VALUES (@idFase, @idEdicion, @tipoFixture, @idEstado, @cantidadEquipos, @cantidadGrupos)";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                         cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.idTipoFixture);
                         cmd.Parameters.AddWithValue("@idEstado", Estado.faseDIAGRAMADA);
+                        if (fase.esGenerica)
+                        {
+                            cmd.Parameters.AddWithValue("@cantidadEquipos", fase.equipos.Count);
+                            cmd.Parameters.AddWithValue("@cantidadGrupos", fase.grupos.Count);
+                        }
+                        else {
+                            cmd.Parameters.AddWithValue("@cantidadEquipos", DBNull.Value);
+                            cmd.Parameters.AddWithValue("@cantidadGrupos", DBNull.Value);
+                        }                                                   
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
 
-                        if (fase.grupos.Count != 0)
+                        if (fase.grupos.Count != 0 && !fase.esGenerica)
                         {
                             DAOGrupo daoGrupo = new DAOGrupo();
                             daoGrupo.registrarGrupos(fase, con, trans);
@@ -96,7 +106,10 @@ namespace AccesoADatos
                           idEdicion = idEdicion,
                           estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
                           tipoFixture = new TipoFixture(dr["tipoFixture"].ToString()),
-                          equipos = new List<Equipo>()
+                          equipos = new List<Equipo>(),
+                          cantidadDeEquipos = (dr["cantidadEquipos"] != DBNull.Value) ? int.Parse(dr["cantidadEquipos"].ToString()) : 0,
+                          cantidadDeGrupos = (dr["cantidadGrupos"] != DBNull.Value) ? int.Parse(dr["cantidadGrupos"].ToString()) : 0,
+                          esGenerica = (dr["cantidadEquipos"] != DBNull.Value) // si el valor del campo cantidadEquipos es Null, entonecs se trata de una fase generica.
                       };        
                      fases.Add(fase);
                  }
@@ -105,13 +118,17 @@ namespace AccesoADatos
 
                  foreach (Fase fase in fases)
                  {
-                     daoGrupo.obtenerGrupos(fase, con, true);
-                     daoFecha.obtenerFechas(fase, con);
-                     daoPartido.obtenerPartidos(fase, con);
-                     foreach (Grupo grupo in fase.grupos)
+                     if (!fase.esGenerica)
                      {
-                         fase.equipos.AddRange(grupo.equipos);
+                         daoGrupo.obtenerGrupos(fase, con, true);
+                         daoFecha.obtenerFechas(fase, con);
+                         daoPartido.obtenerPartidos(fase, con);
+                         foreach (Grupo grupo in fase.grupos)
+                         {
+                             fase.equipos.AddRange(grupo.equipos);
+                         }  
                      }
+                    
                  }
                  return fases;
              }
@@ -125,8 +142,7 @@ namespace AccesoADatos
                      con.Close();
              }
         }
-
-
+        
         /// <summary>
         /// Obtiene las fases  de una edición por Id. Obteniendo solo los valores necesarios para mostrar la informacion básica de la fase y sus equipos.
         /// autor: Antonio Herrera
@@ -161,7 +177,10 @@ namespace AccesoADatos
                         idEdicion = idEdicion,
                         estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
                         tipoFixture = new TipoFixture(dr["tipoFixture"].ToString()),
-                        equipos = new List<Equipo>()
+                        equipos = new List<Equipo>(),
+                        cantidadDeEquipos = (dr["cantidadEquipos"] != DBNull.Value) ? int.Parse(dr["cantidadEquipos"].ToString()) : 0,
+                        cantidadDeGrupos = (dr["cantidadGrupos"] != DBNull.Value) ? int.Parse(dr["cantidadGrupos"].ToString()) : 0,
+                        esGenerica = (dr["cantidadEquipos"] != DBNull.Value) // si el valor del campo cantidadEquipos no es Null, entonecs se trata de una fase generica.
                     };
                     fases.Add(fase);
                 }
@@ -170,12 +189,15 @@ namespace AccesoADatos
 
                 foreach (Fase fase in fases)
                 {
-                    daoGrupo.obtenerGrupos(fase, con , false);
-
-                    foreach (Grupo grupo in fase.grupos)
+                    if (!fase.esGenerica)
                     {
-                        fase.equipos.AddRange(grupo.equipos);
+                        daoGrupo.obtenerGrupos(fase, con, false);
+                        foreach (Grupo grupo in fase.grupos)
+                        {
+                            fase.equipos.AddRange(grupo.equipos);
+                        }  
                     }
+                    
                 }
                 return fases;
             }
@@ -191,57 +213,18 @@ namespace AccesoADatos
         }
 
         /// <summary>
-        /// Actualiza las fases
-        /// autor: Flor Rojas
+        /// Elimina las fases de una edicion y guarda las nuevas fases que se pasan por parametros.
+        /// autor: Antonio Herrera
         /// </summary>
         /// <param name="fases">Lista de Fases</param>
         /// <param name="con">Conexión</param>
         /// <param name="trans">Transacción</param>
         public void actualizarFase(List<Fase> fases, SqlConnection con, SqlTransaction trans)
-        {
-            SqlCommand cmd = new SqlCommand();
+        {            
             try
             {
-                if (con.State == ConnectionState.Closed)
-                    con.Open();
-                cmd.Connection = con;
-                cmd.Transaction = trans;
-
-                
-                foreach (Fase fase in fases)
-                {
-                    if (fase != null)
-                    {
-                        string sqlEliminacion = "DELETE FROM Fases WHERE idFase = @idFase AND idEdicion = @idEdicion";
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
-                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                        cmd.CommandText = sqlEliminacion;
-                        cmd.ExecuteNonQuery();
-
-                        string sql = @"INSERT INTO Fases (idFase,idEdicion,tipoFixture,idEstado)
-                                        VALUES (@idFase,@idEdicion,@tipoFixture,@idEstado)";
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
-                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                        cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.idTipoFixture);
-                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseDIAGRAMADA);
-                        cmd.CommandText = sql;
-                        cmd.ExecuteNonQuery();
-
-                        if (fase.grupos.Count != 0)
-                        {
-                            DAOGrupo daoGrupo = new DAOGrupo();
-                            daoGrupo.registrarGrupos(fase, con, trans);
-
-                            DAOFecha daoFecha = new DAOFecha();
-                            daoFecha.registrarFechas(fase, con, trans);
-
-                            DAOPartido daoPartido = new DAOPartido();
-                            daoPartido.registrarPartidos(fase, con, trans);
-                        }
-                    }
-                }
+                eliminarFases(fases[0].idEdicion);
+                registrarFase(fases, con, trans);
             }
             catch (SqlException ex)
             {
@@ -251,13 +234,11 @@ namespace AccesoADatos
         }
 
         /// <summary>
-        /// Actualiza las fases
-        /// autor: Flor Rojas
+        /// Elimina las fases de la edicion que tiene el id que se pasa como parametro.
+        /// autor: Antonio Herrera
         /// </summary>
         /// <param name="fases">Lista de Fases</param>
-        /// <param name="con">Conexión</param>
-        /// <param name="trans">Transacción</param>
-        public void eliminarFases(List<Fase> fases)
+        public void eliminarFases(int idEdicion)
         {
             SqlCommand cmd = new SqlCommand();
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -266,23 +247,13 @@ namespace AccesoADatos
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-                cmd.Connection = con;
-                trans = con.BeginTransaction();
-                cmd.Transaction = trans;
-
-                foreach (Fase fase in fases)
-                {
-                    if (fase != null)
-                    {
-                        string sqlEliminacion = "DELETE FROM Fases WHERE idFase = @idFase AND idEdicion = @idEdicion";
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
-                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                cmd.Connection = con;          
+             
+                        string sqlEliminacion = "DELETE FROM Fases WHERE idEdicion = @idEdicion";
+                        cmd.Parameters.Clear();                        
+                        cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                         cmd.CommandText = sqlEliminacion;
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                trans.Commit();
+                        cmd.ExecuteNonQuery();           
             }
             catch (SqlException ex)
             {
@@ -290,8 +261,7 @@ namespace AccesoADatos
                 throw new Exception("Error al intentar actualizar la edición: " + ex.Message);
             }
         }
-
-
+        
          /// <summary>
        /// Cambia el estado de la fase a Cerrada cuando se jugaron todos los partidos y devuelve true si se cerró y false si aún no
        /// autor: Flor Rojas

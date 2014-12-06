@@ -23,7 +23,7 @@ namespace Logica
       {
           foreach (Fase f in fases)
           {
-              if (f != null && f==fases[0])
+              if (f != null && f==fases[0])//s
               {
                   if (f.tipoFixture.idTipoFixture == "TCT")//Todos contra todos ida
                   {
@@ -73,7 +73,7 @@ namespace Logica
       public void eliminarConfiguracionGuardada(List<Fase> fases)
       {
           Sesion.getGestorEdicion().edicion.fases = new List<Fase>();
-          new DAOFase().eliminarFases(fases);
+          new DAOFase().eliminarFases(fases[0].idEdicion);
       }
 
       //public void registrarFase()

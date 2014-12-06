@@ -102,8 +102,9 @@
 
         var divCentro = $("<div/>", { class: 'col-md-4', id: 'divCentroFase' + numFase });
         var labelCantidad = $("<label/>").attr("id", "lblCantidadFase" + numFase).text("Cantidad de grupos:");
-        var comboCant = createDropDownList("ddlCantidadFase" + numFase, widget.obtenerGruposPosibles((numFase > 1) ? (widget.options.fases[numFase - 1].equipos.length > 0) ? widget.options.fases[numFase - 1].equipos.length - 2 : $("#ddlCantidadParticipantesFase" + numFase).length : widget.options.fases[numFase - 1].equipos.length));
-        comboCant.on("change", function () { $("#cuerpoFase" + numFase).remove(); })
+        //var cantidadParticipantesEnLaFase = (numFase > 1) ? (widget.options.fases[numFase - 1].equipos.length > 0) ? widget.options.fases[numFase - 1].equipos.length - 2 :  : ;
+        var comboCant = null;
+        
 
         // si la fase es mayor a uno, armos dos divs para que la cantidad de participantes y de grupos se alineen en un solo div central
         if (numFase > 1) {
@@ -123,19 +124,20 @@
                     widget.validarCantidadDeEquiposEliminatorio(numFase);
                 }
             });
-
-
+            comboCant = createDropDownList("ddlCantidadFase" + numFase, widget.obtenerGruposPosibles($(comboCantParticipantes).val()));
             var divCantidadGrupos = $("<div/>", { class: 'col-md-6', id: 'divCantidadGruposFase' + numFase });
             labelCantidad.text("Grupos:");
             labelCantidad.appendTo(divCantidadGrupos);
             comboCant.appendTo(divCantidadGrupos);
             divCantidadParticipantes.appendTo(divCentro);
             divCantidadGrupos.appendTo(divCentro);
-        } else {
+            } else {
+            comboCant = createDropDownList("ddlCantidadFase" + numFase, widget.obtenerGruposPosibles(widget.options.fases[numFase - 1].equipos.length));
             labelCantidad.appendTo(divCentro);
             comboCant.appendTo(divCentro);          
         }
         divCentro.appendTo(row);
+        comboCant.on("change", function () { $("#cuerpoFase" + numFase).remove(); })
         var divDerecha = $("<div/>", { class: 'col-md-3' });
         var botonMostrar = $('<input/>').attr({ type: 'button', id: 'btnMostrarFase' + numFase, value: 'Mostrar Fase', class: 'btn btn-success' }).css("margin-top", "23px").on("click", function () { widget.presentarFase(numFase); });
         botonMostrar.appendTo(divDerecha);        
@@ -154,6 +156,7 @@
             equipos.push(nuevo);
         }
         widget.options.fases[numFase - 1].equipos = equipos;
+        widget.options.fases[numFase - 1].esGenerica = true;
     },
     //elimina todas las fases genericas creadas tras la modificacion de los equipos participantes.
     eliminarFasesSiguientes : function (numFase) {
@@ -226,7 +229,9 @@
             "equipos": (numFase === 1) ? widget.options.equiposDeLaEdicion : [],
             "grupos": [],
             "tipoFixture": null,
-            "cantidadDeEquipos": (numFase === 1) ? widget.options.equiposDeLaEdicion.length : 0
+            "esGenerica": false,
+            "cantidadDeEquipos": (numFase === 1) ? widget.options.equiposDeLaEdicion.length : 0,
+            "cantidadDeGrupos":0
         };
         widget.options.fases.push(faseNueva);
     },
@@ -271,7 +276,7 @@
         var cantidadEquiposPorGrupo = (cantidadGrupos != null) ? parseInt((numFase == 1) ? widget.options.equiposDeLaEdicion.length : $("#ddlCantidadParticipantesFase"+numFase).val() / cantidadGrupos) : null;
         var grupos = (fase!=null) ? fase.grupos : widget.armarGruposParaPresentar((numFase ==1) ? widget.options.equiposDeLaEdicion.sort(function() { return 0.5 - Math.random() }) : widget.options.fases[numFase -1].equipos , cantidadGrupos, (fase != null) ? fase.idFase : numFase);
         //recorremos todos los grupos, previamente borramos los grupos que se han agregado antes.
-        widget.options.fases[numFase - 1].grupos = grupos;
+        widget.options.fases[numFase - 1].grupos = grupos;        
             for (var i = 0; i < grupos.length; i++) {                
                 var tablaGrupo = widget.crearTablaParaGrupo(i + 1, numFase);
                 $("#cuerpoFase" + numFase).append(tablaGrupo);
@@ -358,7 +363,7 @@
         //guardo los grupos segun lo que arm el usuario
         for (var i = 0; i < widget.options.fases.length; i++) {
             var fase = widget.options.fases[i];
-            if (i == 0) {//solo tengo en cuenta lo que genero en la primera fase, lo demas es generico
+            if (!fase.esGenerica) {//armo para cuando la fase NO es generica
                 if (fase.tipoFixture.idTipoFixture.indexOf("TCT") >= 0) {//si es todos contra todos
                     for (var j = 0; j < fase.grupos.length; j++) {
                         var grupo = fase.grupos[j];
@@ -367,8 +372,12 @@
                 } else {
                     widget.armarLlaves(fase.idFase);
                 }
-            } else
+            } else {//armo para cuando la fase es generica
+                //        fase.cantidadDeGrupos = $("#ddlCantidadFase" + fase.idFase).val();
                 return;//no me interesan las demas fases solo la primera que es personalizable
+
+            }
+                
             
             }
                        

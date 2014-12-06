@@ -14,7 +14,14 @@ namespace Entidades
         public TipoFixture tipoFixture { get; set; }
         public Estado estado { get; set; }
         public List<Equipo> equipos { get; set; }
-        
+        /// <summary>
+        /// Indica si la fase fue generada por el sistema solo para mostrar la estructura de la edicion (true), o bien si fue generada por el usuario (false)
+        /// </summary>
+        public bool esGenerica { get; set; }
+        public int cantidadDeGrupos { get; set; }
+        public int cantidadDeEquipos { get; set; }
+
+
         public Fase()
         {
             try
@@ -30,6 +37,74 @@ namespace Entidades
             }
             
         }
+        ///// <summary>
+        ///// Crea una fase generica, con equipos y grupos genericos segun lo que se pase por parametro.
+        ///// </summary>
+        //public Fase(int cantidadEquipos, int cantidadGrupos) {
+        //    this.equipos = generarEquipos(cantidadEquipos);
+        //    this.grupos = generarGrupos(cantidadGrupos);
+        //    this.esGenerica = true;
+        //}
+
+        /// <summary>
+        /// Genera grupos para una fase generica
+        /// </summary>
+      //  private List<Grupo> generarGrupos(double cantEquipos,double cantidadGrupos)
+        //{
+        //    int cantidadEquiposxGrupo = Convert.ToInt16(cantEquipos/cantidadGrupos);
+        //    int sobrantes = Convert.ToInt16(cantEquipos- cantidadEquiposxGrupo*cantidadGrupos);
+        //    int limite = Convert.ToInt16
+
+        //    List<Grupo> respuesta = new List<Grupo>();
+        //    for (int i = 0; i < cantidadGrupos; i++)
+        //    {
+                
+        //    }
+        //    return respuesta;
+        //         var widget = this;
+        ////esta variable es la cantidad de equipos por grupo sin tener en cuenta los sobrantes        
+        
+        //var sobrantes = listaDeEquipos.length - cantidadEquiposxGrupo*cantGrupos ;
+        //var limite = listaDeEquipos.length - sobrantes;
+        //var grupos = [];
+        //var indice = 0;
+        ////se divide en una cantidad de grupos fija, cada uno con la misma cantidad de equipos
+        //for (var i = 0; i < cantGrupos; i++) {
+        //    var nuevoGrupo = {
+        //        idGrupo: i + 1,
+        //        idFase: numFase,
+        //        idEdicion: widget.options.idEdicion,
+        //        equipos: []
+        //    };
+        //    var grupo = [];
+        //    for (var j = 0; j < cantidadEquiposxGrupo; j++) {
+        //        nuevoGrupo.equipos.push(listaDeEquipos[indice]);
+        //        indice++;
+        //    }
+        //    grupos.push(nuevoGrupo);
+        //}
+
+        ////ahora se distribuyen los equipos sobrantes uno en cada grupo
+        //indice = listaDeEquipos.length - sobrantes;        
+        //for (var i = 0; i < sobrantes; i++) {
+        //    grupos[i].equipos.push(listaDeEquipos[indice]);
+        //    indice++;
+        //}        
+      
+        //return grupos;
+        //}
+        ///// <summary>
+        ///// Genera equipos para una fase generica
+        ///// </summary>
+        //private List<Equipo> generarEquipos(int cantidadEquipos)
+        //{
+        //    List<Equipo> respuesta = new List<Equipo>();
+        //    for (int i = 0; i < cantidadEquipos; i++)
+        //    {
+                
+        //    }
+        //    return respuesta;
+        //}
 
         public List<Fecha> obtenerFechas()
         {
