@@ -128,55 +128,63 @@ namespace quegolazo_code.admin
                     Repeater rptEquipos = (Repeater)e.Item.FindControl("rptEquipos");
                     gestorEdicion.edicion = (Edicion)e.Item.DataItem;
                     GestorControles.cargarRepeaterList(rptEquipos, gestorEdicion.obtenerEquipos());
-                    if (rptEquipos.Items.Count == 0)
-                    {
-                        HtmlGenericControl panelEquipos = (HtmlGenericControl)e.Item.FindControl("panelEquipos");
-                        panelEquipos.Visible = false;
-                    }
-                    //Sanciones
-                    if (gestorEdicion.edicion.preferencias.sanciones)
-                    {
-                        HtmlGenericControl rSancionesSi = (HtmlGenericControl)e.Item.FindControl("rSancionesSi");
-                        rSancionesSi.Visible = true;
-                    }
-                    else
-                    {
-                        HtmlGenericControl rSancionesNo = (HtmlGenericControl)e.Item.FindControl("rSancionesNo");
-                        rSancionesNo.Visible = true;
-                    }
-                    //Arbitros
-                    if (gestorEdicion.edicion.preferencias.arbitros)
-                    {
-                        HtmlGenericControl rArbitrosSi = (HtmlGenericControl)e.Item.FindControl("rArbitrosSi");
-                        rArbitrosSi.Visible = true;
-                    }
-                    else
-                    {
-                        HtmlGenericControl rArbitrosNo = (HtmlGenericControl)e.Item.FindControl("rArbitrosNo");
-                        rArbitrosNo.Visible = true;
-                    }
+                    Panel panelDatosEdicionConfigurada = (Panel)e.Item.FindControl("panelDatosEdicionConfigurada");
+                    panelDatosEdicionConfigurada.Visible = (gestorEdicion.edicion.estado.idEstado != Estado.edicionREGISTRADA);
+                    Panel panelDatosEdicionNoConfigurada = (Panel)e.Item.FindControl("panelDatosEdicionNoConfigurada");
+                    panelDatosEdicionNoConfigurada.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA);
 
-                    //Jugadores
-                    if (gestorEdicion.edicion.preferencias.jugadores)
+                    if (panelDatosEdicionConfigurada.Visible)
                     {
-                        HtmlGenericControl rJugadoresSi = (HtmlGenericControl)e.Item.FindControl("rJugadoresSi");
-                        rJugadoresSi.Visible = true;
-                    }
-                    else
-                    {
-                        HtmlGenericControl rJugadoresNo = (HtmlGenericControl)e.Item.FindControl("rJugadoresNo");
-                        rJugadoresNo.Visible = true;
-                    }
-                    //Cancha
-                    if (gestorEdicion.edicion.preferencias.canchas)
-                    {
-                        HtmlGenericControl rCanchasSi = (HtmlGenericControl)e.Item.FindControl("rCanchasSi");
-                        rCanchasSi.Visible = true;
-                    }
-                    else
-                    {
-                        HtmlGenericControl rCanchasNo = (HtmlGenericControl)e.Item.FindControl("rCanchasNo");
-                        rCanchasNo.Visible = true;
+                        if (rptEquipos.Items.Count == 0)
+                        {
+                            HtmlGenericControl panelEquipos = (HtmlGenericControl)e.Item.FindControl("panelEquipos");
+                            panelEquipos.Visible = false;
+                        }
+                        //Sanciones
+                        if (gestorEdicion.edicion.preferencias.sanciones)
+                        {
+                            HtmlGenericControl rSancionesSi = (HtmlGenericControl)e.Item.FindControl("rSancionesSi");
+                            rSancionesSi.Visible = true;
+                        }
+                        else
+                        {
+                            HtmlGenericControl rSancionesNo = (HtmlGenericControl)e.Item.FindControl("rSancionesNo");
+                            rSancionesNo.Visible = true;
+                        }
+                        //Arbitros
+                        if (gestorEdicion.edicion.preferencias.arbitros)
+                        {
+                            HtmlGenericControl rArbitrosSi = (HtmlGenericControl)e.Item.FindControl("rArbitrosSi");
+                            rArbitrosSi.Visible = true;
+                        }
+                        else
+                        {
+                            HtmlGenericControl rArbitrosNo = (HtmlGenericControl)e.Item.FindControl("rArbitrosNo");
+                            rArbitrosNo.Visible = true;
+                        }
+
+                        //Jugadores
+                        if (gestorEdicion.edicion.preferencias.jugadores)
+                        {
+                            HtmlGenericControl rJugadoresSi = (HtmlGenericControl)e.Item.FindControl("rJugadoresSi");
+                            rJugadoresSi.Visible = true;
+                        }
+                        else
+                        {
+                            HtmlGenericControl rJugadoresNo = (HtmlGenericControl)e.Item.FindControl("rJugadoresNo");
+                            rJugadoresNo.Visible = true;
+                        }
+                        //Cancha
+                        if (gestorEdicion.edicion.preferencias.canchas)
+                        {
+                            HtmlGenericControl rCanchasSi = (HtmlGenericControl)e.Item.FindControl("rCanchasSi");
+                            rCanchasSi.Visible = true;
+                        }
+                        else
+                        {
+                            HtmlGenericControl rCanchasNo = (HtmlGenericControl)e.Item.FindControl("rCanchasNo");
+                            rCanchasNo.Visible = true;
+                        }
                     }
                 }
             }
