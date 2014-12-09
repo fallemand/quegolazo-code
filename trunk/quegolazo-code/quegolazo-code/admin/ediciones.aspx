@@ -31,16 +31,20 @@
                                                 <div class="col-md-1 text-center">
                                                     <i class="icon-size flaticon-trophy5"></i>
                                                 </div>
-                                                <div class="col-md-7">
+                                                <div class="col-md-6">
                                                     <a data-toggle="collapse" data-parent="#accordion" href="#edicion<%# Eval("idEdicion") %>" aria-expanded="true" aria-controls="edicion<%# Eval("idEdicion") %>">
                                                         <h4>
                                                             <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                                                            <%# Eval("nombre") %></h4>
+                                                            <%# Eval("nombre") %>
+                                                        </h4>
                                                     </a>
                                                 </div>
+                                                <div class="col-md-1" style="padding-top:8px;">
+                                                    <span class="label label-<%#((Entidades.Edicion)Container.DataItem).estado.nombre%>"><%#((Entidades.Edicion)Container.DataItem).estado.nombre%></span>
+                                                </div>
                                                 <div class="col-md-4">
-                                                    <div class="pull-right botones">
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkConfigurarEdicion" title="Ir al Panel de Configuración" data-container="body" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip">Configurar Edición</asp:LinkButton>
+                                                    <div class="pull-right botones botones-small">
+                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkConfigurarEdicion" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>'>Configurar Edición</asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkModificarEdicion" title="Editar Edición" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarEdicin" title="Eliminar Edición" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="eliminarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                                     </div>
@@ -79,7 +83,7 @@
                                                             <div class="col-md-3">
                                                                 <b>Tamaño: </b><%# Eval("tamanioCancha.nombre") %>
                                                                 <br />
-                                                                <b>Tipo de Superficie:</b> <%# Eval("tipoSuperficie.nombre") %>
+                                                                <b>Superficie:</b> <%# Eval("tipoSuperficie.nombre") %>
                                                                 <br />
                                                                 <b>Género: </b><%# Eval("generoEdicion.nombre") %>
                                                                 <br />
@@ -88,7 +92,7 @@
                                                         </asp:Panel>
                                                         <asp:Panel ID="panelDatosEdicionNoConfigurada" runat="server" Visible="false">
                                                             <div class="col-md-11 col-md-offset-1">
-                                                                <p>La Edición no ha sido configurada aún</p>
+                                                                <p>La Edición no ha sido configurada</p>
                                                             </div>
                                                         </asp:Panel>
                                                     </div>

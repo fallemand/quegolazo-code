@@ -552,6 +552,17 @@ tr th:last-child {
 .lista-torneos .botones {
   margin-top: 12px;
 }
+.botones-small .btn {
+    padding: 4px 12px;
+}
+.botones-small .btn-panel{
+    font-size: 14px;
+}
+
+.botones-small .btn-panel-important{
+    font-size: 14px;
+}
+
 
 /* --------------------- Shadows ------------------------- */
 .shadow-sm {
@@ -1611,7 +1622,7 @@ Date: 2014-11-05
 }
 
 .ediciones .btn {
-  margin-top:0px;
+  margin-top:6px;
 }
 
 .ediciones .page-header {
@@ -1622,4 +1633,20 @@ Date: 2014-11-05
 .ediciones .panel-heading .icon-size {
     font-size: 32px;
     line-height: 37px;
+}
+
+.label-Registrada {
+    background-color: #777;
+}
+.label-Configurada {
+    background-color: #337ab7;
+}
+.label-Iniciada {
+    background-color: #f0ad4e;
+}
+.label-Finalizada {
+    background-color: #5cb85c;
+}
+.label-Cancelada {
+    background-color: #d9534f;
 }

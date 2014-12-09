@@ -46,9 +46,9 @@ namespace Entidades
         //Estados Edicion: 2
         public const int edicionREGISTRADA = 2;
         public const int edicionCONFIGURADA = 14;
-        public const int edicionINICIADA = 17;
-        public const int edicionFINALIZADA = 15;
-        public const int edicionCANCELADA = 16;        
+        public const int edicionINICIADA = 16;
+        public const int edicionFINALIZADA = 17;
+        public const int edicionCANCELADA = 18;        
 
         //Estados Fecha: 3
         public const int fechaDIAGRAMADA = 7;
