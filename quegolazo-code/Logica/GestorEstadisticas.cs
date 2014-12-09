@@ -54,6 +54,11 @@ namespace Logica
            return DaoEstadisticas.obtenerAvanceEdicion(edicion.idEdicion);
        }
 
+       public DataTable obtenerAvanceEdicion(int idEdicion)
+       {
+           return DaoEstadisticas.obtenerAvanceEdicion(idEdicion);
+       }
+
        private Edicion buscarUltimaEdicionTorneo()
        {
            DAOEdicion daoEdicion = new DAOEdicion();
