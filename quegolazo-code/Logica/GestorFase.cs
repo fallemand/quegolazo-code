@@ -76,6 +76,24 @@ namespace Logica
           new DAOFase().eliminarFases(fases[0].idEdicion);
       }
 
+      /// <summary>
+      /// Reduce las fases para que sean procesadas en el editor (no necesita los datos detallados de equipos)
+      /// </summary>
+      public void reducirFases(List<Fase> fases)
+      {
+          foreach (Fase fase in fases)
+          {
+              foreach (Equipo equipo in fase.equipos)
+              {
+                  equipo.jugadores = null;
+              }
+              foreach (Grupo grupo in fase.grupos)
+              {
+                  grupo.equipos = null;
+              }
+          }
+      }
+
       //public void registrarFase()
       //{
       //    DAOFase daoFase = new DAOFase();

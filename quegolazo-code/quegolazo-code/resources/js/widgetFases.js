@@ -65,7 +65,7 @@
         $("<div/>").attr("id", "cuerpoFase" + numFase).appendTo(cuerpoDeLaFase);
         //si la fase es mayor a uno, cargo los equipos genericos para el primer caso.
         if (numFase > 1) {
-             widget.generarListaDeEquiposParaFase(numFase, $("#ddlCantidadParticipantesFase" + numFase).val());
+            widget.generarListaDeEquiposParaFase(numFase,(widget.options.fases[numFase-1].cantidadDeEquipos > 0) ? widget.options.fases[numFase-1].cantidadDeEquipos :  $("#ddlCantidadParticipantesFase" + numFase).val());
             $("#ddlCantidadParticipantesFase" + numFase).tooltip({ placemenent:'bottom',title: "Indica la cantidad de equipos que clasifican de la fase anterior"});
             //elimino el boton eliminar de una fase que no sea la ultima.  
             $("#btnEliminarFase" + (numFase - 1)).hide();
@@ -137,7 +137,10 @@
             comboCant.appendTo(divCentro);          
         }
         divCentro.appendTo(row);
-        comboCant.on("change", function () { $("#cuerpoFase" + numFase).remove(); })
+        comboCant.on("change", function () {
+            $("#cuerpoFase" + numFase).remove();
+            widget.options.fases[numFase - 1].cantidadDeGrupos = $(this).val();
+        })
         var divDerecha = $("<div/>", { class: 'col-md-3' });
         var botonMostrar = $('<input/>').attr({ type: 'button', id: 'btnMostrarFase' + numFase, value: 'Mostrar Fase', class: 'btn btn-success' }).css("margin-top", "23px").on("click", function () { widget.presentarFase(numFase); });
         botonMostrar.appendTo(divDerecha);        
@@ -156,6 +159,7 @@
             equipos.push(nuevo);
         }
         widget.options.fases[numFase - 1].equipos = equipos;
+        widget.options.fases[numFase - 1].cantidadDeEquipos = equipos.length;
         widget.options.fases[numFase - 1].esGenerica = true;
     },
     //elimina todas las fases genericas creadas tras la modificacion de los equipos participantes.
@@ -271,10 +275,10 @@
     //crea la estructura html para los grupos de una fase, si el atributo fase es distinto de null, crea toda una estructura nueva, sino crea lo que tenga la fase que se pasa por parametro
     mostrarEquiposEngrupo: function (numFase, cantidadGrupos, fase) {        
         var widget = this;
-        //var row;
+        var fasePreCargada = fase != null || fase != undefined;
         numFase = (fase != null) ? fase.idFase : numFase;
-        var cantidadEquiposPorGrupo = (cantidadGrupos != null) ? parseInt((numFase == 1) ? widget.options.equiposDeLaEdicion.length : $("#ddlCantidadParticipantesFase"+numFase).val() / cantidadGrupos) : null;
-        var grupos = (fase!=null) ? fase.grupos : widget.armarGruposParaPresentar((numFase ==1) ? widget.options.equiposDeLaEdicion.sort(function() { return 0.5 - Math.random() }) : widget.options.fases[numFase -1].equipos , cantidadGrupos, (fase != null) ? fase.idFase : numFase);
+        var cantidadEquiposPorGrupo = (cantidadGrupos != null) ? parseInt((numFase == 1) ? widget.options.equiposDeLaEdicion.length : $("#ddlCantidadParticipantesFase" + numFase).val() / cantidadGrupos) : null;
+        var grupos = widget.armarGruposParaPresentar(fasePreCargada ? fase.equipos : widget.options.fases[numFase-1].equipos, cantidadGrupos, fasePreCargada ? fase.idFase : numFase);
         //recorremos todos los grupos, previamente borramos los grupos que se han agregado antes.
         widget.options.fases[numFase - 1].grupos = grupos;        
             for (var i = 0; i < grupos.length; i++) {                
@@ -498,13 +502,16 @@
         if (widget.options.error)
             return;
         var tipoFixture = (fasePreCargada) ? fase.tipoFixture.idTipoFixture : $("#ddlTipoFixtureFase" + numFase).val();
-        var cantidades = (fasePreCargada) ? fase.grupos.length : $("#ddlCantidadFase" + numFase).val();
+        var cantidadGrupos = (fasePreCargada) ? (fase.esGenerica) ? fase.cantidadDeGrupos : fase.grupos.length : $("#ddlCantidadFase" + numFase).val();
         $("<div/>").attr("id", "cuerpoFase" + numFase).appendTo($("#panelFase"+ numFase));
         $("#panelFracaso").hide();         
         if (tipoFixture.indexOf("TCT") >= 0) {
-            if(fasePreCargada)
-            $('#ddlCantidadFase'+ fase.idFase + ' option:contains("'+fase.grupos.length+'")').prop('selected', true);
-            widget.mostrarEquiposEngrupo(numFase, cantidades, fase);
+            if (fasePreCargada) {
+                $("#ddlCantidadParticipantesFase" + fase.idFase + ' option:contains("' + fase.equipos.length + '")').prop('selected', true);
+                createDropDownList("ddlCantidadFase" + numFase, widget.obtenerGruposPosibles(fase.equipos.length));
+                $("#ddlCantidadFase" + fase.idFase + ' option:contains("' + cantidadGrupos + '")').prop('selected', true);
+            }          
+            widget.mostrarEquiposEngrupo(numFase, cantidadGrupos, fase);
         } else {
             if (fasePreCargada) {
                 $('#ddlTipoFixtureFase' + fase.idFase).val(fase.tipoFixture.idTipoFixture);
