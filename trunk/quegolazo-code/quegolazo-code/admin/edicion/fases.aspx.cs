@@ -19,13 +19,11 @@ namespace quegolazo_code.admin.edicion
         protected void Page_Load(object sender, EventArgs e)
         {
             gestorEdicion = Sesion.getGestorEdicion();
-            
+            new GestorFase().reducirFases(gestorEdicion.edicion.fases);
             if(gestorEdicion.edicion.equipos.Count<2)
-            {
-                Response.Redirect(GestorUrl.eEQUIPOS);
-            }
+            Response.Redirect(GestorUrl.eEQUIPOS);            
             string equipos = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.equipos);
-            string fases = (new JavaScriptSerializer()).Serialize(new GestorFase().obtenerFasesReducidas(gestorEdicion.edicion.idEdicion));
+            string fases = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.fases);
             if(!IsPostBack)
             //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:"+gestorEdicion.edicion.idEdicion +"});", true);
