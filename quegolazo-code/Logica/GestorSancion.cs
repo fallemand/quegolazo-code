@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Entidades;
 using AccesoADatos;
+using Utils;
+using System.Data;
 
 namespace Logica
 {
@@ -45,7 +47,7 @@ namespace Logica
             }
             return equipos;
         }
-
+        
         public List<Jugador> obtenerJugadoresDeEquipo(string idEquipo)
         {
             jugadores.Clear();
@@ -57,12 +59,45 @@ namespace Logica
             return jugadores;
         }
 
+        public List<Jugador> obtenerJugadoresDeEquipo2(string idEquipo)
+        {
+            List<Jugador> listaJugadores = new List<Jugador>();
+            DAOJugador daoJugador = new DAOJugador();
+            listaJugadores = daoJugador.obtenerJugadoresDeUnEquipo(int.Parse(idEquipo));
+            return listaJugadores;
+        }
+
         public List<MotivoSancion> obtenerMotivos()
         {
             DAOSancion daoSancion = new DAOSancion();
             List<MotivoSancion> motivos = new List<MotivoSancion>();
             motivos = daoSancion.obtenerMotivos();
             return motivos;
+        }
+
+        public void registrarSancion(string idEdicion, string idFecha, string idPartido, string idEquipo, string idJugador, string FechaSancion, string idMotivoSancion, string observacion, string puntosAQuitar, string cantidadFechasSuspendidas, string idFase)
+        {
+            sancion = null;
+            sancion = new Sancion();
+            sancion.idEdicion = Validador.isNotEmptyAndCastInt(idEdicion);
+            sancion.idFecha = (!idFecha.Equals("")) ? (int?)Validador.castInt(idFecha) : null;
+            sancion.idPartido = (!idPartido.Equals("")) ? (int?)Validador.castInt(idPartido) : null;
+            sancion.idEquipo = Validador.isNotEmptyAndCastInt(idEquipo);
+            sancion.idJugador = (!idJugador.Equals("")) ? (int?)Validador.castInt(idJugador) : null;
+            sancion.fechaSancion = (!FechaSancion.Equals("")) ? (DateTime?)Validador.castDate(FechaSancion) : null;
+            sancion.motivoSancion.idMotivoSancion = (!idMotivoSancion.Equals("")) ? (int?)Validador.castInt(idMotivoSancion) : null;
+            sancion.observacion = observacion;
+            sancion.puntosAQuitar = (!puntosAQuitar.Equals("")) ? (int?)Validador.castInt(puntosAQuitar) : null;
+            sancion.cantidadFechasSuspendidas = (!cantidadFechasSuspendidas.Equals("")) ? (int?)Validador.castInt(cantidadFechasSuspendidas) : null;
+            sancion.idFase = Validador.isNotEmptyAndCastInt(idFase);
+            DAOSancion daoSancion = new DAOSancion();
+            daoSancion.registrarSancion(sancion);
+        }
+
+        public DataTable obtenerSancionesDeUnaEdicion(string idEdicion)
+        {
+            DAOSancion daoSancion = new DAOSancion();
+            return daoSancion.obtenerSancionesDeEdicion(int.Parse(idEdicion));
         }
     }
 }
