@@ -99,5 +99,15 @@ namespace Logica
       //    DAOFase daoFase = new DAOFase();
       //    daoFase.registrarFase(fases);
       //}
+      public void cerrarFase(List<Fase> fases)
+      {
+          DAOFase daoFase = new DAOFase();
+          foreach(Fase fase in fases)
+          {
+              if (fase.idFase == faseActual.idFase)
+                  fase.estado.idEstado = Estado.faseCERRADA;
+          }
+          daoFase.cerrarFase(faseActual.idFase, faseActual.idEdicion);
+      }
     }
 }

@@ -29,6 +29,7 @@ namespace Entidades
                 tipoFixture = new TipoFixture();
                 estado = new Estado();
                 grupos = new List<Grupo>();
+                equipos = new List<Equipo>();
             }
             catch (Exception ex)
             {
