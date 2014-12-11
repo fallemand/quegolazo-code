@@ -58,13 +58,12 @@ namespace quegolazo_code.admin.edicion
                 List<Fase> fases = serializador.ConvertToType<List<Fase>>(JSONFases);
                 gestorFase = Sesion.getGestorEdicion().gestorFase;
                 gestorEdicion.edicion.fases = fases;             
-                gestorFase.generarFixture(gestorEdicion.edicion.fases);
-                Sesion.setGestorFase(gestorFase);                
+                gestorFase.generarFixture(gestorEdicion.edicion.fases);                                           
                 return new HttpStatusCodeResult(200, "OK");
             }
             catch (Exception ex) 
             {
-                return new HttpStatusCodeResult(500, "Ha ocurrido un error en el servidor. :'"+ex.Message +"'");
+                return new HttpStatusCodeResult(500, "Ha ocurrido un error en el servidor: '"+ex.Message +"'");
             }
         }
     }
