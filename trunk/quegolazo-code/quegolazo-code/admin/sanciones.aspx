@@ -25,65 +25,111 @@
                                 <span class="glyphicon glyphicon-plus"></span>
                                 Agregar una Sanción                                  
                             </div>
-                            <div class="panel-body nopadding-bottom">                                
+                            <div class="panel-body nopadding-bottom">   
+                            <div class="clearfix">
+                            <div class="col-md-8 first">
+                                <p class="">
+                                   ¿A quién le va aplicar la Sanción?                                   
+                                </p>
+                            </div>
+                            <div class="col-md-4 nopadding-left nopadding-right switch">
+                                <div class="switch-toggle well nomargin-bottom" onclick="cambioJugadores();">
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdJugadores" name="rbgSanciones" >
+                                        <label for="rdJugadores" onclick="">Jugadores</label>
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdEquipos" name="rbgSanciones"> 
+                                        <label for="rdEquipos" onclick="">Equipos</label>
+                                    <a class="btn btn-success" onclick=""></a>
+                                </div>
+                                &nbsp;
+                            </div>
+                            </div>
+                            </div>
+                            <div class="panel-body nopadding-bottom">   
+                            <div class="clearfix">
+                            <div class="col-md-8 first">
+                                <p class="">
+                                   ¿Se la va aplicar a un Partido?                                  
+                                </p>
+                            </div>
+                            <div class="col-md-4 nopadding-left nopadding-right switch">
+                                <div class="switch-toggle well nomargin-bottom" onclick="cambioPartido()">
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdPartido" name="rbgPartidoSinDefinir">
+                                        <label for="rdPartido" onclick="">Partido</label>
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdSinDefinir" name="rbgPartidoSinDefinir"> 
+                                        <label for="rdSinDefinir" onclick="">Sin definir</label>
+                                    <a class="btn btn-success" onclick=""></a>
+                                </div>
+                                &nbsp;
+                            </div>
+                            </div>
+                            </div>
+                            <asp:Panel ID="panelCombos" runat="server">  
+                            <div class="panel-body nopadding-bottom">                                   
                                 <fieldset class="vgSancion">
                                     <div class="form-horizontal">
-                                        <div class="form-group">
+                                        <div class="form-group" id="idDivFecha">
                                             <label for="text" class="col-lg-2 control-label">Fecha</label>
                                             <div class="col-lg-10">
                                                 <asp:DropDownList ID="ddlFecha" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlFecha_SelectedIndexChanged" ></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" id="idDivPartido">
                                             <label for="text" class="col-lg-2 control-label">Partido</label>
                                             <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlPartido" runat="server" CssClass="form-control searchableSelect" AutoPostBack="true" OnSelectedIndexChanged="ddlPartido_SelectedIndexChanged"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlPartido" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPartido_SelectedIndexChanged"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" id="idDivEquipo">
                                             <label for="text" class="col-lg-2 control-label">Equipo</label>
                                             <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlEquipo" runat="server" CssClass="form-control searchableSelect" required="true" AutoPostBack="true" OnSelectedIndexChanged="ddlEquipo_SelectedIndexChanged"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlEquipo" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlEquipo_SelectedIndexChanged"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" id="idDivEquipo2">
+                                            <label for="text" class="col-lg-2 control-label">Equipo</label>
+                                            <div class="col-lg-10">
+                                                <asp:DropDownList ID="ddlEquipoSinPartido" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlEquipoSinPartido_SelectedIndexChanged"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="idDivJugador">
                                             <label for="select" class="col-lg-2 control-label">Jugador</label>
                                             <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlJugador" runat="server" CssClass="form-control searchableSelect"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlJugador" runat="server" CssClass="form-control"></asp:DropDownList>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" id="idDivFechaDate">
                                             <label for="select" class="col-lg-2 control-label">Fecha</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtFecha" runat="server" placeholder="EJ: 20/11/2014" required="true">
+                                                <input type="text" class="form-control" id="txtFecha" runat="server" placeholder="EJ: 20/11/2014">
                                             </div>
                                         </div> 
-                                        <div class="form-group">
+                                        <div class="form-group" id="idDivMotivo">
                                             <label for="select" class="col-lg-2 control-label">Motivo</label>
                                             <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlMotivo" runat="server" CssClass="form-control" required="true"></asp:DropDownList>
+                                                <asp:DropDownList ID="ddlMotivo" runat="server" CssClass="form-control"></asp:DropDownList>
                                             </div>
-                                        </div>     
-                                        <div class="form-group">
+                                        </div> 
+                                        <div class="form-group" id="idDivObservacion">
                                             <label for="select" class="col-lg-2 control-label">Observación</label>
                                             <div class="col-lg-10">
                                                 <textarea class="form-control" id="txtObservacion" runat="server" maxlength="400" rows="3"></textarea>
                                             </div>
-                                        </div>   
-                                        <div class="form-group">
-                                            <label for="select" class="col-lg-2 control-label">Puntos a Quitar</label>
-                                            <div class="col-lg-10">
+                                        </div>     
+                                        <div class="form-group" id="idDivPuntosAQuitar">
+                                            <label for="select" class="col-lg-6 control-label">Puntos a Quitar</label>
+                                            <div class="col-lg-6">
                                                 <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPuntosAQuitar" rel="txtTooltip" title="Puntos a Quitar" maxlength="2" min="0" digits="true">
                                             </div>
                                         </div> 
-                                        <div class="form-group">
-                                            <label for="select" class="col-lg-2 control-label">Cantidad Fechas a Suspender</label>
-                                            <div class="col-lg-10">
+                                        <div class="form-group" id="idDivCantidadFechasASuspender">
+                                            <label for="select" class="col-lg-6 control-label">Cantidad Fechas a Suspender</label>
+                                            <div class="col-lg-6">
                                                 <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtCantidadFechasSuspendidas" rel="txtTooltip" title="Cantidad Fechas a Suspender" maxlength="2" min="0" digits="true">
                                             </div>
-                                        </div>      
+                                        </div>                                          
                                     </div>
                                 </fieldset>
+                                </asp:Panel>
                                 <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
                                     <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
                                 </asp:Panel>
@@ -92,7 +138,7 @@
                                 <div class="col-xs-8 col-xs-offset-3">
                                     <asp:Button class="btn btn-default" ID="btnCancelarModificacionArbitro" runat="server" Text="Cancelar" Visible="false" />
                                     <asp:Button class="btn btn-success causesValidation vgArbitro" ID="btnModificarArbitro" runat="server" Text="Modificar" Visible="false" />
-                                    <asp:Button class="btn btn-success causesValidation vgArbitro" ID="btnRegistrarArbitro" runat="server" Text="Registrar" />
+                                    <asp:Button class="btn btn-success causesValidation vgSancion" ID="btnRegistrarSancion" runat="server" Text="Registrar" OnClick="btnRegistrarSancion_Click"/>
                                 </div>
                                 <div class="col-xs-1">
                                     <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
@@ -122,29 +168,32 @@
                     <div class="panel-body">
                         <asp:UpdatePanel ID="upListaSanciones" runat="server">
                             <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="btnRegistrarArbitro" EventName="Click" />
+                                <asp:AsyncPostBackTrigger ControlID="btnRegistrarSancion" EventName="Click" />
                                 <asp:AsyncPostBackTrigger ControlID="btnModificarArbitro" EventName="Click" />
                             </Triggers>
                             <ContentTemplate>
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-2">Fecha</th>
-                                            <th class="col-md-1">Equipo</th>
-                                            <th class="col-md-1">Jugador</th>
-                                            <th class="col-md-1">Motivo</th>
-                                            <th class="col-md-1">Observación</th>
+                                            <th class="col-md-1">Fecha</th>
+                                            <th class="col-md-2">Equipo</th>
+                                            <th class="col-md-2">Jugador</th>
+                                            <th class="col-md-2">Motivo</th>
+                                            <th class="col-md-2">Puntos A Quitar</th>
+                                            <th class="col-md-1">Fechas Suspendidas</th>
+                                            <th class="col-md-1">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tablaFiltro">
                                         <asp:Repeater ID="rptSanciones" runat="server">
                                             <ItemTemplate>
-                                                <tr>                                                    
-                                                    <td><%# Eval("idFecha") %></td>
-                                                    <td><%# Eval("nombreEquipo") %></td>
-                                                    <td><%# Eval("nombreJugador") %></td>
-                                                    <td><%# Eval("motivo") %></td>
-                                                    <td><%# Eval("observacion") %></td>
+                                                <tr>                                   
+                                                    <td><%# Eval("Fecha") %></td>
+                                                    <td><%# Eval("NombreEquipo") %></td>
+                                                    <td><%# Eval("NombreJugador") %></td>
+                                                    <td><%# Eval("MotivoSancion") %></td>
+                                                    <td><%# Eval("PtosAQuitar") %></td>
+                                                    <td><%# Eval("CantFechas") %></td>
                                                     <td>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarArbitro" title="Editar Arbitro" runat="server" rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarArbitro" title="Eliminar Arbitro" runat="server" rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>
@@ -152,7 +201,7 @@
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
-                                        <tr id="sinArbitros" runat="server" visible="false">
+                                        <tr id="sinSanciones" runat="server" visible="false">
                                             <td colspan="4">No hay sanciones registradas</td>
                                         </tr>
                                     </tbody>
@@ -205,6 +254,147 @@
                     return rex.test($(this).text());
                 }).show();
             });
+            deshabilitarPanel();
         });
+
+        //Cambio Selección JUGADOR - EQUIPO
+        function cambioJugadores() {
+            deshabilitarPanel();
+            if ($('#rdEquipos').is(':checked')) {
+                $('#idDivFechaDate').show();
+                $('#idDivMotivo').show();
+                $('#idDivObservacion').show();
+                $('#idDivPuntosAQuitar').show();
+                $('#idDivCantidadFechasASuspender').show();
+                if ($('#rdPartido').is(':checked')) {
+                    $('#idDivFecha').show();
+                    $('#idDivPartido').show();
+                    $('#idDivEquipo').show();
+                }
+                else {
+                    $('#idDivEquipo2').show();
+                }
+            }
+            else {
+                $('#idDivFechaDate').show();
+                $('#idDivMotivo').show();
+                $('#idDivObservacion').show();
+                $('#idDivCantidadFechasASuspender').show();
+                $('#idDivJugador').show();
+                if ($('#rdPartido').is(':checked')) {
+                    $('#idDivFecha').show();
+                    $('#idDivPartido').show();
+                    $('#idDivEquipo').show();
+                }
+                else {
+                    $('#idDivEquipo2').show();
+                }
+
+            }
+        }       
+
+        function cambioPartido() {
+            if ($('#rdPartido').is(':checked')) {
+                $('#idDivFecha').show();
+                $('#idDivPartido').show();
+                $('#idDivEquipo').show();
+                $('#idDivEquipo2').hide();                
+            }
+            else {
+                $('#idDivFecha').hide();
+                $('#idDivPartido').hide();
+                $('#idDivEquipo2').show();
+                $('#idDivEquipo').hide();
+
+            }
+            if ($('#rdJugadores').is(':checked')) {
+                $('#idDivJugador').show();
+            }
+            else
+                $('#idDivJugador').hide();
+        }
+
+        function deshabilitarPanel() {
+            $('#idDivFecha').hide();
+            $('#idDivPartido').hide();
+            $('#idDivEquipo').hide();
+            $('#idDivEquipo2').hide();
+            $('#idDivJugador').hide();
+            $('#idDivFechaDate').hide();
+            $('#idDivMotivo').hide();
+            $('#idDivObservacion').hide();
+            $('#idDivPuntosAQuitar').hide();
+            $('#idDivCantidadFechasASuspender').hide();
+        }
+
+        function limpiarCombos()
+        {
+            $('#idDivPartido').find('option').remove();
+            $('#idDivEquipo').find('option').remove();
+            $('#idDivJugador').find('option').remove();
+        }
+
+        //CASO EQUIPO - SIN DEFINIR
+        function equipoYSinDefinir() {
+            deshabilitarPanel();
+            $('#idDivEquipo2').show();
+            $('#idDivFechaDate').show();
+            $('#idDivMotivo').show();
+            $('#idDivObservacion').show();
+            $('#idDivPuntosAQuitar').show();
+            $('#idDivCantidadFechasASuspender').show();
+
+            $('#idDivFecha').hide();
+            $('#idDivPartido').hide();
+            $('#idDivEquipo').hide();
+            $('#idDivJugador').hide();
+        }
+        //CASO EQUIPO - PARTIDO
+        function equipoYPartido() {
+            deshabilitarPanel();
+            $('#idDivFecha').show();
+            $('#idDivPartido').show();
+            $('#idDivEquipo').show();
+            $('#idDivFechaDate').show();
+            $('#idDivMotivo').show();
+            $('#idDivObservacion').show();
+            $('#idDivPuntosAQuitar').show();
+            $('#idDivCantidadFechasASuspender').show();
+
+            $('#idDivEquipo2').hide();
+            $('#idDivJugador').hide();
+        }
+
+        //CASO JUGADOR Y SIN DEFINIR
+        function jugadorYSinDefinir() {
+            deshabilitarPanel();
+            $('#idDivEquipo2').show();
+            $('#idDivJugador').show();
+            $('#idDivFechaDate').show();
+            $('#idDivMotivo').show();
+            $('#idDivObservacion').show();
+            $('#idDivCantidadFechasASuspender').show();
+
+            $('#idDivFecha').hide();
+            $('#idDivPartido').hide();
+            $('#idDivEquipo').hide();
+            $('#idDivPuntosAQuitar').hide();
+        }
+
+        //CASO JUGADOR Y PARTIDO
+        function jugadorYPartido() {
+            $('#idDivFecha').show();
+            $('#idDivPartido').show();
+            $('#idDivEquipo').show();
+            $('#idDivJugador').hide();
+            $('#idDivFechaDate').show();
+            $('#idDivMotivo').show();
+            $('#idDivObservacion').show();
+            $('#idDivPuntosAQuitar').show();
+            $('#idDivCantidadFechasASuspender').show();
+
+            $('#idDivEquipo2').hide();           
+        }
+        
     </script>
 </asp:Content>

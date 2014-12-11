@@ -8,7 +8,7 @@ namespace Entidades
 {
     public class MotivoSancion
     {
-        public int idMotivoSancion { get; set; }
+        public int? idMotivoSancion { get; set; }
         public string nombre { get; set; }
     }
 }

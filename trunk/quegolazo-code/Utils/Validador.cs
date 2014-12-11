@@ -84,6 +84,40 @@ namespace Utils
                 return cadena;
         }
 
+        public static int isNotEmptyAndCastInt(string cadena)
+        {
+            if (cadena.Equals(""))
+                throw new Exception("El valor ingresado no puede estar vacío");
+            else
+            {
+                try
+                {
+                    return int.Parse(cadena);
+                }
+                catch (Exception)
+                {
+                    throw new Exception("El valor ingresado no es un número");
+                } 
+            } 
+        }
+
+        public static DateTime isNotEmptyAndCastDate(string cadena)
+        {
+            if (cadena.Equals(""))
+                throw new Exception("El valor ingresado no puede estar vacío");
+            else
+            {
+                try
+                {
+                    return DateTime.Parse(cadena);
+                }
+                catch (Exception)
+                {
+                    throw new Exception("El valor ingresado no es una fecha");
+                }
+            }
+        }
+
         /// <summary>
         /// Valida si la direccion de email es valida devolviendo true en ese caso, y false en caso contrario
         /// </summary>

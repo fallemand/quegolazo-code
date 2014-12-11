@@ -40,6 +40,51 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnSeleccionarEdicion;
         
         /// <summary>
+        /// Control rdJugadores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdJugadores;
+        
+        /// <summary>
+        /// Control rdEquipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdEquipos;
+        
+        /// <summary>
+        /// Control rdPartido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdPartido;
+        
+        /// <summary>
+        /// Control rdSinDefinir.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdSinDefinir;
+        
+        /// <summary>
+        /// Control panelCombos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelCombos;
+        
+        /// <summary>
         /// Control ddlFecha.
         /// </summary>
         /// <remarks>
@@ -65,6 +110,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlEquipo;
+        
+        /// <summary>
+        /// Control ddlEquipoSinPartido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEquipoSinPartido;
         
         /// <summary>
         /// Control ddlJugador.
@@ -157,13 +211,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnModificarArbitro;
         
         /// <summary>
-        /// Control btnRegistrarArbitro.
+        /// Control btnRegistrarSancion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegistrarArbitro;
+        protected global::System.Web.UI.WebControls.Button btnRegistrarSancion;
         
         /// <summary>
         /// Control UpdateProgressModalTorneo.
@@ -193,13 +247,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Repeater rptSanciones;
         
         /// <summary>
-        /// Control sinArbitros.
+        /// Control sinSanciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinArbitros;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinSanciones;
         
         /// <summary>
         /// Control panelFracasoListaSanciones.
