@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="fechas.aspx.cs" Inherits="quegolazo_code.admin.fechas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
+    <script type="text/javascript" src="/resources/js/jquery.multi-select.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
@@ -42,7 +43,7 @@
                                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Fechas" />
                                             </div>
                                             <div class="col-md-3">
-                                                <asp:LinkButton title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
+                                                <asp:LinkButton title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase"  data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
                                                     <span class="label label-green label-big">Finalizar</span></asp:LinkButton>
                                             </div>
                                         </div>
@@ -433,93 +434,54 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-success" Text="Finalizar" />
+                    <asp:Button ID="btnFinalizar" runat="server" OnClick="btnFinalizar_Click" CssClass="btn btn-success" Text="Finalizar" />
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal Agregar Edicion -->
+    <!-- Modal Seleccionar Equipos que pasan-->
     <div class="modal fade" id="modalFinalizarFase" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <asp:UpdatePanel ID="upModalEdicion" runat="server">
                     <ContentTemplate>
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                            
-                            <h4 class="modal-title" id="H1"><i class="flaticon-trophy5"></i>
-                                <asp:Label ID="lblTituloModalEdicion" runat="server" Text="Agregar Nueva Edición"></asp:Label>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="H1"><i class="flaticon-football71"></i>Seleccionar Equipos que pasan a la Siguiente Fase
+                                <%--<asp:Label ID="lblTituloModalEdicion" runat="server" Text="Agregar Nueva Edición"></asp:Label>--%>
                             </h4>
                         </div>
                         <div class="modal-body">
-                           <fieldset class="form-horizontal vgDatosEdicion">
-                                        <div class="form-group">
-                                            <label for="text" class="col-lg-2 control-label">Torneo</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtTorneoAsociado" runat="server" name="nombreTorneoEdicion" placeholder="Nombre del Torneo" disabled>
-                                                <span class="help-block">Torneo para el cual esta creando una nueva Edición</span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="text" class="col-lg-2 control-label">Nombre</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtNombreEdicion" runat="server" rangelength="3, 50" required="true" name="nombreEdicion" placeholder="Nombre de la Edición">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="select" class="col-lg-2 control-label">Tamaño</label>
-                                            <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlTamañoCancha" runat="server" CssClass="form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="select" class="col-lg-2 control-label">Superficie</label>
-                                            <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlTipoSuperficie" runat="server" CssClass="form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="select" class="col-lg-2 control-label">Género</label>
-                                            <div class="col-lg-10">
-                                                <asp:DropDownList ID="ddlGenero" runat="server" CssClass="form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>                                        
-                                 
-                                        <div class="form-group">
-                                            <label for="text" class="col-lg-2 control-label">Puntos</label>
-                                            <div class="col-lg-10">
-                                                <div class="row">
-                                                    <div class="col-xs-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
-                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3" required="required">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">=</span>
-                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1" required="required">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
-                                                            <input type="number" class="form-control" digits="true" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0" required="required">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                             <asp:Panel ID="panFracasoEdicion" runat="server" CssClass="alert alert-danger" Visible="False">
-                               <asp:Literal ID="litFracasoEdicion" runat="server"></asp:Literal>
-                             </asp:Panel>                      
+                            <div class="panel-body">
+                            <select id='optgroup' multiple='multiple'>
+                                <asp:Repeater ID="rptGrupos" runat="server" OnItemDataBound="rptGrupos_ItemDataBound">
+
+                                    <ItemTemplate>
+                                        <optgroup label='Grupo <%# Eval("idGrupo")%>'>
+                                            <asp:Repeater ID="rptEquipos" runat="server">
+                                                <ItemTemplate>
+                                                    <option value='<%# Eval("idEquipo")%>'><%# Eval("nombre")%></option>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </optgroup>
+                                    </ItemTemplate>
+
+                                </asp:Repeater>
+                            </select>
+                               <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />
+                                </div>
+                           <%-- <asp:ListBox ClientIDMode="Static" ID="lstEquiposSeleccionados" runat="server" SelectionMode="Multiple"></asp:ListBox>
+                            <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />--%>
+                            <asp:Panel ID="panFracasoEdicion" runat="server" CssClass="alert alert-danger" Visible="False">
+                                <asp:Literal ID="litFracasoEdicion" runat="server"></asp:Literal>
+                            </asp:Panel>
                         </div>
                         <div class="modal-footer">
                             <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <asp:Button ID="btnSiguienteEdicion" runat="server" Text="Guardar" CssClass="btn btn-success causesValidation vgDatosEdicion" />
-                                <asp:Button ID="btnModificarEdicion" runat="server" Text="Modificar" Visible="false" CssClass="btn btn-success causesValidation vgDatosEdicion" />
+                                <asp:Button ID="btnConfigurarFase" runat="server" Text="Configurar Fase" OnClick="btnConfigurarFase_Click" CssClass="btn btn-success causesValidation vgDatosEdicion" />
+                               
                            </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
@@ -534,7 +496,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal Agregar Edicion -->
+    <!-- Modal Seleccionar Equipos que pasan -->
 
     <script type="text/javascript">
         $('body').on('keyup', '#filtro', function () {
@@ -557,5 +519,40 @@
             cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
         };
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+    </script>
+
+     <script>
+         $('#optgroup').multiSelect({
+             selectableHeader: "<div class='well well-sm alert-success nomargin-bottom'>Listado de Equipos <a href='#' id='select-all' class='btn btn-xs btn-default pull-right'>Seleccionar Todos <span class='glyphicon glyphicon-chevron-right'></span></a></div>",
+             selectionHeader: "<div class='well well-sm alert-success nomargin-bottom'>Equipos Seleccionados: <span id='spanSeleccionados'>0</span>  <a href='#' id='deselect-all' class='btn btn-xs btn-default pull-right'><span class='glyphicon glyphicon-chevron-left'></span> Quitar Todos</a></div>",
+             afterSelect: function (values) {
+                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + values + ',');
+                 actualizarCantidades();
+             },
+             afterDeselect: function (values) {
+                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val().replace(values + ',', ''));
+                 actualizarCantidades();
+             }
+         });
+         $('#select-all').click(function () {
+             $('#optgroup').multiSelect('select_all');
+             return false;
+         });
+         $('#deselect-all').click(function () {
+             $('#optgroup').multiSelect('deselect_all');
+             $('#hfEquiposSeleccionados').val("");
+             $("#spanSeleccionados").text("0");
+             return false;
+         });
+         $(function () {
+             actualizarCantidades();
+         });
+         function actualizarCantidades() {
+             var arr = $("#hfEquiposSeleccionados").val().split(",");
+             var valor = $.grep(arr, function (a) {
+                 return a != "";
+             }).length;
+             $("#spanSeleccionados").text(valor);
+         }
     </script>
 </asp:Content>

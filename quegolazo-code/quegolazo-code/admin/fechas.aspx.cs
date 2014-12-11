@@ -27,6 +27,7 @@ namespace quegolazo_code.admin
                     cargarComboEdiciones();
                     cargarComboArbitros();
                     cargarComboCanchas();
+                    
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -62,6 +63,7 @@ namespace quegolazo_code.admin
                 {
                     //gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     //litNombreEdicion.Text = gestorEdicion.edicion.nombre;
+                    gestorEdicion.gestorFase.faseActual.idFase = int.Parse(e.CommandArgument.ToString());
                     if(!gestorEdicion.gestorFase.estaFinalizada(Validador.castInt(e.CommandArgument.ToString()),gestorEdicion.edicion.idEdicion))
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "showDiv", "showDiv('panelFaseNoCompleta');", true);
                     else
@@ -611,6 +613,43 @@ namespace quegolazo_code.admin
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelCollapse", "showCollapsablePanel('" + Session["idPanelCollapse"] + "', true)", true);
         }
 
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnFinalizar_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalFinalizarFase');", true);
+            cargarEquipos();
+        }
+
+        /// <summary>
+        /// Carga los equipos
+        /// autor: 
+        /// </summary>
+        public void cargarEquipos()
+        {
+
+            GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[0].grupos);
+           
+        }
+
+        protected void rptGrupos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                {
+                    Repeater rptEquipos = (Repeater)e.Item.FindControl("rptEquipos");
+                    GestorControles.cargarRepeaterList(rptEquipos, ((Grupo)e.Item.DataItem).equipos);
+                }
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
         /// <summary>
         /// Ver si el partido es una fecha libre o un partido normal
         /// autor: Facu Allemand
@@ -637,5 +676,14 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
+
+        protected void btnConfigurarFase_Click(object sender, EventArgs e)
+        {
+            gestorEdicion.verificarProximaFase(gestorEdicion.gestorFase.faseActual.idFase+1);
+            gestorEdicion.agregarEquiposEnFase(hfEquiposSeleccionados.Value, (gestorEdicion.gestorFase.faseActual.idFase +1));
+            gestorEdicion.gestorFase.cerrarFase(gestorEdicion.edicion.fases);
+            Response.Redirect(GestorUrl.eFASES);
+        }
+
     }
 }

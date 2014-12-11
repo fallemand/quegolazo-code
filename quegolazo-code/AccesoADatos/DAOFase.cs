@@ -372,7 +372,38 @@ namespace AccesoADatos
             }
         }
 
-        
+
+
+         //<summary>
+         //Cambia el estado de la fase a Cerrada cuando se jugaron todos los partidos 
+         //autor: Flor Rojas
+         //</summary>
+                public void cerrarFase(int idFase,int idEdicion)
+                {
+                    SqlConnection con = new SqlConnection(cadenaDeConexion);
+                    SqlCommand cmd = new SqlCommand();
+                    try
+                    {
+                     if (con.State == ConnectionState.Closed)
+                        con.Open();
+                     cmd.Connection = con;
+                     string sql = @"  UPDATE Fases SET idEstado =@idEstado WHERE idFase = @idFase AND idEdicion = @idEdicion";
+                     cmd.Parameters.Clear();
+                     cmd.Parameters.AddWithValue("@idFase", idFase);
+                     cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                     cmd.Parameters.AddWithValue("@idEstado", Estado.faseCERRADA);
+                     cmd.CommandText=sql;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("No se pudo cerrar la fase: " + ex.Message);
+                    }
+                    finally
+                    {
+                        if (con != null && con.State == ConnectionState.Open)
+                            con.Close();
+                    }
+                }
 
     }
 }

@@ -409,13 +409,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Literal litExito;
         
         /// <summary>
-        /// Control btnEliminar.
+        /// Control btnFinalizar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminar;
+        protected global::System.Web.UI.WebControls.Button btnFinalizar;
         
         /// <summary>
         /// Control upModalEdicion.
@@ -427,85 +427,22 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.UpdatePanel upModalEdicion;
         
         /// <summary>
-        /// Control lblTituloModalEdicion.
+        /// Control rptGrupos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTituloModalEdicion;
+        protected global::System.Web.UI.WebControls.Repeater rptGrupos;
         
         /// <summary>
-        /// Control txtTorneoAsociado.
+        /// Control hfEquiposSeleccionados.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtTorneoAsociado;
-        
-        /// <summary>
-        /// Control txtNombreEdicion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNombreEdicion;
-        
-        /// <summary>
-        /// Control ddlTamañoCancha.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTamañoCancha;
-        
-        /// <summary>
-        /// Control ddlTipoSuperficie.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoSuperficie;
-        
-        /// <summary>
-        /// Control ddlGenero.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlGenero;
-        
-        /// <summary>
-        /// Control txtPuntosPorGanar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPuntosPorGanar;
-        
-        /// <summary>
-        /// Control txtPuntosPorEmpatar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPuntosPorEmpatar;
-        
-        /// <summary>
-        /// Control txtPuntosPorPerder.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPuntosPorPerder;
+        protected global::System.Web.UI.WebControls.HiddenField hfEquiposSeleccionados;
         
         /// <summary>
         /// Control panFracasoEdicion.
@@ -526,22 +463,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Literal litFracasoEdicion;
         
         /// <summary>
-        /// Control btnSiguienteEdicion.
+        /// Control btnConfigurarFase.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSiguienteEdicion;
-        
-        /// <summary>
-        /// Control btnModificarEdicion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarEdicion;
+        protected global::System.Web.UI.WebControls.Button btnConfigurarFase;
         
         /// <summary>
         /// Control UpdateProgressModalEdicion.

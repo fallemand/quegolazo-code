@@ -255,5 +255,43 @@ namespace Logica
                 throw new Exception("Modificación de equipos!!!");
             
         }
+
+        public void agregarEquiposEnFase(string equipos,int idFaseNueva)
+        {
+            //primero limpiamos la lista para evitar que se acumulen cuando el usuario apriete siguiente mas de una vez por algun motivo.
+            edicion.equipos.Clear();
+            if (equipos == "")
+                throw new Exception("No hay equipos seleccionados");
+            //quita la última coma de la cadena
+            string cadena = equipos.Substring(0, equipos.Length - 1);
+            //transforma la cadena en una lista de enteros
+            List<int> listaIdsSeleccionados = cadena.Split(',').Select(Int32.Parse).ToList();
+            //valido que tenga 3 o más equipos
+            if (listaIdsSeleccionados.Count < 2)
+                throw new Exception("Tiene que seleccionar al menos 2 equipos");
+            //agrego los equipos al equipos a la edición
+            GestorEquipo gestorEquipo = new GestorEquipo();
+            foreach (int id in listaIdsSeleccionados)
+                edicion.fases[idFaseNueva-1].equipos.Add(gestorEquipo.obtenerEquipoReducidoPorId(id));
+            if (edicion.fases[idFaseNueva - 1].equipos.Count() == edicion.fases[idFaseNueva - 1].cantidadDeEquipos && edicion.fases[idFaseNueva - 1].cantidadDeEquipos!=0)
+                throw new Exception("La cantidad de equipos no coincide con la indicada para esta fase");
+        }
+
+
+        public void verificarProximaFase(int idFaseNueva)
+        {
+            bool existeFase=false;
+            foreach (Fase f in edicion.fases)
+            {
+                if (f.idFase == idFaseNueva)
+                {
+                    existeFase = true;
+                    break;
+                }
+            }
+            if (!existeFase)
+                edicion.fases.Add(new Fase { idFase = idFaseNueva,idEdicion=edicion.idEdicion});
+        }
+
     }
 }
