@@ -47,7 +47,8 @@
                 $("#panelContenedorFase" + numFase).remove();
                 widget.options.fases.pop();
                 if(numFase>1)
-                $("#btnEliminarFase" + (numFase - 1)).show("slow");
+                    $("#btnEliminarFase" + (numFase - 1)).show("slow");
+                $("#panelFracaso").hide();
             }).tooltip({ title: "Eliminar Fase" });
         btnEliminar.appendTo(headerContenedor);           
         var contenedorTitulo = $("<h4/>", { class: 'panel-title text-center' }).text("Fase N° " + numFase).css("font-weight", "700");
@@ -137,6 +138,7 @@
             comboCant.appendTo(divCentro);          
         }
         divCentro.appendTo(row);
+        //cambio en el combo de cantidades de grupos
         comboCant.on("change", function () {
             $("#cuerpoFase" + numFase).remove();
             widget.options.fases[numFase - 1].cantidadDeGrupos = $(this).val();
@@ -167,6 +169,7 @@
         var widget = this;
         for (var i = widget.options.fases.length; i > numFase; i--) {
             $("#panelContenedorFase" + i).remove();
+            widget.options.fases.splice(i, 1);
             widget.options.fases.pop();    
         }
     
@@ -210,6 +213,7 @@
         if (combo.val().indexOf("TCT") >= 0) {
             $("#divCentroFase" + numFase).show();
             $("#divCantidadGruposFase" + numFase).show();
+            $((numFase > 1) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover("destroy");
         } else {
             //si es la primera fase oculto todo el div central.
             if (numFase == 1)
@@ -347,10 +351,12 @@
         var widget = this;
         if (widget.options.fases.length < 1)
             throw new Error("Debe crear al menos una fase para continuar.");
+        else if ($("#cuerpoFase" + widget.options.fases.length).length == 0)
+            throw new Error("Debe configurar la fase actual para contnuar.");
         for (var i = 0; i < widget.options.fases.length; i++) {
             var fase = widget.options.fases[i];
-            if ( fase.tipoFixture.idTipoFixture.indexOf("TCT") >=0 && fase.grupos.length < 1)
-                throw new Error("Debe crear al menos un grupo para continuar.") ;
+            if ((fase.tipoFixture.idTipoFixture.indexOf("TCT") >= 0 && fase.grupos.length < 1) || ($("#cuerpoFase" + widget.options.fases[i].idFase).length == 0))
+                throw new Error("Debe configurar la Fase N° " + (i+1) +" para continuar.") ;
             for (var j = 0; j < fase.grupos.length; j++) {               
                 for (var k = 0; k < fase.grupos.length; k++) {
                     // si la diferencia entre cantidades de equipos es mayor a uno, o bien la cantidad de equipos de algun grupo es 1
@@ -391,7 +397,7 @@
         var widget = this;
         var idEquipos = $("[data-idequipo]");
         if (idEquipos.length == 0)
-            throw new Error("ATENCION : Debe configurar los partidos de la eliminaoria para continuar");
+            throw new Error("ATENCION : Debe configurar los partidos de la eliminatoria para continuar");
         var partido = { local: null, visitante: null };
         var fecha = { idFecha: 0, partidos: [], nombre: "" };
         var equiposDelGrupo = [];
