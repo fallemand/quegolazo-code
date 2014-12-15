@@ -33,7 +33,7 @@ namespace quegolazo_code.admin.edicion
                         imagenUpload.Enabled = false;
                 }
             }
-            catch (Exception ex) { mostrarPanelFracasoListaJugadores(ex.Message);}
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message);}
         }       
      
         /// <summary>
@@ -94,7 +94,7 @@ namespace quegolazo_code.admin.edicion
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarJugador');", true);
                 }
             }
-            catch (Exception ex){ mostrarPanelFracasoListaJugadores(ex.Message);}     
+            catch (Exception ex){ mostrarPanelFracaso(ex.Message);}     
         }           
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace quegolazo_code.admin.edicion
                 btnCancelarModificacionJugador.Visible = false;
                 gestorJugador.jugador = null; // le setea null al jugador
             }
-            catch (Exception ex) { mostrarPanelFracasoListaJugadores(ex.Message); } 
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); } 
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace quegolazo_code.admin.edicion
             }
             catch (Exception ex)
             {
-                mostrarPanelFracasoListaJugadores(ex.Message);
+                mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -163,7 +163,7 @@ namespace quegolazo_code.admin.edicion
                 cargarRepeaterJugadores();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarJugador", "closeModal('eliminarJugador');", true);
             }
-            catch (Exception ex){mostrarPanelFracasoListaJugadores(ex.Message);}
+            catch (Exception ex){ mostrarPanelFracaso(ex.Message);}
         }  
 
         //------------------------------------------
@@ -209,14 +209,6 @@ namespace quegolazo_code.admin.edicion
             rdTieneFichaMedicaNo.Checked = false;
         }
         /// <summary>
-        /// Panel Fracaso Lista Jugadores
-        /// </summary>
-        private void mostrarPanelFracasoListaJugadores(string mensaje)
-        {
-            litFracasoListaJugadores.Text = mensaje;
-            panelFracasoListaJugadores.Visible = true;
-        }
-        /// <summary>
         /// Carga Repeater Jugadores
         /// </summary>
         private void cargarRepeaterJugadores()
@@ -229,10 +221,10 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         private void limpiarPaneles()
         {
-            panelFracaso.Visible = false;
-            panelFracasoListaJugadores.Visible = false;
-            litFracaso.Text = "";
-            litFracasoListaJugadores.Text = "";
+            //panelFracaso.Visible = false;
+            //panelFracasoListaJugadores.Visible = false;
+            //litFracaso.Text = "";
+            //litFracasoListaJugadores.Text = "";
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.JUGADOR, GestorImagen.MEDIANA);
             if (ddlEquipos.Items.Count > 0)
             {
@@ -240,13 +232,11 @@ namespace quegolazo_code.admin.edicion
             }
         }
         /// <summary>
-        /// Habilita el panel de fracaso y deshabilita el panel de exito.
-        /// autor: Pau Pedrosa
+        /// Mostrar Panel Fracaso
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
-            litFracaso.Text = mensaje;
-            panelFracaso.Visible = true;
+            GestorError.mostrarPanelFracaso(mensaje);
         }
     }
 }

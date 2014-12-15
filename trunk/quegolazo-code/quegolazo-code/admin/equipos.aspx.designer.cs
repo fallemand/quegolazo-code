@@ -148,24 +148,6 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.FileUpload imagenUpload;
         
         /// <summary>
-        /// Control panelFracaso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelFracaso;
-        
-        /// <summary>
-        /// Control litFracaso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litFracaso;
-        
-        /// <summary>
         /// Control btnCancelarModificacionEquipo.
         /// </summary>
         /// <remarks>
@@ -227,24 +209,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinequipos;
-        
-        /// <summary>
-        /// Control panelFracasoListaEquipos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelFracasoListaEquipos;
-        
-        /// <summary>
-        /// Control litFracasoListaEquipos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litFracasoListaEquipos;
         
         /// <summary>
         /// Control upEliminarEquipo.

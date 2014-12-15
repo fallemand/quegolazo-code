@@ -20,7 +20,7 @@ namespace quegolazo_code.admin
                 limpiarPaneles();
                 cargarRepeaterCanchas();
             }
-            catch (Exception ex) {mostrarPanelFracasoListaCanchas(ex.Message);}
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }       
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace quegolazo_code.admin
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarCancha');", true);
                 }
             }
-            catch (Exception ex) {mostrarPanelFracasoListaCanchas(ex.Message);}            
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}            
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace quegolazo_code.admin
                 btnCancelarModificacionCancha.Visible = false;
                 gestorCancha.cancha = null; // le setea null a la cancha
             }
-            catch (Exception ex) { mostrarPanelFracasoListaCanchas(ex.Message); }  
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }  
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterCanchas();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarCancha", "closeModal('eliminarCancha');", true);
             }
-            catch (Exception ex) {mostrarPanelFracasoListaCanchas(ex.Message);}
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         //------------------------------------------
@@ -139,21 +139,12 @@ namespace quegolazo_code.admin
             sinCanchas.Visible = !GestorControles.cargarRepeaterList(rptCanchas, gestorCancha.obtenerCanchasDeUnTorneo());
         }
         /// <summary>
-        /// Habilita el panel de fracaso y deshabilita el panel de exito.
+        /// Muestra Panel Fracaso
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
-            litFracaso.Text = mensaje;
-            panelFracaso.Visible = true;
+            GestorError.mostrarPanelFracaso(mensaje);
         }      
-        /// <summary>
-        /// Habilita el panel de exito y deshabilita el panel de fracaso.
-        /// </summary>
-        private void mostrarPanelFracasoListaCanchas(string mensaje)
-        {
-            litFracasoListaCanchas.Text = mensaje;
-            panelFracasoListaCanchas.Visible = true;
-        }
         /// <summary>
         /// Limpia los campos de la cancha
         /// </summary>
@@ -168,10 +159,10 @@ namespace quegolazo_code.admin
         /// </summary>
         private void limpiarPaneles()
         {
-            panelFracaso.Visible = false;
-            panelFracasoListaCanchas.Visible = false;
-            litFracaso.Text = "";
-            litFracasoListaCanchas.Text = "";
+            //panelFracaso.Visible = false;
+            //panelFracasoListaCanchas.Visible = false;
+            //litFracaso.Text = "";
+            //litFracasoListaCanchas.Text = "";
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.COMPLEJO, GestorImagen.MEDIANA);
         }
     }

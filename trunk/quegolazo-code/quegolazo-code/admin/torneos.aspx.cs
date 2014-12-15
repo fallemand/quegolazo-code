@@ -82,7 +82,7 @@ namespace quegolazo_code.admin
             catch (Exception ex)
             {
                 imagenpreview.Src = GestorImagen.obtenerImagenTemporal(GestorImagen.TORNEO, GestorImagen.MEDIANA);
-                mostrarPanelFracasoTorneo(ex.Message);
+                mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -139,8 +139,7 @@ namespace quegolazo_code.admin
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
-                litFracasoTorneo.Text = ex.Message;
-                panFracasoTorneo.Visible = true;
+                mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -176,8 +175,8 @@ namespace quegolazo_code.admin
         protected void limpiarPaneles()
         {
             txtNombreTorneo.Disabled = false;
-            GestorControles.cleanControls(new List<Object> { panFracaso, panFracasoTorneo });
-            GestorControles.hideControls(new List<Object> { panFracaso, litFracasoTorneo });
+            //GestorControles.cleanControls(new List<Object> { panFracaso, panFracasoTorneo });
+            //GestorControles.hideControls(new List<Object> { panFracaso, litFracasoTorneo });
         }
 
         /// <summary>
@@ -189,7 +188,7 @@ namespace quegolazo_code.admin
             GestorControles.cleanControls(new List<Object> { txtUrlTorneo, txtNombreTorneo, txtDescripcion });
             txtUrlTorneo.Disabled = false;
             GestorControles.showControls(new List<Object> { btnRegistrarTorneo });
-            GestorControles.hideControls(new List<Object> { btnModificarTorneo, panFracasoTorneo });
+            GestorControles.hideControls(new List<Object> { btnModificarTorneo });
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.TORNEO,GestorImagen.MEDIANA);
         }
 
@@ -198,17 +197,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
-            litFracaso.Text = mensaje;
-            panFracaso.Visible = true;
+            GestorError.mostrarPanelFracaso(mensaje);
         }
-
-        /// <summary>
-        /// Muestra el panel de error del modal de Torneo
-        /// </summary>
-        private void mostrarPanelFracasoTorneo(string mensaje)
-        {
-            litFracasoTorneo.Text = mensaje;
-            panFracasoTorneo.Visible = true;
-        }     
     }
 }

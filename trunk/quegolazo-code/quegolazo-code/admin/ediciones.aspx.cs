@@ -103,8 +103,7 @@ namespace quegolazo_code.admin
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
-                litFracasoEdicion.Text = ex.Message;
-                panFracasoEdicion.Visible = true;
+                mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -210,10 +209,10 @@ namespace quegolazo_code.admin
         /// </summary>
         protected void limpiarPaneles()
         {
-            panFracaso.Visible = false;
-            litFracaso.Text = "";
-            panFracasoEdicion.Visible = false;
-            litFracasoEdicion.Text = "";
+            //panFracaso.Visible = false;
+            //litFracaso.Text = "";
+            //panFracasoEdicion.Visible = false;
+            //litFracasoEdicion.Text = "";
         }
 
         /// <summary>
@@ -229,7 +228,7 @@ namespace quegolazo_code.admin
             txtPuntosPorGanar.Value = "3";
             txtPuntosPorEmpatar.Value = "1";
             txtPuntosPorPerder.Value = "0";
-            panFracasoEdicion.Visible = false;
+            //panFracasoEdicion.Visible = false;
             btnSiguienteEdicion.Visible = true;
         }
 
@@ -259,8 +258,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
-            litFracaso.Text = mensaje;
-            panFracaso.Visible = true;
+            GestorError.mostrarPanelFracaso(mensaje);
         }
 
     }

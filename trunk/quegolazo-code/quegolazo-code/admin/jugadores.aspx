@@ -113,9 +113,6 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
-                                    <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
-                                </asp:Panel>
                             </div>
                             <div class="panel-footer clearfix text-right">
                                 <div class="col-xs-8 col-xs-offset-3">
@@ -201,9 +198,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <asp:Panel ID="panelFracasoListaJugadores" runat="server" CssClass="alert alert-danger" Visible="False">
-                                    <asp:Literal ID="litFracasoListaJugadores" runat="server"></asp:Literal>
-                                </asp:Panel>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>

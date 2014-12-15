@@ -40,24 +40,6 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Repeater rptEdiciones;
         
         /// <summary>
-        /// Control panFracaso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panFracaso;
-        
-        /// <summary>
-        /// Control litFracaso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litFracaso;
-        
-        /// <summary>
         /// Control upModalEdicion.
         /// </summary>
         /// <remarks>
@@ -146,24 +128,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPuntosPorPerder;
-        
-        /// <summary>
-        /// Control panFracasoEdicion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panFracasoEdicion;
-        
-        /// <summary>
-        /// Control litFracasoEdicion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litFracasoEdicion;
         
         /// <summary>
         /// Control btnSiguienteEdicion.
