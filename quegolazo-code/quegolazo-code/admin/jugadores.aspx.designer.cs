@@ -139,24 +139,6 @@ namespace quegolazo_code.admin.edicion {
         protected global::System.Web.UI.WebControls.FileUpload imagenUpload;
         
         /// <summary>
-        /// Control panelFracaso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelFracaso;
-        
-        /// <summary>
-        /// Control litFracaso.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litFracaso;
-        
-        /// <summary>
         /// Control btnCancelarModificacionJugador.
         /// </summary>
         /// <remarks>
@@ -236,24 +218,6 @@ namespace quegolazo_code.admin.edicion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinJugadores;
-        
-        /// <summary>
-        /// Control panelFracasoListaJugadores.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelFracasoListaJugadores;
-        
-        /// <summary>
-        /// Control litFracasoListaJugadores.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litFracasoListaJugadores;
         
         /// <summary>
         /// Control upEliminarJugador.

@@ -20,7 +20,7 @@ namespace quegolazo_code.admin
                 limpiarPaneles();
                 cargarRepeaterArbitros();
             }
-            catch (Exception ex) {mostrarPanelFracasoListaArbitros(ex.Message);}
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace quegolazo_code.admin
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarArbitro');", true);
                 }
             }
-            catch (Exception ex) {mostrarPanelFracasoListaArbitros(ex.Message);}
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace quegolazo_code.admin
                 btnCancelarModificacionArbitro.Visible = false;
                 gestorArbitro.arbitro = null; // le setea null al árbitro
             }
-            catch (Exception ex) { mostrarPanelFracasoListaArbitros(ex.Message); }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterArbitros();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarArbitro", "closeModal('eliminarArbitro');", true);
             }
-            catch (Exception ex) {mostrarPanelFracasoListaArbitros(ex.Message);}
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
 
         //------------------------------------------
@@ -149,30 +149,21 @@ namespace quegolazo_code.admin
             txtMatricula.Value = "";
         }
         /// <summary>
-        /// Habilita el panel de fracaso y deshabilita el panel de exito.
+        /// Muestra Panel Fracaso
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
-            litFracaso.Text = mensaje;
-            panelFracaso.Visible = true;
-        }
-        /// <summary>
-        /// Muestra panel de fracaso
-        /// </summary>
-        private void mostrarPanelFracasoListaArbitros(string mensaje)
-        {
-            litFracasoListaArbitros.Text = mensaje;
-            panelFracasoListaArbitros.Visible = true;
+            GestorError.mostrarPanelFracaso(mensaje);
         }
         /// <summary>
         /// Limpia los paneles
         /// </summary>
         public void limpiarPaneles()
-        {           
-            panelFracaso.Visible = false;
-            panelFracasoListaArbitros.Visible = false;
-            litFracaso.Text = "";
-            litFracasoListaArbitros.Text = "";
+        {
+            //panelFracaso.Visible = false;
+            //panelFracasoListaArbitros.Visible = false;
+            //litFracaso.Text = "";
+            //litFracasoListaArbitros.Text = "";
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.ARBITRO, GestorImagen.MEDIANA);
         }
     }

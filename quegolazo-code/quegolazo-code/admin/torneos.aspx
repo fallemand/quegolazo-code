@@ -77,9 +77,6 @@
                                 </div>
                             </ItemTemplate>
                         </asp:Repeater>
-                        <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
-                            <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
-                        </asp:Panel>
                     </div>
                 </div>
             </ContentTemplate>
@@ -153,10 +150,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <asp:Panel ID="panFracasoTorneo" runat="server" CssClass="alert alert-danger" Visible="False">
-                                        <asp:Literal ID="litFracasoTorneo" runat="server"></asp:Literal>
-                                </asp:Panel>
-                                    </fieldset>
+                                </fieldset>
                             </div>
                             <div class="modal-footer">
                                 <div class="col-xs-8 col-xs-offset-3">

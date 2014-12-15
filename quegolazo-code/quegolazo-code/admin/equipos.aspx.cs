@@ -23,7 +23,7 @@ namespace quegolazo_code.admin
                 limpiarPaneles();
                 cargarRepeaterEquipos();
             }
-            catch (Exception ex) {mostrarPanelFracasoListaEquipos(ex.Message);}                        
+            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}                        
         }  
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace quegolazo_code.admin
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarEquipo');", true);
                 }
             }
-            catch (Exception ex) { mostrarPanelFracasoListaEquipos(ex.Message); }  
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }  
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterEquipos();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarEquipo", "closeModal('eliminarEquipo');", true);
             }
-            catch (Exception ex) { mostrarPanelFracasoListaEquipos(ex.Message);}
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message);}
         }
 
         //------------------------------------------
@@ -279,27 +279,18 @@ namespace quegolazo_code.admin
         /// </summary>
         private void limpiarPaneles()
         {
-            panelFracaso.Visible = false;
-            panelFracasoListaEquipos.Visible = false;
-            litFracaso.Text = "";
-            litFracasoListaEquipos.Text = "";
+            //panelFracaso.Visible = false;
+            //panelFracasoListaEquipos.Visible = false;
+            //litFracaso.Text = "";
+            //litFracasoListaEquipos.Text = "";
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
         }
         /// <summary>
-        /// Habilita el panel de fracaso y deshabilita el panel de exito.
+        /// Muestra Panel Fracaso
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
-            litFracaso.Text = mensaje;
-            panelFracaso.Visible = true;
-        }
-        /// <summary>
-        /// Habilita el panel de fracaso y deshabilita el panel de exito.
-        /// </summary>
-        private void mostrarPanelFracasoListaEquipos(string mensaje)
-        {
-            litFracasoListaEquipos.Text = mensaje;
-            panelFracasoListaEquipos.Visible = true;
-        }          
+            GestorError.mostrarPanelFracaso(mensaje);
+        }      
     }
 }
