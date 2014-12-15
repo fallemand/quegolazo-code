@@ -89,7 +89,7 @@ namespace AccesoADatos
                         nombre = dr["nombre"].ToString(),
                         celular = (dr["celular"] != DBNull.Value) ? dr["celular"].ToString() : null,
                         email = (dr["email"] != DBNull.Value) ? dr["email"].ToString() : null,
-                        matricula = (dr["matricula"] != DBNull.Value) ? dr["matriculaa"].ToString() : null,
+                        matricula = (dr["matricula"] != DBNull.Value) ? dr["matricula"].ToString() : null,
                     };
                     respuesta.Add(arbitro);
                 }

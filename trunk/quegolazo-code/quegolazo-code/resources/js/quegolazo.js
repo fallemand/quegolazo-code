@@ -36,15 +36,16 @@ function cbPenalesClick(cbId) {
 
 function showPanelMessage(idPanel, idMensaje, mensaje) {
     setTimeout(function () {
+        $('#' + idMensaje).text(mensaje);
         $('#' + idPanel).toggleClass('in');
     }, 1);
-    $('#' + idMensaje).text(mensaje);
 };
 
 function hidePanelMessage(idPanel) {
     setTimeout(function () {
         $('#' + idPanel).removeClass('in');
     }, 1);
+    $('#' + idPanel).find(".panel-text").text('');
 };
 
 function showCollapsablePanel(idPanelCollapse, hasParent) {
