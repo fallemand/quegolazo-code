@@ -74,7 +74,7 @@ namespace AccesoADatos
                  cmd.Connection = con;                 
                  foreach (Grupo grupo in fase.grupos)
                  {
-                     foreach (Fecha faseActual in grupo.fechas)
+                     foreach (Fecha fechaActual in grupo.fechas)
                      {
                          cmd.Parameters.Clear();
                          cmd.Connection = con;
@@ -82,7 +82,7 @@ namespace AccesoADatos
                                         FROM Partidos p
                                         WHERE idFecha = @idFecha AND idGrupo = @idGrupo 
                                         AND idFase = @idFase AND idEdicion = @idEdicion";                         
-                         cmd.Parameters.AddWithValue("@idFecha", faseActual.idFecha);
+                         cmd.Parameters.AddWithValue("@idFecha", fechaActual.idFecha);
                          cmd.Parameters.AddWithValue("@idGrupo", grupo.idGrupo);
                          cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                          cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
@@ -110,7 +110,7 @@ namespace AccesoADatos
                              partido.cancha = (dr["idCancha"] != DBNull.Value) ? daoCancha.obtenerCanchaPorId(int.Parse(dr["idCancha"].ToString())) : null;
                              if (dr["idEquipoLocal"] != DBNull.Value && dr["idEquipoVisitante"] != DBNull.Value)
                                 partido.nombreCompleto = daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoLocal"].ToString())).nombre + " vs. " + daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString())).nombre;
-                             faseActual.partidos.Add(partido);
+                             fechaActual.partidos.Add(partido);
                          }
                          if (dr != null)
                              dr.Close(); 
