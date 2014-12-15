@@ -26,11 +26,11 @@ namespace Logica
 
                 if (ScriptManager.GetCurrent(page) != null)
                 {
-                    ScriptManager.RegisterStartupScript(page, typeof(Page), "showExito", funcionJS, true);
+                    ScriptManager.RegisterClientScriptBlock(page, typeof(Page), "showExito", funcionJS, true);
                 }
                 else
                 {
-                    page.ClientScript.RegisterStartupScript(typeof(Page), "showExito", funcionJS, true);
+                    page.ClientScript.RegisterClientScriptBlock(typeof(Page), "showExito", funcionJS, true);
                 }
             }
         }
@@ -45,11 +45,11 @@ namespace Logica
 
                 if (ScriptManager.GetCurrent(page) != null)
                 {
-                    ScriptManager.RegisterStartupScript(page, typeof(Page), "showError", funcionJS, true);
+                    ScriptManager.RegisterClientScriptBlock(page, typeof(Page), "showError", funcionJS, true);
                 }
                 else
                 {
-                    page.ClientScript.RegisterStartupScript(typeof(Page), "showError", funcionJS, true);
+                    page.ClientScript.RegisterClientScriptBlock(typeof(Page), "showError", funcionJS, true);
                 }
             }
         }
