@@ -382,6 +382,9 @@ body {
 .separador {
   margin-top: 60px;
 }
+.padding-left {
+    padding-left:40px;
+}
 @media (max-width: 767px) {
     .margin-top {
       margin-top: 10px;
@@ -389,6 +392,9 @@ body {
     .separador {
       margin-top: 30px;
     }
+    .padding-left {
+    padding-left:15px;
+}
 }
 
 .small-padding {
@@ -1632,7 +1638,7 @@ Date: 2014-11-05
 
 .ediciones .panel-heading .icon-size {
     font-size: 32px;
-    line-height: 37px;
+    line-height: 40px;
 }
 
 .label-Registrada {

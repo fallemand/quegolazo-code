@@ -34,15 +34,16 @@ function cbPenalesClick(cbId) {
     }
 };
 
-function showPanelFracaso() {
+function showPanelMessage(idPanel, idMensaje, mensaje) {
     setTimeout(function () {
-        $('#panelFracaso').toggleClass('in');
+        $('#' + idPanel).toggleClass('in');
     }, 1);
+    $('#' + idMensaje).text(mensaje);
 };
 
-function showPanelExito() {
+function hidePanelMessage(idPanel) {
     setTimeout(function () {
-        $('#panelExito').toggleClass('in');
+        $('#' + idPanel).removeClass('in');
     }, 1);
 };
 

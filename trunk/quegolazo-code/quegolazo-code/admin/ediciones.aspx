@@ -16,7 +16,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-9">
-                                        <h2 id="type">Torneo la Cachiporra</h2>
+                                        <h2 id="type"><%=Logica.Sesion.getTorneo().nombre %></h2>
                                     </div>
                                     <div class="col-sm-2 nopadding-right margin-top">
                                         <asp:Button ID="btnRegistrarNuevaEdicion" runat="server" Text="Nueva Edición" CssClass="btn btn-success" OnClick="btnRegistrarNuevaEdicion_Click" />
@@ -67,7 +67,7 @@
                                                                     </asp:Repeater>
                                                                 </table>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-3 padding-left">
                                                                 Registra Jugadores: <span class="text-success"><b><span class="glyphicon glyphicon-ok" runat="server" visible="false" id="rJugadoresSi"></span></b></span>
                                                                 <span class="text-danger"><b><span class="glyphicon glyphicon-remove" runat="server" visible="false" id="rJugadoresNo"></span></b></span>
                                                                 <br />
@@ -92,7 +92,7 @@
                                                         </asp:Panel>
                                                         <asp:Panel ID="panelDatosEdicionNoConfigurada" runat="server" Visible="false">
                                                             <div class="col-md-11 col-md-offset-1">
-                                                                <p>La Edición no ha sido configurada</p>
+                                                                La Edición no ha sido configurada
                                                             </div>
                                                         </asp:Panel>
                                                     </div>
@@ -102,7 +102,7 @@
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </div>
-                            <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
+                            <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger margin-top" Visible="False">
                                 <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
                             </asp:Panel>
                         </div>

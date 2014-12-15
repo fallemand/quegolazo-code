@@ -229,7 +229,11 @@ namespace AccesoADatos
             }
             catch (SqlException ex)
             {
-                throw new Exception("No se pudo eliminar el Jugador: " + ex.Message);
+                //foreign key problem
+                if(ex.Number==547)
+                    throw new Exception("No se pudo eliminar el Jugador: Existen datos asociados a este jugador, como sanciones, goles, tarjetas, etc. Debe eliminarlos para poder eliminar el jugador.");
+                else
+                    throw new Exception("No se pudo eliminar el Jugador: " + ex.Message);
             }
             finally
             {

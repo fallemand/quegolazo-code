@@ -358,11 +358,11 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idEstado2", Estado.edicionCONFIGURADA);
                 cmd.CommandText = sql;
                 if (cmd.ExecuteNonQuery() == 0)
-                    throw new Exception();
+                    throw new Exception("<b>No se pudo eliminar la Edición porque tiene partidos jugados</b>. Quite el resultado de los partidos de la edición y luego podrá eliminarla");
             }
             catch (SqlException ex)
             {
-                throw new Exception("No se pudo eliminar la Edición porque tiene partidos jugados");
+                throw new Exception("Ocurrió un error al intentar eliminar la edición");
             }
             finally
             {

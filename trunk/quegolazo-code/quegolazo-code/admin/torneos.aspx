@@ -210,9 +210,6 @@
                 previewImage(this, 'ContentAdmin_imagenpreview');
                 ajaxFileUpload('ContentAdmin_imagenUpload');
             });
-            $('#modalEdicion').on('hidden.bs.modal', function () {
-                limpiarModalEdicion();
-            });
         });
     </script>
     <!-- Script -->

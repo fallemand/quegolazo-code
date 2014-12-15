@@ -473,9 +473,6 @@
                                 </div>
                            <%-- <asp:ListBox ClientIDMode="Static" ID="lstEquiposSeleccionados" runat="server" SelectionMode="Multiple"></asp:ListBox>
                             <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />--%>
-                            <asp:Panel ID="panFracasoEdicion" runat="server" CssClass="alert alert-danger" Visible="False">
-                                <asp:Literal ID="litFracasoEdicion" runat="server"></asp:Literal>
-                            </asp:Panel>
                         </div>
                         <div class="modal-footer">
                             <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">

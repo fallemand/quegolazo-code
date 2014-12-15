@@ -544,9 +544,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "showError", "showPanelFracaso();", true);
-            litFracaso.Text = mensaje;
-            panelFracaso.Visible = true;
+            GestorError.mostrarPanelFracaso(mensaje);
         }
 
         /// <summary>
@@ -555,9 +553,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void mostrarPanelExito(string mensaje)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "showExito", "showPanelExito();", true);
-            litExito.Text = mensaje;
-            panelExito.Visible = true;
+            GestorError.mostrarPanelExito(mensaje);
         }
 
         /// <summary>
@@ -565,8 +561,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void limpiarPaneles()
         {
-            panelFracaso.Visible = false;
-            litFracaso.Text = "";
+            //panelFracaso.Visible = false;
+            //litFracaso.Text = "";
         }
 
         /// <summary>
