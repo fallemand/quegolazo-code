@@ -405,14 +405,6 @@
                                     </asp:UpdateProgress>
                                 </div>
                             </div>
-                            <asp:Panel ID="panelFracaso" ClientIDMode="Static" runat="server" CssClass="alert alert-danger alert-dismissible flyover flyover-bottom" role="alert">
-                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <b>Error:</b> <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
-                            </asp:Panel>
-                            <asp:Panel ID="panelExito" ClientIDMode="Static" runat="server" CssClass="alert alert-success alert-dismissible flyover flyover-bottom" role="alert">
-                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <b>Exito:</b> <asp:Literal ID="litExito" runat="server"></asp:Literal>
-                            </asp:Panel>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
