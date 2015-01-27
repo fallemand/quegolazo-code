@@ -23,7 +23,7 @@ namespace Logica
             if (HttpContext.Current.CurrentHandler is Page)
             {
                 Page page = (Page)HttpContext.Current.CurrentHandler;
-
+                hidePanels();
                 if (ScriptManager.GetCurrent(page) != null)
                 {
                     ScriptManager.RegisterClientScriptBlock(page, typeof(Page), "showExito", funcionJS, true);
@@ -42,7 +42,7 @@ namespace Logica
             if (HttpContext.Current.CurrentHandler is Page)
             {
                 Page page = (Page)HttpContext.Current.CurrentHandler;
-
+                hidePanels();
                 if (ScriptManager.GetCurrent(page) != null)
                 {
                     ScriptManager.RegisterClientScriptBlock(page, typeof(Page), "showError", funcionJS, true);
@@ -50,6 +50,28 @@ namespace Logica
                 else
                 {
                     page.ClientScript.RegisterClientScriptBlock(typeof(Page), "showError", funcionJS, true);
+                }
+            }
+        }
+
+        public static void hidePanels()
+        {
+            String funcionJS_hideExito = "hidePanelMessage('" + idPanelExito + "')";
+            String funcionJS_hideError = "hidePanelMessage('" + idPanelError + "')";
+
+            if (HttpContext.Current.CurrentHandler is Page)
+            {
+                Page page = (Page)HttpContext.Current.CurrentHandler;
+
+                if (ScriptManager.GetCurrent(page) != null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(page, typeof(Page), "hideExito", funcionJS_hideExito, true);
+                    ScriptManager.RegisterClientScriptBlock(page, typeof(Page), "hideError", funcionJS_hideError, true);
+                }
+                else
+                {
+                    page.ClientScript.RegisterClientScriptBlock(typeof(Page), "hideExito", funcionJS_hideExito, true);
+                    page.ClientScript.RegisterClientScriptBlock(typeof(Page), "hideError", funcionJS_hideError, true);
                 }
             }
         }
