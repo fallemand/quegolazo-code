@@ -282,7 +282,7 @@
         var fasePreCargada = fase != null || fase != undefined;
         numFase = (fase != null) ? fase.idFase : numFase;
         var cantidadEquiposPorGrupo = (cantidadGrupos != null) ? parseInt((numFase == 1) ? widget.options.equiposDeLaEdicion.length : $("#ddlCantidadParticipantesFase" + numFase).val() / cantidadGrupos) : null;
-        var grupos = widget.armarGruposParaPresentar(fasePreCargada ? fase.equipos : widget.options.fases[numFase-1].equipos, cantidadGrupos, fasePreCargada ? fase.idFase : numFase);
+        var grupos = (fasePreCargada && fase.grupos != null) ? fase.grupos : widget.armarGruposParaPresentar(fasePreCargada ? fase.equipos : widget.options.fases[numFase-1].equipos, cantidadGrupos, fasePreCargada ? fase.idFase : numFase);
         //recorremos todos los grupos, previamente borramos los grupos que se han agregado antes.
         widget.options.fases[numFase - 1].grupos = grupos;        
             for (var i = 0; i < grupos.length; i++) {                
