@@ -15,9 +15,9 @@ namespace Entidades
         /// </summary>
         /// <param name="equiposParticipantes"></param>
         /// <returns></returns>
-        public List<Fecha> generarFixture(List<Equipo> equipos)
+        public List<Fecha> generarFixture(List<Equipo> equiposGrupo)
         {
-            List<Equipo> equiposParticipantes = prepararListaDeEquipos(ref equipos);
+            List<Equipo> equiposParticipantes = prepararListaDeEquipos(equiposGrupo);
             int cantidadFechas = (equiposParticipantes.Count - 1) * getCantidadRondas();
             int cantidadPartidos = equiposParticipantes.Count / 2;
             Equipo equipoPivot = (Equipo)equiposParticipantes[0].Clone();
@@ -66,7 +66,7 @@ namespace Entidades
         /// Método para completar la lista de equipos en caso que no sea par
         /// </summary>
         /// <param name="equiposParticipantes"></param>
-        private List<Equipo> prepararListaDeEquipos(ref List<Equipo> equiposParticipantes)
+        private List<Equipo> prepararListaDeEquipos(List<Equipo> equiposParticipantes)
         {
             List<Equipo> equipos = new List<Equipo>();
             foreach (Equipo e in equiposParticipantes)

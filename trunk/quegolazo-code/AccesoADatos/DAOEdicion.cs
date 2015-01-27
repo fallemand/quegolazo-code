@@ -635,10 +635,10 @@ namespace AccesoADatos
         }
 
         /// <summary>
-        /// Cambia de Estado a la Edición a CONFIGURADA
-        /// autor: Pau Pedrosa
+        /// Cambia de Estado a la Edición 
+        /// autor: Flor Rojas
         /// </summary>
-        public void cambiarEstadoAConfigurada(int idEdicion)
+        public void cambiarEstado(int idEdicion, int idEstado)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -651,7 +651,7 @@ namespace AccesoADatos
                                 SET idEstado = @idEstado
                                 WHERE idEdicion = @idEdicion";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idEstado", Estado.edicionCONFIGURADA);
+                cmd.Parameters.AddWithValue("@idEstado", idEdicion);
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);                
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -778,6 +778,44 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-        }       
+        }
+
+
+        /// <summary>
+        /// Cambia el estado de la  cuando se jugaron todos los partidos y devuelve true si se completó la edicion
+        /// autor: Flor Rojas
+        /// </summary>
+        public bool actualizarEstadoEdicion(int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"
+                            DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Fases f WHERE f.idEdicion = @idEdicion AND f.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 5 AND idEstado<>6  ))
+					        if(@cantidad=0)
+						           BEGIN
+							                UPDATE Edicion SET idEstado = @idEstado WHERE idEdicion = @idEdicion
+						           END";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idPartido", idPartido);
+                cmd.Parameters.AddWithValue("@idEstado", Estado.edicionFINALIZADA);
+                cmd.CommandText = sql;
+                return (cmd.ExecuteNonQuery() > 0);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo actualizar el estado de la edicion: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
