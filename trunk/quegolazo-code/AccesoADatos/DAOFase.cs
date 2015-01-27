@@ -427,7 +427,7 @@ namespace AccesoADatos
                             DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Fechas f WHERE f.idGrupo = @idGrupo AND f.idFase=@idFase AND f.idEdicion = @idEdicion AND f.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 3 AND idEstado<>8  ))
 					                            if(@cantidad=0)
 						           BEGIN
-							                UPDATE Fase SET idEstado = @idEstado WHERE idFase = @idFase AND idEdicion = @idEdicion
+							                UPDATE Fases SET idEstado = @idEstado WHERE idFase = @idFase AND idEdicion = @idEdicion
 						           END";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idPartido", idPartido);
