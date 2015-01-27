@@ -89,6 +89,7 @@ namespace Logica
               }
               foreach (Grupo grupo in fase.grupos)
               {
+                  grupo.fechas = null;
                   foreach (Equipo equipo in grupo.equipos)
                   {
                       equipo.jugadores = null;   
