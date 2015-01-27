@@ -172,5 +172,73 @@ namespace quegolazo_code.admin
             txtPuntosAQuitar.Value = "";
             txtCantidadFechasSuspendidas.Value = "";
         }
+
+        protected void rptSanciones_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                gestorSancion.obtenerSancionPorId(e.CommandArgument.ToString());
+                if (e.CommandName == "editarSancion")
+                {
+                    btnRegistrarSancion.Visible = false;
+                    btnModificarSancion.Visible = true;
+                    btnCancelarModificacionSancion.Visible = true;
+
+                    //CASO JUGADOR Y PARTIDO
+                    if (gestorSancion.sancion.idJugador != null && gestorSancion.sancion.idPartido != null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "edicionJugadorYPartido", "jugadorYPartido();", true);
+                        ddlFecha.SelectedValue = gestorSancion.sancion.idFecha.ToString();
+                        GestorControles.cargarComboList(ddlPartido, gestorSancion.obtenerPartidosDeFecha(ddlFecha.SelectedValue),
+                        "idPartido", "nombreCompleto", "Seleccionar Partido", false);
+                        ddlPartido.SelectedValue = gestorSancion.sancion.idPartido.ToString();
+                        GestorControles.cargarComboList(ddlEquipo, gestorSancion.obtenerEquiposDePartido(ddlPartido.SelectedValue),
+                        "idEquipo", "nombre", "Seleccionar Equipo", false);
+                        ddlEquipo.SelectedValue = gestorSancion.sancion.idEquipo.ToString();
+                        GestorControles.cargarComboList(ddlJugador, gestorSancion.obtenerJugadoresDeEquipo(ddlEquipo.SelectedValue),
+                        "idJugador", "nombre", "Seleccionar Jugador", false);
+                        ddlJugador.SelectedValue = gestorSancion.sancion.idJugador.ToString();
+                        txtFecha.Value = gestorSancion.sancion.fechaSancion.ToString();
+                        ddlMotivo.SelectedValue = gestorSancion.sancion.motivoSancion.idMotivoSancion.ToString();
+                        txtObservacion.Value = gestorSancion.sancion.observacion;
+                        txtPuntosAQuitar.Value = gestorSancion.sancion.puntosAQuitar.ToString();
+                        txtCantidadFechasSuspendidas.Value = gestorSancion.sancion.cantidadFechasSuspendidas.ToString();
+                    }
+                }
+                if (e.CommandName == "eliminarSancion")
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarSancion');", true);
+                }
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }  
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorSancion.eliminarSancion(gestorSancion.sancion.idSancion);
+                cargarRepeaterSanciones(gestorEdicion.edicion.idEdicion.ToString());
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarSancion", "closeModal('eliminarSancion');", true);
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
+
+        protected void btnModificarSancion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idSancionAModificar = gestorSancion.sancion.idSancion;
+                if (gestorSancion.sancion.idJugador != null && gestorSancion.sancion.idPartido != null)
+                    gestorSancion.modificarSancion(idSancionAModificar.ToString(), ddlFecha.SelectedValue, ddlPartido.SelectedValue, ddlEquipo.SelectedValue, ddlJugador.SelectedValue, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value);
+
+                gestorSancion.sancion = null;
+                cargarRepeaterSanciones(gestorEdicion.edicion.idEdicion.ToString());
+                btnRegistrarSancion.Visible = true;
+                btnModificarSancion.Visible = false;
+                btnCancelarModificacionSancion.Visible = false;
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
     }
 }

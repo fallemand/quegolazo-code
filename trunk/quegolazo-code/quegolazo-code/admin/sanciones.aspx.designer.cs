@@ -193,22 +193,22 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Literal litFracaso;
         
         /// <summary>
-        /// Control btnCancelarModificacionArbitro.
+        /// Control btnCancelarModificacionSancion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarModificacionArbitro;
+        protected global::System.Web.UI.WebControls.Button btnCancelarModificacionSancion;
         
         /// <summary>
-        /// Control btnModificarArbitro.
+        /// Control btnModificarSancion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarArbitro;
+        protected global::System.Web.UI.WebControls.Button btnModificarSancion;
         
         /// <summary>
         /// Control btnRegistrarSancion.
@@ -272,24 +272,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litFracasoListaSanciones;
-        
-        /// <summary>
-        /// Control upEliminarSancion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upEliminarSancion;
-        
-        /// <summary>
-        /// Control litSancion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litSancion;
         
         /// <summary>
         /// Control btnEliminar.
