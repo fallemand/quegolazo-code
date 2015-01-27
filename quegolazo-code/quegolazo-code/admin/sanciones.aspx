@@ -136,8 +136,8 @@
                             </div>
                             <div class="panel-footer clearfix text-right">
                                 <div class="col-xs-8 col-xs-offset-3">
-                                    <asp:Button class="btn btn-default" ID="btnCancelarModificacionArbitro" runat="server" Text="Cancelar" Visible="false" />
-                                    <asp:Button class="btn btn-success causesValidation vgArbitro" ID="btnModificarArbitro" runat="server" Text="Modificar" Visible="false" />
+                                    <asp:Button class="btn btn-default" ID="btnCancelarModificacionSancion" runat="server" Text="Cancelar" Visible="false" />
+                                    <asp:Button class="btn btn-success causesValidation vgSancion" ID="btnModificarSancion" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarSancion_Click" />
                                     <asp:Button class="btn btn-success causesValidation vgSancion" ID="btnRegistrarSancion" runat="server" Text="Registrar" OnClick="btnRegistrarSancion_Click"/>
                                 </div>
                                 <div class="col-xs-1">
@@ -169,7 +169,7 @@
                         <asp:UpdatePanel ID="upListaSanciones" runat="server">
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="btnRegistrarSancion" EventName="Click" />
-                                <asp:AsyncPostBackTrigger ControlID="btnModificarArbitro" EventName="Click" />
+                                <asp:AsyncPostBackTrigger ControlID="btnModificarSancion" EventName="Click" />
                             </Triggers>
                             <ContentTemplate>
                                 <table class="table">
@@ -185,7 +185,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="tablaFiltro">
-                                        <asp:Repeater ID="rptSanciones" runat="server">
+                                        <asp:Repeater ID="rptSanciones" runat="server" OnItemCommand="rptSanciones_ItemCommand">
                                             <ItemTemplate>
                                                 <tr>                                   
                                                     <td><%# Eval("Fecha") %></td>
@@ -195,8 +195,8 @@
                                                     <td><%# Eval("PtosAQuitar") %></td>
                                                     <td><%# Eval("CantFechas") %></td>
                                                     <td>
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarArbitro" title="Editar Arbitro" runat="server" rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarArbitro" title="Eliminar Arbitro" runat="server" rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>
+                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarSancion" title="Editar Sanción" runat="server" CommandName="editarSancion" CommandArgument='<%#Eval("idSancion")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarSancion" title="Eliminar Sanción" runat="server" CommandName="eliminarSancion" CommandArgument='<%#Eval("idSancion")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>
                                                     </td>
                                                 </tr>
                                             </ItemTemplate>
@@ -224,17 +224,11 @@
                     <h4 class="modal-title" id="myModalLabel">Eliminar Sanción</h4>
                 </div>
                 <div class="modal-body">
-                    <asp:UpdatePanel ID="upEliminarSancion" runat="server">
-                        <ContentTemplate>
-                            <strong>Sanción: </strong>
-                            <asp:Literal ID="litSancion" runat="server"></asp:Literal>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
                     ¿Está seguro de eliminar la sanción?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar"/>
+                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminar_Click"/>
                 </div>
             </div>
         </div>
@@ -386,7 +380,7 @@
             $('#idDivFecha').show();
             $('#idDivPartido').show();
             $('#idDivEquipo').show();
-            $('#idDivJugador').hide();
+            $('#idDivJugador').show();
             $('#idDivFechaDate').show();
             $('#idDivMotivo').show();
             $('#idDivObservacion').show();
