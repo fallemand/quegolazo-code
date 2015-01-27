@@ -62,6 +62,8 @@ namespace Logica
             calcularGanador();
             daoPartido.modificarPartido(partido);
             (new DAOFecha()).actualizarFecha(partido.idPartido);
+            (new DAOFase()).actualizarEstadoFase(partido.idPartido);
+            (new DAOEdicion()).actualizarEstadoEdicion(partido.idPartido);
             
         }
 

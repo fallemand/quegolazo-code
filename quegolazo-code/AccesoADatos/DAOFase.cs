@@ -405,5 +405,46 @@ namespace AccesoADatos
                     }
                 }
 
+
+                /// <summary>
+                /// Cambia el estado de la fase a Completa cuando se jugaron todos los partidos y devuelve true si se completó la fase
+                /// autor: Flor Rojas
+                /// </summary>
+                public bool actualizarEstadoFase(int idPartido)
+                {
+                    SqlConnection con = new SqlConnection(cadenaDeConexion);
+                    SqlCommand cmd = new SqlCommand();
+                    try
+                    {
+                        if (con.State == ConnectionState.Closed)
+                            con.Open();
+                        cmd.Connection = con;
+                        string sql = @"                            
+                            DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Fechas f WHERE f.idGrupo = @idGrupo AND f.idFase=@idFase AND f.idEdicion = @idEdicion AND f.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 3 AND idEstado<>8  ))
+					                            if(@cantidad=0)
+						           BEGIN
+							                UPDATE Fase SET idEstado = @idEstado WHERE idFase = @idFase AND idEdicion = @idEdicion
+						           END";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@idPartido", idPartido);
+                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseCERRADA);
+                        cmd.CommandText = sql;
+                        return (cmd.ExecuteNonQuery() > 0);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("No se pudo actualizar el estado de la fase: " + ex.Message);
+                    }
+                    finally
+                    {
+                        if (con != null && con.State == ConnectionState.Open)
+                            con.Close();
+                    }
+                }
+
     }
 }

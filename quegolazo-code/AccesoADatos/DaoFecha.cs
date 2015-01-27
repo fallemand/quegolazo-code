@@ -122,11 +122,12 @@ namespace AccesoADatos
                             DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13  ))
+                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idGrupo=@idGrupo AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13  ))
 					                            if(@cantidad=0)
 						                            BEGIN
 							UPDATE Fechas SET idEstado = @idEstado WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
-						    END";
+                            END
+						    ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.Parameters.AddWithValue("@idEstado", Estado.fechaCOMPLETA);
@@ -143,5 +144,41 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+//        /// <summary>
+//        /// Verifica si es el primer partido e inicia la fecha, la fase y la edicion si es necesario
+//        /// autor: Flor Rojas
+//        /// </summary>
+//        public bool iniciarFecha(int idFecha,int idGrupo, int idFase, int idEdicion)
+//        {
+//            SqlConnection con = new SqlConnection(cadenaDeConexion);
+//            SqlCommand cmd = new SqlCommand();
+//            try
+//            {
+//                if (con.State == ConnectionState.Closed)
+//                    con.Open();
+//                cmd.Connection = con;
+//                string sql = @"    
+//                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND idGrupo=@idGrupo AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13  ))
+//					                            if(@cantidad=0)
+//						                            BEGIN
+//							UPDATE Fechas SET idEstado = @idEstado WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
+//						    ";
+//                cmd.Parameters.Clear();
+//                cmd.Parameters.AddWithValue("@idPartido", idPartido);
+//                cmd.Parameters.AddWithValue("@idEstado", Estado.fechaCOMPLETA);
+//                cmd.CommandText = sql;
+//                return (cmd.ExecuteNonQuery() > 0);
+//            }
+//            catch (Exception ex)
+//            {
+//                throw new Exception("No se pudo actualizar el estado de la fecha: " + ex.Message);
+//            }
+//            finally
+//            {
+//                if (con != null && con.State == ConnectionState.Open)
+//                    con.Close();
+//            }
+//        }
     }
 }

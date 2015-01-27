@@ -233,7 +233,13 @@ namespace Logica
         public void cambiarEstadoAConfigurada()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            daoEdicion.cambiarEstadoAConfigurada(edicion.idEdicion); 
+            daoEdicion.cambiarEstado(edicion.idEdicion, Estado.edicionCONFIGURADA); 
+        }
+
+        public void cambiarEstado(int idEstado)
+        {
+            DAOEdicion daoEdicion = new DAOEdicion();
+            daoEdicion.cambiarEstado(edicion.idEdicion, idEstado);
         }
 
         /// <summary>
@@ -291,6 +297,15 @@ namespace Logica
             }
             if (!existeFase)
                 edicion.fases.Add(new Fase { idFase = idFaseNueva,idEdicion=edicion.idEdicion});
+        }
+
+        /// <summary>
+        /// Cuando se juega un partido, verifica si se debe cerrar la fase
+        /// </summary>
+        /// <param name="idPartido"></param>
+        public void actualizarEstado(int idPartido)
+        {
+            new DAOEdicion().actualizarEstadoEdicion(idPartido);
         }
 
     }
