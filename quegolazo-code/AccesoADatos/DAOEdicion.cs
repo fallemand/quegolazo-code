@@ -651,7 +651,7 @@ namespace AccesoADatos
                                 SET idEstado = @idEstado
                                 WHERE idEdicion = @idEdicion";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idEstado", idEdicion);
+                cmd.Parameters.AddWithValue("@idEstado", idEstado);
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);                
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
