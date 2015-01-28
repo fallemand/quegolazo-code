@@ -139,17 +139,11 @@ namespace quegolazo_code.admin
             }
             catch (Exception ex)
             {
-                mostrarPanelFracaso(ex.Message);
+                GestorError.mostrarPanelFracaso(ex.Message);
                 rdEquipos.Checked = true;
                 rdSinDefinir.Checked = true;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "equipoYSinDefinir()", "equipoYSinDefinir();", true);
             }
-        }
-
-        private void mostrarPanelFracaso(string mensaje)
-        {
-            litFracaso.Text = mensaje;
-            panelFracaso.Visible = true;
         }
 
         public void cargarRepeaterSanciones(string idEdicion)
@@ -183,7 +177,13 @@ namespace quegolazo_code.admin
                     btnRegistrarSancion.Visible = false;
                     btnModificarSancion.Visible = true;
                     btnCancelarModificacionSancion.Visible = true;
+                    //lo común para los cuatro casos
+                    ddlMotivo.SelectedValue = gestorSancion.sancion.motivoSancion.idMotivoSancion.ToString();
+                    txtFecha.Value = gestorSancion.sancion.fechaSancion.ToString();
+                    txtObservacion.Value = gestorSancion.sancion.observacion;
+                    txtCantidadFechasSuspendidas.Value = gestorSancion.sancion.cantidadFechasSuspendidas.ToString();
 
+                    //Lo particular de cada caso dividido por caso
                     //CASO JUGADOR Y PARTIDO
                     if (gestorSancion.sancion.idJugador != null && gestorSancion.sancion.idPartido != null)
                     {
@@ -197,20 +197,50 @@ namespace quegolazo_code.admin
                         ddlEquipo.SelectedValue = gestorSancion.sancion.idEquipo.ToString();
                         GestorControles.cargarComboList(ddlJugador, gestorSancion.obtenerJugadoresDeEquipo(ddlEquipo.SelectedValue),
                         "idJugador", "nombre", "Seleccionar Jugador", false);
-                        ddlJugador.SelectedValue = gestorSancion.sancion.idJugador.ToString();
+                        ddlJugador.SelectedValue = gestorSancion.sancion.idJugador.ToString();                        
+                        txtPuntosAQuitar.Value = gestorSancion.sancion.puntosAQuitar.ToString();                        
+                    }
+                    //CASO EQUIPO - SIN DEFINIR
+                    if (gestorSancion.sancion.idJugador == null && gestorSancion.sancion.idPartido == null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "edicionEquipoYSinDefinir", "equipoYSinDefinir();", true);
+                        ddlEquipoSinPartido.SelectedValue = gestorSancion.sancion.idEquipo.ToString();
                         txtFecha.Value = gestorSancion.sancion.fechaSancion.ToString();
-                        ddlMotivo.SelectedValue = gestorSancion.sancion.motivoSancion.idMotivoSancion.ToString();
-                        txtObservacion.Value = gestorSancion.sancion.observacion;
                         txtPuntosAQuitar.Value = gestorSancion.sancion.puntosAQuitar.ToString();
-                        txtCantidadFechasSuspendidas.Value = gestorSancion.sancion.cantidadFechasSuspendidas.ToString();
+                    }
+                    //CASO EQUIPO - PARTIDO
+                    if (gestorSancion.sancion.idJugador == null && gestorSancion.sancion.idPartido != null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "edicionEquipoYPartido()", "equipoYPartido();", true);
+                        ddlFecha.SelectedValue = gestorSancion.sancion.idFecha.ToString();
+                        GestorControles.cargarComboList(ddlPartido, gestorSancion.obtenerPartidosDeFecha(ddlFecha.SelectedValue),
+                        "idPartido", "nombreCompleto", "Seleccionar Partido", false);
+                        ddlPartido.SelectedValue = gestorSancion.sancion.idPartido.ToString();
+                        GestorControles.cargarComboList(ddlEquipo, gestorSancion.obtenerEquiposDePartido(ddlPartido.SelectedValue),
+                        "idEquipo", "nombre", "Seleccionar Equipo", false);
+                        ddlEquipo.SelectedValue = gestorSancion.sancion.idEquipo.ToString();
+                        txtPuntosAQuitar.Value = gestorSancion.sancion.puntosAQuitar.ToString();
+                    }
+                    //CASO JUGADOR Y SIN DEFINIR
+                    if (gestorSancion.sancion.idJugador != null && gestorSancion.sancion.idPartido == null)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "edicionJugadorYSinDefinir()", "jugadorYSinDefinir();", true);
+                        ddlEquipoSinPartido.SelectedValue = gestorSancion.sancion.idEquipo.ToString();
+                        GestorControles.cargarComboList(ddlJugador, gestorSancion.obtenerJugadoresDeEquipo2(ddlEquipoSinPartido.SelectedValue),
+                        "idJugador", "nombre", "Seleccionar Jugador", false);
+                        ddlJugador.SelectedValue = gestorSancion.sancion.idJugador.ToString();   
                     }
                 }
                 if (e.CommandName == "eliminarSancion")
                 {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "OpcionPorDefecto", "deshabilitarPanel(); limpiarCombos(); equipoYSinDefinir();", true);
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarSancion');", true);
+                    //GestorControles.cargarComboList(ddlJugador, gestorSancion.obtenerJugadoresDeEquipo(ddlEquipo.SelectedValue),
+                    //    "idJugador", "nombre", "Seleccionar Jugador", false);
+                    //ddlJugador.SelectedValue = gestorSancion.sancion.idJugador.ToString();   
                 }
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }  
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }  
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
@@ -218,10 +248,10 @@ namespace quegolazo_code.admin
             try
             {
                 gestorSancion.eliminarSancion(gestorSancion.sancion.idSancion);
-                cargarRepeaterSanciones(gestorEdicion.edicion.idEdicion.ToString());
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarSancion", "closeModal('eliminarSancion');", true);
+                cargarRepeaterSanciones(gestorEdicion.edicion.idEdicion.ToString());                
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarSancion", "closeModal('eliminarSancion');", true);                
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         protected void btnModificarSancion_Click(object sender, EventArgs e)
@@ -238,7 +268,32 @@ namespace quegolazo_code.admin
                 btnModificarSancion.Visible = false;
                 btnCancelarModificacionSancion.Visible = false;
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
+        }
+
+        protected void btnCancelarModificacionSancion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                limpiarCampos();                
+                btnRegistrarSancion.Visible = true;
+                btnModificarSancion.Visible = false;
+                btnCancelarModificacionSancion.Visible = false;
+                gestorSancion.sancion = null;
+            }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); } 
+        }
+
+        public void limpiarCampos()
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "OpcionPorDefecto", "deshabilitarPanel(); limpiarCombos(); equipoYSinDefinir();", true);
+            cargarComboEquipos();
+            cargarComboFechas();
+            cargarComboMotivos();
+            txtCantidadFechasSuspendidas.Value = "";
+            txtFecha.Value = "";
+            txtObservacion.Value = "";
+            txtPuntosAQuitar.Value = "";
         }
     }
 }
