@@ -410,7 +410,7 @@ namespace AccesoADatos
                 /// Cambia el estado de la fase a Completa cuando se jugaron todos los partidos y devuelve true si se completó la fase
                 /// autor: Flor Rojas
                 /// </summary>
-                public bool actualizarEstadoFase(int idPartido)
+                public void actualizarEstadoFase(int idPartido)
                 {
                     SqlConnection con = new SqlConnection(cadenaDeConexion);
                     SqlCommand cmd = new SqlCommand();
@@ -419,7 +419,26 @@ namespace AccesoADatos
                         if (con.State == ConnectionState.Closed)
                             con.Open();
                         cmd.Connection = con;
+                        
+
+                        //Esta consulta cambia la fecha a estado incompleta, @cantidad(cantidad de partidos jugados),esmayor a 1.
                         string sql = @"                            
+                            DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idGrupo=@idGrupo AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado = 13  ))
+					                            if(@cantidad>0)
+						                            BEGIN
+							                        UPDATE Fases SET idEstado = @idEstado WHERE idFase = @idFase AND idEdicion = @idEdicion
+                                                    END";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@idPartido", idPartido);
+                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseENJUEGO);
+                        cmd.CommandText = sql;
+                        cmd.ExecuteNonQuery();
+
+                       sql = @"                            
                             DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
@@ -433,7 +452,8 @@ namespace AccesoADatos
                         cmd.Parameters.AddWithValue("@idPartido", idPartido);
                         cmd.Parameters.AddWithValue("@idEstado", Estado.faseCERRADA);
                         cmd.CommandText = sql;
-                        return (cmd.ExecuteNonQuery() > 0);
+                        cmd.ExecuteNonQuery();
+                        
                     }
                     catch (Exception ex)
                     {

@@ -785,7 +785,7 @@ namespace AccesoADatos
         /// Cambia el estado de la  cuando se jugaron todos los partidos y devuelve true si se completó la edicion
         /// autor: Flor Rojas
         /// </summary>
-        public bool actualizarEstadoEdicion(int idPartido)
+        public void actualizarEstadoEdicion(int idPartido)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -794,18 +794,23 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"
+                 string sql = @"                            
+                            DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
+                            DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Fases f WHERE f.idEdicion = @idEdicion AND f.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 5 AND idEstado<>6  ))
-					        if(@cantidad=0)
-						           BEGIN
-							                UPDATE Edicion SET idEstado = @idEstado WHERE idEdicion = @idEdicion
-						           END";
+                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idGrupo=@idGrupo AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado = 13  ))
+					                            if(@cantidad>0)
+						                            BEGIN
+							                        UPDATE Ediciones SET idEstado = @idEstado WHERE idEdicion = @idEdicion
+                                                    END
+						    ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
-                cmd.Parameters.AddWithValue("@idEstado", Estado.edicionFINALIZADA);
+                cmd.Parameters.AddWithValue("@idEstado", Estado.edicionINICIADA);
                 cmd.CommandText = sql;
-                return (cmd.ExecuteNonQuery() > 0);
+                cmd.ExecuteNonQuery();
+
             }
             catch (Exception ex)
             {
