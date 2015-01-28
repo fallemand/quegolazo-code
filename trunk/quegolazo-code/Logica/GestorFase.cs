@@ -13,7 +13,7 @@ namespace Logica
     {
 
       public IGenerarFixture generadorFixture { get; set; }
-      public Fase faseActual{ get; set; }
+      
      
       /// <summary>
       /// método para generar fixture
@@ -50,10 +50,6 @@ namespace Logica
 
       }
 
-      public GestorFase()
-      {
-          faseActual =  new Fase();
-      }
 
       public bool estaFinalizada(int idFase, int idEdicion)
       {
@@ -103,15 +99,11 @@ namespace Logica
       //    DAOFase daoFase = new DAOFase();
       //    daoFase.registrarFase(fases);
       //}
-      public void cerrarFase(List<Fase> fases)
-      {
-          DAOFase daoFase = new DAOFase();
-          foreach(Fase fase in fases)
-          {
-              if (fase.idFase == faseActual.idFase)
-                  fase.estado.idEstado = Estado.faseCERRADA;
-          }
-          daoFase.cerrarFase(faseActual.idFase, faseActual.idEdicion);
+      public void cerrarFase(Fase fase)
+      {         
+         if (fase.idFase == fase.idFase)
+         fase.estado.idEstado = Estado.faseCERRADA;         
+         new  DAOFase().cerrarFase(fase.idFase, fase.idEdicion);
       }
     }
 }

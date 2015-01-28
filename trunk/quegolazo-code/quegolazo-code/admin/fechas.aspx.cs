@@ -61,10 +61,8 @@ namespace quegolazo_code.admin
             {
                 if (e.CommandName == "finalizarFase")
                 {
-                    //gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
-                    //litNombreEdicion.Text = gestorEdicion.edicion.nombre;
-                    gestorEdicion.gestorFase.faseActual.idFase = int.Parse(e.CommandArgument.ToString());
-                    if(!gestorEdicion.gestorFase.estaFinalizada(Validador.castInt(e.CommandArgument.ToString()),gestorEdicion.edicion.idEdicion))
+                    gestorEdicion.faseActual = gestorEdicion.edicion.fases[int.Parse(e.CommandArgument.ToString()) - 1];
+                    if(!gestorEdicion.gestorFase.estaFinalizada(gestorEdicion.faseActual.idFase, gestorEdicion.faseActual.idEdicion))
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "showDiv", "showDiv('panelFaseNoCompleta');", true);
                     else
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "showDiv", "hideDiv('panelFaseNoCompleta');", true);
@@ -86,7 +84,7 @@ namespace quegolazo_code.admin
                 {
                     Repeater rptFechas = (Repeater)e.Item.FindControl("rptFechas");
                     int idFase = ((Fase)e.Item.DataItem).idFase;
-                    gestorEdicion.gestorFase.faseActual = ((Fase)e.Item.DataItem);
+                    gestorEdicion.faseActual = ((Fase)e.Item.DataItem);
                     Panel panelSinFechas = e.Item.FindControl("panelSinFechas") as Panel;
                     panelSinFechas.Visible = !GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas());
                 }
@@ -675,9 +673,9 @@ namespace quegolazo_code.admin
 
         protected void btnConfigurarFase_Click(object sender, EventArgs e)
         {
-            gestorEdicion.verificarProximaFase(gestorEdicion.gestorFase.faseActual.idFase+1);
-            gestorEdicion.agregarEquiposEnFase(hfEquiposSeleccionados.Value, (gestorEdicion.gestorFase.faseActual.idFase +1));
-            gestorEdicion.gestorFase.cerrarFase(gestorEdicion.edicion.fases);
+            gestorEdicion.verificarProximaFase(gestorEdicion.faseActual.idFase+1);
+            gestorEdicion.agregarEquiposEnFase(hfEquiposSeleccionados.Value, (gestorEdicion.faseActual.idFase +1));
+            gestorEdicion.gestorFase.cerrarFase(gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1]);
             Response.Redirect(GestorUrl.eFASES);
         }
 

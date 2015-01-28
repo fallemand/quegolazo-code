@@ -1656,3 +1656,12 @@ Date: 2014-11-05
 .label-Cancelada {
     background-color: #d9534f;
 }
+.inhabilitado {
+cursor:not-allowed;
+ cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
