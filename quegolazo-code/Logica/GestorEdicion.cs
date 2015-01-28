@@ -13,6 +13,7 @@ namespace Logica
     {
         public Edicion edicion = new Edicion();
         public GestorFase gestorFase = new GestorFase();
+        public Fase faseActual { get; set; }
         /// <summary>
         /// Obtener ediciones de un torneo en particular
         /// autor: Pau Pedrosa
@@ -22,6 +23,20 @@ namespace Logica
             DAOEdicion daoEdicion = new DAOEdicion();
             List<Edicion> ediciones = daoEdicion.obtenerEdicionesPorIdTorneo(idTorneo);
             return ediciones;           
+        }
+        /// <summary>
+        /// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada
+        /// </summary>
+        /// <param name="gestor">El gestor que se va a actualizar</param>
+        public void actualizarFaseActual(GestorEdicion gestor) {
+            foreach (Fase fase in gestor.edicion.fases)
+            {
+                if (fase.estado.idEstado == Estado.faseDIAGRAMADA)
+                {
+                    gestor.faseActual = fase;
+                    break;
+                }
+            }
         }
 
         /// <summary> 
@@ -35,16 +50,7 @@ namespace Logica
             daoEdicion.registrarEdicion(edicion, Sesion.getTorneo().idTorneo);
         }
 
-        /// <summary> 
-        /// Registra una nueva edicion
-        /// autor: Antonio Herrera
-        /// </summary>
-        /// <returns>El id de la edicion que se registro.</returns>
-        //public void registrarPreferencias()
-        //{
-        //    DAOEdicion daoEdicion = new DAOEdicion();
-        //    daoEdicion.registrarPreferencias(edicion);
-        //}
+       
         
         /// <summary> 
         /// Carga los datos en el objeto edicion
@@ -66,18 +72,7 @@ namespace Logica
             edicion.generoEdicion.idGeneroEdicion = Validador.castInt(idGeneroEdicion);
         }     
 
-        /// <summary>
-        /// Registrar equipos para una edición
-        /// </summary>
-        /// <param name="idEquipo">Id del Equipo</param>
-        /// <param name="idEdicion">Id de la Edición</param>
-        //public void registrarEquiposEnEdicion()
-        //{
-        //    DAOEquipo daoEquipo = new DAOEquipo();
-        //    daoEquipo.registrarEquiposEnEdicion(edicion.equipos, edicion.idEdicion);
-        //}
-
-        /// <summary>
+         /// <summary>
         /// Agrega los equipos recibidos a la edición
         /// </summary>
         public void agregarEquiposEnEdicion(string equipos)
@@ -264,8 +259,7 @@ namespace Logica
 
         public void agregarEquiposEnFase(string equipos,int idFaseNueva)
         {
-            //primero limpiamos la lista para evitar que se acumulen cuando el usuario apriete siguiente mas de una vez por algun motivo.
-            edicion.equipos.Clear();
+            int indiceFase = idFaseNueva -1;
             if (equipos == "")
                 throw new Exception("No hay equipos seleccionados");
             //quita la última coma de la cadena
@@ -278,9 +272,10 @@ namespace Logica
             //agrego los equipos al equipos a la edición
             GestorEquipo gestorEquipo = new GestorEquipo();
             foreach (int id in listaIdsSeleccionados)
-                edicion.fases[idFaseNueva-1].equipos.Add(gestorEquipo.obtenerEquipoReducidoPorId(id));
-            if (edicion.fases[idFaseNueva - 1].equipos.Count() == edicion.fases[idFaseNueva - 1].cantidadDeEquipos && edicion.fases[idFaseNueva - 1].cantidadDeEquipos!=0)
-                throw new Exception("La cantidad de equipos no coincide con la indicada para esta fase");
+            edicion.fases[indiceFase].equipos.Add(gestorEquipo.obtenerEquipoReducidoPorId(id));
+            edicion.fases[indiceFase].esGenerica = false;
+            //if (edicion.fases[idFaseNueva - 1].equipos.Count() == edicion.fases[idFaseNueva - 1].cantidadDeEquipos && edicion.fases[idFaseNueva - 1].cantidadDeEquipos!=0)
+            //    throw new Exception("La cantidad de equipos no coincide con la indicada para esta fase");
         }
 
 

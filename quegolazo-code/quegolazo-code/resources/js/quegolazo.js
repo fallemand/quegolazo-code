@@ -184,7 +184,7 @@ function createDropDownList(id, optionList) {
     return combo;
 
 }
-
+//mezcla una lista que se pasa como parametro.
 function shuffle(list) {
     var i, j, t;
     for (i = 1; i < list.length; i++) {

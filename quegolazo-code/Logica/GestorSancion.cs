@@ -21,7 +21,7 @@ namespace Logica
             List<Partido> todosPartidos = new List<Partido>();
             partidos.Clear();
             GestorEdicion gestorEdicion = Sesion.getGestorEdicion();
-            foreach (Fecha fecha in gestorEdicion.gestorFase.faseActual.obtenerFechas())
+            foreach (Fecha fecha in gestorEdicion.faseActual.obtenerFechas())
             {
                 if (fecha.idFecha == int.Parse(idFecha))
                     todosPartidos = fecha.partidos;

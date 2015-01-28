@@ -52,7 +52,7 @@ namespace quegolazo_code.admin
                 cargarComboEquipos();
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 ////HAY QUE CAMBIARLO. TIENE QUE TRAER LA FASE ACTUAL
-                gestorEdicion.gestorFase.faseActual = gestorEdicion.edicion.fases[0];
+                gestorEdicion.faseActual = gestorEdicion.edicion.fases[0];
                 cargarComboFechas();
                 cargarComboMotivos();
                 rdEquipos.Checked = true;
@@ -67,7 +67,7 @@ namespace quegolazo_code.admin
 
         public void cargarComboFechas()
         {
-            GestorControles.cargarComboList(ddlFecha, gestorEdicion.gestorFase.faseActual.obtenerFechas(),
+            GestorControles.cargarComboList(ddlFecha, gestorEdicion.faseActual.obtenerFechas(),
                 "idFecha", "nombreCompleto", "Seleccionar Fecha", false);
         }
 
@@ -119,13 +119,13 @@ namespace quegolazo_code.admin
                     throw new Exception("\nDebe seleccionar un motivo");                              
 
                 if(rdEquipos.Checked && rdSinDefinir.Checked) //CASO MÁS SIMPLE
-                    gestorSancion.registrarSancion(ddlEdiciones.SelectedValue, string.Empty, string.Empty, ddlEquipoSinPartido.SelectedValue, string.Empty, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value, gestorEdicion.gestorFase.faseActual.idFase.ToString());
+                    gestorSancion.registrarSancion(ddlEdiciones.SelectedValue, string.Empty, string.Empty, ddlEquipoSinPartido.SelectedValue, string.Empty, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value, gestorEdicion.faseActual.idFase.ToString());
                 if(rdEquipos.Checked && rdPartido.Checked)
-                    gestorSancion.registrarSancion(ddlEdiciones.SelectedValue, ddlFecha.SelectedValue, ddlPartido.SelectedValue, ddlEquipo.SelectedValue, string.Empty, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value, gestorEdicion.gestorFase.faseActual.idFase.ToString());
+                    gestorSancion.registrarSancion(ddlEdiciones.SelectedValue, ddlFecha.SelectedValue, ddlPartido.SelectedValue, ddlEquipo.SelectedValue, string.Empty, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value, gestorEdicion.faseActual.idFase.ToString());
                 if(rdJugadores.Checked && rdSinDefinir.Checked)
-                    gestorSancion.registrarSancion(ddlEdiciones.SelectedValue, string.Empty, string.Empty, ddlEquipoSinPartido.SelectedValue, ddlJugador.SelectedValue, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value, gestorEdicion.gestorFase.faseActual.idFase.ToString());
+                    gestorSancion.registrarSancion(ddlEdiciones.SelectedValue, string.Empty, string.Empty, ddlEquipoSinPartido.SelectedValue, ddlJugador.SelectedValue, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value, gestorEdicion.faseActual.idFase.ToString());
                 if(rdJugadores.Checked && rdPartido.Checked)
-                    gestorSancion.registrarSancion(ddlEdiciones.SelectedValue, ddlFecha.SelectedValue, ddlPartido.SelectedValue, ddlEquipo.SelectedValue, ddlJugador.SelectedValue, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value, gestorEdicion.gestorFase.faseActual.idFase.ToString());
+                    gestorSancion.registrarSancion(ddlEdiciones.SelectedValue, ddlFecha.SelectedValue, ddlPartido.SelectedValue, ddlEquipo.SelectedValue, ddlJugador.SelectedValue, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value, gestorEdicion.faseActual.idFase.ToString());
                  
                 cargarRepeaterSanciones(ddlEdiciones.SelectedValue);
                 gestorSancion.sancion = null;
