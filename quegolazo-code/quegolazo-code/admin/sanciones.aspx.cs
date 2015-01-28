@@ -114,9 +114,9 @@ namespace quegolazo_code.admin
                 if ((ddlEquipo.SelectedValue.Equals(string.Empty) && ddlEquipoSinPartido.SelectedValue.Equals(string.Empty)))
                     throw new Exception("Debe seleccionar un equipo"); 
                 if (txtFecha.Value.Equals(string.Empty))
-                    throw new Exception("\nDebe ingresar la fecha de registro de la sanción"); 
+                    throw new Exception("Debe ingresar la fecha de registro de la sanción"); 
                 if (ddlMotivo.SelectedValue.Equals(string.Empty))
-                    throw new Exception("\nDebe seleccionar un motivo");                              
+                    throw new Exception("Debe seleccionar un motivo");                              
 
                 if(rdEquipos.Checked && rdSinDefinir.Checked) //CASO MÁS SIMPLE
                     gestorSancion.registrarSancion(ddlEdiciones.SelectedValue, string.Empty, string.Empty, ddlEquipoSinPartido.SelectedValue, string.Empty, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value, gestorEdicion.faseActual.idFase.ToString());
