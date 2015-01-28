@@ -136,7 +136,7 @@
                             </div>
                             <div class="panel-footer clearfix text-right">
                                 <div class="col-xs-8 col-xs-offset-3">
-                                    <asp:Button class="btn btn-default" ID="btnCancelarModificacionSancion" runat="server" Text="Cancelar" Visible="false" />
+                                    <asp:Button class="btn btn-default" ID="btnCancelarModificacionSancion" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionSancion_Click" />
                                     <asp:Button class="btn btn-success causesValidation vgSancion" ID="btnModificarSancion" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarSancion_Click" />
                                     <asp:Button class="btn btn-success causesValidation vgSancion" ID="btnRegistrarSancion" runat="server" Text="Registrar" OnClick="btnRegistrarSancion_Click"/>
                                 </div>

@@ -230,5 +230,125 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public Sancion obtenerSancionPorId(int idSancion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            Sancion respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM Sanciones
+                                WHERE idSancion = @idSancion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idSancion", idSancion);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    respuesta = new Sancion();
+                    respuesta.idSancion = int.Parse(dr["idSancion"].ToString());
+                    respuesta.idEdicion = int.Parse(dr["idEdicion"].ToString());
+                    respuesta.idFase = (dr["idFase"] != DBNull.Value) ? (int?)int.Parse(dr["idFase"].ToString()) : null;
+                    respuesta.idGrupo = (dr["idGrupo"] != DBNull.Value) ? (int?)int.Parse(dr["idGrupo"].ToString()) : null;
+                    respuesta.idFecha = (dr["idFecha"] != DBNull.Value) ? (int?)int.Parse(dr["idFecha"].ToString()) : null;
+                    respuesta.idPartido = (dr["idPartido"] != DBNull.Value) ? (int?)int.Parse(dr["idPartido"].ToString()) : null;
+                    respuesta.idEquipo = int.Parse(dr["idEquipo"].ToString());
+                    respuesta.idJugador = (dr["idJugador"] != DBNull.Value) ? (int?)int.Parse(dr["idJugador"].ToString()) : null;
+                    respuesta.fechaSancion = (dr["fechaSancion"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fechaSancion"].ToString()) : null;
+                    respuesta.motivoSancion.idMotivoSancion = (dr["idMotivoSancion"] != DBNull.Value) ? (int?)int.Parse(dr["idMotivoSancion"].ToString()) : null;
+                    respuesta.observacion = dr["observacion"].ToString();
+                    respuesta.puntosAQuitar = (dr["puntosAQuitar"] != DBNull.Value) ? (int?)int.Parse(dr["puntosAQuitar"].ToString()) : null;
+                    respuesta.cantidadFechasSuspendidas = (dr["cantidadFechasSuspendidas"] != DBNull.Value) ? (int?)int.Parse(dr["cantidadFechasSuspendidas"].ToString()) : null;
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar la Sanción: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public void eliminarSancion(int idSancion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"DELETE FROM Sanciones
+                                WHERE idSancion = @idSancion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idSancion", idSancion);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+            //    //foreign key problem
+            //    if (ex.Number == 547)
+            //        throw new Exception("No se pudo eliminar el Jugador: Existen datos asociados a este jugador, como sanciones, goles, tarjetas, etc. Debe eliminarlos para poder eliminar el jugador.");
+            //    else
+                    throw new Exception("No se pudo eliminar la Sanción: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public void modificarSancion(Sancion sancion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"UPDATE Sanciones
+                                SET idFecha = @idFecha, idPartido = @idPartido, idEquipo = @idEquipo,
+                                idJugador = @idJugador, fechaSancion = @fechaSancion, idMotivoSancion = @idMotivoSancion, observacion = @observacion,
+                                puntosAQuitar = @puntosAQuitar, cantidadFechasSuspendidas = @cantidadFechasSuspendidas
+                                WHERE idSancion = @idSancion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idFecha", sancion.idFecha);
+                cmd.Parameters.AddWithValue("@idPartido", sancion.idPartido);
+                cmd.Parameters.AddWithValue("@idEquipo", sancion.idEquipo);
+                cmd.Parameters.AddWithValue("@idJugador", sancion.idJugador);
+                cmd.Parameters.AddWithValue("@fechaSancion", sancion.fechaSancion);
+                cmd.Parameters.AddWithValue("@idMotivoSancion", sancion.motivoSancion.idMotivoSancion);
+                cmd.Parameters.AddWithValue("@observacion", sancion.observacion);
+                cmd.Parameters.AddWithValue("@puntosAQuitar", sancion.puntosAQuitar);
+                cmd.Parameters.AddWithValue("@cantidadFechasSuspendidas", sancion.cantidadFechasSuspendidas);
+                cmd.Parameters.AddWithValue("@idSancion", sancion.idSancion);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo modificar la sanción: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
