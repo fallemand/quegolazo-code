@@ -99,5 +99,34 @@ namespace Logica
             DAOSancion daoSancion = new DAOSancion();
             return daoSancion.obtenerSancionesDeEdicion(int.Parse(idEdicion));
         }
+
+        public Sancion obtenerSancionPorId(string idSancion)
+        {
+            DAOSancion daoSancion = new DAOSancion();
+            sancion = daoSancion.obtenerSancionPorId(int.Parse(idSancion));
+            return sancion;
+        }
+
+        public void eliminarSancion(int idSancion)
+        {
+            DAOSancion daoSancion = new DAOSancion();
+            daoSancion.eliminarSancion(idSancion);
+        }
+
+        public void modificarSancion(string idSancion, string idFecha, string idPartido, string idEquipo, string idJugador, string fechaSancion, string idMotivoSancion, string observacion, string puntosAQuitar, string cantidadFechasSuspendidas)
+        {
+            DAOSancion daoSancion = new DAOSancion();
+            sancion.idSancion = int.Parse(idSancion);
+            sancion.idFecha = (idFecha != null) ? (int?)int.Parse(idFecha) : null;
+            sancion.idPartido = (idPartido != null) ? (int?)int.Parse(idPartido) : null;
+            sancion.idEquipo = int.Parse(idEquipo);
+            sancion.idJugador = (idJugador != null) ? (int?)int.Parse(idJugador) : null;
+            sancion.fechaSancion = (fechaSancion != null) ? (DateTime?)DateTime.Parse(fechaSancion) : null;
+            sancion.motivoSancion.idMotivoSancion = (idMotivoSancion != null) ? (int?)int.Parse(idMotivoSancion) : null;
+            sancion.observacion = observacion;
+            sancion.puntosAQuitar = (puntosAQuitar != null) ? (int?)int.Parse(puntosAQuitar) : null;
+            sancion.cantidadFechasSuspendidas = (cantidadFechasSuspendidas != null) ? (int?)int.Parse(cantidadFechasSuspendidas) : null;
+            daoSancion.modificarSancion(sancion);
+        }
     }
 }
