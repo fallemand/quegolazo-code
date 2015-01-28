@@ -4,6 +4,9 @@
         idEdicion: null,
         equiposDeLaEdicion: [],
         fases: [],
+        idFaseCerrada : 6,
+        idFaseEnJuego: 5,
+        idFaseDiagramada :4, 
         idFaseEditable : null,
         error : false,
         tiposDeFixture: [{
@@ -46,12 +49,13 @@
         var headerContenedor = $("<div/>", { class: 'panel-heading' });
         var btnEliminar = $("<span/>", { class: 'glyphicon glyphicon-remove eliminar pull-right', id:"btnEliminarFase"+numFase }).on("click",
             function () {
-                $("#panelContenedorFase" + numFase).remove();
+                $("#panelContenedorFase" + numFase).remove();               
                 widget.options.fases.pop();
-                if(numFase>1)
+                if(numFase>widget.options.idFaseEditable)
                     $("#btnEliminarFase" + (numFase - 1)).show("slow");
                 $("#panelFracaso").hide();
             }).tooltip({ title: "Eliminar Fase" });
+        if(widget.options.idFaseEditable < numFase)
         btnEliminar.appendTo(headerContenedor);           
         var contenedorTitulo = $("<h4/>", { class: 'panel-title text-center' }).text("Fase N° " + numFase).css("font-weight", "700");
         var linkTitulo = $("<a/>").attr("data-toggle", "collapse").attr("data-parent", "#accordionFases").attr("id", "collapsableFase" + numFase).attr("href", "#collapseFase" + numFase);
@@ -67,7 +71,7 @@
         contenedorGeneral.appendTo(panelFases);
         $("<div/>").attr("id", "cuerpoFase" + numFase).appendTo(cuerpoDeLaFase);
         //si la fase es mayor a uno, cargo los equipos genericos para el primer caso.
-        if (numFase =! widget.options.idFaseEditable) {
+        if (numFase > widget.options.idFaseEditable) {
             widget.generarListaDeEquiposParaFase(numFase,(widget.options.fases[numFase-1].cantidadDeEquipos > 0) ? widget.options.fases[numFase-1].cantidadDeEquipos :  $("#ddlCantidadParticipantesFase" + numFase).val());
             $("#ddlCantidadParticipantesFase" + numFase).tooltip({ placemenent:'bottom',title: "Indica la cantidad de equipos que clasifican de la fase anterior"});
             //elimino el boton eliminar de una fase que no sea la ultima.  
@@ -109,8 +113,8 @@
         var comboCant = null;
         
 
-        // si la fase es mayor a uno, armos dos divs para que la cantidad de participantes y de grupos se alineen en un solo div central
-        if (numFase != widget.options.idFaseEditable) {
+        // si la fase es distinta a la que se puede editar, armos dos divs para que la cantidad de participantes y de grupos se alineen en un solo div central
+        if (numFase > widget.options.idFaseEditable) {
             var divCantidadParticipantes = $("<div/>", { class: 'col-md-6 faseGenerica', id: 'divCantidadParticipantesFase' + numFase });
             var labelCantidadParticpantes = $("<label/>").attr("id", "lblCantidadParticipantesFase" + numFase).text("Clasifican:");
             labelCantidadParticpantes.appendTo(divCantidadParticipantes);
@@ -215,7 +219,7 @@
         if (combo.val().indexOf("TCT") >= 0) {
             $("#divCentroFase" + numFase).show();
             $("#divCantidadGruposFase" + numFase).show();
-            $((numFase != widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover("destroy");
+            $((numFase > widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover("destroy");
         } else {
             //si es la primera fase oculto todo el div central.
             if (numFase == widget.options.idFaseEditable)
@@ -264,17 +268,17 @@
         var widget = this;
         var esValido = ($.inArray((numFase == widget.options.idFaseEditable) ? widget.options.fases[numFase - 1].equipos.length : parseInt($("#ddlCantidadParticipantesFase" + numFase).val()), [2, 4, 8, 16, 32, 64, 128]) > -1);
         if (!esValido) {
-            $((numFase != widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover({
+            $((numFase > widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover({
                 container: '#controlesFase' + numFase,
                 placement: (numFase != widget.options.idFaseEditable) ? 'bottom' : 'right',
                 title: 'Cantidad de equipos inválida.',
                 trigger: 'manual',
                 content: 'Para fixtures tipo "Eliminatorio" solo se admiten 2,4,8,16,32,64 o 128 equipos.'
             });
-            $((numFase != widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover("show");
+            $((numFase > widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover("show");
             widget.options.error = true;
         } else {
-            $((numFase != widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover("destroy");
+            $((numFase > widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover("destroy");
             widget.options.error = false;
         }
     },    
@@ -541,7 +545,7 @@
         if (widget.options.error)
             return;
         var tipoFixture = (fasePreCargada) ? fase.tipoFixture.idTipoFixture : $("#ddlTipoFixtureFase" + numFase).val();
-        var cantidadGrupos = (fasePreCargada) ? (fase.esGenerica) ? fase.cantidadDeGrupos : fase.grupos.length : $("#ddlCantidadFase" + numFase).val();
+        var cantidadGrupos = (fasePreCargada && fase.cantidadDeGrupos > 0) ? fase.cantidadDeGrupos : (fasePreCargada && fase.grupos.length >0) ? fase.grupos.length : $("#ddlCantidadFase" + numFase).val();
         $("<div/>").attr("id", "cuerpoFase" + numFase).appendTo($("#panelFase"+ numFase));
         $("#panelFracaso").hide();         
         if (tipoFixture.indexOf("TCT") >= 0) {
@@ -559,9 +563,9 @@
             }
             $("#cuerpoFase" + numFase).css("overflow-x", "scroll");
             $("#cuerpoFase" + numFase).generadorDeLlaves({                
-                equipos: (fasePreCargada && !(numFase != widget.options.idFaseEditable)) ? fase.grupos[0].fechas[0].partidos : widget.options.fases[numFase - 1].equipos,
+                equipos: (fasePreCargada && !(numFase > widget.options.idFaseEditable)) ? fase.grupos[0].fechas[0].partidos : widget.options.fases[numFase - 1].equipos,
                 mezclar: !fasePreCargada,
-                generica: (numFase != widget.options.idFaseEditable)
+                generica: (numFase > widget.options.idFaseEditable)
             });
         }
         widget.armarFase(numFase);
@@ -579,10 +583,10 @@
     },
     //muestra el mensaje que se pasa por parametro, haciendo el efecto de luz ;)
     inhabilitarFasesFinalizadas: function () {
-        var widget = this;
-        var idFaseCerrada = 6;
-        for (var i = 0; i < widget.options.fases; i++) {
-            if (widget.options.fases[i].estado.idEstado = idFaseCerrada)
+        var widget = this;        
+        for (var i = 0; i < widget.options.fases.length; i++) {
+            var idEstadoFase = widget.options.fases[i].estado.idEstado;
+            if (idEstadoFase == widget.options.idFaseCerrada || idEstadoFase ==widget.options.idFaseEnJuego )
                 $("#panelFase" + widget.options.fases[i].idFase).addClass("inhabilitado");
         }
     }
