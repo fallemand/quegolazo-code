@@ -327,15 +327,15 @@ namespace AccesoADatos
                                 puntosAQuitar = @puntosAQuitar, cantidadFechasSuspendidas = @cantidadFechasSuspendidas
                                 WHERE idSancion = @idSancion";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idFecha", sancion.idFecha);
-                cmd.Parameters.AddWithValue("@idPartido", sancion.idPartido);
+                cmd.Parameters.AddWithValue("@idFecha", DAOUtils.dbValueNull(sancion.idFecha));
+                cmd.Parameters.AddWithValue("@idPartido", DAOUtils.dbValueNull(sancion.idPartido));
                 cmd.Parameters.AddWithValue("@idEquipo", sancion.idEquipo);
-                cmd.Parameters.AddWithValue("@idJugador", sancion.idJugador);
-                cmd.Parameters.AddWithValue("@fechaSancion", sancion.fechaSancion);
-                cmd.Parameters.AddWithValue("@idMotivoSancion", sancion.motivoSancion.idMotivoSancion);
-                cmd.Parameters.AddWithValue("@observacion", sancion.observacion);
-                cmd.Parameters.AddWithValue("@puntosAQuitar", sancion.puntosAQuitar);
-                cmd.Parameters.AddWithValue("@cantidadFechasSuspendidas", sancion.cantidadFechasSuspendidas);
+                cmd.Parameters.AddWithValue("@idJugador", DAOUtils.dbValueNull(sancion.idJugador));
+                cmd.Parameters.AddWithValue("@fechaSancion", DAOUtils.dbValueNull(sancion.fechaSancion));
+                cmd.Parameters.AddWithValue("@idMotivoSancion", DAOUtils.dbValueNull(sancion.motivoSancion.idMotivoSancion));
+                cmd.Parameters.AddWithValue("@observacion", DAOUtils.dbValueNull(sancion.observacion));
+                cmd.Parameters.AddWithValue("@puntosAQuitar", DAOUtils.dbValueNull(sancion.puntosAQuitar));
+                cmd.Parameters.AddWithValue("@cantidadFechasSuspendidas", DAOUtils.dbValueNull(sancion.cantidadFechasSuspendidas));
                 cmd.Parameters.AddWithValue("@idSancion", sancion.idSancion);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
