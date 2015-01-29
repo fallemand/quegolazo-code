@@ -27,7 +27,7 @@ namespace quegolazo_code.admin
                         cargarRepeaterTorneos();
                 }
             }
-            catch (Exception ex){mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace quegolazo_code.admin
                 limpiarModalTorneo();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace quegolazo_code.admin
                     panelSinEdiciones.Visible = !(GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(idTorneo)));
                 }
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace quegolazo_code.admin
             catch (Exception ex)
             {
                 imagenpreview.Src = GestorImagen.obtenerImagenTemporal(GestorImagen.TORNEO, GestorImagen.MEDIANA);
-                mostrarPanelFracaso(ex.Message);
+                GestorError.mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -119,7 +119,7 @@ namespace quegolazo_code.admin
                     limpiarPaneles();
                 }                
             }
-            catch (Exception ex){mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
         
         /// <summary>
@@ -139,7 +139,7 @@ namespace quegolazo_code.admin
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalTorneo');", true);
-                mostrarPanelFracaso(ex.Message);
+                GestorError.mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -155,7 +155,8 @@ namespace quegolazo_code.admin
                 cargarRepeaterTorneos();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarTorneo", "closeModal('eliminarTorneo');", true);
             }
-            catch (Exception ex){mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex)
+            {GestorError.mostrarPanelFracaso(ex.Message);}
         }
 
         //------------------------------------------
@@ -190,14 +191,6 @@ namespace quegolazo_code.admin
             GestorControles.showControls(new List<Object> { btnRegistrarTorneo });
             GestorControles.hideControls(new List<Object> { btnModificarTorneo });
             imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.TORNEO,GestorImagen.MEDIANA);
-        }
-
-        /// <summary>
-        /// Muestra el panel de error de la pag principal
-        /// </summary>
-        private void mostrarPanelFracaso(string mensaje)
-        {
-            GestorError.mostrarPanelFracaso(mensaje);
-        }
+        }        
     }
 }

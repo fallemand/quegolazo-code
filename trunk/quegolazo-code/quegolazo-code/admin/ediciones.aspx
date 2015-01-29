@@ -24,6 +24,13 @@
                                 </div>
                             </div>
                             <div class="panel-group well" id="accordion" role="tablist" aria-multiselectable="true">
+                                <asp:Panel ID="panelSinEdiciones" runat="server" Visible="false">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                                    No hay ediciones registradas para el torneo
+                                        </div>
+                                    </div>
+                                </asp:Panel>
                                 <asp:Repeater ID="rptEdiciones" runat="server" OnItemCommand="rptEdiciones_ItemCommand" OnItemDataBound="rptEdiciones_ItemDataBound">
                                     <ItemTemplate>
                                         <div class="panel panel-default">
