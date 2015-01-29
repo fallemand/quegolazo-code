@@ -238,7 +238,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterEdiciones()
         {
-            GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo));
+            panelSinEdiciones.Visible = !GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo));
         }
 
         /// <summary>

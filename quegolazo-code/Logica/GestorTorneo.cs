@@ -90,6 +90,8 @@ namespace Logica
         {
             DAOTorneo daoTorneo = new DAOTorneo();
             daoTorneo.eliminarTorneo(idTorneo);
+            if (torneo.idTorneo == idTorneo)
+                torneo = null;
         }
     }
 }
