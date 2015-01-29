@@ -19,6 +19,7 @@ namespace quegolazo_code.admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            gestorEdicion = Sesion.getGestorEdicion();
             try
             {
                 gestorTorneo = Sesion.getGestorTorneo();

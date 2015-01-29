@@ -563,7 +563,7 @@
             }
             $("#cuerpoFase" + numFase).css("overflow-x", "scroll");
             $("#cuerpoFase" + numFase).generadorDeLlaves({                
-                equipos: (fasePreCargada && !(numFase > widget.options.idFaseEditable)) ? fase.grupos[0].fechas[0].partidos : widget.options.fases[numFase - 1].equipos,
+                equipos: (fasePreCargada && !(numFase > widget.options.idFaseEditable)) ? fase.grupos[0].fechas[0].partidos  : widget.options.fases[numFase - 1].equipos,
                 mezclar: !fasePreCargada,
                 generica: (numFase > widget.options.idFaseEditable)
             });
