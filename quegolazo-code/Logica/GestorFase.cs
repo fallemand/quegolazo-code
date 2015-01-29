@@ -89,12 +89,21 @@ namespace Logica
                   {
                       equipo.jugadores = null;   
                   }
-                  foreach (Fecha fecha in grupo.fechas)
+                  //si es todos contra todos
+                  if (fase.tipoFixture.idTipoFixture == "TCT")
+                      grupo.fechas = null;
+                  else
                   {
-                      foreach (Partido p in fecha.partidos)
+                      foreach (Fecha fecha in grupo.fechas)
                       {
-                          p.local.jugadores = null;
-                          p.visitante.jugadores = null;
+                          foreach (Partido p in fecha.partidos)
+                          {
+                              if (p.local.jugadores != null && p.visitante.jugadores != null)
+                              {
+                                  p.local.jugadores = null;
+                                  p.visitante.jugadores = null;
+                              }
+                          }
                       }
                   }
               }
@@ -108,7 +117,6 @@ namespace Logica
       //}
       public void cerrarFase(Fase fase)
       {         
-         if (fase.idFase == fase.idFase)
          fase.estado.idEstado = Estado.faseCERRADA;         
          new  DAOFase().cerrarFase(fase.idFase, fase.idEdicion);
       }
