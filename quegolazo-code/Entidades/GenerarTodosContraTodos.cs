@@ -22,25 +22,27 @@ namespace Entidades
             int cantidadPartidos = equiposParticipantes.Count / 2;
             Equipo equipoPivot = (Equipo)equiposParticipantes[0].Clone();
             List<Fecha> fechas = new List<Fecha>();
-
-            for (int i = 0; i < cantidadFechas; i++)
+            if (equiposParticipantes.Count > 0)
             {
-                Fecha fechaNueva = new Fecha() { idFecha = i + 1, estado = new Estado { ambito = new Ambito { idAmbito=Ambito.FECHA},idEstado=Estado.fechaINCOMPLETA } };
-
-                for (int j = 0, k = equiposParticipantes.Count - 1; j < cantidadPartidos && j < k; j++, k--)
+                for (int i = 0; i < cantidadFechas; i++)
                 {
-                    Partido partidoNuevo = new Partido()
-                    {
-                        //idPartido = j + 1,
-                        local = equiposParticipantes[j],
-                        visitante = equiposParticipantes[k],
-                        estado = new Estado { ambito = new Ambito { idAmbito = Ambito.PARTIDO,},idEstado=Estado.partidoDIAGRAMADO },
+                    Fecha fechaNueva = new Fecha() { idFecha = i + 1, estado = new Estado { ambito = new Ambito { idAmbito = Ambito.FECHA }, idEstado = Estado.fechaINCOMPLETA } };
 
-                    };
-                    fechaNueva.partidos.Add(partidoNuevo);
+                    for (int j = 0, k = equiposParticipantes.Count - 1; j < cantidadPartidos && j < k; j++, k--)
+                    {
+                        Partido partidoNuevo = new Partido()
+                        {
+                            //idPartido = j + 1,
+                            local = equiposParticipantes[j],
+                            visitante = equiposParticipantes[k],
+                            estado = new Estado { ambito = new Ambito { idAmbito = Ambito.PARTIDO, }, idEstado = Estado.partidoDIAGRAMADO },
+
+                        };
+                        fechaNueva.partidos.Add(partidoNuevo);
+                    }
+                    fechas.Add(fechaNueva);
+                    intercambiarPosiciones(ref equiposParticipantes);
                 }
-                fechas.Add(fechaNueva);
-                intercambiarPosiciones(ref equiposParticipantes);
             }
             //si tiene 2 rondas (ida y vuelta)
             if (getCantidadRondas() == 2) 
