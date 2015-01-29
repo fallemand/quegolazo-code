@@ -52,7 +52,8 @@ namespace quegolazo_code.admin
                 cargarComboEquipos();
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 ////HAY QUE CAMBIARLO. TIENE QUE TRAER LA FASE ACTUAL
-                gestorEdicion.faseActual = gestorEdicion.edicion.fases[0];
+                //gestorEdicion.faseActual = gestorEdicion.edicion.fases[0];
+                gestorEdicion.actualizarFaseActual(gestorEdicion);
                 cargarComboFechas();
                 cargarComboMotivos();
                 rdEquipos.Checked = true;
@@ -195,10 +196,14 @@ namespace quegolazo_code.admin
                         GestorControles.cargarComboList(ddlEquipo, gestorSancion.obtenerEquiposDePartido(ddlPartido.SelectedValue),
                         "idEquipo", "nombre", "Seleccionar Equipo", false);
                         ddlEquipo.SelectedValue = gestorSancion.sancion.idEquipo.ToString();
-                        GestorControles.cargarComboList(ddlJugador, gestorSancion.obtenerJugadoresDeEquipo(ddlEquipo.SelectedValue),
+                        GestorControles.cargarComboList(ddlJugador, gestorSancion.obtenerJugadoresDeEquipo2(ddlEquipo.SelectedValue),
                         "idJugador", "nombre", "Seleccionar Jugador", false);
                         ddlJugador.SelectedValue = gestorSancion.sancion.idJugador.ToString();                        
-                        txtPuntosAQuitar.Value = gestorSancion.sancion.puntosAQuitar.ToString();                        
+                        txtPuntosAQuitar.Value = gestorSancion.sancion.puntosAQuitar.ToString();
+                        ddlJugador.Enabled = false;
+                        ddlEquipo.Enabled = false;
+                        ddlFecha.Enabled = false;
+                        ddlPartido.Enabled = false;
                     }
                     //CASO EQUIPO - SIN DEFINIR
                     if (gestorSancion.sancion.idJugador == null && gestorSancion.sancion.idPartido == null)
@@ -207,6 +212,7 @@ namespace quegolazo_code.admin
                         ddlEquipoSinPartido.SelectedValue = gestorSancion.sancion.idEquipo.ToString();
                         txtFecha.Value = gestorSancion.sancion.fechaSancion.ToString();
                         txtPuntosAQuitar.Value = gestorSancion.sancion.puntosAQuitar.ToString();
+                        ddlEquipoSinPartido.Enabled = false;
                     }
                     //CASO EQUIPO - PARTIDO
                     if (gestorSancion.sancion.idJugador == null && gestorSancion.sancion.idPartido != null)
@@ -220,6 +226,9 @@ namespace quegolazo_code.admin
                         "idEquipo", "nombre", "Seleccionar Equipo", false);
                         ddlEquipo.SelectedValue = gestorSancion.sancion.idEquipo.ToString();
                         txtPuntosAQuitar.Value = gestorSancion.sancion.puntosAQuitar.ToString();
+                        ddlEquipo.Enabled = false;
+                        ddlFecha.Enabled = false;
+                        ddlPartido.Enabled = false;
                     }
                     //CASO JUGADOR Y SIN DEFINIR
                     if (gestorSancion.sancion.idJugador != null && gestorSancion.sancion.idPartido == null)
@@ -228,16 +237,15 @@ namespace quegolazo_code.admin
                         ddlEquipoSinPartido.SelectedValue = gestorSancion.sancion.idEquipo.ToString();
                         GestorControles.cargarComboList(ddlJugador, gestorSancion.obtenerJugadoresDeEquipo2(ddlEquipoSinPartido.SelectedValue),
                         "idJugador", "nombre", "Seleccionar Jugador", false);
-                        ddlJugador.SelectedValue = gestorSancion.sancion.idJugador.ToString();   
+                        ddlJugador.SelectedValue = gestorSancion.sancion.idJugador.ToString();
+                        ddlEquipoSinPartido.Enabled = false;
+                        ddlJugador.Enabled = false;
                     }
                 }
                 if (e.CommandName == "eliminarSancion")
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "OpcionPorDefecto", "deshabilitarPanel(); limpiarCombos(); equipoYSinDefinir();", true);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarSancion');", true);
-                    //GestorControles.cargarComboList(ddlJugador, gestorSancion.obtenerJugadoresDeEquipo(ddlEquipo.SelectedValue),
-                    //    "idJugador", "nombre", "Seleccionar Jugador", false);
-                    //ddlJugador.SelectedValue = gestorSancion.sancion.idJugador.ToString();   
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarSancion');", true);  
                 }
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }  
@@ -261,12 +269,20 @@ namespace quegolazo_code.admin
                 int idSancionAModificar = gestorSancion.sancion.idSancion;
                 if (gestorSancion.sancion.idJugador != null && gestorSancion.sancion.idPartido != null)
                     gestorSancion.modificarSancion(idSancionAModificar.ToString(), ddlFecha.SelectedValue, ddlPartido.SelectedValue, ddlEquipo.SelectedValue, ddlJugador.SelectedValue, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value);
-
+                if (gestorSancion.sancion.idJugador == null && gestorSancion.sancion.idPartido == null)
+                    gestorSancion.modificarSancion(idSancionAModificar.ToString(), null, null, ddlEquipoSinPartido.SelectedValue, null, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value);            
+                
+                if(gestorSancion.sancion.idJugador == null && gestorSancion.sancion.idPartido != null)
+                    gestorSancion.modificarSancion(idSancionAModificar.ToString(), ddlFecha.SelectedValue, ddlPartido.SelectedValue, ddlEquipo.SelectedValue, null, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value);
+                if (gestorSancion.sancion.idJugador != null && gestorSancion.sancion.idPartido == null)
+                    gestorSancion.modificarSancion(idSancionAModificar.ToString(), null, null, ddlEquipoSinPartido.SelectedValue, ddlJugador.SelectedValue, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, null, txtCantidadFechasSuspendidas.Value);
                 gestorSancion.sancion = null;
                 cargarRepeaterSanciones(gestorEdicion.edicion.idEdicion.ToString());
                 btnRegistrarSancion.Visible = true;
                 btnModificarSancion.Visible = false;
                 btnCancelarModificacionSancion.Visible = false;
+                limpiarCampos();
+                habilitarCombos();
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
@@ -275,7 +291,8 @@ namespace quegolazo_code.admin
         {
             try
             {
-                limpiarCampos();                
+                limpiarCampos();
+                habilitarCombos();
                 btnRegistrarSancion.Visible = true;
                 btnModificarSancion.Visible = false;
                 btnCancelarModificacionSancion.Visible = false;
@@ -294,6 +311,15 @@ namespace quegolazo_code.admin
             txtFecha.Value = "";
             txtObservacion.Value = "";
             txtPuntosAQuitar.Value = "";
+        }
+
+        public void habilitarCombos()
+        {
+            ddlEquipoSinPartido.Enabled = true;
+            ddlEquipo.Enabled = true;
+            ddlFecha.Enabled = true;
+            ddlPartido.Enabled = true;
+            ddlJugador.Enabled = true;
         }
     }
 }
