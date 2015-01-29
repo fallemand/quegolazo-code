@@ -501,6 +501,7 @@ namespace quegolazo_code.admin
             {
                 gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(gestorEdicion.edicion.idEdicion);
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                 gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
                 cargarRepeaterFases();
             }
