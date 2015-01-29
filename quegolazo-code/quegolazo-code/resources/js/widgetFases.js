@@ -586,8 +586,12 @@
         var widget = this;        
         for (var i = 0; i < widget.options.fases.length; i++) {
             var idEstadoFase = widget.options.fases[i].estado.idEstado;
-            if (idEstadoFase == widget.options.idFaseCerrada || idEstadoFase ==widget.options.idFaseEnJuego )
+            if (idEstadoFase == widget.options.idFaseCerrada || idEstadoFase == widget.options.idFaseEnJuego) {
+                //inhabilito la edicion del panel
                 $("#panelFase" + widget.options.fases[i].idFase).addClass("inhabilitado");
+                //colapso el acordeon correspondiente a una fase no editable.
+                $("#collapseFase" + widget.options.fases[i].idFase).removeClass("in");
+            }
         }
     }
 
