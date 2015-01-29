@@ -39,7 +39,7 @@ namespace AccesoADatos
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                         cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.idTipoFixture);
-                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseDIAGRAMADA);
+                        cmd.Parameters.AddWithValue("@idEstado", fase.esGenerica ? Estado.faseREGISTRADA: Estado.faseDIAGRAMADA);
                         if (fase.esGenerica)
                         {
                             cmd.Parameters.AddWithValue("@cantidadEquipos", fase.equipos.Count);
@@ -393,6 +393,7 @@ namespace AccesoADatos
                      cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                      cmd.Parameters.AddWithValue("@idEstado", Estado.faseCERRADA);
                      cmd.CommandText=sql;
+                     cmd.ExecuteNonQuery();
                     }
                     catch (Exception ex)
                     {

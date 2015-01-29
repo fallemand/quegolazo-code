@@ -29,12 +29,20 @@ namespace Logica
         /// </summary>
         /// <param name="gestor">El gestor que se va a actualizar</param>
         public void actualizarFaseActual(GestorEdicion gestor) {
-            foreach (Fase fase in gestor.edicion.fases)
+            if (gestor.edicion.fases.Count == 0)
             {
-                if (fase.estado.idEstado == Estado.faseDIAGRAMADA)
+                faseActual = null;
+                return;
+            }
+            else
+            {
+                foreach (Fase fase in gestor.edicion.fases)
                 {
-                    gestor.faseActual = fase;
-                    break;
+                    if (fase.estado.idEstado == Estado.faseREGISTRADA)
+                    {
+                        gestor.faseActual = fase;
+                        break;
+                    }
                 }
             }
         }
@@ -59,6 +67,7 @@ namespace Logica
         /// <returns>El id de la edicion que se registro.</returns>
         public void cargarDatos(string nombre, string idTamanioCancha, string idSuperficie, string ptosGanado, string ptosEmpatado, string ptosPerdido, string idGeneroEdicion)
         {
+            edicion = new Edicion();
             edicion.estado.idEstado = Estado.edicionREGISTRADA;
             edicion.estado.ambito.idAmbito = Ambito.EDICION; 
             edicion.puntosGanado = Validador.castInt(ptosGanado);
@@ -274,6 +283,8 @@ namespace Logica
             foreach (int id in listaIdsSeleccionados)
             edicion.fases[indiceFase].equipos.Add(gestorEquipo.obtenerEquipoReducidoPorId(id));
             edicion.fases[indiceFase].esGenerica = false;
+            edicion.fases[indiceFase].tipoFixture = new TipoFixture("TCT");
+            edicion.fases[indiceFase].estado = new Estado() { idEstado= Estado.faseREGISTRADA};
             //if (edicion.fases[idFaseNueva - 1].equipos.Count() == edicion.fases[idFaseNueva - 1].cantidadDeEquipos && edicion.fases[idFaseNueva - 1].cantidadDeEquipos!=0)
             //    throw new Exception("La cantidad de equipos no coincide con la indicada para esta fase");
         }
