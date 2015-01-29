@@ -435,7 +435,7 @@
         if (idEquipos.length == 0)
             throw new Error("ATENCION : Debe configurar los partidos de la eliminatoria para continuar");
         var partido = { local: null, visitante: null };
-        var fecha = { idFecha: 0, partidos: [], nombre: "" };
+        var fecha = { idFecha: 1, partidos: [], nombre: "" };
         var equiposDelGrupo = [];
         for (var i = 0; i < idEquipos.length; i++) {
            var equipo = widget.buscarEquipo(widget.options.fases[numFase-1].equipos, $(idEquipos[i]).attr("data-idequipo"));
