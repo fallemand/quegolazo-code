@@ -84,11 +84,18 @@ namespace Logica
                   equipo.jugadores = null;
               }
               foreach (Grupo grupo in fase.grupos)
-              {
-                  grupo.fechas = null;
+              {                  
                   foreach (Equipo equipo in grupo.equipos)
                   {
                       equipo.jugadores = null;   
+                  }
+                  foreach (Fecha fecha in grupo.fechas)
+                  {
+                      foreach (Partido p in fecha.partidos)
+                      {
+                          p.local.jugadores = null;
+                          p.visitante.jugadores = null;
+                      }
                   }
               }
           }
