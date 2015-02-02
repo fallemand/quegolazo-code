@@ -96,9 +96,9 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarTablaDePosiciones()
         {
-            rptPosiciones.DataSource = gestorEstadisticas.obtenerTablaPosiciones();
-            rptPosiciones.DataBind();
-            sinequipos.Visible = (rptPosiciones.Items.Count > 0) ? false : true;
+            //rptPosiciones.DataSource = gestorEstadisticas.obtenerTablaPosiciones();
+            //rptPosiciones.DataBind();
+            //sinequipos.Visible = (rptPosiciones.Items.Count > 0) ? false : true;
         }
         /// <summary>
         /// Carga la ultima fecha incompleta de la edicion que esta en sesion

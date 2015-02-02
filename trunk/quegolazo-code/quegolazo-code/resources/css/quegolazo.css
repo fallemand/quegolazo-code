@@ -534,6 +534,10 @@ tr th:last-child {
   color:#c63c3c;
 }
 
+#tabla-posiciones tr {
+    cursor: pointer;
+}
+
 /* --------------------- Forms ------------------------- */
 
 .lista-torneos {

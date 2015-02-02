@@ -440,27 +440,71 @@
                     <ContentTemplate>
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="H1"><i class="flaticon-football71"></i>Seleccionar Equipos que pasan a la Siguiente Fase
+                            <h4 class="modal-title" id="H1"><i class="flaticon-football106"></i>Seleccionar los Equipos Clasificados
                                 <%--<asp:Label ID="lblTituloModalEdicion" runat="server" Text="Agregar Nueva Edición"></asp:Label>--%>
                             </h4>
                         </div>
                         <div class="modal-body">
                             <div class="panel-body">
-                            <select id='optgroup' multiple='multiple'>
-                                <asp:Repeater ID="rptGrupos" runat="server" OnItemDataBound="rptGrupos_ItemDataBound">
-
-                                    <ItemTemplate>
-                                        <optgroup label='Grupo <%# Eval("idGrupo")%>'>
-                                            <asp:Repeater ID="rptEquipos" runat="server">
-                                                <ItemTemplate>
-                                                    <option value='<%# Eval("idEquipo")%>'><%# Eval("nombre")%></option>
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                        </optgroup>
-                                    </ItemTemplate>
-
-                                </asp:Repeater>
-                            </select>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="btn-group btn-group-sm" role="group" style="margin-right:5px;" aria-label="...">
+                                                    <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');">Todos</button>
+                                                </div>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                                    <asp:Repeater ID="rptGrupos" runat="server">
+                                                        <ItemTemplate>
+                                                                <button type="button" class="btn btn-success" onclick="filtrarPosiciones('<%# Eval("idGrupo")%>')">Grupo <%# Eval("idGrupo")%></button>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                Equipos Seleccionados: <span id="spanSeleccionados"></span>
+                                            </div>
+                                        </div>
+                                        <div style="max-height: 350px !important;overflow: auto;">
+                                            <table id="tabla-posiciones" class="table table-condensed table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-md-1"></th>
+                                                        <th class="col-md-4">Equipo</th>
+                                                        <th class="col-md-1">PTS</th>
+                                                        <th class="col-md-1">PJ</th>
+                                                        <th class="col-md-1">PG</th>
+                                                        <th class="col-md-1">PE</th>
+                                                        <th class="col-md-1">PP</th>
+                                                        <th class="col-md-1">GF</th>
+                                                        <th class="col-md-1">GC</th>
+                                                        <th style="display:none;"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tablaFiltro">
+                                                    <asp:Repeater ID="rptEquipos" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td><input type="checkbox" value="<%# Eval("idEquipo") %>" /></td>
+                                                                <td><%--<img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " />--%><%# Eval("Equipo") %></td>
+                                                                <td class="active" style="font-size:16px;"><b><%# Eval("Puntos") %></b></td>
+                                                                <td><%# Eval("PJ") %></td>
+                                                                <td><%# Eval("PG") %></td>
+                                                                <td><%# Eval("PE") %></td>
+                                                                <td><%# Eval("PP") %></td>
+                                                                <td><%# Eval("GF") %></td>
+                                                                <td><%# Eval("GC") %></td>
+                                                                <td id="idEquipo" style="display:none;"><%# Eval("idEquipo") %></td>
+                                                                <td style="display:none;"><%# Eval("idGrupo") %></td>
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            
                                <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />
                                 </div>
                            <%-- <asp:ListBox ClientIDMode="Static" ID="lstEquiposSeleccionados" runat="server" SelectionMode="Multiple"></asp:ListBox>
@@ -470,7 +514,6 @@
                             <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <asp:Button ID="btnConfigurarFase" runat="server" Text="Configurar Fase" OnClick="btnConfigurarFase_Click" CssClass="btn btn-success causesValidation vgDatosEdicion" />
-                               
                            </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
@@ -504,6 +547,13 @@
             }).show();
         });
 
+        function filtrarPosiciones(idGrupo) {
+            $('#tabla-posiciones tbody tr').hide();
+            $('#tabla-posiciones tbody tr').filter(function () {
+                return $(this).find('td:last-child').text() == idGrupo;
+            }).show('fast');
+        };
+
         function EndRequestHandler(sender, args) {
             cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
         };
@@ -511,31 +561,24 @@
     </script>
 
      <script>
-         $('#optgroup').multiSelect({
-             selectableHeader: "<div class='well well-sm alert-success nomargin-bottom'>Listado de Equipos <a href='#' id='select-all' class='btn btn-xs btn-default pull-right'>Seleccionar Todos <span class='glyphicon glyphicon-chevron-right'></span></a></div>",
-             selectionHeader: "<div class='well well-sm alert-success nomargin-bottom'>Equipos Seleccionados: <span id='spanSeleccionados'>0</span>  <a href='#' id='deselect-all' class='btn btn-xs btn-default pull-right'><span class='glyphicon glyphicon-chevron-left'></span> Quitar Todos</a></div>",
-             afterSelect: function (values) {
-                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + values + ',');
-                 actualizarCantidades();
-             },
-             afterDeselect: function (values) {
-                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val().replace(values + ',', ''));
-                 actualizarCantidades();
+
+         $(document).on("click", "#tabla-posiciones > tbody > tr", function () {
+             if (event.target.type !== 'checkbox') {
+                 $(':checkbox', this).trigger('click');
              }
          });
-         $('#select-all').click(function () {
-             $('#optgroup').multiSelect('select_all');
-             return false;
-         });
-         $('#deselect-all').click(function () {
-             $('#optgroup').multiSelect('deselect_all');
-             $('#hfEquiposSeleccionados').val("");
-             $("#spanSeleccionados").text("0");
-             return false;
-         });
-         $(function () {
+
+         $("#tabla-posiciones tbody tr input[type='checkbox']").change(function (e) {
+             if ($(this).is(":checked")) { 
+                 $(this).closest('tr').addClass("success");
+                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + $(this).val() + ',');
+             } else {
+                 $(this).closest('tr').removeClass("success");
+                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val().replace($(this).val() + ',', ''));
+             }
              actualizarCantidades();
          });
+
          function actualizarCantidades() {
              var arr = $("#hfEquiposSeleccionados").val().split(",");
              var valor = $.grep(arr, function (a) {

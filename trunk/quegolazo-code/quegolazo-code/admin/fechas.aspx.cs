@@ -626,23 +626,9 @@ namespace quegolazo_code.admin
         /// </summary>
         public void cargarEquipos()
         {
-
-            GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[0].grupos);
-           
-        }
-
-        protected void rptGrupos_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            try
-            {
-
-                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-                {
-                    Repeater rptEquipos = (Repeater)e.Item.FindControl("rptEquipos");
-                    GestorControles.cargarRepeaterList(rptEquipos, ((Grupo)e.Item.DataItem).equipos);
-                }
-            }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
+            GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1].grupos);
+            GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
         }
 
         /// <summary>
@@ -679,6 +665,5 @@ namespace quegolazo_code.admin
             gestorEdicion.gestorFase.cerrarFase(gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1]);
             Response.Redirect(GestorUrl.eFASES);
         }
-
     }
 }

@@ -24,9 +24,14 @@ namespace Logica
            Sesion.setEdicion(edicion);
        }
 
-       public DataTable obtenerTablaPosiciones()
+       public DataTable obtenerTablaPosiciones(int idFase, int idGrupo)
        {
-           return DaoEstadisticas.obtenerTablaPosiciones(edicion.idEdicion);
+           return DaoEstadisticas.obtenerTablaPosiciones(edicion.idEdicion, idFase, idGrupo);
+       }
+
+       public DataTable obtenerTablaPosiciones(int idFase)
+       {
+           return DaoEstadisticas.obtenerTablaPosiciones(edicion.idEdicion, idFase);
        }
 
        public DataTable obtenerTablaGoleadores()
