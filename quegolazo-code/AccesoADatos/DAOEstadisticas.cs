@@ -205,7 +205,7 @@ namespace AccesoADatos
         /// Obtiene la tabla de Posiciones
         /// autor: Flor Rojas
         /// </summary>
-        public DataTable obtenerTablaPosiciones(int idEdicion)
+        public DataTable obtenerTablaPosiciones(int idEdicion, int idFase, int idGrupo)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -216,19 +216,66 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT Equipo, COUNT(CASE idEstadoPartido WHEN 13 THEN 1 ELSE NULL END) AS 'PJ',  
+                string sql = @"SELECT Equipo, idGrupo, idEquipo, COUNT(CASE idEstadoPartido WHEN 13 THEN 1 ELSE NULL END) AS 'PJ',  
                                 COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) AS 'PG',
                                 COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END) AS 'PE',
                                 COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END) AS 'PP',
                                 SUM(CASE idEquipoLocal WHEN idEquipo THEN golesLocal ELSE 0 END) + SUM(CASE idEquipoVisitante WHEN idEquipo THEN golesVisitante ELSE 0 END) AS 'GF',
                                 SUM(CASE idEquipoLocal WHEN idEquipo THEN golesVisitante ELSE 0 END)+ SUM(CASE idEquipoVisitante WHEN idEquipo THEN golesLocal ELSE 0 END) AS 'GC',
                                 COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
-                                FROM viewTablaPosiciones
-                                GROUP BY Equipo, idEdicion, nombre, puntosGanado, puntosPerdido, puntosEmpatado
-                                HAVING idEdicion = @idEdicion
+                                FROM dbo.joinTablaDePosiciones(@idEdicion,@idFase,@idGrupo)
+                                GROUP BY Equipo, idEdicion,idEquipo, nombre, puntosGanado, puntosPerdido, puntosEmpatado
                                 ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
+                cmd.Parameters.Add(new SqlParameter("@idGrupo", idGrupo));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene la tabla de Posiciones
+        /// autor: Flor Rojas
+        /// </summary>
+        public DataTable obtenerTablaPosiciones(int idEdicion, int idFase)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT Equipo, idGrupo, idEquipo, COUNT(CASE idEstadoPartido WHEN 13 THEN 1 ELSE NULL END) AS 'PJ',  
+                                COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) AS 'PG',
+                                COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END) AS 'PE',
+                                COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END) AS 'PP',
+                                SUM(CASE idEquipoLocal WHEN idEquipo THEN golesLocal ELSE 0 END) + SUM(CASE idEquipoVisitante WHEN idEquipo THEN golesVisitante ELSE 0 END) AS 'GF',
+                                SUM(CASE idEquipoLocal WHEN idEquipo THEN golesVisitante ELSE 0 END)+ SUM(CASE idEquipoVisitante WHEN idEquipo THEN golesLocal ELSE 0 END) AS 'GC',
+                                COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
+                                FROM dbo.joinTablaDePosicionesCompleta(@idEdicion,@idFase)
+                                GROUP BY Equipo, idEquipo, idGrupo, idEdicion, nombre, puntosGanado, puntosPerdido, puntosEmpatado
+                                ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
                 tablaDeDatos.Load(dr);
