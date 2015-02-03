@@ -137,19 +137,18 @@ namespace AccesoADatos
         /// Obtiene solo los id de los Partidos
         /// autor: Flor Rojas
         /// </summary>
-        public void obtenerIDPartidos(Fase fase, SqlConnection con)
+        public void obtenerIDPartidos(Fase fase, SqlConnection con, SqlTransaction tran)
         {
             SqlDataReader dr;
             SqlCommand cmd = new SqlCommand();
             try
-            {
-                if (con.State == ConnectionState.Closed)
-                    con.Open();
+            {               
                 cmd.Connection = con;
-                foreach (Grupo grupo in fase.grupos)
+                cmd.Transaction = tran;
+                Grupo grupo = fase.grupos[0];
+                
+               foreach (Fecha fechaActual in grupo.fechas)
                 {
-                    foreach (Fecha fechaActual in grupo.fechas)
-                    {
                         cmd.Parameters.Clear();
                         cmd.Connection = con;
                         string sql = @"SELECT idPartido
@@ -160,18 +159,19 @@ namespace AccesoADatos
                         cmd.Parameters.AddWithValue("@idGrupo", grupo.idGrupo);
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
-                        cmd.CommandText = sql;
+                        cmd.CommandText = sql;                                               
                         dr = cmd.ExecuteReader();
-                        while (dr.Read())
+                        foreach (Partido p in fechaActual.partidos)
                         {
-                            Partido partido = new Partido();
-                            partido.idPartido = int.Parse(dr["idPartido"].ToString());
-                            fechaActual.partidos.Add(partido);
-                        }
+                            if (dr.Read())
+                                p.idPartido = int.Parse(dr["idPartido"].ToString());
+                            else
+                                throw new Exception("Error al intentar guardar los partidos");
+                        }                          
                         if (dr != null)
                             dr.Close();
-                    }
-                }
+              }
+                
             }
             catch (Exception ex)
             {
@@ -897,27 +897,29 @@ namespace AccesoADatos
         /// Actualiza los idPartido Posterior para las fases eliminatorias
         /// autor: Flor Rojas
         /// </summary>
-        public void actualizarPartidosEliminatorios(Fase fase)
-        {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand(); 
+        public void actualizarPartidosEliminatorios(Fase fase, SqlConnection con, SqlTransaction tran)
+        {            
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.Transaction = tran;            
             try
-            {
-                if (con.State == ConnectionState.Closed)
-                    con.Open();
-                cmd.Connection = con;
+            {               
 
               //  for (int i = fase.grupos[0].fechas.Count-1; i > 1; i--)
                 foreach (Fecha f in fase.grupos[0].fechas.OrderByDescending(f => f.idFecha))
                 {
                     int j = 0;
                     foreach (Partido p in f.partidos)
-                    {
-                        if (f.idFecha > 1)
+                    {                        
+                    if (f.idFecha > 1)
                         {
-                            fase.grupos[0].fechas[f.idFecha - 2].partidos[j].idPartidoPosterior = p.idPartido;
-                            fase.grupos[0].fechas[f.idFecha - 2].partidos[j + 1].idPartidoPosterior = p.idPartido;
-                            j = j + 2;
+                            Fecha fechaAnterior = fase.grupos[0].fechas[f.idFecha - 2];
+                            fechaAnterior.partidos[j].idPartidoPosterior = p.idPartido;
+                            if (fechaAnterior.partidos.Count > 1)
+                            {
+                                fechaAnterior.partidos[j + 1].idPartidoPosterior = p.idPartido;
+                                j = j + 2;
+                            }
                         }
                     }
                 }
@@ -939,7 +941,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                throw new Exception("No se pudo registrar el lalala " + ex.Message);
+                throw new Exception("No se pudo registrar el lalala " + ex.Message);                
             }
             finally
             {

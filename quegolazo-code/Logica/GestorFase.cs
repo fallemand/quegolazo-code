@@ -126,14 +126,15 @@ namespace Logica
        //Este metodo crea las fecha sy partidos que se necesitan para un torneo eliminatorio y los guarda en la bd
       public void crearPartidosSiguientes(Fase fase)
       {
-          //Calcular cantidad de fechas a crear
-          int cantidad = fase.grupos[0].fechas[0].partidos.Count();
-          int nroFecha = fase.grupos[0].fechas[0].idFecha + 1;
-          while (cantidad % 2 == 0 && cantidad > 1)
+          //Calcular cantidad de partidos a crear en la siguiente fecha
+          int cantidad = fase.grupos[0].fechas[0].partidos.Count() /2;
+          int nroFecha = fase.grupos[0].fechas[0].idFecha + 1;          
+          //carga todas las rondas excepto la final y el partido opr tercer puesto
+          while (cantidad % 2 == 0)
           {
               Fecha fecha = new Fecha();
               fecha.idFecha = nroFecha;
-              for (int i = 1; i < cantidad / 2; i++)
+              for (int i = 0; i < cantidad; i++)
               {
                   Partido p = new Partido();
                   fecha.partidos.Add(p);
@@ -141,20 +142,20 @@ namespace Logica
               nroFecha++;
               fase.grupos[0].fechas.Add(fecha);
               cantidad = cantidad / 2;
-          }
-
-          if (cantidad == 1)//Para la ultima ronda, le sumo elpartido por el tercer puesto
-          {
-              Fecha fecha = new Fecha();
-              fecha.idFecha = nroFecha;
-              for (int i = 1; i <= 2; i++)
+          } 
+          //ahora carga el partido de la final y del tercer puesto, primero la final y luego el tercer puesto
+          for (int i = 0; i < 2; i++)
               {
+                  Fecha fecha = new Fecha();
+                  fecha.idFecha = nroFecha;
                   Partido p = new Partido();
                   p.estado.idEstado = Estado.partidoDIAGRAMADO;
                   fecha.partidos.Add(p);
+                  fase.grupos[0].fechas.Add(fecha);
+                  nroFecha++;
               }
-              fase.grupos[0].fechas.Add(fecha);
-          }
+              
+          
       }
 
     }
