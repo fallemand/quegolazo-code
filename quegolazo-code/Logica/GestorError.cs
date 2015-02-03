@@ -18,7 +18,7 @@ namespace Logica
 
         public static void mostrarPanelExito(string mensaje)
         {
-            String funcionJS = "showPanelMessage('" + idPanelExito + "', '" + idMensajeExito + "', '" + mensaje + "')";
+            String funcionJS = "showPanelMessage('" + idPanelExito + "', '" + idMensajeExito + "', '" + mensaje + "');";
 
             if (HttpContext.Current.CurrentHandler is Page)
             {
@@ -37,7 +37,7 @@ namespace Logica
 
         public static void mostrarPanelFracaso(string mensaje)
         {
-            String funcionJS = "showPanelMessage('" + idPanelError + "', '" + idMensajeError + "', '" + mensaje + "')";
+            String funcionJS = "showPanelMessage('" + idPanelError + "', '" + idMensajeError + "', '" + mensaje + "');";
 
             if (HttpContext.Current.CurrentHandler is Page)
             {
@@ -56,8 +56,8 @@ namespace Logica
 
         public static void hidePanels()
         {
-            String funcionJS_hideExito = "hidePanelMessage('" + idPanelExito + "')";
-            String funcionJS_hideError = "hidePanelMessage('" + idPanelError + "')";
+            String funcionJS_hideExito = "hidePanelMessage('" + idPanelExito + "');";
+            String funcionJS_hideError = "hidePanelMessage('" + idPanelError + "');";
 
             if (HttpContext.Current.CurrentHandler is Page)
             {
