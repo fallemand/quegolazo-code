@@ -29,6 +29,7 @@ namespace Entidades
         public int? idPerdedor { get; set; }
         public bool? empate { get; set; }
         public string nombreCompleto { get; set; }
+        public int idPartidoPosterior { get; set; }
 
         public Partido()
         {

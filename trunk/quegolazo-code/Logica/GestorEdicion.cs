@@ -144,7 +144,15 @@ namespace Logica
         public void confirmarEdicion()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
+
+            if (edicion.fases[0].tipoFixture.idTipoFixture == "ELIM" || edicion.fases[0].tipoFixture.idTipoFixture == "ELIM-IV")
+            {
+                gestorFase.crearPartidosSiguientes(edicion.fases[0]);
+            }
+
             daoEdicion.confirmarEdicion(edicion); 
+
+
         }
 
         public void actualizarconfirmacionEdicion()
