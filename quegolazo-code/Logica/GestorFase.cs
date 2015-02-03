@@ -120,5 +120,42 @@ namespace Logica
          fase.estado.idEstado = Estado.faseCERRADA;         
          new  DAOFase().cerrarFase(fase.idFase, fase.idEdicion);
       }
+
+
+       //autor:Florencia Rojas
+       //Este metodo crea las fecha sy partidos que se necesitan para un torneo eliminatorio y los guarda en la bd
+      public void crearPartidosSiguientes(Fase fase)
+      {
+          //Calcular cantidad de fechas a crear
+          int cantidad = fase.grupos[0].fechas[0].partidos.Count();
+          int nroFecha = fase.grupos[0].fechas[0].idFecha + 1;
+          while (cantidad % 2 == 0 && cantidad > 1)
+          {
+              Fecha fecha = new Fecha();
+              fecha.idFecha = nroFecha;
+              for (int i = 1; i < cantidad / 2; i++)
+              {
+                  Partido p = new Partido();
+                  fecha.partidos.Add(p);
+              }
+              nroFecha++;
+              fase.grupos[0].fechas.Add(fecha);
+              cantidad = cantidad / 2;
+          }
+
+          if (cantidad == 1)//Para la ultima ronda, le sumo elpartido por el tercer puesto
+          {
+              Fecha fecha = new Fecha();
+              fecha.idFecha = nroFecha;
+              for (int i = 1; i <= 2; i++)
+              {
+                  Partido p = new Partido();
+                  p.estado.idEstado = Estado.partidoDIAGRAMADO;
+                  fecha.partidos.Add(p);
+              }
+              fase.grupos[0].fechas.Add(fecha);
+          }
+      }
+
     }
 }

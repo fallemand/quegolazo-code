@@ -52,6 +52,9 @@ namespace AccesoADatos
                         }
                     }
                 }
+
+               
+
             }
             catch (Exception ex)
             {
@@ -59,10 +62,12 @@ namespace AccesoADatos
             }          
         }
 
-       /// <summary>
-       /// Obtiene todos los datos del Partido
-       /// autor: Pau Pedrosa
-       /// </summary>
+
+
+        /// <summary>
+        /// Obtiene todos los datos del Partido
+        /// autor: Pau Pedrosa
+        /// </summary>
         public void obtenerPartidos(Fase fase, SqlConnection con)
         {
             SqlDataReader dr;
@@ -126,6 +131,57 @@ namespace AccesoADatos
                  if (con != null && con.State == ConnectionState.Open)
                      con.Close();
              }
+        }
+
+        /// <summary>s
+        /// Obtiene solo los id de los Partidos
+        /// autor: Flor Rojas
+        /// </summary>
+        public void obtenerIDPartidos(Fase fase, SqlConnection con)
+        {
+            SqlDataReader dr;
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                foreach (Grupo grupo in fase.grupos)
+                {
+                    foreach (Fecha fechaActual in grupo.fechas)
+                    {
+                        cmd.Parameters.Clear();
+                        cmd.Connection = con;
+                        string sql = @"SELECT idPartido
+                                        FROM Partidos p
+                                        WHERE idFecha = @idFecha AND idGrupo = @idGrupo 
+                                        AND idFase = @idFase AND idEdicion = @idEdicion";
+                        cmd.Parameters.AddWithValue("@idFecha", fechaActual.idFecha);
+                        cmd.Parameters.AddWithValue("@idGrupo", grupo.idGrupo);
+                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                        cmd.CommandText = sql;
+                        dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            Partido partido = new Partido();
+                            partido.idPartido = int.Parse(dr["idPartido"].ToString());
+                            fechaActual.partidos.Add(partido);
+                        }
+                        if (dr != null)
+                            dr.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo obtener el id del partido" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
         }
 
        /// <summary>
@@ -829,6 +885,61 @@ namespace AccesoADatos
             catch (SqlException ex)
             {
                 throw new Exception("No se pudo eliminar la tarjeta: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Actualiza los idPartido Posterior para las fases eliminatorias
+        /// autor: Flor Rojas
+        /// </summary>
+        public void actualizarPartidosEliminatorios(Fase fase)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand(); 
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+
+              //  for (int i = fase.grupos[0].fechas.Count-1; i > 1; i--)
+                foreach (Fecha f in fase.grupos[0].fechas.OrderByDescending(f => f.idFecha))
+                {
+                    int j = 0;
+                    foreach (Partido p in f.partidos)
+                    {
+                        if (f.idFecha > 1)
+                        {
+                            fase.grupos[0].fechas[f.idFecha - 2].partidos[j].idPartidoPosterior = p.idPartido;
+                            fase.grupos[0].fechas[f.idFecha - 2].partidos[j + 1].idPartidoPosterior = p.idPartido;
+                            j = j + 2;
+                        }
+                    }
+                }
+
+                foreach (Fecha fechaaModificar in fase.grupos[0].fechas)
+                {
+                    foreach (Partido partido in fechaaModificar.partidos)
+                    {
+                        string sql = @"UPDATE Partidos
+                                SET idPArtidoPosterior=@idPartidoPosterior
+                                WHERE idPartido = @idPartido ";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@idPartido", partido.idPartido);
+                        cmd.Parameters.AddWithValue("@idPartidoPosterior", partido.idPartidoPosterior);
+                        cmd.CommandText = sql;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo registrar el lalala " + ex.Message);
             }
             finally
             {

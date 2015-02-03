@@ -31,7 +31,7 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 foreach (Fase fase in fases)
                 {
-                    if (fase != null)
+                    if (fase != null && fase.estado.idEstado!=Estado.faseCERRADA)
                     {
                         string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado, cantidadEquipos, cantidadGrupos)
                                         VALUES (@idFase, @idEdicion, @tipoFixture, @idEstado, @cantidadEquipos, @cantidadGrupos)";
@@ -72,6 +72,31 @@ namespace AccesoADatos
                 throw new Exception("No se pudo registrar la Fase: " + ex.Message);
             }
         }
+
+             public void registrarLlavesEliminatorio(List<Fase> fases, SqlConnection con)
+        {
+            try
+            {
+                foreach (Fase fase in fases)
+                {
+                    if (fase.tipoFixture.idTipoFixture == "ELIM" || fase.tipoFixture.idTipoFixture == "ELIM-IV")
+                    {
+                        DAOPartido daoPartido = new DAOPartido();
+                        daoPartido.obtenerIDPartidos(fase, con);
+                        daoPartido.actualizarPartidosEliminatorios(fase);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            { 
+               
+                throw new Exception("No se pudo registrar la Fase: " + ex.Message);
+            }
+        }
+        
+
+
+        
 
         /// <summary>
         /// Obtiene las fases  de una edición por Id. Si no tiene devuelve lista vacia
@@ -249,9 +274,10 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;          
              
-                        string sqlEliminacion = "DELETE FROM Fases WHERE idEdicion = @idEdicion";
+                        string sqlEliminacion = "DELETE FROM Fases WHERE idEdicion = @idEdicion and idEstado=@idEstado";
                         cmd.Parameters.Clear();                        
                         cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                        cmd.Parameters.AddWithValue("@idEstado",Estado.faseDIAGRAMADA);
                         cmd.CommandText = sqlEliminacion;
                         cmd.ExecuteNonQuery();           
             }
