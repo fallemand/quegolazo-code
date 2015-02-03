@@ -445,7 +445,6 @@
                             </h4>
                         </div>
                         <div class="modal-body">
-                            <div class="panel-body">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
@@ -462,54 +461,54 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                Equipos Seleccionados: <span id="spanSeleccionados"></span>
+                                                Equipos Seleccionados: <span id="spanSeleccionados" class="badge">0</span>
                                             </div>
                                         </div>
-                                        <div style="max-height: 350px !important;overflow: auto;">
-                                            <table id="tabla-posiciones" class="table table-condensed table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="col-md-1"></th>
-                                                        <th class="col-md-4">Equipo</th>
-                                                        <th class="col-md-1">PTS</th>
-                                                        <th class="col-md-1">PJ</th>
-                                                        <th class="col-md-1">PG</th>
-                                                        <th class="col-md-1">PE</th>
-                                                        <th class="col-md-1">PP</th>
-                                                        <th class="col-md-1">GF</th>
-                                                        <th class="col-md-1">GC</th>
-                                                        <th style="display:none;"></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="tablaFiltro">
-                                                    <asp:Repeater ID="rptEquipos" runat="server">
-                                                        <ItemTemplate>
-                                                            <tr>
-                                                                <td><input type="checkbox" value="<%# Eval("idEquipo") %>" /></td>
-                                                                <td><%--<img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " />--%><%# Eval("Equipo") %></td>
-                                                                <td class="active" style="font-size:16px;"><b><%# Eval("Puntos") %></b></td>
-                                                                <td><%# Eval("PJ") %></td>
-                                                                <td><%# Eval("PG") %></td>
-                                                                <td><%# Eval("PE") %></td>
-                                                                <td><%# Eval("PP") %></td>
-                                                                <td><%# Eval("GF") %></td>
-                                                                <td><%# Eval("GC") %></td>
-                                                                <td id="idEquipo" style="display:none;"><%# Eval("idEquipo") %></td>
-                                                                <td style="display:none;"><%# Eval("idGrupo") %></td>
-                                                            </tr>
-                                                        </ItemTemplate>
-                                                    </asp:Repeater>
-                                                </tbody>
-                                            </table>
+                                        <div class="row margin-top" style="max-height: 350px !important;overflow: auto;">
+                                            <div class="col-md-12">
+                                                <table id="tabla-posiciones" class="table table-condensed table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-1"></th>
+                                                            <th class="col-md-4" colspan="2">Equipo</th>
+                                                            <th class="col-md-1">PTS</th>
+                                                            <th class="col-md-1">PJ</th>
+                                                            <th class="col-md-1">PG</th>
+                                                            <th class="col-md-1">PE</th>
+                                                            <th class="col-md-1">PP</th>
+                                                            <th class="col-md-1">GF</th>
+                                                            <th class="col-md-1">GC</th>
+                                                            <th style="display:none;"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tablaFiltro">
+                                                        <asp:Repeater ID="rptEquipos" runat="server">
+                                                            <ItemTemplate>
+                                                                <tr>
+                                                                    <td><input type="checkbox" value="<%# Eval("idEquipo") %>" /></td>
+                                                                    <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("idEquipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
+                                                                    <td><%# Eval("Equipo") %></td>
+                                                                    <td class="active" style="font-size:16px;"><b><%# Eval("Puntos") %></b></td>
+                                                                    <td><%# Eval("PJ") %></td>
+                                                                    <td><%# Eval("PG") %></td>
+                                                                    <td><%# Eval("PE") %></td>
+                                                                    <td><%# Eval("PP") %></td>
+                                                                    <td><%# Eval("GF") %></td>
+                                                                    <td><%# Eval("GC") %></td>
+                                                                    <td class="idEquipo" style="display:none;"><%# Eval("idEquipo") %></td>
+                                                                    <td style="display:none;"><%# Eval("idGrupo") %></td>
+                                                                </tr>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             
                                <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />
                                 </div>
-                           <%-- <asp:ListBox ClientIDMode="Static" ID="lstEquiposSeleccionados" runat="server" SelectionMode="Multiple"></asp:ListBox>
-                            <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />--%>
-                        </div>
                         <div class="modal-footer">
                             <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
