@@ -24,9 +24,7 @@ namespace AccesoADatos
         {
             SqlCommand cmd = new SqlCommand();
             try
-            {
-                if (con.State == ConnectionState.Closed)
-                    con.Open();
+            {                
                 cmd.Connection = con;
                 cmd.Transaction = trans;
                 foreach (Fase fase in fases)
@@ -73,7 +71,7 @@ namespace AccesoADatos
             }
         }
 
-             public void registrarLlavesEliminatorio(List<Fase> fases, SqlConnection con)
+             public void registrarLlavesEliminatorio(List<Fase> fases, SqlConnection con, SqlTransaction tran)
         {
             try
             {
@@ -82,8 +80,8 @@ namespace AccesoADatos
                     if (fase.tipoFixture.idTipoFixture == "ELIM" || fase.tipoFixture.idTipoFixture == "ELIM-IV")
                     {
                         DAOPartido daoPartido = new DAOPartido();
-                        daoPartido.obtenerIDPartidos(fase, con);
-                        daoPartido.actualizarPartidosEliminatorios(fase);
+                        daoPartido.obtenerIDPartidos(fase, con, tran);
+                        daoPartido.actualizarPartidosEliminatorios(fase, con, tran);
                     }
                 }
             }
