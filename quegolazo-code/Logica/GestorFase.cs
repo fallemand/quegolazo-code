@@ -117,7 +117,7 @@ namespace Logica
       //}
       public void cerrarFase(Fase fase)
       {         
-         fase.estado.idEstado = Estado.faseCERRADA;         
+         fase.estado.idEstado = Estado.faseFINALIZADA;         
          new  DAOFase().cerrarFase(fase.idFase, fase.idEdicion);
       }
 

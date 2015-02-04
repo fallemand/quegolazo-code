@@ -57,7 +57,7 @@ namespace quegolazo_code.admin
                 {
                     cargarComboEquipos();
                     gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                    gestorEdicion.actualizarFaseActual(gestorEdicion);
+                    gestorEdicion.actualizarFaseActual();
                     cargarComboFechas();
                     cargarComboMotivos();
                     rdEquipos.Checked = true;

@@ -23,7 +23,7 @@ namespace quegolazo_code.admin.edicion
             if(gestorEdicion.edicion.equipos.Count<2 && gestorEdicion.edicion.fases.Count <2)
             Response.Redirect(GestorUrl.eEQUIPOS);
             //actualizamos la fase actual del gestor
-            new GestorEdicion().actualizarFaseActual(gestorEdicion);
+            new GestorEdicion().actualizarFaseActual();
 
             if (!IsPostBack) {
                gestorFase.reducirFases(gestorEdicion.edicion.fases);
