@@ -26,19 +26,20 @@ namespace quegolazo_code.admin
                 gestorFase = Sesion.getGestorFase();
                 if (!Page.IsPostBack)
                 {
-                    cargarComboEdiciones();                    
+                    cargarComboEdiciones();
                 }
             }
             catch (Exception ex)
-            { 
+            {
+                GestorError.mostrarPanelFracaso(ex.Message);
             }
         }
 
         public void cargarComboEdiciones()
         {
             GestorControles.cargarComboList(ddlEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo),
-                "idEdicion", "nombre", "Seleccionar Edicion", false);
-            ddlEdiciones.SelectedValue = (gestorEdicion.edicion.idEdicion > 0) ? gestorEdicion.edicion.idEdicion.ToString() : ""; 
+                "idEdicion", "nombre", "Seleccionar Edicion", false) ;
+            ddlEdiciones.SelectedValue = (gestorEdicion.edicion.idEdicion > 0) ? gestorEdicion.edicion.idEdicion.ToString() : "";
         }
 
         protected void btnSeleccionarEdicion_Click(object sender, EventArgs e)
@@ -46,23 +47,31 @@ namespace quegolazo_code.admin
             try
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "DeshabilitaPanel", "deshabilitarPanel();", true);
-                int idEdicion = Validador.castInt(ddlEdiciones.SelectedValue);
-                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
+                if (ddlEdiciones.Items.Count == 1) //Está cargada solo con Seleccione Edición
+                    throw new Exception("No tiene ediciones registradas. Por favor registre una edición.");
+                else
+                    sinEdicion.Visible = false;                    
+                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(Validador.castInt(ddlEdiciones.SelectedValue));
                 cargarRepeaterSanciones(ddlEdiciones.SelectedValue);
-                cargarComboEquipos();
-                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                ////HAY QUE CAMBIARLO. TIENE QUE TRAER LA FASE ACTUAL
-                //gestorEdicion.faseActual = gestorEdicion.edicion.fases[0];
-                gestorEdicion.actualizarFaseActual(gestorEdicion);
-                cargarComboFechas();
-                cargarComboMotivos();
-                rdEquipos.Checked = true;
-                rdSinDefinir.Checked = true;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "equipoYSinDefinir()", "equipoYSinDefinir();", true);
+                if (gestorEdicion.edicion.estado.idEstado != Estado.edicionREGISTRADA)
+                {
+                    cargarComboEquipos();
+                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                    gestorEdicion.actualizarFaseActual(gestorEdicion);
+                    cargarComboFechas();
+                    cargarComboMotivos();
+                    rdEquipos.Checked = true;
+                    rdSinDefinir.Checked = true;
+                    btnRegistrarSancion.Enabled = true;
+                    habilitarCheck();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "equipoYSinDefinir()", "equipoYSinDefinir();", true);
+                }
+                else
+                    throw new Exception("Debe primero configurar la Edición.");
             }
             catch (Exception ex) 
-            { 
-                //mostrarPanelFracaso(ex.Message); 
+            {
+                GestorError.mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -112,6 +121,8 @@ namespace quegolazo_code.admin
         {
             try
             {
+                if(gestorEdicion == null)
+                    throw new Exception("Debe seleccionar una edición"); 
                 if ((ddlEquipo.SelectedValue.Equals(string.Empty) && ddlEquipoSinPartido.SelectedValue.Equals(string.Empty)))
                     throw new Exception("Debe seleccionar un equipo"); 
                 if (txtFecha.Value.Equals(string.Empty))
@@ -257,7 +268,10 @@ namespace quegolazo_code.admin
             {
                 gestorSancion.eliminarSancion(gestorSancion.sancion.idSancion);
                 cargarRepeaterSanciones(gestorEdicion.edicion.idEdicion.ToString());                
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarSancion", "closeModal('eliminarSancion');", true);                
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarSancion", "closeModal('eliminarSancion');", true);
+                //rdEquipos.Checked = true;
+                //rdSinDefinir.Checked = true;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "equipoYSinDefinir()", "equipoYSinDefinir();", true);
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
@@ -320,6 +334,14 @@ namespace quegolazo_code.admin
             ddlFecha.Enabled = true;
             ddlPartido.Enabled = true;
             ddlJugador.Enabled = true;
+        }
+
+        public void habilitarCheck()
+        {
+            rdEquipos.Disabled = false;
+            rdJugadores.Disabled = false;
+            rdPartido.Disabled = false;
+            rdSinDefinir.Disabled = false;
         }
     }
 }
