@@ -47,7 +47,6 @@ namespace Logica
                   }
               }
           }
-
       }
 
 
@@ -116,7 +115,7 @@ namespace Logica
       //    daoFase.registrarFase(fases);
       //}
       public void cerrarFase(Fase fase)
-      {         
+      {
          fase.estado.idEstado = Estado.faseFINALIZADA;         
          new  DAOFase().cerrarFase(fase.idFase, fase.idEdicion);
       }

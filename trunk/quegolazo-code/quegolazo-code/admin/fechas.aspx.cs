@@ -82,6 +82,12 @@ namespace quegolazo_code.admin
             {
                 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
                 {
+                    LinkButton lnkFinalizarFase = (LinkButton)e.Item.FindControl("lnkFinalizarFase");
+                    Panel panelEstadoFase = (Panel)e.Item.FindControl("panelEstadoFase");
+                    if (((Fase)e.Item.DataItem).estado.idEstado == Estado.faseINICIADA)
+                        lnkFinalizarFase.Visible = true;
+                    else
+                        panelEstadoFase.Visible = true;
                     Repeater rptFechas = (Repeater)e.Item.FindControl("rptFechas");
                     int idFase = ((Fase)e.Item.DataItem).idFase;
                     gestorEdicion.faseActual = ((Fase)e.Item.DataItem);
@@ -663,7 +669,8 @@ namespace quegolazo_code.admin
             gestorEdicion.verificarProximaFase(gestorEdicion.faseActual.idFase+1);
             gestorEdicion.agregarEquiposEnFase(hfEquiposSeleccionados.Value, (gestorEdicion.faseActual.idFase +1));
             gestorEdicion.gestorFase.cerrarFase(gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1]);
-            Response.Redirect(GestorUrl.eFASES);
+            panelSeleccionarEquipos.Visible = false;
+            panelConfigurarFase.Visible = false;
         }
     }
 }

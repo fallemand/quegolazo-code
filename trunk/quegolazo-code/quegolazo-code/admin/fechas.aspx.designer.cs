@@ -391,6 +391,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.UpdatePanel upModalEdicion;
         
         /// <summary>
+        /// Control panelSeleccionarEquipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelSeleccionarEquipos;
+        
+        /// <summary>
         /// Control rptGrupos.
         /// </summary>
         /// <remarks>
@@ -416,6 +425,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfEquiposSeleccionados;
+        
+        /// <summary>
+        /// Control panelConfigurarFase.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelConfigurarFase;
         
         /// <summary>
         /// Control btnConfigurarFase.

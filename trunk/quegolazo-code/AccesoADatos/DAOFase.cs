@@ -29,7 +29,7 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 foreach (Fase fase in fases)
                 {
-                    if (fase != null && fase.estado.idEstado!=Estado.faseFINALIZADA)
+                    if (fase != null && fase.estado.idEstado != Estado.faseFINALIZADA)
                     {
                         string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado, cantidadEquipos, cantidadGrupos)
                                         VALUES (@idFase, @idEdicion, @tipoFixture, @idEstado, @cantidadEquipos, @cantidadGrupos)";
@@ -121,13 +121,14 @@ namespace AccesoADatos
                  cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                  cmd.CommandText = sql;
                  dr = cmd.ExecuteReader();
+                 DAOEstado daoEstado = new DAOEstado();
                  while (dr.Read())
                  {
                      Fase fase = new Fase()
                       {
                           idFase = int.Parse(dr["idFase"].ToString()),
                           idEdicion = idEdicion,
-                          estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
+                          estado =daoEstado.obtenerEstadoPorId(int.Parse(dr["idEstado"].ToString())),
                           tipoFixture = new TipoFixture(dr["tipoFixture"].ToString()),
                           equipos = new List<Equipo>(),
                           cantidadDeEquipos = (dr["cantidadEquipos"] != DBNull.Value) ? int.Parse(dr["cantidadEquipos"].ToString()) : 0,
