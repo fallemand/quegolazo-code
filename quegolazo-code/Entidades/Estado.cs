@@ -18,31 +18,31 @@ namespace Entidades
         }
 
         //Estados Torneo: 1
-        public const int torneoREGISTRADO = 1;//REGISTRADO = un Torneo se crea como Registrado   
+        public const int torneoREGISTRADO = 1;//REGISTRADO = Torneo creado  
 
         //Estados Edicion: 2
-        public const int edicionREGISTRADA = 2;//REGISTRADA =
-        public const int edicionCONFIGURADA = 14;//CONFIGURADA = 
-        public const int edicionINICIADA = 16;//INICIADA =
-        public const int edicionFINALIZADA = 17;//FINALIZADA =
-        public const int edicionCANCELADA = 18;//CANCELADA =         
+        public const int edicionREGISTRADA = 2;//REGISTRADA = Edición creada
+        public const int edicionCONFIGURADA = 14;//CONFIGURADA = Edición con preferencias, equipos y fixture 
+        public const int edicionINICIADA = 16;//INICIADA = Edición con algún partido jugado
+        public const int edicionFINALIZADA = 17;//FINALIZADA = Edición finalizada
+        public const int edicionCANCELADA = 18;//CANCELADA = Edición cancelada         
 
         //Estados Fecha: 3
-        public const int fechaDIAGRAMADA = 7;//DIAGRAMA = 
-        public const int fechaCOMPLETA = 8;//COMPLETA = 
-        public const int fechaINCOMPLETA = 9;
+        public const int fechaDIAGRAMADA = 7;//DIAGRAMA = Fecha creada
+        public const int fechaINCOMPLETA = 9;//INCOMPLETA = Fecha con partidos pendientes de juego
+        public const int fechaCOMPLETA = 8;//COMPLETA = Fecha con todos los partidos jugados        
 
         //Estados Partido: 4
-        public const int partidoDIAGRAMADO = 10;
-        public const int partidoPROGRAMADO = 11;
-        public const int partidoJUGADO = 13; 
-        public const int partidoCANCELADO = 12;               
+        public const int partidoDIAGRAMADO = 10;//DIAGRAMADO = Partido creado
+        public const int partidoPROGRAMADO = 11;//PROGRAMADO = Partido con fecha asignada
+        public const int partidoJUGADO = 13;//JUGADO = Partido con resultado asignado
+        public const int partidoCANCELADO = 12;//CANCELADO = Partido cancelado               
         
         //Estados Fase: 5        
-        public const int faseREGISTRADA = 3;
-        public const int faseDIAGRAMADA = 4;
-        public const int faseINICIADA = 5;
-        public const int faseFINALIZADA = 6;
+        public const int faseREGISTRADA = 3;//REGISTRADA = Fase genérica creada
+        public const int faseDIAGRAMADA = 4;//DIAGRAMADA = Fase creada
+        public const int faseINICIADA = 5;//INICIADA = Fase con al menos un partido jugado
+        public const int faseFINALIZADA = 6;//FINALIZADA = Fase finalizada
 
     }
     /// <summary>
