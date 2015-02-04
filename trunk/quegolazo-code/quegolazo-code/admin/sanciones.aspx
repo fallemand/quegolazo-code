@@ -112,19 +112,19 @@
                                         <div class="form-group" id="idDivObservacion">
                                             <label for="select" class="col-lg-2 control-label">Observación</label>
                                             <div class="col-lg-10">
-                                                <textarea class="form-control" id="txtObservacion" runat="server" maxlength="400" rows="3"></textarea>
+                                                <textarea class="form-control" id="txtObservacion" runat="server" rangelength="0, 200" rows="3"></textarea>
                                             </div>
                                         </div>     
                                         <div class="form-group" id="idDivPuntosAQuitar">
                                             <label for="select" class="col-lg-6 control-label">Puntos a Quitar</label>
                                             <div class="col-lg-6">
-                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPuntosAQuitar" rel="txtTooltip" title="Puntos a Quitar" maxlength="2" min="0" digits="true">
+                                                <input type="text" class="form-control text-center" runat="server" data-container="body" id="txtPuntosAQuitar" digits="true" rel="txtTooltip" title="Puntos a Quitar" rangelength="0, 2">
                                             </div>
                                         </div> 
                                         <div class="form-group" id="idDivCantidadFechasASuspender">
                                             <label for="select" class="col-lg-6 control-label">Cantidad Fechas a Suspender</label>
                                             <div class="col-lg-6">
-                                                <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtCantidadFechasSuspendidas" rel="txtTooltip" title="Cantidad Fechas a Suspender" maxlength="2" min="0" digits="true">
+                                                <input type="text" class="form-control text-center" runat="server" data-container="body" id="txtCantidadFechasSuspendidas" digits="true" rel="txtTooltip" title="Cantidad Fechas a Suspender" rangelength="0, 2">
                                             </div>
                                         </div>                                          
                                     </div>

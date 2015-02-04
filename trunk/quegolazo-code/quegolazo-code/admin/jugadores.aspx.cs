@@ -174,7 +174,7 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         private void habilitarCampos()
         {
-            GestorControles.disableControls(new List<Object>{txtNombreJugador,txtDni,txtFechaNacimiento, txtNumeroCamiseta,
+            GestorControles.enableControls(new List<Object>{txtNombreJugador,txtDni,txtFechaNacimiento, txtNumeroCamiseta,
                 txtTelefono,txtEmail,txtFacebook,rdSexoFemenino,rdSexoMasculino,rdTieneFichaMedicaSi,rdTieneFichaMedicaNo});
             btnRegistrarJugador.Enabled = true;
             imagenUpload.Enabled = true;

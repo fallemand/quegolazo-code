@@ -163,7 +163,7 @@ namespace quegolazo_code.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPuntosAQuitar;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtPuntosAQuitar;
         
         /// <summary>
         /// Control txtCantidadFechasSuspendidas.
@@ -172,7 +172,7 @@ namespace quegolazo_code.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtCantidadFechasSuspendidas;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtCantidadFechasSuspendidas;
         
         /// <summary>
         /// Control panelFracaso.
