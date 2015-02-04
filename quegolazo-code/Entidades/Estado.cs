@@ -15,57 +15,34 @@ namespace Entidades
         public Estado()
         {
             ambito = new Ambito();
-            //switch (ambito.idAmbito)
-            //{
-            //    case 1:
-            //        //Estados Torneo
-            //        const int REGISTRADO = 1;
-            //        break;
-            //    case 2:
-            //        //Estados Edicion
-            //        const int REGISTRADA = 2;
-            //        break;
-            //    case 3:
-            //        //Estados Fecha
-            //        const int DIAGRAMADA = 5;
-            //        break;
-            //    case 4:
-            //        //Estados Partido
-            //        const int DIAGRAMADO = 6;
-            //        break;
-            //    case 5:
-            //        //Estados Fase
-            //        const int CREADA = 4;
-            //        break;
-            //}
         }
 
         //Estados Torneo: 1
-        public const int torneoREGISTRADO = 1;
+        public const int torneoREGISTRADO = 1;//REGISTRADO = un Torneo se crea como Registrado   
 
         //Estados Edicion: 2
-        public const int edicionREGISTRADA = 2;
-        public const int edicionCONFIGURADA = 14;
-        public const int edicionINICIADA = 16;
-        public const int edicionFINALIZADA = 17;
-        public const int edicionCANCELADA = 18;        
+        public const int edicionREGISTRADA = 2;//REGISTRADA =
+        public const int edicionCONFIGURADA = 14;//CONFIGURADA = 
+        public const int edicionINICIADA = 16;//INICIADA =
+        public const int edicionFINALIZADA = 17;//FINALIZADA =
+        public const int edicionCANCELADA = 18;//CANCELADA =         
 
         //Estados Fecha: 3
-        public const int fechaDIAGRAMADA = 7;
-        public const int fechaCOMPLETA = 8;
+        public const int fechaDIAGRAMADA = 7;//DIAGRAMA = 
+        public const int fechaCOMPLETA = 8;//COMPLETA = 
         public const int fechaINCOMPLETA = 9;
 
         //Estados Partido: 4
         public const int partidoDIAGRAMADO = 10;
-        public const int partidoCANCELADO = 12;
-        public const int partidoJUGADO = 13;
         public const int partidoPROGRAMADO = 11;
+        public const int partidoJUGADO = 13; 
+        public const int partidoCANCELADO = 12;               
         
-        //Estados Fase: 5
-        public const int faseCERRADA = 6;
+        //Estados Fase: 5        
+        public const int faseREGISTRADA = 3;
         public const int faseDIAGRAMADA = 4;
-        public const int faseENJUEGO = 5;
-        public const int faseREGISTRADA = 3;                    
+        public const int faseINICIADA = 5;
+        public const int faseFINALIZADA = 6;
 
     }
     /// <summary>
