@@ -37,8 +37,13 @@ namespace Logica
             else
             {
                 foreach (Fase fase in gestor.edicion.fases)
-                {
-                    if (fase.estado.idEstado == Estado.faseREGISTRADA)
+                {// Acá lo cambié yo porque la fase no era que no tenia que tener mas el estado REGISTRADA???? (Pau)
+                    //if (fase.estado.idEstado == Estado.faseREGISTRADA)
+                    //{
+                    //    gestor.faseActual = fase;
+                    //    break;
+                    //}
+                    if (fase.estado.idEstado == Estado.faseDIAGRAMADA)
                     {
                         gestor.faseActual = fase;
                         break;

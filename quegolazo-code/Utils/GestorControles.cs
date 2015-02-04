@@ -51,14 +51,14 @@ namespace Utils
 
         public static void cargarComboList<T>(DropDownList combo, List<T> dataSource, String valueField, String textField, String defaultItemText, bool puedeSeleccionarse)
         {
-            combo.DataSource = dataSource;
-            combo.DataValueField = valueField;
-            combo.DataTextField = textField;
-            combo.DataBind();
-            ListItem defaultItem = new ListItem(defaultItemText, "", true);
-            if(!puedeSeleccionarse)
-                defaultItem.Attributes.Add("disabled", "disabled");
-            combo.Items.Insert(0, defaultItem);
+                combo.DataSource = dataSource;
+                combo.DataValueField = valueField;
+                combo.DataTextField = textField;
+                combo.DataBind();
+                ListItem defaultItem = new ListItem(defaultItemText, "", true);
+                if (!puedeSeleccionarse)
+                    defaultItem.Attributes.Add("disabled", "disabled");
+                combo.Items.Insert(0, defaultItem);                
         }
 
         public static void cargarComboTabla(DropDownList combo, DataTable dataSource, String valueField, String textField)

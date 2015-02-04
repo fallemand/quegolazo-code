@@ -34,9 +34,9 @@
                             </div>
                             <div class="col-md-4 nopadding-left nopadding-right switch">
                                 <div class="switch-toggle well nomargin-bottom" onclick="cambioJugadores();">
-                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdJugadores" name="rbgSanciones" >
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdJugadores" name="rbgSanciones" disabled >
                                         <label for="rdJugadores" onclick="">Jugadores</label>
-                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdEquipos" name="rbgSanciones"> 
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdEquipos" name="rbgSanciones" disabled> 
                                         <label for="rdEquipos" onclick="">Equipos</label>
                                     <a class="btn btn-success" onclick=""></a>
                                 </div>
@@ -53,9 +53,9 @@
                             </div>
                             <div class="col-md-4 nopadding-left nopadding-right switch">
                                 <div class="switch-toggle well nomargin-bottom" onclick="cambioPartido()">
-                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdPartido" name="rbgPartidoSinDefinir">
+                                    <input type="radio"  ClientIDMode="Static" runat="server" id="rdPartido" name="rbgPartidoSinDefinir" disabled>
                                         <label for="rdPartido" onclick="">Partido</label>
-                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdSinDefinir" name="rbgPartidoSinDefinir"> 
+                                    <input type="radio" ClientIDMode="Static" runat="server" id="rdSinDefinir" name="rbgPartidoSinDefinir" disabled> 
                                         <label for="rdSinDefinir" onclick="">Sin definir</label>
                                     <a class="btn btn-success" onclick=""></a>
                                 </div>
@@ -138,7 +138,7 @@
                                 <div class="col-xs-8 col-xs-offset-3">
                                     <asp:Button class="btn btn-default" ID="btnCancelarModificacionSancion" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionSancion_Click" />
                                     <asp:Button class="btn btn-success causesValidation vgSancion" ID="btnModificarSancion" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarSancion_Click" />
-                                    <asp:Button class="btn btn-success causesValidation vgSancion" ID="btnRegistrarSancion" runat="server" Text="Registrar" OnClick="btnRegistrarSancion_Click"/>
+                                    <asp:Button class="btn btn-success causesValidation vgSancion" ID="btnRegistrarSancion" runat="server" Text="Registrar" OnClick="btnRegistrarSancion_Click" Enabled="false"/>
                                 </div>
                                 <div class="col-xs-1">
                                     <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
@@ -202,7 +202,10 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinSanciones" runat="server" visible="false">
-                                            <td colspan="4">No hay sanciones registradas</td>
+                                            <td colspan="7">No hay sanciones registradas</td>
+                                        </tr>
+                                        <tr id="sinEdicion" runat="server">
+                                            <td colspan="7">Seleccione una edición</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -254,58 +257,62 @@
         //Cambio Selección JUGADOR - EQUIPO
         function cambioJugadores() {
             deshabilitarPanel();
-            if ($('#rdEquipos').is(':checked')) {
-                $('#idDivFechaDate').show();
-                $('#idDivMotivo').show();
-                $('#idDivObservacion').show();
-                $('#idDivPuntosAQuitar').show();
-                $('#idDivCantidadFechasASuspender').show();
-                if ($('#rdPartido').is(':checked')) {
-                    $('#idDivFecha').show();
-                    $('#idDivPartido').show();
-                    $('#idDivEquipo').show();
+            if (!$('#rdEquipos').is(':disabled') && !$('#rdJugadores').is(':disabled')) {
+                if ($('#rdEquipos').is(':checked')) {
+                    $('#idDivFechaDate').show();
+                    $('#idDivMotivo').show();
+                    $('#idDivObservacion').show();
+                    $('#idDivPuntosAQuitar').show();
+                    $('#idDivCantidadFechasASuspender').show();
+                    if ($('#rdPartido').is(':checked')) {
+                        $('#idDivFecha').show();
+                        $('#idDivPartido').show();
+                        $('#idDivEquipo').show();
+                    }
+                    else {
+                        $('#idDivEquipo2').show();
+                    }
                 }
                 else {
-                    $('#idDivEquipo2').show();
+                    $('#idDivFechaDate').show();
+                    $('#idDivMotivo').show();
+                    $('#idDivObservacion').show();
+                    $('#idDivCantidadFechasASuspender').show();
+                    $('#idDivJugador').show();
+                    if ($('#rdPartido').is(':checked')) {
+                        $('#idDivFecha').show();
+                        $('#idDivPartido').show();
+                        $('#idDivEquipo').show();
+                    }
+                    else {
+                        $('#idDivEquipo2').show();
+                    }
                 }
             }
-            else {
-                $('#idDivFechaDate').show();
-                $('#idDivMotivo').show();
-                $('#idDivObservacion').show();
-                $('#idDivCantidadFechasASuspender').show();
-                $('#idDivJugador').show();
-                if ($('#rdPartido').is(':checked')) {
-                    $('#idDivFecha').show();
-                    $('#idDivPartido').show();
-                    $('#idDivEquipo').show();
-                }
-                else {
-                    $('#idDivEquipo2').show();
-                }
-
-            }
-        }       
+        }            
 
         function cambioPartido() {
-            if ($('#rdPartido').is(':checked')) {
-                $('#idDivFecha').show();
-                $('#idDivPartido').show();
-                $('#idDivEquipo').show();
-                $('#idDivEquipo2').hide();                
-            }
-            else {
-                $('#idDivFecha').hide();
-                $('#idDivPartido').hide();
-                $('#idDivEquipo2').show();
-                $('#idDivEquipo').hide();
+            if (!$('#rdPartido').is(':disabled') && !$('#rdSinDefinir').is(':disabled'))
+            {
+                if ($('#rdPartido').is(':checked')) {
+                    $('#idDivFecha').show();
+                    $('#idDivPartido').show();
+                    $('#idDivEquipo').show();
+                    $('#idDivEquipo2').hide();
+                }
+                else {
+                    $('#idDivFecha').hide();
+                    $('#idDivPartido').hide();
+                    $('#idDivEquipo2').show();
+                    $('#idDivEquipo').hide();
 
-            }
-            if ($('#rdJugadores').is(':checked')) {
-                $('#idDivJugador').show();
-            }
-            else
-                $('#idDivJugador').hide();
+                }
+                if ($('#rdJugadores').is(':checked')) {
+                    $('#idDivJugador').show();
+                }
+                else
+                    $('#idDivJugador').hide();
+            }            
         }
 
         function deshabilitarPanel() {

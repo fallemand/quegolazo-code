@@ -168,7 +168,7 @@ namespace AccesoADatos
                                 LEFT OUTER JOIN Equipos e ON e.idEquipo = s.idEquipo
                                 LEFT OUTER JOIN Jugadores j ON j.idJugador = s.idJugador
                                 LEFT OUTER JOIN MotivosSancion m ON s.idMotivoSancion = m.idMotivoSancion
-                                WHERE s.idEdicion = 15
+                                WHERE s.idEdicion = @idEdicion
                                 ORDER BY s.idSancion DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
@@ -181,7 +181,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener los árbitros:" + ex.Message);
+                throw new Exception("Error al obtener las sanciones:" + ex.Message);
             }
             finally
             {

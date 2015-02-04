@@ -79,12 +79,12 @@
                           <div class="panel-body">
                               <div class="col-md-6">
                                 <b>Tipo Fixture:</b> <%# Eval("TipoFixture.nombre") %><br />
-                                <b>Cantidad de Grupos:</b><asp:Literal ID="LitCantidadGrupos" runat="server"></asp:Literal><br />
+                                <b>Cantidad de Grupos:</b> <asp:Literal ID="LitCantidadGrupos" runat="server"></asp:Literal><br />
                                 <b>Cantidad de Equipos:</b> <asp:Literal ID="litCantidadEquipos" runat="server"></asp:Literal><br />
                                 <b>Cantidad de Equipos por Grupo:</b> <asp:Literal ID="litCantidadEquiposGrupo" runat="server" ></asp:Literal> <br />
                               </div>
                               <div class="col-md-6">
-                               <b>Cantidad de Fechas:</b><asp:Literal ID="LitCantidadFechas" runat="server"></asp:Literal> <br />
+                               <b>Cantidad de Fechas:</b> <asp:Literal ID="LitCantidadFechas" runat="server"></asp:Literal> <br />
                                <%--<b>Partidos por Fecha:</b> <asp:Literal ID="LitPartidosPorFecha" runat="server"></asp:Literal><br />--%>
                               </div>
                           </div>
