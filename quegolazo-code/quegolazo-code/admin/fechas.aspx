@@ -43,8 +43,11 @@
                                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Fechas" />
                                             </div>
                                             <div class="col-md-3">
-                                                <asp:LinkButton title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase"  data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
+                                                <asp:LinkButton Visible="false" title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase"  data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
                                                     <span class="label label-green label-big">Finalizar</span></asp:LinkButton>
+                                                <asp:Panel ID="panelEstadoFase" Visible="false" runat="server">
+                                                    <span class="label label-big fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" rel="txtTooltip" title="Finalizar Fecha" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
+                                                </asp:Panel>   
                                             </div>
                                         </div>
                                     </div>
@@ -445,6 +448,7 @@
                             </h4>
                         </div>
                         <div class="modal-body">
+                            <asp:Panel ID="panelSeleccionarEquipos" runat="server">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
@@ -506,13 +510,19 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-                               <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />
-                                </div>
+                                <asp:HiddenField ID="hfEquiposSeleccionados" ClientIDMode="Static" runat="server" />
+                            </asp:Panel>
+
+                            <!-- Toni se te ve la tanga-->
+                            <asp:Panel ID="panelConfigurarFase" runat="server" Visible="false">
+
+                            </asp:Panel>
+
+                        </div>
                         <div class="modal-footer">
                             <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <asp:Button ID="btnConfigurarFase" runat="server" Text="Configurar Fase" OnClick="btnConfigurarFase_Click" CssClass="btn btn-success causesValidation vgDatosEdicion" />
+                                <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click" CssClass="btn btn-success causesValidation vgDatosEdicion" />
                            </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
