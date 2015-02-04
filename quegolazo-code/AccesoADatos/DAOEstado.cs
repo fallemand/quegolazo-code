@@ -42,6 +42,7 @@ namespace AccesoADatos
                     {
                         idEstado = Int32.Parse(dr["idEstado"].ToString()),
                         nombre = dr["estado"].ToString(),
+                        descripcion = dr["descripcion"].ToString(),
                         ambito = new Ambito() {
                             idAmbito = Int32.Parse(dr["idAmbito"].ToString()),
                             nombre = dr["ambito"].ToString()

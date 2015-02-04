@@ -11,6 +11,7 @@ namespace Entidades
         public int idEstado { get; set; }
         public string nombre { get; set; }
         public Ambito ambito { get; set; }
+        public string descripcion { get; set; }
 
         public Estado()
         {
