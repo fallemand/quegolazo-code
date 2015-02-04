@@ -29,6 +29,7 @@ namespace Entidades
         public const int edicionCANCELADA = 18;//CANCELADA = Edición cancelada         
 
         //Estados Fecha: 3
+        public const int fechaREGISTRADA = 19;//REGISTRADA = Fecha genérica creada
         public const int fechaDIAGRAMADA = 7;//DIAGRAMA = Fecha creada
         public const int fechaINCOMPLETA = 9;//INCOMPLETA = Fecha con partidos pendientes de juego
         public const int fechaCOMPLETA = 8;//COMPLETA = Fecha con todos los partidos jugados        
