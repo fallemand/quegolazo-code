@@ -29,7 +29,7 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 foreach (Fase fase in fases)
                 {
-                    if (fase != null && fase.estado.idEstado!=Estado.faseCERRADA)
+                    if (fase != null && fase.estado.idEstado!=Estado.faseFINALIZADA)
                     {
                         string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado, cantidadEquipos, cantidadGrupos)
                                         VALUES (@idFase, @idEdicion, @tipoFixture, @idEstado, @cantidadEquipos, @cantidadGrupos)";
@@ -415,7 +415,7 @@ namespace AccesoADatos
                      cmd.Parameters.Clear();
                      cmd.Parameters.AddWithValue("@idFase", idFase);
                      cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
-                     cmd.Parameters.AddWithValue("@idEstado", Estado.faseCERRADA);
+                     cmd.Parameters.AddWithValue("@idEstado", Estado.faseFINALIZADA);
                      cmd.CommandText=sql;
                      cmd.ExecuteNonQuery();
                     }
@@ -459,7 +459,7 @@ namespace AccesoADatos
                                                     END";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idPartido", idPartido);
-                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseENJUEGO);
+                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseINICIADA);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
 
@@ -475,7 +475,7 @@ namespace AccesoADatos
 						           END";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idPartido", idPartido);
-                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseCERRADA);
+                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseFINALIZADA);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
                         

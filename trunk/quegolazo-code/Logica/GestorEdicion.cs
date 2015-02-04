@@ -24,33 +24,57 @@ namespace Logica
             List<Edicion> ediciones = daoEdicion.obtenerEdicionesPorIdTorneo(idTorneo);
             return ediciones;           
         }
+      
+
         /// <summary>
         /// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada
         /// </summary>
         /// <param name="gestor">El gestor que se va a actualizar</param>
-        public void actualizarFaseActual(GestorEdicion gestor) {
-            if (gestor.edicion.fases.Count == 0)
+        public void actualizarFaseActual()
+        {
+            if (this.edicion.fases.Count == 0)
             {
                 faseActual = null;
                 return;
             }
             else
             {
-                foreach (Fase fase in gestor.edicion.fases)
-                {// Acá lo cambié yo porque la fase no era que no tenia que tener mas el estado REGISTRADA???? (Pau)
-                    //if (fase.estado.idEstado == Estado.faseREGISTRADA)
-                    //{
-                    //    gestor.faseActual = fase;
-                    //    break;
-                    //}
-                    if (fase.estado.idEstado == Estado.faseDIAGRAMADA)
+                foreach (Fase fase in this.edicion.fases)
+                {
+                    if (fase.estado.idEstado == Estado.faseREGISTRADA)
                     {
-                        gestor.faseActual = fase;
+                        this.faseActual = fase;
                         break;
                     }
                 }
             }
         }
+
+        /// <summary>
+        /// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada
+        /// </summary>
+        /// <param name="gestor">El gestor que se va a actualizar</param>
+        public void getFaseActual()
+        {
+            if (this.edicion.fases.Count == 0)
+            {
+                faseActual = null;
+                return;
+            }
+            else
+            {
+                foreach (Fase fase in this.edicion.fases)
+                {
+                    if (fase.estado.idEstado == Estado.faseDIAGRAMADA || fase.estado.idEstado == Estado.faseINICIADA)
+                    {
+                       this.faseActual = fase;
+                       break;
+                    }
+                }
+            }
+        }
+
+
 
         /// <summary> 
         /// Registra una nueva edicion
