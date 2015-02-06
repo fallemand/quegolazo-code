@@ -108,7 +108,7 @@
                                             <th class="col-md-1"></th>
                                             <th class="col-md-4">Nombre</th>
                                             <th class="col-md-3">Domicilio</th>
-                                            <th class="col-md-3">Telefono</th>
+                                            <th class="col-md-3">Teléfono</th>
                                             <th class="col-md-1">Acciones</th>
                                         </tr>
                                     </thead>

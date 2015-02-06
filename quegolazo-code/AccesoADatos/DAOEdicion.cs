@@ -326,7 +326,7 @@ namespace AccesoADatos
             catch (Exception ex)
             {
                 if (ex.Message.Contains("unique_nombre_torneo"))
-                    throw new Exception("Ya existe ese nombre de Edición");
+                    throw new Exception("Ya existe ese nombre de Edición. Por favor elija otro.");
                 throw new Exception("No se pudo modificar la Edición: " + ex.Message);
             }
             finally

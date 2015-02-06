@@ -135,7 +135,8 @@
                                     <label for="text" class="col-lg-2 control-label">Torneo</label>
                                     <div class="col-lg-10">
                                         <input type="text" class="form-control" id="txtTorneoAsociado" runat="server" name="nombreTorneoEdicion" placeholder="Nombre del Torneo" disabled>
-                                        <span class="help-block">Torneo para el cual esta creando una nueva Edición</span>
+                                        <span class="help-block" runat="server" id="descripcionNueva">Torneo para el cual está creando una nueva Edición</span>
+                                        <span class="help-block" runat="server" id="descripcionModifica" visible="false">Torneo para el cual está modificando la edición</span>
                                     </div>
                                 </div>
                                 <div class="form-group">

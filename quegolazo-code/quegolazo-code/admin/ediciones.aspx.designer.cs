@@ -76,6 +76,24 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtTorneoAsociado;
         
         /// <summary>
+        /// Control descripcionNueva.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl descripcionNueva;
+        
+        /// <summary>
+        /// Control descripcionModifica.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl descripcionModifica;
+        
+        /// <summary>
         /// Control txtNombreEdicion.
         /// </summary>
         /// <remarks>
