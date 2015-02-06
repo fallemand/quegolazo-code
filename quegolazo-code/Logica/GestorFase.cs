@@ -76,6 +76,7 @@ namespace Logica
       /// </summary>
       public void reducirFases(List<Fase> fases)
       {
+          quitarFechasGenericas(fases);
           foreach (Fase fase in fases)
           {
               foreach (Equipo equipo in fase.equipos)
@@ -125,6 +126,8 @@ namespace Logica
        //Este metodo crea las fecha sy partidos que se necesitan para un torneo eliminatorio y los guarda en la bd
       public void crearPartidosSiguientes(Fase fase)
       {
+          //seteo el estado de la fecha 1 en diagramada
+          fase.grupos[0].fechas[0].estado.idEstado = Estado.fechaDIAGRAMADA;
           //Calcular cantidad de partidos a crear en la siguiente fecha
           int cantidad = fase.grupos[0].fechas[0].partidos.Count() /2;
           int nroFecha = fase.grupos[0].fechas[0].idFecha + 1;          
@@ -133,6 +136,7 @@ namespace Logica
           {
               Fecha fecha = new Fecha();
               fecha.idFecha = nroFecha;
+              fecha.estado.idEstado = (nroFecha > 1) ? Estado.fechaREGISTRADA : Estado.fechaDIAGRAMADA;
               for (int i = 0; i < cantidad; i++)
               {
                   Partido p = new Partido();
@@ -147,6 +151,7 @@ namespace Logica
               {
                   Fecha fecha = new Fecha();
                   fecha.idFecha = nroFecha;
+                  fecha.estado.idEstado = (nroFecha > 1) ? Estado.fechaREGISTRADA : Estado.fechaDIAGRAMADA;
                   Partido p = new Partido();
                   p.estado.idEstado = Estado.partidoDIAGRAMADO;
                   fecha.partidos.Add(p);
@@ -156,6 +161,28 @@ namespace Logica
               
           
       }
-
+      /// <summary>
+      /// quita las fechas que tienen estado REGISTRADA, que corresponden a las fechas genericas de una fase eliminatoria.
+      /// </summary>
+      /// <param name="fases">La lista de fases de una edicion.</param>
+      public void quitarFechasGenericas(List<Fase> fases)
+      {
+          List<Fecha> fechasAEliminar =  new List<Fecha>();
+          foreach (Fase fase in fases)
+          {
+             if(fase.grupos.Count >0)
+                 foreach (Fecha fecha in fase.grupos[0].fechas)
+                 {
+                     if (fecha.estado.idEstado == Estado.fechaREGISTRADA)
+                         fechasAEliminar.Add(fecha);
+                 }
+             foreach (Fecha fechaEliminar in fechasAEliminar)
+             {
+                 fase.grupos[0].fechas.Remove(fechaEliminar);
+             }
+          }
+         
+      }
+    
     }
 }

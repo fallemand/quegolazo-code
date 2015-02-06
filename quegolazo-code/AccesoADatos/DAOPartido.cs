@@ -134,10 +134,10 @@ namespace AccesoADatos
         }
 
         /// <summary>s
-        /// Obtiene solo los id de los Partidos
+        /// Obtiene solo los id de los Partidos eliminatorios que se crearon para configurar las llaves de una fase dada.
         /// autor: Flor Rojas
         /// </summary>
-        public void obtenerIDPartidos(Fase fase, SqlConnection con, SqlTransaction tran)
+        public void obtenerIDPartidosEliminatorios(Fase fase, SqlConnection con, SqlTransaction tran)
         {
             SqlDataReader dr;
             SqlCommand cmd = new SqlCommand();
@@ -176,12 +176,7 @@ namespace AccesoADatos
             catch (Exception ex)
             {
                 throw new Exception("No se pudo obtener el id del partido" + ex.Message);
-            }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
-            }
+            }           
         }
 
        /// <summary>
@@ -901,29 +896,10 @@ namespace AccesoADatos
         {            
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.Transaction = tran;            
+            cmd.Transaction = tran;
+            asignarPartidosPosteriores(fase);
             try
-            {               
-
-              //  for (int i = fase.grupos[0].fechas.Count-1; i > 1; i--)
-                foreach (Fecha f in fase.grupos[0].fechas.OrderByDescending(f => f.idFecha))
-                {
-                    int j = 0;
-                    foreach (Partido p in f.partidos)
-                    {                        
-                    if (f.idFecha > 1)
-                        {
-                            Fecha fechaAnterior = fase.grupos[0].fechas[f.idFecha - 2];
-                            fechaAnterior.partidos[j].idPartidoPosterior = p.idPartido;
-                            if (fechaAnterior.partidos.Count > 1)
-                            {
-                                fechaAnterior.partidos[j + 1].idPartidoPosterior = p.idPartido;
-                                j = j + 2;
-                            }
-                        }
-                    }
-                }
-
+            {       
                 foreach (Fecha fechaaModificar in fase.grupos[0].fechas)
                 {
                     foreach (Partido partido in fechaaModificar.partidos)
@@ -941,12 +917,37 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                throw new Exception("No se pudo registrar el lalala " + ex.Message);                
-            }
-            finally
+                throw new Exception("No se pudo registrar la fase eliminatoria: " + ex.Message);                
+            }            
+        }
+
+
+       
+
+        /// <summary>
+        /// Asigna un valor para el atributo idPartidoPosterior para una fase eliminatoria
+        /// </summary>
+        /// <param name="fase"vos id>La fase con todos los partidos de la eliminatoria, con sus respectivos ID</param>
+        public void asignarPartidosPosteriores(Fase faseEliminatoria)
+        {
+            foreach (Fecha f in faseEliminatoria.grupos[0].fechas.OrderByDescending(f => f.idFecha))
             {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
+                int j = 0;
+                foreach (Partido p in f.partidos)
+                {
+                    if (f.idFecha > 1)
+                    {
+                        Fecha fechaAnterior = faseEliminatoria.grupos[0].fechas[f.idFecha - 2];
+                        fechaAnterior.partidos[j].idPartidoPosterior = p.idPartido;
+                        if (fechaAnterior.partidos.Count > 1)
+                        {
+                            fechaAnterior.partidos[j + 1].idPartidoPosterior = p.idPartido;
+                            j = j + 2;
+                        }
+                    }
+                    else
+                        break;
+                }
             }
         }
     }

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Logica;
 using Entidades;
 using Utils;
+using System.Web.Script.Serialization;
 
 namespace quegolazo_code.admin
 {
@@ -436,6 +437,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterFases()
         {
+            new GestorFase().quitarFechasGenericas(gestorEdicion.edicion.fases);
             rptFases.DataSource = gestorEdicion.edicion.fases;
             rptFases.DataBind();
             panelSinFases.Visible = (rptFases.Items.Count > 0) ? false : true;
@@ -671,6 +673,12 @@ namespace quegolazo_code.admin
             gestorEdicion.gestorFase.cerrarFase(gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1]);
             panelSeleccionarEquipos.Visible = false;
             panelConfigurarFase.Visible = false;
+            new GestorFase().reducirFases(gestorEdicion.edicion.fases);
+            gestorEdicion.actualizarFaseActual();
+            string equipos = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.equipos);
+            string fases = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.fases);
+            //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:" + gestorEdicion.edicion.idEdicion + ", idFaseEditable:" + ((gestorEdicion.faseActual != null) ? gestorEdicion.faseActual.idFase.ToString() : "1") + "});", true);
         }
     }
 }
