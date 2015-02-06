@@ -194,7 +194,7 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinJugadores" runat="server" visible="false">
-                                            <td colspan="5">No hay Jugadores registrados para este equipo</td>
+                                            <td colspan="6">No hay Jugadores registrados para este equipo</td>
                                         </tr>
                                     </tbody>
                                 </table>

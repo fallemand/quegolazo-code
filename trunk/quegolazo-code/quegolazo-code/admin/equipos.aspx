@@ -10,7 +10,7 @@
                                 <span class="glyphicon glyphicon-plus"></span>
                                 Agregar un Equipo                                   
                             </div>
-                            <div class="panel-body nopadding-bottom">mo
+                            <div class="panel-body nopadding-bottom">
                                 <fieldset class="vgEquipo">
                                     <div class="form-horizontal">
                                         <div class="form-group">
@@ -181,7 +181,7 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinequipos" runat="server" visible="false">
-                                            <td colspan="2">No hay equipos registrados</td>
+                                            <td colspan="3">No hay equipos registrados</td>
                                         </tr>
                                     </tbody>
                                 </table>

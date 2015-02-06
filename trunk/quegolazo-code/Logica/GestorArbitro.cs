@@ -59,6 +59,7 @@ namespace Logica
             DAOArbitro daoArbitro = new DAOArbitro();
             arbitro.idArbitro = idArbitro;
             arbitro.nombre = nombre;
+            arbitro.celular = celular;
             arbitro.email = email;
             arbitro.matricula = matricula;
             daoArbitro.modificarArbitro(arbitro);

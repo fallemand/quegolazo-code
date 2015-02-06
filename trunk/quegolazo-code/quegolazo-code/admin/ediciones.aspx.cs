@@ -42,6 +42,7 @@ namespace quegolazo_code.admin
                 {
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     lblTituloModalEdicion.Text = "Modificar Edición";
+                    txtTorneoAsociado.Value = gestorTorneo.torneo.nombre;
                     btnSiguienteEdicion.Visible = false;
                     btnModificarEdicion.Visible = true;
                     txtNombreEdicion.Value = gestorEdicion.edicion.nombre;
@@ -51,6 +52,8 @@ namespace quegolazo_code.admin
                     txtPuntosPorEmpatar.Value = gestorEdicion.edicion.puntosEmpatado.ToString();
                     txtPuntosPorGanar.Value = gestorEdicion.edicion.puntosGanado.ToString();
                     txtPuntosPorPerder.Value = gestorEdicion.edicion.puntosPerdido.ToString();
+                    descripcionNueva.Visible = false;
+                    descripcionModifica.Visible = true;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
                 }
                 if (e.CommandName == "eliminarEdicion")
@@ -99,7 +102,7 @@ namespace quegolazo_code.admin
                 limpiarModalEdicion();
                 lblTituloModalEdicion.Text = "Agregar Nueva Edición";
                 btnSiguienteEdicion.Visible = true;
-                btnModificarEdicion.Visible = false;
+                btnModificarEdicion.Visible = false;                
             }
             catch (Exception ex)
             {
@@ -195,8 +198,12 @@ namespace quegolazo_code.admin
         {
             try
             {
+                btnModificarEdicion.Visible = false;
+                lblTituloModalEdicion.Text = "Agregar Nueva Edición";
                 limpiarModalEdicion();
                 txtTorneoAsociado.Value = gestorTorneo.torneo.nombre;
+                descripcionModifica.Visible = false;
+                descripcionNueva.Visible = true;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
