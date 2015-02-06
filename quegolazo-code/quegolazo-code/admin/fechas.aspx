@@ -448,7 +448,7 @@
                 <asp:UpdatePanel ID="upModalEdicion" runat="server">
                     <ContentTemplate>
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reiniciarContador();">&times;</button>
                             <h4 class="modal-title" id="H1"><i class="flaticon-football106"></i>Seleccionar los Equipos Clasificados
                                 <%--<asp:Label ID="lblTituloModalEdicion" runat="server" Text="Agregar Nueva Edición"></asp:Label>--%>
                             </h4>
@@ -540,7 +540,7 @@
                         </div>
                         <div class="modal-footer">
                             <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#contenedorFases').generadorDeFases('destroy');reiniciarContador();">Cerrar</button>
                                 <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click" CssClass="btn btn-success causesValidation vgDatosEdicion" />
                            </div>
                             <div class="col-xs-1">
@@ -586,6 +586,14 @@
             cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
         };
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+    </script>
+    <!-- reiniciar contadores -->
+     <script type="text/javascript">
+         function reiniciarContador() {
+             var arr = $("#hfEquiposSeleccionados").val("");
+             var valor = 0;
+             $("#spanSeleccionados").text(valor);
+         };
     </script>
 
      <script>
