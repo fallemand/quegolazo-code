@@ -167,7 +167,7 @@ namespace AccesoADatos
         }
 
         /// <summary>
-        /// Transacción que permite confirmar una edición.
+        /// Transacción que permite confirmar una edición, para la primera vez que se ejecuta el asistente.
         /// Permite registrar preferencias en la BD
         /// Permite registrar Equipos en la Edición
         /// Permite registrar Fase
@@ -193,7 +193,8 @@ namespace AccesoADatos
                 trans.Commit();
             }
             catch (Exception e)
-            {           trans.Rollback();     
+            {   
+                trans.Rollback();     
                 throw new Exception("No se pudo registrar la confirmación de la edición: " + e.Message);
             }
             finally

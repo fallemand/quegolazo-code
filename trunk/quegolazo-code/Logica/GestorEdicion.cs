@@ -167,21 +167,15 @@ namespace Logica
         }
 
         /// <summary>
-        /// Permite confirmar la Edición
+        /// Permite confirmar la Edición, para la primera vez que se crea, solo tiene en cuenta la primera fase.
         /// autor: Pau Pedrosa
         /// </summary>
         public void confirmarEdicion()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-
-            if (edicion.fases[0].tipoFixture.idTipoFixture == "ELIM" || edicion.fases[0].tipoFixture.idTipoFixture == "ELIM-IV")
-            {
-                gestorFase.crearPartidosSiguientes(edicion.fases[0]);
-            }
-
+            if(edicion.fases[0].tipoFixture.idTipoFixture.Contains("ELIM"))            
+            gestorFase.crearPartidosSiguientes(edicion.fases[0]);
             daoEdicion.confirmarEdicion(edicion); 
-
-
         }
 
         public void actualizarconfirmacionEdicion()
@@ -339,7 +333,8 @@ namespace Logica
                 }
             }
             if (!existeFase)
-                edicion.fases.Add(new Fase { idFase = idFaseNueva,idEdicion=edicion.idEdicion});
+                edicion.fases.Add(new Fase { idFase = idFaseNueva,idEdicion=edicion.idEdicion, estado=new Estado(Estado.faseREGISTRADA)});
+
         }
 
         /// <summary>

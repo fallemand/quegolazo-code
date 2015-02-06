@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="fechas.aspx.cs" Inherits="quegolazo_code.admin.fechas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
     <script type="text/javascript" src="/resources/js/jquery.multi-select.js"></script>
+    <script src="../../resources/js/jquery.ui/jquery-ui.min.js"></script>
+    <script src="../../resources/js/quegolazo.js"></script>
+    <script src="../../resources/js/widgetFases.js"></script>
+    <script src="../../resources/js/jquery.bracket.min.js"></script>
+    <link href="../../resources/css/jquery.bracket.min.css" rel="stylesheet" />
+    <script src="../../resources/js/widgetLlaves.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
@@ -46,7 +52,7 @@
                                                 <asp:LinkButton Visible="false" title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase"  data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
                                                     <span class="label label-green label-big">Finalizar</span></asp:LinkButton>
                                                 <asp:Panel ID="panelEstadoFase" Visible="false" runat="server">
-                                                    <span class="label label-big fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" rel="txtTooltip" title="Finalizar Fecha" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
+                                                    <span class="label label-big fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" rel="txtTooltip" title="<%# ((Entidades.Fase)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
                                                 </asp:Panel>   
                                             </div>
                                         </div>
@@ -515,7 +521,20 @@
 
                             <!-- Toni se te ve la tanga-->
                             <asp:Panel ID="panelConfigurarFase" runat="server" Visible="false">
-
+                                  <div class="row">
+                                    <div class="col-md-12" id="contenedorFases">
+                                         <p class="bs-component">    
+                                         <input id="agregarFase" type="button" class="btn btn-lg btn-success" onclick="$('#contenedorFases').generadorDeFases('agregarNuevaFase');" value="Agregar Fase" />                                        
+                     
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                       <div class="col-md-12">
+                                          <div class="panel-group" id="accordionFases">   
+              
+                                          </div>
+                                      </div>
+                                  </div> 
                             </asp:Panel>
 
                         </div>

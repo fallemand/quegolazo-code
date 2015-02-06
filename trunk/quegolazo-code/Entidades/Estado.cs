@@ -17,6 +17,11 @@ namespace Entidades
         {
             ambito = new Ambito();
         }
+        public Estado(int idEstado)
+        {
+            ambito = new Ambito();
+            this.idEstado = idEstado;
+        }
 
         //Estados Torneo: 1
         public const int torneoREGISTRADO = 1;//REGISTRADO = Torneo creado  

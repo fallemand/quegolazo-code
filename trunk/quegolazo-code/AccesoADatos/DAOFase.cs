@@ -77,10 +77,10 @@ namespace AccesoADatos
             {
                 foreach (Fase fase in fases)
                 {
-                    if (fase.tipoFixture.idTipoFixture == "ELIM" || fase.tipoFixture.idTipoFixture == "ELIM-IV")
+                    if ((fase.tipoFixture.idTipoFixture == "ELIM" || fase.tipoFixture.idTipoFixture == "ELIM-IV") && !fase.esGenerica)
                     {
                         DAOPartido daoPartido = new DAOPartido();
-                        daoPartido.obtenerIDPartidos(fase, con, tran);
+                        daoPartido.obtenerIDPartidosEliminatorios(fase, con, tran);
                         daoPartido.actualizarPartidosEliminatorios(fase, con, tran);
                     }
                 }
