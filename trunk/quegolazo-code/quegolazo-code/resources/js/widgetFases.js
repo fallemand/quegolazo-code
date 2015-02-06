@@ -29,7 +29,7 @@
         $("#agregarFase").tooltip({title:"Presiona este botón para generar nuevas fases.", placement:"right"});
         widget.cargarEstructuraDeFases();
         widget.inhabilitarFasesFinalizadas();
-    },
+    },  
 
     //crea la estrucctura incial para presentar todas las fases del campeonato
     agregarNuevaFase: function () {
