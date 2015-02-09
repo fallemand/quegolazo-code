@@ -51,7 +51,8 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="pull-right botones botones-small">
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkConfigurarEdicion" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>'>Configurar Edición</asp:LinkButton>
+                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkConfigurarEdicion" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>' Visible="false">Configurar</asp:LinkButton>
+                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkVerFechas" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="verFechas" CommandArgument='<%#Eval("idEdicion")%>' Visible="false">Ver Fechas</asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkModificarEdicion" title="Editar Edición" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarEdicin" title="Eliminar Edición" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="eliminarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                                     </div>
