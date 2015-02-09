@@ -60,7 +60,7 @@
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" rangelength="3, 100" required="true" disabled>
+                                                                <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" rangelength="3, 50" required="true" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">

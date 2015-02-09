@@ -23,7 +23,7 @@ namespace quegolazo_code.admin.edicion
                 if (!Page.IsPostBack)
                     cargarEquipos();
             }
-            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) {GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -53,9 +53,9 @@ namespace quegolazo_code.admin.edicion
             catch (Exception ex)
             {
                 if (ex.Message == "Modificación de equipos!!!")
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modificarEquipos');", true); 
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modificarEquipos');", true);
                 else
-                    mostrarPanelFracaso(ex.Message);
+                    GestorError.mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -72,7 +72,7 @@ namespace quegolazo_code.admin.edicion
                 new GestorFase().eliminarConfiguracionGuardada(gestorEdicion.edicion.fases);
                 Response.Redirect(GestorUrl.eFASES);
             }
-            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         /// <summary>
@@ -80,16 +80,6 @@ namespace quegolazo_code.admin.edicion
         /// --------------------------Metodos Extra---------------------------------
         /// -------------------------------------------------------------------------
         /// </summary>
-
-        /// <summary>
-        /// Habilita el panel de fracaso y muestra el error
-        /// autor: Facundo Allemand
-        /// </summary>
-        private void mostrarPanelFracaso(string mensaje)
-        {
-            panelFracaso.Visible = true;
-            litFracaso.Text = mensaje;
-        }
 
         /// <summary>
         /// Limpiar panel de error

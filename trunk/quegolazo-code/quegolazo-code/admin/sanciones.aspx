@@ -112,7 +112,7 @@
                                         <div class="form-group" id="idDivObservacion">
                                             <label for="select" class="col-lg-2 control-label">Observación</label>
                                             <div class="col-lg-10">
-                                                <textarea class="form-control" id="txtObservacion" runat="server" rangelength="0, 200" rows="3"></textarea>
+                                                <textarea class="form-control" id="txtObservacion" runat="server" maxlength="200" rows="3"></textarea>
                                             </div>
                                         </div>     
                                         <div class="form-group" id="idDivPuntosAQuitar">

@@ -17,13 +17,13 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Nombre</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" runat="server" id="txtNombreJugador" placeholder="Nombre del Jugador" required="true" disabled="true">
+                                                <input type="text" class="form-control" runat="server" id="txtNombreJugador" placeholder="Nombre del Jugador" required="true" rangelength="3, 50" disabled="true">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">DNI</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtDni" runat="server" placeholder="DNI" required="true" disabled="true">
+                                                <input type="text" class="form-control" id="txtDni" runat="server" placeholder="DNI" required="true" disabled="true" maxlength="9">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -41,26 +41,26 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Teléfono:</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Telefono" digits="true" disabled="true">
+                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Telefono" digits="true" disabled="true" maxlenght = "50">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">E-mail</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtEmail" runat="server" placeholder="E-mail" disabled="true">
+                                                <input type="text" class="form-control" id="txtEmail" runat="server" placeholder="E-mail" disabled="true" maxlength="100">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Facebook</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtFacebook" runat="server" placeholder="Facebook" disabled="true">
+                                                <input type="text" class="form-control" id="txtFacebook" runat="server" placeholder="Facebook" disabled="true" maxlength="50">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-2 control-label" for="radios">Sexo</label>
                                             <div class="col-lg-10">
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="rbgSexo" id="rdSexoMasculino" runat="server" disabled="true" checked="true">
+                                                    <input type="radio" name="rbgSexo" id="rdSexoMasculino" runat="server" disabled="true" checked="true" maxlength="50">
                                                     Masculino
                                                 </label>
                                                 <label class="radio-inline">

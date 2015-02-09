@@ -19,7 +19,7 @@
     <div class="panel panel-default">
         <div class="panel-heading panel-heading-master">
             <span class="glyphicon glyphicon-cog"></span>
-            Administrar Fases
+            Configurar Fases
         </div>
         <div class="panel-body">
             <div class="row">

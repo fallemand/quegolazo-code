@@ -16,7 +16,7 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Nombre</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" runat="server" id="txtNombreArbitro" placeholder="Nombre del Árbitro" required="true" rangelength="3, 100">
+                                                <input type="text" class="form-control" runat="server" id="txtNombreArbitro" placeholder="Nombre del Árbitro" required="true" rangelength="3, 50">
                                             </div>
                                         </div>
                                         <div class="form-group">
