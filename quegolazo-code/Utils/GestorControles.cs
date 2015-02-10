@@ -49,8 +49,12 @@ namespace Utils
             return false;
         }
 
-        public static void cargarComboList<T>(DropDownList combo, List<T> dataSource, String valueField, String textField, String defaultItemText, bool puedeSeleccionarse)
+        public static bool cargarComboList<T>(DropDownList combo, List<T> dataSource, String valueField, String textField, String defaultItemText, bool puedeSeleccionarse)
         {
+            if (dataSource == null)
+                return false;
+            else
+            {
                 combo.DataSource = dataSource;
                 combo.DataValueField = valueField;
                 combo.DataTextField = textField;
@@ -58,7 +62,9 @@ namespace Utils
                 ListItem defaultItem = new ListItem(defaultItemText, "", true);
                 if (!puedeSeleccionarse)
                     defaultItem.Attributes.Add("disabled", "disabled");
-                combo.Items.Insert(0, defaultItem);                
+                combo.Items.Insert(0, defaultItem);
+                return true;
+            }                              
         }
 
         public static void cargarComboTabla(DropDownList combo, DataTable dataSource, String valueField, String textField)

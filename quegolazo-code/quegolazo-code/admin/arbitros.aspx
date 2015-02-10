@@ -96,7 +96,7 @@
                                 Árbitros Existentes
                             </div>
                             <div class="col-md-4">
-                                <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Arbitros"/>
+                                <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Árbitros"/>
                             </div>
                         </div>                        
                     </div>
@@ -133,7 +133,7 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinArbitros" runat="server" visible="false">
-                                            <td colspan="4">No hay arbitros registrados</td>
+                                            <td colspan="5">No hay árbitros registrados</td>
                                         </tr>
                                     </tbody>
                                 </table>

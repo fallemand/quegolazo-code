@@ -119,7 +119,7 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinNoticias" runat="server" visible="false">
-                                            <td colspan="4">No hay noticias cargadas</td>
+                                            <td colspan="5">No hay noticias cargadas</td>
                                         </tr>
                                     </tbody>
                                 </table>

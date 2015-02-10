@@ -116,9 +116,6 @@ namespace Logica
         public void agregarEquiposEnEdicion(string equipos)
         {
             //primero limpiamos la lista para evitar que se acumulen cuando el usuario apriete siguiente mas de una vez por algun motivo.
-            edicion.equipos.Clear();
-            if (equipos == "")
-                throw new Exception("No hay equipos seleccionados");
             //quita la última coma de la cadena
             string cadena = equipos.Substring(0, equipos.Length - 1);
             //transforma la cadena en una lista de enteros
@@ -131,9 +128,6 @@ namespace Logica
             foreach (int id in listaIdsSeleccionados)
                 edicion.equipos.Add(gestorEquipo.obtenerEquipoReducidoPorId(id));
         }
-
-
-
 
         /// <summary>
         /// Modifica de la BD una edición

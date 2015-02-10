@@ -66,7 +66,7 @@
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="Email del Delegado" runat="server" rangelength="3, 100" required="true" email="true" disabled>
+                                                                <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="E-mail del Delegado" runat="server" rangelength="3, 100" required="true" email="true" disabled>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
