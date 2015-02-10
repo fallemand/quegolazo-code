@@ -56,8 +56,8 @@ namespace Logica
 
         public static void hidePanels()
         {
-            String funcionJS_hideExito = "hidePanelMessage('" + idPanelExito + "');";
-            String funcionJS_hideError = "hidePanelMessage('" + idPanelError + "');";
+            String funcionJS_hideExito = "hidePanelMessageExito('" + idPanelExito + "');";
+            String funcionJS_hideError = "hidePanelMessageError('" + idPanelError + "');";
 
             if (HttpContext.Current.CurrentHandler is Page)
             {

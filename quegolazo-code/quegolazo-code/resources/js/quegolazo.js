@@ -41,7 +41,14 @@ function showPanelMessage(idPanel, idMensaje, mensaje) {
     }, 1);
 };
 
-function hidePanelMessage(idPanel) {
+function hidePanelMessageError(idPanel) {
+    setTimeout(function () {
+        $('#' + idPanel).removeClass('in');
+    }, 1);
+    $('#' + idPanel).find(".panel-text").text('');
+};
+
+function hidePanelMessageExito(idPanel) {
     setTimeout(function () {
         $('#' + idPanel).removeClass('in');
     }, 1);
