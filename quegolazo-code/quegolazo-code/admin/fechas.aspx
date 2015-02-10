@@ -183,7 +183,7 @@
                                                 <label>
                                                     <input type="checkbox" id="cbPenales" onclick="cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');"  data-container="body" rel="txtTooltip" title="¿Se definió por penales?" runat="server"> ¿Penales?
                                                 </label>
-                                            </div>
+                                            &nbsp;&nbsp;</div>
                                             <div class="col-md-2 nopadding-right">
                                                 <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesVisitante" rel="txtTooltip" title="Goles Equipo Visitante" maxlength="2" digits="true" min="0" placeholder="EJ: 0">
                                             </div>
@@ -420,6 +420,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal para la finalización de fases -->
     <div class="modal fade bs-example-modal-sm" id="modalConfirmarFinalizarFase" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -430,7 +432,7 @@
                 <div class="modal-body">
                     <div id="panelFaseNoCompleta" class="alert alert-danger" style="display:none;">
                         <b>Atención:</b> Esta fase posee fechas que no han sido completadas.
-                    </div>  
+                    </div> 
                     ¿Esta seguro que desea finalizar la fase?
                 </div>
                 <div class="modal-footer">
@@ -440,6 +442,32 @@
             </div>
         </div>
     </div>
+    <!-- Fin para la finalización de fases -->
+
+     <!-- Modal para la finalización de Edición -->
+    <div class="modal fade" id="modalFinalizarEdicion" tabindex="-1"  role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="H2">Finalizar Edición</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="panelFaseNoCompleta2" class="alert alert-danger" style="display:none;">
+                        <b>Atención:</b> Esta fase posee fechas que no han sido completadas.
+                    </div> 
+                    Ha finalizado la última fase de la edición ¿Qué desea hacer?
+                </div>
+                <div class="modal-footer" >
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnNuevaFase" runat="server" OnClick="btnFinalizar_Click" CssClass="btn btn-success " Text="Crear Nueva Fase" />
+                    <asp:Button ID="btnFinalizarEdicion" runat="server" OnClick="btnFinalizarEdicion_Click" CssClass="btn btn-success" Text="Finalizar Edición" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin para la finalización de Edición -->
+
 
     <!-- Modal Seleccionar Equipos que pasan-->
     <div class="modal fade" id="modalFinalizarFase" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -558,6 +586,104 @@
     </div>
     <!-- Modal Seleccionar Equipos que pasan -->
 
+   <!-- Modal Seleccionar Ganadores - Finalizar Edicion-->
+    <div class="modal fade" id="modalSeleccionarGanadores" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="H3"><i class="flaticon-football160"></i>Tabla de Posiciones Final
+                                <%--<asp:Label ID="lblTituloModalEdicion" runat="server" Text="Agregar Nueva Edición"></asp:Label>--%>
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <asp:Panel ID="panel1" runat="server">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="btn-group btn-group-sm" role="group" style="margin-right:5px;" aria-label="...">
+                                                    <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');">Todos</button>
+                                                </div>
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                                    <asp:Repeater ID="rptGrupos2" runat="server">
+                                                        <ItemTemplate>
+                                                                <button type="button" class="btn btn-success" onclick="filtrarPosiciones('<%# Eval("idGrupo")%>')">Grupo <%# Eval("idGrupo")%></button>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </div>
+                                                 Para modificar, arrastre los equipos a la posición correspondiente
+                                            </div>
+                                        </div>
+                                        <div class="row margin-top" style="max-height: 350px !important;overflow: auto;">
+                                            <div class="col-md-12">
+                                                <table id="Table1" class="table table-condensed table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-1">Posición</th>
+                                                            <th class="col-md-4" colspan="2">Equipo</th>
+                                                            <th class="col-md-1">PTS</th>
+                                                            <th class="col-md-1">PJ</th>
+                                                            <th class="col-md-1">PG</th>
+                                                            <th class="col-md-1">PE</th>
+                                                            <th class="col-md-1">PP</th>
+                                                            <th class="col-md-1">GF</th>
+                                                            <th class="col-md-1">GC</th>
+                                                            <th style="display:none;"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tablaFiltro">
+                                                           <asp:Repeater ID="rptPosiciones" runat="server">
+                                                            <ItemTemplate>
+                                                                <tr>
+                                                                    <td> <%# Container.ItemIndex + 1 %>º</td>
+                                                                    <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("idEquipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
+                                                                    <td><%# Eval("Equipo") %></td>
+                                                                    <td class="active" style="font-size:16px;"><b><%# Eval("Puntos") %></b></td>
+                                                                    <td><%# Eval("PJ") %></td>
+                                                                    <td><%# Eval("PG") %></td>
+                                                                    <td><%# Eval("PE") %></td>
+                                                                    <td><%# Eval("PP") %></td>
+                                                                    <td><%# Eval("GF") %></td>
+                                                                    <td><%# Eval("GC") %></td>
+                                                                    <td class="idEquipo" style="display:none;"><%# Eval("idEquipo") %></td>
+                                                                    <td style="display:none;"><%# Eval("idGrupo") %></td>
+                                                                </tr>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                     
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </asp:Panel>
+
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <asp:Button ID="btnConfirmarFinalizacion" runat="server" Text="Finalizar" OnClick="btnConfirmarFinalizacion_Click" CssClass="btn btn-success causesValidation vgDatosEdicion" />
+                           </div>
+                            <div class="col-xs-1">
+                                <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="upModalEdicion">
+                                    <ProgressTemplate>
+                                        <img src="/resources/img/theme/load3.gif" />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Seleccionar Ganadores - Finalizar Edicion -->
+
+
     <script type="text/javascript">
         $('body').on('keyup', '#filtro', function () {
             if ($(this).val().length > 0) {
@@ -622,5 +748,8 @@
              }).length;
              $("#spanSeleccionados").text(valor);
          }
+
+         $('tbody').sortable();
     </script>
+    
 </asp:Content>

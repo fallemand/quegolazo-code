@@ -27,7 +27,7 @@ namespace quegolazo_code.admin
                     obtenerEdiciónSeleccionada();
                     cargarComboEdiciones();
                     cargarComboArbitros();
-                    cargarComboCanchas();                    
+                    cargarComboCanchas();
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -62,11 +62,22 @@ namespace quegolazo_code.admin
                 if (e.CommandName == "finalizarFase")
                 {
                     gestorEdicion.faseActual = gestorEdicion.edicion.fases[int.Parse(e.CommandArgument.ToString()) - 1];
-                    if(!gestorEdicion.gestorFase.estaFinalizada(gestorEdicion.faseActual.idFase, gestorEdicion.faseActual.idEdicion))
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "showDiv", "showDiv('panelFaseNoCompleta');", true);
+
+                    if (gestorEdicion.esUltimaFase(gestorEdicion.faseActual.idFase))
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalFinalizarEdicion');", true);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "hideDiv('modalConfirmarFinalizarFase');", true);
+                        if (!gestorEdicion.gestorFase.estaFinalizada(gestorEdicion.faseActual.idFase, gestorEdicion.faseActual.idEdicion))
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "showDiv", "showDiv('panelFaseNoCompleta2');", true);
+                    }
                     else
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "showDiv", "hideDiv('panelFaseNoCompleta');", true);
+                    {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalConfirmarFinalizarFase');", true);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "hideDiv('modalFinalizarEdicion');", true);
+                         if (!gestorEdicion.gestorFase.estaFinalizada(gestorEdicion.faseActual.idFase, gestorEdicion.faseActual.idEdicion))
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "showDiv", "showDiv('panelFaseNoCompleta');", true);
+                    
+                    }
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -623,10 +634,13 @@ namespace quegolazo_code.admin
 
         protected void btnFinalizar_Click(object sender, EventArgs e)
         {
+            
             ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalFinalizarFase');", true);
             panelSeleccionarEquipos.Visible = true;
             panelConfigurarFase.Visible = false;
             cargarEquipos();
+            
+           
         }
 
         /// <summary>
@@ -638,6 +652,17 @@ namespace quegolazo_code.admin
             GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
             GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1].grupos);
             GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
+        }
+
+        /// <summary>
+        /// Carga la tabla de posiciones para finalizar una edición
+        /// autor: 
+        /// </summary>
+        public void cargarPosicionesFinales()
+        {
+            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
+            GestorControles.cargarRepeaterList(rptGrupos2, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase - 1].grupos);
+            GestorControles.cargarRepeaterTable(rptPosiciones, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
         }
 
         /// <summary>
@@ -680,6 +705,19 @@ namespace quegolazo_code.admin
             string fases = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.fases);
             //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:" + gestorEdicion.edicion.idEdicion + ", idFaseEditable:" + ((gestorEdicion.faseActual != null) ? gestorEdicion.faseActual.idFase.ToString() : "1") + "});", true);
+        }
+
+        protected void btnFinalizarEdicion_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalSeleccionarGanadores');", true);
+            cargarPosicionesFinales();
+        }
+
+        protected void btnConfirmarFinalizacion_Click(object sender, EventArgs e)
+        {
+            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
+            //Falta obtener los grupos, cada uno con los equipos ordenados en una lista, en la posicion final en la que van
+            //gestorEstadisticas.guardarTablaPosicionesFinal(Grupos,gestorEdicion.edicion.idEdicion);
         }
     }
 }

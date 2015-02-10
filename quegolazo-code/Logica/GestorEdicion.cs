@@ -315,6 +315,7 @@ namespace Logica
         }
 
 
+        //Este método crea una nueva fase en caso de que no exista una siguiente.
         public void verificarProximaFase(int idFaseNueva)
         {
             bool existeFase=false;
@@ -338,6 +339,43 @@ namespace Logica
         public void actualizarEstado(int idPartido)
         {
             new DAOEdicion().actualizarEstadoEdicion(idPartido);
+        }
+
+
+        /// <summary>
+        /// Verifica si es la ultima fase, si es q el id de la afse es el mayor de todos
+        /// </summary>
+        /// <param name="idFase"></param>
+        /// <returns></returns>
+        public bool esUltimaFase(int idFase)
+        {
+            bool esUltima = false;
+            foreach (Fase f in edicion.fases)
+            {
+                esUltima = (f.idFase <= idFase) ? true : false;
+            }
+            return esUltima;
+        }
+
+        /// <summary>
+        /// Este metodo crea los grupos y los equipos que se guardaran al finalizar la edicion
+        /// </summary>
+        /// <param name="equipos"></param>
+        /// <param name="idGrupo"></param>
+        public void guardarEquiposEnGrupo(string equipos,int idGrupo)
+        {
+            Grupo grupo = new Grupo { idGrupo=idGrupo};
+            if (equipos == "")
+                throw new Exception("No hay equipos seleccionados");
+            //quita la última coma de la cadena
+            string cadena = equipos.Substring(0, equipos.Length - 1);
+            //transforma la cadena en una lista de enteros
+            List<int> listaIdsSeleccionados = cadena.Split(',').Select(Int32.Parse).ToList();
+            foreach (int id in listaIdsSeleccionados)
+            {
+                Equipo equipo = new Equipo { idEquipo = id };
+                grupo.equipos.Add(equipo);
+            }
         }
 
     }

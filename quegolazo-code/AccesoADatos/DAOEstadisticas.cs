@@ -336,5 +336,47 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        /// <summary>
+        /// Guarda la tabla de posiciones final de una edición 
+        /// autor: Flor Rojas
+        /// </summary>
+        public void guardarTablaPosiciones(List<Grupo> grupos, int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                int i=1;
+                foreach (Grupo grupo in grupos)
+                {
+                    foreach (Equipo equipo in grupo.equipos)
+                    {
+                        string sql = @"INSERT INTO TablaPosicionesFinal (posicion, idEquipo, idGrupo, idEdicion)
+                                            VALUES (@posicion, @idEquipo,@idGrupo, @idEdicion)";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add(new SqlParameter("@posicion",i));
+                        cmd.Parameters.Add(new SqlParameter("@idEquipo", equipo.idEquipo));
+                        cmd.Parameters.Add(new SqlParameter("@idGrupo", grupo.idGrupo));
+                        cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                        cmd.CommandText = sql;
+                        cmd.ExecuteNonQuery();
+                        i++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
