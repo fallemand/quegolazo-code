@@ -183,7 +183,11 @@
                                                 <label>
                                                     <input type="checkbox" id="cbPenales" onclick="cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');"  data-container="body" rel="txtTooltip" title="¿Se definió por penales?" runat="server"> ¿Penales?
                                                 </label>
+<<<<<<< .mine
+                                            &nbsp;</div>
+=======
                                             &nbsp;&nbsp;</div>
+>>>>>>> .r389
                                             <div class="col-md-2 nopadding-right">
                                                 <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesVisitante" rel="txtTooltip" title="Goles Equipo Visitante" maxlength="2" digits="true" min="0" placeholder="EJ: 0">
                                             </div>
@@ -433,7 +437,7 @@
                     <div id="panelFaseNoCompleta" class="alert alert-danger" style="display:none;">
                         <b>Atención:</b> Esta fase posee fechas que no han sido completadas.
                     </div> 
-                    ¿Esta seguro que desea finalizar la fase?
+                    ¿Está seguro que desea finalizar la fase?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -482,7 +486,7 @@
                             </h4>
                         </div>
                         <div class="modal-body">
-                            <asp:Panel ID="panelSeleccionarEquipos" runat="server">
+                            <asp:Panel ID="panelSeleccionarEquipos"  runat="server">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
@@ -552,8 +556,6 @@
                                   <div class="row">
                                     <div class="col-md-12" id="contenedorFases">
                                          <p class="bs-component">    
-                                         <input id="agregarFase" type="button" class="btn btn-lg btn-success" onclick="$('#contenedorFases').generadorDeFases('agregarNuevaFase');" value="Agregar Fase" />                                        
-                     
                                     </div>
                                   </div>
                                   <div class="row">
@@ -567,10 +569,12 @@
 
                         </div>
                         <div class="modal-footer">
-                            <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
-                                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#contenedorFases').generadorDeFases('destroy');reiniciarContador();">Cerrar</button>
+                         <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
+                                <asp:Button ID="btnCerrar" runat="server" data-dismiss="modal" Text="Cerrar" OnClientClick="reiniciarContador();" CssClass="btn btn-default" />
+                                <asp:Button ID="btnAtras" runat="server" Text="Atras" OnClick="btnAtras_Click" Visible="false" OnClientClick="$('#contenedorFases').generadorDeFases('destroy');" CssClass="btn btn-success" />
                                 <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click" CssClass="btn btn-success causesValidation vgDatosEdicion" />
-                           </div>
+                                <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar Fase" Visible="false" CssClass="btn btn-success causesValidation vgDatosEdicion" />                          
+                         </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
                                     <ProgressTemplate>
@@ -716,31 +720,35 @@
     <!-- reiniciar contadores -->
      <script type="text/javascript">
          function reiniciarContador() {
-             var arr = $("#hfEquiposSeleccionados").val("");
+             $("#hfEquiposSeleccionados").val("");
+             $('#contenedorFases').generadorDeFases('destroy');
              var valor = 0;
              $("#spanSeleccionados").text(valor);
          };
     </script>
 
      <script>
-
-         $(document).on("click", "#tabla-posiciones > tbody > tr", function () {
-             if (event.target.type !== 'checkbox') {
-                 $(':checkbox', this).trigger('click');
-             }
+         $(document).ready(function () {
+             setearEventos();
          });
+         function setearEventos() {
+             $(document).on("click", "#tabla-posiciones > tbody > tr", function () {
+                 if (event.target.type !== 'checkbox') {
+                     $(':checkbox', this).trigger('click');
+                 }
+             });
 
-         $("#tabla-posiciones tbody tr input[type='checkbox']").change(function (e) {
-             if ($(this).is(":checked")) { 
-                 $(this).closest('tr').addClass("success");
-                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + $(this).val() + ',');
-             } else {
-                 $(this).closest('tr').removeClass("success");
-                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val().replace($(this).val() + ',', ''));
-             }
-             actualizarCantidades();
-         });
-
+             $("#tabla-posiciones tbody tr input[type='checkbox']").change(function (e) {
+                 if ($(this).is(":checked")) {
+                     $(this).closest('tr').addClass("success");
+                     $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + $(this).val() + ',');
+                 } else {
+                     $(this).closest('tr').removeClass("success");
+                     $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val().replace($(this).val() + ',', ''));
+                 }
+                 actualizarCantidades();
+             });
+         }
          function actualizarCantidades() {
              var arr = $("#hfEquiposSeleccionados").val().split(",");
              var valor = $.grep(arr, function (a) {

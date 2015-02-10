@@ -266,7 +266,7 @@
     //valida que la cantidad de qeuipos para una fase eliminatoria sea 2,4,8,16,..., si no lo es muestra un popup indicando el error
     validarCantidadDeEquiposEliminatorio: function (numFase) {
         var widget = this;
-        var esValido = ($.inArray((numFase == widget.options.idFaseEditable) ? widget.options.fases[numFase - 1].equipos.length : parseInt($("#ddlCantidadParticipantesFase" + numFase).val()), [2, 4, 8, 16, 32, 64, 128]) > -1);
+        var esValido = ($.inArray((numFase == widget.options.idFaseEditable || widget.options.fases[numFase - 1].equipos.length > 0) ? widget.options.fases[numFase - 1].equipos.length : parseInt($("#ddlCantidadParticipantesFase" + numFase).val()), [2, 4, 8, 16, 32, 64, 128]) > -1);
         if (!esValido) {
             $((numFase > widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover({
                 container: '#controlesFase' + numFase,
@@ -538,10 +538,10 @@
     //renderiza una fase en la pantalla, si el atributo fase es un objeto, muestra esos datos, sino genera una nueva basandose en el numero de fase que se pasa como parametro
     //si el parametro deNuevo es verdadero es porque el meodo fue llamado desde el boton para que se haga la randomizacion de nuevo.
     presentarFase: function (numFase, fase, deNuevo) {
-        $("#cuerpoFase" + numFase).remove();
-        var widget = this;
         var fasePreCargada = fase != null || fase != undefined;
         numFase = (fasePreCargada) ? fase.idFase : numFase;
+        $("#cuerpoFase" + numFase).remove();
+        var widget = this;    
         if (widget.options.error)
             return;
         var tipoFixture = (fasePreCargada) ? fase.tipoFixture.idTipoFixture : $("#ddlTipoFixtureFase" + numFase).val();
@@ -565,6 +565,7 @@
             $("#cuerpoFase" + numFase).generadorDeLlaves({                
                 equipos: (fasePreCargada && !(numFase > widget.options.idFaseEditable)) ? fase.grupos[0].fechas[0].partidos  : widget.options.fases[numFase - 1].equipos,
                 mezclar: !fasePreCargada,
+                numFase : numFase,
                 generica: (numFase > widget.options.idFaseEditable)
             });
         }

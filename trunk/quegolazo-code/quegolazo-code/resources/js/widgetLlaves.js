@@ -21,8 +21,7 @@
         if(!this.options.generica)
         this.habilitarSwap();    
 
-    },
-    
+    },    
     armarLlaves: function () {
         var widget = this;
         var llaves = [];
@@ -57,7 +56,7 @@
     renderizarLlaves: function (equipos) {
         var widget = this;
         widget.options.datosEquipos.teams = widget.armarLlaves();
-        widget.element.bracket({
+        $("#cuerpoFase"+widget.options.numFase).bracket({
             init: widget.options.datosEquipos, /* data to initialize the bracket with */            
             decorator: {
                 edit: function () {},
@@ -109,6 +108,6 @@
         this._create();
     },
     _destroy: function () {
-        $(".jQBracket").remove();
+        $("#cuerpoFase" + widget.options.numFase).remove();
     }
 });
