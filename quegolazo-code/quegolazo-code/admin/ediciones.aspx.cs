@@ -137,11 +137,13 @@ namespace quegolazo_code.admin
                     Repeater rptEquipos = (Repeater)e.Item.FindControl("rptEquipos");
                     LinkButton lnkConfigurarEdicion = (LinkButton)e.Item.FindControl("lnkConfigurarEdicion");
                     LinkButton lnkVerFechas = (LinkButton)e.Item.FindControl("lnkVerFechas");
+                    LinkButton lnkCambiarConfiguracion = (LinkButton)e.Item.FindControl("lnkCambiarConfiguracion");
                     lnkVerFechas.Visible = false;
                     lnkConfigurarEdicion.Visible = false;
                     gestorEdicion.edicion = (Edicion)e.Item.DataItem;
                     lnkVerFechas.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA);
-                    lnkConfigurarEdicion.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA || gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA);                 
+                    lnkConfigurarEdicion.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA);
+                    lnkCambiarConfiguracion.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA);
                     GestorControles.cargarRepeaterList(rptEquipos, gestorEdicion.obtenerEquipos());
                     Panel panelDatosEdicionConfigurada = (Panel)e.Item.FindControl("panelDatosEdicionConfigurada");
                     panelDatosEdicionConfigurada.Visible = (gestorEdicion.edicion.estado.idEstado != Estado.edicionREGISTRADA);
