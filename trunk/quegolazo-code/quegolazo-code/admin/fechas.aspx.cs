@@ -27,8 +27,7 @@ namespace quegolazo_code.admin
                     obtenerEdiciónSeleccionada();
                     cargarComboEdiciones();
                     cargarComboArbitros();
-                    cargarComboCanchas();
-                    
+                    cargarComboCanchas();                    
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }

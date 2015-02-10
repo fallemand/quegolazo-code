@@ -41,7 +41,7 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Teléfono:</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Telefono" digits="true" disabled="true" maxlenght = "50">
+                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Teléfono" digits="true" disabled="true" maxlenght = "50">
                                             </div>
                                         </div>
                                         <div class="form-group">

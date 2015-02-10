@@ -12,7 +12,7 @@
                                 <div class="page-header clearfix" role="tab" id="headingOne">
                                     <div class="col-sm-1">
                                         <div class="thumbnail nomargin-bottom">
-                                            <img src="http://localhost:12434/resources/img/torneos/87-sm.jpg" />
+                                            <img src="<%=Logica.Sesion.getTorneo().obtenerImagenMediana() %>"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-9">

@@ -31,7 +31,7 @@ namespace quegolazo_code.admin
                     cargarRepeaterEdiciones();
                 }
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         protected void rptEdiciones_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -64,6 +64,10 @@ namespace quegolazo_code.admin
                 }
                 if (e.CommandName == "configurarEdicion")
                 {
+                    GestorEquipo gestorEquipo = new GestorEquipo();
+                    gestorTorneo.torneo.equipos = gestorEquipo.obtenerEquiposDeUnTorneo();
+                    if (gestorTorneo.torneo.equipos.Count <= 1)
+                        throw new Exception("El torneo asociado a la edición no tiene la cantidad de equipos mínima para configurarla. Registre al menos dos equipos para continuar.");
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     if (gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA) // Si la edicion esta personalizada
                     {
@@ -78,10 +82,9 @@ namespace quegolazo_code.admin
                 {
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     Response.Redirect(GestorUrl.aFECHAS);                    
-                }
-                
+                }                
             }
-            catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         protected void btnSiguienteEdicion_Click(object sender, EventArgs e)
@@ -94,7 +97,7 @@ namespace quegolazo_code.admin
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
                 cargarRepeaterEdiciones();
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         protected void btnModificarEdicion_Click(object sender, EventArgs e)
@@ -113,7 +116,7 @@ namespace quegolazo_code.admin
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
-                mostrarPanelFracaso(ex.Message);
+                GestorError.mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -125,7 +128,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterEdiciones();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarEdicion", "closeModal('eliminarEdicion');", true);
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         protected void rptEdiciones_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -205,7 +208,7 @@ namespace quegolazo_code.admin
                     }
                 }
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         protected void btnRegistrarNuevaEdicion_Click(object sender, EventArgs e)
@@ -220,7 +223,7 @@ namespace quegolazo_code.admin
                 descripcionNueva.Visible = true;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalEdicion');", true);
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         //------------------------------------------
@@ -274,14 +277,5 @@ namespace quegolazo_code.admin
             GestorControles.cargarComboList(ddlTipoSuperficie, gestorTipoSuperficie.obtenerTodos(), "idTipoSuperficie", "nombre");
             GestorControles.cargarComboList(ddlGenero, gestorEdicion.obtenerGenerosEdicion(), "idGeneroEdicion", "nombre");
         }
-
-        /// <summary>
-        /// Muestra el panel de error de la pag principal
-        /// </summary>
-        private void mostrarPanelFracaso(string mensaje)
-        {
-            GestorError.mostrarPanelFracaso(mensaje);
-        }
-
     }
 }

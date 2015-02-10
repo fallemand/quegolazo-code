@@ -27,9 +27,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="select" class="col-lg-2 control-label">Telefono</label>
+                                            <label for="select" class="col-lg-2 control-label">Teléfono</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Telefono" maxlength="20">
+                                                <input type="text" class="form-control" id="txtTelefono" runat="server" placeholder="Teléfono" maxlength="20">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -128,7 +128,7 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinCanchas" runat="server" visible="false">
-                                            <td colspan="4">No hay canchas registradas</td>
+                                            <td colspan="5">No hay canchas registradas</td>
                                         </tr>
                                     </tbody>
                                 </table>

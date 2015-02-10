@@ -42,6 +42,8 @@ namespace quegolazo_code.admin.edicion
         {
             try
             {
+                if (hfEquiposSeleccionados.Value == "")
+                    throw new Exception("No hay equipos seleccionados");
                 if(gestorEdicion.edicion.estado.idEstado==Estado.edicionCONFIGURADA)
                     gestorEdicion.verificarCambiosDeEquipos(hfEquiposSeleccionados.Value);                
                 gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);

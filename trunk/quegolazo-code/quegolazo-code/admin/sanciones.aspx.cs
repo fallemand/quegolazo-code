@@ -29,10 +29,7 @@ namespace quegolazo_code.admin
                     cargarComboEdiciones();
                 }
             }
-            catch (Exception ex)
-            {
-                GestorError.mostrarPanelFracaso(ex.Message);
-            }
+            catch (Exception ex){ GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         public void cargarComboEdiciones()
@@ -47,11 +44,14 @@ namespace quegolazo_code.admin
             try
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "DeshabilitaPanel", "deshabilitarPanel();", true);
-                if (ddlEdiciones.Items.Count == 1) //Está cargada solo con Seleccione Edición
+                if (ddlEdiciones.Items.Count == 1) //Está cargada solo con "Seleccione Edición"
                     throw new Exception("No tiene ediciones registradas. Por favor registre una edición.");
                 else
                     sinEdicion.Visible = false;                    
                 gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(Validador.castInt(ddlEdiciones.SelectedValue));
+                gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
+                if (!(gestorEdicion.edicion.preferencias.sancionesEquipos && gestorEdicion.edicion.preferencias.sancionesJugadores))
+                    throw new Exception("La edición seleccionada no permite registrar sanciones. Actualice sus preferencias.");
                 cargarRepeaterSanciones(ddlEdiciones.SelectedValue);
                 if (gestorEdicion.edicion.estado.idEstado != Estado.edicionREGISTRADA)
                 {
