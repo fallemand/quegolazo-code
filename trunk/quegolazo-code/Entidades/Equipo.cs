@@ -17,7 +17,8 @@ namespace Entidades
         public List<Jugador> jugadores { get; set; } 
         public Delegado delegadoPrincipal { get; set; }
         public Delegado delegadoOpcional { get; set; }
-
+       
+      
         public string obtenerImagenChicha()
         {
             return GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, GestorImagen.CHICA);

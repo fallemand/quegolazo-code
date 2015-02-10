@@ -64,6 +64,11 @@ namespace Logica
            return DaoEstadisticas.obtenerAvanceEdicion(idEdicion);
        }
 
+       public void guardarTablaPosicionesFinal(List<Grupo> grupos, int idEdicion)
+       {
+           DaoEstadisticas.guardarTablaPosiciones(grupos, idEdicion);
+       }
+
        private Edicion buscarUltimaEdicionTorneo()
        {
            DAOEdicion daoEdicion = new DAOEdicion();
