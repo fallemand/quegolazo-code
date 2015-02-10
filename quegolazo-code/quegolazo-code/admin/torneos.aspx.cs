@@ -155,8 +155,7 @@ namespace quegolazo_code.admin
                 cargarRepeaterTorneos();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarTorneo", "closeModal('eliminarTorneo');", true);
             }
-            catch (Exception ex)
-            {GestorError.mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         //------------------------------------------

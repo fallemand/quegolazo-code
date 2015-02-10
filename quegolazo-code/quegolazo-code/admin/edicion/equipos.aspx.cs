@@ -44,7 +44,7 @@ namespace quegolazo_code.admin.edicion
             {
                 if (hfEquiposSeleccionados.Value == "")
                     throw new Exception("No hay equipos seleccionados");
-                if(gestorEdicion.edicion.estado.idEstado==Estado.edicionCONFIGURADA)
+                if(gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA)
                     gestorEdicion.verificarCambiosDeEquipos(hfEquiposSeleccionados.Value);                
                 gestorEdicion.agregarEquiposEnEdicion(hfEquiposSeleccionados.Value);
                 //se limpian las fases que hayan sido generadas anteriormente
