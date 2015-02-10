@@ -140,7 +140,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al intentar recuperar los datos: " + ex.Message);
+                throw new Exception("Error al intentar recuperar los datos: Canchas " + ex.Message);
             }
             finally
             {
@@ -182,7 +182,7 @@ namespace AccesoADatos
                 if (ex.Class == 14 && ex.Number == 2601)
                     throw new Exception("La Cancha " + cancha.nombre + " ya se encuentra registrada. Ingrese otro nombre.");
                 else
-                    throw new Exception("No se pudo registrar la cancha: " + ex.Message);
+                    throw new Exception("No se pudo registrar la Cancha: " + ex.Message);
             }
             finally
             {
@@ -234,7 +234,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                    throw new Exception("Error al obtener las canchas:" + ex.Message);
+                    throw new Exception("Error al obtener las Canchas:" + ex.Message);
             }
             finally
             {
@@ -281,7 +281,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener la cancha:" + ex.Message);
+                throw new Exception("Error al obtener la Cancha:" + ex.Message);
             }
             finally
             {
@@ -401,7 +401,7 @@ namespace AccesoADatos
             {// si tiene edicion asociada
                 if (ex.Message.Contains("FK_CanchaXEdicion_Canchas"))
                     throw new Exception("La Cancha que desea eliminar está asociada a alguna Edición");
-                throw new Exception("No se pudo eliminar la cancha: " + ex.Message);
+                throw new Exception("No se pudo eliminar la Cancha: " + ex.Message);
             }
             finally
             {

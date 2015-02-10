@@ -268,14 +268,14 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {// si tiene ediciones asociadas
-                if (ex.Message.Contains("FK_Ediciones"))
+                if (ex.Message.Contains("Ediciones"))
                     throw new Exception("No se puede eliminar ese torneo: tiene ediciones asociadas");
-                if (ex.Message.Contains("FK_Arbitros"))
+                if (ex.Message.Contains("Arbitros"))
                     throw new Exception("No se puede eliminar ese torneo: tiene árbitros asociados");
-                if (ex.Message.Contains("FK_Canchas"))
+                if (ex.Message.Contains("Canchas"))
                     throw new Exception("No se puede eliminar ese torneo: tiene canchas asociadas");
-                if (ex.Message.Contains("FK_Equipos"))
-                    throw new Exception("No se puede eliminar ese torneo: tiene equipos asociadas");
+                if (ex.Message.Contains("Equipos"))
+                    throw new Exception("No se puede eliminar ese torneo: tiene equipos asociados");
                 throw new Exception("No se pudo eliminar el torneo");
             }
             finally
