@@ -137,6 +137,18 @@ namespace quegolazo_code.admin
             {
                 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
                 {                    
+                    //LinkButton configurarEdicion = (LinkButton)e.Item.FindControl("lnkConfigurarEdicion");
+                    //LinkButton verFechas = (LinkButton)e.Item.FindControl("lnkVerFechas");
+                    //if (gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA)
+                    //{
+                    //    configurarEdicion.Visible = false;
+                    //    verFechas.Visible = true;
+                    //}
+                    //if ((gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA) || (gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA))
+                    //{
+                    //    configurarEdicion.Visible = true;
+                    //    verFechas.Visible = false;
+                    //}
                     Repeater rptEquipos = (Repeater)e.Item.FindControl("rptEquipos");
                     LinkButton lnkConfigurarEdicion = (LinkButton)e.Item.FindControl("lnkConfigurarEdicion");
                     LinkButton lnkVerFechas = (LinkButton)e.Item.FindControl("lnkVerFechas");
