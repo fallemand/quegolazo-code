@@ -14,6 +14,7 @@ namespace Logica
         public Edicion edicion = new Edicion();
         public GestorFase gestorFase = new GestorFase();
         public Fase faseActual { get; set; }
+
         /// <summary>
         /// Obtener ediciones de un torneo en particular
         /// autor: Pau Pedrosa
@@ -402,6 +403,28 @@ namespace Logica
                 grupo.equipos.Add(equipo);
             }
         }
+
+        ///// <summary>
+        ///// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada
+        ///// </summary>
+        ///// <param name="gestor">El gestor que se va a actualizar</param>
+        //public void getFechaActual()
+        //{
+        //    if (this.edicion.fases.Count != 0)
+        //    {
+        //        foreach (Fase fase in this.edicion.fases)
+        //        {
+        //            foreach(Fecha fecha in fase.grupos[0].fechas)
+        //            {
+        //                if (fecha.estado.idEstado == Estado.fechaINCOMPLETA)
+        //                {
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
 
     }
 }

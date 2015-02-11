@@ -23,6 +23,7 @@ namespace quegolazo_code.admin
                 gestorEdicion = Sesion.getGestorEdicion();
                 gestorEstadisticas = new GestorEstadisticas();               
                 gestorEdicion.edicion = Sesion.getEdicion();
+                
                 if (!Page.IsPostBack)
                 {
                     obtenerEdiciónSeleccionada();
@@ -48,6 +49,7 @@ namespace quegolazo_code.admin
                 gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(gestorEdicion.edicion.idEdicion);
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
+                gestorEdicion.getFaseActual();
             }
         }
 
@@ -75,6 +77,7 @@ namespace quegolazo_code.admin
                 gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
                 gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                gestorEdicion.getFaseActual();
 
                 cargarTablaDePosiciones();
                 cargarGoleadoresDeLaEdicion();
@@ -96,8 +99,8 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarTablaDePosiciones()
         {
-            //rptPosiciones.DataSource = gestorEstadisticas.obtenerTablaPosiciones();
-            //rptPosiciones.DataBind();
+            GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1].grupos);
+            GestorControles.cargarRepeaterTable(rptPosiciones, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
             //sinequipos.Visible = (rptPosiciones.Items.Count > 0) ? false : true;
         }
         /// <summary>
@@ -105,15 +108,9 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarUltimaFecha()
         {
-            var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(Entidades.Estado.fechaINCOMPLETA);
+            var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha();
             rptFecha.DataSource = ultimaFecha;
             rptFecha.DataBind();
-            if (rptFecha.Items.Count == 0)
-            {
-                ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(Entidades.Estado.fechaCOMPLETA);
-                rptFecha.DataSource = ultimaFecha;
-                rptFecha.DataBind();
-            }
             ltFecha.Text = ultimaFecha.Rows[0]["idFecha"].ToString();
             noFixture.Visible = (rptFecha.Items.Count > 0) ? false : true;
             
@@ -124,7 +121,7 @@ namespace quegolazo_code.admin
         private void cargarPorcentajeDeAvanceDeLaFecha()
         {
             double avance = 0;
-            var valores = gestorEstadisticas.obtenerAvanceFecha(9);
+            var valores = gestorEstadisticas.obtenerAvanceFecha();
             try { avance = double.Parse(valores.Rows[0]["porcentajeAvance"].ToString()); }
             catch (IndexOutOfRangeException) { }           
             ScriptManager.RegisterStartupScript(this, this.GetType(), "AvanceFecha", "$('#avanceFecha').percentageLoader({ width : 180, height : 180, progress :" + (avance / 100).ToString("0.00", CultureInfo.InvariantCulture) + ", value : ''});", true);
