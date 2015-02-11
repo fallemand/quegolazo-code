@@ -121,7 +121,6 @@ namespace Logica
          new  DAOFase().cerrarFase(fase.idFase, fase.idEdicion);
       }
 
-
        //autor:Florencia Rojas
        //Este metodo crea las fecha sy partidos que se necesitan para un torneo eliminatorio y los guarda en la bd
       public void crearPartidosSiguientes(Fase fase)

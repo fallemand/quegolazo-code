@@ -28,8 +28,7 @@ namespace Logica
 
         /// <summary>
         /// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada
-        /// </summary>
-        /// <param name="gestor">El gestor que se va a actualizar</param>
+        /// </summary>   
         public void actualizarFaseActual()
         {
             if (this.edicion.fases.Count == 0)
@@ -73,6 +72,32 @@ namespace Logica
                 }
             }
         }
+
+        /// <summary>
+        /// Devuelve la fase actual de una lista de fases, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada
+        /// </summary>
+        /// <param name="fases">La lista que se quiere verificar</param>
+        public Fase getFaseActual(List<Fase> fases)
+        {
+            Fase respuesta = null;
+            if (fases.Count == 0)
+            {              
+                return respuesta;
+            }
+            else
+            {
+                foreach (Fase fase in fases)
+                {
+                    if (fase.estado.idEstado == Estado.faseDIAGRAMADA || fase.estado.idEstado == Estado.faseINICIADA)
+                    {
+                        respuesta = fase;
+                        break;
+                    }
+                }
+            }
+            return respuesta;
+        }
+
 
 
 
@@ -290,11 +315,9 @@ namespace Logica
                 throw new Exception("Modificación de equipos!!!");
             
         }
-
-        public void agregarEquiposEnFase(string equipos,int idFaseNueva)
+        //agrega los equipos en una fase determinada, de una lista de fases dada.
+        public void agregarEquiposEnFase(List<Fase> fases, string equipos,int idFaseNueva)
         {
-            try
-            {
                 int indiceFase = idFaseNueva - 1;
                 if (equipos == "")
                     throw new Exception("No hay equipos seleccionados");
@@ -307,27 +330,20 @@ namespace Logica
                     throw new Exception("Tiene que seleccionar al menos 2 equipos");
                 //agrego los equipos al equipos a la edición
                 GestorEquipo gestorEquipo = new GestorEquipo();
-                edicion.fases[indiceFase].equipos.Clear();
+                fases[indiceFase].equipos.Clear();
                 foreach (int id in listaIdsSeleccionados)
-                    edicion.fases[indiceFase].equipos.Add(gestorEquipo.obtenerEquipoReducidoPorId(id));
-                edicion.fases[indiceFase].esGenerica = false;
-                edicion.fases[indiceFase].tipoFixture = new TipoFixture("TCT");
-                edicion.fases[indiceFase].estado = new Estado() { idEstado = Estado.faseREGISTRADA };
-            }
-            catch (Exception ex)
-            {
-                
-                throw new Exception(ex.Message);
-            }
-
+                    fases[indiceFase].equipos.Add(gestorEquipo.obtenerEquipoReducidoPorId(id));
+                fases[indiceFase].esGenerica = false;
+                fases[indiceFase].tipoFixture = new TipoFixture("TCT");
+                fases[indiceFase].estado = new Estado() { idEstado = Estado.faseDIAGRAMADA };     
         }
 
 
-        //Este método crea una nueva fase en caso de que no exista una siguiente.
-        public void verificarProximaFase(int idFaseNueva)
+        //Este método crea una nueva fase en caso de que no exista una siguiente, en una lista de fases dada.
+        public void verificarProximaFase(List<Fase> fases, int idFaseNueva)
         {
-            bool existeFase=false;
-            foreach (Fase f in edicion.fases)
+            bool existeFase = false;
+            foreach (Fase f in fases)
             {
                 if (f.idFase == idFaseNueva)
                 {
@@ -336,8 +352,9 @@ namespace Logica
                 }
             }
             if (!existeFase)
-                edicion.fases.Add(new Fase { idFase = idFaseNueva,idEdicion=edicion.idEdicion, estado=new Estado(Estado.faseREGISTRADA)});
-
+                fases.Add(new Fase { idFase = idFaseNueva, idEdicion = edicion.idEdicion, estado = new Estado(Estado.faseDIAGRAMADA) });
+            //cierro la fase anterior a la nueva
+            fases[idFaseNueva - 2].estado.idEstado = Estado.faseFINALIZADA;
         }
 
         /// <summary>

@@ -693,18 +693,19 @@ namespace quegolazo_code.admin
         protected void btnConfigurarFase_Click(object sender, EventArgs e)
         {
             try
-            {
-                obtenerEdiciónSeleccionada();
-                gestorEdicion.verificarProximaFase(gestorEdicion.faseActual.idFase + 1);
-                gestorEdicion.agregarEquiposEnFase(hfEquiposSeleccionados.Value, (gestorEdicion.faseActual.idFase + 1));
+            {                
+            obtenerEdiciónSeleccionada();
+            List<Fase> fasesParaElWidget = (List<Fase>)GestorColecciones.clonarLista(gestorEdicion.edicion.fases);                
+            gestorEdicion.verificarProximaFase(fasesParaElWidget,gestorEdicion.faseActual.idFase + 1);
+            gestorEdicion.agregarEquiposEnFase(fasesParaElWidget, hfEquiposSeleccionados.Value, (gestorEdicion.faseActual.idFase + 1));
             hfEquiposSeleccionados.Value = string.Empty;
             //gestorEdicion.gestorFase.cerrarFase(gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1]);            
-            new GestorFase().reducirFases(gestorEdicion.edicion.fases);
-            gestorEdicion.actualizarFaseActual();
-            string equipos = (new JavaScriptSerializer()).Serialize(gestorEdicion.faseActual.equipos);
-            string fases = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.fases);
+            new GestorFase().reducirFases(gestorEdicion.edicion.fases); 
+            Fase faseActual =  gestorEdicion.getFaseActual(fasesParaElWidget);
+            string equipos = (new JavaScriptSerializer()).Serialize(faseActual.equipos);
+            string fases = (new JavaScriptSerializer()).Serialize(fasesParaElWidget);
             //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:" + gestorEdicion.edicion.idEdicion + ", idFaseEditable:" + ((gestorEdicion.faseActual != null) ? gestorEdicion.faseActual.idFase.ToString() : "1") + "});$('#panelSeleccionarEquipos').css('display','none');", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:" + gestorEdicion.edicion.idEdicion + ", idFaseEditable:" + ((faseActual!= null) ? faseActual.idFase.ToString() : "1") + "});$('#panelSeleccionarEquipos').hide();$('#btnAtras').show();", true);
             }
             catch (Exception ex)
             {

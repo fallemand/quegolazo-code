@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Fase
+    public class Fase :ICloneable
     {
         public int idFase { get; set; }
         public int idEdicion { get; set; }
@@ -38,75 +38,10 @@ namespace Entidades
             }
             
         }
-        ///// <summary>
-        ///// Crea una fase generica, con equipos y grupos genericos segun lo que se pase por parametro.
-        ///// </summary>
-        //public Fase(int cantidadEquipos, int cantidadGrupos) {
-        //    this.equipos = generarEquipos(cantidadEquipos);
-        //    this.grupos = generarGrupos(cantidadGrupos);
-        //    this.esGenerica = true;
-        //}
-
-        /// <summary>
-        /// Genera grupos para una fase generica
-        /// </summary>
-      //  private List<Grupo> generarGrupos(double cantEquipos,double cantidadGrupos)
-        //{
-        //    int cantidadEquiposxGrupo = Convert.ToInt16(cantEquipos/cantidadGrupos);
-        //    int sobrantes = Convert.ToInt16(cantEquipos- cantidadEquiposxGrupo*cantidadGrupos);
-        //    int limite = Convert.ToInt16
-
-        //    List<Grupo> respuesta = new List<Grupo>();
-        //    for (int i = 0; i < cantidadGrupos; i++)
-        //    {
-                
-        //    }
-        //    return respuesta;
-        //         var widget = this;
-        ////esta variable es la cantidad de equipos por grupo sin tener en cuenta los sobrantes        
-        
-        //var sobrantes = listaDeEquipos.length - cantidadEquiposxGrupo*cantGrupos ;
-        //var limite = listaDeEquipos.length - sobrantes;
-        //var grupos = [];
-        //var indice = 0;
-        ////se divide en una cantidad de grupos fija, cada uno con la misma cantidad de equipos
-        //for (var i = 0; i < cantGrupos; i++) {
-        //    var nuevoGrupo = {
-        //        idGrupo: i + 1,
-        //        idFase: numFase,
-        //        idEdicion: widget.options.idEdicion,
-        //        equipos: []
-        //    };
-        //    var grupo = [];
-        //    for (var j = 0; j < cantidadEquiposxGrupo; j++) {
-        //        nuevoGrupo.equipos.push(listaDeEquipos[indice]);
-        //        indice++;
-        //    }
-        //    grupos.push(nuevoGrupo);
-        //}
-
-        ////ahora se distribuyen los equipos sobrantes uno en cada grupo
-        //indice = listaDeEquipos.length - sobrantes;        
-        //for (var i = 0; i < sobrantes; i++) {
-        //    grupos[i].equipos.push(listaDeEquipos[indice]);
-        //    indice++;
-        //}        
-      
-        //return grupos;
-        //}
-        ///// <summary>
-        ///// Genera equipos para una fase generica
-        ///// </summary>
-        //private List<Equipo> generarEquipos(int cantidadEquipos)
-        //{
-        //    List<Equipo> respuesta = new List<Equipo>();
-        //    for (int i = 0; i < cantidadEquipos; i++)
-        //    {
-                
-        //    }
-        //    return respuesta;
-        //}
-
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
         public List<Fecha> obtenerFechas()
         {
             List<Fecha> fechasFase = new List<Fecha>();
