@@ -618,7 +618,7 @@
                                         </div>
                                         <div class="row margin-top" style="max-height: 350px !important;overflow: auto;">
                                             <div class="col-md-12">
-                                                <table id="Table1" class="table table-condensed table-hover">
+                                                <table id="tabla-posiciones2" class="table table-condensed table-hover">
                                                     <thead>
                                                         <tr>
                                                             <th class="col-md-1">Posición</th>
