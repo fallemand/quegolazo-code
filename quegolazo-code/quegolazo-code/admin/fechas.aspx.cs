@@ -635,9 +635,7 @@ namespace quegolazo_code.admin
         protected void btnFinalizar_Click(object sender, EventArgs e)
         {
             
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalFinalizarFase');", true);
-            panelSeleccionarEquipos.Visible = true;
-            panelConfigurarFase.Visible = false;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalFinalizarFase');", true);           
             cargarEquipos();
             
            
@@ -699,20 +697,14 @@ namespace quegolazo_code.admin
                 obtenerEdiciónSeleccionada();
                 gestorEdicion.verificarProximaFase(gestorEdicion.faseActual.idFase + 1);
                 gestorEdicion.agregarEquiposEnFase(hfEquiposSeleccionados.Value, (gestorEdicion.faseActual.idFase + 1));
-                hfEquiposSeleccionados.Value = string.Empty;
-            //gestorEdicion.gestorFase.cerrarFase(gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1]);
-            panelSeleccionarEquipos.Visible = false;
-            panelConfigurarFase.Visible = true;
-                btnAtras.Visible = true;
-                btnConfigurarFase.Visible = false;
-                btnConfirmar.Visible = true;
+            hfEquiposSeleccionados.Value = string.Empty;
+            //gestorEdicion.gestorFase.cerrarFase(gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1]);            
             new GestorFase().reducirFases(gestorEdicion.edicion.fases);
             gestorEdicion.actualizarFaseActual();
             string equipos = (new JavaScriptSerializer()).Serialize(gestorEdicion.faseActual.equipos);
             string fases = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.fases);
             //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:" + gestorEdicion.edicion.idEdicion + ", idFaseEditable:" + ((gestorEdicion.faseActual != null) ? gestorEdicion.faseActual.idFase.ToString() : "1") + "});", true);
-                
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:" + gestorEdicion.edicion.idEdicion + ", idFaseEditable:" + ((gestorEdicion.faseActual != null) ? gestorEdicion.faseActual.idFase.ToString() : "1") + "});$('#panelSeleccionarEquipos').css('display','none');", true);
             }
             catch (Exception ex)
             {
@@ -733,19 +725,7 @@ namespace quegolazo_code.admin
             //gestorEstadisticas.guardarTablaPosicionesFinal(Grupos,gestorEdicion.edicion.idEdicion);
         }
 
-        protected void btnAtras_Click(object sender, EventArgs e)
-        {
-            panelSeleccionarEquipos.Visible = true;
-            panelConfigurarFase.Visible = false;
-            btnCerrar.Visible = true;
-            btnAtras.Visible = false;
-            btnConfirmar.Visible = false;
-            btnConfigurarFase.Visible = true;
-            //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "eventos", "setearEventos();", true);
-                
-            
-        }
+       
 
 
     }

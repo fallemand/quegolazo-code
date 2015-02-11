@@ -49,7 +49,7 @@
                                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Fechas" />
                                             </div>
                                             <div class="col-md-3">
-                                                <asp:LinkButton Visible="false" title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase"  data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
+                                                <asp:LinkButton Visible="false" title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
                                                     <span class="label label-green label-big">Finalizar</span></asp:LinkButton>
                                                 <asp:Panel ID="panelEstadoFase" Visible="false" runat="server">
                                                     <span class="label label-big fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" rel="txtTooltip" title="<%# ((Entidades.Fase)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
@@ -179,15 +179,11 @@
                                             <div class="col-md-1 nopadding-right nopadding-left" style="padding-left:5px">
                                                 <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtPenalesLocal"  rel="txtTooltip" title="Goles en penales" maxlength="2" min="0" digits="true" style="display:none">
                                             </div>
-                                            <div class="col-md-2 nopadding-right text-center"style="padding-left:40px;">
+                                           <div class="col-md-2 nopadding-right text-center"style="padding-left:40px;">
                                                 <label>
                                                     <input type="checkbox" id="cbPenales" onclick="cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');"  data-container="body" rel="txtTooltip" title="¿Se definió por penales?" runat="server"> ¿Penales?
                                                 </label>
-<<<<<<< .mine
-                                            &nbsp;</div>
-=======
-                                            &nbsp;&nbsp;</div>
->>>>>>> .r389
+                                            </div>
                                             <div class="col-md-2 nopadding-right">
                                                 <input type="number" class="form-control text-center" runat="server" data-container="body" id="txtGolesVisitante" rel="txtTooltip" title="Goles Equipo Visitante" maxlength="2" digits="true" min="0" placeholder="EJ: 0">
                                             </div>
@@ -481,12 +477,12 @@
                     <ContentTemplate>
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reiniciarContador();">&times;</button>
-                            <h4 class="modal-title" id="H1"><i class="flaticon-football106"></i>Seleccionar los Equipos Clasificados
+                            <h4 class="modal-title" id="H1"><i class="flaticon-football106"></i><span id="tituloModal">Seleccionar los Equipos Clasificados</span> 
                                 <%--<asp:Label ID="lblTituloModalEdicion" runat="server" Text="Agregar Nueva Edición"></asp:Label>--%>
                             </h4>
                         </div>
                         <div class="modal-body">
-                            <asp:Panel ID="panelSeleccionarEquipos"  runat="server">
+                            <asp:Panel ID="panelSeleccionarEquipos" ClientIDMode="Static"  runat="server">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row">
@@ -552,7 +548,7 @@
                             </asp:Panel>
 
                             <!-- Toni se te ve la tanga-->
-                            <asp:Panel ID="panelConfigurarFase" runat="server" Visible="false">
+                            <asp:Panel ID="panelConfigurarFase" ClientIDMode="Static" runat="server">
                                   <div class="row">
                                     <div class="col-md-12" id="contenedorFases">
                                          <p class="bs-component">    
@@ -570,10 +566,10 @@
                         </div>
                         <div class="modal-footer">
                          <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
-                                <asp:Button ID="btnCerrar" runat="server" data-dismiss="modal" Text="Cerrar" OnClientClick="reiniciarContador();" CssClass="btn btn-default" />
-                                <asp:Button ID="btnAtras" runat="server" Text="Atras" OnClick="btnAtras_Click" Visible="false" OnClientClick="$('#contenedorFases').generadorDeFases('destroy');" CssClass="btn btn-success" />
-                                <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click" CssClass="btn btn-success causesValidation vgDatosEdicion" />
-                                <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar Fase" Visible="false" CssClass="btn btn-success causesValidation vgDatosEdicion" />                          
+                                <Button ID="btnCerrar" data-dismiss="modal" onclick="clickBotonCerrar();" class="btn btn-default" > Cerrar</button>
+                                <Button ID="btnAtras"  value="Atras" OnClick="clickBotonAtras();" style="display:none" Class="btn btn-success" > Atras</button>
+                                <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click" OnClientClick="clickSiguiente();" ClientIDMode="Static" CssClass="btn btn-success causesValidation vgDatosEdicion" />
+                                <Button ID="btnConfirmar" Visible="false" onclick="clickBotonConfirmar();" style="display:none;" Class="btn btn-success causesValidation vgDatosEdicion">Confirmar Fase</button>                        
                          </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
@@ -717,8 +713,31 @@
         };
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
     </script>
-    <!-- reiniciar contadores -->
+    <!-- BOTONES MODAL CONFIGURAR FASE -->
      <script type="text/javascript">
+         function clickBotonCerrar() {
+             $('#contenedorFases').generadorDeFases('destroy');
+             $('#btnConfigurarFase').css('display','block');;
+             $('#panelSeleccionarEquipos').css('display','block');;
+             $('#panelConfigurarFase').css('display','none');;
+             reiniciarContador();
+         }
+         function clickBotonAtras() {             
+             $('#tituloModal').text("Seleccionar los Equipos Clasificados");
+             $('#btnAtras').css('display','none');;
+             $('#panelSeleccionarEquipos').css('display','block');;
+             $('#panelConfigurarFase').css('display', 'none');
+             $('#contenedorFases').generadorDeFases('destroy');
+         }
+         function clickBotonConfirmar() {
+
+         }
+         function clickSiguiente() {
+             $('#tituloModal').text("Configurar la nueva Fase");
+             $('#btnAtras').css('display','block');;
+             $('#panelSeleccionarEquipos').css('display','none');;
+             $('#panelConfigurarFase').css('display','block');;
+         }
          function reiniciarContador() {
              $("#hfEquiposSeleccionados").val("");
              $('#contenedorFases').generadorDeFases('destroy');
