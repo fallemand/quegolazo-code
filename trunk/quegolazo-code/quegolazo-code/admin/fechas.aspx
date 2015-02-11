@@ -566,8 +566,7 @@
                         </div>
                         <div class="modal-footer">
                          <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
-                                <Button ID="btnCerrar" data-dismiss="modal" onclick="clickBotonCerrar();" class="btn btn-default" > Cerrar</button>
-                                <Button ID="btnAtras"  value="Atras" OnClick="clickBotonAtras();" style="display:none" Class="btn btn-success" > Atras</button>
+                                <Button ID="btnCerrar" data-dismiss="modal" onclick="clickBotonCerrar();" class="btn btn-default" > Cancelar</button>
                                 <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click" OnClientClick="clickSiguiente();" ClientIDMode="Static" CssClass="btn btn-success causesValidation vgDatosEdicion" />
                                 <Button ID="btnConfirmar" Visible="false" onclick="clickBotonConfirmar();" style="display:none;" Class="btn btn-success causesValidation vgDatosEdicion">Confirmar Fase</button>                        
                          </div>
@@ -717,26 +716,17 @@
      <script type="text/javascript">
          function clickBotonCerrar() {
              $('#contenedorFases').generadorDeFases('destroy');
-             $('#btnConfigurarFase').css('display','block');;
-             $('#panelSeleccionarEquipos').css('display','block');;
-             $('#panelConfigurarFase').css('display','none');;
+             $('#btnConfigurarFase').show();
+             $('#panelSeleccionarEquipos').show();
+             $('#panelConfigurarFase').hide();
              reiniciarContador();
          }
-         function clickBotonAtras() {             
-             $('#tituloModal').text("Seleccionar los Equipos Clasificados");
-             $('#btnAtras').css('display','none');;
-             $('#panelSeleccionarEquipos').css('display','block');;
-             $('#panelConfigurarFase').css('display', 'none');
-             $('#contenedorFases').generadorDeFases('destroy');
-         }
          function clickBotonConfirmar() {
-
+             
          }
          function clickSiguiente() {
-             $('#tituloModal').text("Configurar la nueva Fase");
-             $('#btnAtras').css('display','block');;
-             $('#panelSeleccionarEquipos').css('display','none');;
-             $('#panelConfigurarFase').css('display','block');;
+             $('#tituloModal').text("Configurar la nueva Fase");  
+             $('#panelConfigurarFase').show();
          }
          function reiniciarContador() {
              $("#hfEquiposSeleccionados").val("");
@@ -749,6 +739,9 @@
      <script>
          $(document).ready(function () {
              setearEventos();
+             $('#modalFinalizarFase').on('hidden', function () {
+                 clickBotonCerrar();
+             });
          });
          function setearEventos() {
              $(document).on("click", "#tabla-posiciones > tbody > tr", function () {

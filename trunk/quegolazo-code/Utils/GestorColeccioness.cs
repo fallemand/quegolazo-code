@@ -30,5 +30,16 @@ namespace Utils
             return listaDesordenada;
 
         }
+
+        /// <summary>
+        /// Clona una lista determinada devolviendo una copia de la misma.
+        /// </summary>
+        /// <typeparam name="T">Un objeto cualquiera que implemente la interfaz ICloneable</typeparam>
+        /// <param name="listaDeEntrada">La lista a clonar</param> 
+       public static IList<T> clonarLista<T>(this IList<T> listToClone) where T: ICloneable
+            {
+                return listToClone.Select(item => (T)item.Clone()).ToList();
+             }
+         
     }
 }
