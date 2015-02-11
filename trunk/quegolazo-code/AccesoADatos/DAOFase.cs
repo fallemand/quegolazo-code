@@ -457,10 +457,15 @@ namespace AccesoADatos
 					                            if(@cantidad>0)
 						                            BEGIN
 							                        UPDATE Fases SET idEstado = @idEstado WHERE idFase = @idFase AND idEdicion = @idEdicion
+                                                    END
+                                                else
+                                                    BEGIN
+							                        UPDATE Fases SET idEstado = @idEstado1 WHERE idFase = @idFase AND idEdicion = @idEdicion
                                                     END";
                         cmd.Parameters.Clear();
                         cmd.Parameters.AddWithValue("@idPartido", idPartido);
                         cmd.Parameters.AddWithValue("@idEstado", Estado.faseINICIADA);
+                        cmd.Parameters.AddWithValue("@idEstado1", Estado.faseDIAGRAMADA);
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
 

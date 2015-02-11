@@ -319,7 +319,7 @@ namespace AccesoADatos
             catch (SqlException ex)
             {//Error de Clave foránea
                 if (ex.Message.Contains("FK"))
-                    throw new Exception("Clave forránea");//Cambiar mensaje
+                    throw new Exception("No puede eliminar el Equipo, está asignado a un partido");
                 throw new Exception("No se pudo eliminar el equipo: " + ex.Message);
             }
             finally

@@ -26,7 +26,7 @@ namespace Entidades
             {
                 for (int i = 0; i < cantidadFechas; i++)
                 {
-                    Fecha fechaNueva = new Fecha() { idFecha = i + 1, estado = new Estado { ambito = new Ambito { idAmbito = Ambito.FECHA }, idEstado = Estado.fechaINCOMPLETA } };
+                    Fecha fechaNueva = new Fecha() { idFecha = i + 1, estado = new Estado { ambito = new Ambito { idAmbito = Ambito.FECHA }, idEstado = Estado.fechaDIAGRAMADA } };
 
                     for (int j = 0, k = equiposParticipantes.Count - 1; j < cantidadPartidos && j < k; j++, k--)
                     {

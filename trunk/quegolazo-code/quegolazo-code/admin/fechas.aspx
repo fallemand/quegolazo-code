@@ -49,7 +49,7 @@
                                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Fechas" />
                                             </div>
                                             <div class="col-md-3">
-                                                <asp:LinkButton Visible="false" title="Finalizar Fecha" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
+                                                <asp:LinkButton Visible="false" title="Finalizar Fase" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
                                                     <span class="label label-green label-big">Finalizar</span></asp:LinkButton>
                                                 <asp:Panel ID="panelEstadoFase" Visible="false" runat="server">
                                                     <span class="label label-big fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" rel="txtTooltip" title="<%# ((Entidades.Fase)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
@@ -67,8 +67,8 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#fechas" href="#fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>" style="font-size: 15px;">Fecha <%# Eval("idFecha") %> <small>Ver Más Detalles</small>
-                                                                </a>
+                                                                <a data-toggle="collapse" data-parent="#fechas" href="#fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>" style="font-size: 15px;">Fecha <%# Eval("idFecha") %> <small>Ver Más Detalles</small></a>     
+                                                                <small><span class="label pull-right fecha-<%# ((Entidades.Fecha)Container.DataItem).estado.nombre%>" rel="txtTooltip" title="<%# ((Entidades.Fecha)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fecha)Container.DataItem).estado.nombre  %></span></small>                                                        
                                                             </h4>
                                                         </div>
                                                         <div id='fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>' class="panel-collapse collapse">

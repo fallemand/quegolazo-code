@@ -78,12 +78,13 @@ namespace AccesoADatos
                     cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                     cmd.CommandText = sql;
                     dr = cmd.ExecuteReader();
+                    DAOEstado daoEstado = new DAOEstado();
                     while (dr.Read())
                     {
                         Fecha fecha = new Fecha()
                         {
                             idFecha = int.Parse(dr["idFecha"].ToString()),
-                            estado = new Estado() { idEstado = int.Parse(dr["idEstado"].ToString()) },
+                            estado = daoEstado.obtenerEstadoPorId(int.Parse(dr["idEstado"].ToString())),
                             nombre = dr["nombre"].ToString(),
                             nombreCompleto ="Fecha " + int.Parse(dr["idFecha"].ToString())
                         };
@@ -116,39 +117,50 @@ namespace AccesoADatos
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
-             cmd.Connection = con;
-                //Esta consulta cambia la fecha a estado incompleta, @cantidad(cantidad de partidos jugados),esmayor a 1.
-             string sql = @"                            
+                cmd.Connection = con;
+                //ESTA CONSULTA CAMBIA LA FECHA A ESTADO INCOMPLETA SI
+                //@cantidad(cantidad de partidos jugados) ES MAYOR A CERO, ES DECIR QUE HAY AL MENOS UN PARTIDO JUGADO
+                // O CAMBIA LA FECHA A DIAGRAMADA SI NINGUN PARTIDO FUE JUGADO
+                string sql = @"                            
                             DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idGrupo=@idGrupo AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado = 13  ))
+                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idGrupo=@idGrupo AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idEstado = @estadoJugado ))
 					                            if(@cantidad>0)
 						                            BEGIN
 							UPDATE Fechas SET idEstado = @idEstado WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
                                                     END
+                                                else                                                
+                                                    BEGIN
+							UPDATE Fechas SET idEstado = @idEstado1 WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
+                                                    END
+
 						    ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
-                cmd.Parameters.AddWithValue("@idEstado", Estado.fechaINCOMPLETA);
+                cmd.Parameters.AddWithValue("@estadoJugado", Estado.partidoJUGADO);
+                cmd.Parameters.AddWithValue("@idEstado", Estado.fechaINCOMPLETA); //Si al menos un partido está jugado
+                cmd.Parameters.AddWithValue("@idEstado1", Estado.fechaDIAGRAMADA);
                 cmd.CommandText = sql;
-               cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
-               //Esta  consulta actualiza a Completa, si es que cantidad=0, es decir no queda ningun partido distinto del estado jugado
-             sql = @"                            
+                //ESTA CONSULTA CAMBIA LA FECHA A ESTADO COMPLETA 
+                //si es que cantidad=0, es decir no queda ningun partido distinto del estado jugado
+                sql = @"                            
                             DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
                             DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idGrupo=@idGrupo AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13  ))
+                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idGrupo=@idGrupo AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idEstado <> @estadoJugado ))
 					                            if(@cantidad=0)
 						                            BEGIN
 							UPDATE Fechas SET idEstado = @idEstado WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
-                            END
+                                                    END
 						    ";
                cmd.Parameters.Clear();
                cmd.Parameters.AddWithValue("@idPartido", idPartido);
+               cmd.Parameters.AddWithValue("@estadoJugado", Estado.partidoJUGADO);
                cmd.Parameters.AddWithValue("@idEstado", Estado.fechaCOMPLETA);
                cmd.CommandText = sql;
                cmd.ExecuteNonQuery();

@@ -1673,6 +1673,15 @@ Date: 2014-11-05
 .fase-Finalizada {
     background-color: #5cb85c;
 }
+.fecha-Diagramada {
+    background-color: #337ab7;
+}
+.fecha-Completa {
+    background-color: #5cb85c;
+}
+.fecha-Incompleta {
+    background-color: #f0ad4e;
+}
 
 .inhabilitado {
 cursor:not-allowed;

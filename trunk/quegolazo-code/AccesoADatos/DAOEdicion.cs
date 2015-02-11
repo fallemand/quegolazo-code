@@ -360,11 +360,11 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idEstado2", Estado.edicionCONFIGURADA);
                 cmd.CommandText = sql;
                 if (cmd.ExecuteNonQuery() == 0)
-                    throw new Exception("<b>No se pudo eliminar la Edición porque tiene partidos jugados</b>. Quite el resultado de los partidos de la edición y luego podrá eliminarla");
+                    throw new Exception("No se pudo eliminar la Edición porque tiene partidos jugados. Quite el resultado de los partidos de la edición y luego podrá eliminarla");
             }
             catch (SqlException ex)
             {
-                throw new Exception("Ocurrió un error al intentar eliminar la edición");
+                throw new Exception("Ocurrió un error al intentar eliminar la edición: "+ ex.Message);
             }
             finally
             {
@@ -806,10 +806,14 @@ namespace AccesoADatos
 						                            BEGIN
 							                        UPDATE Ediciones SET idEstado = @idEstado WHERE idEdicion = @idEdicion
                                                     END
-						    ";
+                                                else
+                                                    BEGIN
+							                        UPDATE Ediciones SET idEstado = @idEstado1 WHERE idEdicion = @idEdicion
+                                                    END";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
                 cmd.Parameters.AddWithValue("@idEstado", Estado.edicionINICIADA);
+                cmd.Parameters.AddWithValue("@idEstado1", Estado.edicionCONFIGURADA);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
 
