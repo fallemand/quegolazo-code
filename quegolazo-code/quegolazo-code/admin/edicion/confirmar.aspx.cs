@@ -81,7 +81,10 @@ namespace quegolazo_code.admin.edicion
                     gestorEdicion.cambiarEstadoAConfigurada(); // Cambia el estado de la Edición "REGISTRADA" a "PERSONALIZADA" 
                 }
                 else
+                {
                     gestorEdicion.actualizarconfirmacionEdicion(); //Actualiza las Preferencias, Actualiza equipos en la edicion y Actualiza Fases
+ 
+                }                    
                 Response.Redirect(GestorUrl.aFECHAS);
             }
             catch(Exception ex)

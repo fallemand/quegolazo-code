@@ -373,6 +373,37 @@ namespace AccesoADatos
             }
         }
 
+        public void eliminarConfiguracion(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"DELETE FROM Ediciones
+                                WHERE idEdicion = @idEdicion 
+                                AND idEstado IN (@idEstado1, @idEstado2)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@idEstado1", Estado.edicionREGISTRADA);
+                cmd.Parameters.AddWithValue("@idEstado2", Estado.edicionCONFIGURADA);
+                cmd.CommandText = sql;
+                if (cmd.ExecuteNonQuery() == 0)
+                    throw new Exception("No se pudo eliminar la Edición porque tiene partidos jugados. Quite el resultado de los partidos de la edición y luego podrá eliminarla");
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Ocurrió un error al intentar eliminar la edición: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
         /// <summary>
         /// Obtiene todos los Géneros de Edición de la BD
         /// autor: Pau Pedrosa
@@ -719,6 +750,31 @@ namespace AccesoADatos
             {
                 trans.Rollback();
                 throw new Exception("No se pudo actualizar las preferencias: " + e.Message);
+            }
+        }
+
+        public void eliminarPreferencias(int idEdicion, SqlConnection con, SqlTransaction trans)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.Transaction = trans;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"DELETE FROM ConfiguracionesEdicion
+                                WHERE idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                //idEdición
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                trans.Rollback();
+                throw new Exception("No se pudo eliminar las preferencias: " + e.Message);
             }
         }
 
