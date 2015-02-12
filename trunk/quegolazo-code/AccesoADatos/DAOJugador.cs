@@ -229,6 +229,14 @@ namespace AccesoADatos
             }
             catch (SqlException ex)
             {
+                if (ex.Message.Contains("Goles"))
+                    throw new Exception("No se puede eliminar ese torneo: TIENE GOLES ASOCIADOS");
+                if (ex.Message.Contains("Cambios"))
+                    throw new Exception("No se puede eliminar ese torneo: TIENE CAMBIOS ASOCIADOS");
+                if (ex.Message.Contains("Tarjetas"))
+                    throw new Exception("No se puede eliminar ese torneo: TIENE TARJETAS ASOCIADOS");
+                if (ex.Message.Contains("Titulares"))
+                    throw new Exception("No se puede eliminar ese torneo: TIENE PARTIDOS JUGADOS");
                 //foreign key problem
                 if(ex.Number==547)
                     throw new Exception("No se pudo eliminar el Jugador: Existen datos asociados a este jugador, como sanciones, goles, tarjetas, etc. Debe eliminarlos para poder eliminar el jugador.");
