@@ -22,6 +22,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Literal LitEdicion;
         
         /// <summary>
+        /// Control panelEstadisticas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelEstadisticas;
+        
+        /// <summary>
         /// Control ddlEdiciones.
         /// </summary>
         /// <remarks>
@@ -65,15 +74,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinequipos;
-        
-        /// <summary>
-        /// Control Literal1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal1;
         
         /// <summary>
         /// Control rptGoleadores.

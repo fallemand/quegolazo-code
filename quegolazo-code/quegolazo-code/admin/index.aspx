@@ -9,6 +9,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <!-- Contenido -->
     <asp:Literal ID="LitEdicion" runat="server"></asp:Literal>
+    <asp:Panel ID="panelEstadisticas" runat="server">
     <div class="container padding-top">
         <div class="col-md-12">
             <div class="well">
@@ -75,6 +76,8 @@
                                                 <td><%# Eval("GF") %></td>
                                                 <td><%# Eval("GC") %></td>
                                                 <td><%# Eval("Puntos") %></td>
+                                                <td class="idEquipo" style="display:none;"><%# Eval("idEquipo") %></td>
+                                                <td style="display:none;"><%# Eval("idGrupo") %></td>
                                             </tr>
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -93,7 +96,6 @@
                 <div class="panel-heading">
                     <span class="icon-size flaticon-flaming"></span>
                     Goleadores de la Edición
-                    <asp:Literal ID="Literal1" Text="" runat="server"></asp:Literal>
                 </div>
                 <div class="panel-body">
                     <table class="table">
@@ -140,7 +142,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-stats"></span>
-                    Avance de la última Fecha 
+                    Avance de la Fecha 
                 </div>
                 <div class="panel-body">
                     <div id="avanceFecha"></div>
@@ -151,7 +153,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-stats"></span>
-                    Última fecha  : Fecha
+                    Fecha 
                     <asp:Literal ID="ltFecha" runat="server" />
                 </div>
                 <div class="panel-body">
@@ -187,6 +189,7 @@
             </div>
         </div>
     </div>
+ </asp:Panel>
     <!-- Contenido -->
     <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
         <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
