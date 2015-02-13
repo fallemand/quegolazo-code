@@ -20,23 +20,30 @@ namespace quegolazo_code.admin
             try
             {
                 panelFracaso.Visible = false;
+                panelEstadisticas.Visible = true;
                 gestorEdicion = Sesion.getGestorEdicion();
                 gestorEstadisticas = new GestorEstadisticas();               
                 gestorEdicion.edicion = Sesion.getEdicion();
                 
                 if (!Page.IsPostBack)
                 {
-                    obtenerEdiciónSeleccionada();
-                    cargarComboEdiciones();
-                    cargarTablaDePosiciones();
-                    cargarGoleadoresDeLaEdicion();
-                    cargarPorcentajeDeAvanceDeLaFecha();
-                    cargarPorcentajeDeAvanceEdicion();
-                    cargarUltimaFecha();                    
+                        obtenerEdiciónSeleccionada();
+                        cargarComboEdiciones();
+                        cargarTablaDePosiciones();
+                        cargarGoleadoresDeLaEdicion();
+                        cargarPorcentajeDeAvanceDeLaFecha();
+                        cargarPorcentajeDeAvanceEdicion();
+                        cargarUltimaFecha();
+                   
                 }
              }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex)
+            {
+                panelEstadisticas.Visible = false;
+                mostrarPanelFracaso("Primero debes crear una edición para poder ver las estadísticas");
+            }
         }
+
 
         /// <summary>
         /// Obtiene la Edición de Sesión
@@ -72,18 +79,21 @@ namespace quegolazo_code.admin
         {
             try
             {
-                int idEdicion = Validador.castInt(ddlEdiciones.SelectedValue);
-                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
-                gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
-                gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
-                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                gestorEdicion.getFaseActual();
+               
+                    int idEdicion = Validador.castInt(ddlEdiciones.SelectedValue);
+                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
+                    gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
+                    gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
+                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                    gestorEdicion.getFaseActual();
 
-                cargarTablaDePosiciones();
-                cargarGoleadoresDeLaEdicion();
-                cargarPorcentajeDeAvanceDeLaFecha();
-                cargarPorcentajeDeAvanceEdicion();
-                cargarUltimaFecha();
+                    cargarTablaDePosiciones();
+                    cargarGoleadoresDeLaEdicion();
+                    cargarPorcentajeDeAvanceDeLaFecha();
+                    cargarPorcentajeDeAvanceEdicion();
+                    cargarUltimaFecha();
+              
+
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
@@ -109,8 +119,8 @@ namespace quegolazo_code.admin
         private void cargarUltimaFecha()
         {
             var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha();
-            rptFecha.DataSource = ultimaFecha;
-            rptFecha.DataBind();
+            GestorControles.cargarRepeaterTable(rptFecha,ultimaFecha);
+            if(ultimaFecha.Rows.Count>0)
             ltFecha.Text = ultimaFecha.Rows[0]["idFecha"].ToString();
             noFixture.Visible = (rptFecha.Items.Count > 0) ? false : true;
             
@@ -154,8 +164,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void mostrarPanelFracaso(string mensaje)
         {
-            litFracaso.Text = mensaje;
-            panelFracaso.Visible = true;
+            GestorError.mostrarPanelFracaso(mensaje);
         }
     }
 }
