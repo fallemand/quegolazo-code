@@ -128,5 +128,31 @@ namespace Logica
             sancion.cantidadFechasSuspendidas = (cantidadFechasSuspendidas != null) ? (int?)int.Parse(cantidadFechasSuspendidas) : null;
             daoSancion.modificarSancion(sancion);
         }
+
+        public string manipulaSancionar(Edicion edicionSeleccionada)
+        {
+            string mensaje = "";
+            switch (edicionSeleccionada.estado.idEstado)
+            {
+                case Estado.edicionREGISTRADA:
+                    mensaje = "La edición seleccionada no se encuentra Configurada. Por favor, configure la edición primero para continuar";
+                    break;
+                case Estado.edicionCANCELADA:
+                    mensaje = "La edición seleccionada está " + edicionSeleccionada.estado.nombre + ". No puede registrar Sanciones.";
+                    break;
+                case Estado.edicionFINALIZADA:
+                    mensaje = "La edición seleccionada está " + edicionSeleccionada.estado.nombre + ". No puede registrar Sanciones.";
+                    break;
+                case Estado.edicionCONFIGURADA:
+                    if (!(edicionSeleccionada.preferencias.sancionesEquipos && edicionSeleccionada.preferencias.sancionesJugadores))
+                        mensaje = "La edición seleccionada no permite registrar sanciones. Actualice sus preferencias.";
+                    break;
+                case Estado.edicionINICIADA:
+                    if (!(edicionSeleccionada.preferencias.sancionesEquipos && edicionSeleccionada.preferencias.sancionesJugadores))
+                        mensaje = "La edición seleccionada no permite registrar sanciones.";
+                    break;
+            }
+            return mensaje;
+        }
     }
 }

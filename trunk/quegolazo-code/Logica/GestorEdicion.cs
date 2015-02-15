@@ -279,6 +279,21 @@ namespace Logica
             return daoFase.obtenerFases(edicion.idEdicion);
         }
 
+        public bool fasesFinalizadas()
+        {
+            int fasesFinalizadas = 0;
+            bool edicionFinalizada = false;
+            foreach (Fase itemFase in obtenerFases())
+            {
+                if (itemFase.estado.idEstado == Estado.faseFINALIZADA)
+                    fasesFinalizadas++;                    
+            }
+            if (obtenerFases().Count == fasesFinalizadas)
+                edicionFinalizada = true;
+            return edicionFinalizada;
+        }
+
+
         public void perteneceAUsuario(int idEdicion)
         {
             DAOEdicion daoEdicion = new DAOEdicion();

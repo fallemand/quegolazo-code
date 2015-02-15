@@ -317,9 +317,9 @@ namespace AccesoADatos
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException ex)
-            {//Error de Clave foránea
-                if (ex.Message.Contains("FK"))
-                    throw new Exception("No puede eliminar el Equipo, está asignado a un partido");
+            {
+                if (ex.Message.Contains("EquiposXGrupo"))
+                    throw new Exception("No puede eliminar ese Equipo: ESTÁ ASIGNADO A UN PARTIDO.");
                 throw new Exception("No se pudo eliminar el equipo: " + ex.Message);
             }
             finally

@@ -218,7 +218,9 @@ namespace AccesoADatos
             }
             catch (SqlException ex)
             {
-                throw new Exception("No se pudo eliminar el árbitro: " + ex.Message);
+                if (ex.Message.Contains("Partidos"))
+                    throw new Exception("No se puede eliminar ese Árbitro: ESTÁ ASIGNADO A UN PARTIDO.");
+                throw new Exception("No se pudo eliminar el Árbitro: " + ex.Message);
             }
             finally
             {
