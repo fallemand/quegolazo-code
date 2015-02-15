@@ -91,10 +91,6 @@ namespace AccesoADatos
                 throw new Exception("No se pudo registrar la Fase: " + ex.Message);
             }
         }
-        
-
-
-        
 
         /// <summary>
         /// Obtiene las fases  de una edición por Id. Si no tiene devuelve lista vacia

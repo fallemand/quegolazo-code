@@ -49,26 +49,27 @@ namespace quegolazo_code.admin
                 else
                     sinEdicion.Visible = false;                    
                 gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(Validador.castInt(ddlEdiciones.SelectedValue));
-                gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
-                if (!(gestorEdicion.edicion.preferencias.sancionesEquipos && gestorEdicion.edicion.preferencias.sancionesJugadores))
-                    throw new Exception("La edición seleccionada no permite registrar sanciones. Actualice sus preferencias.");
-                cargarRepeaterSanciones(ddlEdiciones.SelectedValue);
-                if (gestorEdicion.edicion.estado.idEstado != Estado.edicionREGISTRADA)
-                {
-                    cargarComboEquipos();
+                if (!gestorSancion.manipulaSancionar(gestorEdicion.edicion).Equals(""))
+                    throw new Exception(gestorSancion.manipulaSancionar(gestorEdicion.edicion));                
+                //La edición permite la manipulación de sanciones
+                if (gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA)
+                {// Edición Iniciada, se puede cargar sanciones a partidos
                     gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                    //gestorEdicion.actualizarFaseActual();
+                    if (gestorEdicion.fasesFinalizadas())
+                        throw new Exception("La Edición tiene todas sus Fases Finalizadas. Ya no puede registrar sanciones.");
                     gestorEdicion.getFaseActual();
-                    cargarComboFechas();
-                    cargarComboMotivos();
-                    rdEquipos.Checked = true;
-                    rdSinDefinir.Checked = true;
-                    btnRegistrarSancion.Enabled = true;
-                    habilitarCheck();
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "equipoYSinDefinir()", "equipoYSinDefinir();", true);
+                    cargarComboFechas();                   
                 }
-                else
-                    throw new Exception("Debe primero configurar la Edición.");
+                else // Edicion No Iniciada, por lo tanto se deshabilita la carga de fechas y partidos porque todavia no inició
+                    rdPartido.Disabled = true;
+                cargarRepeaterSanciones(ddlEdiciones.SelectedValue);
+                cargarComboEquipos();
+                cargarComboMotivos();
+                rdEquipos.Checked = true;
+                rdSinDefinir.Checked = true;
+                btnRegistrarSancion.Enabled = true;
+                habilitarCheck();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "equipoYSinDefinir()", "equipoYSinDefinir();", true);
             }
             catch (Exception ex) 
             {

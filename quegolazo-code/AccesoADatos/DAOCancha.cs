@@ -398,9 +398,9 @@ namespace AccesoADatos
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException ex)
-            {// si tiene edicion asociada
-                if (ex.Message.Contains("FK_CanchaXEdicion_Canchas"))
-                    throw new Exception("La Cancha que desea eliminar está asociada a alguna Edición");
+            {
+                if (ex.Message.Contains("Partidos"))
+                    throw new Exception("No se puede eliminar esa Cancha: ESTÁ ASIGNADA A UN PARTIDO.");
                 throw new Exception("No se pudo eliminar la Cancha: " + ex.Message);
             }
             finally
