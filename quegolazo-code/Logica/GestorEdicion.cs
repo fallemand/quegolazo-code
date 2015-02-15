@@ -151,8 +151,10 @@ namespace Logica
                 throw new Exception("Tiene que seleccionar al menos 2 equipos");
              //agrego los equipos al equipos a la edición
             GestorEquipo gestorEquipo = new GestorEquipo();
+            edicion.equipos = null; // lo agreguè yo pau
+            edicion.equipos = new List<Equipo>();
             foreach (int id in listaIdsSeleccionados)
-                edicion.equipos.Add(gestorEquipo.obtenerEquipoReducidoPorId(id));
+                edicion.equipos.Add(gestorEquipo.obtenerEquipoReducidoPorId(id));            
         }
 
         /// <summary>
