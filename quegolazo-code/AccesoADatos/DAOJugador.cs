@@ -235,8 +235,8 @@ namespace AccesoADatos
                     throw new Exception("No se puede eliminar ese Jugador: TIENE CAMBIOS ASOCIADOS");
                 if (ex.Message.Contains("Tarjetas"))
                     throw new Exception("No se puede eliminar ese Jugador: TIENE TARJETAS ASOCIADAS");
-                if (ex.Message.Contains("Titulares"))
-                    throw new Exception("No se puede eliminar ese Jugador: TIENE PARTIDOS JUGADOS");
+                //if (ex.Message.Contains("Titulares"))
+                //    throw new Exception("No se puede eliminar ese Jugador: TIENE PARTIDOS JUGADOS");
                 if (ex.Message.Contains("Sanciones"))
                     throw new Exception("No se puede eliminar ese Jugador: TIENE SANCIONES ASOCIADAS");
                 throw new Exception("No se pudo eliminar el Jugador: " + ex.Message);
