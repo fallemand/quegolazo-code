@@ -604,16 +604,16 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="btn-group btn-group-sm" role="group" style="margin-right:5px;" aria-label="...">
-                                                    <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');">Todos</button>
+                                                    <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones2 tr').show('fast');">Todos</button>
                                                 </div>
                                                 <div class="btn-group btn-group-sm" role="group" aria-label="...">
                                                     <asp:Repeater ID="rptGrupos2" runat="server">
                                                         <ItemTemplate>
-                                                                <button type="button" class="btn btn-success" onclick="filtrarPosiciones('<%# Eval("idGrupo")%>')">Grupo <%# Eval("idGrupo")%></button>
+                                                                <button type="button" class="btn btn-success" onclick="filtrarPosiciones2('<%# Eval("idGrupo")%>')">Grupo <%# Eval("idGrupo")%></button>
                                                         </ItemTemplate>
                                                     </asp:Repeater>
                                                 </div>
-                                                 Para modificar, arrastre los equipos a la posición correspondiente
+                                                <br />Para modificar, arrastre los equipos a la posición correspondiente
                                             </div>
                                         </div>
                                         <div class="row margin-top" style="max-height: 350px !important;overflow: auto;">
@@ -707,6 +707,12 @@
             }).show('fast');
         };
 
+        function filtrarPosiciones2(idGrupo) {
+            $('#tabla-posiciones2 tbody tr').hide();
+            $('#tabla-posiciones2 tbody tr').filter(function () {
+                return $(this).find('td:last-child').text() == idGrupo;
+            }).show('fast');
+        };
         function EndRequestHandler(sender, args) {
             cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
         };
