@@ -8,6 +8,8 @@ using Logica;
 using Entidades;
 using Utils;
 using System.Web.Script.Serialization;
+using System.Web.Services;
+using System.Web.Mvc;
 
 namespace quegolazo_code.admin
 {
@@ -15,12 +17,14 @@ namespace quegolazo_code.admin
     {
         protected GestorEdicion gestorEdicion;
         protected GestorPartido gestorPartido;
+        private static GestorEstadisticas gestorEstadistica;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 gestorEdicion = Sesion.getGestorEdicion();
                 gestorPartido = Sesion.getGestorPartido();
+                gestorEstadistica = Sesion.getGestorEstadisticas();
                 if (!Page.IsPostBack)
                 {
                     gestorPartido.partido = null;
@@ -719,15 +723,21 @@ namespace quegolazo_code.admin
             cargarPosicionesFinales();
         }
 
-        protected void btnConfirmarFinalizacion_Click(object sender, EventArgs e)
+        [WebMethod(enableSession: true)]
+        public static object guardarPosicionesEquipos(object idEquipos)
         {
-            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
-            //Falta obtener los grupos, cada uno con los equipos ordenados en una lista, en la posicion final en la que van
-            //gestorEstadisticas.guardarTablaPosicionesFinal(Grupos,gestorEdicion.edicion.idEdicion);
+            try
+            {
+                JavaScriptSerializer serializador = new JavaScriptSerializer();
+                List<Int64> ids = serializador.ConvertToType<List<Int64>>(idEquipos);
+                //CAMBIARRRRRRRRRRRRRRR!!!!!!!!
+                gestorEstadistica.guardarTablaPosicionesFinal(ids, 12); // CAMBIAR EL ID DE EDICION
+                return new HttpStatusCodeResult(200, "OK");
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(500, "Ha ocurrido un error en el servidor: '" + ex.Message + "'");
+            }
         }
-
-       
-
-
     }
 }

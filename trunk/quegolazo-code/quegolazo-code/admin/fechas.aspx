@@ -665,7 +665,7 @@
                         <div class="modal-footer">
                             <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <asp:Button ID="btnConfirmarFinalizacion" runat="server" Text="Finalizar" OnClick="btnConfirmarFinalizacion_Click" CssClass="btn btn-success causesValidation vgDatosEdicion" />
+                                <button ID="btnConfirmarFinalizacion" onclick="enviarPosicionesEquipos();"/>Finalizar</button>
                            </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="upModalEdicion">
@@ -775,7 +775,47 @@
              $("#spanSeleccionados").text(valor);
          }
 
-         $('tbody').sortable();
+         $('#tabla-posiciones2 tbody').sortable({
+             update: function (event, ui) {
+                 reordenarPosicionesEquipos();
+             }
+         });
+
+         function reordenarPosicionesEquipos() {
+             var columna = $('#tabla-posiciones2 tr td:nth-child(1)');
+             for (var i = 0; i < columna.length; i++) {
+                 $(columna[i]).text((i + 1) + 'º');
+             }
+         }
+
+         function enviarPosicionesEquipos() {
+             var vector = [];
+             var ids = $('#tabla-posiciones2 tr td:nth-child(11)');
+             for (var i = 0; i < ids.length; i++) {
+                 vector.push($(ids[i]).text());
+             }
+             $.ajax({
+                 type: "POST",
+                 url: "fechas.aspx/guardarPosicionesEquipos",
+                 contentType: "application/json",
+                 dataType: "json",
+                 async: false,
+                 data: "{idEquipos :" + JSON.stringify(vector) + " }",
+                 success: function (response) {
+                     //Si hubo un error, hago esto
+                     if (response.d.StatusCode != 200) {
+                         //widget.mostrarMensajeDeError(response.d.StatusDescription);
+                         //acá va cuando se produce un error
+                     } else {
+                         //respuesta = true;
+                         //$("#panelFracaso").hide();
+                     }
+                 },
+                 error: function (response) {
+                     //widget.mostrarMensajeDeError(response.responseJSON.Message);
+                 }
+             });
+         }
     </script>
     
 </asp:Content>

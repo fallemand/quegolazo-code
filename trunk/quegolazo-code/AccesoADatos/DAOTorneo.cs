@@ -54,7 +54,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener los torneos del usuario: " + ex.Message);
+                throw new Exception("Error al obtener los Torneos del usuario: " + ex.Message);
             }
             finally
             {
@@ -103,7 +103,7 @@ namespace AccesoADatos
             catch (Exception ex)
             {
 
-                throw new Exception("Error al intentar recuperar el torneo: " + ex.Message);
+                throw new Exception("Error al intentar recuperar el Torneo: " + ex.Message);
             }
             finally
             {
@@ -156,7 +156,7 @@ namespace AccesoADatos
             catch (Exception ex)
             {
 
-                throw new Exception("Error al intentar recuperar el torneo: " + ex.Message);
+                throw new Exception("Error al intentar recuperar el Torneo: " + ex.Message);
             }
             finally
             {
@@ -193,11 +193,11 @@ namespace AccesoADatos
             {
                 //Si ya existe un torneo con ese nombre
                 if(e.Message.Contains("unique_nombre"))
-                    throw new Exception("No se pudo registrar el torneo: Ya existe un torneo registrado con este nombre, por favor cambielo e intente nuevamente.");
+                    throw new Exception("No se pudo registrar el Torneo: Ya existe un Torneo registrado con este nombre, por favor cambielo e intente nuevamente.");
                 //Si ya existe un torneo con ese nick
                 if (e.Message.Contains("unique_nick"))
-                    throw new Exception("No se pudo registrar el torneo: Ya existe un torneo registrado con esta URL, por favor cambiela e intente nuevamente.");
-                throw new Exception("No se pudo registrar el torneo: " + e.Message);
+                    throw new Exception("No se pudo registrar el Torneo: Ya existe un Torneo registrado con esta URL, por favor cambiela e intente nuevamente.");
+                throw new Exception("No se pudo registrar el Torneo: " + e.Message);
             }
             finally 
             {
@@ -235,8 +235,8 @@ namespace AccesoADatos
             {
                 //Si ya existe un torneo con ese nombre
                 if (e.Message.Contains("unique_nombre"))
-                    throw new Exception("No se pudo modificar el torneo: ya existe un torneo registrado con este nombre, por favor cambielo e intente nuevamente.");              
-                throw new Exception("No se pudo registrar el torneo: " + e.Message);
+                    throw new Exception("No se pudo modificar el Torneo: ya existe un Torneo registrado con este nombre, por favor cambielo e intente nuevamente.");              
+                throw new Exception("No se pudo registrar el Torneo: " + e.Message);
             }
             finally
             {
@@ -269,14 +269,14 @@ namespace AccesoADatos
             catch (Exception ex)
             {// si tiene ediciones asociadas
                 if (ex.Message.Contains("Ediciones"))
-                    throw new Exception("No se puede eliminar ese torneo: tiene ediciones asociadas");
+                    throw new Exception("No se puede eliminar ese Torneo: TIENE EDICIONES ASOCIADAS");
                 if (ex.Message.Contains("Arbitros"))
-                    throw new Exception("No se puede eliminar ese torneo: tiene árbitros asociados");
+                    throw new Exception("No se puede eliminar ese Torneo: TIENE ÁRBITROS ASOCIADOS");
                 if (ex.Message.Contains("Canchas"))
-                    throw new Exception("No se puede eliminar ese torneo: tiene canchas asociadas");
+                    throw new Exception("No se puede eliminar ese Torneo: TIENE CANCHAS ASOCIADAS");
                 if (ex.Message.Contains("Equipos"))
-                    throw new Exception("No se puede eliminar ese torneo: tiene equipos asociados");
-                throw new Exception("No se pudo eliminar el torneo");
+                    throw new Exception("No se puede eliminar ese Torneo: TIENE EQUIPOS ASOCIADOS");
+                throw new Exception("No se pudo eliminar el Torneo");
             }
             finally
             {
@@ -322,7 +322,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener el último torneo del usuario: " + ex.Message);
+                throw new Exception("Error al obtener el último Torneo del usuario: " + ex.Message);
             }
             finally
             {

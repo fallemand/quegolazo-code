@@ -105,13 +105,13 @@ namespace AccesoADatos
             catch (SqlException ex)
             {
                 if (ex.Class == 14 && ex.Number == 2601)
-                    throw new Exception("La edición " + edicionNueva.nombre + " ya se encuentra registrada. Ingrese otro nombre para la misma.");
+                    throw new Exception("La Edición " + edicionNueva.nombre + " ya se encuentra registrada. Ingrese otro nombre para la misma.");
                 else
-                    throw new Exception("No se pudo registrar la edición: " + ex.Message);
+                    throw new Exception("No se pudo registrar la Edición: " + ex.Message);
             }
             catch (Exception e)
             {                
-                throw new Exception("No se pudo registrar la edición: " + e.Message);
+                throw new Exception("No se pudo registrar la Edición: " + e.Message);
             }               
             finally
             {
@@ -195,7 +195,7 @@ namespace AccesoADatos
             catch (Exception e)
             {   
                 trans.Rollback();     
-                throw new Exception("No se pudo registrar la confirmación de la edición: " + e.Message);
+                throw new Exception("No se pudo registrar la confirmación de la Edición: " + e.Message);
             }
             finally
             {
@@ -231,7 +231,7 @@ namespace AccesoADatos
             }
             catch (Exception e)
             {
-                throw new Exception("No se pudo actualizar la confirmación de la edición: " + e.Message);
+                throw new Exception("No se pudo actualizar la confirmación de la Edición: " + e.Message);
             }
             finally
             {
@@ -365,7 +365,7 @@ namespace AccesoADatos
             }
             catch (SqlException ex)
             {
-                throw new Exception("Ocurrió un error al intentar eliminar la edición: "+ ex.Message);
+                throw new Exception("Ocurrió un error al intentar eliminar la Edición: "+ ex.Message);
             }
             finally
             {
@@ -396,7 +396,7 @@ namespace AccesoADatos
             }
             catch (SqlException ex)
             {
-                throw new Exception("Ocurrió un error al intentar eliminar la edición: " + ex.Message);
+                throw new Exception("Ocurrió un error al intentar Eliminar la edición: " + ex.Message);
             }
             finally
             {
@@ -485,7 +485,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al intentar recuperar los géneros de edición: " + ex.Message);
+                throw new Exception("Error al intentar recuperar los Géneros de Edición: " + ex.Message);
             }
             finally
             {
@@ -750,7 +750,7 @@ namespace AccesoADatos
             catch (Exception e)
             {
                 trans.Rollback();
-                throw new Exception("No se pudo actualizar las preferencias: " + e.Message);
+                throw new Exception("No se pudo actualizar las Preferencias: " + e.Message);
             }
         }
 
@@ -775,7 +775,7 @@ namespace AccesoADatos
             catch (Exception e)
             {
                 trans.Rollback();
-                throw new Exception("No se pudo eliminar las preferencias: " + e.Message);
+                throw new Exception("No se pudo eliminar las Preferencias: " + e.Message);
             }
         }
 
@@ -877,7 +877,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                throw new Exception("No se pudo actualizar el estado de la edicion: " + ex.Message);
+                throw new Exception("No se pudo actualizar el estado de la Edicion: " + ex.Message);
             }
             finally
             {

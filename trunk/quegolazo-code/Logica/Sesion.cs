@@ -112,6 +112,15 @@ namespace Logica
             return (GestorPartido)System.Web.HttpContext.Current.Session["gestorPartido"];
         }
         /// <summary>
+        /// Devuelve el objeto gestorEdicion que se encuentra en Session, si es nulo, crea uno nuevo
+        /// </summary>  
+        public static GestorEstadisticas getGestorEstadisticas()
+        {
+            if (System.Web.HttpContext.Current.Session["gestorEstadisticas"] == null)
+                System.Web.HttpContext.Current.Session["gestorEstadisticas"] = new GestorEstadisticas();
+            return (GestorEstadisticas)System.Web.HttpContext.Current.Session["gestorEstadisticas"];
+        }
+        /// <summary>
         /// Devuelve el objeto GestorJugador que se encuentra en Session, si es nulo, crea uno nuevo
         /// </summary>        
         public static GestorJugador getGestorJugador()
