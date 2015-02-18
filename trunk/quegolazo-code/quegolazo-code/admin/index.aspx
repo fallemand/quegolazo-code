@@ -9,9 +9,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <!-- Contenido -->
     <asp:Literal ID="LitEdicion" runat="server"></asp:Literal>
-    <asp:Panel ID="panelEstadisticas" runat="server">
-    <div class="container padding-top">
-        <div class="col-md-12">
+     <div class="container padding-top">
+    <div class="col-md-12">
             <div class="well">
                 <fieldset class="vgSeleccionarEdicion">
                     <div class="col-md-5">
@@ -25,6 +24,9 @@
                 </fieldset>
             </div>
         </div>
+         </div>
+     <asp:Panel ID="panelEstadisticas" runat="server">
+    <div class="container padding-top">
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -189,7 +191,7 @@
             </div>
         </div>
     </div>
- </asp:Panel>
+    </asp:Panel>
     <!-- Contenido -->
     <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
         <asp:Literal ID="litFracaso" runat="server"></asp:Literal>

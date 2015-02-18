@@ -29,18 +29,14 @@ namespace quegolazo_code.admin
                 {
                         obtenerEdiciónSeleccionada();
                         cargarComboEdiciones();
-                        cargarTablaDePosiciones();
-                        cargarGoleadoresDeLaEdicion();
-                        cargarPorcentajeDeAvanceDeLaFecha();
-                        cargarPorcentajeDeAvanceEdicion();
-                        cargarUltimaFecha();
+                        cargarEstadisticas();
                    
                 }
              }
             catch (Exception ex)
             {
                 panelEstadisticas.Visible = false;
-                mostrarPanelFracaso("Primero debes crear una edición para poder ver las estadísticas");
+                mostrarPanelFracaso(ex.Message);
             }
         }
 
@@ -59,6 +55,21 @@ namespace quegolazo_code.admin
                 gestorEdicion.getFaseActual();
             }
         }
+
+        private void cargarEstadisticas()
+        {
+            if (gestorEdicion.faseActual != null)
+            {
+                cargarTablaDePosiciones();
+                cargarGoleadoresDeLaEdicion();
+                cargarPorcentajeDeAvanceDeLaFecha();
+                cargarPorcentajeDeAvanceEdicion();
+                cargarUltimaFecha();
+            }
+            else
+                panelEstadisticas.Visible = false;
+        }
+
 
         /// <summary>
         /// Carga Combo Ediciones
@@ -79,21 +90,13 @@ namespace quegolazo_code.admin
         {
             try
             {
-               
                     int idEdicion = Validador.castInt(ddlEdiciones.SelectedValue);
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
                     gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
                     gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                     gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                     gestorEdicion.getFaseActual();
-
-                    cargarTablaDePosiciones();
-                    cargarGoleadoresDeLaEdicion();
-                    cargarPorcentajeDeAvanceDeLaFecha();
-                    cargarPorcentajeDeAvanceEdicion();
-                    cargarUltimaFecha();
-              
-
+                    cargarEstadisticas();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }

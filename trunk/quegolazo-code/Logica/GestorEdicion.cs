@@ -51,7 +51,7 @@ namespace Logica
         }
 
         /// <summary>
-        /// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada
+        /// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Diagramada o iniciada
         /// </summary>
         /// <param name="gestor">El gestor que se va a actualizar</param>
         public void getFaseActual()
