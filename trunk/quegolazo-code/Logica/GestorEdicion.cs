@@ -28,7 +28,7 @@ namespace Logica
       
 
         /// <summary>
-        /// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada
+        /// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada o Diagramada
         /// </summary>   
         public void actualizarFaseActual()
         {
@@ -41,7 +41,7 @@ namespace Logica
             {
                 foreach (Fase fase in this.edicion.fases)
                 {
-                    if (fase.estado.idEstado == Estado.faseREGISTRADA)
+                    if (fase.estado.idEstado == Estado.faseREGISTRADA || fase.estado.idEstado == Estado.faseDIAGRAMADA)
                     {
                         this.faseActual = fase;
                         break;
@@ -195,14 +195,22 @@ namespace Logica
         public void confirmarEdicion()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            if(edicion.fases[0].tipoFixture.idTipoFixture.Contains("ELIM"))            
-            gestorFase.crearPartidosSiguientes(edicion.fases[0]);
+            verificarPrimeraFaseEliminatoria();
             daoEdicion.confirmarEdicion(edicion); 
+        }
+        /// <summary>
+        /// Verifica si la primera fase tiene fixture tipo Eliminatorio, y si es asi crea los partidos para toda la llave hasta la final y el tercer puesto.
+        /// </summary>
+        private void verificarPrimeraFaseEliminatoria()
+        {
+            if (edicion.fases[0].tipoFixture.idTipoFixture.Contains("ELIM"))
+                gestorFase.crearPartidosSiguientes(edicion.fases[0]);
         }
 
         public void actualizarconfirmacionEdicion()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
+            verificarPrimeraFaseEliminatoria();
             daoEdicion.actualizarconfirmacionEdicion(edicion);    
         }
 
