@@ -64,9 +64,16 @@ namespace Logica
            return DaoEstadisticas.obtenerAvanceEdicion(idEdicion);
        }
 
-       public void guardarTablaPosicionesFinal(List<Grupo> grupos, int idEdicion)
+       public void guardarTablaPosicionesFinal(List<Int64> idEquipos, int idEdicion)
        {
-           DaoEstadisticas.guardarTablaPosiciones(grupos, idEdicion);
+           List<Equipo> equipos = new List<Equipo>();
+           for (int i = 0; i < idEquipos.Count; i++)
+           {
+               Equipo equipo = new Equipo();
+               equipo.idEquipo = int.Parse(idEquipos[i].ToString());
+               equipos.Add(equipo);
+           }
+           DaoEstadisticas.guardarTablaPosiciones(equipos, idEdicion);
        }
 
        private Edicion buscarUltimaEdicionTorneo()
