@@ -18,7 +18,8 @@ namespace Logica
 
         public static void mostrarPanelExito(string mensaje)
         {
-            mensaje.Replace("'", "\'");
+            mensaje = mensaje.Replace("'", "\"");
+            mensaje = mensaje.Replace(System.Environment.NewLine, " - ");
             String funcionJS = "showPanelMessage('" + idPanelExito + "', '" + idMensajeExito + "', '" + mensaje + "');";
 
             if (HttpContext.Current.CurrentHandler is Page)
@@ -38,7 +39,8 @@ namespace Logica
 
         public static void mostrarPanelFracaso(string mensaje)
         {
-            mensaje.Replace("'", "\"");
+            mensaje = mensaje.Replace("'", "\"");
+            mensaje = mensaje.Replace(System.Environment.NewLine, " - ");
             String funcionJS = "showPanelMessage('" + idPanelError + "', '" + idMensajeError + "', '" + mensaje + "');";
 
             if (HttpContext.Current.CurrentHandler is Page)
