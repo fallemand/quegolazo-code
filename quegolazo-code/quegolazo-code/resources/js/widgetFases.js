@@ -6,7 +6,8 @@
         fases: [],
         idFaseCerrada : 6,
         idFaseEnJuego: 5,
-        idFaseDiagramada :4, 
+        idFaseDiagramada: 4,
+        asistente : true,
         idFaseEditable : null,
         error : false,
         tiposDeFixture: [{
@@ -320,7 +321,7 @@
     },
     //crea una tabla para presentar el grupo
     crearTablaParaGrupo: function (idGrupo, numFase) {
-        return "<div id='tablaGrupo" + idGrupo + "Fase"+numFase + "' class='col-md-6 divGrupos'> <table  class='table'><thead><tr><th>Grupo " + idGrupo + "</th></tr></thead><tbody><tr><td></td></tr></tbody></table></div>"
+        return "<div id='tablaGrupo" + idGrupo + "Fase"+numFase + "' class='col-md-6 divGrupos'><table  class='table'><thead><tr><th>Grupo " + idGrupo + "</th></tr></thead><tbody><tr><td></td></tr></tbody></table></div>"
      },
     // realiza la llamada final al servidor, mandando como parametro una lista de fases con sus atributos, y guardando las fases en sesión.
     guardarFasesEnSesion: function () {
@@ -357,6 +358,42 @@
         }
         
     },
+    // realiza la llamada final al servidor, mandando como parametro una lista de fases con sus atributos, y guardando las fases en sesión.
+    actualizarFasesEnSesion: function () {
+        var widget = this;
+        var respuesta = false;
+        try {
+            widget.armarFases();
+            widget.validarFasesCorrectas();
+            $.ajax({
+                type: "POST",
+                url: "fechas.aspx/guardarFases",
+                contentType: "application/json",
+                dataType: "json",
+                async: false,
+                data: "{JSONFases :" + JSON.stringify(widget.options.fases) + " }",
+                success: function (response) {
+                    //Si hubo un error, hago esto
+                    if (response.d.StatusCode != 200) {
+                        widget.mostrarMensajeDeError(response.d.StatusDescription);
+                    } else {
+                        respuesta = true;
+                        $("#panelFracaso").hide();
+                    }
+                },
+                error: function (response) {
+                    widget.mostrarMensajeDeError(response.responseJSON.Message);
+                }
+            });
+            return respuesta;
+
+        } catch (e) {
+            widget.mostrarMensajeDeError(e.message);
+            return respuesta;
+        }
+
+    },
+ 
     //valida que las fases estén generadas por el usuario y que la diferencia de equipos entre los grupos no sea mayor a uno
     validarFasesCorrectas: function () {
         var widget = this;
@@ -582,7 +619,7 @@
         $("#msjFracaso").text(mensaje);
         $("#panelFracaso").show();
     },
-    //muestra el mensaje que se pasa por parametro, haciendo el efecto de luz ;)
+    //inhabilita las fases finalizadas y deja abierta la fase actual
     inhabilitarFasesFinalizadas: function () {
         var widget = this;        
         for (var i = 0; i < widget.options.fases.length; i++) {
@@ -593,6 +630,13 @@
                 //colapso el acordeon correspondiente a una fase no editable.
                 $("#collapseFase" + widget.options.fases[i].idFase).removeClass("in");
             }
+        }
+        if(!widget.options.asistente)//si no lo esta ejecutando del asistente, entonces deja visible la fase editable y no la ultima
+        for (var i = 0; i < widget.options.fases.length; i++) {
+            if(widget.options.fases[i].idFase != widget.options.idFaseEditable)
+                $("#collapseFase" + widget.options.fases[i].idFase).removeClass("in");
+            else
+                $("#collapseFase" + widget.options.fases[i].idFase).addClass("in");
         }
     }
 

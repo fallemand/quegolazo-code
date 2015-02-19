@@ -220,7 +220,7 @@ namespace AccesoADatos
             try
             {
                 if (con.State == ConnectionState.Closed)
-                    con.Open();
+                con.Open();
                 trans = con.BeginTransaction();
                 actualizarPreferencias(edicion, con, trans);
                 DAOEquipo daoEquipo = new DAOEquipo();

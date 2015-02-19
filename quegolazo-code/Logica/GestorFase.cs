@@ -13,8 +13,6 @@ namespace Logica
     {
 
       public IGenerarFixture generadorFixture { get; set; }
-      
-     
       /// <summary>
       /// método para generar fixture
       /// autor=Flor
@@ -53,6 +51,19 @@ namespace Logica
       public bool estaFinalizada(int idFase, int idEdicion)
       {
         return  (new DAOFase()).finalizoFase(idFase,idEdicion);
+      }
+
+      /// <summary>
+      /// Verifica si la fase generada por el usuario tiene la misma (o menor) cantidad de equipos que la que habia generado anteriormente, devuelve True si la fase generada es correcta, false si la cantidad de equipos que selecciono es menor a la anterior
+      /// </summary>
+      /// <param name="cantidadEquipos">La cantidad de equipos que seleccionó el usuario</param>
+      /// <param name="idFase">el numero de fase a verificar</param>
+      /// <param name="idFase">Las fases en donde se va a realizar la validacion</param>
+      /// <returns>True si la fase generada es correcta, false si la cantidad de equipos que selecciono es menor a la anterior</returns>
+      public bool validarCantidadEquipos(string listadoEquipos, int idFase, List<Fase> fases)
+      {
+          string[] listaIdsSeleccionados = listadoEquipos.Split(',');
+          return fases[idFase - 1].cantidadDeEquipos <= listaIdsSeleccionados.Length -1; //-1 porque cuenta la ultima coma
       }
 
       /// <summary>
@@ -109,6 +120,27 @@ namespace Logica
               }
           }
       }
+
+
+      /// <summary>
+      /// Elimina las fases posteriores a la actual, es decir las genericas, para que el usuario genere una nueva fase.
+      /// </summary>
+      /// <param name="fases">La lista de fases a limpiar</param>
+      /// <param name="faseActual">La fase que se va a editar</param>
+      public void eliminarFasesPosteriores(List<Fase> fases, Fase faseActual)
+      {
+          List<Fase> fasesAEliminar = new List<Fase>();
+          foreach (Fase fase in fases)
+          {
+              if (fase.idFase > faseActual.idFase)
+                  fasesAEliminar.Add(fase);
+          }
+          foreach (Fase faseElim in fasesAEliminar)
+          {
+              fases.Remove(faseElim);
+          }
+      }
+
 
       //public void registrarFase()
       //{
@@ -169,16 +201,18 @@ namespace Logica
           List<Fecha> fechasAEliminar =  new List<Fecha>();
           foreach (Fase fase in fases)
           {
-             if(fase.grupos.Count >0)
-                 foreach (Fecha fecha in fase.grupos[0].fechas)
-                 {
-                     if (fecha.estado.idEstado == Estado.fechaREGISTRADA)
-                         fechasAEliminar.Add(fecha);
-                 }
-             foreach (Fecha fechaEliminar in fechasAEliminar)
-             {
-                 fase.grupos[0].fechas.Remove(fechaEliminar);
-             }
+              if (!fase.esGenerica && fase.grupos.Count > 0)
+              {
+                  foreach (Fecha fecha in fase.grupos[0].fechas)
+                  {
+                      if (fecha.estado.idEstado == Estado.fechaREGISTRADA)
+                          fechasAEliminar.Add(fecha);
+                  }
+                  foreach (Fecha fechaEliminar in fechasAEliminar)
+                  {
+                      fase.grupos[0].fechas.Remove(fechaEliminar);
+                  }
+              }
           }
          
       }

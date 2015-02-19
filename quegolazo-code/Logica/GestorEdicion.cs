@@ -365,8 +365,13 @@ namespace Logica
         }
 
 
-        //Este método crea una nueva fase en caso de que no exista una siguiente, en una lista de fases dada.
-        public void verificarProximaFase(List<Fase> fases, int idFaseNueva)
+       /// <summary>
+        /// Este método crea una nueva fase en caso de que no exista una siguiente, en una lista de fases dada. Devuelve true si la fase siguiente estaba creada genericamente y false en caso de que haya creado una nueva.
+       /// </summary>
+       /// <param name="fases"></param>
+       /// <param name="idFaseNueva"></param>
+        /// <returns>Devuelve true si la fase siguiente estaba creada genericamente y false en caso de que haya creado una nueva.</returns>
+       public bool verificarProximaFase(List<Fase> fases, int idFaseNueva)
         {
             bool existeFase = false;
             foreach (Fase f in fases)
@@ -381,6 +386,7 @@ namespace Logica
                 fases.Add(new Fase { idFase = idFaseNueva, idEdicion = edicion.idEdicion, estado = new Estado(Estado.faseDIAGRAMADA) });
             //cierro la fase anterior a la nueva
             fases[idFaseNueva - 2].estado.idEstado = Estado.faseFINALIZADA;
+            return existeFase;
         }
 
         /// <summary>

@@ -566,9 +566,9 @@
                         </div>
                         <div class="modal-footer">
                          <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
-                                <Button ID="btnCerrar" data-dismiss="modal" onclick="clickBotonCerrar();" class="btn btn-default" > Cancelar</button>
-                                <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click" OnClientClick="clickSiguiente();" ClientIDMode="Static" CssClass="btn btn-success causesValidation vgDatosEdicion" />
-                                <Button ID="btnConfirmar" Visible="false" onclick="clickBotonConfirmar();" style="display:none;" Class="btn btn-success causesValidation vgDatosEdicion">Confirmar Fase</button>                        
+                           <Button ID="btnCerrar" data-dismiss="modal" onclick="clickBotonCerrar();" class="btn btn-default" > Cancelar</button>
+                           <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click"  ClientIDMode="Static" CssClass="btn btn-success causesValidation vgDatosEdicion" />
+                           <Button ID="btnConfirmar" style="display:none" OnClick="$('#contenedorFases').generadorDeFases('actualizarFasesEnSesion');"  Class="btn btn-success causesValidation vgDatosEdicion" >Confirmar Fase</button>
                          </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
@@ -680,8 +680,28 @@
             </div>
         </div>
     </div>
-    <!-- Modal Seleccionar Ganadores - Finalizar Edicion -->
-
+    <!-- Modal Confirmar cambios en cantidades -->
+        <div class="modal fade bs-example-modal-sm" id="modalCambioEnCantidades" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="H4">Confirmar cambios</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="Div2" class="alert alert-danger">
+                        <b>Atención:</b> (Acá va una explicacion que se entienda). Si continua, se eliminarán las fases siguientes.
+                    </div> 
+                    ¿Está seguro que desea finalizar la fase?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal(modalFinalizarFase);">Cancelar</button>
+                    <asp:Button ID="btnCambioEnCantidadEquipos" runat="server" OnClick="btnCambioEnCantidadEquipos_Click" CssClass="btn btn-success" Text="Continuar" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Confirmar cambios en cantidades -->
 
     <script type="text/javascript">
         $('body').on('keyup', '#filtro', function () {
@@ -733,6 +753,9 @@
          function clickSiguiente() {
              $('#tituloModal').text("Configurar la nueva Fase");  
              $('#panelConfigurarFase').show();
+             $('#btnConfirmar').show();
+             $('#btnConfigurarFase').hide();
+             $('#panelSeleccionarEquipos').hide();
          }
          function reiniciarContador() {
              $("#hfEquiposSeleccionados").val("");
