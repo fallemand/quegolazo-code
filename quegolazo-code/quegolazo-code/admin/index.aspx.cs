@@ -27,10 +27,9 @@ namespace quegolazo_code.admin
                 
                 if (!Page.IsPostBack)
                 {
-                        obtenerEdiciónSeleccionada();
-                        cargarComboEdiciones();
-                        cargarEstadisticas();
-                   
+                    obtenerEdiciónSeleccionada();
+                    cargarComboEdiciones();
+                    cargarEstadisticas();                   
                 }
              }
             catch (Exception ex)
@@ -90,13 +89,14 @@ namespace quegolazo_code.admin
         {
             try
             {
-                    int idEdicion = Validador.castInt(ddlEdiciones.SelectedValue);
-                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
-                    gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
-                    gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
-                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                    gestorEdicion.getFaseActual();
-                    cargarEstadisticas();
+                int idEdicion = Validador.castInt(ddlEdiciones.SelectedValue);
+                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
+                panelEdicionRegistrada.Visible = (gestorEdicion.edicion.estado.idEstado == 2);
+                gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
+                gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
+                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                gestorEdicion.getFaseActual();
+                cargarEstadisticas();
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }

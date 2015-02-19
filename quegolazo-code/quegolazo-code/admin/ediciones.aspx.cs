@@ -129,6 +129,8 @@ namespace quegolazo_code.admin
         {
             try
             {
+                if (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA)
+                    throw new Exception("La edición seleccionada no se pudo eliminar porque está Finalizada.");
                 gestorEdicion.eliminarEdicion(gestorEdicion.edicion.idEdicion);
                 cargarRepeaterEdiciones();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarEdicion", "closeModal('eliminarEdicion');", true);
@@ -151,7 +153,8 @@ namespace quegolazo_code.admin
                     lnkConfigurarEdicion.Visible = false;
                     lnkVerFixture.Enabled = false;
                     gestorEdicion.edicion = (Edicion)e.Item.DataItem;
-                    lnkVerFechas.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA);
+                    if((gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA) || (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA))
+                        lnkVerFechas.Visible = true;
                     lnkVerFixture.Enabled = (gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA);
                     lnkConfigurarEdicion.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA);
                     lnkCambiarConfiguracion.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA);

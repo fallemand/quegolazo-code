@@ -38,7 +38,7 @@
                                                 <div class="col-md-1 text-center">
                                                     <i class="icon-size flaticon-trophy5"></i>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-5">
                                                     <a data-toggle="collapse" data-parent="#accordion" href="#edicion<%# Eval("idEdicion") %>" aria-expanded="true" aria-controls="edicion<%# Eval("idEdicion") %>">
                                                         <h4>
                                                             <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
@@ -49,7 +49,7 @@
                                                 <div class="col-md-1" style="padding-top:8px;">
                                                     <span class="label label-<%#((Entidades.Edicion)Container.DataItem).estado.nombre%>"><%#((Entidades.Edicion)Container.DataItem).estado.nombre%></span>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-5">
                                                     <div class="pull-right botones botones-small">
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkConfigurarEdicion" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>' Visible="false" Width="155px">Configurar Edición</asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkVerFechas" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="verFechas" CommandArgument='<%#Eval("idEdicion")%>' Visible="false" Width="155px">Ver Fechas</asp:LinkButton>
@@ -57,6 +57,7 @@
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkVerFixture" title="Ver Fixture" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="verFixture" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip" Enabled="false"><span class="flaticon-football116"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkModificarEdicion" title="Editar Edición" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarEdicin" title="Eliminar Edición" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="eliminarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkCancelarEdicion" title="Cancelar Edición" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="cancelarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-ban-circle"></span></asp:LinkButton>
                                                     </div>
                                                 </div>
                                             </div>
