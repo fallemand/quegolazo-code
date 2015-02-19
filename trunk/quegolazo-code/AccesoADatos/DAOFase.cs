@@ -465,21 +465,21 @@ namespace AccesoADatos
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
 
-                       sql = @"                            
-                            DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
-                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Fechas f WHERE f.idGrupo = @idGrupo AND f.idFase=@idFase AND f.idEdicion = @idEdicion AND f.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 3 AND idEstado<>8  ))
-					                            if(@cantidad=0)
-						           BEGIN
-							                UPDATE Fases SET idEstado = @idEstado WHERE idFase = @idFase AND idEdicion = @idEdicion
-						           END";
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@idPartido", idPartido);
-                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseFINALIZADA);
-                        cmd.CommandText = sql;
-                        cmd.ExecuteNonQuery();
+//                       sql = @"                            
+//                            DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
+//                            DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
+//                            DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
+//                            DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
+//                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Fechas f WHERE f.idGrupo = @idGrupo AND f.idFase=@idFase AND f.idEdicion = @idEdicion AND f.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 3 AND idEstado<>8  ))
+//					                            if(@cantidad=0)
+//						           BEGIN
+//							                UPDATE Fases SET idEstado = @idEstado WHERE idFase = @idFase AND idEdicion = @idEdicion
+//						           END";
+//                        cmd.Parameters.Clear();
+//                        cmd.Parameters.AddWithValue("@idPartido", idPartido);
+//                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseFINALIZADA);
+//                        cmd.CommandText = sql;
+//                        cmd.ExecuteNonQuery();
                         
                     }
                     catch (Exception ex)
