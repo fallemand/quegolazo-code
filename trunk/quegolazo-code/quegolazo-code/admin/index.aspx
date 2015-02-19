@@ -221,9 +221,4 @@
          };
 
     </script>
-      <script>
-          $(document).ready(function () {
-              setearEventos();
-          });
-    </script>
 </asp:Content>
