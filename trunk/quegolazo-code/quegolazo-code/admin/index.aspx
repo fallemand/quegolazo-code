@@ -9,7 +9,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <!-- Contenido -->
     <asp:Literal ID="LitEdicion" runat="server"></asp:Literal>
-     <div class="container padding-top">
+    <div class="container padding-top">
     <div class="col-md-12">
             <div class="well">
                 <fieldset class="vgSeleccionarEdicion">
@@ -22,10 +22,17 @@
                         <asp:Button ID="btnSeleccionarEdicion" runat="server" Text="Seleccionar Edición" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEdicion" OnClick="btnSeleccionarEdicion_Click" />
                     </div>
                 </fieldset>
-            </div>
-        </div>
          </div>
-     <asp:Panel ID="panelEstadisticas" runat="server">
+        <div class="row">
+            <asp:Panel ID="panelEdicionRegistrada" runat="server" CssClass="col-md-7" Enabled="True" Visible="False">
+                <div class="alert alert-info">
+                    La edición seleccionada se encuentra registrada. Por favor, primero configurela para ver las estadísticas.
+                </div>
+            </asp:Panel>
+        </div>
+      </div>        
+    </div>
+    <asp:Panel ID="panelEstadisticas" runat="server">
     <div class="container padding-top">
         <div class="col-md-6">
             <div class="panel panel-default">
