@@ -429,6 +429,22 @@ namespace Logica
             }
         }
 
+        public void cambiarEstadoAFase(int idEdicion, int idFase, int idEstado)
+        {
+            DAOFase daoFase = new DAOFase();
+            daoFase.cambiarEstado(idEdicion, idFase, idEstado);
+        }
+
+        public void cerrarEdicion(int idEdicion)
+        {
+            cambiarEstado(Estado.edicionFINALIZADA); //Cambia estado edición: de Iniciada a FINALIZADA
+            cambiarEstadoAFase(edicion.idEdicion, faseActual.idFase, Estado.faseFINALIZADA); // Cambiar estado Fase a FINALIZADA
+            DAOPartido daoPartido = new DAOPartido();
+            DAOFecha daoFecha = new DAOFecha();
+            daoPartido.cambiarEstadosAPartidos(Estado.partidoCANCELADO, edicion.idEdicion); //De todos los partidos que no han  sido jugados, les cambia el estado a CANCELADO           
+            daoFecha.cambiarEstadosAFechas(Estado.fechaCOMPLETA, edicion.idEdicion); // Pone a todas las fechas como COMPLETAS
+        }
+
         ///// <summary>
         ///// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada
         ///// </summary>

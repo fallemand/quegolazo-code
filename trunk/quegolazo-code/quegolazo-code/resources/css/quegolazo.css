@@ -1506,6 +1506,14 @@ border-color: #DDDDDD;
     background-color: #70BD82;
 }
 
+.label-red {
+    background-color: #D84B4B;
+}
+
+.label-red:hover {
+    background-color: #E26666;
+}
+
 .label-green:hover {
     background-color: #77B37C;
 }

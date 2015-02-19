@@ -15,7 +15,7 @@ namespace quegolazo_code.admin
 {
     public partial class fechas : System.Web.UI.Page
     {
-        protected GestorEdicion gestorEdicion;
+        public GestorEdicion gestorEdicion;
         protected GestorPartido gestorPartido;
         private static GestorEstadisticas gestorEstadistica;
         protected void Page_Load(object sender, EventArgs e)
@@ -679,6 +679,7 @@ namespace quegolazo_code.admin
                 {
                     
                     Partido partido = ((Partido)e.Item.DataItem);
+                    Edicion edicionAsociada = gestorEdicion.edicion;
                     if (partido.local != null && partido.visitante != null)
                     {
                         Panel panelPartidoNormal = (Panel)e.Item.FindControl("panelPartidoNormal");
@@ -689,6 +690,8 @@ namespace quegolazo_code.admin
                         Panel panelPartidoLibre = (Panel)e.Item.FindControl("panelPartidoLibre");
                         panelPartidoLibre.Visible = true;
                     }
+                    LinkButton lnkAdministrarPartido = (LinkButton)e.Item.FindControl("lnkAdministrarPartido");
+                    lnkAdministrarPartido.Visible = ((partido.estado.idEstado == Estado.partidoJUGADO || partido.estado.idEstado == Estado.partidoCANCELADO) && edicionAsociada.estado.idEstado == Estado.edicionFINALIZADA) ? false : true;
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -730,14 +733,23 @@ namespace quegolazo_code.admin
             {
                 JavaScriptSerializer serializador = new JavaScriptSerializer();
                 List<Int64> ids = serializador.ConvertToType<List<Int64>>(idEquipos);
-                //CAMBIARRRRRRRRRRRRRRR!!!!!!!!
-                gestorEstadistica.guardarTablaPosicionesFinal(ids, 12); // CAMBIAR EL ID DE EDICION
+                GestorEdicion gestorEdicion = Sesion.getGestorEdicion();
+                //Guarda en la tabla TablaPosicionesFinal los equipos ganadores de acuerdo al orden que estableció el usuario
+                gestorEstadistica.guardarTablaPosicionesFinal(ids, gestorEdicion.edicion.idEdicion);
+                //Cierra la edición
+                gestorEdicion.cerrarEdicion(gestorEdicion.edicion.idEdicion);
                 return new HttpStatusCodeResult(200, "OK");
             }
             catch (Exception ex)
             {
                 return new HttpStatusCodeResult(500, "Ha ocurrido un error en el servidor: '" + ex.Message + "'");
             }
+        }
+
+        protected void btnConfirmarFinalizacion_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "claseModal", "closeModal('modalSeleccionarGanadores');", true);
+            Response.Redirect(GestorUrl.aFECHAS);
         }
     }
 }

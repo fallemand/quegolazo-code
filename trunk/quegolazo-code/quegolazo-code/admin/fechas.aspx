@@ -50,7 +50,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <asp:LinkButton Visible="false" title="Finalizar Fase" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
-                                                    <span class="label label-green label-big">Finalizar</span></asp:LinkButton>
+                                                    <span class="label label-red label-big">Finalizar</span></asp:LinkButton>
                                                 <asp:Panel ID="panelEstadoFase" Visible="false" runat="server">
                                                     <span class="label label-big fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" rel="txtTooltip" title="<%# ((Entidades.Fase)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
                                                 </asp:Panel>   
@@ -593,7 +593,7 @@
                     <ContentTemplate>
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="H3"><i class="flaticon-football160"></i>Tabla de Posiciones Final
+                            <h4 class="modal-title" id="H3"><i class="flaticon-trophy5"></i>Tabla de Posiciones Final
                                 <%--<asp:Label ID="lblTituloModalEdicion" runat="server" Text="Agregar Nueva Edición"></asp:Label>--%>
                             </h4>
                         </div>
@@ -637,7 +637,7 @@
                                                            <asp:Repeater ID="rptPosiciones" runat="server">
                                                             <ItemTemplate>
                                                                 <tr>
-                                                                    <td> <%# Container.ItemIndex + 1 %>º</td>
+                                                                    <td style="font-size:17px" ><strong> <%# Container.ItemIndex + 1 %>º </strong></td>
                                                                     <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("idEquipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
                                                                     <td><%# Eval("Equipo") %></td>
                                                                     <td class="active" style="font-size:16px;"><b><%# Eval("Puntos") %></b></td>
@@ -665,7 +665,7 @@
                         <div class="modal-footer">
                             <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <button ID="btnConfirmarFinalizacion" onclick="enviarPosicionesEquipos();"/>Finalizar</button>
+                                <asp:Button ID="btnConfirmarFinalizacion" runat="server" Text="Finalizar" OnClientClick="enviarPosicionesEquipos();" OnClick="btnConfirmarFinalizacion_Click" class="btn btn-success pull-right"/>
                            </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="upModalEdicion">
@@ -784,7 +784,9 @@
          function reordenarPosicionesEquipos() {
              var columna = $('#tabla-posiciones2 tr td:nth-child(1)');
              for (var i = 0; i < columna.length; i++) {
-                 $(columna[i]).text((i + 1) + 'º');
+                 //$(columna[i]).text((i + 1) + 'º');
+                 $(columna[i]).html('<strong>' + (i + 1) + 'º' + '</strong>');
+                 $(columna[i]).css('font-size', '17px');
              }
          }
 
@@ -807,6 +809,7 @@
                          //widget.mostrarMensajeDeError(response.d.StatusDescription);
                          //acá va cuando se produce un error
                      } else {
+                         //closeModal(modalSeleccionarGanadores);
                          //respuesta = true;
                          //$("#panelFracaso").hide();
                      }
