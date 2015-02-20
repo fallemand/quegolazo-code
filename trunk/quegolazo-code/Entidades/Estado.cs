@@ -37,7 +37,8 @@ namespace Entidades
         public const int fechaREGISTRADA = 19;//REGISTRADA = Fecha genérica creada
         public const int fechaDIAGRAMADA = 7;//DIAGRAMA = Fecha creada
         public const int fechaINCOMPLETA = 9;//INCOMPLETA = Fecha con partidos pendientes de juego
-        public const int fechaCOMPLETA = 8;//COMPLETA = Fecha con todos los partidos jugados        
+        public const int fechaCOMPLETA = 8;//COMPLETA = Fecha con todos los partidos jugados       
+        public const int fechaCANCELADA = 21;//CANCELADA = Fecha cancelada
 
         //Estados Partido: 4
         public const int partidoDIAGRAMADO = 10;//DIAGRAMADO = Partido creado
@@ -50,6 +51,7 @@ namespace Entidades
         public const int faseDIAGRAMADA = 4;//DIAGRAMADA = Fase creada
         public const int faseINICIADA = 5;//INICIADA = Fase con al menos un partido jugado
         public const int faseFINALIZADA = 6;//FINALIZADA = Fase finalizada
+        public const int faseCANCELADA = 19;//CANCELADA = Fase cancelada
 
     }
     /// <summary>

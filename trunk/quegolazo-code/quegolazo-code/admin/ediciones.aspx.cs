@@ -87,7 +87,15 @@ namespace quegolazo_code.admin
                 {
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     Response.Redirect(GestorUrl.aFECHAS);
-                }  
+                }
+                if (e.CommandName == "cancelarEdicion")
+                {
+                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
+                    if (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA)
+                        throw new Exception("No es posible cancelar la edición seleccionada. Ya ha finalizado.");
+                    litNombreEdicionACancelar.Text = gestorEdicion.edicion.nombre;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalCancelarEdicion');", true);
+                }
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
@@ -149,11 +157,13 @@ namespace quegolazo_code.admin
                     LinkButton lnkVerFechas = (LinkButton)e.Item.FindControl("lnkVerFechas");
                     LinkButton lnkCambiarConfiguracion = (LinkButton)e.Item.FindControl("lnkCambiarConfiguracion");
                     LinkButton lnkVerFixture = (LinkButton)e.Item.FindControl("lnkVerFixture");
+                    LinkButton lnkCancelarEdicion = (LinkButton)e.Item.FindControl("lnkCancelarEdicion");
                     lnkVerFechas.Visible = false;
                     lnkConfigurarEdicion.Visible = false;
                     lnkVerFixture.Enabled = false;
+                    lnkCancelarEdicion.Enabled = true;
                     gestorEdicion.edicion = (Edicion)e.Item.DataItem;
-                    if((gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA) || (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA))
+                    if ((gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA) || (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA) || (gestorEdicion.edicion.estado.idEstado == Estado.edicionCANCELADA))
                         lnkVerFechas.Visible = true;
                     lnkVerFixture.Enabled = (gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA);
                     lnkConfigurarEdicion.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA);
@@ -166,11 +176,11 @@ namespace quegolazo_code.admin
 
                     if (panelDatosEdicionConfigurada.Visible)
                     {
-                        if (rptEquipos.Items.Count == 0)
-                        {
-                            HtmlGenericControl panelEquipos = (HtmlGenericControl)e.Item.FindControl("panelEquipos");
-                            panelEquipos.Visible = false;
-                        }
+                        //if (rptEquipos.Items.Count == 0)
+                        //{
+                        //    //HtmlGenericControl panelEquipos = (HtmlGenericControl)e.Item.FindControl("panelEquipos");
+                        //    //panelEquipos.Visible = false;
+                        //}
                         //Sanciones
                         if (gestorEdicion.edicion.preferencias.sanciones)
                         {
@@ -287,6 +297,17 @@ namespace quegolazo_code.admin
             GestorControles.cargarComboList(ddlTamañoCancha, gestorCancha.obtenerTodos(), "idTamanioCancha", "nombre");
             GestorControles.cargarComboList(ddlTipoSuperficie, gestorTipoSuperficie.obtenerTodos(), "idTipoSuperficie", "nombre");
             GestorControles.cargarComboList(ddlGenero, gestorEdicion.obtenerGenerosEdicion(), "idGeneroEdicion", "nombre");
+        }
+
+        protected void btnCancelarEdicion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorEdicion.cancelarEdicion(gestorEdicion.edicion.idEdicion);
+                cargarRepeaterEdiciones();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "cancelarEdicion", "closeModal('modalCancelarEdicion');", true);
+            }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }        
         }
     }
 }
