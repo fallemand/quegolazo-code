@@ -91,8 +91,8 @@ namespace quegolazo_code.admin
                 if (e.CommandName == "cancelarEdicion")
                 {
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
-                    if (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA)
-                        throw new Exception("No es posible cancelar la edición seleccionada. Ya ha finalizado.");
+                    if (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA || gestorEdicion.edicion.estado.idEstado == Estado.edicionCANCELADA)
+                        throw new Exception("No es posible cancelar la edición seleccionada. Se encuentra "+ gestorEdicion.edicion.estado.nombre);
                     litNombreEdicionACancelar.Text = gestorEdicion.edicion.nombre;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('modalCancelarEdicion');", true);
                 }
