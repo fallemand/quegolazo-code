@@ -688,7 +688,7 @@ namespace quegolazo_code.admin
                         panelPartidoLibre.Visible = true;
                     }
                     LinkButton lnkAdministrarPartido = (LinkButton)e.Item.FindControl("lnkAdministrarPartido");
-                    lnkAdministrarPartido.Visible = ((partido.estado.idEstado == Estado.partidoJUGADO || partido.estado.idEstado == Estado.partidoCANCELADO) && edicionAsociada.estado.idEstado == Estado.edicionFINALIZADA) ? false : true;
+                    lnkAdministrarPartido.Visible = ((partido.estado.idEstado == Estado.partidoJUGADO || partido.estado.idEstado == Estado.partidoCANCELADO) && (edicionAsociada.estado.idEstado == Estado.edicionFINALIZADA || edicionAsociada.estado.idEstado == Estado.edicionCANCELADA)) ? false : true;
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -770,28 +770,6 @@ namespace quegolazo_code.admin
                 gestorEstadistica.guardarTablaPosicionesFinal(ids, gestorEdicion.edicion.idEdicion);
                 //Cierra la edición
                 gestorEdicion.cerrarEdicion(gestorEdicion.edicion.idEdicion);
-                return new HttpStatusCodeResult(200, "OK");
-            }
-            catch (Exception ex)
-            {
-                return new HttpStatusCodeResult(500, "Ha ocurrido un error en el servidor: '" + ex.Message + "'");
-            }
-        }
-
-
-        /// <summary>
-        /// Guarda en sesión la configuración de fases
-        /// autor: Antonio Herrera
-        /// </summary>
-        [WebMethod(enableSession: true)]
-        public static object guardarFases(object JSONFases)
-        {
-            try
-            {
-                JavaScriptSerializer serializador = new JavaScriptSerializer();
-                List<Fase> fases = serializador.ConvertToType<List<Fase>>(JSONFases);
-                gestorEdicion.edicion.fases = fases;               
-               
                 return new HttpStatusCodeResult(200, "OK");
             }
             catch (Exception ex)

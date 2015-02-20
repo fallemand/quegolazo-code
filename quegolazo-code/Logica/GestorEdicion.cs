@@ -451,6 +451,23 @@ namespace Logica
             daoFecha.cambiarEstadosAFechas(Estado.fechaCOMPLETA, edicion.idEdicion); // Pone a todas las fechas como COMPLETAS
         }
 
+        public void cancelarEdicion(int idEdicion)
+        {
+            if (edicion.estado.idEstado != Estado.edicionREGISTRADA)            
+            {//la edición está CONFIGURADA O INICIADA                
+                DAOFase daoFase = new DAOFase();
+                DAOFecha daoFecha = new DAOFecha();
+                DAOPartido daoPartido = new DAOPartido();
+                //Le pone estado Cancelada a todas las fases que no estén finalizadas
+                daoFase.cambiarEstadoAFasesIncompletasYDiagramadas(edicion.idEdicion, Estado.edicionCANCELADA);                
+                //Le pone estado Cancelado a todos los partidos que no están jugados
+                daoPartido.cambiarEstadosAPartidos(Estado.partidoCANCELADO, edicion.idEdicion);
+                daoFecha.cambiarEstadosAFechasIncompletas(Estado.fechaCANCELADA, edicion.idEdicion);
+            }
+            cambiarEstado(Estado.edicionCANCELADA);//Cambia estado edición: de Iniciada a FINALIZADA            
+        }
+       
+
         ///// <summary>
         ///// Actualiza la fase actual de una edición, basandose en los estados, se considera fase actual a la primera fase que encuentre en estado Registrada
         ///// </summary>

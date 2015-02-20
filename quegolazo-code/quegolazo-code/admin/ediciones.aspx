@@ -241,7 +241,33 @@
         </div>
     </div>
     <!-- Modal Eliminar Edición -->
-   
+
+   <!-- Modal Cancelar Edición -->
+      <div class="modal fade bs-example-modal-sm" id="modalCancelarEdicion" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                    <h4 class="modal-title" id="H3">Cancelar Edición</h4>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="upCancelarEdicion" runat="server">
+                        <ContentTemplate>
+                            <strong>Edición: </strong>
+                            <asp:Literal ID="litNombreEdicionACancelar" runat="server"></asp:Literal>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    ¿Está seguro de Cancelar la Edición?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnCancelarEdicion" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancelarEdicion_Click"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Cancelar Edición -->
+
     <!-- Script -->
     <script>
         $(document).ready(function () {

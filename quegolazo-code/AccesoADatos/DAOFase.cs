@@ -504,12 +504,44 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 string sql = @"UPDATE Fases
                         SET idEstado = @idEstado
-                        WHERE idEdicion = @idEdicion
-                        AND idFase = @idFase";
+                        WHERE idEdicion = @idEdicion 
+                        AND idFase = @idFase";                
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEstado", idEstado);
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                 cmd.Parameters.AddWithValue("@idFase", idFase);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo cambiar el estado de la Fase: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public void cambiarEstadoAFasesIncompletasYDiagramadas(int idEdicion, int idEstado)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"UPDATE Fases
+                        SET idEstado = @idEstado
+                        WHERE idEdicion = @idEdicion
+                        AND idEstado NOT IN(@estadoFinalizada, @estadoCancelada)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEstado", idEstado);
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@estadoFinalizada", Estado.faseFINALIZADA);
+                cmd.Parameters.AddWithValue("@estadoCancelada", Estado.faseCANCELADA);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
