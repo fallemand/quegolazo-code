@@ -834,7 +834,7 @@ div.colorPicker-palette {
   position: absolute;
   z-index: 9999;
   min-width: 120px;
-  max-width: 160px;
+  max-width: 252px;
   padding: 5px;
   margin: 2px 0 0;
   list-style: none;
