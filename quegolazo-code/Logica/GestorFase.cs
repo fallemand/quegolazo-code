@@ -21,28 +21,40 @@ namespace Logica
       {
           foreach (Fase f in fases)
           {
-              if (f != null)//s
-              {
-                  if (f.tipoFixture.idTipoFixture == "TCT")//Todos contra todos ida
-                  {
-                      generadorFixture = new GenerarTodosContraTodos();
-                      generadorFixture.setCantidadRondas(1);
-                  }
-                  if (f.tipoFixture.idTipoFixture == "TCT-IV")//Todos contra todos ida y vuelta
-                  {
-                      generadorFixture = new GenerarTodosContraTodos();
-                      generadorFixture.setCantidadRondas(2);
-                  }
-                  if (f.tipoFixture.idTipoFixture == "ELIM" || f.tipoFixture.idTipoFixture == "ELIM-IV")
-                      break;
+              generarFixtureDeUnaFase(f);
+          }
+      }
 
-                  int i = 1;
-                  foreach (Grupo g in f.grupos)
-                  {
-                      g.idGrupo = i;
-                      g.fechas = generadorFixture.generarFixture(g.equipos);
-                      i++; 
-                  }
+      /// <summary>
+      /// Genera el fixture si la fase es todos contra todos.
+      /// </summary>
+      /// <param name="f">La fase a la cual se le va a generar el fixture.</param>
+      public void generarFixtureDeUnaFase(Fase f)
+      {
+          if (f != null && !f.esGenerica)//s
+          {
+              if (f.tipoFixture.idTipoFixture == "TCT")//Todos contra todos ida
+              {
+                  generadorFixture = new GenerarTodosContraTodos();
+                  generadorFixture.setCantidadRondas(1);
+              }
+              if (f.tipoFixture.idTipoFixture == "TCT-IV")//Todos contra todos ida y vuelta
+              {
+                  generadorFixture = new GenerarTodosContraTodos();
+                  generadorFixture.setCantidadRondas(2);
+              }
+              if (f.tipoFixture.idTipoFixture == "ELIM")
+                  crearPartidosSiguientesDeUnaEliminatoria(f);
+              //if(f.tipoFixture.idTipoFixture == "ELIM-IV")
+              //    crearPartidosSiguientes(f);
+
+              int i = 1;
+              if(f.tipoFixture.idTipoFixture.Contains("TCT"))
+              foreach (Grupo g in f.grupos)
+              {
+                  g.idGrupo = i;
+                  g.fechas = generadorFixture.generarFixture(g.equipos);
+                  i++;
               }
           }
       }
@@ -141,21 +153,12 @@ namespace Logica
           }
       }
 
-
-      //public void registrarFase()
-      //{
-      //    DAOFase daoFase = new DAOFase();
-      //    daoFase.registrarFase(fases);
-      //}
-      public void cerrarFase(Fase fase)
-      {
-         fase.estado.idEstado = Estado.faseFINALIZADA;         
-         new  DAOFase().cerrarFase(fase.idFase, fase.idEdicion);
-      }
-
-       //autor:Florencia Rojas
-       //Este metodo crea las fecha sy partidos que se necesitan para un torneo eliminatorio y los guarda en la bd
-      public void crearPartidosSiguientes(Fase fase)
+      
+      /// <summary>
+      /// Este metodo crea las fecha sy partidos que se necesitan para un torneo eliminatorio
+      /// </summary>
+      /// <param name="fase">La fase donde se van a crear los partidos siguientes</param>
+      public void crearPartidosSiguientesDeUnaEliminatoria(Fase fase)
       {
           //seteo el estado de la fecha 1 en diagramada
           fase.grupos[0].fechas[0].estado.idEstado = Estado.fechaDIAGRAMADA;

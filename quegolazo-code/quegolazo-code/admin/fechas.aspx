@@ -22,7 +22,7 @@
                                 <fieldset class="vgSeleccionarEdicion">
                                     <div class="col-md-8">
                                         <div id="selectEdiciones">
-                                            <asp:DropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true"></asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -49,7 +49,7 @@
                                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Fechas" />
                                             </div>
                                             <div class="col-md-3">
-                                                <asp:LinkButton Visible="false" title="Finalizar Fase" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-placement="left" runat="server" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
+                                                <asp:LinkButton Visible="false" title="Finalizar Fase" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-placement="left" runat="server" OnClientClick="reiniciarContador();" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
                                                     <span class="label label-red label-big">Finalizar</span></asp:LinkButton>
                                                 <asp:Panel ID="panelEstadoFase" Visible="false" runat="server">
                                                     <span class="label label-big fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" rel="txtTooltip" title="<%# ((Entidades.Fase)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
@@ -562,13 +562,15 @@
                                       </div>
                                   </div> 
                             </asp:Panel>
-
+                             <div ID="panelFracaso" Class="alert alert-danger margin-top" style="display:none" >                
+                             <p id="msjFracaso" runat="server" ClientIDMode="Static"></p>
+                            </div>
                         </div>
                         <div class="modal-footer">
                          <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
                            <Button ID="btnCerrar" data-dismiss="modal" onclick="clickBotonCerrar();" class="btn btn-default" > Cancelar</button>
                            <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click"  ClientIDMode="Static" CssClass="btn btn-success causesValidation vgDatosEdicion" />
-                           <Button ID="btnConfirmar" style="display:none" OnClick="$('#contenedorFases').generadorDeFases('actualizarFasesEnSesion');"  Class="btn btn-success causesValidation vgDatosEdicion" >Confirmar Fase</button>
+                           <Button ID="btnConfirmar" style="display:none" OnClick=" return $('#contenedorFases').generadorDeFases('guardarFasesEnSesion');"  Class="btn btn-success causesValidation vgDatosEdicion" >Confirmar Fase</button>
                          </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
@@ -695,7 +697,7 @@
                     ¿Está seguro que desea finalizar la fase?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal(modalFinalizarFase);">Cancelar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal('modalFinalizarFase');">Cancelar</button>
                     <asp:Button ID="btnCambioEnCantidadEquipos" runat="server" OnClick="btnCambioEnCantidadEquipos_Click" CssClass="btn btn-success" Text="Continuar" />
                 </div>
             </div>
@@ -748,7 +750,7 @@
              reiniciarContador();
          }
          function clickBotonConfirmar() {
-             
+            
          }
          function clickSiguiente() {
              $('#tituloModal').text("Configurar la nueva Fase");  
@@ -763,6 +765,7 @@
              var valor = 0;
              $("#spanSeleccionados").text(valor);
          };
+      
     </script>
 
      <script>

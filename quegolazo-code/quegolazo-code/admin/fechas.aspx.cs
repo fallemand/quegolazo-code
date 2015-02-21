@@ -67,6 +67,7 @@ namespace quegolazo_code.admin
                 {
                     gestorEdicion.faseActual = gestorEdicion.edicion.fases[int.Parse(e.CommandArgument.ToString()) - 1];
                     btnConfigurarFase.Visible = true;
+                    hfEquiposSeleccionados.Value = string.Empty;
                     if (gestorEdicion.esUltimaFase(gestorEdicion.faseActual.idFase))
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalFinalizarEdicion');", true);
@@ -702,15 +703,17 @@ namespace quegolazo_code.admin
             gestorEdicion.actualizarFaseActual();
             List<Fase> fasesParaElWidget = (List<Fase>)GestorColecciones.clonarLista(gestorEdicion.edicion.fases);                
             validarFases(fasesParaElWidget);
-            hfEquiposSeleccionados.Value = string.Empty;
             cargarWidgetFases(fasesParaElWidget,false);
             btnConfigurarFase.Visible = false;    
+            hfEquiposSeleccionados.Value = string.Empty;
             }
             catch (Exception ex)
             {
                 if (ex.Message.Contains("CantidadEquiposInvalida")) {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "modalCantidadEquipos2", "openModal('modalCambioEnCantidades');", true); 
                 }
+                else
+                    GestorError.mostrarPanelFracaso("Se ha producido un error: " + ex.Message);
                
             }
         }
@@ -728,7 +731,6 @@ namespace quegolazo_code.admin
                     throw new Exception("CantidadEquiposInvalida");
                 }                    
             }
-            gestorEdicion.agregarEquiposEnFase(fasesParaElWidget, hfEquiposSeleccionados.Value, gestorEdicion.faseActual.idFase);
         }
         /// <summary>
         /// Renderiza el widget de configuracion de fases en la pantalla
@@ -738,6 +740,7 @@ namespace quegolazo_code.admin
         private void cargarWidgetFases(List<Fase> fasesParaElWidget, bool eliminaFasesPosteriores)
         {
             GestorFase gestorFase= new GestorFase();
+            gestorEdicion.agregarEquiposEnFase(fasesParaElWidget, hfEquiposSeleccionados.Value, gestorEdicion.faseActual.idFase);
             gestorFase.reducirFases(fasesParaElWidget);
             Fase faseActual = gestorEdicion.getFaseActual(fasesParaElWidget);
             if (eliminaFasesPosteriores)
@@ -748,8 +751,8 @@ namespace quegolazo_code.admin
             JavaScriptSerializer serializador = new JavaScriptSerializer();
             string equipos = serializador.Serialize(faseActual.equipos);
             string fases = serializador.Serialize(fasesParaElWidget);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "widget", "$('#contenedorFases').generadorDeFases({ asistente :" + serializador.Serialize(false) + ", equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:" + gestorEdicion.edicion.idEdicion + ", idFaseEditable:" + ((faseActual != null) ? faseActual.idFase.ToString() : "1") + "});clickSiguiente()", true);
-           
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "widget", "$('#contenedorFases').generadorDeFases({equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:" + gestorEdicion.edicion.idEdicion +", asistente: false"+ ", idFaseEditable:" + ((faseActual != null) ? faseActual.idFase.ToString() : "1") + "});clickSiguiente(); openModal('modalFinalizarFase');", true);
+            //asistente :" + serializador.Serialize(false) + ",
         }
 
         protected void btnFinalizarEdicion_Click(object sender, EventArgs e)
@@ -786,10 +789,32 @@ namespace quegolazo_code.admin
 
         protected void btnCambioEnCantidadEquipos_Click(object sender, EventArgs e)
         {
-            List<Fase> fasesParaElWidget = (List<Fase>)Session["fasesParaElWidget"];
-            gestorEdicion.agregarEquiposEnFase(fasesParaElWidget, hfEquiposSeleccionados.Value, gestorEdicion.faseActual.idFase);
+            List<Fase> fasesParaElWidget = (List<Fase>)Session["fasesParaElWidget"];            
             cargarWidgetFases(fasesParaElWidget, true);
         }
+
+        /// <summary>
+        /// Guarda en sesión la configuración de fases
+        /// autor: Antonio Herrera
+        /// </summary>
+        [WebMethod(enableSession: true)]
+        public static object guardarFases(object JSONFases)
+        {
+            try
+            {
+                JavaScriptSerializer serializador = new JavaScriptSerializer();
+                List<Fase> fases = serializador.ConvertToType<List<Fase>>(JSONFases);
+                GestorEdicion gestor = Sesion.getGestorEdicion();
+                gestor.edicion.fases = fases;
+                gestor.actualizarFasesLuegoDeCerrarUna(gestor.edicion, gestor.faseActual.idFase);
+                return new HttpStatusCodeResult(200, "OK");
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(500, "Ha ocurrido un error en el servidor: '" + ex.Message + "'");
+            }
+        }
+
 
     }
 }

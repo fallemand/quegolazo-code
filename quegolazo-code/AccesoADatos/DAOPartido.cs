@@ -917,6 +917,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
+                tran.Rollback();
                 throw new Exception("No se pudo registrar la fase eliminatoria: " + ex.Message);                
             }            
         }
