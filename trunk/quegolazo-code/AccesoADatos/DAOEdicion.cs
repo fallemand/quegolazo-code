@@ -188,7 +188,7 @@ namespace AccesoADatos
                 DAOEquipo daoEquipo = new DAOEquipo();
                 daoEquipo.registrarEquiposEnEdicion(edicion.equipos, edicion.idEdicion, con, trans);
                 DAOFase daoFase = new DAOFase();
-                daoFase.registrarFase(edicion.fases, con, trans);                
+                daoFase.registrarFases(edicion.fases, con, trans);                
                 daoFase.registrarLlavesEliminatorio(edicion.fases,con, trans);
                 trans.Commit();
             }

@@ -195,22 +195,22 @@ namespace Logica
         public void confirmarEdicion()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            verificarPrimeraFaseEliminatoria();
+            //verificarPrimeraFaseEliminatoria();
             daoEdicion.confirmarEdicion(edicion); 
         }
-        /// <summary>
-        /// Verifica si la primera fase tiene fixture tipo Eliminatorio, y si es asi crea los partidos para toda la llave hasta la final y el tercer puesto.
-        /// </summary>
-        private void verificarPrimeraFaseEliminatoria()
-        {
-            if (edicion.fases[0].tipoFixture.idTipoFixture.Contains("ELIM"))
-                gestorFase.crearPartidosSiguientes(edicion.fases[0]);
-        }
+        ///// <summary>
+        ///// Verifica si la primera fase tiene fixture tipo Eliminatorio, y si es asi crea los partidos para toda la llave hasta la final y el tercer puesto.
+        ///// </summary>
+        //private void verificarPrimeraFaseEliminatoria()
+        //{
+        //    if (edicion.fases[0].tipoFixture.idTipoFixture.Contains("ELIM"))
+        //        gestorFase.crearPartidosSiguientes(edicion.fases[0]);
+        //}
 
         public void actualizarconfirmacionEdicion()
         {
             DAOEdicion daoEdicion = new DAOEdicion();
-            verificarPrimeraFaseEliminatoria();
+            //verificarPrimeraFaseEliminatoria();
             daoEdicion.actualizarconfirmacionEdicion(edicion);    
         }
 
@@ -344,6 +344,8 @@ namespace Logica
         //agrega los equipos en una fase determinada, de una lista de fases dada.
         public void agregarEquiposEnFase(List<Fase> fases, string equipos,int idFaseNueva)
         {
+            try
+            {
                 int indiceFase = idFaseNueva - 1;
                 if (equipos == "")
                     throw new Exception("No hay equipos seleccionados");
@@ -362,6 +364,12 @@ namespace Logica
                 fases[indiceFase].esGenerica = false;
                 fases[indiceFase].tipoFixture = new TipoFixture("TCT");
                 fases[indiceFase].estado = new Estado() { idEstado = Estado.faseDIAGRAMADA };     
+        }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }  
         }
 
 
@@ -451,6 +459,16 @@ namespace Logica
             daoFecha.cambiarEstadosAFechas(Estado.fechaCOMPLETA, edicion.idEdicion); // Pone a todas las fechas como COMPLETAS
         }
 
+        /// <summary>
+        /// Cierra una fase (la anterior a la fase actual), y actualiza toda la configuracón de fases basándose en lo que generó el usuario.
+        /// </summary>
+        /// <param name="edicion">LA edicion con las fases a actualizar</param>
+        /// <param name="idFaseActual">La fase que se acaba de modificar.</param>
+        public void actualizarFasesLuegoDeCerrarUna(Edicion edicion, int idFaseActual)
+        {
+            new GestorFase().generarFixtureDeUnaFase(edicion.fases[idFaseActual - 1]);
+            new DAOFase().cerrarFaseYActualizarPosteriores(edicion, idFaseActual);
+        }
         public void cancelarEdicion(int idEdicion)
         {
             if (edicion.estado.idEstado != Estado.edicionREGISTRADA)            
@@ -489,6 +507,7 @@ namespace Logica
         //    }
         //}
 
+        }
 
     }
-}
+

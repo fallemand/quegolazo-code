@@ -332,7 +332,7 @@
             widget.validarFasesCorrectas();
             $.ajax({
                     type: "POST",
-                    url: "fases.aspx/guardarFases",
+                    url: (widget.options.asistente) ? "fases.aspx/guardarFases" : "fechas.aspx/guardarFases",
                     contentType: "application/json",
                     dataType: "json",
                     async: false,

@@ -20,7 +20,7 @@ namespace AccesoADatos
         /// <param name="equipo">El objeto Equipo que se va a registrar</param>
         /// <param name="idTorneo">Id del torneo al que pertenece el equipo</param>
         /// <returns>El id del equipo registrado</returns>
-        public void registrarFase(List<Fase> fases, SqlConnection con, SqlTransaction trans)
+        public void registrarFases(List<Fase> fases, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
             try
@@ -29,6 +29,21 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 foreach (Fase fase in fases)
                 {
+                    registrarUnaFase(con, trans, cmd, fase);
+                }
+            }
+            catch (SqlException ex)
+            { 
+                trans.Rollback();
+                throw new Exception("No se pudo registrar la Fase: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Registra una fase, con todos sus atributos en la base de datos
+        /// </summary>
+        private static void registrarUnaFase(SqlConnection con, SqlTransaction trans, SqlCommand cmd, Fase fase)
+        {
                     if (fase != null && fase.estado.idEstado != Estado.faseFINALIZADA)
                     {
                         string sql = @"INSERT INTO Fases (idFase, idEdicion, tipoFixture, idEstado, cantidadEquipos, cantidadGrupos)
@@ -37,13 +52,14 @@ namespace AccesoADatos
                         cmd.Parameters.AddWithValue("@idFase", fase.idFase);
                         cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
                         cmd.Parameters.AddWithValue("@tipoFixture", fase.tipoFixture.idTipoFixture);
-                        cmd.Parameters.AddWithValue("@idEstado", fase.esGenerica ? Estado.faseREGISTRADA: Estado.faseDIAGRAMADA);
+                cmd.Parameters.AddWithValue("@idEstado", fase.esGenerica ? Estado.faseREGISTRADA : Estado.faseDIAGRAMADA);
                         if (fase.esGenerica)
                         {
                             cmd.Parameters.AddWithValue("@cantidadEquipos", fase.equipos.Count);
                             cmd.Parameters.AddWithValue("@cantidadGrupos", fase.grupos.Count);
                         }
-                        else {
+                else
+                {
                             cmd.Parameters.AddWithValue("@cantidadEquipos", DBNull.Value);
                             cmd.Parameters.AddWithValue("@cantidadGrupos", DBNull.Value);
                         }                                                   
@@ -63,13 +79,6 @@ namespace AccesoADatos
                         }
                     }
                 }
-            }
-            catch (SqlException ex)
-            { 
-                trans.Rollback();
-                throw new Exception("No se pudo registrar la Fase: " + ex.Message);
-            }
-        }
 
              public void registrarLlavesEliminatorio(List<Fase> fases, SqlConnection con, SqlTransaction tran)
         {
@@ -77,18 +86,29 @@ namespace AccesoADatos
             {
                 foreach (Fase fase in fases)
                 {
-                    if ((fase.tipoFixture.idTipoFixture == "ELIM" || fase.tipoFixture.idTipoFixture == "ELIM-IV") && !fase.esGenerica)
-                    {
-                        DAOPartido daoPartido = new DAOPartido();
-                        daoPartido.obtenerIDPartidosEliminatorios(fase, con, tran);
-                        daoPartido.actualizarPartidosEliminatorios(fase, con, tran);
+                    actualizarFaseEliminatoria(con, tran, fase);
                     }
                 }
-            }
             catch (SqlException ex)
             { 
                
                 throw new Exception("No se pudo registrar la Fase: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Registra una fase eliminatoria, previamente debe tener creados los partidos con el método crearPartidosSiguientes, y dicha fase debe estar resgitrada en la base de datos.
+        /// </summary>
+        /// <param name="con"></param>
+        /// <param name="tran"></param>
+        /// <param name="fase"></param>
+        private static void actualizarFaseEliminatoria(SqlConnection con, SqlTransaction tran, Fase fase)
+        {
+            if ((fase.tipoFixture.idTipoFixture == "ELIM" || fase.tipoFixture.idTipoFixture == "ELIM-IV") && !fase.esGenerica)
+            {
+                DAOPartido daoPartido = new DAOPartido();
+                daoPartido.obtenerIDPartidosEliminatorios(fase, con, tran);
+                daoPartido.actualizarPartidosEliminatorios(fase, con, tran);
             }
         }
 
@@ -244,7 +264,7 @@ namespace AccesoADatos
             try
             {
                 eliminarFases(fases[0].idEdicion);
-                registrarFase(fases, con, trans);
+                registrarFases(fases, con, trans);
             }
             catch (SqlException ex)
             {
@@ -284,43 +304,34 @@ namespace AccesoADatos
         }
         
          /// <summary>
-       /// Cambia el estado de la fase a Cerrada cuando se jugaron todos los partidos y devuelve true si se cerró y false si aún no
-       /// autor: Flor Rojas
+        /// Elimina las fases de la edicion que tiene el id mayor o igual al que se pase por parametro
+        /// autor: Antonio Herrera
        /// </summary>
-//        public bool cerrarFase(int idPartido)
-//        {
-//            SqlConnection con = new SqlConnection(cadenaDeConexion);
-//            SqlCommand cmd = new SqlCommand();
-//            try
-//            {
-//                if (con.State == ConnectionState.Closed)
-//                    con.Open();
-//             cmd.Connection = con;
-//             string sql = @"                            
-//                            DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
-//                            DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
-//                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE  p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 4 AND idEstado<>13  ))
-//	                            if(@cantidad=0)
-//	                             BEGIN
-//	                             UPDATE Fases SET idEstado =6 WHERE idFase = @idFase AND idEdicion = @idEdicion
-//                                 END";
-//             cmd.Parameters.Clear();
-//             cmd.Parameters.AddWithValue("@idPartido", idPartido);
-//             cmd.Parameters.AddWithValue("@idEstado", Estado.faseCERRADA);
-//             cmd.CommandText=sql;
-//             bool b= (cmd.ExecuteNonQuery() > 0) ? true : false;
-//             return b;
-//            }
-//            catch (Exception ex)
-//            {
-//                throw new Exception("No se pudo cerrar la fase: " + ex.Message);
-//            }
-//            finally
-//            {
-//                if (con != null && con.State == ConnectionState.Open)
-//                    con.Close();
-//            }
-//        }
+        /// <param name="fases">Lista de Fases</param>
+        public void eliminarFasesPosteriores(int idFase, int idEdicion)
+        {
+            SqlCommand cmd = new SqlCommand();
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            cmd.Connection = con;
+            if (con.State == ConnectionState.Closed)
+                con.Open();
+            try
+            {
+                string sqlEliminacion = "DELETE FROM Fases WHERE idEdicion = @idEdicion and idEstado=@idEstado and idFase >= @idFase";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@idFase", idFase);
+                cmd.Parameters.AddWithValue("@idEstado", Estado.faseDIAGRAMADA);
+                cmd.CommandText = sqlEliminacion;
+                cmd.ExecuteNonQuery();
+               
+            }
+            catch (SqlException ex)
+            {
+                cmd.Transaction.Rollback();
+                throw new Exception("Error al intentar actualizar las fases: " + ex.Message);
+            }
+        }
 
         /// <summary>
         /// Cambia el estado de la fase a Cerrada cuando se jugaron todos los partidos y devuelve true si se cerró y false si aún no
@@ -399,15 +410,10 @@ namespace AccesoADatos
          //Cambia el estado de la fase a Cerrada cuando se jugaron todos los partidos 
          //autor: Flor Rojas
          //</summary>
-                public void cerrarFase(int idFase,int idEdicion)
+                public void cerrarFase(int idFase,int idEdicion, SqlCommand cmd)
                 {
-                    SqlConnection con = new SqlConnection(cadenaDeConexion);
-                    SqlCommand cmd = new SqlCommand();
                     try
                     {
-                     if (con.State == ConnectionState.Closed)
-                        con.Open();
-                     cmd.Connection = con;
                      string sql = @"  UPDATE Fases SET idEstado =@idEstado WHERE idFase = @idFase AND idEdicion = @idEdicion";
                      cmd.Parameters.Clear();
                      cmd.Parameters.AddWithValue("@idFase", idFase);
@@ -418,12 +424,8 @@ namespace AccesoADatos
                     }
                     catch (Exception ex)
                     {
+                        cmd.Transaction.Rollback();
                         throw new Exception("No se pudo cerrar la fase: " + ex.Message);
-                    }
-                    finally
-                    {
-                        if (con != null && con.State == ConnectionState.Open)
-                            con.Close();
                     }
                 }
 
@@ -441,8 +443,6 @@ namespace AccesoADatos
                         if (con.State == ConnectionState.Closed)
                             con.Open();
                         cmd.Connection = con;
-                        
-
                         //Esta consulta cambia la fecha a estado incompleta, @cantidad(cantidad de partidos jugados),esmayor a 1.
                         string sql = @"                            
                             DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
@@ -465,22 +465,6 @@ namespace AccesoADatos
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
 
-//                       sql = @"                            
-//                            DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartido)
-//                            DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartido)
-//                            DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartido)
-//                            DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartido)
-//                            DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Fechas f WHERE f.idGrupo = @idGrupo AND f.idFase=@idFase AND f.idEdicion = @idEdicion AND f.idEstado IN (SELECT idEstado FROM Estados WHERE idAmbito = 3 AND idEstado<>8  ))
-//					                            if(@cantidad=0)
-//						           BEGIN
-//							                UPDATE Fases SET idEstado = @idEstado WHERE idFase = @idFase AND idEdicion = @idEdicion
-//						           END";
-//                        cmd.Parameters.Clear();
-//                        cmd.Parameters.AddWithValue("@idPartido", idPartido);
-//                        cmd.Parameters.AddWithValue("@idEstado", Estado.faseFINALIZADA);
-//                        cmd.CommandText = sql;
-//                        cmd.ExecuteNonQuery();
-                        
                     }
                     catch (Exception ex)
                     {
@@ -504,8 +488,8 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 string sql = @"UPDATE Fases
                         SET idEstado = @idEstado
-                        WHERE idEdicion = @idEdicion 
-                        AND idFase = @idFase";                
+                        WHERE idEdicion = @idEdicion
+                        AND idFase = @idFase";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEstado", idEstado);
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
@@ -523,7 +507,84 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+       
+        /// <summary>
+        /// Cierra la fase anterior a la actual, y actualiza todas las fases posteriores segun lo haya configurado el usuario.
+        /// </summary>
+        /// <param name="edicion">La edicion que contiene las fases a modificar</param>
+        /// <param name="idFaseActual">El numero de fase que acaba de crear el usuario.</param>
+        public void cerrarFaseYActualizarPosteriores(Edicion edicion, int idFaseActual)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                trans = con.BeginTransaction();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+                cerrarFase(idFaseActual - 1, edicion.idEdicion, cmd);
+                actualizarFasesPosteriores(edicion.fases, idFaseActual,cmd);
+            }
+            catch (Exception ex)
+            {
+                cmd.Transaction.Rollback();
+                throw new Exception("No se pudo cambiar el estado de la Fase: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
 
+        /// <summary>
+        /// Borra las fases posteriores a la actual y vuelve a grabar lo que hizo el usuario con esas fases.
+        /// </summary>
+        public void actualizarFasesPosteriores(List<Fase> fases, int idFaseActual, SqlCommand cmd)
+        {
+            try
+            {
+                //TODO corregir este método, parece que no está eliminando las fases
+                eliminarFasesPosteriores(idFaseActual, fases[0].idEdicion);
+                registrarFasesPosteriores(fases, idFaseActual, cmd);
+                actualizarFasesPosterioresEliminatorias(fases, idFaseActual, cmd);
+            }
+            catch (Exception ex)
+            {
+                cmd.Transaction.Rollback();
+                throw new Exception("No se pudo actualizar las fases: " + ex.Message);
+            }
+            finally
+            {
+                if (cmd.Connection != null && cmd.Connection.State == ConnectionState.Open)
+                    cmd.Connection.Close();
+            }
+        }
+        /// <summary>
+        /// Actualiza las fases posteriores, cuando son eliminatorias guardando todos los id de las llaves de los partidos eliminatorios.
+        /// </summary>
+        private static void actualizarFasesPosterioresEliminatorias(List<Fase> fases, int idFaseActual, SqlCommand cmd)
+        {
+            foreach (Fase fase in fases)
+            {
+                if (fase.idFase >= idFaseActual && fase.tipoFixture.idTipoFixture.Contains("ELIM"))
+                    actualizarFaseEliminatoria(cmd.Connection, cmd.Transaction, fase);
+            }
+        }
+        /// <summary>
+        /// Registra las fases posteriores a la fase actual, o sea todo lo que cambio el usuario luego de cerrar una fase.
+        /// </summary>
+        private static void registrarFasesPosteriores(List<Fase> fases, int idFaseActual, SqlCommand cmd)
+        {
+            foreach (Fase fase in fases)
+            {
+                if (fase.idFase >= idFaseActual)
+                    registrarUnaFase(cmd.Connection, cmd.Transaction, cmd, fase);
+            }
+        }
         public void cambiarEstadoAFasesIncompletasYDiagramadas(int idEdicion, int idEstado)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
@@ -555,5 +616,6 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
     }
 }
