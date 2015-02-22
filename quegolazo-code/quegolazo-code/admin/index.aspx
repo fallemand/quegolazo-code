@@ -37,7 +37,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="icon-size flaticon-football31"></span>
+                    <span class="flaticon-sports24"></span>
                     Tabla de Posiciones
                 </div>
                 <div class="panel-body">
@@ -103,7 +103,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="icon-size flaticon-flaming"></span>
+                    <span class="flaticon-football116"></span>
                     Goleadores de la Edición
                 </div>
                 <div class="panel-body">
