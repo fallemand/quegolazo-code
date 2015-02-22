@@ -58,7 +58,8 @@ namespace quegolazo_code.admin
                 }
                 if (e.CommandName == "eliminarEdicion")
                 {
-                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
+                    if (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA || gestorEdicion.edicion.estado.idEstado == Estado.edicionCANCELADA)
+                        throw new Exception("No es posible eliminar la edición seleccionada. Se encuentra " + gestorEdicion.edicion.estado.nombre);
                     litNombreEdicion.Text = gestorEdicion.edicion.nombre;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal('eliminarEdicion');", true);
                 }
@@ -136,9 +137,7 @@ namespace quegolazo_code.admin
         protected void btnEliminarEdicion_Click(object sender, EventArgs e)
         {
             try
-            {
-                if (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA)
-                    throw new Exception("La edición seleccionada no se pudo eliminar porque está Finalizada.");
+            {                
                 gestorEdicion.eliminarEdicion(gestorEdicion.edicion.idEdicion);
                 cargarRepeaterEdiciones();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarEdicion", "closeModal('eliminarEdicion');", true);

@@ -633,8 +633,8 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idArbitro", DAOUtils.dbValueNull((partido.arbitro != null) ? (int?)partido.arbitro.idArbitro : null));
                 cmd.Parameters.AddWithValue("@idCancha", DAOUtils.dbValueNull((partido.cancha != null) ? (int?)partido.cancha.idCancha : null));
                 cmd.Parameters.AddWithValue("@golesLocal", DAOUtils.dbValueNull(partido.golesLocal));
-                cmd.Parameters.AddWithValue("@golesVisitante", DAOUtils.dbValueNull(partido.golesVisitante));               
-                cmd.Parameters.AddWithValue("@huboPenales", partido.huboPenales);
+                cmd.Parameters.AddWithValue("@golesVisitante", DAOUtils.dbValueNull(partido.golesVisitante));
+                cmd.Parameters.AddWithValue("@huboPenales", DAOUtils.dbValueNull(partido.huboPenales));
                 cmd.Parameters.AddWithValue("@penalesLocal", DAOUtils.dbValueNull(partido.penalesLocal));
                 cmd.Parameters.AddWithValue("@penalesVisitante", DAOUtils.dbValueNull(partido.penalesVisitante));
                 cmd.Parameters.AddWithValue("@idGanador", DAOUtils.dbValueNull(partido.idGanador));

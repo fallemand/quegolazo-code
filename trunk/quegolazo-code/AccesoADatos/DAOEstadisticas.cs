@@ -349,8 +349,8 @@ namespace AccesoADatos
                                 COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) AS 'PG',
                                 COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END) AS 'PE',
                                 COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END) AS 'PP',
-                                SUM(CASE idEquipoLocal WHEN idEquipo THEN golesLocal ELSE 0 END) + SUM(CASE idEquipoVisitante WHEN idEquipo THEN golesVisitante ELSE 0 END) AS 'GF',
-                                SUM(CASE idEquipoLocal WHEN idEquipo THEN golesVisitante ELSE 0 END)+ SUM(CASE idEquipoVisitante WHEN idEquipo THEN golesLocal ELSE 0 END) AS 'GC',
+                                SUM(CASE WHEN idEquipoLocal = idEquipo AND golesLocal IS NOT NULL THEN golesLocal ELSE 0 END) + SUM(CASE WHEN idEquipoVisitante = idEquipo AND golesVisitante IS NOT NULL THEN golesVisitante ELSE 0 END) AS 'GF',
+                                SUM(CASE WHEN idEquipoLocal = idEquipo AND golesVisitante IS NOT NULL THEN golesVisitante ELSE 0 END)+ SUM(CASE WHEN idEquipoVisitante = idEquipo AND golesLocal IS NOT NULL THEN golesLocal ELSE 0 END) AS 'GC',
                                 COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
                                 FROM dbo.joinTablaDePosicionesCompleta(@idEdicion,@idFase)
                                 GROUP BY Equipo, idEquipo, idGrupo, idEdicion, nombre, puntosGanado, puntosPerdido, puntosEmpatado
