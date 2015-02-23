@@ -172,7 +172,8 @@
                                 <th class="col-md-3">LOCAL</th>
                                 <th class="col-md-1">VS</th>
                                 <th class="col-md-3">VISITANTE</th>
-                                <th class="col-md-2">ARBITRO</th>
+                                <th class="col-md-1"></th>
+                                <th class="col-md-2">ÁRBITRO</th>
                                 <th class="col-md-1">ESTADO</th>
                             </tr>
                         </thead>
@@ -183,8 +184,9 @@
                                         <td><%# Eval("local") %></td>
                                         <td>vs</td>
                                         <td><%# Eval("visitante") %></td>
+                                        <td><%# Eval("GolesLocal") %>-<%# Eval("GolesVisitante") %></td>
                                         <td><%# Eval("arbitro") %></td>
-                                        <td><%# Eval("estado") %></td>
+                                        <td><span class="label partido-<%# Eval("estado") %>" rel="txtTooltip" data-placement="left"><%# Eval("estado") %></span></td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:Repeater>

@@ -28,12 +28,13 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END) AS 'Partidos Jugados',
+                string sql = @"SELECT COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END) AS 'Partidos Jugados',
                                       COUNT(p.idPartido) AS 'Partidos', 
-                                      COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance'
+                                      COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance'
                                       FROM Partidos p where p.idEdicion = @idEdicion";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
                 tablaDeDatos.Load(dr);
@@ -67,21 +68,22 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT top 1 f.idFecha, COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END) AS 'Partidos Jugados',
+                string sql = @"SELECT top 1 f.idFecha, COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END) AS 'Partidos Jugados',
                                             COUNT(p.idPartido) AS 'Partidos', 
-                                            COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance',
+                                            COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance',
 		                                    COUNT(CASE T.tipoTarjeta WHEN 'A' THEN 1 ELSE NULL END) AS 'AMARILLAS', 
                                             COUNT(CASE T.tipoTarjeta WHEN 'R' THEN 1 ELSE NULL END) AS 'ROJAS'
                                             FROM Partidos p 
 	                                        INNER JOIN Fechas f ON p.idFecha=f.idFecha
 	                                        LEFT JOIN Tarjetas t ON p.idPartido = t.idPartido
 	                                        LEFT JOIN Sanciones s ON s.idPartido = s.idPartido
-	                                        WHERE p.idEdicion=@idEdicion AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado=@idEstadoFecha AND p.idEdicion=@idEdicion)
+	                                        WHERE p.idEdicion = @idEdicion AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @estadoIncompleta AND p.idEdicion = @idEdicion)
 	                                        GROUP BY f.idFecha 
 	                                        ORDER BY f.idFecha";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
-                cmd.Parameters.Add(new SqlParameter("@idEstadoFecha", Estado.fechaINCOMPLETA));
+                cmd.Parameters.Add(new SqlParameter("@estadoIncompleta", Estado.fechaINCOMPLETA));
+                cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
                 if (dr.HasRows)
@@ -90,21 +92,22 @@ namespace AccesoADatos
                 {
                     if (dr != null)
                         dr.Close();
-                     sql = @"SELECT top 1 f.idFecha, COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END) AS 'Partidos Jugados',
+                    sql = @"SELECT top 1 f.idFecha, COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END) AS 'Partidos Jugados',
                                             COUNT(p.idPartido) AS 'Partidos', 
-                                            COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance',
+                                            COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance',
 		                                    COUNT(CASE T.tipoTarjeta WHEN 'A' THEN 1 ELSE NULL END) AS 'AMARILLAS', 
                                             COUNT(CASE T.tipoTarjeta WHEN 'R' THEN 1 ELSE NULL END) AS 'ROJAS'
                                             FROM Partidos p 
 	                                        INNER JOIN Fechas f ON p.idFecha=f.idFecha
 	                                        LEFT JOIN Tarjetas t ON p.idPartido = t.idPartido
 	                                        LEFT JOIN Sanciones s ON s.idPartido = s.idPartido
-	                                        WHERE p.idEdicion=@idEdicion AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado=@idEstadoFecha AND p.idEdicion=@idEdicion ORDER BY idFecha DESC)
+	                                        WHERE p.idEdicion = @idEdicion AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @estadoIncompleta AND p.idEdicion=@idEdicion ORDER BY idFecha DESC)
 	                                        GROUP BY f.idFecha 
 	                                        ORDER BY f.idFecha";
                     cmd.Parameters.Clear();
                     cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
-                    cmd.Parameters.Add(new SqlParameter("@idEstadoFecha", Estado.fechaCOMPLETA));
+                    cmd.Parameters.Add(new SqlParameter("@estadoIncompleta", Estado.fechaCOMPLETA));
+                    cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
                     cmd.CommandText = sql;
                     dr = cmd.ExecuteReader();
                     tablaDeDatos.Load(dr);
@@ -140,7 +143,7 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @" SELECT f.idFecha, elocal.nombre as 'Local', p.golesLocal , p.golesVisitante, eVisitante.nombre as 'Visitante',
+                string sql = @" SELECT f.idFecha, elocal.nombre as 'Local', p.golesLocal as 'GolesLocal', p.golesVisitante as 'GolesVisitante', eVisitante.nombre as 'Visitante',
 		                            ar.nombre as 'arbitro', 
                                     can.nombre as 'Complejo/Cancha',
                                     p.fecha, 
@@ -298,20 +301,21 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT Equipo, idGrupo, idEquipo, COUNT(CASE idEstadoPartido WHEN 13 THEN 1 ELSE NULL END) AS 'PJ',  
+                string sql = @"SELECT Equipo, idGrupo, idEquipo, COUNT(CASE idEstadoPartido WHEN @estadoJugado THEN 1 ELSE NULL END) AS 'PJ',  
                                 COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) AS 'PG',
                                 COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END) AS 'PE',
                                 COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END) AS 'PP',
-                                SUM(CASE idEquipoLocal WHEN idEquipo THEN golesLocal ELSE 0 END) + SUM(CASE idEquipoVisitante WHEN idEquipo THEN golesVisitante ELSE 0 END) AS 'GF',
-                                SUM(CASE idEquipoLocal WHEN idEquipo THEN golesVisitante ELSE 0 END)+ SUM(CASE idEquipoVisitante WHEN idEquipo THEN golesLocal ELSE 0 END) AS 'GC',
+                                SUM(CASE WHEN (idEquipoLocal = idEquipo AND golesLocal IS NOT NULL) THEN golesLocal ELSE 0 END) + SUM(CASE WHEN (idEquipoVisitante = idEquipo AND golesVisitante IS NOT NULL) THEN golesVisitante ELSE 0 END) AS 'GF',
+                                SUM(CASE WHEN (idEquipoLocal = idEquipo AND golesVisitante IS NOT NULL) THEN golesVisitante ELSE 0 END) + SUM(CASE WHEN (idEquipoVisitante = idEquipo AND golesLocal IS NOT NULL) THEN golesLocal ELSE 0 END) AS 'GC',
                                 COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
-                                FROM dbo.joinTablaDePosiciones(@idEdicion,@idFase,@idGrupo)
+                                FROM dbo.joinTablaDePosiciones(@idEdicion, @idFase, @idGrupo)
                                 GROUP BY Equipo, idEdicion,idEquipo, nombre, puntosGanado, puntosPerdido, puntosEmpatado
                                 ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
                 cmd.Parameters.Add(new SqlParameter("@idGrupo", idGrupo));
+                cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
                 tablaDeDatos.Load(dr);
@@ -345,19 +349,20 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT Equipo, idGrupo, idEquipo, COUNT(CASE idEstadoPartido WHEN 13 THEN 1 ELSE NULL END) AS 'PJ',  
+                string sql = @"SELECT Equipo, idGrupo, idEquipo, COUNT(CASE idEstadoPartido WHEN @estadoJugado THEN 1 ELSE NULL END) AS 'PJ',  
                                 COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) AS 'PG',
                                 COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END) AS 'PE',
                                 COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END) AS 'PP',
                                 SUM(CASE WHEN idEquipoLocal = idEquipo AND golesLocal IS NOT NULL THEN golesLocal ELSE 0 END) + SUM(CASE WHEN idEquipoVisitante = idEquipo AND golesVisitante IS NOT NULL THEN golesVisitante ELSE 0 END) AS 'GF',
                                 SUM(CASE WHEN idEquipoLocal = idEquipo AND golesVisitante IS NOT NULL THEN golesVisitante ELSE 0 END)+ SUM(CASE WHEN idEquipoVisitante = idEquipo AND golesLocal IS NOT NULL THEN golesLocal ELSE 0 END) AS 'GC',
                                 COUNT(CASE idGanador WHEN idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
-                                FROM dbo.joinTablaDePosicionesCompleta(@idEdicion,@idFase)
+                                FROM dbo.joinTablaDePosicionesCompleta(@idEdicion, @idFase)
                                 GROUP BY Equipo, idEquipo, idGrupo, idEdicion, nombre, puntosGanado, puntosPerdido, puntosEmpatado
                                 ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
+                cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
                 tablaDeDatos.Load(dr);
