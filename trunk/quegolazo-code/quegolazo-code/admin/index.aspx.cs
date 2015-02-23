@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Logica;
+using Entidades;
 using System.Globalization;
 using Utils;
 
@@ -90,8 +91,8 @@ namespace quegolazo_code.admin
             try
             {
                 int idEdicion = Validador.castInt(ddlEdiciones.SelectedValue);
-                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
-                panelEdicionRegistrada.Visible = (gestorEdicion.edicion.estado.idEstado == 2);
+                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(Validador.castInt(ddlEdiciones.SelectedValue));
+                panelEdicionRegistrada.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA);
                 gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
                 gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
