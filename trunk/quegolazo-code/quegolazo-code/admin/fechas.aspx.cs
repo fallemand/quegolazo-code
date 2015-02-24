@@ -661,7 +661,6 @@ namespace quegolazo_code.admin
         public void cargarPosicionesFinales()
         {
             GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
-            GestorControles.cargarRepeaterList(rptGrupos2, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase - 1].grupos);
             GestorControles.cargarRepeaterTable(rptPosiciones, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
         }
 
