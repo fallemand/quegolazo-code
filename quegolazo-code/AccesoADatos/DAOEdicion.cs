@@ -190,6 +190,7 @@ namespace AccesoADatos
                 DAOFase daoFase = new DAOFase();
                 daoFase.registrarFases(edicion.fases, con, trans);                
                 daoFase.registrarLlavesEliminatorio(edicion.fases,con, trans);
+                
                 trans.Commit();
             }
             catch (Exception e)

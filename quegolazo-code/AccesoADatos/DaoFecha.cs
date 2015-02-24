@@ -23,10 +23,7 @@ namespace AccesoADatos
         public void registrarFechas(Fase fase, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
-            try
-            {
-                if (con.State == ConnectionState.Closed)
-                    con.Open();
+            try{
                 cmd.Connection = con;
                 cmd.Transaction = trans;
                 foreach (Grupo g in fase.grupos)
@@ -229,6 +226,46 @@ namespace AccesoADatos
             catch (Exception ex)
             {
                 throw new Exception("No se pudo cambiar el estado de los partidos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+       //Para las fechas eliminatorias, les agrega el nombre Final, Semi, Cuartos
+        public void cambiarNombresAFechas(Fase fase, SqlConnection con, SqlTransaction trans)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+                foreach (Grupo g in fase.grupos)
+                {
+                    foreach (Fecha f in g.fechas)
+                    {
+                        string sql = @"UPDATE Fechas
+                                        SET nombre = @nombre
+                                        WHERE idEdicion = @idEdicion
+                                        AND idFase=@idFase 
+                                        AND idGrupo=@idGrupo 
+                                        AND idFecha=@idFecha";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@nombre", f.nombre);
+                        cmd.Parameters.AddWithValue("@idEdicion", fase.idEdicion);
+                        cmd.Parameters.AddWithValue("@idFase", fase.idFase);
+                        cmd.Parameters.AddWithValue("@idGrupo", g.idGrupo);
+                        cmd.Parameters.AddWithValue("@idFecha", f.idFecha);
+                        cmd.CommandText = sql;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo cambiar el nombre de las fechas " + ex.Message);
             }
             finally
             {
