@@ -67,6 +67,7 @@ namespace quegolazo_code.admin
                 {
                     gestorEdicion.faseActual = gestorEdicion.edicion.fases[int.Parse(e.CommandArgument.ToString()) - 1];
                     btnConfigurarFase.Visible = true;
+                    btnConfirmar.Visible = false;
                     hfEquiposSeleccionados.Value = string.Empty;
                     if (gestorEdicion.esUltimaFase(gestorEdicion.faseActual.idFase))
                     {
@@ -703,7 +704,8 @@ namespace quegolazo_code.admin
             List<Fase> fasesParaElWidget = (List<Fase>)GestorColecciones.clonarLista(gestorEdicion.edicion.fases);                
             validarFases(fasesParaElWidget);
             cargarWidgetFases(fasesParaElWidget,false);
-            btnConfigurarFase.Visible = false;    
+            btnConfigurarFase.Visible = false;
+            btnConfirmar.Visible = true;
             hfEquiposSeleccionados.Value = string.Empty;
             }
             catch (Exception ex)
@@ -739,7 +741,7 @@ namespace quegolazo_code.admin
         private void cargarWidgetFases(List<Fase> fasesParaElWidget, bool eliminaFasesPosteriores)
         {
             GestorFase gestorFase= new GestorFase();
-            gestorEdicion.agregarEquiposEnFase(fasesParaElWidget, hfEquiposSeleccionados.Value, gestorEdicion.faseActual.idFase);
+            gestorEdicion.agregarEquiposEnFase(fasesParaElWidget, hfEquiposSeleccionados.Value,  gestorEdicion.getFaseActual(fasesParaElWidget).idFase);
             gestorFase.reducirFases(fasesParaElWidget);
             Fase faseActual = gestorEdicion.getFaseActual(fasesParaElWidget);
             if (eliminaFasesPosteriores)
@@ -805,6 +807,7 @@ namespace quegolazo_code.admin
                 List<Fase> fases = serializador.ConvertToType<List<Fase>>(JSONFases);
                 GestorEdicion gestor = Sesion.getGestorEdicion();
                 gestor.edicion.fases = fases;
+                gestor.faseActual = gestor.getFaseActual(fases);
                 gestor.actualizarFasesLuegoDeCerrarUna(gestor.edicion, gestor.faseActual.idFase);
                 return new HttpStatusCodeResult(200, "OK");
             }
@@ -812,6 +815,13 @@ namespace quegolazo_code.admin
             {
                 return new HttpStatusCodeResult(500, "Ha ocurrido un error en el servidor: '" + ex.Message + "'");
             }
+        }
+
+        protected void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            obtenerEdiciónSeleccionada();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "cierraModal", "closeModal('modalFinalizarFase');", true);
+         
         }
 
 

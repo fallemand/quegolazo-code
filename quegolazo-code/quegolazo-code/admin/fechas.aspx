@@ -570,7 +570,8 @@
                          <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
                            <Button ID="btnCerrar" data-dismiss="modal" onclick="clickBotonCerrar();" class="btn btn-default" > Cancelar</button>
                            <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click"  ClientIDMode="Static" CssClass="btn btn-success causesValidation vgDatosEdicion" />
-                           <Button ID="btnConfirmar" style="display:none" OnClick=" return $('#contenedorFases').generadorDeFases('guardarFasesEnSesion');"  Class="btn btn-success causesValidation vgDatosEdicion" >Confirmar Fase</button>
+                           <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar Fase" OnClick="btnConfirmar_Click" OnClientClick="return $('#contenedorFases').generadorDeFases('guardarFasesEnSesion');"  ClientIDMode="Static" CssClass="btn btn-success causesValidation vgDatosEdicion" />
+                           
                          </div>
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
