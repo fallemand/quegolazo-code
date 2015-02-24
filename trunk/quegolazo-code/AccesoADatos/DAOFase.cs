@@ -29,6 +29,7 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 foreach (Fase fase in fases)
                 {
+                    actualizarNombresFases(fase);
                     registrarUnaFase(con, trans, cmd, fase);
                 }
             }
@@ -80,15 +81,19 @@ namespace AccesoADatos
                     }
                 }
 
-             public void registrarLlavesEliminatorio(List<Fase> fases, SqlConnection con, SqlTransaction tran)
+        /// <summary>
+        /// registra kas llaves de un torneo eliminatorio
+        /// </summary>
+        public void registrarLlavesEliminatorio(List<Fase> fases, SqlConnection con, SqlTransaction tran)
         {
             try
             {
                 foreach (Fase fase in fases)
                 {
                     actualizarFaseEliminatoria(con, tran, fase);
-                    }
+
                 }
+             }
             catch (SqlException ex)
             { 
                
@@ -99,13 +104,45 @@ namespace AccesoADatos
         /// <summary>
         /// Registra una fase eliminatoria, previamente debe tener creados los partidos con el método crearPartidosSiguientes, y dicha fase debe estar resgitrada en la base de datos.
         /// </summary>
-        private static void actualizarFaseEliminatoria(SqlConnection con, SqlTransaction tran, Fase fase)
+        protected static void actualizarFaseEliminatoria(SqlConnection con, SqlTransaction tran, Fase fase)
         {
             if ((fase.tipoFixture.idTipoFixture == "ELIM" || fase.tipoFixture.idTipoFixture == "ELIM-IV") && !fase.esGenerica)
             {
                 DAOPartido daoPartido = new DAOPartido();
                 daoPartido.obtenerIDPartidosEliminatorios(fase, con, tran);
                 daoPartido.actualizarPartidosEliminatorios(fase, con, tran);
+            }
+        }
+
+        /// <summary>
+        /// Actualiza los nombres de las fases 
+        /// </summary>
+        protected static void actualizarNombresFases( Fase fase)
+        {
+            if (fase.tipoFixture.idTipoFixture == "ELIM" || fase.tipoFixture.idTipoFixture == "ELIM-IV")
+            {
+                foreach (Grupo g in fase.grupos)
+                {
+                    foreach (Fecha f in g.fechas)
+                    {
+                        switch (f.partidos.Count)
+                        {
+                            case 1: f.nombre = "Final";
+                                break;
+                            case 2: f.nombre = "Semifinal";
+                                break;
+                            case 4: f.nombre = "Cuartos de Final";
+                                break;
+                            case 8: f.nombre = "Octavos de Final";
+                                break;
+                            case 16: f.nombre = "Diciseiasavos";
+                                break;
+                            case 32: f.nombre = "Treintaidosavos";
+                                break;
+                        }
+                    }
+                }
+               // daoFecha.cambiarNombresAFechas(fase, con, tran);
             }
         }
 
