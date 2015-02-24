@@ -8,8 +8,9 @@
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <!-- Contenido -->
+    <div class="container">
     <asp:Literal ID="LitEdicion" runat="server"></asp:Literal>
-    <div class="container padding-top">
+    <div class="row padding-top">
     <div class="col-md-12">
             <div class="well">
                 <fieldset class="vgSeleccionarEdicion">
@@ -33,7 +34,7 @@
       </div>        
     </div>
     <asp:Panel ID="panelEstadisticas" runat="server">
-    <div class="container padding-top">
+    <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -110,18 +111,21 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="col-md-6">JUGADOR</th>
-                                <th class="col-md-5">EQUIPO</th>
-                                <th class="col-md-1">GOLES</th>
+                                <th class="col-md-1"></th>
+                                <th class="col-md-3">JUGADOR</th>
+                                <th class="col-md-1"></th>
+                                <th class="col-md-3">EQUIPO</th>
+                                <th class="col-md-2">GOLES</th>
                             </tr>
                         </thead>
                         <tbody class="tablaFiltro">
                             <asp:Repeater ID="rptGoleadores" runat="server">
                                 <ItemTemplate>
                                     <tr>
+                                        <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("IDJUGADOR").ToString()), Utils.GestorImagen.JUGADOR, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
                                         <td><%# Eval("JUGADOR") %></td>
-                                        <td><%# Eval("EQUIPO") %></td>
-                                        <%--<td><img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /> <%# Eval("EQUIPO") %></td>--%>
+                                        <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("IDEQUIPO").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
+                                        <td><%# Eval("EQUIPO") %></td>                                       
                                         <td><%# Eval("GOLES") %></td>
                                     </tr>
                                 </ItemTemplate>
@@ -135,7 +139,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="row">
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -169,11 +173,10 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="col-md-3">LOCAL</th>
+                                <th class="col-md-2">LOCAL</th>
                                 <th class="col-md-1">VS</th>
-                                <th class="col-md-3">VISITANTE</th>
-                                <th class="col-md-1"></th>
-                                <th class="col-md-2">ÁRBITRO</th>
+                                <th class="col-md-2">VISITANTE</th>
+                                <th class="col-md-1">FECHA</th>
                                 <th class="col-md-1">ESTADO</th>
                             </tr>
                         </thead>
@@ -182,10 +185,9 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td><%# Eval("local") %></td>
-                                        <td>vs</td>
-                                        <td><%# Eval("visitante") %></td>
-                                        <td><%# Eval("GolesLocal") %>-<%# Eval("GolesVisitante") %></td>
-                                        <td><%# Eval("arbitro") %></td>
+                                        <td><%# Eval("GolesLocal") %> - <%# Eval("GolesVisitante") %></td>
+                                        <td><%# Eval("visitante") %></td>                                        
+                                        <td><%# Eval("FechaPartido") %></td>
                                         <td><span class="label partido-<%# Eval("estado") %>" rel="txtTooltip" data-placement="left"><%# Eval("estado") %></span></td>
                                     </tr>
                                 </ItemTemplate>
@@ -201,6 +203,7 @@
         </div>
     </div>
     </asp:Panel>
+    </div>
     <!-- Contenido -->
     <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
         <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
