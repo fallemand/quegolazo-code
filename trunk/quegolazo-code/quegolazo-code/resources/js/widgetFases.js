@@ -468,7 +468,7 @@
     //arma un grupo con una fecha, que corresponde a todas las llaves de la primera ronda, guarda en objetos tipo PartidoEliminatorio
     armarLlaves: function (numFase) {
         var widget = this;
-        var idEquipos = $("[data-idequipo]");
+        var idEquipos = $("#panelFase"+numFase+" [data-idequipo]");
         if (idEquipos.length == 0)
             throw new Error("ATENCION : Debe configurar los partidos de la eliminatoria para continuar");
         var partido = { local: null, visitante: null };

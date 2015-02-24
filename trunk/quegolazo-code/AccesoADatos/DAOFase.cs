@@ -99,9 +99,6 @@ namespace AccesoADatos
         /// <summary>
         /// Registra una fase eliminatoria, previamente debe tener creados los partidos con el método crearPartidosSiguientes, y dicha fase debe estar resgitrada en la base de datos.
         /// </summary>
-        /// <param name="con"></param>
-        /// <param name="tran"></param>
-        /// <param name="fase"></param>
         private static void actualizarFaseEliminatoria(SqlConnection con, SqlTransaction tran, Fase fase)
         {
             if ((fase.tipoFixture.idTipoFixture == "ELIM" || fase.tipoFixture.idTipoFixture == "ELIM-IV") && !fase.esGenerica)
@@ -304,20 +301,15 @@ namespace AccesoADatos
         }
         
          /// <summary>
-        /// Elimina las fases de la edicion que tiene el id mayor o igual al que se pase por parametro
+        /// Elimina las fases de la edicion que tiene el id mayor o igual al que se pase por parametro. 
         /// autor: Antonio Herrera
        /// </summary>
         /// <param name="fases">Lista de Fases</param>
-        public void eliminarFasesPosteriores(int idFase, int idEdicion)
-        {
-            SqlCommand cmd = new SqlCommand();
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
-            cmd.Connection = con;
-            if (con.State == ConnectionState.Closed)
-                con.Open();
+        public void eliminarFasesPosteriores(int idFase, int idEdicion, SqlCommand cmd)
+        {   
             try
             {
-                string sqlEliminacion = "DELETE FROM Fases WHERE idEdicion = @idEdicion and idEstado=@idEstado and idFase >= @idFase";
+                string sqlEliminacion = "DELETE FROM Fases WHERE idEdicion = @idEdicion and idFase >= @idFase";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                 cmd.Parameters.AddWithValue("@idFase", idFase);
@@ -328,8 +320,7 @@ namespace AccesoADatos
             }
             catch (SqlException ex)
             {
-                cmd.Transaction.Rollback();
-                throw new Exception("Error al intentar actualizar las fases: " + ex.Message);
+               throw new Exception("Error al intentar actualizar las fases: " + ex.Message);
             }
         }
 
@@ -423,8 +414,7 @@ namespace AccesoADatos
                      cmd.ExecuteNonQuery();
                     }
                     catch (Exception ex)
-                    {
-                        cmd.Transaction.Rollback();
+                    {                       
                         throw new Exception("No se pudo cerrar la fase: " + ex.Message);
                     }
                 }
@@ -527,6 +517,7 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 cerrarFase(idFaseActual - 1, edicion.idEdicion, cmd);
                 actualizarFasesPosteriores(edicion.fases, idFaseActual,cmd);
+                trans.Commit();
             }
             catch (Exception ex)
             {
@@ -548,20 +539,15 @@ namespace AccesoADatos
             try
             {
                 //TODO corregir este método, parece que no está eliminando las fases
-                eliminarFasesPosteriores(idFaseActual, fases[0].idEdicion);
+                eliminarFasesPosteriores(idFaseActual, fases[0].idEdicion, cmd);
                 registrarFasesPosteriores(fases, idFaseActual, cmd);
                 actualizarFasesPosterioresEliminatorias(fases, idFaseActual, cmd);
             }
             catch (Exception ex)
-            {
-                cmd.Transaction.Rollback();
+            {            
                 throw new Exception("No se pudo actualizar las fases: " + ex.Message);
             }
-            finally
-            {
-                if (cmd.Connection != null && cmd.Connection.State == ConnectionState.Open)
-                    cmd.Connection.Close();
-            }
+          
         }
         /// <summary>
         /// Actualiza las fases posteriores, cuando son eliminatorias guardando todos los id de las llaves de los partidos eliminatorios.
