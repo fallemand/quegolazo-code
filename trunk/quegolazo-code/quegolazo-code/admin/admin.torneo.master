@@ -49,7 +49,6 @@
             $('.date').datetimepicker({
                 language: 'es'
             });
-            $('.searchableSelect').searchableSelect();
             cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
         };
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
