@@ -464,5 +464,51 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        /// <summary>
+        /// Permite obtener el ranking de tarjetas amarillas y rojas por equipo y jugador
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public DataTable obtenerTablaTarjetas(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT TOP 10 e.idEquipo AS 'IDEQUIPO', e.nombre AS 'EQUIPO', 
+                                j.idJugador AS 'IDJUGADOR', j.nombre AS 'JUGADOR',
+                                COUNT(CASE t.tipoTarjeta WHEN 'A' THEN 1 ELSE NULL END) AS 'AMARILLAS',
+                                COUNT(CASE t.tipoTarjeta WHEN 'R' THEN 1 ELSE NULL END) AS 'ROJAS'
+                                FROM Tarjetas t
+                                INNER JOIN Equipos e ON t.idEquipo = e.idEquipo
+                                INNER JOIN Jugadores j ON t.idJugador = j.idJugador
+                                INNER JOIN Partidos p ON t.idPartido = p.idPartido
+                                WHERE p.idEdicion = @idEdicion
+                                GROUP BY e.idEquipo, e.nombre, j.idJugador, j.nombre
+                                ORDER BY 'AMARILLAS' DESC, 'ROJAS' DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
