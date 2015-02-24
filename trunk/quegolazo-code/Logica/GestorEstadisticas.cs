@@ -39,6 +39,11 @@ namespace Logica
            return DaoEstadisticas.obtenerTablaGoleadores(edicion.idEdicion);
        }
 
+       public DataTable obtenerTablaTarjetas()
+       {
+           return DaoEstadisticas.obtenerTablaTarjetas(edicion.idEdicion);
+       }
+
        public DataTable obtenerFixtureFecha(int idFecha)
        {
            return DaoEstadisticas.obtenerFixtureFecha(edicion.idEdicion, idFecha);
