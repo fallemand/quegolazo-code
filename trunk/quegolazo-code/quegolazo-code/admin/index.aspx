@@ -38,7 +38,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="btn-group btn-group-sm" role="group" style="margin-right: 5px;" aria-label="...">
                                 <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');">Todos</button>
                             </div>
