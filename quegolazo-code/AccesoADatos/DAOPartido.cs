@@ -909,22 +909,25 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 cmd.Transaction = trans;
                 string sql = @" DECLARE @tipoFixture AS varchar(10) = (SELECT f.tipoFixture FROM Partidos p INNER JOIN Fases f on (p.idFase = f.idFase AND p.idEdicion = f.idEdicion) WHERE p.idPartido=@idPartido )
-                                DECLARE @idPartidoPosterior AS int = (SELECT p.idPartidoPosterior FROM Partidos p  WHERE p.idPartido=@idPartido  )
-                                IF @tipoFixture='ELIM'
-	                               BEGIN
-									UPDATE Partidos
-										SET idEquipoLocal = CASE WHEN  idEquipoLocal IS NULL THEN @idGanador
-															END,
-											idEquipoVisitante = CASE WHEN idEquipoLocal IS NOT NULL THEN @idGanador
-																END
-		                               WHERE idPartido=@idPartidoPosterior
-	                                END
+                                DECLARE @idPartidoPosterior AS int = (SELECT p.idPartidoPosterior FROM Partidos p  WHERE p.idPartido=@idPartido)
+                                DECLARE @idEquipoLocal AS int = (SELECT idEquipolocal FROM Partidos p  WHERE p.idPartido=@idPartidoPosterior)
+                                    IF @tipoFixture='ELIM'
+	                                  BEGIN
+								       IF @idEquipoLocal IS NULL
+									    BEGIN
+									    UPDATE Partidos SET idEquipoLocal = @idGanador WHERE idPartido=@idPartidoPosterior
+									    END
+									    ELSE
+									    BEGIN
+									    UPDATE Partidos SET idEquipoVisitante = @idGanador WHERE idPartido=@idPartidoPosterior
+									    END  
+	                                  END
                                 ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idPartido",idPartido);
                 cmd.Parameters.AddWithValue("@idGanador", idGanador);
                 cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
+                if(cmd.ExecuteNonQuery()>0)
                 (new DAOFecha()).actualizarFechaEliminatorio(idPartido, con, trans);
             }
             catch (SqlException ex)
