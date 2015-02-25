@@ -57,7 +57,7 @@ namespace AccesoADatos
         /// Permite obtener el avance de la edición a partir de su Id
         /// autor: Flor Rojas
         /// </summary>  
-        public DataTable obtenerAvanceFecha(int idEdicion)
+        public DataTable obtenerAvanceFecha(int idEdicion, int idFase)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -73,11 +73,13 @@ namespace AccesoADatos
                                             COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance'
                                             FROM Partidos p 
 	                                        INNER JOIN Fechas f ON p.idFecha = f.idFecha
-	                                        WHERE p.idEdicion = @idEdicion AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @estadoIncompleta AND idEdicion = p.idEdicion ORDER BY idFecha DESC)
+	                                        WHERE p.idEdicion = @idEdicion AND p.idFase = @idFase
+                                            AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @estadoIncompleta AND idEdicion = p.idEdicion AND idFase = p.idFase ORDER BY idFecha DESC)
 	                                        GROUP BY f.idFecha 
 	                                        ORDER BY f.idFecha";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
                 cmd.Parameters.Add(new SqlParameter("@estadoIncompleta", Estado.fechaINCOMPLETA));
                 cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
                 cmd.CommandText = sql;
@@ -92,12 +94,14 @@ namespace AccesoADatos
                                             COUNT(p.idPartido) AS 'Partidos', 
                                             COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance'
                                             FROM Partidos p 
-	                                        INNER JOIN Fechas f ON p.idFecha=f.idFecha
-	                                        WHERE p.idEdicion = @idEdicion AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @estadoCompleta AND idEdicion = p.idEdicion ORDER BY idFecha DESC)
+	                                        INNER JOIN Fechas f ON p.idFecha=f.idFecha 
+	                                        WHERE p.idEdicion = @idEdicion AND p.idFase = @idFase
+                                            AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @estadoCompleta AND idEdicion = p.idEdicion AND idFase = p.idFase ORDER BY idFecha DESC)
 	                                        GROUP BY f.idFecha 
 	                                        ORDER BY f.idFecha";
                     cmd.Parameters.Clear();
                     cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                    cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
                     cmd.Parameters.Add(new SqlParameter("@estadoCompleta", Estado.fechaCOMPLETA));
                     cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
                     cmd.CommandText = sql;
@@ -123,7 +127,7 @@ namespace AccesoADatos
         /// Obtiene el Fixture de la última fecha
         /// autor: Flor Rojas
         /// </summary>
-        public DataTable obtenerFixtureUltimaFecha(int idEdicion)
+        public DataTable obtenerFixtureUltimaFecha(int idEdicion, int idFase)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -148,11 +152,13 @@ namespace AccesoADatos
 	                            LEFT JOIN Arbitros ar ON p.idArbitro = ar.idArbitro
 	                            LEFT JOIN Canchas can ON p.idCancha = can.idCancha
 	                            LEFT JOIN Estados es ON p.idEstado = es.idEstado
-	                            WHERE p.idEdicion = @idEdicion AND f.idFecha = (SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @idEstadoFecha AND idEdicion = @idEdicion ORDER BY idFecha DESC)
+	                            WHERE p.idEdicion = @idEdicion AND p.idFase = @idFase
+                                AND f.idFecha = (SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @idEstadoFecha AND idEdicion = @idEdicion AND idFase = @idFase ORDER BY idFecha DESC)
 	                            GROUP BY f.idFecha, elocal.nombre, p.golesLocal ,  eVisitante.nombre, p.golesVisitante, ar.nombre, can.nombre,  p.fecha, es.nombre
 	                            ORDER BY f.idFecha";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
                 cmd.Parameters.Add(new SqlParameter("@idEstadoFecha", Estado.fechaINCOMPLETA));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
@@ -178,12 +184,15 @@ namespace AccesoADatos
 	                            LEFT JOIN Arbitros ar ON p.idArbitro = ar.idArbitro
 	                            LEFT JOIN Canchas can ON p.idCancha = can.idCancha
 	                            LEFT JOIN Estados es ON p.idEstado = es.idEstado
-	                            WHERE p.idEdicion = @idEdicion AND f.idFecha = (SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @idEstadoFecha AND idEdicion = @idEdicion ORDER BY idFecha DESC)
+	                            WHERE p.idEdicion = @idEdicion AND p.idFase = @idFase
+                                AND f.idFecha = (SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @idEstadoFecha AND idEdicion = @idEdicion AND idFase = @idFase ORDER BY idFecha DESC)
 	                            GROUP BY f.idFecha, elocal.nombre, p.golesLocal, eVisitante.nombre, p.golesVisitante, ar.nombre, can.nombre, p.fecha, es.nombre
 	                            ORDER BY f.idFecha";
                     cmd.Parameters.Clear();
                     cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                    cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
                     cmd.Parameters.Add(new SqlParameter("@idEstadoFecha", Estado.fechaCOMPLETA));
+                    cmd.CommandText = sql;
                     dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
@@ -207,12 +216,15 @@ namespace AccesoADatos
 	                            LEFT JOIN Arbitros ar ON p.idArbitro = ar.idArbitro
 	                            LEFT JOIN Canchas can ON p.idCancha = can.idCancha
 	                            LEFT JOIN Estados es ON p.idEstado = es.idEstado
-	                            WHERE p.idEdicion = @idEdicion AND f.idFecha = (SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @idEstadoFecha AND idEdicion = @idEdicion ORDER BY idFecha DESC)
+	                            WHERE p.idEdicion = @idEdicion AND p.idFase = @idFase
+                                AND f.idFecha = (SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @idEstadoFecha AND idEdicion = @idEdicion AND idFase = @idFase ORDER BY idFecha ASC)
 	                            GROUP BY f.idFecha, elocal.nombre, p.golesLocal, eVisitante.nombre, p.golesVisitante, ar.nombre, can.nombre, p.fecha, es.nombre
 	                            ORDER BY f.idFecha";
                         cmd.Parameters.Clear();
                         cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                        cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
                         cmd.Parameters.Add(new SqlParameter("@idEstadoFecha", Estado.fechaDIAGRAMADA));
+                        cmd.CommandText = sql;
                         dr = cmd.ExecuteReader();
                         tablaDeDatos.Load(dr);
                         dr.Close();

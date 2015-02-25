@@ -1033,5 +1033,27 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public void cambiarEstadosAPartidos(int idEstado, int idEdicion, int idFase, SqlCommand cmd)
+        {
+            try
+            {
+                string sql = @"UPDATE Partidos
+                                SET idEstado = @idEstado
+                                WHERE idEdicion = @idEdicion AND idFase = @idFase
+                                AND idEstado NOT IN (@estadoJugado)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEstado", idEstado);
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@idFase", idFase);
+                cmd.Parameters.AddWithValue("@estadoJugado", Estado.partidoJUGADO);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo cambiar el estado de los partidos: " + ex.Message);
+            }
+        }
     }
 }

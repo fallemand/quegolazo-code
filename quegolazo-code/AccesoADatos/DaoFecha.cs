@@ -201,6 +201,27 @@ namespace AccesoADatos
             }
         }
 
+        public void cambiarEstadosAFechas(int idEstado, int idEdicion, int idFase, SqlCommand cmd)
+        {
+            try
+            {
+                string sql = @"UPDATE Fechas
+                                SET idEstado = @idEstado
+                                WHERE idEdicion = @idEdicion
+                                AND idFase = @idFase";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEstado", idEstado);
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@idFase", idFase);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo cambiar el estado de los partidos: " + ex.Message);
+            }
+        }
+
         public void cambiarEstadosAFechasIncompletas(int idEstado, int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);

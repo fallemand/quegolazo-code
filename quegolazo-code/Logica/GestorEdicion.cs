@@ -56,6 +56,7 @@ namespace Logica
         /// <param name="gestor">El gestor que se va a actualizar</param>
         public void getFaseActual()
         {
+            bool hayFaseIniciadaODiagramada = false;
             if (this.edicion.fases.Count == 0)
             {
                 faseActual = null;
@@ -68,9 +69,12 @@ namespace Logica
                     if (fase.estado.idEstado == Estado.faseDIAGRAMADA || fase.estado.idEstado == Estado.faseINICIADA)
                     {
                        this.faseActual = fase;
+                       hayFaseIniciadaODiagramada = true;
                        break;
                     }
                 }
+                if (!hayFaseIniciadaODiagramada)
+                    this.faseActual = this.edicion.fases[this.edicion.fases.Count - 1];
             }
         }
 
