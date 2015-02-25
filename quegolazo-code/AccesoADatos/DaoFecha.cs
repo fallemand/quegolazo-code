@@ -132,7 +132,6 @@ namespace AccesoADatos
                                                     BEGIN
 							UPDATE Fechas SET idEstado = @idEstado1 WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
                                                     END
-
 						    ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idPartido", idPartido);
@@ -310,7 +309,39 @@ namespace AccesoADatos
 //            }
 //        }
 
-      
 
+        /// <summary>
+        /// Cambia el estado de la fecha a Diagramada cuando se registra un equipo en algun partido de las fechas genericas
+        /// autor: Flor Rojas
+        /// </summary>
+        public void actualizarFechaEliminatorio(int idPartido, SqlConnection con, SqlTransaction trans)
+        {
+            
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+                string sql = @"    
+                            DECLARE @idPartidoPosterior AS int = (SELECT p.idPartidoPosterior FROM Partidos p  WHERE p.idPartido=@idPartido  )
+                            DECLARE @idFecha AS int = (SELECT idFecha FROM Partidos WHERE idPartido = @idPartidoPosterior)
+                            DECLARE @idGrupo AS int = (SELECT idGrupo FROM Partidos WHERE idPartido = @idPartidoPosterior)
+                            DECLARE @idFase AS int = (SELECT idFase FROM Partidos WHERE idPartido = @idPartidoPosterior)
+                            DECLARE @idEdicion AS int = (SELECT idEdicion FROM Partidos WHERE idPartido = @idPartidoPosterior)       
+							UPDATE Fechas SET idEstado = @idEstado WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
+						    ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idPartido", idPartido); 
+                cmd.Parameters.AddWithValue("@idEstado", Estado.fechaDIAGRAMADA);   
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No se pudo actualizar el estado de la fecha: " + ex.Message);
+            }
+        }
     }
 }

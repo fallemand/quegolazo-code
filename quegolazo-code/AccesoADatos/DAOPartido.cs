@@ -270,6 +270,8 @@ namespace AccesoADatos
             }
         }
 
+
+
        /// <summary>
        /// Registra una sanción en la BD
        /// autor: Pau Pedrosa
@@ -662,6 +664,8 @@ namespace AccesoADatos
                     registrarTitularesAPartido(partido.titularesLocal, partido.local.idEquipo, partido.idPartido, con, trans);//titulares del equipo local
                 if(partido.visitante.idEquipo != null)
                     registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}
+                guardarEquipoEnLLaveSiguiene(partido.idPartido,partido.idGanador, con, trans);
+                
                 trans.Commit();
             }
             catch (Exception ex)
@@ -675,6 +679,8 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+     
 
        /// <summary>
        /// Obtiene los Tipos Goles de la BD
@@ -887,6 +893,46 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        /// <summary>
+        /// Graba el equipo ganador de un partido, en el partido de la llave siguiente (solo apra eliminatorios)
+        /// autor: Florencia Rojas
+        /// </summary>
+        public void guardarEquipoEnLLaveSiguiene(int idPartido, int? idGanador, SqlConnection con, SqlTransaction trans)
+        {
+            
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                cmd.Transaction = trans;
+                string sql = @" DECLARE @tipoFixture AS varchar(10) = (SELECT f.tipoFixture FROM Partidos p INNER JOIN Fases f on (p.idFase = f.idFase AND p.idEdicion = f.idEdicion) WHERE p.idPartido=@idPartido )
+                                DECLARE @idPartidoPosterior AS int = (SELECT p.idPartidoPosterior FROM Partidos p  WHERE p.idPartido=@idPartido  )
+                                IF @tipoFixture='ELIM'
+	                               BEGIN
+									UPDATE Partidos
+										SET idEquipoLocal = CASE WHEN  idEquipoLocal IS NULL THEN @idGanador
+															END,
+											idEquipoVisitante = CASE WHEN idEquipoLocal IS NOT NULL THEN @idGanador
+																END
+		                               WHERE idPartido=@idPartidoPosterior
+	                                END
+                                ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idPartido",idPartido);
+                cmd.Parameters.AddWithValue("@idGanador", idGanador);
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+                (new DAOFecha()).actualizarFechaEliminatorio(idPartido, con, trans);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("No se pudo grabar equipo en el partido de la siguiente llave " + ex.Message);
+            }
+        }
+
 
         /// <summary>
         /// Actualiza los idPartido Posterior para las fases eliminatorias
