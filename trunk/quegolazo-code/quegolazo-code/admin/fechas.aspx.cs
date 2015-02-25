@@ -690,7 +690,7 @@ namespace quegolazo_code.admin
                         panelPartidoLibre.Visible = true;
                     }
                     LinkButton lnkAdministrarPartido = (LinkButton)e.Item.FindControl("lnkAdministrarPartido");
-                    lnkAdministrarPartido.Visible = ((partido.estado.idEstado == Estado.partidoJUGADO || partido.estado.idEstado == Estado.partidoCANCELADO) && (edicionAsociada.estado.idEstado == Estado.edicionFINALIZADA || edicionAsociada.estado.idEstado == Estado.edicionCANCELADA)) ? false : true;
+                    lnkAdministrarPartido.Visible = ((partido.estado.idEstado == Estado.partidoJUGADO || partido.estado.idEstado == Estado.partidoCANCELADO) && (partido.faseAsociada.estado.idEstado == Estado.faseFINALIZADA || partido.faseAsociada.estado.idEstado == Estado.faseCANCELADA)) ? false : true;
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }

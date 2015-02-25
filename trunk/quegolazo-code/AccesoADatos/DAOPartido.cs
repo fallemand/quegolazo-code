@@ -99,6 +99,7 @@ namespace AccesoADatos
                              DAOEstado daoEstado = new DAOEstado();
                              DAOArbitro daoArbitro = new DAOArbitro();
                              DAOCancha daoCancha = new DAOCancha();
+                             DAOFase daoFase = new DAOFase();
                              Partido partido = new Partido();
                              partido.idPartido = int.Parse(dr["idPartido"].ToString());
                              partido.fecha = (dr["fecha"] != DBNull.Value) ? (DateTime?) DateTime.Parse( dr["fecha"].ToString()) : null;
@@ -113,6 +114,7 @@ namespace AccesoADatos
                              partido.estado = daoEstado.obtenerEstadoPorId(int.Parse(dr["idEstado"].ToString()));
                              partido.arbitro = (dr["idArbitro"] != DBNull.Value) ? daoArbitro.obtenerArbitroPorId(int.Parse(dr["idArbitro"].ToString())) : null;
                              partido.cancha = (dr["idCancha"] != DBNull.Value) ? daoCancha.obtenerCanchaPorId(int.Parse(dr["idCancha"].ToString())) : null;
+                             partido.faseAsociada = daoFase.obtenerFasePorId(int.Parse(dr["idEdicion"].ToString()), int.Parse(dr["idFase"].ToString()));
                              if (dr["idEquipoLocal"] != DBNull.Value && dr["idEquipoVisitante"] != DBNull.Value)
                                 partido.nombreCompleto = daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoLocal"].ToString())).nombre + " vs. " + daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString())).nombre;
                              fechaActual.partidos.Add(partido);
@@ -373,6 +375,7 @@ namespace AccesoADatos
                     DAOEstado daoEstado = new DAOEstado();
                     DAOArbitro daoArbitro = new DAOArbitro();
                     DAOCancha daoCancha = new DAOCancha();
+                    DAOFase daoFase = new DAOFase();
                     partido.idPartido = int.Parse(dr["idPartido"].ToString());
                     partido.fecha = (dr["fecha"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fecha"].ToString()) : null;
                     partido.golesLocal = (dr["golesLocal"] != DBNull.Value) ? (int?)int.Parse(dr["golesLocal"].ToString()) : null;
@@ -385,7 +388,8 @@ namespace AccesoADatos
                     partido.visitante = (dr["idEquipoVisitante"] != DBNull.Value) ? daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString())) : null;
                     partido.estado = daoEstado.obtenerEstadoPorId(int.Parse(dr["idEstado"].ToString()));
                     partido.arbitro = (dr["idArbitro"] != DBNull.Value) ? daoArbitro.obtenerArbitroPorId(int.Parse(dr["idArbitro"].ToString())) : null;
-                    partido.cancha = (dr["idCancha"] != DBNull.Value) ? daoCancha.obtenerCanchaPorId(int.Parse(dr["idCancha"].ToString())) : null;                                   
+                    partido.cancha = (dr["idCancha"] != DBNull.Value) ? daoCancha.obtenerCanchaPorId(int.Parse(dr["idCancha"].ToString())) : null;
+                    partido.faseAsociada = daoFase.obtenerFasePorId(int.Parse(dr["idEdicion"].ToString()), int.Parse(dr["idFase"].ToString()));
                 }
                 if (dr != null)
                     dr.Close();
@@ -664,8 +668,7 @@ namespace AccesoADatos
                     registrarTitularesAPartido(partido.titularesLocal, partido.local.idEquipo, partido.idPartido, con, trans);//titulares del equipo local
                 if(partido.visitante.idEquipo != null)
                     registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}
-                guardarEquipoEnLLaveSiguiene(partido.idPartido,partido.idGanador, con, trans);
-                
+                //guardarEquipoEnLLaveSiguiene(partido.idPartido,partido.idGanador, con, trans);                
                 trans.Commit();
             }
             catch (Exception ex)

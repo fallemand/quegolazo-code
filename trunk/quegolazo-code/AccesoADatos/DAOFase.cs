@@ -216,6 +216,52 @@ namespace AccesoADatos
                      con.Close();
              }
         }
+
+        public Fase obtenerFasePorId(int idEdicion, int idFase)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            Fase fase = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT * 
+                                FROM  Fases
+                                WHERE idEdicion = @idEdicion
+                                AND idFase = @idFase";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@idFase", idFase);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                DAOEstado daoEstado = new DAOEstado();
+                while (dr.Read())
+                {
+                    fase = new Fase()
+                    {
+                        idFase = int.Parse(dr["idFase"].ToString()),
+                        idEdicion = idEdicion,
+                        estado = daoEstado.obtenerEstadoPorId(int.Parse(dr["idEstado"].ToString())),
+                        tipoFixture = new TipoFixture(dr["tipoFixture"].ToString())
+                    };
+                }
+                if (dr != null)
+                    dr.Close();               
+                return fase;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar la fase: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
         
         /// <summary>
         /// Obtiene las fases  de una edición por Id. Obteniendo solo los valores necesarios para mostrar la informacion básica de la fase y sus equipos.

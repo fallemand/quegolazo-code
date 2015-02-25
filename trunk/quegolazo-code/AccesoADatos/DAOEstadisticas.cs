@@ -70,13 +70,9 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 string sql = @"SELECT top 1 f.idFecha, COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END) AS 'Partidos Jugados',
                                             COUNT(p.idPartido) AS 'Partidos', 
-                                            COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance',
-		                                    COUNT(CASE T.tipoTarjeta WHEN 'A' THEN 1 ELSE NULL END) AS 'AMARILLAS', 
-                                            COUNT(CASE T.tipoTarjeta WHEN 'R' THEN 1 ELSE NULL END) AS 'ROJAS'
+                                            COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance'
                                             FROM Partidos p 
-	                                        INNER JOIN Fechas f ON p.idFecha=f.idFecha
-	                                        LEFT JOIN Tarjetas t ON p.idPartido = t.idPartido
-	                                        LEFT JOIN Sanciones s ON s.idPartido = s.idPartido
+	                                        INNER JOIN Fechas f ON p.idFecha = f.idFecha
 	                                        WHERE p.idEdicion = @idEdicion AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @estadoIncompleta AND idEdicion = p.idEdicion ORDER BY idFecha DESC)
 	                                        GROUP BY f.idFecha 
 	                                        ORDER BY f.idFecha";
@@ -94,13 +90,9 @@ namespace AccesoADatos
                         dr.Close();
                     sql = @"SELECT top 1 f.idFecha, COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END) AS 'Partidos Jugados',
                                             COUNT(p.idPartido) AS 'Partidos', 
-                                            COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance',
-		                                    COUNT(CASE T.tipoTarjeta WHEN 'A' THEN 1 ELSE NULL END) AS 'AMARILLAS', 
-                                            COUNT(CASE T.tipoTarjeta WHEN 'R' THEN 1 ELSE NULL END) AS 'ROJAS'
+                                            COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END)*100/(COUNT(p.idPartido)) AS 'porcentajeAvance'
                                             FROM Partidos p 
 	                                        INNER JOIN Fechas f ON p.idFecha=f.idFecha
-	                                        LEFT JOIN Tarjetas t ON p.idPartido = t.idPartido
-	                                        LEFT JOIN Sanciones s ON s.idPartido = s.idPartido
 	                                        WHERE p.idEdicion = @idEdicion AND f.idFecha =(SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @estadoCompleta AND idEdicion = p.idEdicion ORDER BY idFecha DESC)
 	                                        GROUP BY f.idFecha 
 	                                        ORDER BY f.idFecha";
@@ -111,7 +103,6 @@ namespace AccesoADatos
                     cmd.CommandText = sql;
                     dr = cmd.ExecuteReader();
                     tablaDeDatos.Load(dr);
-                    
                 }
                 if (dr != null)
                     dr.Close();
