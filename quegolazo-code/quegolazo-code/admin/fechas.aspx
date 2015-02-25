@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="fechas.aspx.cs" Inherits="quegolazo_code.admin.fechas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
     <script type="text/javascript" src="/resources/js/jquery.multi-select.js"></script>
-    <script src="../../resources/js/jquery.ui/jquery-ui.min.js"></script>
-    <script src="../../resources/js/quegolazo.js"></script>
-    <script src="../../resources/js/widgetFases.js"></script>
-    <script src="../../resources/js/jquery.bracket.min.js"></script>
-    <link href="../../resources/css/jquery.bracket.min.css" rel="stylesheet" />
-    <script src="../../resources/js/widgetLlaves.js"></script>
+    <script src="/resources/js/jquery.ui/jquery-ui.min.js"></script>
+    <script src="/resources/js/quegolazo.js"></script>
+    <script src="/resources/js/widgetFases.js"></script>
+    <script src="/resources/js/jquery.bracket.min.js"></script>
+    <link href="/resources/css/jquery.bracket.min.css" rel="stylesheet" />
+    <script src="/resources/js/widgetLlaves.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
