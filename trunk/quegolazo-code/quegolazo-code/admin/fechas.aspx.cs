@@ -678,6 +678,7 @@ namespace quegolazo_code.admin
                     
                     Partido partido = ((Partido)e.Item.DataItem);
                     Edicion edicionAsociada = gestorEdicion.edicion;
+                    
                     if (partido.local != null && partido.visitante != null)
                     {
                         Panel panelPartidoNormal = (Panel)e.Item.FindControl("panelPartidoNormal");
