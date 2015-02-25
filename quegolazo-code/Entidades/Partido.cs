@@ -30,6 +30,7 @@ namespace Entidades
         public bool? empate { get; set; }
         public string nombreCompleto { get; set; }
         public int idPartidoPosterior { get; set; }
+        public Fase faseAsociada { get; set; }
 
         public Partido()
         {

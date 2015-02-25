@@ -126,11 +126,11 @@ namespace AccesoADatos
                             DECLARE @cantidad AS int = (SELECT COUNT(*) FROM Partidos p WHERE p.idFecha = @idFecha AND p.idGrupo=@idGrupo AND p.idEdicion = @idEdicion AND p.idEstado IN (SELECT idEstado FROM Estados WHERE idEstado = @estadoJugado ))
 					                            if(@cantidad>0)
 						                            BEGIN
-							UPDATE Fechas SET idEstado = @idEstado WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
+							UPDATE Fechas SET idEstado = @idEstado WHERE idFecha = @idFecha AND idFase = @idFase AND idEdicion = @idEdicion
                                                     END
                                                 else                                                
                                                     BEGIN
-							UPDATE Fechas SET idEstado = @idEstado1 WHERE idFecha = @idFecha AND idGrupo = @idGrupo AND idFase = @idFase AND idEdicion = @idEdicion
+							UPDATE Fechas SET idEstado = @idEstado1 WHERE idFecha = @idFecha AND idFase = @idFase AND idEdicion = @idEdicion
                                                     END
 						    ";
                 cmd.Parameters.Clear();

@@ -216,9 +216,13 @@ namespace Logica
                       fase.grupos[0].fechas.Remove(fechaEliminar);
                   }
               }
-          }
-         
+          }         
       }
-      
+
+      public Fase obtenerFasePorId(int idEdicion, int idFase)
+      {
+          DAOFase daoFase = new DAOFase();
+          return daoFase.obtenerFasePorId(idEdicion, idFase);
+      }      
     }
 }
