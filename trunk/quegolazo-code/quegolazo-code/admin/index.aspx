@@ -180,9 +180,9 @@
                             <asp:Repeater ID="rptFecha" runat="server">
                                 <ItemTemplate>
                                     <tr>
-                                        <td><%# Eval("local") %></td>
+                                        <td><%# Eval("Local") %></td>
                                         <td><%# Eval("GolesLocal") %> - <%# Eval("GolesVisitante") %></td>
-                                        <td><%# Eval("visitante") %></td>                                        
+                                        <td><%# Eval("Visitante") %></td>                                        
                                         <td><%# Eval("FechaPartido") %></td>
                                         <td><span class="label partido-<%# Eval("estado") %>" rel="txtTooltip" data-placement="left"><%# Eval("estado") %></span></td>
                                     </tr>

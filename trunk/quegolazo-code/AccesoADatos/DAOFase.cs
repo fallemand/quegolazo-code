@@ -598,7 +598,11 @@ namespace AccesoADatos
                 trans = con.BeginTransaction();
                 cmd.Connection = con;
                 cmd.Transaction = trans;
+                DAOPartido daoPartido = new DAOPartido();
+                DAOFecha daoFecha = new DAOFecha();
                 cerrarFase(idFaseActual - 1, edicion.idEdicion, cmd);
+                daoPartido.cambiarEstadosAPartidos(Estado.partidoCANCELADO, edicion.idEdicion, idFaseActual - 1, cmd);
+                daoFecha.cambiarEstadosAFechas(Estado.fechaCOMPLETA, edicion.idEdicion, idFaseActual - 1, cmd);
                 actualizarFasesPosteriores(edicion.fases, idFaseActual,cmd);
                 trans.Commit();
             }

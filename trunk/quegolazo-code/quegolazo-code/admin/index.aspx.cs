@@ -122,7 +122,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarUltimaFecha()
         {
-            var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha();
+            var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(gestorEdicion.faseActual.idFase);
             GestorControles.cargarRepeaterTable(rptFecha,ultimaFecha);
             if(ultimaFecha.Rows.Count>0)
             ltFecha.Text = ultimaFecha.Rows[0]["idFecha"].ToString();
@@ -135,7 +135,7 @@ namespace quegolazo_code.admin
         private void cargarPorcentajeDeAvanceDeLaFecha()
         {
             double avance = 0;
-            var valores = gestorEstadisticas.obtenerAvanceFecha();
+            var valores = gestorEstadisticas.obtenerAvanceFecha(gestorEdicion.faseActual.idFase);
             try { avance = double.Parse(valores.Rows[0]["porcentajeAvance"].ToString()); }
             catch (IndexOutOfRangeException) { }           
             ScriptManager.RegisterStartupScript(this, this.GetType(), "AvanceFecha", "$('#avanceFecha').percentageLoader({ width : 180, height : 180, progress :" + (avance / 100).ToString("0.00", CultureInfo.InvariantCulture) + ", value : ''});", true);

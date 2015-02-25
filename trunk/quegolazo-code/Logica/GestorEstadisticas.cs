@@ -49,14 +49,14 @@ namespace Logica
            return DaoEstadisticas.obtenerFixtureFecha(edicion.idEdicion, idFecha);
        }
 
-       public DataTable obtenerFixtureUltimaFecha()
+       public DataTable obtenerFixtureUltimaFecha(int idFase)
        {
-           return DaoEstadisticas.obtenerFixtureUltimaFecha(edicion.idEdicion);
+           return DaoEstadisticas.obtenerFixtureUltimaFecha(edicion.idEdicion, idFase);
        }
 
-       public DataTable obtenerAvanceFecha()
+       public DataTable obtenerAvanceFecha(int idFase)
        {    
-           return DaoEstadisticas.obtenerAvanceFecha(edicion.idEdicion);
+           return DaoEstadisticas.obtenerAvanceFecha(edicion.idEdicion, idFase);
        }
 
        public DataTable obtenerAvanceEdicion()
