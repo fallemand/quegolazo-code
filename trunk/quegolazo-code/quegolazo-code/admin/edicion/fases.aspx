@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/edicion/edicion.master" AutoEventWireup="true" CodeBehind="fases.aspx.cs" Inherits="quegolazo_code.admin.edicion.fases" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeaderEdicion" runat="server">    
-    <script src="../../resources/js/jquery.ui/jquery-ui.min.js"></script>
-    <script src="../../resources/js/quegolazo.js"></script>
-    <script src="../../resources/js/widgetFases.js"></script>
-    <script src="../../resources/js/jquery.bracket.min.js"></script>
-    <link href="../../resources/css/jquery.bracket.min.css" rel="stylesheet" />
-    <script src="../../resources/js/widgetLlaves.js"></script>
+    <script src="/resources/js/jquery.ui/jquery-ui.min.js"></script>
+    <script src="/resources/js/quegolazo.js"></script>
+    <script src="/resources/js/widgetFases.js"></script>
+    <script src="/resources/js/jquery.bracket.min.js"></script>
+    <link href="/resources/css/jquery.bracket.min.css" rel="stylesheet" />
+    <script src="/resources/js/widgetLlaves.js"></script>
     <script>  
         $(document).ready(function () {
             $("#panelFracaso").hide();
