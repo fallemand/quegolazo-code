@@ -291,7 +291,7 @@ namespace quegolazo_code.admin
                 if(gestorSancion.sancion.idJugador == null && gestorSancion.sancion.idPartido != null)
                     gestorSancion.modificarSancion(idSancionAModificar.ToString(), ddlFecha.SelectedValue, ddlPartido.SelectedValue, ddlEquipo.SelectedValue, null, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, txtPuntosAQuitar.Value, txtCantidadFechasSuspendidas.Value);
                 if (gestorSancion.sancion.idJugador != null && gestorSancion.sancion.idPartido == null)
-                    gestorSancion.modificarSancion(idSancionAModificar.ToString(), null, null, ddlEquipoSinPartido.SelectedValue, ddlJugador.SelectedValue, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, null, txtCantidadFechasSuspendidas.Value);
+                    gestorSancion.modificarSancion(idSancionAModificar.ToString(), null, null, ddlEquipoSinPartido.SelectedValue, ddlJugador.SelectedValue, txtFecha.Value, ddlMotivo.SelectedValue, txtObservacion.Value, "", txtCantidadFechasSuspendidas.Value);
                 gestorSancion.sancion = null;
                 cargarRepeaterSanciones(gestorEdicion.edicion.idEdicion.ToString());
                 btnRegistrarSancion.Visible = true;
@@ -321,8 +321,9 @@ namespace quegolazo_code.admin
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "OpcionPorDefecto", "deshabilitarPanel(); limpiarCombos(); equipoYSinDefinir();", true);
             cargarComboEquipos();
-            cargarComboFechas();
             cargarComboMotivos();
+            if (gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA)
+                cargarComboFechas();
             txtCantidadFechasSuspendidas.Value = "";
             txtFecha.Value = "";
             txtObservacion.Value = "";

@@ -121,6 +121,14 @@ namespace Logica
             sancion.idPartido = (idPartido != null) ? (int?)int.Parse(idPartido) : null;
             sancion.idEquipo = int.Parse(idEquipo);
             sancion.idJugador = (idJugador != null) ? (int?)int.Parse(idJugador) : null;
+            if (fechaSancion.Equals(""))
+                fechaSancion = null;
+            if (observacion.Equals(""))
+                observacion = null;
+            if (puntosAQuitar.Equals(""))
+                puntosAQuitar = null;
+            if (cantidadFechasSuspendidas.Equals(""))
+                cantidadFechasSuspendidas = null;
             sancion.fechaSancion = (fechaSancion != null) ? (DateTime?)DateTime.Parse(fechaSancion) : null;
             sancion.motivoSancion.idMotivoSancion = (idMotivoSancion != null) ? (int?)int.Parse(idMotivoSancion) : null;
             sancion.observacion = observacion;

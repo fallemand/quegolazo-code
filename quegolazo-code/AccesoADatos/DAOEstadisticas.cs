@@ -513,5 +513,47 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+
+        public DataTable obtenerPartidosPorArbitro(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT a.idArbitro, a.nombre, p.idPartido, eqLocal.nombre AS 'EquipoLocal', 
+                                eqVisitante.nombre AS 'EquipoVisitante', p.golesLocal, p.golesVisitante
+                                FROM Partidos p 
+                                INNER JOIN Arbitros a ON p.idArbitro = a.idArbitro
+                                INNER JOIN Ediciones e ON e.idTorneo = a.idTorneo
+                                INNER JOIN Equipos eqLocal ON p.idEquipoLocal = eqLocal.idEquipo
+                                INNER JOIN Equipos eqVisitante ON p.idEquipoVisitante = eqVisitante.idEquipo
+                                WHERE e.idEdicion = @idEdicion
+                                GROUP BY a.idArbitro, a.nombre, p.idPartido,eqLocal.nombre, eqVisitante.nombre, 
+                                golesLocal, golesVisitante";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
