@@ -22,9 +22,12 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"DECLARE @idGrupo AS int = (SELECT idGrupo FROM Grupos WHERE idEdicion = @idEdicion AND idFase = @idFase)
-                                INSERT INTO Sanciones (idEdicion, idFase, idGrupo, idFecha, idPartido, idEquipo, idJugador, fechaSancion, idMotivoSancion, observacion, puntosAQuitar, cantidadFechasSuspendidas)
-                                    VALUES (@idEdicion, @idFase, @idGrupo, @idFecha, @idPartido, @idEquipo, @idJugador, @fechaSancion, @idMotivoSancion, @observacion, @puntosAQuitar, @cantidadFechasSuspendidas)
+//                string sql = @"DECLARE @idGrupo AS int = (SELECT idGrupo FROM Grupos WHERE idEdicion = @idEdicion AND idFase = @idFase)
+//                                INSERT INTO Sanciones (idEdicion, idFase, idGrupo, idFecha, idPartido, idEquipo, idJugador, fechaSancion, idMotivoSancion, observacion, puntosAQuitar, cantidadFechasSuspendidas)
+//                                    VALUES (@idEdicion, @idFase, @idGrupo, @idFecha, @idPartido, @idEquipo, @idJugador, @fechaSancion, @idMotivoSancion, @observacion, @puntosAQuitar, @cantidadFechasSuspendidas)
+//                                    SELECT SCOPE_IDENTITY()";
+                string sql = @"INSERT INTO Sanciones (idEdicion, idFase, idFecha, idPartido, idEquipo, idJugador, fechaSancion, idMotivoSancion, observacion, puntosAQuitar, cantidadFechasSuspendidas)
+                                    VALUES (@idEdicion, @idFase, @idFecha, @idPartido, @idEquipo, @idJugador, @fechaSancion, @idMotivoSancion, @observacion, @puntosAQuitar, @cantidadFechasSuspendidas)
                                     SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idEdicion", DAOUtils.dbValueNull(sancion.idEdicion));

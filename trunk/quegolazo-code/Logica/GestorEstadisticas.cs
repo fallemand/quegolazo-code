@@ -69,6 +69,11 @@ namespace Logica
            return DaoEstadisticas.obtenerAvanceEdicion(idEdicion);
        }
 
+       public DataTable obtenerPartidosPorArbitro(int idEdicion)
+       {
+           return DaoEstadisticas.obtenerPartidosPorArbitro(idEdicion);
+       }
+
        public void guardarTablaPosicionesFinal(List<Int64> idEquipos, int idEdicion)
        {
            List<Equipo> equipos = new List<Equipo>();
