@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 listado listado-sm">
                             <table id="tabla-posiciones" class="table table-condensed table-hover">
                                 <thead>
                                     <tr>
@@ -68,7 +68,7 @@
                                         <th class="col-md-1">PTS</th>
                                     </tr>
                                 </thead>
-                                <tbody class="tablaFiltro">
+                                <tbody>
                                     <asp:Repeater ID="rptPosiciones" runat="server">
                                         <ItemTemplate>
                                             <tr>
@@ -96,7 +96,88 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-6 ">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-stats"></span>
+                    Fecha 
+                    <asp:Literal ID="ltFecha" runat="server" />
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group btn-group-sm" role="group" style="margin-right: 5px;" aria-label="...">
+                                <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');">Todos</button>
+                            </div>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                <asp:Repeater ID="Repeater1" runat="server">
+                                    <ItemTemplate>
+                                        <button type="button" class="btn btn-success" onclick="filtrarPosiciones('<%# Eval("idGrupo")%>')">Grupo <%# Eval("idGrupo")%></button>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 listado listado-sm">
+                            <table class="table nomargin-bottom">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-2">LOCAL</th>
+                                    <th class="col-md-1">VS</th>
+                                    <th class="col-md-2">VISITANTE</th>
+                                    <th class="col-md-1">FECHA</th>
+                                    <th class="col-md-1">ESTADO</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tablaFiltro">
+                                <asp:Repeater ID="rptFecha" runat="server">
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td><%# Eval("Local") %></td>
+                                            <td><%# Eval("GolesLocal") %> - <%# Eval("GolesVisitante") %></td>
+                                            <td><%# Eval("Visitante") %></td>                                        
+                                            <td><%# Eval("FechaPartido") %></td>
+                                            <td><span class="label partido-<%# Eval("estado") %>" rel="txtTooltip" data-placement="left"><%# Eval("estado") %></span></td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <tr id="noFixture" runat="server" visible="false">
+                                    <td colspan="4">Todavia no hay un fixture generado.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <asp:GridView ID="gvFixture" runat="server" CssClass="table"></asp:GridView>
+            </div>
+        </div>
     </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-stats"></span>
+                    Avance de la Edición
+                </div>
+                <div class="panel-body">
+                    <div id="avanceTorneo"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-stats"></span>
+                    Avance de la Fecha 
+                </div>
+                <div class="panel-body">
+                    <div id="avanceFecha"></div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -132,69 +213,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-stats"></span>
-                    Avance de la Edición
-                </div>
-                <div class="panel-body">
-                    <div id="avanceTorneo"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-stats"></span>
-                    Avance de la Fecha 
-                </div>
-                <div class="panel-body">
-                    <div id="avanceFecha"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 ">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-stats"></span>
-                    Fecha 
-                    <asp:Literal ID="ltFecha" runat="server" />
-                </div>
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="col-md-2">LOCAL</th>
-                                <th class="col-md-1">VS</th>
-                                <th class="col-md-2">VISITANTE</th>
-                                <th class="col-md-1">FECHA</th>
-                                <th class="col-md-1">ESTADO</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tablaFiltro">
-                            <asp:Repeater ID="rptFecha" runat="server">
-                                <ItemTemplate>
-                                    <tr>
-                                        <td><%# Eval("Local") %></td>
-                                        <td><%# Eval("GolesLocal") %> - <%# Eval("GolesVisitante") %></td>
-                                        <td><%# Eval("Visitante") %></td>                                        
-                                        <td><%# Eval("FechaPartido") %></td>
-                                        <td><span class="label partido-<%# Eval("estado") %>" rel="txtTooltip" data-placement="left"><%# Eval("estado") %></span></td>
-                                    </tr>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                            <tr id="noFixture" runat="server" visible="false">
-                                <td colspan="4">Todavia no hay un fixture generado.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <asp:GridView ID="gvFixture" runat="server" CssClass="table"></asp:GridView>
             </div>
         </div>
     </div>

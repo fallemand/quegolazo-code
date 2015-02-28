@@ -1364,6 +1364,11 @@ div.colorPicker-swatch:hover {
 .listado {
     max-height: 450px !important;
     overflow: auto;
+    margin-top:7px;
+}
+
+.listado-sm {
+    max-height: 300px !important;
 }
 
 .input-xs {

@@ -49,6 +49,7 @@ namespace Utils
         {
             try
             {
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-ES"); //dd/MM/yyyy
                 return DateTime.Parse(fecha);
             }
             catch (Exception)
