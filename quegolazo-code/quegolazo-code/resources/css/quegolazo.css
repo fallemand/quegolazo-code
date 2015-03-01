@@ -150,6 +150,11 @@ body {
   border-left: 1px solid #d9d9d9;
 }
 
+.subnavbar .container > ul > li > a:hover {
+    background-color: rgb(240, 240, 240);
+    border-bottom: 2px solid #58A044;
+}
+
 .subnavbar .container > ul > li > a {
   display: block;
   height: 100%;
@@ -168,8 +173,8 @@ body {
 }
 
 .subnavbar .container > ul > li > a:hover {
-  color: #888;
-  text-decoration: none;
+    color: #181818;
+    text-decoration: none;
 }
 
 .subnavbar .container > ul > li > a > i {

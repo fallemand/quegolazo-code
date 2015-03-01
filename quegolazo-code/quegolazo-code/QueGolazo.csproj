@@ -316,6 +316,7 @@
     <Content Include="admin\admin.torneo.master" />
     <Content Include="admin\AjaxFileUploader.ashx" />
     <Content Include="admin\edicion\edicion.master" />
+    <None Include="Properties\PublishProfiles\QueGolazo Online.pubxml" />
     <None Include="Properties\PublishProfiles\QueGolazo.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
