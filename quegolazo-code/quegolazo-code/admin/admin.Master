@@ -58,6 +58,22 @@
                           </li>
                         </ul>
                       </li>
+                      <li class="dropdown visible-xs">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          <span class="glyphicon glyphicon-th-large"></span> Administrar Torneo<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<%=Logica.GestorUrl.aINDEX %>"><i class="flaticon-football141"></i><span> Principal</span></a></li>
+                            <li><a href="<%=Logica.GestorUrl.aEDICIONES %>"><i class="flaticon-trophy5"></i> Ediciones</a></li>
+                            <li><a href="<%=Logica.GestorUrl.aEQUIPOS %>"><i class="flaticon-soccer18"></i><span> Equipos</span></a></li>
+                            <li><a href="<%=Logica.GestorUrl.aJUGADORES %>"><i class="flaticon-football99"></i><span> Jugadores</span></a></li>
+                            <li><a href="<%=Logica.GestorUrl.aARBITROS %>"><i class="flaticon-football85"></i><span> Árbitros</span></a></li>
+                            <li><a href="<%=Logica.GestorUrl.aCANCHAS %>"><i class="flaticon-football65"></i><span> Canchas</span></a></li>
+                            <li><a href="<%=Logica.GestorUrl.aFECHAS %>"><i class="flaticon-football84"></i><span> Fechas</span></a></li>
+                            <li><a href="<%=Logica.GestorUrl.aSANCIONES %>"><i class="flaticon-football79"></i><span> Sanciones</span></a></li>
+                            <li><a href="<%=Logica.GestorUrl.aNOTICIAS %>"><i class="glyphicon glyphicon-list-alt"></i><span> Noticias</span></a></li>
+                        </ul>
+                      </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                           <span class="glyphicon glyphicon-info-sign"></span> Soporte <b class="caret"></b>
@@ -68,7 +84,7 @@
                         </ul>
                       </li>
                     </ul>
-                    <div class="navbar-form navbar-right input-group-sm" role="search">
+                    <div class="navbar-form navbar-right input-group-sm hidden-sm hidden-xs" role="search">
                       <div class="form-group">
                         <div class="col-xs-6 col-sm-6 col-md-9 nopadding-right">
                           <input type="text" class="form-control input-sm" placeholder="Preguntas Frecuentes" />
