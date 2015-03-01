@@ -6,7 +6,7 @@
     <!-- Contenido -->
     <div class="container">
     <asp:Literal ID="LitEdicion" runat="server"></asp:Literal>
-    <div class="row padding-top">
+    <div class="row">
     <div class="col-md-12">
             <div class="well">
                 <fieldset class="vgSeleccionarEdicion">
@@ -185,33 +185,35 @@
                     Goleadores de la Edición
                 </div>
                 <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="col-md-1"></th>
-                                <th class="col-md-3">JUGADOR</th>
-                                <th class="col-md-1"></th>
-                                <th class="col-md-3">EQUIPO</th>
-                                <th class="col-md-2">GOLES</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tablaFiltro">
-                            <asp:Repeater ID="rptGoleadores" runat="server">
-                                <ItemTemplate>
-                                    <tr>
-                                        <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("IDJUGADOR").ToString()), Utils.GestorImagen.JUGADOR, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
-                                        <td><%# Eval("JUGADOR") %></td>
-                                        <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("IDEQUIPO").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
-                                        <td><%# Eval("EQUIPO") %></td>                                       
-                                        <td><%# Eval("GOLES") %></td>
-                                    </tr>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                            <tr id="sinpartidosGoleadores" runat="server" visible="false">
-                                <td colspan="4">Todavia no hay partidos registrados.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="listado listado-xs">
+                        <table class="table nomargin-bottom">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-1"></th>
+                                    <th class="col-md-3">JUGADOR</th>
+                                    <th class="col-md-1"></th>
+                                    <th class="col-md-3">EQUIPO</th>
+                                    <th class="col-md-2">GOLES</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tablaFiltro">
+                                <asp:Repeater ID="rptGoleadores" runat="server">
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("IDJUGADOR").ToString()), Utils.GestorImagen.JUGADOR, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
+                                            <td><%# Eval("JUGADOR") %></td>
+                                            <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("IDEQUIPO").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
+                                            <td><%# Eval("EQUIPO") %></td>                                       
+                                            <td><%# Eval("GOLES") %></td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <tr id="sinpartidosGoleadores" runat="server" visible="false">
+                                    <td colspan="4">Todavia no hay partidos registrados.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

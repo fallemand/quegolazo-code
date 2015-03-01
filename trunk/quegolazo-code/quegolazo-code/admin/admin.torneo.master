@@ -11,18 +11,18 @@
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdmin" runat="server">
     <!-- Navbar Administación Campeonato -->
-    <div class="subnavbar hidden-sm hidden-xs">
-        <div class="subnavbar-inner">
+    <div class="subnavbar">
+        <div class="subnavbar-inner hidden-xs">
             <div class="container">
                 <ul id="menuTorneo" class="mainnav">
                     <li><a href="<%=Logica.GestorUrl.aINDEX %>"><i class="flaticon-football141"></i><span>Principal</span> </a></li>
-                    <li><a href="<%=Logica.GestorUrl.aEDICIONES %>"><i class="flaticon-trophy5"></i><span></span>Ediciones</a> </li>
-                    <li><a href="<%=Logica.GestorUrl.aEQUIPOS %>"><i class="flaticon-soccer18"></i><span>Equipos</span> </a></li>
-                    <li><a href="<%=Logica.GestorUrl.aJUGADORES %>"><i class="flaticon-football99"></i><span>Jugadores</span> </a></li>
-                    <li><a href="<%=Logica.GestorUrl.aARBITROS %>"><i class="flaticon-football85"></i><span>Árbitros</span> </a></li>
-                    <li><a href="<%=Logica.GestorUrl.aCANCHAS %>"><i class="flaticon-football65"></i><span>Canchas</span> </a></li>
-                    <li><a href="<%=Logica.GestorUrl.aFECHAS %>"><i class="flaticon-football84"></i><span>Fechas</span> </a></li>
-                    <li><a href="<%=Logica.GestorUrl.aSANCIONES %>"><i class="flaticon-football79"></i><span>Sanciones</span> </a></li>
+                    <li><a href="<%=Logica.GestorUrl.aEDICIONES %>"><i class="flaticon-trophy5"></i><span></span>Ediciones</a></li>
+                    <li><a href="<%=Logica.GestorUrl.aEQUIPOS %>"><i class="flaticon-soccer18"></i><span>Equipos</span></a></li>
+                    <li><a href="<%=Logica.GestorUrl.aJUGADORES %>"><i class="flaticon-football99"></i><span>Jugadores</span></a></li>
+                    <li><a href="<%=Logica.GestorUrl.aARBITROS %>"><i class="flaticon-football85"></i><span>Árbitros</span></a></li>
+                    <li><a href="<%=Logica.GestorUrl.aCANCHAS %>"><i class="flaticon-football65"></i><span>Canchas</span></a></li>
+                    <li><a href="<%=Logica.GestorUrl.aFECHAS %>"><i class="flaticon-football84"></i><span>Fechas</span></a></li>
+                    <li><a href="<%=Logica.GestorUrl.aSANCIONES %>"><i class="flaticon-football79"></i><span>Sanciones</span></a></li>
                     <li><a href="<%=Logica.GestorUrl.aNOTICIAS %>"><i class="glyphicon glyphicon-list-alt"></i><span>Noticias</span> </a></li>
                     <li><a href="#"><i class="glyphicon glyphicon-cog"></i><span>Opciones</span> </a></li>
                 </ul>
