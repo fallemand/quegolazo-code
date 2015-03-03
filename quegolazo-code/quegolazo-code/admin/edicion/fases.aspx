@@ -9,7 +9,7 @@
     <script src="/resources/js/widgetLlaves.js"></script>
     <script>  
         $(document).ready(function () {
-            $("#panelFracaso").hide();
+            $("#divFracaso").hide();
           
         });
     </script>
@@ -36,8 +36,8 @@
               </div>
           </div>
         </div> 
-        <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger margin-top" ClientIDMode="Static" >                
-                <p id="msjFracaso" runat="server" ClientIDMode="Static"></p>
+        <asp:Panel ID="divFracaso" runat="server" CssClass="alert alert-danger margin-top" ClientIDMode="Static" >                
+                <p id="txtFracaso" runat="server" ClientIDMode="Static"></p>
             </asp:Panel>
         
     </div>

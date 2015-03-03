@@ -7,6 +7,7 @@
     <script src="/resources/js/jquery.bracket.min.js"></script>
     <link href="/resources/css/jquery.bracket.min.css" rel="stylesheet" />
     <script src="/resources/js/widgetLlaves.js"></script>
+    <script src="../../resources/js/fechas.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
@@ -49,7 +50,7 @@
                                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Fechas" />
                                             </div>
                                             <div class="col-md-3">
-                                                <asp:LinkButton Visible="false" title="Finalizar Fase" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-placement="left" runat="server" OnClientClick="reiniciarContador();" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
+                                                <asp:LinkButton Visible="false" title="Finalizar Fase" ClientIDMode="AutoID" rel="txtTooltip" ID="lnkFinalizarFase" data-placement="left" runat="server" OnClientClick="" CommandName="finalizarFase" CommandArgument='<%# Eval("idFase") %>'>
                                                     <span class="label label-red label-big">Finalizar</span></asp:LinkButton>
                                                 <asp:Panel ID="panelEstadoFase" Visible="false" runat="server">
                                                     <span class="label label-big fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" rel="txtTooltip" title="<%# ((Entidades.Fase)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
@@ -436,7 +437,7 @@
                     ¿Está seguro que desea finalizar la fase?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                  
                     <asp:Button ID="btnFinalizar" runat="server" OnClick="btnFinalizar_Click" CssClass="btn btn-success" Text="Finalizar" />
                 </div>
             </div>
@@ -473,8 +474,9 @@
     <div class="modal fade" id="modalFinalizarFase" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <asp:UpdatePanel ID="upModalEdicion" runat="server">
+                  <asp:UpdatePanel ID="upModalEdicion" runat="server">
                     <ContentTemplate>
+                   
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="reiniciarContador();">&times;</button>
                             <h4 class="modal-title" id="H1"><i class="flaticon-football106"></i><span id="tituloModal">Seleccionar los Equipos Clasificados</span> 
@@ -562,17 +564,15 @@
                                       </div>
                                   </div> 
                             </asp:Panel>
-                             <div ID="panelFracaso" Class="alert alert-danger margin-top" style="display:none" >                
-                             <p id="msjFracaso" runat="server" ClientIDMode="Static"></p>
+                            <div ID="divFracaso" Class="alert alert-danger margin-top" style="display:none" >                
+                             <p id="txtFracaso" runat="server" ClientIDMode="Static"></p>
                             </div>
                         </div>
                         <div class="modal-footer">
                          <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
-                           <Button ID="btnCerrar" data-dismiss="modal" onclick="clickBotonCerrar();" class="btn btn-default" > Cancelar</button>
-                           <asp:Button ID="btnConfigurarFase" runat="server" Text="Siguiente" OnClick="btnConfigurarFase_Click"  ClientIDMode="Static" CssClass="btn btn-success causesValidation vgDatosEdicion" />
-                           <asp:Button ID="btnConfirmar" runat="server" Text="Confirmar Fase" OnClick="btnConfirmar_Click" OnClientClick="return $('#contenedorFases').generadorDeFases('guardarFasesEnSesion');"  ClientIDMode="Static" CssClass="btn btn-success causesValidation vgDatosEdicion" />
-                           
-                         </div>
+                         <Button ID="btnCerrar" data-dismiss="modal" onclick="clickBotonCerrar();" class="btn btn-default" > Cancelar</button>
+                         <Button ID="btnConfigurarFase"  onclick="clickSiguiente();" type="button" class="btn btn-success"> Siguiente</button>  
+                         <asp:Button ID="btnConfirmar" style="display:none" runat="server" Text="Confirmar Fase" OnClick="btnConfirmar_Click" OnClientClick="return $('#contenedorFases').generadorDeFases('guardarFasesEnSesion');closeModal('modalFinalizarFase');"   ClientIDMode="Static" CssClass="btn btn-success causesValidation vgDatosEdicion" />
                             <div class="col-xs-1">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgressModalEdicion" AssociatedUpdatePanelID="upModalEdicion">
                                     <ProgressTemplate>
@@ -580,9 +580,11 @@
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
                             </div>
-                        </div>
-                    </ContentTemplate>
+                         </div>
+                          </ContentTemplate>
                 </asp:UpdatePanel>
+                        </div>
+          
             </div>
         </div>
     </div>
@@ -659,14 +661,7 @@
                             <div class="col-md-5 col-md-offset-6 col-xs-10 col-xs-offset-1">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <asp:Button ID="btnConfirmarFinalizacion" runat="server" Text="Finalizar" OnClientClick="enviarPosicionesEquipos();" OnClick="btnConfirmarFinalizacion_Click" class="btn btn-success pull-right"/>
-                           </div>
-                            <div class="col-xs-1">
-                                <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="upModalEdicion">
-                                    <ProgressTemplate>
-                                        <img src="/resources/img/theme/load3.gif" />
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                            </div>
+                           </div>  
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -688,7 +683,7 @@
                     ¿Está seguro que desea finalizar la fase?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal('modalFinalizarFase');">Cancelar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <asp:Button ID="btnCambioEnCantidadEquipos" runat="server" OnClick="btnCambioEnCantidadEquipos_Click" CssClass="btn btn-success" Text="Continuar" />
                 </div>
             </div>
@@ -697,139 +692,9 @@
     <!-- Modal Confirmar cambios en cantidades -->
 
     <script type="text/javascript">
-        $('body').on('keyup', '#filtro', function () {
-            if ($(this).val().length > 0) {
-                $('.panel-collapse').collapse('show');
-                $('.panel-title').attr('data-toggle', '');
-            }
-            else {
-                $('.panel-collapse').collapse('hide');
-                $('.panel-title').attr('data-toggle', 'collapse');
-            }
-            var rex = new RegExp($(this).val(), 'i');
-            $('.tablaFiltro tr').hide();
-            $('.tablaFiltro tr').filter(function () {
-                return rex.test($(this).text());
-            }).show();
-        });
-
-        function filtrarPosiciones(idGrupo) {
-            $('#tabla-posiciones tbody tr').hide();
-            $('#tabla-posiciones tbody tr').filter(function () {
-                return $(this).find('td:last-child').text() == idGrupo;
-            }).show('fast');
-        };
-
-        function EndRequestHandler(sender, args) {
-            cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
-        };
+     
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
     </script>
-    <!-- BOTONES MODAL CONFIGURAR FASE -->
-     <script type="text/javascript">
-         function clickBotonCerrar() {
-             $('#contenedorFases').generadorDeFases('destroy');
-             $('#btnConfigurarFase').show();
-             $('#panelSeleccionarEquipos').show();
-             $('#panelConfigurarFase').hide();
-             reiniciarContador();
-         }
-         function clickBotonConfirmar() {
-            
-         }
-         function clickSiguiente() {
-             $('#tituloModal').text("Configurar la nueva Fase");  
-             $('#panelConfigurarFase').show();
-             $('#btnConfirmar').show();
-             $('#btnConfigurarFase').hide();
-             $('#panelSeleccionarEquipos').hide();
-         }
-         function reiniciarContador() {
-             $("#hfEquiposSeleccionados").val("");
-             $('#contenedorFases').generadorDeFases('destroy');
-             var valor = 0;
-             $("#spanSeleccionados").text(valor);
-         };
-      
-    </script>
-
-     <script>
-         $(document).ready(function () {
-             setearEventos();
-             $('#modalFinalizarFase').on('hidden', function () {
-                 clickBotonCerrar();
-             });
-         });
-         function setearEventos() {
-             $(document).on("click", "#tabla-posiciones > tbody > tr", function () {
-                 if (event.target.type !== 'checkbox') {
-                     $(':checkbox', this).trigger('click');
-                 }
-             });
-
-             $("#tabla-posiciones tbody tr input[type='checkbox']").change(function (e) {
-                 if ($(this).is(":checked")) {
-                     $(this).closest('tr').addClass("success");
-                     $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + $(this).val() + ',');
-                 } else {
-                     $(this).closest('tr').removeClass("success");
-                     $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val().replace($(this).val() + ',', ''));
-                 }
-                 actualizarCantidades();
-             });
-         }
-         function actualizarCantidades() {
-             var arr = $("#hfEquiposSeleccionados").val().split(",");
-             var valor = $.grep(arr, function (a) {
-                 return a != "";
-             }).length;
-             $("#spanSeleccionados").text(valor);
-         }
-
-         $('#tabla-posiciones2 tbody').sortable({
-             update: function (event, ui) {
-                 reordenarPosicionesEquipos();
-             }
-         });
-
-         function reordenarPosicionesEquipos() {
-             var columna = $('#tabla-posiciones2 tr td:nth-child(1)');
-             for (var i = 0; i < columna.length; i++) {
-                 //$(columna[i]).text((i + 1) + 'º');
-                 $(columna[i]).html('<strong>' + (i + 1) + 'º' + '</strong>');
-                 $(columna[i]).css('font-size', '17px');
-             }
-         }
-
-         function enviarPosicionesEquipos() {
-             var vector = [];
-             var ids = $('#tabla-posiciones2 tr td:nth-child(11)');
-             for (var i = 0; i < ids.length; i++) {
-                 vector.push($(ids[i]).text());
-             }
-             $.ajax({
-                 type: "POST",
-                 url: "fechas.aspx/guardarPosicionesEquipos",
-                 contentType: "application/json",
-                 dataType: "json",
-                 async: false,
-                 data: "{idEquipos :" + JSON.stringify(vector) + " }",
-                 success: function (response) {
-                     //Si hubo un error, hago esto
-                     if (response.d.StatusCode != 200) {
-                         //widget.mostrarMensajeDeError(response.d.StatusDescription);
-                         //acá va cuando se produce un error
-                     } else {
-                         //closeModal(modalSeleccionarGanadores);
-                         //respuesta = true;
-                         //$("#panelFracaso").hide();
-                     }
-                 },
-                 error: function (response) {
-                     //widget.mostrarMensajeDeError(response.responseJSON.Message);
-                 }
-             });
-         }
-    </script>
+ 
     
 </asp:Content>

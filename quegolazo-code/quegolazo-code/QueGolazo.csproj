@@ -93,6 +93,7 @@
     <Content Include="resources\js\ajaxfileupload.js" />
     <Content Include="resources\js\bootstrap-datetimepicker.min.js" />
     <Content Include="resources\js\bootstrap-datetimepicker.es.js" />
+    <Content Include="resources\js\fechas.js" />
     <Content Include="resources\js\jquery.bracket.min.js" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
     <Content Include="resources\js\jquery.multi-select.js" />

@@ -15,7 +15,7 @@ namespace quegolazo_code.admin
 {
     public partial class fechas : System.Web.UI.Page
     {
-        public GestorEdicion gestorEdicion;
+        public static GestorEdicion gestorEdicion;
         protected GestorPartido gestorPartido;
         private static GestorEstadisticas gestorEstadistica;
         protected void Page_Load(object sender, EventArgs e)
@@ -29,6 +29,7 @@ namespace quegolazo_code.admin
                 {
                     gestorPartido.partido = null;
                     obtenerEdiciónSeleccionada();
+                    cargarRepeaterFases();
                     cargarComboEdiciones();
                     cargarComboArbitros();
                     cargarComboCanchas();
@@ -66,13 +67,12 @@ namespace quegolazo_code.admin
                 if (e.CommandName == "finalizarFase")
                 {
                     gestorEdicion.faseActual = gestorEdicion.edicion.fases[int.Parse(e.CommandArgument.ToString()) - 1];
-                    btnConfigurarFase.Visible = true;
-                    btnConfirmar.Visible = false;
+               
                     hfEquiposSeleccionados.Value = string.Empty;
                     if (gestorEdicion.esUltimaFase(gestorEdicion.faseActual.idFase))
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalFinalizarEdicion');", true);
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "hideDiv('modalConfirmarFinalizarFase');", true);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "hideDiv", "hideDiv('modalConfirmarFinalizarFase');", true);
                         if (!gestorEdicion.gestorFase.estaFinalizada(gestorEdicion.faseActual.idFase, gestorEdicion.faseActual.idEdicion))
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "showDiv", "showDiv('panelFaseNoCompleta2');", true);
                     }
@@ -519,7 +519,7 @@ namespace quegolazo_code.admin
         /// Obtiene la Edición de Sesión
         /// autor: Facu Allemand
         /// </summary>
-        private void obtenerEdiciónSeleccionada()
+        private static void obtenerEdiciónSeleccionada()
         {
             if (gestorEdicion.edicion != null && gestorEdicion.edicion.idEdicion > 0)
             {
@@ -527,7 +527,8 @@ namespace quegolazo_code.admin
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                 gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
-                cargarRepeaterFases();
+               
+                  
             }
         }
 
@@ -632,12 +633,6 @@ namespace quegolazo_code.admin
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showPanelCollapse", "showCollapsablePanel('" + Session["idPanelCollapse"] + "', true)", true);
         }
 
-
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void btnFinalizar_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalFinalizarFase');", true);           
@@ -703,10 +698,6 @@ namespace quegolazo_code.admin
             obtenerEdiciónSeleccionada();
             gestorEdicion.actualizarFaseActual();
             List<Fase> fasesParaElWidget = (List<Fase>)GestorColecciones.clonarLista(gestorEdicion.edicion.fases);                
-            validarFases(fasesParaElWidget);
-            cargarWidgetFases(fasesParaElWidget,false);
-            btnConfigurarFase.Visible = false;
-            btnConfirmar.Visible = true;
             hfEquiposSeleccionados.Value = string.Empty;
             }
             catch (Exception ex)
@@ -723,13 +714,13 @@ namespace quegolazo_code.admin
         /// Valida si la fase que sigue estaba creada genericamente o no, y en base a eso analiza si mostrar o no un mensaje al usuario en caso de que haya conflicto con la cantida de equipos que ha elegido.
         /// </summary>
         /// <param name="fasesParaElWidget">Las fases que se van a validar</param>
-        private void validarFases(List<Fase> fasesParaElWidget)
+        private static void validarFases(List<Fase> fasesParaElWidget, string idEquipos)
         {
-            if (gestorEdicion.verificarProximaFase(fasesParaElWidget, gestorEdicion.faseActual.idFase))
+            if (gestorEdicion.verificarProximaFase(fasesParaElWidget, gestorEdicion.faseActual.idFase+1))
             { //si tenia una fase generica configurada, verificamos las cantidades de equipos.
-                if (!new GestorFase().validarCantidadEquipos(hfEquiposSeleccionados.Value, gestorEdicion.faseActual.idFase, fasesParaElWidget))
+                if (!new GestorFase().validarCantidadEquipos(idEquipos, gestorEdicion.faseActual.idFase+1, fasesParaElWidget))
                 {
-                    Session["fasesParaElWidget"] = fasesParaElWidget;
+                    System.Web.HttpContext.Current.Session["fasesParaElWidget"]= fasesParaElWidget;                    
                     throw new Exception("CantidadEquiposInvalida");
                 }                    
             }
@@ -739,10 +730,10 @@ namespace quegolazo_code.admin
         /// </summary>
         /// <param name="fasesParaElWidget">EL conjunto de fases que se van a </param>
         /// <param name="faseActual"></param>
-        private void cargarWidgetFases(List<Fase> fasesParaElWidget, bool eliminaFasesPosteriores)
+        private static string armarFases(List<Fase> fasesParaElWidget, string idEquipos, bool eliminaFasesPosteriores)
         {
             GestorFase gestorFase= new GestorFase();
-            gestorEdicion.agregarEquiposEnFase(fasesParaElWidget, hfEquiposSeleccionados.Value,  gestorEdicion.getFaseActual(fasesParaElWidget).idFase);
+            gestorEdicion.agregarEquiposEnFase(fasesParaElWidget, idEquipos, gestorEdicion.faseActual.idFase+1);
             gestorFase.reducirFases(fasesParaElWidget);
             Fase faseActual = gestorEdicion.getFaseActual(fasesParaElWidget);
             if (eliminaFasesPosteriores)
@@ -750,18 +741,39 @@ namespace quegolazo_code.admin
                 gestorFase.eliminarFasesPosteriores(fasesParaElWidget, faseActual);
                 faseActual = gestorEdicion.getFaseActual(fasesParaElWidget);
             }
-            JavaScriptSerializer serializador = new JavaScriptSerializer();
-            string equipos = serializador.Serialize(faseActual.equipos);
-            string fases = serializador.Serialize(fasesParaElWidget);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "widget", "$('#contenedorFases').generadorDeFases({equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:" + gestorEdicion.edicion.idEdicion +", asistente: false"+ ", idFaseEditable:" + ((faseActual != null) ? faseActual.idFase.ToString() : "1") + "});clickSiguiente(); openModal('modalFinalizarFase');", true);
-            //asistente :" + serializador.Serialize(false) + ",
-        }
+            return gestorFase.armarJsonParaWidget(fasesParaElWidget, gestorEdicion.edicion.idEdicion, gestorEdicion.edicion.equipos, ((faseActual != null) ? faseActual.idFase : 1), false);
+         }
 
         protected void btnFinalizarEdicion_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalSeleccionarGanadores');", true);
             cargarPosicionesFinales();
         }
+
+        [System.Web.Services.WebMethod(enableSession: true)]
+        public static string finalizarFase(object idEquipos)
+        {
+            try
+            {
+                obtenerEdiciónSeleccionada();
+                gestorEdicion.actualizarFaseActual();
+                List<Fase> fasesParaElWidget = (List<Fase>)GestorColecciones.clonarLista(gestorEdicion.edicion.fases);     
+                JavaScriptSerializer s = new JavaScriptSerializer();
+                string equipos = s.ConvertToType<string>(idEquipos);                             
+                validarFases(fasesParaElWidget,equipos);
+                string fases = armarFases(fasesParaElWidget, equipos, false); 
+                return fases;
+
+            }
+            catch (Exception ex)
+            {
+                
+                return "Error: " + ex.Message;
+                
+            }
+        }
+
+
 
         [WebMethod(enableSession: true)]
         public static object guardarPosicionesEquipos(object idEquipos)
@@ -791,9 +803,21 @@ namespace quegolazo_code.admin
 
         protected void btnCambioEnCantidadEquipos_Click(object sender, EventArgs e)
         {
-            List<Fase> fasesParaElWidget = (List<Fase>)Session["fasesParaElWidget"];            
-            cargarWidgetFases(fasesParaElWidget, true);
+            try
+            {
+                List<Fase> fasesParaElWidget = (List<Fase>)Session["fasesParaElWidget"];
+                string datosWidget = armarFases(fasesParaElWidget, hfEquiposSeleccionados.Value, true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "cambioEnEquipos(); $('#contenedorFases').generadorDeFases(" + datosWidget + "); ", true);             
+           
+            }
+            catch (Exception ex)
+            {
+
+                GestorError.mostrarPanelFracaso(ex.Message);
+            }
+           
         }
+
 
         /// <summary>
         /// Guarda en sesión la configuración de fases
@@ -820,10 +844,10 @@ namespace quegolazo_code.admin
 
         protected void btnConfirmar_Click(object sender, EventArgs e)
         {
-            obtenerEdiciónSeleccionada();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "cierraModal", "closeModal('modalFinalizarFase');", true);
-         
+           cargarRepeaterFases();
         }
+
+     
 
 
     }
