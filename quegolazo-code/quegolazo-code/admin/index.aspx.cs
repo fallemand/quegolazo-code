@@ -160,6 +160,10 @@ namespace quegolazo_code.admin
         {
             sinpartidosGoleadores.Visible = GestorControles.cargarRepeaterTable(rptGoleadores, gestorEstadisticas.obtenerTablaGoleadores()) ? 
             false : true;
+            if (gestorEdicion.edicion.preferencias.jugadores)
+                litSinGoleadores.Text = "Todavia no hay partidos registrados";
+            else if(sinpartidosGoleadores.Visible)
+                litSinGoleadores.Text = "La edición seleccionada no gestiona Jugadores";
         }
 
         /// <summary>
