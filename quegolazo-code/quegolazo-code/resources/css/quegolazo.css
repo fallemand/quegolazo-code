@@ -155,6 +155,10 @@ body {
     border-bottom: 2px solid #58A044;
 }
 
+.subnavbar .container > ul > li > a:focus {
+    text-decoration: none;
+}
+
 .subnavbar .container > ul > li > a {
   display: block;
   height: 100%;
