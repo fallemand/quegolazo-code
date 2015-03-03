@@ -110,6 +110,8 @@ namespace quegolazo_code.admin
                 if (e.CommandName == "administrarTorneo")
                 {
                     Sesion.setTorneo(gestorTorneo.torneo);
+                    Sesion.setEdicion(null);
+                    Sesion.setGestorEdicion(null);
                     Response.Redirect(GestorUrl.aINDEX);
                 }
                 if (e.CommandName == "eliminarTorneo")

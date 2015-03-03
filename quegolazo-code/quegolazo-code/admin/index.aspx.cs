@@ -20,11 +20,9 @@ namespace quegolazo_code.admin
         {
             try
             {
-                panelFracaso.Visible = false;
                 panelEstadisticas.Visible = true;
                 gestorEdicion = Sesion.getGestorEdicion();
-                gestorEstadisticas = new GestorEstadisticas();               
-                gestorEdicion.edicion = Sesion.getEdicion();
+                gestorEstadisticas = new GestorEstadisticas(); 
                 
                 if (!Page.IsPostBack)
                 {
@@ -58,7 +56,7 @@ namespace quegolazo_code.admin
 
         private void cargarEstadisticas()
         {
-            if (gestorEdicion.faseActual != null)
+            if (gestorEdicion.edicion!=null && gestorEdicion.faseActual != null)
             {
                 cargarTablaDePosiciones();
                 cargarGoleadoresDeLaEdicion();
@@ -76,7 +74,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarComboEdiciones()
         {
-            GestorControles.cargarComboList(ddlEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo),
+            panelSinEdiciones.Visible = !GestorControles.cargarComboList(ddlEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(Sesion.getTorneo().idTorneo),
                 "idEdicion", "nombre", "Seleccionar Edicion", false);
             ddlEdiciones.SelectedValue = (gestorEdicion.edicion.idEdicion > 0) ? 
                 gestorEdicion.edicion.idEdicion.ToString() : "";
@@ -92,6 +90,7 @@ namespace quegolazo_code.admin
             {
                 int idEdicion = Validador.castInt(ddlEdiciones.SelectedValue);
                 gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(Validador.castInt(ddlEdiciones.SelectedValue));
+                gestorEstadisticas.edicion = gestorEdicion.edicion;
                 panelEdicionRegistrada.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA);
                 gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
                 gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
