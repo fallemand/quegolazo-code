@@ -68,7 +68,7 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#fechas" href="#fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>" style="font-size: 15px;">Fecha <%# Eval("idFecha") %> <small>Ver Más Detalles</small></a>     
+                                                                <a data-toggle="collapse" data-parent="#fechas" href="#fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>" style="font-size: 15px;">   <%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).tipoFixture.idTipoFixture=="ELIM" ?  Eval("nombre") + " " : "Fecha "+ Eval("idFecha")%>  <small>Ver Más Detalles</small></a>     
                                                                 <small><span class="label pull-right fecha-<%# ((Entidades.Fecha)Container.DataItem).estado.nombre%>" rel="txtTooltip" title="<%# ((Entidades.Fecha)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fecha)Container.DataItem).estado.nombre  %></span></small>                                                        
                                                             </h4>
                                                         </div>
@@ -102,7 +102,17 @@
                                                                                 </asp:Panel>
                                                                                 <asp:Panel ID="panelPartidoLibre" runat="server" Visible="false">
                                                                                     <tr>
-                                                                                        <td colspan="4">Libre: <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : ((Entidades.Partido)Container.DataItem).visitante.nombre %> </td>
+                                                                                        <td><asp:Literal ID="litLibre" runat="server" Text=""></asp:Literal></td>
+                                                                                        <%--<td colspan="4">Libre: <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre :( ((Entidades.Partido)Container.DataItem).visitante.nombre!=null) ? ((Entidades.Partido)Container.DataItem).visitante.nombre : ""  %> </td>--%>
+                                                                                    </tr>
+                                                                                </asp:Panel>
+                                                                                <asp:Panel ID="panelPartidoEliminatorioIncompleto" runat="server" Visible="false">
+                                                                                    <tr>
+                                                                                        <td><asp:Literal ID="litEquipo1" runat="server" Text=""></asp:Literal></td>
+                                                                                        <%--<td><%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre :( ((Entidades.Partido)Container.DataItem).visitante.nombre!=null) ? ((Entidades.Partido)Container.DataItem).visitante.nombre : "" %> </td>--%>
+                                                                                         <td>-</td> 
+                                                                                        <td>Equipo 2</td>
+                                                                                        <td>
                                                                                     </tr>
                                                                                 </asp:Panel>
                                                                                 
