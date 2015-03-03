@@ -54,7 +54,7 @@
                 widget.options.fases.pop();
                 if(numFase>widget.options.idFaseEditable)
                     $("#btnEliminarFase" + (numFase - 1)).show("slow");
-                $("#panelFracaso").hide();
+                $("#divFracaso").hide();
             }).tooltip({ title: "Eliminar Fase" });
         if(widget.options.idFaseEditable < numFase)
         btnEliminar.appendTo(headerContenedor);           
@@ -209,7 +209,7 @@
     //prepara los controles de la fase ségun el tipo de fixture que se eligió, ademas setea la cantidad de grupos en 0.
     cambioEnTipoDeFixture: function (combo) {
         var widget = this;        
-        $("#panelFracaso").hide(); //se esconde el panel de fracaso.
+        $("#divFracaso").hide(); //se esconde el panel de fracaso.
         var numFase = combo.attr("id").substr(combo.attr("id").length - 1);
         //elimino los grupos que se crearon anteriormente
         $("#cuerpoFase" + numFase).remove();
@@ -343,7 +343,7 @@
                             widget.mostrarMensajeDeError(response.d.StatusDescription);
                         } else {
                             respuesta = true;
-                            $("#panelFracaso").hide();
+                            $("#divFracaso").hide();
                         }
                     },
                     error: function (response) {
@@ -378,7 +378,7 @@
                         widget.mostrarMensajeDeError(response.d.StatusDescription);
                     } else {
                         respuesta = true;
-                        $("#panelFracaso").hide();
+                        $("#divFracaso").hide();
                     }
                 },
                 error: function (response) {
@@ -584,7 +584,7 @@
         var tipoFixture = (fasePreCargada) ? fase.tipoFixture.idTipoFixture : $("#ddlTipoFixtureFase" + numFase).val();
         var cantidadGrupos = (fasePreCargada && fase.cantidadDeGrupos > 0) ? fase.cantidadDeGrupos : (fasePreCargada && fase.grupos.length >0) ? fase.grupos.length : $("#ddlCantidadFase" + numFase).val();
         $("<div/>").attr("id", "cuerpoFase" + numFase).appendTo($("#panelFase"+ numFase));
-        $("#panelFracaso").hide();         
+        $("#divFracaso").hide();         
         if (tipoFixture.indexOf("TCT") >= 0) {
             if (fasePreCargada) {
                 $("#ddlCantidadParticipantesFase" + fase.idFase + ' option:contains("' + fase.equipos.length + '")').prop('selected', true);
@@ -616,8 +616,8 @@
         //$('body').append(msj);
         //$("#msjError").text(mensaje);
         //$("#alertmsg1").addClass("in");
-        $("#msjFracaso").text(mensaje);
-        $("#panelFracaso").show();
+        $("#txtFracaso").text(mensaje);
+        $("#divFracaso").show();
     },
     //inhabilita las fases finalizadas y deja abierta la fase actual
     inhabilitarFasesFinalizadas: function () {

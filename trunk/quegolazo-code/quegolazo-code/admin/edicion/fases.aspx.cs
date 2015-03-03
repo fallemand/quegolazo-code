@@ -22,15 +22,12 @@ namespace quegolazo_code.admin.edicion
             //si no tiene mas de dos equipos y solo tiene una fase, lo manda a seleccionar equipos.
             if(gestorEdicion.edicion.equipos.Count<2 && gestorEdicion.edicion.fases.Count <2)
             Response.Redirect(GestorUrl.eEQUIPOS);
-            string path = HttpContext.Current.Request.Url.AbsolutePath;
             //actualizamos la fase actual del gestor
             gestorEdicion.actualizarFaseActual();
             if (!IsPostBack) {
             gestorFase.reducirFases(gestorEdicion.edicion.fases);
-            string equipos = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.equipos);
-            string fases = (new JavaScriptSerializer()).Serialize(gestorEdicion.edicion.fases);
-            //TODO aca el id de la edicion esta harcodeado debe ser reemplazado por el de la sesion cuando se defina desde donde va a llegar a la pantalla de conf de ediciones.
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases({ equiposDeLaEdicion: " + equipos + ", fases: " + fases + ", idEdicion:" + gestorEdicion.edicion.idEdicion + ", idFaseEditable:" + ((gestorEdicion.faseActual != null) ? gestorEdicion.faseActual.idFase.ToString() : "1") + "});", true);             
+            string datosWidget = gestorFase.armarJsonParaWidget(gestorEdicion.edicion.fases, gestorEdicion.edicion.idEdicion, gestorEdicion.edicion.equipos,(gestorEdicion.faseActual != null) ? gestorEdicion.faseActual.idFase: 1, true); 
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "$('#contenedorFases').generadorDeFases("+ datosWidget+");", true);             
             }            
         }
 

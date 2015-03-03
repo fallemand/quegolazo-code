@@ -13,22 +13,22 @@ namespace quegolazo_code.admin.edicion {
     public partial class fases {
         
         /// <summary>
-        /// Control panelFracaso.
+        /// Control divFracaso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelFracaso;
+        protected global::System.Web.UI.WebControls.Panel divFracaso;
         
         /// <summary>
-        /// Control msjFracaso.
+        /// Control txtFracaso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl msjFracaso;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txtFracaso;
         
         /// <summary>
         /// Control btnAtras.

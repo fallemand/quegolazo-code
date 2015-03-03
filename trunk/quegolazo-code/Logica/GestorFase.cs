@@ -6,12 +6,23 @@ using System.Threading.Tasks;
 using Entidades;
 using AccesoADatos;
 using Utils;
+using System.Dynamic;
+using System.Web.Script.Serialization;
 
 namespace Logica
 {
   public class GestorFase
     {
-
+      /// <summary>
+      /// Objeto auxiliar creado para hacer mas entendible la creacion del widget de fases. Se usa para la serializacion de los datos.
+      /// </summary>
+      private class generadorDeFases { 
+          public List<Fase> fases {get;set;}
+          public int idEdicion {get;set;}
+          public List<Equipo> equiposDeLaEdicion {get;set;} 
+          public int idFaseEditable {get;set;}
+          public bool asistente { get; set; }          
+      }
       public IGenerarFixture generadorFixture { get; set; }
       /// <summary>
       /// método para generar fixture
@@ -75,7 +86,10 @@ namespace Logica
       public bool validarCantidadEquipos(string listadoEquipos, int idFase, List<Fase> fases)
       {
           string[] listaIdsSeleccionados = listadoEquipos.Split(',');
-          return fases[idFase - 1].cantidadDeEquipos <= listaIdsSeleccionados.Length -1; //-1 porque cuenta la ultima coma
+          int cantidadSeleccionados = listaIdsSeleccionados.Length -1;
+          if (cantidadSeleccionados < 2)
+              throw new Exception("MenosDeDosEquipos");
+          return fases[idFase - 1].cantidadDeEquipos <= cantidadSeleccionados; //-1 porque cuenta la ultima coma
       }
 
       /// <summary>
@@ -204,8 +218,9 @@ namespace Logica
           List<Fecha> fechasAEliminar =  new List<Fecha>();
           foreach (Fase fase in fases)
           {
-              if (!fase.esGenerica && fase.grupos.Count > 0)
+              if (!fase.esGenerica && fase.grupos.Count > 0 && fase.grupos[0] != null)
               {
+           
                   foreach (Fecha fecha in fase.grupos[0].fechas)
                   {
                       if (fecha.estado.idEstado == Estado.fechaREGISTRADA)
@@ -215,14 +230,31 @@ namespace Logica
                   {
                       fase.grupos[0].fechas.Remove(fechaEliminar);
                   }
+                  
               }
-          }         
-      }
-
-      public Fase obtenerFasePorId(int idEdicion, int idFase)
+              }
+         
+          }
+     
+          /// <summary>
+      /// Crea un objeto JSON para enviar como respuesta al generador de Fases.
+      /// </summary>   
+      public string armarJsonParaWidget(List<Fase> fases, int idEdicion, List<Equipo> equiposDeLaEdicion, int idFaseEditable , bool asistente)
       {
-          DAOFase daoFase = new DAOFase();
-          return daoFase.obtenerFasePorId(idEdicion, idFase);
-      }      
-    }
-}
+         generadorDeFases generador = new generadorDeFases();         
+         generador.equiposDeLaEdicion = equiposDeLaEdicion;
+         generador.fases= fases;
+         generador.idEdicion= idEdicion;
+         generador.idFaseEditable = idFaseEditable;
+         generador.asistente = asistente;        
+         JavaScriptSerializer s = new JavaScriptSerializer();
+         return s.Serialize(generador);
+         
+      }
+      }  
+  }
+         
+  
+      
+
+ 

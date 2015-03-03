@@ -454,22 +454,13 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Panel panelConfigurarFase;
         
         /// <summary>
-        /// Control msjFracaso.
+        /// Control txtFracaso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl msjFracaso;
-        
-        /// <summary>
-        /// Control btnConfigurarFase.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConfigurarFase;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txtFracaso;
         
         /// <summary>
         /// Control btnConfirmar.
@@ -524,15 +515,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnConfirmarFinalizacion;
-        
-        /// <summary>
-        /// Control UpdateProgress1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
         
         /// <summary>
         /// Control btnCambioEnCantidadEquipos.

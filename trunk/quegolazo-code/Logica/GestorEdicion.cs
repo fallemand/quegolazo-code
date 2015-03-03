@@ -41,7 +41,7 @@ namespace Logica
             {
                 foreach (Fase fase in this.edicion.fases)
                 {
-                    if (fase.estado.idEstado == Estado.faseREGISTRADA || fase.estado.idEstado == Estado.faseDIAGRAMADA)
+                    if (fase.estado.idEstado == Estado.faseREGISTRADA || fase.estado.idEstado == Estado.faseDIAGRAMADA || fase.estado.idEstado == Estado.faseINICIADA)
                     {
                         this.faseActual = fase;
                         break;
@@ -66,7 +66,7 @@ namespace Logica
             {
                 foreach (Fase fase in this.edicion.fases)
                 {
-                    if (fase.estado.idEstado == Estado.faseDIAGRAMADA || fase.estado.idEstado == Estado.faseINICIADA)
+                    if (fase.estado.idEstado == Estado.faseDIAGRAMADA || fase.estado.idEstado == Estado.faseINICIADA || fase.estado.idEstado == Estado.faseREGISTRADA)
                     {
                        this.faseActual = fase;
                        hayFaseIniciadaODiagramada = true;
@@ -93,7 +93,7 @@ namespace Logica
             {
                 foreach (Fase fase in fases)
                 {
-                    if (fase.estado.idEstado == Estado.faseDIAGRAMADA || fase.estado.idEstado == Estado.faseINICIADA)
+                    if (fase.estado.idEstado == Estado.faseREGISTRADA || fase.estado.idEstado == Estado.faseDIAGRAMADA || fase.estado.idEstado == Estado.faseINICIADA)
                     {
                         respuesta = fase;
                         break;
