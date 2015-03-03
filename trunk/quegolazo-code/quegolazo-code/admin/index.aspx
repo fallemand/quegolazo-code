@@ -26,6 +26,11 @@
                     La edición seleccionada se encuentra registrada. Por favor, primero configurela para ver las estadísticas.
                 </div>
             </asp:Panel>
+            <asp:Panel ID="panelSinEdiciones" runat="server" CssClass="col-md-7" Enabled="True" Visible="False">
+                <div class="alert alert-info">
+                    Este torneo no cuenta con ediciones registradas. Puede crear una ingresando <a href="<%=Logica.GestorUrl.aEDICIONES %>">aquí</a>
+                </div>
+            </asp:Panel>
         </div>
       </div>        
     </div>
@@ -221,9 +226,6 @@
     </asp:Panel>
     </div>
     <!-- Contenido -->
-    <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
-        <asp:Literal ID="litFracaso" runat="server"></asp:Literal>
-    </asp:Panel>
      <script type="text/javascript">
          $('body').on('keyup', '#filtro', function () {
              if ($(this).val().length > 0) {

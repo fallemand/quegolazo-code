@@ -51,20 +51,17 @@ namespace Utils
 
         public static bool cargarComboList<T>(DropDownList combo, List<T> dataSource, String valueField, String textField, String defaultItemText, bool puedeSeleccionarse)
         {
-            if (dataSource == null)
-                return false;
-            else
-            {
-                combo.DataSource = dataSource;
-                combo.DataValueField = valueField;
-                combo.DataTextField = textField;
-                combo.DataBind();
-                ListItem defaultItem = new ListItem(defaultItemText, "", true);
-                if (!puedeSeleccionarse)
-                    defaultItem.Attributes.Add("disabled", "disabled");
-                combo.Items.Insert(0, defaultItem);
+            combo.DataSource = dataSource;
+            combo.DataValueField = valueField;
+            combo.DataTextField = textField;
+            combo.DataBind();
+            ListItem defaultItem = new ListItem(defaultItemText, "", true);
+            if (!puedeSeleccionarse)
+                defaultItem.Attributes.Add("disabled", "disabled");
+            combo.Items.Insert(0, defaultItem);
+            if (combo.Items.Count > 1)
                 return true;
-            }                              
+            return false;                           
         }
 
         public static void cargarComboTabla(DropDownList combo, DataTable dataSource, String valueField, String textField)
@@ -75,7 +72,7 @@ namespace Utils
             combo.DataBind();
         }
 
-        public static void cargarComboTabla(DropDownList combo, DataTable dataSource, String valueField, String textField, String defaultItemText, bool puedeSeleccionarse)
+        public static bool cargarComboTabla(DropDownList combo, DataTable dataSource, String valueField, String textField, String defaultItemText, bool puedeSeleccionarse)
         {
             combo.DataSource = dataSource;
             combo.DataValueField = valueField;
@@ -85,6 +82,9 @@ namespace Utils
             if (!puedeSeleccionarse)
                 defaultItem.Attributes.Add("disabled", "disabled");
             combo.Items.Insert(0, defaultItem);
+            if (combo.Items.Count > 1)
+                return true;
+            return false;    
         }
 
         public static void enableControls(List<Object> controles)

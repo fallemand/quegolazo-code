@@ -13,7 +13,7 @@ namespace Logica
    public  class GestorEstadisticas
     {
        //DAOEstadisticas
-       Edicion edicion;
+       public Edicion edicion;
        DAOEstadisticas DaoEstadisticas = new DAOEstadisticas();
 
        public GestorEstadisticas()
