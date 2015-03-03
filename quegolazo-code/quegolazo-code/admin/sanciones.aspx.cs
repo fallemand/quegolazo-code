@@ -52,12 +52,12 @@ namespace quegolazo_code.admin
                 if (!gestorSancion.manipulaSancionar(gestorEdicion.edicion).Equals(""))
                     throw new Exception(gestorSancion.manipulaSancionar(gestorEdicion.edicion));                
                 //La edición permite la manipulación de sanciones
+                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                gestorEdicion.getFaseActual();              
                 if (gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA)
                 {// Edición Iniciada, se puede cargar sanciones a partidos
-                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                     if (gestorEdicion.fasesFinalizadas())
                         throw new Exception("La Edición tiene todas sus Fases Finalizadas. Ya no puede registrar sanciones.");
-                    gestorEdicion.getFaseActual();
                     cargarComboFechas();                   
                 }
                 else // Edicion No Iniciada, por lo tanto se deshabilita la carga de fechas y partidos porque todavia no inició
@@ -273,7 +273,8 @@ namespace quegolazo_code.admin
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarSancion", "closeModal('eliminarSancion');", true);
                 //rdEquipos.Checked = true;
                 //rdSinDefinir.Checked = true;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "equipoYSinDefinir()", "equipoYSinDefinir();", true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "equipoYSinDefinir()", "equipoYSinDefinir();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "OpcionPorDefecto", "deshabilitarPanel(); limpiarCombos(); equipoYSinDefinir();", true);
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
