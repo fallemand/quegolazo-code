@@ -38,9 +38,9 @@ namespace quegolazo_code.admin
         {
             try
             {
+                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                 if (e.CommandName == "editarEdicion")
-                {
-                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
+                {                    
                     lblTituloModalEdicion.Text = "Modificar Edición";
                     txtTorneoAsociado.Value = gestorTorneo.torneo.nombre;
                     btnSiguienteEdicion.Visible = false;
@@ -69,7 +69,6 @@ namespace quegolazo_code.admin
                     gestorTorneo.torneo.equipos = gestorEquipo.obtenerEquiposDeUnTorneo();
                     if (gestorTorneo.torneo.equipos.Count <= 1)
                         throw new Exception("El torneo asociado a la edición no tiene la cantidad de equipos mínima para configurarla. Registre al menos dos equipos para continuar.");
-                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     if (gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA) // Si la edicion esta personalizada
                     {
                         gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
@@ -81,17 +80,14 @@ namespace quegolazo_code.admin
                 }
                 if (e.CommandName == "verFechas")
                 {
-                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     Response.Redirect(GestorUrl.aFECHAS);                    
                 }
                 if (e.CommandName == "verFixture")
                 {
-                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     Response.Redirect(GestorUrl.aFECHAS);
                 }
                 if (e.CommandName == "cancelarEdicion")
                 {
-                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(int.Parse(e.CommandArgument.ToString()));
                     if (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA || gestorEdicion.edicion.estado.idEstado == Estado.edicionCANCELADA)
                         throw new Exception("No es posible cancelar la edición seleccionada. Se encuentra "+ gestorEdicion.edicion.estado.nombre);
                     litNombreEdicionACancelar.Text = gestorEdicion.edicion.nombre;

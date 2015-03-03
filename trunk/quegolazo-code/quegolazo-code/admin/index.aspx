@@ -209,7 +209,7 @@
                                     </ItemTemplate>
                                 </asp:Repeater>
                                 <tr id="sinpartidosGoleadores" runat="server" visible="false">
-                                    <td colspan="4">Todavia no hay partidos registrados.</td>
+                                    <td colspan="5"><asp:Literal ID="litSinGoleadores" runat="server"></asp:Literal></td>
                                 </tr>
                             </tbody>
                         </table>
