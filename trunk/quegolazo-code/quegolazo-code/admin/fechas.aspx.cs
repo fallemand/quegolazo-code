@@ -681,8 +681,27 @@ namespace quegolazo_code.admin
                     }
                     else
                     {
-                        Panel panelPartidoLibre = (Panel)e.Item.FindControl("panelPartidoLibre");
-                        panelPartidoLibre.Visible = true;
+                        if (partido.faseAsociada.tipoFixture.idTipoFixture == "ELIM")
+                        {
+                            if (partido.local.nombre != null || partido.visitante.nombre != null)
+                            {
+                                Panel panelPartidoEliminatorioIncompleto = (Panel)e.Item.FindControl("panelPartidoEliminatorioIncompleto");
+                                panelPartidoEliminatorioIncompleto.Visible = true;
+                                Literal litLibre = (Literal)e.Item.FindControl("litEquipo1");
+                                litLibre.Text = partido.local.nombre;
+                            }
+
+                        }
+                        else
+                        {
+                            Panel panelPartidoLibre = (Panel)e.Item.FindControl("panelPartidoLibre");
+                            Literal litLibre = (Literal)e.Item.FindControl("litLibre");
+                            if (partido.local.nombre != null)
+                                litLibre.Text = partido.local.nombre;
+                            if (partido.visitante.nombre != null)
+                                litLibre.Text = partido.local.nombre;
+                            panelPartidoLibre.Visible = true;
+                        }
                     }
                     LinkButton lnkAdministrarPartido = (LinkButton)e.Item.FindControl("lnkAdministrarPartido");
                     lnkAdministrarPartido.Visible = ((partido.estado.idEstado == Estado.partidoJUGADO || partido.estado.idEstado == Estado.partidoCANCELADO) && (partido.faseAsociada.estado.idEstado == Estado.faseFINALIZADA || partido.faseAsociada.estado.idEstado == Estado.faseCANCELADA)) ? false : true;

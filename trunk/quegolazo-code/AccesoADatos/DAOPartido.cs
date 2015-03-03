@@ -668,7 +668,7 @@ namespace AccesoADatos
                     registrarTitularesAPartido(partido.titularesLocal, partido.local.idEquipo, partido.idPartido, con, trans);//titulares del equipo local
                 if(partido.visitante.idEquipo != null)
                     registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}
-                //guardarEquipoEnLLaveSiguiene(partido.idPartido,partido.idGanador, con, trans);                
+                guardarEquipoEnLLaveSiguiene(partido.idPartido,partido.idGanador, con, trans);                
                 trans.Commit();
             }
             catch (Exception ex)
@@ -930,8 +930,11 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idPartido",idPartido);
                 cmd.Parameters.AddWithValue("@idGanador", idGanador);
                 cmd.CommandText = sql;
-                if(cmd.ExecuteNonQuery()>0)
-                (new DAOFecha()).actualizarFechaEliminatorio(idPartido, con, trans);
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    (new DAOFecha()).actualizarFechaEliminatorio(idPartido, con, trans);
+                    
+                }
             }
             catch (SqlException ex)
             {
