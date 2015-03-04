@@ -28,7 +28,7 @@ namespace quegolazo_code.admin {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEdiciones;
+        protected global::Utils.NewDropDownList ddlEdiciones;
         
         /// <summary>
         /// Control btnSeleccionarEdicion.

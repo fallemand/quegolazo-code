@@ -12,7 +12,7 @@
                 <fieldset class="vgSeleccionarEdicion">
                     <div class="col-md-5">
                         <div id="selectEdiciones">
-                            <asp:DropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true"></asp:DropDownList>
+                            <aspNew:NewDropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true" ViewStateMode="Enabled"></aspNew:NewDropDownList>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -23,12 +23,12 @@
         <div class="row">
             <asp:Panel ID="panelEdicionRegistrada" runat="server" CssClass="col-md-7" Enabled="True" Visible="False">
                 <div class="alert alert-info">
-                    La edición seleccionada se encuentra registrada. Por favor, primero configurela para ver las estadísticas.
+                    Debe configurar la edición para poder ver las estadísticas.
                 </div>
             </asp:Panel>
             <asp:Panel ID="panelSinEdiciones" runat="server" CssClass="col-md-7" Enabled="True" Visible="False">
                 <div class="alert alert-info">
-                    Este torneo no cuenta con ediciones registradas. Puede crear una ingresando <a href="<%=Logica.GestorUrl.aEDICIONES %>">aquí</a>
+                    Este torneo no cuenta con ediciones. Puede crear una ingresando <a href="<%=Logica.GestorUrl.aEDICIONES %>"><b>Aquí</b></a>
                 </div>
             </asp:Panel>
         </div>
