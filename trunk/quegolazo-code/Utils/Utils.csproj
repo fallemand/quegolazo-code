@@ -48,6 +48,7 @@
     <Compile Include="GestorExtra.cs" />
     <Compile Include="GestorImagen.cs" />
     <Compile Include="GestorMails.cs" />
+    <Compile Include="NewDropDownList.cs" />
     <Compile Include="OperacionesAccesoADatos.cs" />
     <Compile Include="GestorColeccioness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

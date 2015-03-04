@@ -23,7 +23,7 @@
                                 <fieldset class="vgSeleccionarEdicion">
                                     <div class="col-md-8">
                                         <div id="selectEdiciones">
-                                        <asp:DropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true"></asp:DropDownList>
+                                        <aspNew:NewDropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true"></aspNew:NewDropDownList>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
