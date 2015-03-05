@@ -667,8 +667,7 @@ namespace AccesoADatos
                 if(partido.local.idEquipo != null)
                     registrarTitularesAPartido(partido.titularesLocal, partido.local.idEquipo, partido.idPartido, con, trans);//titulares del equipo local
                 if(partido.visitante.idEquipo != null)
-                    registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}
-                guardarEquipoEnLLaveSiguiene(partido.idPartido,partido.idGanador, con, trans);                
+                    registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}             
                 trans.Commit();
             }
             catch (Exception ex)
@@ -901,16 +900,18 @@ namespace AccesoADatos
         /// Graba el equipo ganador de un partido, en el partido de la llave siguiente (solo apra eliminatorios)
         /// autor: Florencia Rojas
         /// </summary>
-        public void guardarEquipoEnLLaveSiguiene(int idPartido, int? idGanador, SqlConnection con, SqlTransaction trans)
+        public void guardarEquipoEnLLaveSiguiente(int idPartido, int? idGanador)
         {
-            
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
+            SqlTransaction trans = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
-                    con.Open();
-                cmd.Connection = con;
+                    con.Open();                
+                trans = con.BeginTransaction();
                 cmd.Transaction = trans;
+                cmd.Connection = con;
                 string sql = @" DECLARE @tipoFixture AS varchar(10) = (SELECT f.tipoFixture FROM Partidos p INNER JOIN Fases f on (p.idFase = f.idFase AND p.idEdicion = f.idEdicion) WHERE p.idPartido=@idPartido )
                                 DECLARE @idPartidoPosterior AS int = (SELECT p.idPartidoPosterior FROM Partidos p  WHERE p.idPartido=@idPartido)
                                 DECLARE @idEquipoLocal AS int = (SELECT idEquipolocal FROM Partidos p  WHERE p.idPartido=@idPartidoPosterior)
@@ -932,8 +933,7 @@ namespace AccesoADatos
                 cmd.CommandText = sql;
                 if (cmd.ExecuteNonQuery() > 0)
                 {
-                    (new DAOFecha()).actualizarFechaEliminatorio(idPartido, con, trans);
-                    
+                    (new DAOFecha()).actualizarFechaEliminatorio(idPartido, con, trans);                    
                 }
             }
             catch (SqlException ex)

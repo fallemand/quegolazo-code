@@ -69,11 +69,18 @@ namespace Logica
                 partido.penalesVisitante = null;
                 partido.huboPenales = null;            
             }             
-            daoPartido.modificarPartido(partido);
+            daoPartido.modificarPartido(partido);          
             (new DAOFecha()).actualizarFecha(partido.idPartido);
             (new DAOFase()).actualizarEstadoFase(partido.idPartido);
             (new DAOEdicion()).actualizarEstadoEdicion(partido.idPartido);
-            
+            GestorEdicion gestorEdicion = Sesion.getGestorEdicion();
+            if (gestorEdicion.faseActual.tipoFixture.idTipoFixture.Contains("ELIM"))
+                guardarEquipoEnLLaveSiguiente(partido.idPartido, partido.idGanador);            
+        }
+
+        public void guardarEquipoEnLLaveSiguiente(int idPartido, int? idGanador)
+        {
+            daoPartido.guardarEquipoEnLLaveSiguiente(idPartido, idGanador);
         }
 
         /// <summary>

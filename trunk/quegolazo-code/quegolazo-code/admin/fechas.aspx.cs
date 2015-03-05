@@ -169,7 +169,7 @@ namespace quegolazo_code.admin
                 if (gestorPartido.partido == null)
                     throw new Exception("Debe seleccionar un partido desde la lista de fechas");
                 mostrarFechaCollapsablePanel();
-                gestorPartido.modificarPartido(txtFecha.Value, txtGolesLocal.Value, txtGolesVisitante.Value, cbPenales.Checked, txtPenalesLocal.Value, txtPenalesVisitante.Value, ddlArbitros.SelectedValue, ddlCanchas.SelectedValue, obtenerTitularesLocal(), obtenerTitularesVisitante());
+                gestorPartido.modificarPartido(txtFecha.Value, txtGolesLocal.Value, txtGolesVisitante.Value, cbPenales.Checked, txtPenalesLocal.Value, txtPenalesVisitante.Value, ddlArbitros.SelectedValue, ddlCanchas.SelectedValue, obtenerTitularesLocal(), obtenerTitularesVisitante());                
                 mostrarPanelExito("Partido Modificado con éxito");
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 cargarRepeaterFases();
