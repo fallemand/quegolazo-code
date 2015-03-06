@@ -54,6 +54,9 @@ namespace Logica
             foreach (int idJugador in titularesVisitante)
                 partido.titularesVisitante.Add(new Jugador() { idJugador = idJugador });
             calcularGanador();
+            GestorEdicion gestorEdicion = Sesion.getGestorEdicion();
+            if (gestorEdicion.faseActual.tipoFixture.idTipoFixture.Contains("ELIM") && partido.empate == true && partido.golesLocal != null && partido.golesVisitante != null)
+                throw new Exception("Debe definir un Ganador");
             if (partido.golesLocal != null && partido.golesVisitante != null)
                 partido.estado.idEstado = Estado.partidoJUGADO;
             else 
@@ -68,19 +71,13 @@ namespace Logica
                 partido.penalesLocal = null;
                 partido.penalesVisitante = null;
                 partido.huboPenales = null;            
-            }             
+            } 
             daoPartido.modificarPartido(partido);          
             (new DAOFecha()).actualizarFecha(partido.idPartido);
             (new DAOFase()).actualizarEstadoFase(partido.idPartido);
             (new DAOEdicion()).actualizarEstadoEdicion(partido.idPartido);
-            GestorEdicion gestorEdicion = Sesion.getGestorEdicion();
-            if (gestorEdicion.faseActual.tipoFixture.idTipoFixture.Contains("ELIM"))
-                guardarEquipoEnLLaveSiguiente(partido.idPartido, partido.idGanador);            
-        }
-
-        public void guardarEquipoEnLLaveSiguiente(int idPartido, int? idGanador)
-        {
-            daoPartido.guardarEquipoEnLLaveSiguiente(idPartido, idGanador);
+            //if (gestorEdicion.faseActual.tipoFixture.idTipoFixture.Contains("ELIM"))
+            //    guardarEquipoEnLLaveSiguiente(partido.idPartido, partido.idGanador);            
         }
 
         /// <summary>

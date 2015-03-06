@@ -667,7 +667,8 @@ namespace AccesoADatos
                 if(partido.local.idEquipo != null)
                     registrarTitularesAPartido(partido.titularesLocal, partido.local.idEquipo, partido.idPartido, con, trans);//titulares del equipo local
                 if(partido.visitante.idEquipo != null)
-                    registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}             
+                    registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}      
+                guardarEquipoEnLLaveSiguiente(partido.idPartido, partido.idGanador, con, trans);
                 trans.Commit();
             }
             catch (Exception ex)
@@ -900,40 +901,35 @@ namespace AccesoADatos
         /// Graba el equipo ganador de un partido, en el partido de la llave siguiente (solo apra eliminatorios)
         /// autor: Florencia Rojas
         /// </summary>
-        public void guardarEquipoEnLLaveSiguiente(int idPartido, int? idGanador)
+        public void guardarEquipoEnLLaveSiguiente(int idPartido, int? idGanador, SqlConnection con, SqlTransaction trans)
         {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
-            SqlTransaction trans = null;
             try
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();                
-                trans = con.BeginTransaction();
                 cmd.Transaction = trans;
                 cmd.Connection = con;
                 string sql = @" DECLARE @tipoFixture AS varchar(10) = (SELECT f.tipoFixture FROM Partidos p INNER JOIN Fases f on (p.idFase = f.idFase AND p.idEdicion = f.idEdicion) WHERE p.idPartido=@idPartido )
                                 DECLARE @idPartidoPosterior AS int = (SELECT p.idPartidoPosterior FROM Partidos p  WHERE p.idPartido=@idPartido)
-                                DECLARE @idEquipoLocal AS int = (SELECT idEquipolocal FROM Partidos p  WHERE p.idPartido=@idPartidoPosterior)
-                                    IF @tipoFixture='ELIM'
-	                                  BEGIN
-								       IF @idEquipoLocal IS NULL
-									    BEGIN
-									    UPDATE Partidos SET idEquipoLocal = @idGanador WHERE idPartido=@idPartidoPosterior
-									    END
-									    ELSE
-									    BEGIN
-									    UPDATE Partidos SET idEquipoVisitante = @idGanador WHERE idPartido=@idPartidoPosterior
-									    END  
-	                                  END
+                                DECLARE @idPartidoComplementario AS int = (SELECT idPartido FROM Partidos WHERE idPartidoPosterior = @idPartidoPosterior AND idPartido <> @idPartido)
+                                IF @tipoFixture='ELIM'  
+                                BEGIN                              
+                                IF @idPartido < @idPartidoComplementario
+                                BEGIN
+                                    UPDATE Partidos SET idEquipoLocal = @idGanador WHERE idPartido = @idPartidoPosterior
+                                END
+                                ELSE
+                                    UPDATE Partidos SET idEquipoVisitante = @idGanador WHERE idPartido = @idPartidoPosterior                                
+                                END
                                 ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idPartido",idPartido);
-                cmd.Parameters.AddWithValue("@idGanador", idGanador);
+                cmd.Parameters.AddWithValue("@idGanador", DAOUtils.dbValueNull(idGanador));
                 cmd.CommandText = sql;
                 if (cmd.ExecuteNonQuery() > 0)
                 {
-                    (new DAOFecha()).actualizarFechaEliminatorio(idPartido, con, trans);                    
+                    (new DAOFecha()).actualizarFechaEliminatorio(idPartido, idGanador, con, trans);                    
                 }
             }
             catch (SqlException ex)
