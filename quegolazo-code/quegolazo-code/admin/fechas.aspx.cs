@@ -683,7 +683,7 @@ namespace quegolazo_code.admin
                     {
                         if (partido.faseAsociada.tipoFixture.idTipoFixture == "ELIM")
                         {
-                            if (partido.local.nombre != null || partido.visitante.nombre != null)
+                            if (partido.local != null || partido.visitante != null)
                             {
                                 Panel panelPartidoEliminatorioIncompleto = (Panel)e.Item.FindControl("panelPartidoEliminatorioIncompleto");
                                 panelPartidoEliminatorioIncompleto.Visible = true;
@@ -696,10 +696,10 @@ namespace quegolazo_code.admin
                         {
                             Panel panelPartidoLibre = (Panel)e.Item.FindControl("panelPartidoLibre");
                             Literal litLibre = (Literal)e.Item.FindControl("litLibre");
-                            if (partido.local.nombre != null)
+                            if (partido.local != null)
                                 litLibre.Text = partido.local.nombre;
-                            if (partido.visitante.nombre != null)
-                                litLibre.Text = partido.local.nombre;
+                            if (partido.visitante != null)
+                                litLibre.Text = partido.visitante.nombre;
                             panelPartidoLibre.Visible = true;
                         }
                     }
