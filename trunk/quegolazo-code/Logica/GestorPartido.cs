@@ -80,6 +80,10 @@ namespace Logica
             //    guardarEquipoEnLLaveSiguiente(partido.idPartido, partido.idGanador);            
         }
 
+
+       
+
+
         /// <summary>
         /// Valida y carga los penales
         /// autor: Facundo Allemand
