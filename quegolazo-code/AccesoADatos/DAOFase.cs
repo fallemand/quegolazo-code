@@ -29,7 +29,7 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 foreach (Fase fase in fases)
                 {
-                    actualizarNombresFases(fase);
+                    actualizarNombresFechasEliminatorio(fase);
                     registrarUnaFase(con, trans, cmd, fase);
                 }
             }
@@ -117,7 +117,7 @@ namespace AccesoADatos
         /// <summary>
         /// Actualiza los nombres de las fases 
         /// </summary>
-        protected static void actualizarNombresFases( Fase fase)
+        protected static void actualizarNombresFechasEliminatorio( Fase fase)
         {
             if (fase.tipoFixture.idTipoFixture == "ELIM" || fase.tipoFixture.idTipoFixture == "ELIM-IV")
             {
@@ -127,20 +127,19 @@ namespace AccesoADatos
                     {
                         switch (f.partidos.Count)
                         {
-                            case 1: f.nombre = "Final";
-                                break;
-                            case 2: f.nombre = "Semifinal";
-                                break;
-                            case 4: f.nombre = "Cuartos de Final";
-                                break;
-                            case 8: f.nombre = "Octavos de Final";
+                            case 32: f.nombre = "Treintaidosavos";
                                 break;
                             case 16: f.nombre = "Diciseiasavos";
                                 break;
-                            case 32: f.nombre = "Treintaidosavos";
+                            case 8: f.nombre = "Octavos de Final";
+                                break;
+                            case 4: f.nombre = "Cuartos de Final";
+                                break;
+                            case 2: f.nombre = "Semifinal";
                                 break;
                         }
                     }
+                    g.fechas[g.fechas.Count - 1].nombre = "Final";
                 }
                // daoFecha.cambiarNombresAFechas(fase, con, tran);
             }

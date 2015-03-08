@@ -668,6 +668,7 @@ namespace AccesoADatos
                     registrarTitularesAPartido(partido.titularesLocal, partido.local.idEquipo, partido.idPartido, con, trans);//titulares del equipo local
                 if(partido.visitante.idEquipo != null)
                     registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}      
+               if(partido.faseAsociada.tipoFixture.idTipoFixture=="ELIM")
                 guardarEquipoEnLLaveSiguiente(partido.idPartido, partido.idGanador, con, trans);
                 trans.Commit();
             }
@@ -984,20 +985,35 @@ namespace AccesoADatos
             foreach (Fecha f in faseEliminatoria.grupos[0].fechas.OrderByDescending(f => f.idFecha))
             {
                 int j = 0;
-                foreach (Partido p in f.partidos)
+                if (f.idFecha == faseEliminatoria.grupos[0].fechas.Count)
                 {
-                    if (f.idFecha > 1)
+                    Fecha fechaAnterior = faseEliminatoria.grupos[0].fechas[f.idFecha - 2];
+                    fechaAnterior.partidos[j].idPartidoPosterior = f.partidos[0].idPartido;
+                    if (fechaAnterior.partidos.Count > 1)
                     {
-                        Fecha fechaAnterior = faseEliminatoria.grupos[0].fechas[f.idFecha - 2];
-                        fechaAnterior.partidos[j].idPartidoPosterior = p.idPartido;
-                        if (fechaAnterior.partidos.Count > 1)
-                        {
-                            fechaAnterior.partidos[j + 1].idPartidoPosterior = p.idPartido;
-                            j = j + 2;
-                        }
+                        fechaAnterior.partidos[j + 1].idPartidoPosterior = f.partidos[0].idPartido;
+                        j = j + 2;
                     }
-                    else
-                        break;
+                    continue;
+                }
+                else
+                {
+                    foreach (Partido p in f.partidos)
+                    {
+
+                        if (f.idFecha > 1)
+                        {
+                            Fecha fechaAnterior = faseEliminatoria.grupos[0].fechas[f.idFecha - 2];
+                            fechaAnterior.partidos[j].idPartidoPosterior = p.idPartido;
+                            if (fechaAnterior.partidos.Count > 1)
+                            {
+                                fechaAnterior.partidos[j + 1].idPartidoPosterior = p.idPartido;
+                                j = j + 2;
+                            }
+                        }
+                        else
+                            break;
+                    }
                 }
             }
         }

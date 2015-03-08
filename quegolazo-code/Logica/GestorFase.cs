@@ -195,19 +195,17 @@ namespace Logica
               cantidad = cantidad / 2;
           } 
           //ahora carga el partido de la final y del tercer puesto, primero la final y luego el tercer puesto
-          for (int i = 0; i < 2; i++)
-              {
-                  Fecha fecha = new Fecha();
-                  fecha.idFecha = nroFecha;
-                  fecha.estado.idEstado = (nroFecha > 1) ? Estado.fechaREGISTRADA : Estado.fechaDIAGRAMADA;
-                  Partido p = new Partido();
-                  p.estado.idEstado = Estado.partidoDIAGRAMADO;
-                  fecha.partidos.Add(p);
-                  fase.grupos[0].fechas.Add(fecha);
-                  nroFecha++;
-              }
-              
-          
+          Fecha ultimaFecha = new Fecha();
+          ultimaFecha.idFecha = nroFecha;
+          ultimaFecha.estado.idEstado = (nroFecha > 1) ? Estado.fechaREGISTRADA : Estado.fechaDIAGRAMADA;
+          Partido partidoFinal = new Partido();
+          partidoFinal.estado.idEstado = Estado.partidoDIAGRAMADO;
+          ultimaFecha.partidos.Add(partidoFinal);
+          Partido partidoTercerPuesto = new Partido();
+          partidoTercerPuesto.estado.idEstado = Estado.partidoDIAGRAMADO;
+          ultimaFecha.partidos.Add(partidoTercerPuesto);
+          fase.grupos[0].fechas.Add(ultimaFecha);
+
       }
       /// <summary>
       /// quita las fechas que tienen estado REGISTRADA, que corresponden a las fechas genericas de una fase eliminatoria.
@@ -230,9 +228,8 @@ namespace Logica
                   {
                       fase.grupos[0].fechas.Remove(fechaEliminar);
                   }
-                  
               }
-              }
+            }
          
           }
      
