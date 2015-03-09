@@ -123,10 +123,10 @@ namespace quegolazo_code.admin
         {
             var ultimaFecha = gestorEstadisticas.obtenerFixtureUltimaFecha(gestorEdicion.faseActual.idFase);
             GestorControles.cargarRepeaterTable(rptFecha,ultimaFecha);
+            GestorControles.cargarRepeaterList(rptGruposFecha, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase - 1].grupos);
             if(ultimaFecha.Rows.Count>0)
             ltFecha.Text = ultimaFecha.Rows[0]["idFecha"].ToString();
-            noFixture.Visible = (rptFecha.Items.Count > 0) ? false : true;
-            
+            noFixture.Visible = (rptFecha.Items.Count > 0) ? false : true;            
         }
         /// <summary>
         /// Carga el porcetnaje de avance de la ultima fecha incompleta
