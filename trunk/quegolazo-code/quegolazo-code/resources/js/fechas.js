@@ -30,6 +30,11 @@ $(document).ready(function () {
         if (event.target.type !== 'checkbox') {
             $(':checkbox', this).trigger('click');
         }
+        $('#tabla-posiciones2 tbody').sortable({
+            update: function (event, ui) {
+                reordenarPosicionesEquipos();
+            }
+        });
     });
     $("#tabla-posiciones tbody tr input[type='checkbox']").change(function (e) {
         if ($(this).is(":checked")) {
@@ -51,11 +56,7 @@ function actualizarCantidades() {
     $("#spanSeleccionados").text(valor);
 }
 
-$('#tabla-posiciones2 tbody').sortable({
-    update: function (event, ui) {
-        reordenarPosicionesEquipos();
-    }
-});
+
 
 function reordenarPosicionesEquipos() {
     var columna = $('#tabla-posiciones2 tr td:nth-child(1)');
