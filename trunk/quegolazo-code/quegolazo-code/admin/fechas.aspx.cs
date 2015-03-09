@@ -751,10 +751,10 @@ namespace quegolazo_code.admin
         /// <param name="faseActual"></param>
         private static string armarFases(List<Fase> fasesParaElWidget, string idEquipos, bool eliminaFasesPosteriores)
         {
-            GestorFase gestorFase= new GestorFase();
-            gestorEdicion.agregarEquiposEnFase(fasesParaElWidget, idEquipos, gestorEdicion.faseActual.idFase+1);
-            gestorFase.reducirFases(fasesParaElWidget);
             Fase faseActual = gestorEdicion.getFaseActual(fasesParaElWidget);
+            GestorFase gestorFase= new GestorFase();
+            gestorEdicion.agregarEquiposEnFase(fasesParaElWidget, idEquipos, faseActual.idFase);
+            gestorFase.reducirFases(fasesParaElWidget);            
             if (eliminaFasesPosteriores)
             {
                 gestorFase.eliminarFasesPosteriores(fasesParaElWidget, faseActual);
@@ -863,7 +863,7 @@ namespace quegolazo_code.admin
 
         protected void btnConfirmar_Click(object sender, EventArgs e)
         {
-           cargarRepeaterFases();
+            Response.Redirect(GestorUrl.aFECHAS);
         }
 
      

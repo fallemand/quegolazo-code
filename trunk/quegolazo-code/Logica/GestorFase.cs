@@ -135,7 +135,7 @@ namespace Logica
                       {
                           foreach (Partido p in fecha.partidos)
                           {
-                              if (p.local.jugadores != null && p.visitante.jugadores != null)
+                              if (p.local != null && p.visitante != null && p.local.jugadores != null && p.visitante.jugadores != null)
                               {
                                   p.local.jugadores = null;
                                   p.visitante.jugadores = null;
@@ -216,7 +216,7 @@ namespace Logica
           List<Fecha> fechasAEliminar =  new List<Fecha>();
           foreach (Fase fase in fases)
           {
-              if (!fase.esGenerica && fase.grupos.Count > 0 && fase.grupos[0] != null)
+              if (!fase.esGenerica && fase.grupos.Count > 0 && fase.grupos[0] != null && fase.grupos[0].fechas != null)
               {
            
                   foreach (Fecha fecha in fase.grupos[0].fechas)
