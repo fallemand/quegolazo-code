@@ -133,12 +133,12 @@
                                     </asp:Panel>
                                 </div>
                                 <div class="panel-footer clearfix text-right">
-                                    <div class="col-xs-11 col-md-8 col-md-offset-3 col-xs-offset-0">
+                                    <div class="mobile-nopadding-left col-xs-10 col-md-8 col-md-offset-3">
                                         <asp:Button class="btn btn-default" ID="btnCancelarModificacionSancion" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionSancion_Click" />
                                         <asp:Button class="btn btn-success causesValidation vgSancion" ID="btnModificarSancion" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarSancion_Click" />
                                         <asp:Button class="btn btn-success causesValidation vgSancion" ID="btnRegistrarSancion" runat="server" Text="Registrar" OnClick="btnRegistrarSancion_Click" Enabled="false" />
                                     </div>
-                                    <div class="col-xs-1">
+                                    <div class="col-xs-2 col-md-1">
                                         <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
                                             <ProgressTemplate>
                                                 <img src="/resources/img/theme/load4.gif" />
