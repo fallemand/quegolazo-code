@@ -385,20 +385,21 @@ namespace Logica
         /// <returns>Devuelve true si la fase siguiente estaba creada genericamente y false en caso de que haya creado una nueva.</returns>
        public bool verificarProximaFase(List<Fase> fases, int idFaseNueva)
         {
-           bool creoFaseNueva = idFaseNueva == fases.Count;
+           bool creoFaseNueva = idFaseNueva > fases.Count;
             bool existeFase = false;
             foreach (Fase f in fases)
             {
-                if (idFaseNueva != fases.Count && f.idFase == idFaseNueva)
+                if (!creoFaseNueva && f.idFase == idFaseNueva)
                 {
                     existeFase = true;
                     break;
                 }
             }
             if (!existeFase)
-                fases.Add(new Fase { idFase = creoFaseNueva ? idFaseNueva+1 : idFaseNueva, idEdicion = edicion.idEdicion, estado = new Estado(Estado.faseDIAGRAMADA) });
+                fases.Add(new Fase { idFase = creoFaseNueva ? idFaseNueva : idFaseNueva, idEdicion = edicion.idEdicion, estado = new Estado(Estado.faseDIAGRAMADA) });
             //cierro la fase anterior a la nueva, si idFaseNueva es del tamaño de la lista de fases, es xq el usuario creo una nueva fase, entonces cambio el estado de esa fase, sino de la que tiene el indice anterior a la actual.
-            fases[creoFaseNueva ? idFaseNueva-1 : idFaseNueva - 2].estado.idEstado = Estado.faseFINALIZADA;
+            int indiceFase = idFaseNueva-2 ;
+           fases[indiceFase].estado.idEstado = Estado.faseFINALIZADA;
             return existeFase;
         }
 

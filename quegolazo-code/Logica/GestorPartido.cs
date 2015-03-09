@@ -71,13 +71,11 @@ namespace Logica
                 partido.penalesLocal = null;
                 partido.penalesVisitante = null;
                 partido.huboPenales = null;            
-            } 
+            }             
             daoPartido.modificarPartido(partido);          
             (new DAOFecha()).actualizarFecha(partido.idPartido);
             (new DAOFase()).actualizarEstadoFase(partido.idPartido);
-            (new DAOEdicion()).actualizarEstadoEdicion(partido.idPartido);
-            //if (gestorEdicion.faseActual.tipoFixture.idTipoFixture.Contains("ELIM"))
-            //    guardarEquipoEnLLaveSiguiente(partido.idPartido, partido.idGanador);            
+            (new DAOEdicion()).actualizarEstadoEdicion(partido.idPartido);          
         }
 
 
