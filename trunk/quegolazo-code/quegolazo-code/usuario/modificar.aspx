@@ -59,7 +59,7 @@
                     <asp:Panel ID="panFracaso" runat="server" CssClass="alert alert-danger margin-top panelMensaje" Visible="False"><strong>
                         <asp:Literal ID="litError" runat="server"></asp:Literal></strong></asp:Panel>
                     <div class="clearfix">
-                        <div class="col-xs-9 col-xs-offset-1">
+                        <div class="col-xs-10 col-md-9 col-md-offset-1 mobile-nopadding-left mobile-nopadding-right">
                             <asp:Button class="btn btn-default" ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" />
                             <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CssClass="btn btn-success causesValidation vgModificar" />
                         </div>

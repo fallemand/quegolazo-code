@@ -36,6 +36,7 @@ namespace quegolazo_code.admin
                 limpiarCamposArbitros();
                 cargarRepeaterArbitros();
                 gestorArbitro.arbitro = null; // le setea null al arbitro
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarArbitro');", true);
             }
             catch (Exception ex)
             {
@@ -87,6 +88,7 @@ namespace quegolazo_code.admin
                 btnModificarArbitro.Visible = false;
                 btnCancelarModificacionArbitro.Visible = false;
                 gestorArbitro.arbitro = null; // le setea null al árbitro
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarArbitro');", true);
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
@@ -109,6 +111,7 @@ namespace quegolazo_code.admin
                 btnRegistrarArbitro.Visible = true;
                 btnModificarArbitro.Visible = false;
                 btnCancelarModificacionArbitro.Visible = false;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarArbitro');", true);
             }
             catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }

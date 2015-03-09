@@ -39,6 +39,7 @@ namespace quegolazo_code.admin
                 limpiarCamposEquipo();
                 cargarRepeaterEquipos();
                 gestorEquipo.equipo = null; // le setea null al equipo
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarEquipo');", true);
             }
             catch (Exception ex)
             {
@@ -211,6 +212,7 @@ namespace quegolazo_code.admin
                 btnModificarEquipo.Visible = false;
                 btnCancelarModificacionEquipo.Visible = false;
                 gestorEquipo.equipo = null; // le setea null al equipo
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarEquipo');", true);
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }

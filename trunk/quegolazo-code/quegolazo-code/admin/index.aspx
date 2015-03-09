@@ -10,13 +10,13 @@
     <div class="col-md-12">
             <div class="well">
                 <fieldset class="vgSeleccionarEdicion">
-                    <div class="col-md-5">
+                    <div class="col-md-5 col-xs-9 mobile-nopadding-left">
                         <div id="selectEdiciones">
                             <aspNew:NewDropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true" ViewStateMode="Enabled"></aspNew:NewDropDownList>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <asp:Button ID="btnSeleccionarEdicion" runat="server" Text="Seleccionar Edición" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEdicion" OnClick="btnSeleccionarEdicion_Click" />
+                    <div class="col-md-2 col-xs-3 mobile-nopadding-left">
+                        <asp:Button ID="btnSeleccionarEdicion" runat="server" Text="Seleccionar" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEdicion" OnClick="btnSeleccionarEdicion_Click" />
                     </div>
                 </fieldset>
          </div>
@@ -45,49 +45,46 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="btn-group btn-group-sm" role="group" style="margin-right: 5px;" aria-label="...">
-                                <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');reordenarPosiciones()">Todos</button>
-                            </div>
+                            Grupos:
                             <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                <button type="button" style="margin-right: 5px;" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');">Todos</button>
                                 <asp:Repeater ID="rptGrupos" runat="server">
                                     <ItemTemplate>
-                                        <button type="button" class="btn btn-success" onclick="filtrarPosiciones('<%# Eval("idGrupo")%>')">Grupo <%# Eval("idGrupo")%></button>
+                                        <button type="button" class="btn btn-success" onclick="filtrarPosiciones('<%# Eval("idGrupo")%>')"><span class="hidden-xs">Grupo</span> <%# Eval("idGrupo")%></button>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 listado listado-sm">
+                        <div class="col-xs-12 listado listado-sm">
                             <table id="tabla-posiciones" class="table table-condensed table-hover">
                                 <thead>
-                                    <tr>                                        
+                                    <tr>
                                         <th class="col-md-1"></th>
-                                        <th class="col-md-1"></th>
-                                        <th class="col-md-4">EQUIPO</th>
+                                        <th class="col-md-4">Equipo</th>
                                         <th class="col-md-1">PJ</th>
-                                        <th class="col-md-1">PG</th>
-                                        <th class="col-md-1">PE</th>
-                                        <th class="col-md-1">PP</th>
-                                        <th class="col-md-1">GF</th>
-                                        <th class="col-md-1">GC</th>
+                                        <th class="col-md-1 hidden-xs">PG</th>
+                                        <th class="col-md-1 hidden-xs">PE</th>
+                                        <th class="col-md-1 hidden-xs">PP</th>
+                                        <th class="col-md-1 hidden-xs">GF</th>
+                                        <th class="col-md-1 hidden-xs">GC</th>
                                         <th class="col-md-1">PTS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <asp:Repeater ID="rptPosiciones" runat="server">
                                         <ItemTemplate>
-                                            <tr>   
-                                                <td style="font-size:15px" ><strong> <%# Container.ItemIndex + 1 %>º </strong></td>                                             
+                                            <tr>
                                                 <td>
-                                                    <img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("idEquipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>                                                
+                                                    <img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("idEquipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
                                                 <td><%# Eval("Equipo") %></td>
                                                 <td><%# Eval("PJ") %></td>
-                                                <td><%# Eval("PG") %></td>
-                                                <td><%# Eval("PE") %></td>
-                                                <td><%# Eval("PP") %></td>
-                                                <td><%# Eval("GF") %></td>
-                                                <td><%# Eval("GC") %></td>
+                                                <td class="hidden-xs"><%# Eval("PG") %></td>
+                                                <td class="hidden-xs"><%# Eval("PE") %></td>
+                                                <td class="hidden-xs"><%# Eval("PP") %></td>
+                                                <td class="hidden-xs"><%# Eval("GF") %></td>
+                                                <td class="hidden-xs"><%# Eval("GC") %></td>
                                                 <td><%# Eval("Puntos") %></td>
                                                 <td class="idEquipo" style="display:none;"><%# Eval("idEquipo") %></td>
                                                 <td style="display:none;"><%# Eval("idGrupo") %></td>
@@ -131,11 +128,11 @@
                             <table class="table nomargin-bottom">
                             <thead>
                                 <tr>
-                                    <th class="col-md-2">LOCAL</th>
+                                    <th class="col-md-2">Local</th>
                                     <th class="col-md-1">VS</th>
-                                    <th class="col-md-2">VISITANTE</th>
-                                    <th class="col-md-1">FECHA</th>
-                                    <th class="col-md-1">ESTADO</th>
+                                    <th class="col-md-2">Visitante</th>
+                                    <th class="col-md-1 hidden-xs">Fecha</th>
+                                    <th class="col-md-1">Estado</th>
                                 </tr>
                             </thead>
                             <tbody class="tablaFiltro">
@@ -145,8 +142,11 @@
                                             <td><%# Eval("Local") %></td>
                                             <td><%# Eval("GolesLocal") %> - <%# Eval("GolesVisitante") %></td>
                                             <td><%# Eval("Visitante") %></td>                                        
-                                            <td><%# Eval("FechaPartido") %></td>
-                                            <td><span class="label partido-<%# Eval("estado") %>" rel="txtTooltip" data-placement="left"><%# Eval("estado") %></span></td>
+                                            <td class="hidden-xs"><%# Eval("FechaPartido") %></td>
+                                            <td>
+                                                <span class="label partido-<%# Eval("estado") %> visible-xs" title="<%# Eval("estado") %>" rel="txtTooltip" data-placement="left"><%# Eval("estado").ToString().PadRight(1).Substring(0,1).TrimEnd() %></span>
+                                                <span class="label partido-<%# Eval("estado") %> hidden-xs"><%# Eval("estado") %></span>
+                                            </td>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>
@@ -197,10 +197,10 @@
                             <thead>
                                 <tr>
                                     <th class="col-md-1"></th>
-                                    <th class="col-md-3">JUGADOR</th>
-                                    <th class="col-md-1"></th>
-                                    <th class="col-md-3">EQUIPO</th>
-                                    <th class="col-md-2">GOLES</th>
+                                    <th class="col-md-3">Jugador</th>
+                                    <th class="col-md-1 hidden-xs"></th>
+                                    <th class="col-md-3">Equipo</th>
+                                    <th class="col-md-2">Goles</th>
                                 </tr>
                             </thead>
                             <tbody class="tablaFiltro">
@@ -209,8 +209,11 @@
                                         <tr>
                                             <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("IDJUGADOR").ToString()), Utils.GestorImagen.JUGADOR, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
                                             <td><%# Eval("JUGADOR") %></td>
-                                            <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("IDEQUIPO").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
-                                            <td><%# Eval("EQUIPO") %></td>                                       
+                                            <td class="hidden-xs"><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("IDEQUIPO").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
+                                            <td>
+                                                <span class="hidden-xs"><%# Eval("EQUIPO") %></span>
+                                                <img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("idEquipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" title="<%# Eval("EQUIPO") %>" rel="txtTooltip" data-placement="left" />
+                                            </td>                                       
                                             <td><%# Eval("GOLES") %></td>
                                         </tr>
                                     </ItemTemplate>
@@ -250,19 +253,6 @@
              $('#tabla-posiciones tbody tr').filter(function () {
                  return $(this).find('td:last-child').text() == idGrupo;
              }).show('fast');
-             var columna = $('#tabla-posiciones tr:visible td:nth-child(1)');
-             for (var i = 0; i < columna.length; i++) {
-                 $(columna[i]).html('<strong>' + (i + 1) + 'º' + '</strong>');
-                 $(columna[i]).css('font-size', '15px');
-             }
-         };
-
-         function reordenarPosiciones() {
-             var columna = $('#tabla-posiciones tr td:nth-child(1)');
-             for (var i = 0; i < columna.length; i++) {
-                 $(columna[i]).html('<strong>' + (i + 1) + 'º' + '</strong>');
-                 $(columna[i]).css('font-size', '15px');
-             }
          };
 
     </script>

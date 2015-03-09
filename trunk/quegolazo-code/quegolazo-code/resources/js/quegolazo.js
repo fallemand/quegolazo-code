@@ -50,6 +50,25 @@ function hidePanelMessage(idPanel) {
     }
 };
 
+function hideOnMobile(idPanel) {
+    if (window.innerWidth < 768) {
+        if ($('#' + idPanel).hasClass('in')) {
+            setTimeout(function () {
+                $('#' + idPanel).removeClass('in');
+            }, 1);
+        }
+    }
+};
+
+
+function isMobile() {
+    if (window.innerWidth <= 600) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function showCollapsablePanel(idPanelCollapse, hasParent) {
     $('#' + idPanelCollapse).addClass('in');
     if(hasParent)

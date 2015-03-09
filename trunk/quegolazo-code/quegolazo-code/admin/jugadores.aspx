@@ -8,11 +8,14 @@
                     <ContentTemplate>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <span class="glyphicon glyphicon-plus"></span>
-                                Agregar un Jugador                                 
+                                <a data-toggle="collapse" data-parent="#accordion" href="#agregarJugador" aria-expanded="true" aria-controls="agragarJugador">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    Agregar un Jugador  
+                                </a>                                     
                             </div>
-                            <div class="panel-body nopadding-bottom">
-                                <fieldset class="vgJugador">
+                            <div id="agregarJugador" class="panel-collapse collapse in mobile-collapse" role="tabpanel" aria-labelledby="headingOne"">
+                               <div class="panel-body nopadding-bottom">
+                                 <fieldset class="vgJugador">
                                     <div class="form-horizontal">
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Nombre</label>
@@ -86,7 +89,7 @@
                                             <label for="textArea" class="col-lg-2 control-label">Imagen</label>
                                             <div class="col-lg-10">
                                                 <div class="row">
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-5 col-xs-6">
                                                         <div class="fileinput">
                                                             <div class="thumbnail fileinput-preview">
                                                                 <img id="imagenpreview" runat="server" />
@@ -97,7 +100,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-7">
+                                                    <div class="col-md-7 col-xs-6">
                                                         <img src="../resources/img/theme/load2.gif" id="cargandoImagen" style="display: none;" alt="load" />
                                                         <span id="imagenCorrecta" class="label alert-success label-md" style="display: none;">Imagen Correcta <span class="glyphicon glyphicon-ok"></span></span>
                                                         <span id="imagenIncorrecta" class="label alert-danger label-md" style="display: none;"><span id="mensajeErrorImagen"></span></span>
@@ -115,7 +118,7 @@
                                 </fieldset>
                             </div>
                             <div class="panel-footer clearfix text-right">
-                                <div class="col-xs-8 col-xs-offset-3">
+                                <div class="col-xs-11 col-md-8 col-md-offset-3">
                                     <asp:Button class="btn btn-default" ID="btnCancelarModificacionJugador" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionJugador_Click" />
                                     <asp:Button class="btn btn-success causesValidation vgJugador" ID="btnModificarJugador" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarJugador_Click" />
                                     <asp:Button class="btn btn-success causesValidation vgJugador" ID="btnRegistrarJugador" runat="server" Text="Registrar" OnClick="btnRegistrarJugador_Click" Enabled="False" />
@@ -128,6 +131,7 @@
                                     </asp:UpdateProgress>
                                 </div>
                             </div>
+                            </div>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -137,12 +141,12 @@
                     <div class="row">
                         <fieldset class="vgSeleccionarEquipo">
                             <div class="col-md-8">
-                                <div id="selectEquipos">
+                                <div id="selectEquipos" class="col-md-5 col-xs-9 mobile-nopadding-left">
                                     <asp:DropDownList ID="ddlEquipos" runat="server" CssClass="form-control searchableSelect" required="true"></asp:DropDownList>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <asp:Button ID="btnSeleccionarEquipo" runat="server" Text="Seleccionar Equipo" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEquipo" OnClick="btnSeleccionarEquipo_Click" />
+                            <div class="col-md-2 col-xs-3 mobile-nopadding-left">
+                                <asp:Button ID="btnSeleccionarEquipo" runat="server" Text="Seleccionar" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEquipo" OnClick="btnSeleccionarEquipo_Click" />
                             </div>
                         </fieldset>
                     </div>
@@ -150,11 +154,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row clearfix">
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-xs-5">
                                 <span class="glyphicon glyphicon-search"></span>
-                                Jugadores del Equipo
+                                Jugadores<span class="hidden-xs"> del Equipo</span>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-xs-7">
                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Jugadores" />
                             </div>
                         </div>
@@ -171,9 +175,9 @@
                                         <tr>
                                             <th class="col-md-1"></th>
                                             <th class="col-md-2">Nombre</th>
-                                            <th class="col-md-1">#</th>
-                                            <th class="col-md-2">E-mail</th>
-                                            <th class="col-md-2">Facebook</th>
+                                            <th class="col-md-1 hidden-xs">#</th>
+                                            <th class="col-md-2 hidden-xs">E-mail</th>
+                                            <th class="col-md-2 hidden-xs">Facebook</th>
                                             <th class="col-md-1">Acciones</th>
                                         </tr>
                                     </thead>
@@ -183,9 +187,9 @@
                                                 <tr>
                                                     <td><img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
                                                     <td><strong><%# Eval("nombre") %></strong></td>
-                                                    <td><%# Eval("numeroCamiseta") %></td>
-                                                    <td><%# Eval("email") %></td>
-                                                    <td><%# Eval("facebook") %></td>
+                                                    <td class="hidden-xs"><%# Eval("numeroCamiseta") %></td>
+                                                    <td class="hidden-xs"><%# Eval("email") %></td>
+                                                    <td class="hidden-xs"><%# Eval("facebook") %></td>
                                                     <td>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarJugador" title="Editar Jugador" runat="server" CommandName="editarJugador" CommandArgument='<%#Eval("idJugador")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarJugador" title="Eliminar Jugador" runat="server" CommandName="eliminarJugador" CommandArgument='<%#Eval("idJugador")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar"></span></asp:LinkButton>

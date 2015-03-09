@@ -2,151 +2,155 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <asp:UpdatePanel ID="upRegistrarEquipo" runat="server">
                     <ContentTemplate>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <span class="glyphicon glyphicon-plus"></span>
-                                Agregar un Equipo                                   
+                                <a data-toggle="collapse" data-parent="#accordion" href="#agregarEquipo" aria-expanded="true" aria-controls="agregarEquipo">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    Agregar un Equipo  
+                                </a>                                 
                             </div>
-                            <div class="panel-body nopadding-bottom">
-                                <fieldset class="vgEquipo">
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <label for="text" class="col-lg-2 control-label">Nombre</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo" required="true" rangelength="3, 50">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="select" class="col-lg-2 control-label">Director</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="txtNombreDirector" runat="server" placeholder="Nombre del Director Técnico" rangelength="3, 80">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="text" class="col-lg-2 control-label">Color °1</label>
-                                            <div class="col-lg-2">
-                                                <div class="colorpick">
-                                                    <input type="text" class="form-control" rel="txtTooltip" title="Color primario de la camiseta" id="txtColorPrimario" runat="server" value="#E1E1E1" required="true">
+                            <div id="agregarEquipo" class="panel-collapse collapse in mobile-collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body nopadding-bottom">
+                                    <fieldset class="vgEquipo">
+                                        <div class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="text" class="col-lg-2 control-label">Nombre</label>
+                                                <div class="col-lg-10">
+                                                    <input type="text" class="form-control" runat="server" id="txtNombreEquipo" placeholder="Nombre del Equipo" required="true" rangelength="3, 50">
                                                 </div>
                                             </div>
-                                            <label for="text" class="col-lg-2 control-label">Color 2°</label>
-                                            <div class="col-lg-2">
-                                                <div class="colorpick">
-                                                    <input type="text" class="form-control" rel="txtTooltip" title="Color secundario de la camiseta" id="txtColorSecundario" runat="server" value="#E1E1E1" required="true">
+                                            <div class="form-group">
+                                                <label for="select" class="col-lg-2 control-label">Director</label>
+                                                <div class="col-lg-10">
+                                                    <input type="text" class="form-control" id="txtNombreDirector" runat="server" placeholder="Nombre del Director Técnico" rangelength="3, 80">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="subform-horizontal clearfix">
-                                            <label for="select" class="col-lg-2 control-label">Delegados</label>
-                                            <div class="col-lg-10">
-                                                <p class="nomargin-bottom">
-                                                    <span class="label label-default label-md">
-                                                        <a href="" rel="txtTooltip" title="Agregar Delegado" onclick="showDelegados();return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Nuevo</a>
-                                                    </span>
-                                                    <asp:Repeater ID="rptDelegados" runat="server" OnItemCommand="rptDelegados_ItemCommand">
-                                                        <ItemTemplate>
-                                                            <span class="label label-default label-md"><%# Eval("nombre") %>
-                                                                <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminar" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                                                <asp:LinkButton ClientIDMode="AutoID" title="Modificar" rel="txtTooltip" ID="lnkModificar" runat="server" CommandName="modificarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                                            </span>
-                                                        </ItemTemplate>
-                                                    </asp:Repeater>
-                                                </p>
-                                                <div id="delegado" style="display: none;" class="col-md-9">
-                                                    <fieldset class="vgDelegado">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" rangelength="3, 50" required="true" disabled>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-envelope"></i></span>
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="E-mail del Delegado" runat="server" rangelength="3, 100" required="true" email="true" disabled>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-phone"></i></span>
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegado" runat="server" rangelength="3, 20" required="true" number="true" disabled>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-home"></i></span>
-                                                                <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server" maxlength="100" disabled>
-                                                            </div>
-                                                        </div>
-                                                        <asp:Button class="btn btn-default btn-xs causesValidation vgDelegado" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click" />
-                                                        <asp:Button class="btn btn-default btn-xs causesValidation vgDelegado" ID="btnModificarDelegado" runat="server" Text="Modificar Delegado" OnClick="btnModificarDelegado_Click" Visible="false" />
-                                                        <asp:Button class="btn btn-default btn-xs" ID="btnCancelarDelegado" runat="server" Text="Cancelar" OnClick="btnCancelarDelegado_Click" />
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="textArea" class="col-lg-2 control-label">Logo</label>
-                                            <div class="col-lg-10">
-                                                <div class="row">
-                                                <div class="col-md-5">
-                                                    <div class="fileinput">
-                                                        <div class="thumbnail fileinput-preview">
-                                                            <img id="imagenpreview" runat="server" />
-                                                        </div>
-                                                        <div class="fileUpload">
-                                                            <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
-                                                            <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload" />
-                                                        </div>
+                                            <div class="form-group">
+                                                <label for="text" class="col-md-2 control-label">Color °1</label>
+                                                <div class="col-md-2">
+                                                    <div class="colorpick">
+                                                        <input type="text" class="form-control" rel="txtTooltip" title="Color primario de la camiseta" id="txtColorPrimario" runat="server" value="#E1E1E1" required="true">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <img src="../resources/img/theme/load2.gif" id="cargandoImagen" style="display: none;" alt="load" />
-                                                    <span id="imagenCorrecta" class="label alert-success label-md" style="display: none;">Imagen Correcta <span class="glyphicon glyphicon-ok"></span></span>
-                                                    <span id="imagenIncorrecta" class="label alert-danger label-md" style="display: none;"><span id="mensajeErrorImagen"></span></span>
-                                                    <p class="help-block">
-                                                        <strong>Formato admitido</strong><br />
-                                                        PNG, JPEG, JPG, GIF<br />
-                                                        <strong>Tamaño Máximo</strong><br />
-                                                        1 Mb
-                                                    </p>
+                                                <label for="text" class="col-md-2 control-label">Color 2°</label>
+                                                <div class="col-md-2">
+                                                    <div class="colorpick">
+                                                        <input type="text" class="form-control" rel="txtTooltip" title="Color secundario de la camiseta" id="txtColorSecundario" runat="server" value="#E1E1E1" required="true">
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="subform-horizontal clearfix">
+                                                <label for="select" class="col-lg-2 control-label">Delegados</label>
+                                                <div class="col-lg-10">
+                                                    <p class="nomargin-bottom">
+                                                        <span class="label label-default label-md">
+                                                            <a href="" rel="txtTooltip" title="Agregar Delegado" onclick="showDelegados();return false;"><span class="glyphicon glyphicon-plus"></span>Agregar Nuevo</a>
+                                                        </span>
+                                                        <asp:Repeater ID="rptDelegados" runat="server" OnItemCommand="rptDelegados_ItemCommand">
+                                                            <ItemTemplate>
+                                                                <span class="label label-default label-md"><%# Eval("nombre") %>
+                                                                    <asp:LinkButton ClientIDMode="AutoID" title="Eliminar" rel="txtTooltip" ID="lnkEliminar" runat="server" CommandName="eliminarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                                    <asp:LinkButton ClientIDMode="AutoID" title="Modificar" rel="txtTooltip" ID="lnkModificar" runat="server" CommandName="modificarDelegado" CommandArgument='<%# Eval("nombre") %>'><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                                </span>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </p>
+                                                    <div id="delegado" style="display: none;" class="col-md-9">
+                                                        <fieldset class="vgDelegado">
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-user"></i></span>
+                                                                    <input type="text" class="form-control margin-xs input-sm" id="txtNombreDelegado" placeholder="Nombre del Delegado" runat="server" rangelength="3, 50" required="true" disabled>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-envelope"></i></span>
+                                                                    <input type="text" class="form-control margin-xs input-sm" id="txtEmailDelegado" placeholder="E-mail del Delegado" runat="server" rangelength="3, 100" required="true" email="true" disabled>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-phone"></i></span>
+                                                                    <input type="text" class="form-control margin-xs input-sm" id="txtTelefonoDelegado" placeholder="Teléfono del Delegado" runat="server" rangelength="3, 20" required="true" number="true" disabled>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon input-sm"><i class="glyphicon glyphicon-home"></i></span>
+                                                                    <input type="text" class="form-control margin-xs input-sm" id="txtDireccionDelegado" placeholder="Dirección del Delegado" runat="server" maxlength="100" disabled>
+                                                                </div>
+                                                            </div>
+                                                            <asp:Button class="btn btn-default btn-xs causesValidation vgDelegado" ID="btnAgregarDelegado" runat="server" Text="Agregar Delegado" OnClick="btnAgregarDelegado_Click" />
+                                                            <asp:Button class="btn btn-default btn-xs causesValidation vgDelegado" ID="btnModificarDelegado" runat="server" Text="Modificar Delegado" OnClick="btnModificarDelegado_Click" Visible="false" />
+                                                            <asp:Button class="btn btn-default btn-xs" ID="btnCancelarDelegado" runat="server" Text="Cancelar" OnClick="btnCancelarDelegado_Click" />
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="textArea" class="col-lg-2 control-label">Logo</label>
+                                                <div class="col-lg-10">
+                                                    <div class="row">
+                                                    <div class="col-md-5 col-xs-6">
+                                                        <div class="fileinput">
+                                                            <div class="thumbnail fileinput-preview">
+                                                                <img id="imagenpreview" runat="server" />
+                                                            </div>
+                                                            <div class="fileUpload">
+                                                                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
+                                                                <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7 col-xs-6">
+                                                        <img src="../resources/img/theme/load2.gif" id="cargandoImagen" style="display: none;" alt="load" />
+                                                        <span id="imagenCorrecta" class="label alert-success label-md" style="display: none;">Imagen Correcta <span class="glyphicon glyphicon-ok"></span></span>
+                                                        <span id="imagenIncorrecta" class="label alert-danger label-md" style="display: none;"><span id="mensajeErrorImagen"></span></span>
+                                                        <p class="help-block">
+                                                            <strong>Formato admitido</strong><br />
+                                                            PNG, JPEG, JPG, GIF<br />
+                                                            <strong>Tamaño Máximo</strong><br />
+                                                            1 Mb
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <div class="panel-footer clearfix text-right">
-                                <div class="col-xs-8 col-xs-offset-3">
-                                    <asp:Button class="btn btn-default" ID="btnCancelarModificacionEquipo" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionEquipo_Click" />
-                                    <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnModificarEquipo" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarEquipo_Click" />
-                                    <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
+                                    </fieldset>
                                 </div>
-                                <div class="col-xs-1">
-                                    <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
-                                        <ProgressTemplate>
-                                            <img src="/resources/img/theme/load4.gif" />
-                                        </ProgressTemplate>
-                                    </asp:UpdateProgress>
+                                <div class="panel-footer clearfix text-right">
+                                    <div class="col-xs-11 col-md-8 col-md-offset-3">
+                                        <asp:Button class="btn btn-default" ID="btnCancelarModificacionEquipo" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionEquipo_Click" />
+                                        <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnModificarEquipo" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarEquipo_Click" />
+                                        <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
+                                            <ProgressTemplate>
+                                                <img src="/resources/img/theme/load4.gif" />
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row clearfix">
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-xs-5">
                                 <span class="glyphicon glyphicon-search"></span>
-                                Equipos Existentes
+                                Equipos<span class="hidden-xs"> Existentes</span>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-xs-7">
                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar por Nombre"/>
                             </div>
                         </div>

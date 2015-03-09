@@ -10,15 +10,15 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="page-header clearfix" role="tab" id="headingOne">
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-1 col-xs-3">
                                         <div class="thumbnail nomargin-bottom">
                                             <img src="<%=Logica.Sesion.getTorneo().obtenerImagenMediana() %>"/>
                                         </div>
                                     </div>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-9 col-xs-9">
                                         <h2 id="type"><%=Logica.Sesion.getTorneo().nombre %></h2>
                                     </div>
-                                    <div class="col-sm-2 nopadding-right margin-top">
+                                    <div class="col-sm-2 nopadding-right margin-top col-xs-12">
                                         <asp:Button ID="btnRegistrarNuevaEdicion" runat="server" Text="Nueva Edición" CssClass="btn btn-success" OnClick="btnRegistrarNuevaEdicion_Click" />
                                     </div>
                                 </div>
@@ -35,10 +35,10 @@
                                     <ItemTemplate>
                                         <div class="panel panel-default">
                                             <div class="panel-heading header clearfix">
-                                                <div class="col-md-1 text-center">
+                                                <div class="col-md-1 text-center hidden-xs">
                                                     <i class="icon-size flaticon-trophy5"></i>
                                                 </div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-5 mobile-nopadding-right mobile-nopadding-left">
                                                     <a data-toggle="collapse" data-parent="#accordion" href="#edicion<%# Eval("idEdicion") %>" aria-expanded="true" aria-controls="edicion<%# Eval("idEdicion") %>">
                                                         <h4>
                                                             <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
@@ -46,18 +46,23 @@
                                                         </h4>
                                                     </a>
                                                 </div>
-                                                <div class="col-md-1" style="padding-top:8px;">
+                                                <div class="col-md-1 nopadding-left hidden-xs" style="padding-top:8px;">
                                                     <span class="label label-<%#((Entidades.Edicion)Container.DataItem).estado.nombre%>"><%#((Entidades.Edicion)Container.DataItem).estado.nombre%></span>
                                                 </div>
                                                 <div class="col-md-5">
-                                                    <div class="pull-right botones botones-small">
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkConfigurarEdicion" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>' Visible="false" Width="155px">Configurar Edición</asp:LinkButton>
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkVerFechas" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="verFechas" CommandArgument='<%#Eval("idEdicion")%>' Visible="false" Width="155px">Ver Fechas</asp:LinkButton>
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkCambiarConfiguracion" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>' Visible="false" Width="155px">Editar Configuración</asp:LinkButton>
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkVerFixture" title="Ver Fixture" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="verFixture" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip" Enabled="false"><span class="flaticon-football116"></span></asp:LinkButton>
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkModificarEdicion" title="Editar Edición" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarEdicin" title="Eliminar Edición" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="eliminarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                                        <asp:LinkButton ClientIDMode="AutoID" ID="lnkCancelarEdicion" title="Cancelar Edición" data-container="body" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="cancelarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-ban-circle"></span></asp:LinkButton>
+                                                    <div class="botones botones-small">
+                                                        <div class="row">
+                                                            <div class="col-md-8 col-xs-10 mobile-nopadding-left mobile-nopadding-right">
+                                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkConfigurarEdicion" CssClass="btn btn-block btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>' Visible="false">Configurar Edición</asp:LinkButton>
+                                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkVerFechas" CssClass="btn btn-block btn-panel-important shadow-xs" runat="server" CommandName="verFechas" CommandArgument='<%#Eval("idEdicion")%>' Visible="false">Ver Fechas</asp:LinkButton>
+                                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkCambiarConfiguracion" CssClass="btn btn-block btn-panel-important shadow-xs" runat="server" CommandName="configurarEdicion" CommandArgument='<%#Eval("idEdicion")%>' Visible="false">Editar Configuración</asp:LinkButton>
+                                                            </div>
+                                                            <span class="visible-xs label label-<%#((Entidades.Edicion)Container.DataItem).estado.nombre%> col-xs-2" style="height:28px; margin-top:1px; padding-top:8px" title="<%#((Entidades.Edicion)Container.DataItem).estado.nombre%>" rel="txtTooltip" data-placement="left"><%#((Entidades.Edicion)Container.DataItem).estado.nombre.ToString().PadRight(1).Substring(0,1).TrimEnd()%></span>
+                                                            <asp:LinkButton ClientIDMode="AutoID" ID="lnkVerFixture" title="Ver Fixture" data-container="body" CssClass="btn btn-panel shadow-xs col-xs-3 col-md-1" runat="server" CommandName="verFixture" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip" Enabled="false"><span class="flaticon-football116"></span></asp:LinkButton>
+                                                            <asp:LinkButton ClientIDMode="AutoID" ID="lnkModificarEdicion" title="Editar Edición" data-container="body" CssClass="btn btn-panel shadow-xs col-xs-3 col-md-1" runat="server" CommandName="editarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                            <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarEdicin" title="Eliminar Edición" data-container="body" CssClass="btn btn-panel shadow-xs col-xs-3 col-md-1" runat="server" CommandName="eliminarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                            <asp:LinkButton ClientIDMode="AutoID" ID="lnkCancelarEdicion" title="Cancelar Edición" data-container="body" CssClass="btn btn-panel shadow-xs col-xs-3 col-md-1" runat="server" CommandName="cancelarEdicion" CommandArgument='<%#Eval("idEdicion")%>' rel="txtTooltip"><span class="glyphicon glyphicon-ban-circle"></span></asp:LinkButton>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -174,19 +179,19 @@
                                         <div class="row">
                                             <div class="col-xs-4">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-up"></span></span>
+                                                    <span class="input-group-addon input-group-addon-xs"><span class="glyphicon glyphicon-chevron-up"></span></span>
                                                     <input type="number" class="form-control" digits="true" id="txtPuntosPorGanar" runat="server" rel="txtTooltip" title="Puntos por Ganar" name="ptosGanar" value="3" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-xs-4">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">=</span>
+                                                    <span class="input-group-addon input-group-addon-xs">=</span>
                                                     <input type="number" class="form-control" digits="true" id="txtPuntosPorEmpatar" runat="server" rel="txtTooltip" title="Puntos por Empatar" name="ptosEmpatar" value="1" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-xs-4">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-chevron-down"></span></span>
+                                                    <span class="input-group-addon input-group-addon-xs"><span class="glyphicon glyphicon-chevron-down"></span></span>
                                                     <input type="number" class="form-control" digits="true" id="txtPuntosPorPerder" runat="server" rel="txtTooltip" title="Puntos por Perder" name="ptosPerder" value="0" required="required">
                                                 </div>
                                             </div>

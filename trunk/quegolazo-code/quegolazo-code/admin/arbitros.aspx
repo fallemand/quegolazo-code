@@ -7,9 +7,12 @@
                     <ContentTemplate>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <span class="glyphicon glyphicon-plus"></span>
-                                Agregar un Árbitro                                   
+                                <a data-toggle="collapse" data-parent="#accordion" href="#agregarArbitro" aria-expanded="true" aria-controls="agragarArbitro">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    Agregar un Árbitro 
+                                </a>                                 
                             </div>
+                            <div id="agregarArbitro" class="panel-collapse collapse in mobile-collapse" role="tabpanel" aria-labelledby="headingOne"">
                             <div class="panel-body nopadding-bottom">
                                 <fieldset class="vgArbitro">
                                     <div class="form-horizontal">
@@ -41,7 +44,7 @@
                                             <label for="textArea" class="col-lg-2 control-label">Imagen</label>
                                             <div class="col-lg-10">
                                                 <div class="row">
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-5 col-xs-6">
                                                         <div class="fileinput">
                                                             <div class="thumbnail fileinput-preview">
                                                                 <img id="imagenpreview" runat="server" />
@@ -52,7 +55,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-7">
+                                                    <div class="col-md-7 col-xs-6">
                                                         <img src="../resources/img/theme/load2.gif" id="cargandoImagen" style="display: none;" alt="load" />
                                                         <span id="imagenCorrecta" class="label alert-success label-md" style="display: none;">Imagen Correcta <span class="glyphicon glyphicon-ok"></span></span>
                                                         <span id="imagenIncorrecta" class="label alert-danger label-md" style="display: none;"><span id="mensajeErrorImagen"></span></span>
@@ -70,7 +73,7 @@
                                 </fieldset>
                             </div>
                             <div class="panel-footer clearfix text-right">
-                                <div class="col-xs-8 col-xs-offset-3">
+                                <div class="col-xs-11 col-md-8 col-md-offset-3">
                                     <asp:Button class="btn btn-default" ID="btnCancelarModificacionArbitro" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionArbitro_Click" />
                                     <asp:Button class="btn btn-success causesValidation vgArbitro" ID="btnModificarArbitro" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarArbitro_Click"/>
                                     <asp:Button class="btn btn-success causesValidation vgArbitro" ID="btnRegistrarArbitro" runat="server" Text="Registrar" OnClick="btnRegistrarArbitro_Click" />
@@ -83,6 +86,7 @@
                                     </asp:UpdateProgress>
                                 </div>
                             </div>
+                            </div>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -91,11 +95,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row clearfix">
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-xs-5">
                                 <span class="glyphicon glyphicon-search"></span>
-                                Árbitros Existentes
+                                Árbitros<span class="hidden-xs"> Existentes</span>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-xs-7">
                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Árbitros"/>
                             </div>
                         </div>                        
@@ -112,8 +116,8 @@
                                         <tr>
                                             <th class="col-md-1"></th>
                                             <th class="col-md-2">Nombre</th>
-                                            <th class="col-md-1">Celular</th>
-                                            <th class="col-md-1">E-mail</th>
+                                            <th class="col-md-1 hidden-xs">Celular</th>
+                                            <th class="col-md-1 hidden-xs">E-mail</th>
                                             <th class="col-md-1">Acciones</th>
                                         </tr>
                                     </thead>
@@ -123,8 +127,8 @@
                                                 <tr>
                                                     <td><img src="<%# ((Entidades.Arbitro)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
                                                     <td><strong><%# Eval("nombre") %></strong></td>
-                                                    <td><%# Eval("celular") %></td>
-                                                    <td><%# Eval("email") %></td>
+                                                    <td class="hidden-xs"><%# Eval("celular") %></td>
+                                                    <td class="hidden-xs"><%# Eval("email") %></td>
                                                     <td>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarArbitro" title="Editar Arbitro" runat="server" CommandName="editarArbitro" CommandArgument='<%#Eval("idArbitro")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarArbitro" title="Eliminar Arbitro" runat="server" CommandName="eliminarArbitro" CommandArgument='<%#Eval("idArbitro")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>

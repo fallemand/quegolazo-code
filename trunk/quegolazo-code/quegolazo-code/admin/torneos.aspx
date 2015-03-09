@@ -23,20 +23,20 @@
                             <ItemTemplate>
                                 <div class="panel panel-default lista-torneos shadow-sm">
                                     <div class="panel-heading header clearfix">
-                                        <div class="col-md-1">
+                                        <div class="col-md-1 col-xs-3">
                                             <div class="thumbnail nomargin-bottom">
                                                 <img id="img<%# Eval("idTorneo") %>" src="<%# ((Entidades.Torneo)Container.DataItem).obtenerImagenChicha() %>" />
                                             </div>
                                         </div>
-                                        <div class="col-md-5">
-                                            <h3><%# Eval("nombre") %></h3>
+                                        <div class="col-md-5 col-xs-9 mobile-nopadding-left">
+                                            <h3 class=""><%# Eval("nombre") %></h3>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="pull-right botones">
-                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkAdministrarTorneo" title="Ir al Panel de Administración" CssClass="btn btn-panel-important shadow-xs" runat="server" CommandName="administrarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip">Administrar Torneo</asp:LinkButton>
-                                                <a href="#" class="btn btn-panel shadow-xs" rel="txtTooltip" data-placement="top" title="Ver Sitio Web del Torneo"><span class="glyphicon glyphicon-globe"></span></a>
-                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkModificarCampeonato" title="Editar Torneo" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="editarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarTorneo" title="Eliminar Torneo" CssClass="btn btn-panel shadow-xs" runat="server" CommandName="eliminarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                        <div class="col-md-6 col-xs-12">
+                                            <div class="center-block botones">
+                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkAdministrarTorneo" title="Ir al Panel de Administración" CssClass="btn btn-panel-important shadow-xs col-xs-12 col-md-6" runat="server" CommandName="administrarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip">Administrar Torneo</asp:LinkButton>
+                                                <a href="#" class="btn btn-panel shadow-xs col-xs-4 col-md-2" rel="txtTooltip" data-placement="top" title="Ver Sitio Web del Torneo"><span class="glyphicon glyphicon-globe"></span></a>
+                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkModificarCampeonato" title="Editar Torneo" CssClass="btn btn-panel shadow-xs col-xs-4 col-md-2" runat="server" CommandName="editarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
+                                                <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarTorneo" title="Eliminar Torneo" CssClass="btn btn-panel shadow-xs col-xs-4 col-md-2" runat="server" CommandName="eliminarTorneo" CommandArgument='<%#Eval("idTorneo")%>' rel="txtTooltip"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
                                             </div>
                                         </div>
                                     </div>
@@ -44,35 +44,35 @@
                                         <div class="pull-left">
                                             <h4>Ediciones</h4>
                                         </div>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="col-md-4">Nombre</th>
-                                                    <th class="col-md-2">Tamaño</th>
-                                                    <th class="col-md-2">Superficie</th>
-                                                    <th class="col-md-2">Género</th>
-                                                    <th class="col-md-2">Estado</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rptEdiciones" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td><%# Eval("nombre") %></td>
-                                                            <td><%# Eval("tamanioCancha.nombre") %></td>
-                                                            <td><%# Eval("tipoSuperficie.nombre") %></td>
-                                                            <td><%# Eval("generoEdicion.nombre") %></td>
-                                                            <td><%# Eval("estado.nombre") %></td>
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                                <asp:Panel ID="panelSinEdiciones" runat="server">
+                                            <table class="table">
+                                                <thead>
                                                     <tr>
-                                                        <td colspan="5">No hay ediciones registradas para el torneo</td>
+                                                        <th class="col-md-4 col-xs-8">Nombre</th>
+                                                        <th class="col-md-2 hidden-xs">Tamaño</th>
+                                                        <th class="col-md-2 hidden-xs">Superficie</th>
+                                                        <th class="col-md-2 hidden-xs">Género</th>
+                                                        <th class="col-md-2 col-xs-4">Estado</th>
                                                     </tr>
-                                                </asp:Panel>
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="rptEdiciones" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td><%# Eval("nombre") %></td>
+                                                                <td class="hidden-xs"><%# Eval("tamanioCancha.nombre") %></td>
+                                                                <td class="hidden-xs"><%# Eval("tipoSuperficie.nombre") %></td>
+                                                                <td class="hidden-xs"><%# Eval("generoEdicion.nombre") %></td>
+                                                                <td><%# Eval("estado.nombre") %></td>
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                    <asp:Panel ID="panelSinEdiciones" runat="server">
+                                                        <tr>
+                                                            <td colspan="5">No hay ediciones registradas para el torneo</td>
+                                                        </tr>
+                                                    </asp:Panel>
+                                                </tbody>
+                                            </table>
                                     </div>
                                 </div>
                             </ItemTemplate>
@@ -125,7 +125,7 @@
                                         <label for="textArea" class="col-lg-2 control-label">Logo</label>
                                         <div class="col-lg-10">
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 col-xs-6">
                                                     <div class="fileinput">
                                                         <div class="thumbnail fileinput-preview">
                                                             <img id="imagenpreview" runat="server" />
@@ -136,7 +136,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-8">
+                                                <div class="col-md-8 col-xs-6">
                                                     <img src="../resources/img/theme/load2.gif" id="cargandoImagen" style="display: none;" alt="load" />
                                                     <span id="imagenCorrecta" class="label alert-success label-md" style="display: none;">Imagen Correcta <span class="glyphicon glyphicon-ok"></span></span>
                                                     <span id="imagenIncorrecta" class="label alert-danger label-md" style="display: none;"><span id="mensajeErrorImagen"></span></span>
@@ -153,12 +153,12 @@
                                 </fieldset>
                             </div>
                             <div class="modal-footer">
-                                <div class="col-xs-8 col-xs-offset-3">
+                                <div class="col-xs-10 col-md-offset-3">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                     <asp:Button ID="btnRegistrarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Registrar" OnClick="btnResgitrarTorneo_Click"/>
                                     <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Modificar" OnClick="btnModificarTorneo_Click" Visible="false"/>
                                 </div>
-                                <div class="col-xs-1">
+                                <div class="col-xs-2 col-md-1">
                                     <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo" AssociatedUpdatePanelID="upModalTorneo">
                                         <ProgressTemplate>
                                             <img src="/resources/img/theme/load3.gif" />
