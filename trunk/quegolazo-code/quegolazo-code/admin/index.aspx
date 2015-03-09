@@ -112,12 +112,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="btn-group btn-group-sm" role="group" style="margin-right: 5px;" aria-label="...">
-                                <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');">Todos</button>
+                                <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-fechas tr').show('fast');">Todos</button>
                             </div>
                             <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                <asp:Repeater ID="Repeater1" runat="server">
+                                <asp:Repeater ID="rptGruposFecha" runat="server">
                                     <ItemTemplate>
-                                        <button type="button" class="btn btn-success" onclick="filtrarPosiciones('<%# Eval("idGrupo")%>')">Grupo <%# Eval("idGrupo")%></button>
+                                        <button type="button" class="btn btn-success" onclick="filtrarFechasPorGrupo('<%# Eval("idGrupo")%>')">Grupo <%# Eval("idGrupo")%></button>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </div>
@@ -125,7 +125,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 listado listado-sm">
-                            <table class="table nomargin-bottom">
+                            <table id="tabla-fechas" class="table nomargin-bottom">
                             <thead>
                                 <tr>
                                     <th class="col-md-2">Local</th>
@@ -147,6 +147,7 @@
                                                 <span class="label partido-<%# Eval("estado") %> visible-xs" title="<%# Eval("estado") %>" rel="txtTooltip" data-placement="left"><%# Eval("estado").ToString().PadRight(1).Substring(0,1).TrimEnd() %></span>
                                                 <span class="label partido-<%# Eval("estado") %> hidden-xs"><%# Eval("estado") %></span>
                                             </td>
+                                            <td style="display:none;"><%# Eval("Grupo") %></td>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>
@@ -255,5 +256,12 @@
              }).show('fast');
          };
 
+         function filtrarFechasPorGrupo(Grupo) {
+             $('#tabla-fechas tbody tr').hide();
+             $('#tabla-fechas tbody tr').filter(function () {
+                 return $(this).find('td:last-child').text() == Grupo;
+             }).show('fast');
+         };
+         
     </script>
 </asp:Content>

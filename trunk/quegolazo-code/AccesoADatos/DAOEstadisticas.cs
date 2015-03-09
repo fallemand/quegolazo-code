@@ -143,7 +143,8 @@ namespace AccesoADatos
                                 ar.nombre AS 'Arbitro', 
                                 can.nombre AS 'Complejo/Cancha',
                                 CONVERT (char(10), p.fecha, 103) AS 'FechaPartido', 
-                                es.nombre AS 'Estado'
+                                es.nombre AS 'Estado',
+                                p.idGrupo AS 'Grupo'
 	                            FROM Partidos p 
 	                            INNER JOIN Fechas f on p.idFecha = f.idFecha
 	                            INNER JOIN EquipoXEdicion exe on exe.idEdicion = p.idEdicion  
@@ -154,7 +155,7 @@ namespace AccesoADatos
 	                            LEFT JOIN Estados es ON p.idEstado = es.idEstado
 	                            WHERE p.idEdicion = @idEdicion AND p.idFase = @idFase
                                 AND f.idFecha = (SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @idEstadoFecha AND idEdicion = @idEdicion AND idFase = @idFase ORDER BY idFecha DESC)
-	                            GROUP BY f.idFecha, elocal.nombre, p.golesLocal ,  eVisitante.nombre, p.golesVisitante, ar.nombre, can.nombre,  p.fecha, es.nombre
+	                            GROUP BY f.idFecha, elocal.nombre, p.golesLocal ,  eVisitante.nombre, p.golesVisitante, ar.nombre, can.nombre,  p.fecha, es.nombre, p.idGrupo
 	                            ORDER BY f.idFecha";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
@@ -175,7 +176,8 @@ namespace AccesoADatos
 		                            ar.nombre AS 'Arbitro', 
                                     can.nombre AS 'Complejo/Cancha',
                                     CONVERT (char(10), p.fecha, 103) AS 'FechaPartido', 
-                                    es.nombre AS 'Estado'
+                                    es.nombre AS 'Estado',
+                                    p.idGrupo AS 'Grupo'
 	                            FROM Partidos p 
 	                            INNER JOIN Fechas f on p.idFecha = f.idFecha
 	                            INNER JOIN EquipoXEdicion exe on exe.idEdicion = p.idEdicion  
@@ -186,7 +188,7 @@ namespace AccesoADatos
 	                            LEFT JOIN Estados es ON p.idEstado = es.idEstado
 	                            WHERE p.idEdicion = @idEdicion AND p.idFase = @idFase
                                 AND f.idFecha = (SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @idEstadoFecha AND idEdicion = @idEdicion AND idFase = @idFase ORDER BY idFecha DESC)
-	                            GROUP BY f.idFecha, elocal.nombre, p.golesLocal, eVisitante.nombre, p.golesVisitante, ar.nombre, can.nombre, p.fecha, es.nombre
+	                            GROUP BY f.idFecha, elocal.nombre, p.golesLocal, eVisitante.nombre, p.golesVisitante, ar.nombre, can.nombre, p.fecha, es.nombre, p.idGrupo
 	                            ORDER BY f.idFecha";
                     cmd.Parameters.Clear();
                     cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
@@ -207,7 +209,8 @@ namespace AccesoADatos
 		                            ar.nombre AS 'Arbitro', 
                                     can.nombre AS 'Complejo/Cancha',
                                     CONVERT (char(10), p.fecha, 103) AS 'FechaPartido',
-                                    es.nombre AS 'Estado'
+                                    es.nombre AS 'Estado',
+                                    p.idGrupo AS 'Grupo'
 	                            FROM Partidos p 
 	                            INNER JOIN Fechas f on p.idFecha = f.idFecha
 	                            INNER JOIN EquipoXEdicion exe on exe.idEdicion = p.idEdicion  
@@ -218,7 +221,7 @@ namespace AccesoADatos
 	                            LEFT JOIN Estados es ON p.idEstado = es.idEstado
 	                            WHERE p.idEdicion = @idEdicion AND p.idFase = @idFase
                                 AND f.idFecha = (SELECT TOP 1 idFecha FROM Fechas WHERE idEstado = @idEstadoFecha AND idEdicion = @idEdicion AND idFase = @idFase ORDER BY idFecha ASC)
-	                            GROUP BY f.idFecha, elocal.nombre, p.golesLocal, eVisitante.nombre, p.golesVisitante, ar.nombre, can.nombre, p.fecha, es.nombre
+	                            GROUP BY f.idFecha, elocal.nombre, p.golesLocal, eVisitante.nombre, p.golesVisitante, ar.nombre, can.nombre, p.fecha, es.nombre, p.idGrupo
 	                            ORDER BY f.idFecha";
                         cmd.Parameters.Clear();
                         cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
