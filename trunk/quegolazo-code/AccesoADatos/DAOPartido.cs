@@ -115,6 +115,7 @@ namespace AccesoADatos
                              partido.arbitro = (dr["idArbitro"] != DBNull.Value) ? daoArbitro.obtenerArbitroPorId(int.Parse(dr["idArbitro"].ToString())) : null;
                              partido.cancha = (dr["idCancha"] != DBNull.Value) ? daoCancha.obtenerCanchaPorId(int.Parse(dr["idCancha"].ToString())) : null;
                              partido.faseAsociada = daoFase.obtenerFasePorId(int.Parse(dr["idEdicion"].ToString()), int.Parse(dr["idFase"].ToString()));
+                             partido.idPartidoPosterior = (dr["idPartidoPosterior"] != DBNull.Value) ? int.Parse(dr["idPartidoPosterior"].ToString()) : 0;
                              if (dr["idEquipoLocal"] != DBNull.Value && dr["idEquipoVisitante"] != DBNull.Value)
                                 partido.nombreCompleto = daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoLocal"].ToString())).nombre + " vs. " + daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString())).nombre;
                              fechaActual.partidos.Add(partido);
@@ -390,6 +391,7 @@ namespace AccesoADatos
                     partido.arbitro = (dr["idArbitro"] != DBNull.Value) ? daoArbitro.obtenerArbitroPorId(int.Parse(dr["idArbitro"].ToString())) : null;
                     partido.cancha = (dr["idCancha"] != DBNull.Value) ? daoCancha.obtenerCanchaPorId(int.Parse(dr["idCancha"].ToString())) : null;
                     partido.faseAsociada = daoFase.obtenerFasePorId(int.Parse(dr["idEdicion"].ToString()), int.Parse(dr["idFase"].ToString()));
+                    partido.idPartidoPosterior = (dr["idPartidoPosterior"] != DBNull.Value) ? int.Parse(dr["idPartidoPosterior"].ToString()) : 0;
                 }
                 if (dr != null)
                     dr.Close();
@@ -645,7 +647,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@penalesVisitante", DAOUtils.dbValueNull(partido.penalesVisitante));
                 cmd.Parameters.AddWithValue("@idGanador", DAOUtils.dbValueNull(partido.idGanador));
                 cmd.Parameters.AddWithValue("@idPerdedor", DAOUtils.dbValueNull(partido.idPerdedor));
-                cmd.Parameters.AddWithValue("empate", DAOUtils.dbValueNull(partido.empate)); 
+                cmd.Parameters.AddWithValue("@empate", DAOUtils.dbValueNull(partido.empate)); 
                 cmd.Parameters.AddWithValue("@idPartido", partido.idPartido);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -668,7 +670,7 @@ namespace AccesoADatos
                     registrarTitularesAPartido(partido.titularesLocal, partido.local.idEquipo, partido.idPartido, con, trans);//titulares del equipo local
                 if(partido.visitante.idEquipo != null)
                     registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}      
-               if(partido.faseAsociada.tipoFixture.idTipoFixture=="ELIM")
+               if(partido.faseAsociada.tipoFixture.idTipoFixture=="ELIM" && partido.idPartidoPosterior != 0)
                 guardarEquipoEnLLaveSiguiente(partido, con, trans);
                 trans.Commit();
             }
@@ -683,9 +685,7 @@ namespace AccesoADatos
                     con.Close();
             }
         }
-
-     
-
+       
        /// <summary>
        /// Obtiene los Tipos Goles de la BD
        /// autor: Pau Pedrosa
@@ -912,28 +912,27 @@ namespace AccesoADatos
                 cmd.Transaction = trans;
                 cmd.Connection = con;
                 string sql = @" 
-                                DECLARE @nombreFecha AS varchar(10) = (SELECT f.nombre FROM Partidos p INNER JOIN Fechas f on (p.idFecha=f.idFecha and p.idGrupo=f.idGrupo and p.idFase = f.idFase AND p.idEdicion = f.idEdicion) WHERE p.idPartido=@idPartido )
-                                DECLARE @idPartidoPosterior AS int = (SELECT p.idPartidoPosterior FROM Partidos p  WHERE p.idPartido=@idPartido)
+                                DECLARE @nombreFecha AS varchar(10) = (SELECT f.nombre FROM Partidos p INNER JOIN Fechas f on (p.idFecha=f.idFecha and p.idGrupo=f.idGrupo and p.idFase = f.idFase AND p.idEdicion = f.idEdicion) WHERE p.idPartido=@idPartido )                                
                                 DECLARE @idFecha AS int = (SELECT p.idFecha FROM Partidos p  WHERE p.idPartido=@idPartidoPosterior)
                                 DECLARE @idGrupo AS int = (SELECT p.idGrupo FROM Partidos p  WHERE p.idPartido=@idPartidoPosterior)
-                                DECLARE @idPartidoComplementario AS int = (SELECT idPartido FROM Partidos WHERE idPartidoPosterior = @idPartidoPosterior AND idPartido <> @idPartido)     
-                                    IF @idPartido < @idPartidoComplementario
-                                        BEGIN
-                                            UPDATE Partidos SET idEquipoLocal = @idGanador WHERE idPartido = @idPartidoPosterior
-                                        END
-                                        ELSE
-                                            UPDATE Partidos SET idEquipoVisitante = @idGanador WHERE idPartido = @idPartidoPosterior 
+                                DECLARE @idPartidoComplementario AS int = (SELECT idPartido FROM Partidos WHERE idPartidoPosterior = @idPartidoPosterior AND idPartido <> @idPartido)  
+                                IF @idPartido < @idPartidoComplementario
+                                    BEGIN
+                                        UPDATE Partidos SET idEquipoLocal = @idGanador WHERE idPartido = @idPartidoPosterior
+                                    END
+                                    ELSE
+                                        UPDATE Partidos SET idEquipoVisitante = @idGanador WHERE idPartido = @idPartidoPosterior 
 		                               
-	                                IF @nombreFecha like 'Semifinal'
-	                                    BEGIN
-	                                     DECLARE @idPartidoTercerPuesto AS int = (SELECT idPartido FROM Partidos WHERE idFecha =@idFecha AND idFase=@idFase AND idGrupo=@idGrupo AND idEdicion=@idEdicion AND  idPartido <> @idPArtidoPosterior )
-	                                     IF @idPartido < @idPartidoComplementario
-		                                    BEGIN
-			                                    UPDATE Partidos SET idEquipoLocal = @idPerdedor WHERE idPartido = @idPartidoTercerPuesto
-		                                    END
-		                                    ELSE
-			                                    UPDATE Partidos SET idEquipoVisitante = @idPerdedor WHERE idPartido = @idPartidoTercerPuesto
-	                                    END
+	                            IF @nombreFecha like 'Semifinal'
+	                                BEGIN
+	                                    DECLARE @idPartidoTercerPuesto AS int = (SELECT idPartido FROM Partidos WHERE idFecha =@idFecha AND idFase=@idFase AND idGrupo=@idGrupo AND idEdicion=@idEdicion AND  idPartido <> @idPArtidoPosterior )
+	                                    IF @idPartido < @idPartidoComplementario
+		                                BEGIN
+			                                UPDATE Partidos SET idEquipoLocal = @idPerdedor WHERE idPartido = @idPartidoTercerPuesto
+		                                END
+		                                ELSE
+			                                UPDATE Partidos SET idEquipoVisitante = @idPerdedor WHERE idPartido = @idPartidoTercerPuesto
+	                                END
                                 ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idPartido",p.idPartido);
@@ -941,6 +940,7 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@idPerdedor", DAOUtils.dbValueNull(p.idPerdedor));
                 cmd.Parameters.AddWithValue("@idFase", DAOUtils.dbValueNull(p.faseAsociada.idFase));
                 cmd.Parameters.AddWithValue("@idEdicion", DAOUtils.dbValueNull(p.faseAsociada.idEdicion));
+                cmd.Parameters.AddWithValue("@idPartidoPosterior", DAOUtils.dbValueNull(p.idPartidoPosterior));
                 cmd.CommandText = sql;
                 if (cmd.ExecuteNonQuery() > 0)
                 {
