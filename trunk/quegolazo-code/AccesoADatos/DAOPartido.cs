@@ -669,7 +669,7 @@ namespace AccesoADatos
                 if(partido.visitante.idEquipo != null)
                     registrarTitularesAPartido(partido.titularesVisitante, partido.visitante.idEquipo, partido.idPartido, con, trans);//titulares del equipo visitante}      
                if(partido.faseAsociada.tipoFixture.idTipoFixture=="ELIM")
-                guardarEquipoEnLLaveSiguiente(partido.idPartido, partido.idGanador, con, trans);
+                guardarEquipoEnLLaveSiguiente(partido, con, trans);
                 trans.Commit();
             }
             catch (Exception ex)
@@ -902,7 +902,7 @@ namespace AccesoADatos
         /// Graba el equipo ganador de un partido, en el partido de la llave siguiente (solo apra eliminatorios)
         /// autor: Florencia Rojas
         /// </summary>
-        public void guardarEquipoEnLLaveSiguiente(int idPartido, int? idGanador, SqlConnection con, SqlTransaction trans)
+        public void guardarEquipoEnLLaveSiguiente(Partido p, SqlConnection con, SqlTransaction trans)
         {
             SqlCommand cmd = new SqlCommand();
             try
@@ -911,26 +911,40 @@ namespace AccesoADatos
                     con.Open();                
                 cmd.Transaction = trans;
                 cmd.Connection = con;
-                string sql = @" DECLARE @tipoFixture AS varchar(10) = (SELECT f.tipoFixture FROM Partidos p INNER JOIN Fases f on (p.idFase = f.idFase AND p.idEdicion = f.idEdicion) WHERE p.idPartido=@idPartido )
+                string sql = @" 
+                                DECLARE @nombreFecha AS varchar(10) = (SELECT f.nombre FROM Partidos p INNER JOIN Fechas f on (p.idFecha=f.idFecha and p.idGrupo=f.idGrupo and p.idFase = f.idFase AND p.idEdicion = f.idEdicion) WHERE p.idPartido=@idPartido )
                                 DECLARE @idPartidoPosterior AS int = (SELECT p.idPartidoPosterior FROM Partidos p  WHERE p.idPartido=@idPartido)
-                                DECLARE @idPartidoComplementario AS int = (SELECT idPartido FROM Partidos WHERE idPartidoPosterior = @idPartidoPosterior AND idPartido <> @idPartido)
-                                IF @tipoFixture='ELIM'  
-                                BEGIN                              
-                                IF @idPartido < @idPartidoComplementario
-                                BEGIN
-                                    UPDATE Partidos SET idEquipoLocal = @idGanador WHERE idPartido = @idPartidoPosterior
-                                END
-                                ELSE
-                                    UPDATE Partidos SET idEquipoVisitante = @idGanador WHERE idPartido = @idPartidoPosterior                                
-                                END
+                                DECLARE @idFecha AS int = (SELECT p.idFecha FROM Partidos p  WHERE p.idPartido=@idPartidoPosterior)
+                                DECLARE @idGrupo AS int = (SELECT p.idGrupo FROM Partidos p  WHERE p.idPartido=@idPartidoPosterior)
+                                DECLARE @idPartidoComplementario AS int = (SELECT idPartido FROM Partidos WHERE idPartidoPosterior = @idPartidoPosterior AND idPartido <> @idPartido)     
+                                    IF @idPartido < @idPartidoComplementario
+                                        BEGIN
+                                            UPDATE Partidos SET idEquipoLocal = @idGanador WHERE idPartido = @idPartidoPosterior
+                                        END
+                                        ELSE
+                                            UPDATE Partidos SET idEquipoVisitante = @idGanador WHERE idPartido = @idPartidoPosterior 
+		                               
+	                                IF @nombreFecha like 'Semifinal'
+	                                    BEGIN
+	                                     DECLARE @idPartidoTercerPuesto AS int = (SELECT idPartido FROM Partidos WHERE idFecha =@idFecha AND idFase=@idFase AND idGrupo=@idGrupo AND idEdicion=@idEdicion AND  idPartido <> @idPArtidoPosterior )
+	                                     IF @idPartido < @idPartidoComplementario
+		                                    BEGIN
+			                                    UPDATE Partidos SET idEquipoLocal = @idPerdedor WHERE idPartido = @idPartidoTercerPuesto
+		                                    END
+		                                    ELSE
+			                                    UPDATE Partidos SET idEquipoVisitante = @idPerdedor WHERE idPartido = @idPartidoTercerPuesto
+	                                    END
                                 ";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idPartido",idPartido);
-                cmd.Parameters.AddWithValue("@idGanador", DAOUtils.dbValueNull(idGanador));
+                cmd.Parameters.AddWithValue("@idPartido",p.idPartido);
+                cmd.Parameters.AddWithValue("@idGanador", DAOUtils.dbValueNull(p.idGanador));
+                cmd.Parameters.AddWithValue("@idPerdedor", DAOUtils.dbValueNull(p.idPerdedor));
+                cmd.Parameters.AddWithValue("@idFase", DAOUtils.dbValueNull(p.faseAsociada.idFase));
+                cmd.Parameters.AddWithValue("@idEdicion", DAOUtils.dbValueNull(p.faseAsociada.idEdicion));
                 cmd.CommandText = sql;
                 if (cmd.ExecuteNonQuery() > 0)
                 {
-                    (new DAOFecha()).actualizarFechaEliminatorio(idPartido, idGanador, con, trans);                    
+                    (new DAOFecha()).actualizarFechaEliminatorio(p.idPartido,  con, trans);                    
                 }
             }
             catch (SqlException ex)

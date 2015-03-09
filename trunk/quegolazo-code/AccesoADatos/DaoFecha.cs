@@ -335,9 +335,8 @@ namespace AccesoADatos
         /// Cambia el estado de la fecha a Diagramada cuando se registra un equipo en algun partido de las fechas genericas
         /// autor: Flor Rojas
         /// </summary>
-        public void actualizarFechaEliminatorio(int idPartido, int? idGanador, SqlConnection con, SqlTransaction trans)
+        public void actualizarFechaEliminatorio(int idPartido, SqlConnection con, SqlTransaction trans)
         {
-            
             SqlCommand cmd = new SqlCommand();
             try
             {
