@@ -384,17 +384,25 @@ body {
 .nopadding-bottom {
   padding-bottom:0px;
 }
+.nopadding-top {
+  padding-bottom:0px;
+}
 .margin-top {
   margin-top: 20px;
 }
 .padding-top {
   padding-top: 20px;
 }
-
 .nomargin-top {
   margin-top: 0px;
 }
 .nomargin-bottom {
+  margin-bottom: 0px;
+}
+.nomargin-left {
+  margin-left: 0px;
+}
+.nomargin-right {
   margin-bottom: 0px;
 }
 .separador {
@@ -1751,4 +1759,61 @@ cursor:not-allowed;
   filter: alpha(opacity=65);
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+
+@media (max-width: 991px) {
+    .help-block {
+        margin-bottom: 0px;
+    }
+    .form-group {
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 767px) {
+    .mobile-nopadding-right {
+      padding-right:0px;
+    }
+    .mobile-nopadding-left {
+      padding-left:0px;
+    }
+    .mobile-nopadding-bottom {
+      padding-bottom:0px;
+    }
+    .mobile-nopadding-top {
+      padding-bottom:0px;
+    }
+    .mobile-nomargin-top {
+      margin-top: 0px;
+    }
+    .mobile-nomargin-bottom {
+      margin-bottom: 0px;
+    }
+    .mobile-nomargin-left {
+      margin-left: 0px;
+    }
+    .mobile-nomargin-right {
+      margin-bottom: 0px;
+    }
+    h1, .h1, h2, .h2, h3, .h3 {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    .form-group {
+        margin-bottom: 5px;
+    }
+    h4, .h4, h5, .h5, h6, .h6 {
+        margin-top: 5.5px;
+        margin-bottom: 5px;
+    }
+    .ediciones .btn {
+        margin-top: 0px;
+    }
+    .help-block {
+        margin-bottom: 0px;
+    }
+    .input-group-addon-xs {
+        padding: 8px 9px;
+    }
 }

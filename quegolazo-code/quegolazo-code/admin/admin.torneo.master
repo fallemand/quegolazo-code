@@ -52,6 +52,21 @@
             cbPenalesClick('ContentAdmin_ContentAdminTorneo_cbPenales');
         };
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+
+        //En Dispositivos mobiles ocultar paneles
+        $(document).ready(function () {
+            if ($(window).width() <= 480) {
+                $('.mobile-collapse').removeClass('in');
+            }
+        });
+        $(window).resize(function () {
+            if ($(window).width() >= 480) {
+                $('.mobile-collapse').addClass('in');
+            }
+            if ($(window).width() <= 480) {
+                $('.mobile-collapse').removeClass('in');
+            }
+        });
     </script>
     <!-- Script -->
 </asp:Content>

@@ -49,6 +49,7 @@ namespace quegolazo_code.admin.edicion
                 limpiarCampos();
                 cargarRepeaterJugadores();
                 gestorJugador.jugador = null;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarEquipo');", true);
             }
             catch (Exception ex)
             {
@@ -110,6 +111,7 @@ namespace quegolazo_code.admin.edicion
                 btnModificarJugador.Visible = false;
                 btnCancelarModificacionJugador.Visible = false;
                 gestorJugador.jugador = null; // le setea null al jugador
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarEquipo');", true);
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); } 
         }
@@ -132,6 +134,7 @@ namespace quegolazo_code.admin.edicion
                 btnRegistrarJugador.Visible = true;
                 btnModificarJugador.Visible = false;
                 btnCancelarModificacionJugador.Visible = false;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarEquipo');", true);
             }
             catch (Exception ex){mostrarPanelFracaso(ex.Message); }
         }      
