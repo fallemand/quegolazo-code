@@ -40,6 +40,7 @@ namespace quegolazo_code.admin
                 limpiarCamposNoticias();
                 cargarRepeaterNoticias();
                 gestorNoticia.noticia = null; // le setea null a la noticia
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarNoticia');", true);
             }
             catch (Exception ex)
             {
@@ -94,6 +95,7 @@ namespace quegolazo_code.admin
                 btnModificarNoticia.Visible = false;
                 btnCancelarModificacionNoticia.Visible = false;
                 ddlEdicion.Enabled = true;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarNoticia');", true);
             }
             catch (Exception ex){mostrarPanelFracaso(ex.Message);}
         }
@@ -126,6 +128,7 @@ namespace quegolazo_code.admin
                 btnModificarNoticia.Visible = false;
                 btnCancelarModificacionNoticia.Visible = false;
                 gestorNoticia.noticia = null;// le setea null a la noticia
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarNoticia');", true);
             }
             catch (Exception ex) { mostrarPanelFracasoListaNoticias(ex.Message); }
         }

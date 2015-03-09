@@ -8,9 +8,12 @@
                     <ContentTemplate>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <span class="glyphicon glyphicon-plus"></span>
-                                Agregar una Cancha                                   
+                                <a data-toggle="collapse" data-parent="#accordion" href="#agregarCancha" aria-expanded="true" aria-controls="agregarCancha">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    Agregar una Cancha  
+                                </a>                                   
                             </div>
+                            <div id="agregarCancha" class="panel-collapse collapse in mobile-collapse" role="tabpanel" aria-labelledby="headingOne"">
                             <div class="panel-body nopadding-bottom">
                                 <fieldset class="vgCancha">
                                     <div class="form-horizontal">
@@ -36,7 +39,7 @@
                                             <label for="textArea" class="col-lg-2 control-label">Imagen</label>
                                             <div class="col-lg-10">
                                                 <div class="row">
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-5 col-xs-6">
                                                         <div class="fileinput">
                                                             <div class="thumbnail fileinput-preview">
                                                                 <img id="imagenpreview" runat="server" />
@@ -47,7 +50,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-7">
+                                                    <div class="col-md-7 col-xs-6">
                                                         <img src="../resources/img/theme/load2.gif" id="cargandoImagen" style="display: none;" alt="load" />
                                                         <span id="imagenCorrecta" class="label alert-success label-md" style="display: none;">Imagen Correcta <span class="glyphicon glyphicon-ok"></span></span>
                                                         <span id="imagenIncorrecta" class="label alert-danger label-md" style="display: none;"><span id="mensajeErrorImagen"></span></span>
@@ -65,7 +68,7 @@
                                 </fieldset>
                             </div>
                             <div class="panel-footer clearfix text-right">
-                                <div class="col-xs-8 col-xs-offset-3">
+                                <div class="col-xs-11 col-md-8 col-md-offset-3">
                                     <asp:Button class="btn btn-default" ID="btnCancelarModificacionCancha" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionCancha_Click" />
                                     <asp:Button class="btn btn-success causesValidation vgCancha" ID="btnModificarCancha" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarCancha_Click" />
                                     <asp:Button class="btn btn-success causesValidation vgCancha" ID="btnRegistrarCancha" runat="server" Text="Registrar" OnClick="btnRegistrarCancha_Click" />
@@ -78,6 +81,7 @@
                                     </asp:UpdateProgress>
                                 </div>
                             </div>
+                            </div>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -86,11 +90,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row clearfix">
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-xs-5">
                                 <span class="glyphicon glyphicon-search"></span>
-                                Canchas Existentes
+                                Canchas<span class="hidden-xs">  Existentes</span>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-xs-7">
                                 <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Canchas"/>
                             </div>
                         </div>                        
@@ -107,8 +111,8 @@
                                         <tr>
                                             <th class="col-md-1"></th>
                                             <th class="col-md-4">Nombre</th>
-                                            <th class="col-md-3">Domicilio</th>
-                                            <th class="col-md-3">Teléfono</th>
+                                            <th class="col-md-3 hidden-xs">Domicilio</th>
+                                            <th class="col-md-3 hidden-xs">Teléfono</th>
                                             <th class="col-md-1">Acciones</th>
                                         </tr>
                                     </thead>
@@ -118,8 +122,8 @@
                                                 <tr>
                                                     <td><img src="<%# ((Entidades.Cancha)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>
                                                     <td><strong><%# Eval("nombre") %></strong></td>
-                                                    <td><%# Eval("domicilio") %></td>
-                                                    <td><%# Eval("telefono") %></td>
+                                                    <td class="hidden-xs"><%# Eval("domicilio") %></td>
+                                                    <td class="hidden-xs"><%# Eval("telefono") %></td>
                                                     <td>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarCancha" title="Editar Cancha" runat="server" CommandName="editarCancha" CommandArgument='<%#Eval("idCancha")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarCancha" title="Eliminar Cancha" runat="server" CommandName="eliminarCancha" CommandArgument='<%#Eval("idCancha")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>

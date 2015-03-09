@@ -70,6 +70,7 @@ namespace quegolazo_code.admin
                 btnRegistrarSancion.Enabled = true;
                 habilitarCheck();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "equipoYSinDefinir()", "equipoYSinDefinir();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarSancion');", true);
             }
             catch (Exception ex) 
             {
@@ -150,6 +151,7 @@ namespace quegolazo_code.admin
                 rdEquipos.Checked = true;
                 rdSinDefinir.Checked = true;
                 limpiarCamposSanciones();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarSancion');", true);
             }
             catch (Exception ex)
             {
@@ -300,6 +302,7 @@ namespace quegolazo_code.admin
                 btnCancelarModificacionSancion.Visible = false;
                 limpiarCampos();
                 habilitarCombos();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarSancion');", true);
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
@@ -314,6 +317,7 @@ namespace quegolazo_code.admin
                 btnModificarSancion.Visible = false;
                 btnCancelarModificacionSancion.Visible = false;
                 gestorSancion.sancion = null;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarSancion');", true);
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); } 
         }
