@@ -654,6 +654,7 @@ namespace AccesoADatos
             foreach (Fase fase in fases)
             {
                 if (fase.idFase >= idFaseActual)
+                    actualizarNombresFechasEliminatorio(fase);
                     registrarUnaFase(cmd.Connection, cmd.Transaction, cmd, fase);
             }
         }
