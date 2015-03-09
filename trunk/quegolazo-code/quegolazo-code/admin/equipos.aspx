@@ -124,12 +124,12 @@
                                     </fieldset>
                                 </div>
                                 <div class="panel-footer clearfix text-right">
-                                    <div class="col-xs-11 col-md-8 col-md-offset-3">
+                                    <div class="mobile-nopadding-left col-xs-10 col-md-8 col-md-offset-3">
                                         <asp:Button class="btn btn-default" ID="btnCancelarModificacionEquipo" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionEquipo_Click" />
                                         <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnModificarEquipo" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarEquipo_Click" />
                                         <asp:Button class="btn btn-success causesValidation vgEquipo" ID="btnRegistrarEquipo" runat="server" Text="Registrar" OnClick="btnRegistrarEquipo_Click" />
                                     </div>
-                                    <div class="col-xs-1">
+                                    <div class="col-xs-2 col-md-1">
                                         <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
                                             <ProgressTemplate>
                                                 <img src="/resources/img/theme/load4.gif" />

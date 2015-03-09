@@ -414,10 +414,10 @@
                                 </fieldset>
                             </div>
                             <div class="panel-footer clearfix text-right">
-                                <div class="col-xs-8 col-xs-offset-3">
+                                <div class="mobile-nopadding-left col-xs-10 col-md-8 col-md-offset-3">
                                     <asp:Button class="btn btn-success causesValidation vgPartido" ID="btnRegistrar" runat="server" Text="Registrar" OnClick="btnRegistrar_Click" />
                                 </div>
-                                <div class="col-xs-1">
+                                <div class="col-xs-2 col-md-1">
                                     <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
                                         <ProgressTemplate>
                                             <img src="/resources/img/theme/load4.gif" />
