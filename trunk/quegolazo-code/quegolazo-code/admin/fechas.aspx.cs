@@ -765,7 +765,7 @@ namespace quegolazo_code.admin
 
         protected void btnFinalizarEdicion_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalSeleccionarGanadores');", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal('modalSeleccionarGanadores');ordenarTabla();", true);
             cargarPosicionesFinales();
         }
 
