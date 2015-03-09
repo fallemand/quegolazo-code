@@ -36,6 +36,7 @@ namespace quegolazo_code.admin
                 limpiarCamposCancha();                
                 cargarRepeaterCanchas();
                 gestorCancha.cancha = null; // le setea null a la cancha
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarCancha');", true);
             }
             catch (Exception ex)
             {
@@ -87,6 +88,7 @@ namespace quegolazo_code.admin
                 btnModificarCancha.Visible = false;
                 btnCancelarModificacionCancha.Visible = false;
                 gestorCancha.cancha = null; // le setea null a la cancha
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarCancha');", true);
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }  
         }
@@ -109,6 +111,7 @@ namespace quegolazo_code.admin
                 btnRegistrarCancha.Visible = true;
                 btnModificarCancha.Visible = false;
                 btnCancelarModificacionCancha.Visible = false;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarCancha');", true);
             }
             catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
