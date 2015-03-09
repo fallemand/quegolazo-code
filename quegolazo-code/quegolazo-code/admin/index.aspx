@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="btn-group btn-group-sm" role="group" style="margin-right: 5px;" aria-label="...">
-                                <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');">Todos</button>
+                                <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');reordenarPosiciones()">Todos</button>
                             </div>
                             <div class="btn-group btn-group-sm" role="group" aria-label="...">
                                 <asp:Repeater ID="rptGrupos" runat="server">
@@ -61,7 +61,8 @@
                         <div class="col-md-12 listado listado-sm">
                             <table id="tabla-posiciones" class="table table-condensed table-hover">
                                 <thead>
-                                    <tr>
+                                    <tr>                                        
+                                        <th class="col-md-1"></th>
                                         <th class="col-md-1"></th>
                                         <th class="col-md-4">EQUIPO</th>
                                         <th class="col-md-1">PJ</th>
@@ -76,9 +77,10 @@
                                 <tbody>
                                     <asp:Repeater ID="rptPosiciones" runat="server">
                                         <ItemTemplate>
-                                            <tr>
+                                            <tr>   
+                                                <td style="font-size:15px" ><strong> <%# Container.ItemIndex + 1 %>º </strong></td>                                             
                                                 <td>
-                                                    <img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("idEquipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
+                                                    <img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("idEquipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>                                                
                                                 <td><%# Eval("Equipo") %></td>
                                                 <td><%# Eval("PJ") %></td>
                                                 <td><%# Eval("PG") %></td>
@@ -248,6 +250,19 @@
              $('#tabla-posiciones tbody tr').filter(function () {
                  return $(this).find('td:last-child').text() == idGrupo;
              }).show('fast');
+             var columna = $('#tabla-posiciones tr:visible td:nth-child(1)');
+             for (var i = 0; i < columna.length; i++) {
+                 $(columna[i]).html('<strong>' + (i + 1) + 'º' + '</strong>');
+                 $(columna[i]).css('font-size', '15px');
+             }
+         };
+
+         function reordenarPosiciones() {
+             var columna = $('#tabla-posiciones tr td:nth-child(1)');
+             for (var i = 0; i < columna.length; i++) {
+                 $(columna[i]).html('<strong>' + (i + 1) + 'º' + '</strong>');
+                 $(columna[i]).css('font-size', '15px');
+             }
          };
 
     </script>
