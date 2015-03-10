@@ -17,28 +17,25 @@ namespace Logica
         /// Registra una Nueva Noticia en la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public void registrarNoticia(string titulo, string tipoNoticia, string descripcion, string idEdicion, string fecha)
+        public void registrarNoticia(string titulo, string tipoNoticia, string descripcion, string idEdicion)
         {
             if (noticia == null)
                 noticia = new Noticia();
             noticia.titulo = titulo;
             noticia.tipoNoticia = tipoNoticia;
             noticia.descripcion = descripcion;
-            noticia.fecha = Validador.castDate(fecha);
             DAONoticia daoNoticia = new DAONoticia();
-            noticia.idNoticia = daoNoticia.registrarNoticia(noticia, Validador.castInt(idEdicion));
+            daoNoticia.registrarNoticia(noticia, Validador.castInt(idEdicion));
         }
 
         /// <summary>
         /// Obtener noticias de un torneo de la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public DataTable obtenerNoticiasDeUnTorneo()
+        public DataTable obtenerNoticias()
         {
             DAONoticia daoNoticia = new DAONoticia();
-            int idTorneo = Sesion.getTorneo().idTorneo;
-            DataTable noticias = new DataTable();
-            noticias = daoNoticia.obtenerNoticiasDeUnTorneo(idTorneo);
+            DataTable noticias = daoNoticia.obtenerNoticias(Sesion.getGestorEdicion().edicion.idEdicion);
             return noticias;
         }
 
@@ -56,14 +53,13 @@ namespace Logica
         /// Modifica una noticia de la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public void modificarNoticia(int idNoticia, string titulo, string tipoNoticia, string descripcion, string fecha)
+        public void modificarNoticia(int idNoticia, string titulo, string tipoNoticia, string descripcion)
         {
             DAONoticia daoNoticia = new DAONoticia();
             noticia.idNoticia = idNoticia;
             noticia.titulo = titulo;
             noticia.tipoNoticia = tipoNoticia;
             noticia.descripcion = descripcion;
-            noticia.fecha = DateTime.Parse(fecha);
             daoNoticia.modificarNoticia(noticia);
         }
 

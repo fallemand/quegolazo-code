@@ -3,6 +3,29 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <div class="well">
+                    <fieldset class="vgSeleccionarEdicion">
+                        <div class="col-md-5 col-xs-9 mobile-nopadding-left">
+                            <div id="selectEdiciones">
+                                <aspNew:NewDropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true" ViewStateMode="Enabled"></aspNew:NewDropDownList>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-3 mobile-nopadding-left">
+                            <asp:Button ID="btnSeleccionarEdicion" runat="server" Text="Seleccionar" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEdicion" OnClick="btnSeleccionarEdicion_Click" />
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="row">
+                    <asp:Panel ID="panelSinEdiciones" runat="server" CssClass="col-md-7" Enabled="True" Visible="False">
+                        <div class="alert alert-info">
+                            Este torneo no cuenta con ediciones. Puede crear una ingresando <a href="<%=Logica.GestorUrl.aEDICIONES %>"><b>Aquí</b></a>
+                        </div>
+                    </asp:Panel>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-5">
                 <asp:UpdatePanel ID="upRegistrarNuevoArbitro" runat="server">
                     <ContentTemplate>
@@ -18,31 +41,19 @@
                                     <fieldset class="vgNoticia">
                                         <div class="form-horizontal">
                                             <div class="form-group">
-                                                <label for="text" class="col-md-2 control-label">Edición</label>
-                                                <div class="col-md-10">
-                                                    <asp:DropDownList ID="ddlEdicion" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                             <div class="form-group">
-                                                <label for="text" class="col-md-2 control-label">Fecha</label>
-                                                <div class="col-md-10">
-                                                    <input type="text" class="form-control" runat="server" id="txtFecha" placeholder="Fecha" required="true" date="true">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
                                                 <label for="text" class="col-md-2 control-label">Título</label>
                                                 <div class="col-md-10">
                                                     <input type="text" class="form-control" runat="server" id="txtTituloNoticia" placeholder="Título de la Noticia" required="true" rangelength="3, 100">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="select" class="col-md-2 control-label">Tipo Noticia</label>
+                                                <label for="select" class="col-md-2 control-label">Categoría</label>
                                                 <div class="col-md-10">
                                                     <select id="ddlTipoNoticia" runat="server" class="form-control">
-                                                        <option value="1">Tipo 1</option>
-                                                        <option value="2">Tipo 2</option>
-                                                        <option value="3">Tipo 3</option>
-                                                        <option value="4">Tipo 4</option>
+                                                        <option value="1">Categoría 1</option>
+                                                        <option value="2">Categoría 2</option>
+                                                        <option value="3">Categoría 3</option>
+                                                        <option value="4">Categoría 4</option>
                                                     </select>                                           
                                                 </div>
                                             </div>
@@ -102,8 +113,7 @@
                                         <tr>
                                             <th class="col-md-1 hidden-xs">Fecha</th>
                                             <th class="col-md-1">Título</th>
-                                            <th class="col-md-1 hidden-xs">Tipo Noticia</th>
-                                            <th class="col-md-2 hidden-xs">Edición</th>
+                                            <th class="col-md-1 hidden-xs">Categoría</th>
                                             <th class="col-md-1"></th>
                                         </tr>
                                     </thead>
@@ -114,7 +124,6 @@
                                                     <td class="hidden-xs"><%# Eval("fecha") %></td>
                                                     <td><%# Eval("titulo") %></td>
                                                     <td class="hidden-xs"><%# Eval("tipoNoticia") %></td>
-                                                    <td class="hidden-xs"><%# Eval("nombre") %></td>
                                                     <td>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarNoticia" title="Editar Noticia" runat="server" CommandName="editarNoticia" CommandArgument='<%#Eval("idNoticia")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarNoticia" title="Eliminar Noticia" runat="server" CommandName="eliminarNoticia" CommandArgument='<%#Eval("idNoticia")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>
@@ -123,13 +132,10 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinNoticias" runat="server" visible="false">
-                                            <td colspan="5">No hay noticias cargadas</td>
+                                            <td colspan="5">No hay noticias registradas</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <asp:Panel ID="panelFracasoListaNoticias" runat="server" CssClass="alert alert-danger" Visible="False">
-                                    <asp:Literal ID="litFracasoListaNoticias" runat="server"></asp:Literal>
-                                </asp:Panel>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
