@@ -229,7 +229,7 @@
                                             <td class="hidden-xs"><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("IDEQUIPO").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
                                             <td>
                                                 <span class="hidden-xs"><%# Eval("EQUIPO") %></span>
-                                                <img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("idEquipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" title="<%# Eval("EQUIPO") %>" rel="txtTooltip" data-placement="left" />
+                                                <img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("idEquipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive visible-xs" alt="" style="height: 22px; max-width: 30px;" title="<%# Eval("EQUIPO") %>" rel="txtTooltip" data-placement="left" />
                                             </td>                                       
                                             <td><%# Eval("GOLES") %></td>
                                         </tr>

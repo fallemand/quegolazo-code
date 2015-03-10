@@ -13,13 +13,13 @@ namespace quegolazo_code.admin {
     public partial class fechas {
         
         /// <summary>
-        /// Control upListadoFases.
+        /// Control upAdministrarFecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upListadoFases;
+        protected global::System.Web.UI.UpdatePanel upAdministrarFecha;
         
         /// <summary>
         /// Control ddlEdiciones.
@@ -38,33 +38,6 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSeleccionarEdicion;
-        
-        /// <summary>
-        /// Control rptFases.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptFases;
-        
-        /// <summary>
-        /// Control panelSinFases.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelSinFases;
-        
-        /// <summary>
-        /// Control upAdministrarFecha.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upAdministrarFecha;
         
         /// <summary>
         /// Control txtEquipoLocal.
@@ -355,6 +328,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Button btnTarjetaAgregar;
         
         /// <summary>
+        /// Control btnCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        
+        /// <summary>
         /// Control btnRegistrar.
         /// </summary>
         /// <remarks>
@@ -371,6 +353,33 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgressModalTorneo;
+        
+        /// <summary>
+        /// Control upListadoFases.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upListadoFases;
+        
+        /// <summary>
+        /// Control rptFases.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptFases;
+        
+        /// <summary>
+        /// Control panelSinFases.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelSinFases;
         
         /// <summary>
         /// Control btnFinalizar.

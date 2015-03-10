@@ -181,6 +181,7 @@ namespace quegolazo_code.admin
                 btnRegistrarEquipo.Visible = true;
                 btnModificarEquipo.Visible = false;
                 btnCancelarModificacionEquipo.Visible = false;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarEquipo');", true);
             }
             catch (Exception ex){mostrarPanelFracaso(ex.Message);}
         }
