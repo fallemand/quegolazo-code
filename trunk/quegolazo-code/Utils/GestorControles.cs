@@ -130,6 +130,7 @@ namespace Utils
                     case "TextBox" : ((TextBox)control).Text = ""; break;
                     case "HtmlTextArea": ((HtmlTextArea)control).Value = ""; break;
                     case "DropDownList": ((DropDownList)control).ClearSelection(); break;
+                    default: ((HtmlInputGenericControl)control).Value = ""; break;
                 }
             }
         }

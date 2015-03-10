@@ -18,10 +18,12 @@ namespace quegolazo_code.admin
         public static GestorEdicion gestorEdicion;
         protected GestorPartido gestorPartido;
         private static GestorEstadisticas gestorEstadistica;
+        public bool segundaVuelta = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+                ViewState["SegundaVuelta"] = segundaVuelta;
                 gestorEdicion = Sesion.getGestorEdicion();
                 gestorPartido = Sesion.getGestorPartido();
                 gestorEstadistica = Sesion.getGestorEstadisticas();
@@ -52,6 +54,7 @@ namespace quegolazo_code.admin
                 gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 cargarRepeaterFases();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('administrarPartido');", true);
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
@@ -152,6 +155,7 @@ namespace quegolazo_code.admin
                     limpiarCampos();
                     gestorPartido.obtenerPartidoporId(commandArgument);
                     cargarPartido();
+                    btnCancelar.Visible = true;
                     mostrarFechaCollapsablePanel();
                 }
             }
@@ -173,6 +177,8 @@ namespace quegolazo_code.admin
                 mostrarPanelExito("Partido Modificado con éxito");
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 cargarRepeaterFases();
+                btnCancelar.Visible = false;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('administrarPartido');", true);
             }
             catch (Exception ex) {mostrarPanelFracaso(ex.Message);}
         }
@@ -621,6 +627,14 @@ namespace quegolazo_code.admin
             GestorControles.cleanControls(new List<Object>{txtEquipoLocal,txtEquipoVisitante,txtGolesLocal,txtGolesVisitante,
                     txtPenalesLocal, txtPenalesVisitante,txtFecha,ddlArbitros,ddlCanchas});
             cbPenales.Checked = false;
+            rptCambios.DataSource = null;
+            rptCambios.DataBind();
+            rptGoles.DataSource = null;
+            rptGoles.DataBind();
+            rptTarjetas.DataSource = null;
+            rptTarjetas.DataBind();
+            cblJugadoresEquipoLocal.Items.Clear();
+            cblJugadoresEquipoVisitante.Items.Clear();
         }
 
         /// <summary>
@@ -705,6 +719,24 @@ namespace quegolazo_code.admin
                     }
                     LinkButton lnkAdministrarPartido = (LinkButton)e.Item.FindControl("lnkAdministrarPartido");
                     lnkAdministrarPartido.Visible = ((partido.estado.idEstado == Estado.partidoJUGADO || partido.estado.idEstado == Estado.partidoCANCELADO) && (partido.faseAsociada.estado.idEstado == Estado.faseFINALIZADA || partido.faseAsociada.estado.idEstado == Estado.faseCANCELADA)) ? false : true;
+
+                    if (partido.faseAsociada.tipoFixture.idTipoFixture == "ELIM")
+                    {
+                        Label lblPrimerPuesto = (Label)e.Item.FindControl("lblPrimerPuesto");
+                        Label lblTercerPuesto = (Label)e.Item.FindControl("lblTercerPuesto");
+                        if (ViewState["SegundaVuelta"] != null && bool.Parse(ViewState["SegundaVuelta"].ToString()) == true)
+                        {
+                            lblPrimerPuesto.Visible = false;
+                            lblTercerPuesto.Visible = true;
+                        }
+                        if (partido.idPartidoPosterior == 0 && bool.Parse(ViewState["SegundaVuelta"].ToString()) == false)
+                        {
+                            lblPrimerPuesto.Visible = true;
+                            lblTercerPuesto.Visible = false;
+                            segundaVuelta = true;
+                            ViewState["SegundaVuelta"] = segundaVuelta;
+                        }
+                    }
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -866,8 +898,16 @@ namespace quegolazo_code.admin
             Response.Redirect(GestorUrl.aFECHAS);
         }
 
-     
-
-
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                limpiarCampos();
+                btnCancelar.Visible = false;
+                gestorPartido.partido = null;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('administrarPartido');", true);
+            }
+            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+        }
     }
 }
