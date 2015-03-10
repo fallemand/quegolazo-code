@@ -19,9 +19,6 @@
         }, {
             "value": "ELIM",
             "text": "Eliminatorio"
-        }, {
-            "value": "ELIM-IV",
-            "text": "Eliminatorio, ida y vuelta"
         }]      
     },
 
@@ -267,7 +264,7 @@
     //valida que la cantidad de qeuipos para una fase eliminatoria sea 2,4,8,16,..., si no lo es muestra un popup indicando el error
     validarCantidadDeEquiposEliminatorio: function (numFase) {
         var widget = this;
-        var esValido = ($.inArray((numFase == widget.options.idFaseEditable || widget.options.fases[numFase - 1].equipos.length > 0) ? widget.options.fases[numFase - 1].equipos.length : parseInt($("#ddlCantidadParticipantesFase" + numFase).val()), [2, 4, 8, 16, 32, 64, 128]) > -1);
+        var esValido = ($.inArray((numFase == widget.options.idFaseEditable || widget.options.fases[numFase - 1].equipos.length > 0) ? widget.options.fases[numFase - 1].equipos.length : parseInt($("#ddlCantidadParticipantesFase" + numFase).val()), [4, 8, 16, 32, 64, 128]) > -1);
         if (!esValido) {
             $((numFase > widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover({
                 container: '#controlesFase' + numFase,
