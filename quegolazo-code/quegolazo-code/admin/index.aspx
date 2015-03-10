@@ -41,7 +41,7 @@
     </div>
     <asp:Panel ID="panelEstadisticas" runat="server">
     <div class="row">
-        <div class="col-md-6">
+        <div id="divLlaves" class="col-md-6">
             <div id="panelPosiciones" runat="server" class="panel panel-default">
                 <div class="panel-heading">
                     <span class="flaticon-sports24"></span>
@@ -107,9 +107,11 @@
                 </div>
             </div>
             <div id="panelLlaves" runat="server" class="panel panel-default">
-                <div class="panel-heading">
+                <div class="panel-heading botones botones-small">
                     <span class="flaticon-sports24"></span>
-                    Tabla de Posiciones
+                    Llaves Eliminatorias
+                    <a id="btnAgrandar" title="Expandir" rel="txtTooltip" class="btn btn-panel shadow-xs"onclick="agrandarLlaves();" style="float:right; margin-top:-5px;"><span  class="glyphicon glyphicon-resize-full"  ></span></a>
+                   <a id="btnAchicar" title="Contraer" rel="txtTooltip" class="btn btn-panel shadow-xs" onclick="achicarLlaves();" style="display:none;float:right; margin-top:-5px;" > <span class="glyphicon glyphicon-resize-small"></span></a>
                 </div>
                 <div class="panel-body" id="containerLlaves">
 
@@ -117,7 +119,7 @@
 
             </div>
         </div>
-        <div class="col-md-6 ">
+        <div id="divFechas" class="col-md-6 ">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-stats"></span>
@@ -278,6 +280,23 @@
                  return $(this).find('td:last-child').text() == Grupo;
              }).show('fast');
          };
+         function agrandarLlaves() {
+             $("#divFechas").hide('slow');
+             $("#divLlaves").removeClass('col-md-6', 'slow').addClass('col-md-12');
+             $("#divLlaves").hide();
+             $("#divLlaves").show('slow');
+             $("#btnAgrandar").hide();
+             $("#btnAchicar").show();
+         };
+         function achicarLlaves() {
+             $("#divFechas").show('slow');
+             $("#divLlaves").removeClass('col-md-12', 'slow').addClass('col-md-6', 800, 'easeOutBounce');
+             $("#divLlaves").hide();
+             $("#divLlaves").show('slow');
+             $("#btnAgrandar").show();
+             $("#btnAchicar").hide();
+         };
          
     </script>
+
 </asp:Content>
