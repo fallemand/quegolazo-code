@@ -16,7 +16,7 @@ namespace AccesoADatos
         /// Registra una Nueva Noticia en la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public int registrarNoticia(Noticia noticia, int idEdicion)
+        public void registrarNoticia(Noticia noticia, int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -26,17 +26,15 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"INSERT INTO Noticias (titulo, tipoNoticia, idEdicion, descripcion, fecha)
-                                    VALUES (@titulo, @tipoNoticia, @idEdicion, @descripcion, @fecha)
+                                    VALUES (@titulo, @tipoNoticia, @idEdicion, @descripcion, getDate())
                                     SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@titulo", noticia.titulo);
                 cmd.Parameters.AddWithValue("@tipoNoticia", noticia.tipoNoticia);
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                 cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValueNull(noticia.descripcion));
-                cmd.Parameters.AddWithValue("@fecha", noticia.fecha);   
                 cmd.CommandText = sql;
-                int idNoticia = int.Parse(cmd.ExecuteScalar().ToString());
-                return idNoticia; //retorna el id de la noticia generado por la BD
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -53,7 +51,7 @@ namespace AccesoADatos
         /// Obtener noticias de un torneo de la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public DataTable obtenerNoticiasDeUnTorneo(int idTorneo)
+        public DataTable obtenerNoticias(int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -63,12 +61,12 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT n.idNoticia AS 'idNoticia', CONVERT (char(10), n.fecha, 103)  AS 'fecha', n.titulo AS 'titulo', n.tipoNoticia AS 'tipoNoticia', e.nombre AS 'nombre'
-                                FROM Noticias n INNER JOIN Ediciones e ON n.idEdicion = e.idEdicion
-                                WHERE e.idTorneo = @idTorneo
-                                ORDER BY n.idNoticia DESC";
+                string sql = @"SELECT idNoticia, CONVERT (char(10), fecha, 103)  AS 'fecha', titulo, tipoNoticia, descripcion
+                                FROM Noticias n
+                                WHERE idEdicion = @idEdicion
+                                ORDER BY fecha DESC";
                 cmd.Parameters.Clear();
-                cmd.Parameters.Add(new SqlParameter("@idTorneo", idTorneo));
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
                 DataTable tabla = new DataTable();
@@ -78,7 +76,7 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener los árbitros:" + ex.Message);
+                throw new Exception("Error al obtener las noticias:" + ex.Message);
             }
             finally
             {
@@ -148,14 +146,13 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"UPDATE Noticias
-                                SET titulo = @titulo, tipoNoticia = @tipoNoticia, descripcion = @descripcion, fecha = @fecha
+                                SET titulo = @titulo, tipoNoticia = @tipoNoticia, descripcion = @descripcion
                                 WHERE idNoticia = @idNoticia";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idNoticia", noticia.idNoticia);
                 cmd.Parameters.AddWithValue("@titulo", noticia.titulo);
                 cmd.Parameters.AddWithValue("@tipoNoticia", noticia.tipoNoticia);
-                cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValueNull(noticia.descripcion));
-                cmd.Parameters.AddWithValue("@fecha", noticia.fecha);               
+                cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValueNull(noticia.descripcion));               
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
