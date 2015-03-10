@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="quegolazo_code.admin.index" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
     <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/jquery.percentageloader-0.1.js"></script>
+        <script src="/resources/js/jquery.ui/jquery-ui.min.js"></script>
+    <script src="/resources/js/quegolazo.js"></script>
+    <script src="/resources/js/jquery.bracket.min.js"></script>
+    <link href="/resources/css/jquery.bracket.min.css" rel="stylesheet" />
+    <script src="/resources/js/widgetLlaves.js"></script>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <!-- Contenido -->
@@ -37,7 +42,7 @@
     <asp:Panel ID="panelEstadisticas" runat="server">
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div id="panelPosiciones" runat="server" class="panel panel-default">
                 <div class="panel-heading">
                     <span class="flaticon-sports24"></span>
                     Tabla de Posiciones
@@ -93,12 +98,23 @@
                                     </asp:Repeater>
                                     <tr id="sinequipos" runat="server" visible="false">
                                         <td colspan="12">Todavia no hay partidos registrados.</td>
-                                    </tr>
+                                    </tr>                                    
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
+            </div>
+            <div id="panelLlaves" runat="server" class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="flaticon-sports24"></span>
+                    Tabla de Posiciones
+                </div>
+                <div class="panel-body" id="containerLlaves">
+
+                </div>
+
             </div>
         </div>
         <div class="col-md-6 ">

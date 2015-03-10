@@ -4,7 +4,10 @@
         equipos: null,
         mezclar: false,
         numFase: null,
-        generica : false,
+        generica: false,
+        noSwap: false,
+        scroll: true,
+        resultados: [],
         llaves: [],
         datosEquipos: {teams:[], results:[]},
         //cuando se hace click en el label de un equipo.
@@ -18,8 +21,12 @@
         //workaround para eliminar los controles de customizacion
         $(".tools").remove();
         //$(".team").unbind();
-        if(!this.options.generica)
-        this.habilitarSwap();    
+        if(!this.options.generica && !this.options.noSwap)
+            this.habilitarSwap();
+        if (scroll) {
+            this.element.css("overflow", "scroll");
+            
+        }
 
     },    
     armarLlaves: function () {
@@ -56,7 +63,8 @@
     renderizarLlaves: function (equipos) {
         var widget = this;
         widget.options.datosEquipos.teams = widget.armarLlaves();
-        $("#cuerpoFase"+widget.options.numFase).bracket({
+        widget.options.datosEquipos.results = widget.options.resultados;
+        this.element.bracket({
             init: widget.options.datosEquipos, /* data to initialize the bracket with */            
             decorator: {
                 edit: function () {},

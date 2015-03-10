@@ -271,7 +271,7 @@
                 placement: (numFase != widget.options.idFaseEditable) ? 'bottom' : 'right',
                 title: 'Cantidad de equipos inválida.',
                 trigger: 'manual',
-                content: 'Para fixtures tipo "Eliminatorio" solo se admiten 2,4,8,16,32,64 o 128 equipos.'
+                content: 'Para fixtures tipo "Eliminatorio" solo se admiten 4, 8, 16, 32, 64 o 128 equipos.'
             });
             $((numFase > widget.options.idFaseEditable) ? "#ddlCantidadParticipantesFase" + numFase : "#btnMostrarFase" + numFase).popover("show");
             widget.options.error = true;

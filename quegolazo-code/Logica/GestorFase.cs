@@ -16,12 +16,30 @@ namespace Logica
       /// <summary>
       /// Objeto auxiliar creado para hacer mas entendible la creacion del widget de fases. Se usa para la serializacion de los datos.
       /// </summary>
-      private class generadorDeFases { 
+      private class GeneradorDeFases { 
           public List<Fase> fases {get;set;}
           public int idEdicion {get;set;}
           public List<Equipo> equiposDeLaEdicion {get;set;} 
           public int idFaseEditable {get;set;}
           public bool asistente { get; set; }          
+      }
+      private class GeneradorDeLlaves
+      {
+          //si bien dice equipos, se debe pasar un conjunto de Partidos porque de ahi obtiene los equipos que se renderizarán en la llave
+          public List<Partido> equipos { get; set; }
+          public int numFase { get; set; }         
+          public bool generica { get; set; }
+          public bool mezclar { get; set; }
+          public bool noSwap { get; set; }
+          public bool scroll { get; set; }
+          //la primera lista es una llave, la segunda una ronda, la tercera los resultados de esa ronda
+          public List<List<List<int[]>>> resultados { get; set; }
+          public GeneradorDeLlaves() {
+              resultados = new List<List<List<int[]>>>();
+              generica = false;
+              mezclar = false;
+              noSwap = true;
+          }
       }
       public IGenerarFixture generadorFixture { get; set; }
       /// <summary>
@@ -238,7 +256,7 @@ namespace Logica
       /// </summary>   
       public string armarJsonParaWidget(List<Fase> fases, int idEdicion, List<Equipo> equiposDeLaEdicion, int idFaseEditable , bool asistente)
       {
-         generadorDeFases generador = new generadorDeFases();         
+         GeneradorDeFases generador = new GeneradorDeFases();         
          generador.equiposDeLaEdicion = equiposDeLaEdicion;
          generador.fases= fases;
          generador.idEdicion= idEdicion;
@@ -248,7 +266,40 @@ namespace Logica
          return s.Serialize(generador);
          
       }
-      }  
+      /// <summary>
+      /// Crea un string serializado que va como entrada al widget de llaves, para mostrar los partidos y resultados de una fase eliminatoria
+      /// </summary>
+      public string armarLlavesDeUnaFase(Fase faseEliminatoria) {
+          string res = string.Empty;
+          GeneradorDeLlaves llaves = new GeneradorDeLlaves();
+          llaves.equipos = faseEliminatoria.grupos[0].fechas[0].partidos;
+          List<List<int[]>> resultadosParaWidget = new List<List<int[]>>();
+          foreach (Fecha fecha  in faseEliminatoria.grupos[0].fechas)
+          {            
+            List<int[]> resultados = new List<int[]>();
+            foreach (Partido partido in fecha.partidos)
+            {
+                int[] resultado = null;
+                if(partido.estado.idEstado== Estado.partidoJUGADO)
+                {
+                    resultado = new int[2]; 
+                    resultado[0] = (int)partido.golesLocal;
+                    resultado[1] = (int)partido.golesVisitante;
+                    resultados.Add(resultado);
+                }                
+            }
+            resultadosParaWidget.Add(resultados);  
+          }
+          llaves.resultados.Add(resultadosParaWidget);
+          llaves.numFase = faseEliminatoria.idFase;
+          JavaScriptSerializer s = new JavaScriptSerializer();
+          return s.Serialize(llaves);
+      }
+  
+  
+  }  
+
+     
   }
          
   
