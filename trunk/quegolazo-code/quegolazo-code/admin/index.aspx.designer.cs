@@ -67,6 +67,15 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.WebControls.Panel panelEstadisticas;
         
         /// <summary>
+        /// Control panelPosiciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelPosiciones;
+        
+        /// <summary>
         /// Control rptGrupos.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinequipos;
+        
+        /// <summary>
+        /// Control panelLlaves.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelLlaves;
         
         /// <summary>
         /// Control ltFecha.

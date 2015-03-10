@@ -58,7 +58,7 @@ namespace quegolazo_code.admin
         {
             if (gestorEdicion.edicion!=null && gestorEdicion.faseActual != null)
             {
-                cargarTablaDePosiciones();
+                cargarTablaDePosicionesOLlaves();
                 cargarGoleadoresDeLaEdicion();
                 cargarPorcentajeDeAvanceDeLaFecha();
                 cargarPorcentajeDeAvanceEdicion();
@@ -110,11 +110,23 @@ namespace quegolazo_code.admin
         /// <summary>
         /// Carga la tabla de posiciones de la edicion que esta en la sesion.
         /// </summary>
-        private void cargarTablaDePosiciones()
+        private void cargarTablaDePosicionesOLlaves()
         {
-            GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1].grupos);
-            GestorControles.cargarRepeaterTable(rptPosiciones, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
-            //sinequipos.Visible = (rptPosiciones.Items.Count > 0) ? false : true;
+            if (gestorEdicion.faseActual.tipoFixture.idTipoFixture.Contains("TCT"))
+            {
+                GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.faseActual.grupos);
+                GestorControles.cargarRepeaterTable(rptPosiciones, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
+                panelPosiciones.Visible = true;
+                panelLlaves.Visible = false;
+            }
+            else {
+                string llaves = new GestorFase().armarLlavesDeUnaFase(gestorEdicion.faseActual);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "llaves", "$('#containerLlaves').generadorDeLlaves(" + llaves + ");", true);
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "llaves", "var options = " + llaves + ";", true);
+                panelPosiciones.Visible = false;
+                panelLlaves.Visible = true;
+               
+            }            
         }
         /// <summary>
         /// Carga la ultima fecha incompleta de la edicion que esta en sesion
