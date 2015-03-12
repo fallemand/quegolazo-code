@@ -10,7 +10,7 @@
                             <div class="panel-heading">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#agregarCancha" aria-expanded="true" aria-controls="agregarCancha">
                                     <span class="glyphicon glyphicon-plus"></span>
-                                    Agregar una Cancha  
+                                    Agregar un Complejo 
                                 </a>                                   
                             </div>
                             <div id="agregarCancha" class="panel-collapse collapse in mobile-collapse" role="tabpanel" aria-labelledby="headingOne"">
@@ -20,7 +20,7 @@
                                         <div class="form-group">
                                             <label for="text" class="col-lg-2 control-label">Nombre</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" runat="server" id="txtNombreCancha" placeholder="Nombre de la Cancha" required="true" rangelength="3, 50">
+                                                <input type="text" class="form-control" runat="server" id="txtNombreCancha" placeholder="Nombre del Complejo" required="true" rangelength="3, 50">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -92,10 +92,10 @@
                         <div class="row clearfix">
                             <div class="col-md-8 col-xs-5">
                                 <span class="glyphicon glyphicon-search"></span>
-                                Canchas<span class="hidden-xs">  Existentes</span>
+                                Complejos<span class="hidden-xs">  Existentes</span>
                             </div>
                             <div class="col-md-4 col-xs-7">
-                                <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Canchas"/>
+                                <input type="text" id="filtro" class="pull-right form-control input-xs" placeholder="Filtrar Complejos"/>
                             </div>
                         </div>                        
                     </div>
@@ -132,7 +132,7 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinCanchas" runat="server" visible="false">
-                                            <td colspan="5">No hay canchas registradas</td>
+                                            <td colspan="5">No hay complejos registrados</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -148,16 +148,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Eliminar Cancha</h4>
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Complejo</h4>
                 </div>
                 <div class="modal-body">
                     <asp:UpdatePanel ID="upEliminarCancha" runat="server">
                         <ContentTemplate>
-                            <strong>Cancha: </strong>
+                            <strong>Complejo: </strong>
                             <asp:Literal ID="litNombreCancha" runat="server"></asp:Literal>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    ¿Está seguro de eliminar la cancha?
+                    ¿Está seguro de eliminar el Complejo?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
