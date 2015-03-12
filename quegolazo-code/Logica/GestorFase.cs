@@ -247,8 +247,7 @@ namespace Logica
                       fase.grupos[0].fechas.Remove(fechaEliminar);
                   }
               }
-            }
-         
+            }         
           }
      
           /// <summary>

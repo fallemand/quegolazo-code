@@ -140,6 +140,12 @@ function clickSiguiente() {
     $("#imgProgreso").hide();
 
 }
+
+//function obtenerGruposDeEquipos() {
+
+//};
+
+
 function cambioEnEquipos() {
     $('#tituloModal').text("Configurar la nueva Fase");
     $('#btnConfirmar').show();
