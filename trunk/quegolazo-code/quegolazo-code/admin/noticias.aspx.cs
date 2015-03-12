@@ -19,11 +19,13 @@ namespace quegolazo_code.admin
             {
                 gestorEdicion = Sesion.getGestorEdicion();
                 gestorNoticia = Sesion.getGestorNoticia();
+                
+
                 if (!Page.IsPostBack)
                 {
-                        cargarComboEdiciones();
-                        //limpiarPaneles();
-                       
+                    cargarRepeaterNoticias();
+                    cargarComboEdiciones();
+                    imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.NOTICIA, GestorImagen.MEDIANA);
                 }
             }
             catch (Exception ex){mostrarPanelFracaso(ex.Message);}
@@ -50,11 +52,14 @@ namespace quegolazo_code.admin
         {
             try
             {
-                gestorNoticia.registrarNoticia(txtTituloNoticia.Value, ddlTipoNoticia.Value, txtDescripcionNoticia.Text, ddlEdiciones.SelectedValue);
+                gestorNoticia.registrarNoticia(txtTituloNoticia.Value,txtDescripcionNoticia.Text, ddlEdiciones.SelectedValue);
+                GestorImagen.guardarImagen(gestorNoticia.noticia.idNoticia, GestorImagen.NOTICIA);
                 limpiarCamposNoticias();
                 cargarRepeaterNoticias();
+                GestorError.mostrarPanelExito("Se registró exitosamente la noticia");
                 gestorNoticia.noticia = null; // le setea null a la noticia
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarNoticia');", true);
+                
             }
             catch (Exception ex)
             {
@@ -69,17 +74,16 @@ namespace quegolazo_code.admin
         protected void rptNoticias_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             try
-            {//por CommandArgument recibe el ID de la noticia a modificar o a eliminar
+            {
                 gestorNoticia.obtenerNoticiaPorId(Int32.Parse(e.CommandArgument.ToString()));
                 if (e.CommandName == "editarNoticia")
                 {
                     txtTituloNoticia.Value = gestorNoticia.noticia.titulo;
-                    //txtFecha.Value = DateTime.Parse(gestorNoticia.noticia.fecha.ToString()).ToShortDateString();
                     txtDescripcionNoticia.Text = gestorNoticia.noticia.descripcion;
-                    ddlTipoNoticia.Value = gestorNoticia.noticia.tipoNoticia;
                     btnRegistrarNoticia.Visible = false;
                     btnModificarNoticia.Visible = true;
                     btnCancelarModificacionNoticia.Visible = true;
+                    imagenpreview.Src = gestorNoticia.noticia.obtenerImagenMediana();
                 }
                 if (e.CommandName == "eliminarNoticia")
                 {
@@ -98,7 +102,7 @@ namespace quegolazo_code.admin
         {
             try
             {
-                gestorNoticia.modificarNoticia(gestorNoticia.noticia.idNoticia, txtTituloNoticia.Value, ddlTipoNoticia.Value, txtDescripcionNoticia.Text);
+                gestorNoticia.modificarNoticia(gestorNoticia.noticia.idNoticia, txtTituloNoticia.Value, txtDescripcionNoticia.Text);
                 limpiarCamposNoticias();
                 cargarRepeaterNoticias();
                 gestorNoticia.noticia = null;
@@ -106,6 +110,7 @@ namespace quegolazo_code.admin
                 btnRegistrarNoticia.Visible = true;
                 btnModificarNoticia.Visible = false;
                 btnCancelarModificacionNoticia.Visible = false;
+                GestorError.mostrarPanelExito("Se modificó exitosamente la noticia");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarNoticia');", true);
             }
             catch (Exception ex){mostrarPanelFracaso(ex.Message);}
@@ -123,7 +128,9 @@ namespace quegolazo_code.admin
                 cargarRepeaterNoticias();
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "eliminarArbitro", "closeModal('eliminarNoticia');", true);
             }
-            catch (Exception ex){ mostrarPanelFracaso(ex.Message);}
+            catch (Exception ex){
+                imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.NOTICIA, GestorImagen.MEDIANA);
+                mostrarPanelFracaso(ex.Message);}
         }
 
         /// <summary>
@@ -141,7 +148,10 @@ namespace quegolazo_code.admin
                 gestorNoticia.noticia = null;// le setea null a la noticia
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('agregarNoticia');", true);
             }
-            catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
+            catch (Exception ex) { 
+                mostrarPanelFracaso(ex.Message);
+                imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.NOTICIA, GestorImagen.MEDIANA);
+            }
         }
 
         //------------------------------------------
@@ -162,6 +172,7 @@ namespace quegolazo_code.admin
         {
             txtTituloNoticia.Value = "";
             txtDescripcionNoticia.Text = "";
+            imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.NOTICIA, GestorImagen.MEDIANA);
         }
         /// <summary>
         /// Panel Fracaso

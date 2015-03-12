@@ -25,16 +25,15 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"INSERT INTO Noticias (titulo, tipoNoticia, idEdicion, descripcion, fecha)
-                                    VALUES (@titulo, @tipoNoticia, @idEdicion, @descripcion, getDate())
-                                    SELECT SCOPE_IDENTITY()";
+                string sql = @"INSERT INTO Noticias (titulo,  idEdicion, descripcion, fecha, tipoNoticia)
+                                    VALUES (@titulo, @idEdicion, @descripcion, getDate(), 1)
+                                    SELECT SCOPE_IDENTITY()";//el 1 esta hardcodeado, no se alarmen, es porque actualmente no usamos este campo, pero tal vez en el futuro si, y la bd no permite nullos, y generar una nueva versión para q admita nullos, no valia la pena
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@titulo", noticia.titulo);
-                cmd.Parameters.AddWithValue("@tipoNoticia", noticia.tipoNoticia);
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
                 cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValueNull(noticia.descripcion));
                 cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
+                noticia.idNoticia = int.Parse(cmd.ExecuteScalar().ToString());
             }
             catch (Exception ex)
             {
@@ -61,7 +60,7 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT idNoticia, CONVERT (char(10), fecha, 103)  AS 'fecha', titulo, tipoNoticia, descripcion
+                string sql = @"SELECT idNoticia, CONVERT (char(10), fecha, 103)  AS 'fecha', titulo, descripcion
                                 FROM Noticias n
                                 WHERE idEdicion = @idEdicion
                                 ORDER BY fecha DESC";
@@ -112,7 +111,6 @@ namespace AccesoADatos
                     respuesta = new Noticia();
                     respuesta.idNoticia = Int32.Parse(dr["idNoticia"].ToString());
                     respuesta.titulo = dr["titulo"].ToString();
-                    respuesta.tipoNoticia = dr["tipoNoticia"].ToString();
                     respuesta.idEdicion = Int32.Parse(dr["idEdicion"].ToString());
                     respuesta.fecha = DateTime.Parse(dr["fecha"].ToString());
                     respuesta.descripcion = (dr["descripcion"] != System.DBNull.Value) ? dr["descripcion"].ToString() : null;
@@ -146,12 +144,11 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"UPDATE Noticias
-                                SET titulo = @titulo, tipoNoticia = @tipoNoticia, descripcion = @descripcion
+                                SET titulo = @titulo, descripcion = @descripcion
                                 WHERE idNoticia = @idNoticia";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idNoticia", noticia.idNoticia);
                 cmd.Parameters.AddWithValue("@titulo", noticia.titulo);
-                cmd.Parameters.AddWithValue("@tipoNoticia", noticia.tipoNoticia);
                 cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValueNull(noticia.descripcion));               
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
