@@ -1750,32 +1750,41 @@ Date: 2014-11-05
 .partido-Cancelado {
     background-color: #d9534f;
 }
-.table > tbody > tr .grupo-1 {
+.table .grupo-1 {
     background-color: #D5EFCE;
 }
-.table > tbody > tr .grupo-2 {
+.table .grupo-2 {
     background-color: #AFFFA9;
 }
-.table > tbody > tr .grupo-3 {
-    background-color: #CFCEEF;
-}
-.table > tbody > tr .grupo-4 {
-    background-color: #F9F78C;
-}
-.table > tbody > tr .grupo-5 {
-    background-color: #EFECCE;
-}
-.table > tbody > tr .grupo-6 {
+.table .grupo-3 {
     background-color: #CEE9EF;
 }
-.table > tbody > tr .grupo-7 {
-    background-color: #E5CEEF;
-}
-.table > tbody > tr .grupo-8 {
+.table .grupo-4 {
     background-color: #EFECCE;
 }
-.table > tbody > tr .grupo-9 {
-    background-color: #D5EFCE;
+.table .grupo-5 {
+    background-color: #F9F78C;
+}
+.table .grupo-6 {
+    background-color: #CFCEEF;
+}
+.table .grupo-7 {
+    background-color: #E5CEEF;
+}
+.table .grupo-8 {
+    background-color: #EFCECE;
+}
+.table .grupo-9 {
+    background-color: #CCD1F4;
+}
+.table .grupo-10 {
+    background-color: #F59B9B;
+}
+.table .grupo-11 {
+    background-color: #AFFF99;
+}
+.table .grupo-12 {
+    background-color: #8FDCED;
 }
 
 .inhabilitado {

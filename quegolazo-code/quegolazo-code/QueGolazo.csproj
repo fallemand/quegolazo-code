@@ -48,7 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -72,6 +72,7 @@
     <Content Include="admin\sanciones.aspx" />
     <Content Include="resources\css\jquery-customselect-1.9.1.css" />
     <Content Include="resources\css\jquery.bracket.min.css" />
+    <Content Include="resources\css\trumbowyg.min.css" />
     <Content Include="resources\img\arbitros\default-bg.jpg" />
     <Content Include="resources\img\arbitros\default-nm.jpg" />
     <Content Include="resources\img\arbitros\default-sm.jpg" />
@@ -88,6 +89,10 @@
     <Content Include="resources\img\noticias\default-nm.jpg" />
     <Content Include="resources\img\noticias\default-sm.jpg" />
     <Content Include="resources\img\theme\favicon.ico" />
+    <Content Include="resources\img\theme\icons-black-2x.png" />
+    <Content Include="resources\img\theme\icons-black.png" />
+    <Content Include="resources\img\theme\icons-white-2x.png" />
+    <Content Include="resources\img\theme\icons-white.png" />
     <Content Include="resources\img\theme\load4.gif" />
     <Content Include="resources\img\theme\switch.png" />
     <Content Include="resources\img\torneos\default-bg.jpg" />
@@ -96,6 +101,7 @@
     <Content Include="resources\js\ajaxfileupload.js" />
     <Content Include="resources\js\bootstrap-datetimepicker.min.js" />
     <Content Include="resources\js\bootstrap-datetimepicker.es.js" />
+    <Content Include="resources\js\trumbowyg-es_ar.min.js" />
     <Content Include="resources\js\fechas.js" />
     <Content Include="resources\js\jquery.bracket.min.js" />
     <Content Include="resources\js\jquery.colorPicker.min.js" />
@@ -105,6 +111,7 @@
     <Content Include="resources\js\jquery.ui\jquery-ui.min.js" />
     <Content Include="resources\js\moment.js" />
     <Content Include="resources\js\quegolazo.js" />
+    <Content Include="resources\js\trumbowyg.min.js" />
     <Content Include="resources\js\widgetFases.js" />
     <Content Include="resources\js\widgetLlaves.js" />
     <Content Include="usuario\activar.aspx" />

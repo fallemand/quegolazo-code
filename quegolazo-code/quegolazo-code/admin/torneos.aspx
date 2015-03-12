@@ -153,7 +153,7 @@
                                 </fieldset>
                             </div>
                             <div class="modal-footer">
-                                <div class="col-xs-10 col-md-offset-3">
+                                <div class="col-xs-10 col-md-8 col-md-offset-3">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                     <asp:Button ID="btnRegistrarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Registrar" OnClick="btnResgitrarTorneo_Click"/>
                                     <asp:Button ID="btnModificarTorneo" runat="server" CssClass="btn btn-success causesValidation vgModalTorneo" Text="Modificar" OnClick="btnModificarTorneo_Click" Visible="false"/>
