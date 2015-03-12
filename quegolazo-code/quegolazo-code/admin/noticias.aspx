@@ -47,22 +47,40 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="select" class="col-md-2 control-label">Categoría</label>
-                                                <div class="col-md-10">
-                                                    <select id="ddlTipoNoticia" runat="server" class="form-control">
-                                                        <option value="1">Categoría 1</option>
-                                                        <option value="2">Categoría 2</option>
-                                                        <option value="3">Categoría 3</option>
-                                                        <option value="4">Categoría 4</option>
-                                                    </select>                                           
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="select" class="col-md-2 control-label">Descripción</label>
+                                                <label for="select" class="col-md-2 control-label">Cuerpo</label>
                                                 <div class="col-md-10">
                                                     <asp:TextBox class="form-control" ID="txtDescripcionNoticia" runat="server" Height="110px" TextMode="MultiLine" Width="341px"></asp:TextBox>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                            <label for="textArea" class="col-lg-2 control-label">Imagen</label>
+                                            <div class="col-lg-10">
+                                                <div class="row">
+                                                    <div class="col-md-5 col-xs-6">
+                                                        <div class="fileinput">
+                                                            <div class="thumbnail fileinput-preview">
+                                                                <img id="imagenpreview" runat="server" />
+                                                            </div>
+                                                            <div class="fileUpload">
+                                                                <span class="btn btn-default btn-xs btn-file"><span class="fileinput-new">Seleccionar Imagen</span></span>
+                                                                <asp:FileUpload ID="imagenUpload" runat="server" CssClass="upload" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7 col-xs-6">
+                                                        <img src="../resources/img/theme/load2.gif" id="cargandoImagen" style="display: none;" alt="load" />
+                                                        <span id="imagenCorrecta" class="label alert-success label-md" style="display: none;">Imagen Correcta <span class="glyphicon glyphicon-ok"></span></span>
+                                                        <span id="imagenIncorrecta" class="label alert-danger label-md" style="display: none;"><span id="mensajeErrorImagen"></span></span>
+                                                        <p class="help-block">
+                                                            <strong>Formato admitido</strong><br />
+                                                            PNG, JPEG, JPG, GIF<br />
+                                                            <strong>Tamaño Máximo</strong><br />
+                                                            1 Mb
+                                                        </p>
+                                                    </div>                                                  
+                                                </div>
+                                            </div>
+                                        </div>
                                         </div>
                                     </fieldset>
                                     <asp:Panel ID="panelFracaso" runat="server" CssClass="alert alert-danger" Visible="False">
@@ -73,7 +91,8 @@
                                     <div class="mobile-nopadding-left col-xs-10 col-md-8 col-md-offset-3">
                                         <asp:Button class="btn btn-default" ID="btnCancelarModificacionNoticia" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionNoticia_Click"/>
                                         <asp:Button class="btn btn-success causesValidation vgNoticia" ID="btnModificarNoticia" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarNoticia_Click"/>
-                                        <asp:Button class="btn btn-success causesValidation vgNoticia" ID="btnRegistrarNoticia" runat="server" Text="Registrar" OnClick="btnRegistrarNoticia_Click"/>
+                                        <asp:Button class="btn btn-succes
+                                            s causesValidation vgNoticia" ID="btnRegistrarNoticia" runat="server" Text="Registrar" OnClick="btnRegistrarNoticia_Click"/>
                                     </div>
                                     <div class="col-xs-2 col-ms-1">
                                         <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
@@ -111,19 +130,19 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                           <%-- <th class="col-md-1"></th>--%>
                                             <th class="col-md-1 hidden-xs">Fecha</th>
-                                            <th class="col-md-1">Título</th>
-                                            <th class="col-md-1 hidden-xs">Categoría</th>
+                                            <th class="col-md-5">Título</th>
                                             <th class="col-md-1"></th>
                                         </tr>
                                     </thead>
                                     <tbody class="tablaFiltro">
                                         <asp:Repeater ID="rptNoticias" runat="server" OnItemCommand="rptNoticias_ItemCommand">
                                             <ItemTemplate>
-                                                <tr>                                                    
+                                                <tr>                  
+                                                    <%--<td><img src="<%# ((Entidades.Noticia)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>--%>                            
                                                     <td class="hidden-xs"><%# Eval("fecha") %></td>
                                                     <td><%# Eval("titulo") %></td>
-                                                    <td class="hidden-xs"><%# Eval("tipoNoticia") %></td>
                                                     <td>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarNoticia" title="Editar Noticia" runat="server" CommandName="editarNoticia" CommandArgument='<%#Eval("idNoticia")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarNoticia" title="Eliminar Noticia" runat="server" CommandName="eliminarNoticia" CommandArgument='<%#Eval("idNoticia")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>

@@ -23,6 +23,7 @@ namespace Utils
         private static string pathComplejos = "complejos/";
         private static string pathJugadores = "jugadores/";
         private static string pathArbitros = "arbitros/";
+        private static string pathNoticias = "noticias/";
         private static string pathTemp = "temp/";
 
         //Tipos de Imágenes
@@ -31,6 +32,7 @@ namespace Utils
         public const int COMPLEJO = 3;
         public const int JUGADOR = 4;
         public const int ARBITRO = 5;
+        public const int NOTICIA = 6;
 
         //Tamaños de Imagen
         public const string CHICA = "-sm";
@@ -64,6 +66,7 @@ namespace Utils
                             case COMPLEJO: img.Save(pathImagenesDisco + pathComplejos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
                             case JUGADOR: img.Save(pathImagenesDisco + pathJugadores + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
                             case ARBITRO: img.Save(pathImagenesDisco + pathArbitros + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                            case NOTICIA: img.Save(pathImagenesDisco + pathNoticias + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
                         }
                         img.Dispose();
                     }
@@ -120,6 +123,8 @@ namespace Utils
                 Directory.CreateDirectory(pathImagenesDisco + pathJugadores);
             if (!Directory.Exists(pathImagenesDisco + pathArbitros))
                 Directory.CreateDirectory(pathImagenesDisco + pathArbitros);
+            if (!Directory.Exists(pathImagenesDisco + pathNoticias))
+                Directory.CreateDirectory(pathImagenesDisco + pathNoticias);
         }
 
         /// <summary>
@@ -138,6 +143,7 @@ namespace Utils
                     case COMPLEJO: files = System.IO.Directory.GetFiles(pathImagenesDisco + pathComplejos, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
                     case JUGADOR: files = System.IO.Directory.GetFiles(pathImagenesDisco + pathJugadores, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
                     case ARBITRO: files = System.IO.Directory.GetFiles(pathImagenesDisco + pathArbitros, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
+                    case NOTICIA: files = System.IO.Directory.GetFiles(pathImagenesDisco + pathNoticias, id + "*" + extension, System.IO.SearchOption.TopDirectoryOnly); break;
                 }
                 if (files.Length > 0)
                 {
@@ -279,6 +285,12 @@ namespace Utils
                         return pathImagen;
                     else
                         return (pathImagenes + pathArbitros + "default" + tamañoImagen + extension);
+                case NOTICIA:
+                    pathImagen = pathImagenes + pathNoticias + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return pathImagen;
+                    else
+                        return (pathImagenes + pathNoticias + "default" + tamañoImagen + extension);
             }
             throw new Exception("Error al obtener la imagen");
         }
@@ -316,6 +328,8 @@ namespace Utils
                     pathImagen = pathImagenes + pathJugadores + "default" + tamañoImagen + extension; break;
                 case ARBITRO:
                     pathImagen = pathImagenes + pathArbitros + "default" + tamañoImagen + extension; break;
+                case NOTICIA:
+                    pathImagen = pathImagenes + pathNoticias + "default" + tamañoImagen + extension; break;
             }
             return pathImagen;
         }

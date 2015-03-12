@@ -17,12 +17,11 @@ namespace Logica
         /// Registra una Nueva Noticia en la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public void registrarNoticia(string titulo, string tipoNoticia, string descripcion, string idEdicion)
+        public void registrarNoticia(string titulo, string descripcion, string idEdicion)
         {
             if (noticia == null)
                 noticia = new Noticia();
             noticia.titulo = titulo;
-            noticia.tipoNoticia = tipoNoticia;
             noticia.descripcion = descripcion;
             DAONoticia daoNoticia = new DAONoticia();
             daoNoticia.registrarNoticia(noticia, Validador.castInt(idEdicion));
@@ -53,12 +52,11 @@ namespace Logica
         /// Modifica una noticia de la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public void modificarNoticia(int idNoticia, string titulo, string tipoNoticia, string descripcion)
+        public void modificarNoticia(int idNoticia, string titulo, string descripcion)
         {
             DAONoticia daoNoticia = new DAONoticia();
             noticia.idNoticia = idNoticia;
             noticia.titulo = titulo;
-            noticia.tipoNoticia = tipoNoticia;
             noticia.descripcion = descripcion;
             daoNoticia.modificarNoticia(noticia);
         }
