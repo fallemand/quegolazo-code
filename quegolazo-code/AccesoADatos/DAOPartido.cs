@@ -135,7 +135,7 @@ namespace AccesoADatos
                      con.Close();
              }
         }
-
+       
         /// <summary>s
         /// Obtiene solo los id de los Partidos eliminatorios que se crearon para configurar las llaves de una fase dada.
         /// autor: Flor Rojas
