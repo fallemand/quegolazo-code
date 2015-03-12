@@ -349,7 +349,7 @@
                                                         </div>
                                                         <div id='fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>' class="panel-collapse collapse">
                                                             <div class="panel-body small-padding">
-                                                                <table class="table nomargin-bottom">
+                                                                <table id="tabla-fechas" class="table nomargin-bottom">
                                                                     <thead style="display: none;">
                                                                         <tr>
                                                                             <th class="col-md-4">Equipo Local</th>
@@ -362,7 +362,7 @@
                                                                         <asp:Repeater ID="rptPartidos" runat="server" OnItemCommand="rptPartidos_ItemCommand" OnItemDataBound="rptPartidos_ItemDataBound">
                                                                             <ItemTemplate>
                                                                                 <asp:Panel ID="panelPartidoNormal" runat="server" Visible="false">
-                                                                                    <tr>
+                                                                                    <tr class="grupo-<%# Eval("idGrupo") %>">
                                                                                         <td>
                                                                                             <asp:Label Font-Size="17px" ID="lblPrimerPuesto" class="flaticon-football81" runat="server" Visible="false" title="Final" rel="txtTooltip" data-placement="left"></asp:Label><asp:Label Font-Size="16px" ID="lblTercerPuesto" class="flaticon-football78" runat="server" Visible="false" title="Tercer Puesto" rel="txtTooltip" data-placement="left"></asp:Label>
                                                                                             <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : "" %></td>

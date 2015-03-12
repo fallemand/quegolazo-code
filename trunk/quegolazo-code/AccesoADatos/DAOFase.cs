@@ -261,7 +261,8 @@ namespace AccesoADatos
                     con.Close();
             }
         }
-        
+
+                
         /// <summary>
         /// Obtiene las fases  de una edición por Id. Obteniendo solo los valores necesarios para mostrar la informacion básica de la fase y sus equipos.
         /// autor: Antonio Herrera

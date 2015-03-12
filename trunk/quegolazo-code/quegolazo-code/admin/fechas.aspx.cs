@@ -533,8 +533,6 @@ namespace quegolazo_code.admin
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                 gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
-               
-                  
             }
         }
 

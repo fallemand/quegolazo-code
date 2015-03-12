@@ -84,7 +84,7 @@ namespace quegolazo_code.admin
                 }
                 if (e.CommandName == "verFixture")
                 {
-                    Response.Redirect(GestorUrl.aFECHAS);
+                    Response.Redirect(GestorUrl.aFECHAS);    
                 }
                 if (e.CommandName == "cancelarEdicion")
                 {
@@ -303,6 +303,7 @@ namespace quegolazo_code.admin
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "cancelarEdicion", "closeModal('modalCancelarEdicion');", true);
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }        
-        }
+        }  
+       
     }
 }
