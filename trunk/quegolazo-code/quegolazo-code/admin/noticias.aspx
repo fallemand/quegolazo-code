@@ -1,5 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="noticias.aspx.cs" Inherits="quegolazo_code.admin.noticias" %>
-
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
+    <link rel="stylesheet" href="/resources/css/trumbowyg.min.css" />
+    <script type="text/javascript" src="/resources/js/trumbowyg.min.js"></script>
+    <script type="text/javascript" src="/resources/js/trumbowyg-es_ar.min.js"></script>
+</asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="row">
@@ -26,7 +30,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <asp:UpdatePanel ID="upRegistrarNuevoArbitro" runat="server">
                     <ContentTemplate>
                         <div class="panel panel-default">
@@ -49,11 +53,11 @@
                                             <div class="form-group">
                                                 <label for="select" class="col-md-2 control-label">Cuerpo</label>
                                                 <div class="col-md-10">
-                                                    <asp:TextBox class="form-control" ID="txtDescripcionNoticia" runat="server" Height="110px" TextMode="MultiLine" Width="341px"></asp:TextBox>
+                                                    <asp:TextBox class="form-control" ID="txtDescripcionNoticia" ClientIDMode="Static" runat="server" Height="110px" TextMode="MultiLine" Width="341px" rangelength="0, 1500"></asp:TextBox>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                            <label for="textArea" class="col-lg-2 control-label">Imagen</label>
+                                            <label class="col-lg-2 control-label">Imagen</label>
                                             <div class="col-lg-10">
                                                 <div class="row">
                                                     <div class="col-md-5 col-xs-6">
@@ -91,8 +95,7 @@
                                     <div class="mobile-nopadding-left col-xs-10 col-md-8 col-md-offset-3">
                                         <asp:Button class="btn btn-default" ID="btnCancelarModificacionNoticia" runat="server" Text="Cancelar" Visible="false" OnClick="btnCancelarModificacionNoticia_Click"/>
                                         <asp:Button class="btn btn-success causesValidation vgNoticia" ID="btnModificarNoticia" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarNoticia_Click"/>
-                                        <asp:Button class="btn btn-succes
-                                            s causesValidation vgNoticia" ID="btnRegistrarNoticia" runat="server" Text="Registrar" OnClick="btnRegistrarNoticia_Click"/>
+                                        <asp:Button class="btn btn-success causesValidation vgNoticia" ID="btnRegistrarNoticia" runat="server" Text="Registrar" OnClick="btnRegistrarNoticia_Click"/>
                                     </div>
                                     <div class="col-xs-2 col-ms-1">
                                         <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
@@ -107,7 +110,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row clearfix">
@@ -186,6 +189,24 @@
         </div>
     </div>
     <script>
+        var btnsGrps = jQuery.trumbowyg.btnsGrps;
+        /** WTF this btnsGrps var? It's just array of strings :)
+        *  jQuery.trumbowyg.btnsGrps = {
+        *      design:   ['bold', 'italic', 'underline', 'strikethrough'],
+        *      semantic: ['strong', 'em'],
+        *      justify:  ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+        *      lists:    ['unorderedList', 'orderedList']
+        *  };
+        */
+        $('#txtDescripcionNoticia').trumbowyg({
+            btns: ['formatting',
+              '|', 'bold', 'italic', 'underline',
+              '|', 'link',
+              '|', 'insertImage',
+              '|', btnsGrps.justify,
+              '|', btnsGrps.lists,
+              '|', 'horizontalRule']
+        });
         jQuery(document).ready(function () {
             $('#ContentAdmin_ContentAdminTorneo_txtColorPrimario').colorPicker();
             $('#ContentAdmin_ContentAdminTorneo_txtColorSecundario').colorPicker();
