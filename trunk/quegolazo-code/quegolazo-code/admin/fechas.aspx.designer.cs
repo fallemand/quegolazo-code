@@ -22,24 +22,6 @@ namespace quegolazo_code.admin {
         protected global::System.Web.UI.UpdatePanel upAdministrarFecha;
         
         /// <summary>
-        /// Control ddlEdiciones.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::Utils.NewDropDownList ddlEdiciones;
-        
-        /// <summary>
-        /// Control btnSeleccionarEdicion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSeleccionarEdicion;
-        
-        /// <summary>
         /// Control txtEquipoLocal.
         /// </summary>
         /// <remarks>
@@ -362,6 +344,24 @@ namespace quegolazo_code.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upListadoFases;
+        
+        /// <summary>
+        /// Control ddlEdiciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::Utils.NewDropDownList ddlEdiciones;
+        
+        /// <summary>
+        /// Control btnSeleccionarEdicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSeleccionarEdicion;
         
         /// <summary>
         /// Control rptFases.

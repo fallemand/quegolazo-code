@@ -140,12 +140,12 @@
                 <div class="well">
                     <div class="row">
                         <fieldset class="vgSeleccionarEquipo">
-                            <div class="col-md-8">
-                                <div id="selectEquipos" class="col-md-5 col-xs-9 mobile-nopadding-left">
+                            <div class="col-md-9 col-xs-9 mobile-nopadding-left">
+                                <div id="selectEquipos" class="">
                                     <asp:DropDownList ID="ddlEquipos" runat="server" CssClass="form-control searchableSelect" required="true"></asp:DropDownList>
                                 </div>
                             </div>
-                            <div class="col-md-2 col-xs-3 mobile-nopadding-left">
+                            <div class="col-md-3 col-xs-3 mobile-nopadding-left">
                                 <asp:Button ID="btnSeleccionarEquipo" runat="server" Text="Seleccionar" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEquipo" OnClick="btnSeleccionarEquipo_Click" />
                             </div>
                         </fieldset>
