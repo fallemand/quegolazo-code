@@ -11,10 +11,10 @@
                     <div class="panel panel-default">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
                             <div class="panel-heading panel-heading-master">
-                                <span class="glyphicon glyphicon-chevron-down"></span>Configurar la Edición
+                                <span class="glyphicon glyphicon-chevron-down"></span> Configurar la Edición
                             </div>
                         </a>
-                        <div id="collapse2" class="panel-collapse collapse in">
+                        <div id="collapse2" class="panel-collapse collapse in mobile-collapse">
                             <div class="list-group">
                                 <asp:UpdatePanel ID="upMaster" runat="server">
                                     <ContentTemplate>

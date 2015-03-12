@@ -49,8 +49,8 @@
    
     <script>
         $('#lstEquiposSeleccionados').multiSelect({
-            selectableHeader: "<div class='well well-sm alert-success nomargin-bottom'>Listado de Equipos <a href='#' id='select-all' class='btn btn-xs btn-default pull-right'>Seleccionar Todos <span class='glyphicon glyphicon-chevron-right'></span></a></div>",
-            selectionHeader: "<div class='well well-sm alert-success nomargin-bottom'>Equipos Seleccionados: <span id='spanSeleccionados'>0</span>  <a href='#' id='deselect-all' class='btn btn-xs btn-default pull-right'><span class='glyphicon glyphicon-chevron-left'></span> Quitar Todos</a></div>",
+            selectableHeader: "<div class='well well-sm alert-success nomargin-bottom'><span class='hidden-xs'>Listado de </span>Equipos <a href='#' id='select-all' class='btn btn-xs btn-default pull-right'>Seleccionar Todos <span class='glyphicon glyphicon-chevron-right'></span></a></div>",
+            selectionHeader: "<div class='well well-sm alert-success nomargin-bottom'><span class='hidden-xs'>Equipos </span>Seleccionados: <span id='spanSeleccionados'>0</span>  <a href='#' id='deselect-all' class='btn btn-xs btn-default pull-right'><span class='glyphicon glyphicon-chevron-left'></span> Quitar Todos</a></div>",
             afterSelect: function (values) {
                 $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val() + values + ',');
                 actualizarCantidades();

@@ -12,23 +12,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentAdminTorneo" runat="server">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-md-push-6">
                 <asp:UpdatePanel ID="upAdministrarFecha" runat="server">
                     <ContentTemplate>
-                        <div class="well">
-                            <div class="row">
-                                <fieldset class="vgSeleccionarEdicion">
-                                    <div class="col-md-8 col-xs-9 mobile-nopadding-left">
-                                        <div id="selectEdiciones">
-                                        <aspNew:NewDropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true"></aspNew:NewDropDownList>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-xs-3 mobile-nopadding-left">
-                                        <asp:Button ID="btnSeleccionarEdicion" runat="server" Text="Seleccionar" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEdicion" OnClick="btnSeleccionarEdicion_Click" />
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#administrarPartido" aria-expanded="true" aria-controls="administrarPartido">
@@ -301,12 +287,26 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-md-pull-6">
                 <asp:UpdatePanel ID="upListadoFases" runat="server">
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="btnRegistrar" EventName="Click" />
                     </Triggers>
                     <ContentTemplate>
+                        <div class="well">
+                            <div class="row">
+                                <fieldset class="vgSeleccionarEdicion">
+                                    <div class="col-md-8 col-xs-9 mobile-nopadding-left">
+                                        <div id="selectEdiciones">
+                                            <aspNew:NewDropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true"></aspNew:NewDropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3 mobile-nopadding-left">
+                                        <asp:Button ID="btnSeleccionarEdicion" runat="server" Text="Seleccionar" CssClass="btn btn-success btn-sm CausesValidation vgSeleccionarEdicion" OnClick="btnSeleccionarEdicion_Click" />
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
                         <asp:Repeater ID="rptFases" runat="server" OnItemDataBound="rptFases_ItemDataBound" OnItemCommand="rptFases_ItemCommand">
                             <HeaderTemplate>
                                 <div class="panel-group" id="fases">
@@ -329,7 +329,7 @@
                                                     <span class="label label-red label-big">Finalizar</span></asp:LinkButton>
                                                 <asp:Panel ID="panelEstadoFase" Visible="false" runat="server">
                                                     <span class="label label-big fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" rel="txtTooltip" title="<%# ((Entidades.Fase)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
-                                                </asp:Panel>   
+                                                </asp:Panel>
                                             </div>
                                         </div>
                                     </div>
@@ -343,8 +343,8 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#fechas" href="#fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>" style="font-size: 15px;">   <%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).tipoFixture.idTipoFixture=="ELIM" ?  Eval("nombre") + " " : "Fecha "+ Eval("idFecha")%>  <small>Ver Más Detalles</small></a>     
-                                                                <small><span class="label pull-right fecha-<%# ((Entidades.Fecha)Container.DataItem).estado.nombre%>" rel="txtTooltip" title="<%# ((Entidades.Fecha)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fecha)Container.DataItem).estado.nombre  %></span></small>                                                        
+                                                                <a data-toggle="collapse" data-parent="#fechas" href="#fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>" style="font-size: 15px;"><%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).tipoFixture.idTipoFixture=="ELIM" ?  Eval("nombre") + " " : "Fecha "+ Eval("idFecha")%>  <small>Ver Más Detalles</small></a>
+                                                                <small><span class="label pull-right fecha-<%# ((Entidades.Fecha)Container.DataItem).estado.nombre%>" rel="txtTooltip" title="<%# ((Entidades.Fecha)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fecha)Container.DataItem).estado.nombre  %></span></small>
                                                             </h4>
                                                         </div>
                                                         <div id='fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>' class="panel-collapse collapse">
@@ -364,7 +364,7 @@
                                                                                 <asp:Panel ID="panelPartidoNormal" runat="server" Visible="false">
                                                                                     <tr>
                                                                                         <td>
-                                                                                            <asp:label Font-Size="17px" id="lblPrimerPuesto" class="flaticon-football81" runat="server" visible="false" title="Final" rel="txtTooltip" data-placement="left"></asp:label><asp:label Font-Size="16px" id="lblTercerPuesto" class="flaticon-football78" runat="server" visible="false" title="Tercer Puesto" rel="txtTooltip" data-placement="left"></asp:label>
+                                                                                            <asp:Label Font-Size="17px" ID="lblPrimerPuesto" class="flaticon-football81" runat="server" Visible="false" title="Final" rel="txtTooltip" data-placement="left"></asp:Label><asp:Label Font-Size="16px" ID="lblTercerPuesto" class="flaticon-football78" runat="server" Visible="false" title="Tercer Puesto" rel="txtTooltip" data-placement="left"></asp:Label>
                                                                                             <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : "" %></td>
                                                                                         <td class="col-xs-4"><%# ((Entidades.Partido)Container.DataItem).golesLocal %>
                                                                                             <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesLocal.ToString()+")" : "" %>
@@ -379,20 +379,22 @@
                                                                                 </asp:Panel>
                                                                                 <asp:Panel ID="panelPartidoLibre" runat="server" Visible="false">
                                                                                     <tr>
-                                                                                        <td><asp:Literal ID="litLibre" runat="server" Text=""></asp:Literal></td>
+                                                                                        <td>
+                                                                                            <asp:Literal ID="litLibre" runat="server" Text=""></asp:Literal></td>
                                                                                         <%--<td colspan="4">Libre: <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre :( ((Entidades.Partido)Container.DataItem).visitante.nombre!=null) ? ((Entidades.Partido)Container.DataItem).visitante.nombre : ""  %> </td>--%>
                                                                                     </tr>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel ID="panelPartidoEliminatorioIncompleto" runat="server" Visible="false">
                                                                                     <tr>
-                                                                                        <td><asp:Literal ID="litEquipo1" runat="server" Text=""></asp:Literal></td>
+                                                                                        <td>
+                                                                                            <asp:Literal ID="litEquipo1" runat="server" Text=""></asp:Literal></td>
                                                                                         <%--<td><%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre :( ((Entidades.Partido)Container.DataItem).visitante.nombre!=null) ? ((Entidades.Partido)Container.DataItem).visitante.nombre : "" %> </td>--%>
-                                                                                         <td>-</td> 
+                                                                                        <td>-</td>
                                                                                         <td>Equipo 2</td>
                                                                                         <td>
                                                                                     </tr>
                                                                                 </asp:Panel>
-                                                                                
+
                                                                             </ItemTemplate>
                                                                         </asp:Repeater>
                                                                         <asp:Panel ID="panelSinPartidos" runat="server">
