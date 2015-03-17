@@ -378,8 +378,8 @@
                                                                                     </tr>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel ID="panelPartidoLibre" runat="server" Visible="false">
-                                                                                    <tr>
-                                                                                        <td>
+                                                                                     <tr class="grupo-<%# Eval("idGrupo") %>">
+                                                                                        <td colspan="4">
                                                                                             <asp:Literal ID="litLibre" runat="server" Text=""></asp:Literal></td>
                                                                                         <%--<td colspan="4">Libre: <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre :( ((Entidades.Partido)Container.DataItem).visitante.nombre!=null) ? ((Entidades.Partido)Container.DataItem).visitante.nombre : ""  %> </td>--%>
                                                                                     </tr>
