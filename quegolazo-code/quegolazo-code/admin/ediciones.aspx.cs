@@ -82,10 +82,6 @@ namespace quegolazo_code.admin
                 {
                     Response.Redirect(GestorUrl.aFECHAS);                    
                 }
-                if (e.CommandName == "verFixture")
-                {
-                    Response.Redirect(GestorUrl.aFECHAS);    
-                }
                 if (e.CommandName == "cancelarEdicion")
                 {
                     if (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA || gestorEdicion.edicion.estado.idEstado == Estado.edicionCANCELADA)
@@ -151,16 +147,13 @@ namespace quegolazo_code.admin
                     LinkButton lnkConfigurarEdicion = (LinkButton)e.Item.FindControl("lnkConfigurarEdicion");
                     LinkButton lnkVerFechas = (LinkButton)e.Item.FindControl("lnkVerFechas");
                     LinkButton lnkCambiarConfiguracion = (LinkButton)e.Item.FindControl("lnkCambiarConfiguracion");
-                    LinkButton lnkVerFixture = (LinkButton)e.Item.FindControl("lnkVerFixture");
                     LinkButton lnkCancelarEdicion = (LinkButton)e.Item.FindControl("lnkCancelarEdicion");
                     lnkVerFechas.Visible = false;
                     lnkConfigurarEdicion.Visible = false;
-                    lnkVerFixture.Enabled = false;
                     lnkCancelarEdicion.Enabled = true;
                     gestorEdicion.edicion = (Edicion)e.Item.DataItem;
                     if ((gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA) || (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA) || (gestorEdicion.edicion.estado.idEstado == Estado.edicionCANCELADA))
                         lnkVerFechas.Visible = true;
-                    lnkVerFixture.Enabled = (gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA);
                     lnkConfigurarEdicion.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA);
                     lnkCambiarConfiguracion.Visible = (gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA);
                     GestorControles.cargarRepeaterList(rptEquipos, gestorEdicion.obtenerEquipos());
