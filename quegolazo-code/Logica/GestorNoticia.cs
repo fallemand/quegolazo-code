@@ -19,6 +19,8 @@ namespace Logica
         /// </summary>
         public void registrarNoticia(string titulo, string descripcion, string idEdicion)
         {
+            if (Validador.castInt(idEdicion) == 0)
+                throw new Exception("Debe seleccionar primero una edición!");
             if (noticia == null)
                 noticia = new Noticia();
             noticia.titulo = titulo;
