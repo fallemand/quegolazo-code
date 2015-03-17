@@ -709,9 +709,9 @@ namespace quegolazo_code.admin
                             Panel panelPartidoLibre = (Panel)e.Item.FindControl("panelPartidoLibre");
                             Literal litLibre = (Literal)e.Item.FindControl("litLibre");
                             if (partido.local != null)
-                                litLibre.Text = partido.local.nombre;
+                                litLibre.Text = "Libre: "+ partido.local.nombre;
                             if (partido.visitante != null)
-                                litLibre.Text = partido.visitante.nombre;
+                                litLibre.Text = "Libre: " + partido.visitante.nombre;
                             panelPartidoLibre.Visible = true;
                         }
                     }
