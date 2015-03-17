@@ -52,7 +52,7 @@ namespace quegolazo_code.admin
         {
             try
             {
-                gestorNoticia.registrarNoticia(txtTituloNoticia.Value,txtDescripcionNoticia.Text, ddlEdiciones.SelectedValue);
+                gestorNoticia.registrarNoticia(txtTituloNoticia.Value, txtDescripcionNoticia.Text, gestorEdicion.edicion.idEdicion.ToString());
                 GestorImagen.guardarImagen(gestorNoticia.noticia.idNoticia, GestorImagen.NOTICIA);
                 limpiarCamposNoticias();
                 cargarRepeaterNoticias();
