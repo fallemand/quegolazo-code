@@ -606,7 +606,6 @@
           
             </div>
         </div>
-    </div>
     <!-- Modal Seleccionar Equipos que pasan -->
 
    <!-- Modal Seleccionar Ganadores - Finalizar Edicion-->

@@ -97,7 +97,7 @@
                                         <asp:Button class="btn btn-success causesValidation vgNoticia" ID="btnModificarNoticia" runat="server" Text="Modificar" Visible="false" OnClick="btnModificarNoticia_Click"/>
                                         <asp:Button class="btn btn-success causesValidation vgNoticia" ID="btnRegistrarNoticia" runat="server" Text="Registrar" OnClick="btnRegistrarNoticia_Click"/>
                                     </div>
-                                    <div class="col-xs-2 col-ms-1">
+                                    <div class="col-xs-2 col-md-1">
                                         <asp:UpdateProgress runat="server" ID="UpdateProgressModalTorneo">
                                             <ProgressTemplate>
                                                 <img src="/resources/img/theme/load4.gif" />
@@ -198,18 +198,25 @@
         *      lists:    ['unorderedList', 'orderedList']
         *  };
         */
-        $('#txtDescripcionNoticia').trumbowyg({
-            btns: ['formatting',
-              '|', 'bold', 'italic', 'underline',
-              '|', 'link',
-              '|', 'insertImage',
-              '|', btnsGrps.justify,
-              '|', btnsGrps.lists,
-              '|', 'horizontalRule']
-        });
+        cargarEditorTexto();
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
+        function EndRequestHandler(sender, args) {
+            cargarEditorTexto();
+        }
+
+        function cargarEditorTexto() {
+            $('#txtDescripcionNoticia').trumbowyg({
+                btns: ['formatting',
+                  '|', 'bold', 'italic', 'underline',
+                  '|', 'link',
+                  '|', 'insertImage',
+                  '|', btnsGrps.justify,
+                  '|', btnsGrps.lists,
+                  '|', 'horizontalRule']
+            });
+        };
+
         jQuery(document).ready(function () {
-            $('#ContentAdmin_ContentAdminTorneo_txtColorPrimario').colorPicker();
-            $('#ContentAdmin_ContentAdminTorneo_txtColorSecundario').colorPicker();
             $('body').on('change', '#ContentAdmin_ContentAdminTorneo_imagenUpload', function () {
                 previewImage(this, 'ContentAdmin_ContentAdminTorneo_imagenpreview');
                 ajaxFileUpload('ContentAdmin_ContentAdminTorneo_imagenUpload');
