@@ -53,7 +53,7 @@
                                             <div class="form-group">
                                                 <label for="select" class="col-md-2 control-label">Cuerpo</label>
                                                 <div class="col-md-10">
-                                                    <asp:TextBox class="form-control" ID="txtDescripcionNoticia" ClientIDMode="Static" runat="server" Height="110px" TextMode="MultiLine" Width="341px" rangelength="0, 1500"></asp:TextBox>
+                                                    <asp:TextBox class="form-control" ID="txtDescripcionNoticia" ClientIDMode="Static" runat="server" Height="110px" TextMode="MultiLine" Width="341px" rangelength="0, 1500" ValidateRequestMode="Disabled"></asp:TextBox>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -206,6 +206,7 @@
 
         function cargarEditorTexto() {
             $('#txtDescripcionNoticia').trumbowyg({
+                lang: 'es_ar',
                 btns: ['formatting',
                   '|', 'bold', 'italic', 'underline',
                   '|', 'link',

@@ -9,7 +9,7 @@
                         <div class="well">
                             <div class="row">
                                 <fieldset class="vgSeleccionarEdicion">
-                                    <div class="col-md-5 col-xs-9 mobile-nopadding-left">
+                                    <div class="col-md-8 col-xs-9 mobile-nopadding-left">
                                         <div id="selectEdiciones">
                                             <aspNew:NewDropDownList ID="ddlEdiciones" runat="server" CssClass="form-control" required="true"></aspNew:NewDropDownList>
                                         </div>
