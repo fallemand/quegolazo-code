@@ -40,7 +40,6 @@ namespace quegolazo_code.admin
             if (gestorEdicion.edicion != null && gestorEdicion.edicion.idEdicion > 0)
             {
                 gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(gestorEdicion.edicion.idEdicion);
-                gestorEdicion.getFaseActual();
             }
         }
 
