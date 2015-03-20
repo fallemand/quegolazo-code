@@ -558,5 +558,51 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        /// <summary>
+        /// Devuelve el nombre del goleador de un equipo apra una edicion
+        /// autor: Flor Rojas
+        /// </summary>
+        public DataTable obtenerGoleadorEquipo(int idEdicion, int idEquipo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @" SELECT TOP 1 j.idJugador AS 'IDJUGADOR', j.nombre AS 'JUGADOR', count(g.idGol) AS 'GOLES',count(DISTINCT p.idPartido) AS 'PARTIDOS'
+                                    FROM Goles g
+	                                     JOIN Equipos e ON e.idEquipo = g.idEquipo 
+	                                     JOIN Jugadores j ON g.idJugador = j.idJugador
+	                                     JOIN Partidos p ON p.idPartido = g.idPartido
+										 WHERE p.idEquipoLocal=@idEquipo OR p.idEquipoVisitante=@idEquipo
+	                                     GROUP BY j.idJugador, p.idEdicion, j.nombre, e.nombre, e.idEquipo 
+	                                     HAVING p.idEdicion = @idEdicion 
+										 ORDER BY Goles DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
     }
 }
