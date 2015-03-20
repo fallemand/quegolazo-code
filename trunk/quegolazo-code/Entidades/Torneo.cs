@@ -16,12 +16,14 @@ namespace Entidades
         public List<Edicion> ediciones { get; set; }
         public List<Cancha> canchas { get; set; } 
         public string descripcion { get; set; }
+        public ConfiguracionVisual configuracionVisual {get;set;}
         
         public Torneo()
         {            
             equipos = new List<Equipo>();
             ediciones = new List<Edicion>();
             canchas = new List<Cancha>();
+            configuracionVisual = new ConfiguracionVisual();
         }
 
         public string obtenerImagenChicha() {

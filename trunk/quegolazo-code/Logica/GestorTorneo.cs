@@ -7,6 +7,7 @@ using Entidades;
 using AccesoADatos;
 using Utils;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace Logica
 {
@@ -92,6 +93,17 @@ namespace Logica
             daoTorneo.eliminarTorneo(idTorneo);
             if (torneo.idTorneo == idTorneo)
                 torneo = null;
+        }
+        /// <summary>
+        /// Guarda la configuracion visual que genero un usuario para un torneo en particular.
+        /// </summary>
+        /// <param name="configuracion"></param>
+        public void registrarConfiguracionVisual(object configuracion) {
+            JavaScriptSerializer s = new JavaScriptSerializer();
+            ConfiguracionVisual conf = s.ConvertToType<ConfiguracionVisual>(configuracion);
+            GestorTorneo gestor = Sesion.getGestorTorneo();
+            gestor.torneo.configuracionVisual = conf;
+            new DAOTorneo().registrarConfiguracionVisual(gestor.torneo);
         }
     }
 }

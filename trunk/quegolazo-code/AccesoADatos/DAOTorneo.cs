@@ -330,5 +330,101 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        /// <summary>
+        /// Registra la configuracion visual generada por un usuario para un torneo determinado, analiza si existe una configuracion guardada, si no es asi, crea una nueva.
+        /// </summary>
+        public void registrarConfiguracionVisual(Torneo torneo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"declare @configuracion int = (select COUNT(c.idTorneo) from ConfiguracionesVisuales c WHERE idTorneo = @idTorneo);
+                                IF @configuracion > 0 
+                                    BEGIN
+                                        UPDATE ConfiguracionesVisuales 
+	                                    SET
+	                                    colorDeFondo = @colorDeFondo,
+	                                    patronDeFondo = @patronDeFondo,
+	                                    estiloPagina = @estiloPagina,
+	                                    colorDestacado = @colorDestacado
+	                                    WHERE idTorneo = @idTorneo
+                                    END
+                                    ELSE
+                                    BEGIN
+                                       INSERT INTO ConfiguracionesVisuales (colorDeFondo, patronDeFondo, estiloPagina,colorDestacado)
+		                                      VALUES (@colorDeFondo, @patronDeFondo, @estiloPagina, @colorDestacado)
+                                    END";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idTorneo", torneo.idTorneo);
+                cmd.Parameters.AddWithValue("@colorDeFondo", torneo.configuracionVisual.colorDeFondo);
+                cmd.Parameters.AddWithValue("@patronDeFondo", torneo.configuracionVisual.patronDeFondo);
+                cmd.Parameters.AddWithValue("@estiloPagina", torneo.configuracionVisual.estiloPagina);
+                cmd.Parameters.AddWithValue("@colorDestacado", torneo.configuracionVisual.colorDestacado);                
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+               throw new Exception("OCURRIÓ UN ERROR, INTENTA MAS TARDE");              
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene la configuracion visual registrada para un torneo
+        /// 
+        /// </summary>
+        public ConfiguracionVisual obtenerConfiguracionVisual(int idTorneo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            ConfiguracionVisual respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT  * 
+                             FROM ConfiguracionesVisuales
+                             WHERE idTorneo = @idTorneo";                            
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idTorneo", idTorneo));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    respuesta = new ConfiguracionVisual()
+                    {
+                        colorDeFondo = dr["colorDeFondo"].ToString(),
+                        colorHeader = dr["colorHeader"].ToString(),
+                        patronDeFondo = dr["patronDeFondo"].ToString(),
+                        patronHeader = dr["patronHeader"].ToString(),
+                        colorDestacado = dr["colorDestacado"].ToString(),
+                        estiloPagina = dr["estiloPagina"].ToString(),
+                    };
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el último Torneo del usuario: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
     }
 }
