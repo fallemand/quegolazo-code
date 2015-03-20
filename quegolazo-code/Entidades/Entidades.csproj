@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Arbitro.cs" />
     <Compile Include="Cambio.cs" />
+    <Compile Include="ConfiguracionVisual.cs" />
     <Compile Include="ConfiguracionEdicion.cs" />
     <Compile Include="Fecha.cs" />
     <Compile Include="GenerarEliminatoria.cs" />

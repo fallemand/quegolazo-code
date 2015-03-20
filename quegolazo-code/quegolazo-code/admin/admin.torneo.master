@@ -4,6 +4,7 @@
     <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/bootstrap-datetimepicker.es.js"></script>
     <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/jquery.searchableSelect.js"></script>
+    <link href="../resources/css/colorPicker.css" rel="stylesheet" />
     <!-- ContentPage Header -->
     <asp:ContentPlaceHolder ID="ContentHeaderAdminTorneo" runat="server">
     </asp:ContentPlaceHolder>

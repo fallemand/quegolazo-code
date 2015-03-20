@@ -318,7 +318,7 @@
     },
     //crea una tabla para presentar el grupo
     crearTablaParaGrupo: function (idGrupo, numFase) {
-        return "<div id='tablaGrupo" + idGrupo + "Fase"+numFase + "' class='col-md-6 divGrupos'><table  class='table'><thead><tr><th>Grupo " + idGrupo + "</th></tr></thead><tbody><tr><td></td></tr></tbody></table></div>"
+        return "<div id='tablaGrupo" + idGrupo + "Fase"+numFase + "' class='col-md-6 divGrupos'><table  class='table nomargin-bottom'><thead><tr><th>Grupo " + idGrupo + "</th></tr></thead><tbody><tr><td></td></tr></tbody></table></div>"
      },
     // realiza la llamada final al servidor, mandando como parametro una lista de fases con sus atributos, y guardando las fases en sesión.
     guardarFasesEnSesion: function () {
