@@ -604,5 +604,71 @@ namespace AccesoADatos
             }
         }
 
+        public DataTable obtenerVersus(int idEquipoLocal, int idEquipoVisitante, int idEdicion, int idTorneo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT 
+                                equipo1.idEquipo AS 'Id Equipo Local', equipo1.nombre AS 'Equipo Local', 
+                                COUNT(CASE WHEN (p.idEdicion = @idEdicion AND equipo1.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante)) THEN 1 ELSE NULL END) AS 'PJ Equipo Local',
+                                COUNT(CASE WHEN (p.idEdicion = @idEdicion AND p.idGanador = equipo1.idEquipo AND (equipo1.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante))) THEN 1 ELSE NULL END) AS 'PG Equipo Local',
+                                SUM(CASE WHEN (p.idEdicion = @idEdicion AND p.idEquipoLocal= equipo1.idEquipo AND p.golesLocal IS NOT NULL AND equipo1.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante)) THEN p.golesLocal ELSE 0 END) + SUM(CASE WHEN (p.idEdicion = @idEdicion AND p.idEquipoVisitante = equipo1.idEquipo AND p.golesVisitante IS NOT NULL) THEN p.golesVisitante ELSE 0 END) AS 'GF Equipo Local',	
+                                COUNT(CASE WHEN (p.idEdicion = @idEdicion AND p.idGanador = equipo1.idEquipo AND equipo1.idEquipo IN (p.idEquipoLocal, p.idEquipoVisitante)) THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE WHEN p.idEdicion = @idEdicion AND p.empate = 1 AND equipo1.idEquipo IN (p.idEquipoLocal, p.idEquipoVisitante) THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE WHEN (p.idEdicion = @idEdicion AND p.idPerdedor = equipo1.idEquipo AND equipo1.idEquipo IN (p.idEquipoLocal, p.idEquipoVisitante)) THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos Local',
+                                COUNT(CASE WHEN (p.idEdicion = @idEdicion AND t.tipoTarjeta = 'A' AND equipo1.idEquipo = t.idEquipo) THEN 1 ELSE NULL END) AS 'AMARILLAS Equipo Local',
+                                COUNT(CASE WHEN (p.idEdicion = @idEdicion AND t.tipoTarjeta = 'R' AND equipo1.idEquipo = t.idEquipo) THEN 1 ELSE NULL END) AS 'ROJAS Equipo Local',
+                                equipo2.idEquipo AS 'Id Equipo Visitante',
+                                equipo2.nombre AS 'Equipo Visitante', 
+                                COUNT(CASE WHEN ((p.idEdicion = @idEdicion AND equipo2.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante))) THEN 1 ELSE NULL END) AS 'PJ Equipo Visitante',
+                                COUNT(CASE WHEN (p.idEdicion = @idEdicion AND equipo2.idEquipo = p.idGanador AND (equipo2.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante))) THEN 1 ELSE NULL END) AS 'PG Equipo Visitante',
+                                SUM(CASE WHEN (p.idEdicion = @idEdicion AND p.idEquipoLocal = equipo2.idEquipo AND p.golesLocal IS NOT NULL AND equipo2.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante)) THEN p.golesLocal ELSE 0 END) + SUM(CASE WHEN (p.idEdicion = @idEdicion AND p.idEquipoVisitante = equipo2.idEquipo AND p.golesVisitante IS NOT NULL) THEN p.golesVisitante ELSE 0 END) AS 'GF Equipo Visitante',
+                                COUNT(CASE WHEN (p.idEdicion = @idEdicion AND p.idGanador = equipo2.idEquipo AND equipo2.idEquipo IN (p.idEquipoLocal, p.idEquipoVisitante)) THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE WHEN p.idEdicion = @idEdicion AND p.empate = 1 AND equipo2.idEquipo IN (p.idEquipoLocal, p.idEquipoVisitante) THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE WHEN (p.idEdicion = @idEdicion AND p.idPerdedor = equipo2.idEquipo AND equipo2.idEquipo IN (p.idEquipoLocal, p.idEquipoVisitante)) THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos Visitante', 
+                                COUNT(CASE WHEN (p.idEdicion = @idEdicion AND t.tipoTarjeta = 'A' AND equipo2.idEquipo = t.idEquipo) THEN 1 ELSE NULL END) AS 'AMARILLAS Equipo Visitante',
+                                COUNT(CASE WHEN (p.idEdicion = @idEdicion AND t.tipoTarjeta = 'R' AND equipo2.idEquipo = t.idEquipo) THEN 1 ELSE NULL END) AS 'ROJAS Equipo Visitante',
+                                COUNT(CASE WHEN (p.idEdicion <> @idEdicion AND p.idGanador = equipo1.idEquipo AND (equipo1.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante))) THEN 1 ELSE NULL END) AS 'PG Equipo Local Previos',
+                                COUNT(CASE WHEN (p.idEdicion <> @idEdicion AND equipo2.idEquipo = p.idGanador AND (equipo2.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante))) THEN 1 ELSE NULL END) AS 'PG Equipo Visitante Previos',
+                                COUNT(CASE WHEN ((p.idEdicion <> @idEdicion AND equipo1.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante) AND equipo2.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante))) THEN 1 ELSE NULL END) AS 'Cant Enfrentamientos Previos',
+                                COUNT(CASE WHEN ((p.idEdicion <> @idEdicion AND p.empate = 1 AND equipo1.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante) AND equipo2.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante))) THEN 1 ELSE NULL END) AS 'Empates Previos'
+                                FROM Partidos p
+                                INNER JOIN Equipos equipo1 ON (equipo1.idEquipo = p.idEquipoLocal OR equipo1.idEquipo = p.idEquipoVisitante)
+                                INNER JOIN Equipos equipo2 ON (equipo2.idEquipo = p.idEquipoLocal OR equipo2.idEquipo = p.idEquipoVisitante)
+                                INNER JOIN Ediciones edicionActual ON p.idEdicion = edicionActual.idEdicion	
+                                LEFT JOIN Tarjetas t ON t.idPartido = p.idPartido	
+                                WHERE 
+                                equipo1.idEquipo = @idEquipoLocal AND equipo2.idEquipo = @idEquipoVisitante
+                                AND p.idEstado = @estadoJugado AND
+                                edicionActual.idEdicion IN (SELECT idEdicion
+				                                            FROM Ediciones
+				                                            WHERE idTorneo = @idTorneo)
+                                GROUP BY equipo1.idEquipo, equipo1.nombre, equipo2.idEquipo, equipo2.nombre, edicionActual.puntosGanado, edicionActual.puntosEmpatado, edicionActual.puntosPerdido";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idTorneo", idTorneo));
+                cmd.Parameters.Add(new SqlParameter("@idEquipoLocal", idEquipoLocal));
+                cmd.Parameters.Add(new SqlParameter("@idEquipoVisitante", idEquipoVisitante));
+                cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
