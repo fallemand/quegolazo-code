@@ -105,5 +105,9 @@ namespace Logica
             gestor.torneo.configuracionVisual = conf;
             new DAOTorneo().registrarConfiguracionVisual(gestor.torneo);
         }
+
+        public ConfiguracionVisual obtenerConfiguracionVisual(int idTorneo) {
+            return new DAOTorneo().obtenerConfiguracionVisual(idTorneo);
+        }
     }
 }

@@ -224,7 +224,7 @@
 #theme-options ul.backgrounds li:hover { 
 	border-color: #ccc; 
 }
-#theme-options ul.backgrounds li.active,#theme-options ul.backgrounds li.active:hover { 
+#theme-options ul.backgrounds li.active,#theme-options ul.backgrounds li.active:hover,#theme-options ul.backgrounds-h li.active,#theme-options ul.backgrounds-h li.active:hover { 
 	border-color: #ff9600; 
 }
 #theme-options .layout-style li{

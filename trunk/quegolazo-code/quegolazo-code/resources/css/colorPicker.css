@@ -3,7 +3,11 @@ div.colorPicker-picker {
   background: url(arrow.gif) no-repeat top right;
   cursor: pointer;
   margin: 2px 6px;
-  border-style: inset;
+
+}
+
+.conBorde div.colorPicker-picker {
+  border: 1px solid #ccc;
 }
 
 .colorpick {
