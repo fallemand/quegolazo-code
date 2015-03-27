@@ -351,24 +351,28 @@ namespace AccesoADatos
 	                                    colorDeFondo = @colorDeFondo,
 	                                    patronDeFondo = @patronDeFondo,
 	                                    estiloPagina = @estiloPagina,
-	                                    colorDestacado = @colorDestacado
+	                                    colorDestacado = @colorDestacado,
+                                        colorHeader = @colorHeader,
+                                        patronHeader = @patronHeader
 	                                    WHERE idTorneo = @idTorneo
                                     END
                                     ELSE
                                     BEGIN
-                                       INSERT INTO ConfiguracionesVisuales (colorDeFondo, patronDeFondo, estiloPagina,colorDestacado)
-		                                      VALUES (@colorDeFondo, @patronDeFondo, @estiloPagina, @colorDestacado)
+                                       INSERT INTO ConfiguracionesVisuales (idTorneo,colorDeFondo, patronDeFondo, estiloPagina,colorDestacado,colorHeader,patronHeader)
+		                                      VALUES (@idTorneo,@colorDeFondo, @patronDeFondo, @estiloPagina, @colorDestacado,@colorHeader,@patronHeader)
                                     END";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idTorneo", torneo.idTorneo);
                 cmd.Parameters.AddWithValue("@colorDeFondo", torneo.configuracionVisual.colorDeFondo);
                 cmd.Parameters.AddWithValue("@patronDeFondo", torneo.configuracionVisual.patronDeFondo);
                 cmd.Parameters.AddWithValue("@estiloPagina", torneo.configuracionVisual.estiloPagina);
-                cmd.Parameters.AddWithValue("@colorDestacado", torneo.configuracionVisual.colorDestacado);                
+                cmd.Parameters.AddWithValue("@colorDestacado", torneo.configuracionVisual.colorDestacado);
+                cmd.Parameters.AddWithValue("@colorHeader", torneo.configuracionVisual.colorHeader);
+                cmd.Parameters.AddWithValue("@patronHeader", torneo.configuracionVisual.patronHeader);   
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                throw new Exception("OCURRIÓ UN ERROR, INTENTA MAS TARDE");              
             }

@@ -43,9 +43,14 @@
 
         <!-- Skins Changer-->
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+     <script type="text/javascript" src="../resources/torneo/js/theme-options/theme-options.js"></script>
     </head>
 
     <body>
+        <form id="form1" runat="server">
+        <asp:ScriptManager ID="MainScriptManager" runat="server" />
+        </form>
+       
        <!-- Theme-options -->
         <div id="theme-options" style="z-index:9999">
             <div class="openclose"></div>
@@ -76,13 +81,17 @@
                 </ul>  
             <span>Colores:</span>
            <ul class="layout-style text-center">    
-                <li id="colorFondo">
+                <li>
                     Fondo
+                    <div id="colorFondo" class="conBorde">
                     <div class="cp-background"></div>
+                    </div>
                 </li>    
-                <li id="colorHeader">
+                <li >
                     Header
+                    <div id="colorHeader" class="conBorde">
                     <div class="cp-background"></div>
+                    </div>
                 </li>                                 
             </ul> 
             <span>ESTILO DE PAGINA</span>
@@ -124,8 +133,10 @@
             <ul class="layout-style">    
                 <li class="btn btn-danger" id="cerrarConfig">Cerrar</li>    
                 <li onclick="guardarConfiguracion()" class="btn btn-primary">Guardar</li>                                 
-            </ul>  
-            <span id="msjeAjax"></span>
+            </ul> 
+            <div class="col-xs-12">
+            <span id="msjeAjax" class="text-center"></span>  
+            </div>                       
         </div>
         <!-- End Theme-options -->      
 
@@ -768,8 +779,7 @@
         <script src="../resources/torneo/js/flickr/jflickrfeed.min.js"></script> 
         <!-- Counter -->
         <script src="../resources/torneo/js/counter/jquery.countdown.js"></script>      
-        <!--Theme Options-->
-        <script type="text/javascript" src="../resources/torneo/js/theme-options/theme-options.js"></script>
+        <!--Theme Options-->        
         <script type="text/javascript" src="../resources/torneo/js/theme-options/jquery.cookies.js"></script>         
         <!-- Bootstrap.js-->
         <script type="text/javascript" src="../resources/torneo/js/bootstrap/bootstrap.js"></script> 

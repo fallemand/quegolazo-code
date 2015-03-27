@@ -14,9 +14,15 @@ namespace quegolazo_code.torneo
     public partial class configurarSitio : System.Web.UI.Page
     {
         GestorTorneo gestorTorneo;
+        JavaScriptSerializer serializador;
         protected void Page_Load(object sender, EventArgs e)
         {
             gestorTorneo = Sesion.getGestorTorneo();
+            //TODO esto está harcodeado para que funque!
+            gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorId(88);            
+            serializador = new JavaScriptSerializer();
+            string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(gestorTorneo.torneo.idTorneo));
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "var configuracion = " + estilos + ";", true);
         }
 
 
