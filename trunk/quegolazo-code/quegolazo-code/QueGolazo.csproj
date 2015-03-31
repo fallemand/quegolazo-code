@@ -287,6 +287,7 @@
     <Content Include="resources\torneo\js\totop\jquery.ui.totop.js" />
     <Content Include="resources\torneo\js\twitter\jquery.tweet.js" />
     <Content Include="torneo\configurarSitio.aspx" />
+    <Content Include="torneo\principal.aspx" />
     <Content Include="usuario\activar.aspx" />
     <Content Include="admin\index.aspx" />
     <Content Include="usuario\login.aspx" />
@@ -421,6 +422,20 @@
     <Compile Include="torneo\configurarSitio.aspx.designer.cs">
       <DependentUpon>configurarSitio.aspx</DependentUpon>
     </Compile>
+    <Compile Include="torneo\principal.aspx.cs">
+      <DependentUpon>principal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="torneo\principal.aspx.designer.cs">
+      <DependentUpon>principal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="torneo\torneoMaster.Master.cs">
+      <DependentUpon>torneoMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="torneo\torneoMaster.Master.designer.cs">
+      <DependentUpon>torneoMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="usuario\activar.aspx.cs">
       <DependentUpon>activar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -535,6 +550,7 @@
     <Content Include="resources\torneo\img\slide\patterns\Descr.WD3" />
     <Content Include="resources\torneo\img\sponsors\Descr.WD3" />
     <Content Include="resources\torneo\img\testimonials\Descr.WD3" />
+    <Content Include="torneo\torneoMaster.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
