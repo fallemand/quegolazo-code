@@ -48,7 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -66,6 +66,8 @@
     <Content Include="admin\edicion\equipos.aspx" />
     <Content Include="admin\edicion\fases.aspx" />
     <Content Include="admin\fechas.aspx" />
+    <Content Include="admin\interfacesFeas\Equipos.aspx" />
+    <Content Include="admin\interfacesFeas\Jugadores.aspx" />
     <Content Include="admin\jugadores.aspx" />
     <Content Include="admin\equipos.aspx" />
     <Content Include="admin\noticias.aspx" />
@@ -386,6 +388,20 @@
     </Compile>
     <Compile Include="admin\fechas.aspx.designer.cs">
       <DependentUpon>fechas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\interfacesFeas\Equipos.aspx.cs">
+      <DependentUpon>Equipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\interfacesFeas\Equipos.aspx.designer.cs">
+      <DependentUpon>Equipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\interfacesFeas\Jugadores.aspx.cs">
+      <DependentUpon>Jugadores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\interfacesFeas\Jugadores.aspx.designer.cs">
+      <DependentUpon>Jugadores.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\jugadores.aspx.cs">
       <DependentUpon>jugadores.aspx</DependentUpon>
