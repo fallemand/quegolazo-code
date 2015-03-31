@@ -766,5 +766,45 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public DataTable goleadoresDeUnEquipo(int idEquipo, int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT TOP 5 j.idJugador AS 'Id Jugador', j.nombre AS 'Jugador', count(g.idGol) AS 'Goles'
+                                FROM Goles g
+                                JOIN Jugadores j ON g.idJugador = j.idJugador
+                                JOIN Partidos p ON p.idPartido = g.idPartido
+                                WHERE j.idEquipo = @idEquipo 
+                                AND p.idEdicion = @idEdicion
+                                GROUP BY j.idJugador, j.nombre
+                                ORDER BY 'GOLES' DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
