@@ -1,0 +1,384 @@
+.resultado h1 {
+  font-size: 55px;
+  font-weight: 700;
+  text-shadow: 2px 1px 1px rgba(202, 202, 202, 0.6);
+  color: #FAFAFA;
+}
+
+.resultado span {
+  font-size: 65px;
+  line-height: 60px;
+  color: #222;
+}
+
+.resultado h2 {
+  font-size: 45px;
+  font-weight: 700;
+}
+.padding-top {
+  padding-top:35px;
+}
+.nomargin-right{
+  margin-right:0px;
+}
+.nomargin-left{
+  margin-left:0px;
+}
+.nomargin-bottom{
+  margin-bottom:0px;
+}
+.nomargin-top{
+  margin-top:0px;
+}
+.nopadding-right{
+  padding-right:0px !important;
+}
+.nopadding-left{
+  padding-left:0px !important;
+}
+.nopadding-top{
+  padding-top:0px !important;
+}
+.nopadding-bottom{
+  padding-bottom:0px !important;
+}
+
+.tab-content {
+  margin-left: 0px;
+}
+
+.header-title {
+  font-size:60px;
+  text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135;
+  line-height:100px;
+}
+
+.navbar-nav.nav-justified > li{
+    float:none;
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before, [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+  margin-left: 0px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.navbar-nav-small {
+  min-height: 40px !important;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav-small ul li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+.text-lg {
+  font-size: 30px;
+  font-weight: 700;
+  text-shadow: 1px 1px 0px rgba(68, 68, 68, 0.38);
+}
+
+.text-middle > tbody > tr > td {
+  vertical-align: middle !important;
+}
+
+.text-middle > thead > tr > td {
+  vertical-align: middle !important;
+}
+
+.text-middle > td {
+  vertical-align: middle !important;
+}
+
+.avatar-xs {
+  height:22px; 
+  max-width:30px;
+}
+
+.avatar-sm {
+  height:35px; 
+  max-width:40px;
+}
+
+.avatar-md {
+  height:55px; 
+  max-width:60px;
+}
+
+.logo-torneo {
+  max-height: 145px;
+}
+
+.camiseta-equipo {
+  font-size:150px;
+  line-height: 120px;
+  width:100%;
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+}
+.camiseta-equipo div {
+  width:75px;
+  display: inline-block;
+  overflow:hidden;
+}
+
+.camiseta-equipo .segunda-mitad i {
+  margin-left:-75px;
+}
+
+/*.primera-mitad {
+  letter-spacing: -117px;
+}*/
+.img-xs {
+  max-width: 22px;
+  max-height: 22px;
+}
+.footer-down p a{
+  color: #fff;
+  font-weight: bold;
+}
+
+.score {
+  background-image: url(/torneo/img/img-theme/bg-score.png);
+  border-left: 7px solid;
+  border-right: 7px solid;
+}
+
+.score a{
+  color: #FFF;
+}
+
+/****  Widget Partidos ****/
+.widget-partido * .camiseta-equipo {
+  font-size:100px;
+  line-height: 90px;
+  margin-top: 0px;
+}
+.widget-partido .camiseta-equipo div {
+  width:50px;
+}
+
+.widget-partido .camiseta-equipo .segunda-mitad i {
+  margin-left:-55px;
+}
+.small-arrows .owl-theme .owl-controls .owl-buttons div {
+  padding:0px 6px;
+}
+/**--  END ****  Widget Partidos ****   **/
+
+
+@media (max-width: 1199px) {
+  .widget-partido * .camiseta-equipo {
+    font-size:90px;
+    line-height: 90px;
+    margin-top: 0px;
+  }
+  .widget-partido .camiseta-equipo div {
+    width:40px;
+  }
+
+  .widget-partido .camiseta-equipo .segunda-mitad i {
+    margin-left:-50px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-size:30px;
+    line-height:30px;
+    margin-top:0px;
+  }
+  .sb-page-header {
+    position: relative;
+    padding: 15px 7px;
+    text-align: center;
+    color: rgba(255,255,255,0.8);
+    /*background-color: #4C9832;*/
+    /*background-image: url('../images/bg-patterns/a2.png');*/
+    height:100px;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  .logo-torneo {
+  max-height: 70px;
+  }
+  .camiseta-equipo {
+    font-size:120px;
+    line-height: 100px;
+  }
+  .camiseta-equipo div {
+    width:55px;
+  }
+  .camiseta-equipo .segunda-mitad i {
+    margin-left:-75px;
+  }
+  .camiseta-equipo {
+    margin-top: 0px;
+  }
+  .list-group {
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 550px) {
+  .camiseta-equipo {
+    font-size:90px;
+    line-height: 80px;
+  }
+  .camiseta-equipo div {
+    width:38px;
+  }
+  .camiseta-equipo .segunda-mitad i {
+    margin-left:-47px;
+  }
+  .mobile-margin-top {
+    margin-top:15px;
+  }
+}
+
+@media (max-width: 420px) {
+  h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 6px;
+    margin-bottom: 3px;
+  }
+  .header-title {
+    font-size:25px;
+    text-shadow: 0px 1px 0px #666, 0px 2px 0px #555, 0px 3px 0px #444, 0px 4px 0px #333, 0px 5px 7px #222
+  }
+  .camiseta-equipo {
+    font-size:60px;
+    line-height: 50px;
+  }
+  .camiseta-equipo div {
+    width:30px;
+  }
+  .camiseta-equipo .segunda-mitad i {
+    margin-left:-35px;
+  }
+  .list-group-item {
+    padding: 5px 8px;
+  }
+  .padding-top {
+    padding-top: 20px;
+  }
+  .score {
+    font-size:12px;
+  }
+  .score .resultado h1 {
+    font-size: 40px;
+  }
+  .score h3 {
+    font-size: 14px;
+  }
+  .crumbs {
+    padding: 5px 0px;
+  }
+  .crumbs ul li {
+    font-size:14px;
+    line-height:12px;
+  }
+  .headerbox h1 {
+    font-size: 25px;
+    line-height: 20px;
+  }
+}
+.li-partido {
+  line-height: 12px;
+    margin-top: 4px;
+  float: none;
+  width: 115px;
+  height: 80px;
+  display: inline-block;
+  white-space: normal;
+  font-size: 13px;
+  margin-right: 4px;
+  background-color: #3d3d3d;
+  /* box-shadow: 0 0 6px rgba(0,0,0,0.5); */
+  position: relative !important;
+  -webkit-transition: all .25s linear;
+  -moz-transition: all .25s linear;
+  -ms-transition: all .25s linear;
+  -o-transition: all .25s linear;
+  transition: all .25s linear;
+}
+
+.li-partido .fecha {
+  color: #FFF;
+  font-size: 10px;
+  padding: 4px 0px;
+  float: left;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.li-partido .text {
+    float: left;
+    width: 100%;
+    padding: 7px 10px;
+    text-align: center;
+    -webkit-transition: all .25s linear;
+    -moz-transition: all .25s linear;
+    -ms-transition: all .25s linear;
+    -o-transition: all .25s linear;
+    transition: all .25s linear;
+}
+
+.li-partido .text .equipos {
+    margin: 5px 0px 4px 0px;
+}
+
+.li-partido .text .equipos a {
+    color: #999999;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: 'Fjalla One', sans-serif;
+}
+
+.li-partido .text .equipos a span {
+    color: #fff;
+    font-size: 16px;
+}
+
+.li-partido .text .equipos p.estado {
+  font-size: 10px;
+  color: #FFF;
+  padding: 3px 7px;
+  margin-top:8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  float: none;
+}
+
+.li-partido .text .equipos p.estado.jugado {
+  font-size: 12px;
+}
+
+
+.proximos-partidos {
+  padding-left:34px;
+  padding-right:20px;
+}
+
+.proximos-partidos.owl-theme .owl-controls .owl-buttons div {
+  padding:0px 6px;
+  margin-top:15px;
+}
+
+.proximos-partidos-title {
+  margin-top: -24px;
+  margin-left: -15px;
+  margin-bottom: 0px;
+  padding-left: 10px;
+  font-size: 13px;
+  line-height: 25px;
+}

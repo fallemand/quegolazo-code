@@ -13,22 +13,22 @@ namespace quegolazo_code.torneo {
     public partial class torneoMaster {
         
         /// <summary>
-        /// Control Head1.
+        /// Control headTorneoMaster.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+        protected global::System.Web.UI.HtmlControls.HtmlHead headTorneoMaster;
         
         /// <summary>
-        /// Control head.
+        /// Control headTorneoMasterContent.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder headTorneoMasterContent;
         
         /// <summary>
         /// Control form1.
