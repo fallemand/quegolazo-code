@@ -442,10 +442,7 @@
     <Content Include="torneo\js\jquery.js" />
     <Content Include="torneo\js\main.js" />
     <Content Include="torneo\js\modernizr.js" />
-    <Content Include="torneo\js\nav\hoverIntent.js" />
     <Content Include="torneo\js\nav\jquery.sticky.js" />
-    <Content Include="torneo\js\nav\superfish.js" />
-    <Content Include="torneo\js\nav\tinynav.js" />
     <Content Include="torneo\js\theme-options\jquery.cookies.js" />
     <Content Include="torneo\js\theme-options\theme-options.js" />
     <Content Include="torneo\js\totop\jquery.ui.totop.js" />

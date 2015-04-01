@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 
 /* ============================== 
 	- Template Name: Sports Cup- Responsive HTML5  soccer and sports Template
@@ -435,10 +435,8 @@ header{
 }
 .mainmenu{
 	width: 100%;
-	min-height: 65px;
-	background-color: #fff;
-	border-top: 1px solid #dedede;	
 	z-index: 9999;
+    margin-bottom:0px;
 }
 /* Header 2 --------------------------------------------------*/
 
