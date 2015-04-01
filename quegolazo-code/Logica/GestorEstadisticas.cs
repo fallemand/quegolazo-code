@@ -86,7 +86,7 @@ namespace Logica
 
        public DataTable obtenerGoleadoresDeUnEquipo(int idEquipo)
        {
-           return DaoEstadisticas.obtenerGoleadorEquipo(idEquipo, edicion.idEdicion);
+           return DaoEstadisticas.obtenerGoleadorEquipo(edicion.idEdicion, idEquipo);
        }
 
        public void guardarTablaPosicionesFinal(List<Int64> idEquipos, int idEdicion)

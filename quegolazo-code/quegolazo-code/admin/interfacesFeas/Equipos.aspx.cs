@@ -24,16 +24,19 @@ namespace quegolazo_code.admin.interfacesFeas
                 gestorEquipo = Sesion.getGestorEquipo();
                 gestorJugador = Sesion.getGestorJugador();
                 gestorEstadisticas = Sesion.getGestorEstadisticas();
-                imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
-                cargarRepeaterEquipos();
-                cargarRepeaterJugadores();
+                if (!Page.IsPostBack)
+                {
+                    imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.EQUIPO, GestorImagen.MEDIANA);
+                    cargarRepeaterEquipos();
+                    cargarRepeaterJugadores();
+                }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
         }
 
         private void cargarRepeaterEquipos()
         {
-            sinequipos.Visible = !GestorControles.cargarRepeaterList(rptEquipos, gestorEquipo.obtenerEquiposDeUnTorneo());
+            sinequipos.Visible = !GestorControles.cargarRepeaterList(rptEquipos1, gestorEquipo.obtenerEquiposDeUnTorneo());
         }
 
         private void mostrarPanelFracaso(string mensaje)
@@ -41,7 +44,7 @@ namespace quegolazo_code.admin.interfacesFeas
             GestorError.mostrarPanelFracaso(mensaje);
         }
 
-        protected void rptEquipos_ItemCommand(object source, RepeaterCommandEventArgs e)
+        protected void rptEquipos1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             try
             {
@@ -52,11 +55,11 @@ namespace quegolazo_code.admin.interfacesFeas
                     lblDirectorTecnico.Text = gestorEquipo.equipo.directorTecnico;
                     List<Delegado> delegados = gestorEquipo.obtenerDelegados();
                     lblDelegado1.Text = (delegados[0] != null) ? delegados[0].nombre : "";
-                    lblDelegado2.Text = (delegados[1] != null) ? delegados[1].nombre : "";
+                    lblDelegado2.Text = (delegados.Count>1) ? delegados[1].nombre : "";
                     imagenpreview.Src = gestorEquipo.equipo.obtenerImagenMediana();
                     cargarRepeaterJugadores();
                     cargarDatos(Int32.Parse(e.CommandArgument.ToString()));
-                    cargarGoleador(Int32.Parse(e.CommandArgument.ToString()));
+                    cargarGoleadores(Int32.Parse(e.CommandArgument.ToString()));
                     cargarUltimosPartidos();
                 }
             }
@@ -77,6 +80,7 @@ namespace quegolazo_code.admin.interfacesFeas
         {
             var estadisticasEquipo = gestorEstadisticas.obtenerEstadisticasEquipo(idEquipo);
             lblPuntos.Text = (estadisticasEquipo.Rows.Count > 0) ? estadisticasEquipo.Rows[0]["Puntos"].ToString() : "";
+            lblPartidosJugados.Text = (estadisticasEquipo.Rows.Count > 0) ? estadisticasEquipo.Rows[0]["PJ"].ToString() : ""; ;//Pedir a Pau
             lblGanados.Text = (estadisticasEquipo.Rows.Count > 0) ? estadisticasEquipo.Rows[0]["PG"].ToString() : ""; ;//Pedir a Pau
             lblPerdidos.Text = (estadisticasEquipo.Rows.Count > 0) ? estadisticasEquipo.Rows[0]["PP"].ToString() : ""; ;//Pedir a Pau
             lblEmpates.Text = (estadisticasEquipo.Rows.Count > 0) ? estadisticasEquipo.Rows[0]["PE"].ToString() : ""; ;//Pedir a Pau
@@ -86,17 +90,17 @@ namespace quegolazo_code.admin.interfacesFeas
             lblRojas.Text = (estadisticasEquipo.Rows.Count > 0) ? estadisticasEquipo.Rows[0]["ROJAS"].ToString() : ""; ;//Pedir a Pau
         }
 
-        private void cargarGoleador(int idEquipo)
+        private void cargarGoleadores(int idEquipo)
         {
-            var goleadores = gestorEstadisticas.obtenerGoleadoresDeUnEquipo(idEquipo);
-            imgGoleador.Src= (new Jugador(){idJugador=(goleadores.Rows.Count > 0) ? int.Parse(goleadores.Rows[0]["IdJugador"].ToString()):0}).obtenerImagenMediana();
-            lblNombreGoleador.Text = (goleadores.Rows.Count > 0) ? goleadores.Rows[0]["Jugador"].ToString() : "";//Pedir a Pau
-            lblGolesGoleador.Text = (goleadores.Rows.Count > 0) ? goleadores.Rows[0]["Goles"].ToString() : "";
+            GestorControles.cargarRepeaterTable(rptGoleadoresEquipo, gestorEstadisticas.obtenerGoleadoresDeUnEquipo(idEquipo)); 
         }
 
         private void cargarUltimosPartidos()
         {
-            GestorControles.cargarRepeaterTable(rptPartidos, gestorEstadisticas.obtenerUltimosPartidosEquipo(gestorEquipo.equipo.idEquipo)); //;Pedir a Pau list de partidos
+            GestorControles.cargarRepeaterTable(rptUltimosPartidos, gestorEstadisticas.obtenerUltimosPartidosEquipo(gestorEquipo.equipo.idEquipo)); //;Pedir a Pau list de partidos
         }
+
+      
+        
     }
 }
