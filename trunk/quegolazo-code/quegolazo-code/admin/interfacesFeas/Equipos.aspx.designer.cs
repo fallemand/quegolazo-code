@@ -13,13 +13,13 @@ namespace quegolazo_code.admin.interfacesFeas {
     public partial class Equipos {
         
         /// <summary>
-        /// Control rptEquipos.
+        /// Control rptEquipos1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptEquipos;
+        protected global::System.Web.UI.WebControls.Repeater rptEquipos1;
         
         /// <summary>
         /// Control sinequipos.
@@ -175,48 +175,21 @@ namespace quegolazo_code.admin.interfacesFeas {
         protected global::System.Web.UI.WebControls.Label lblRojas;
         
         /// <summary>
-        /// Control imgGoleador.
+        /// Control rptUltimosPartidos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgGoleador;
+        protected global::System.Web.UI.WebControls.Repeater rptUltimosPartidos;
         
         /// <summary>
-        /// Control lblNombreGoleador.
+        /// Control rptGoleadoresEquipo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombreGoleador;
-        
-        /// <summary>
-        /// Control lblGolesGoleador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblGolesGoleador;
-        
-        /// <summary>
-        /// Control lblPartidosGoleador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPartidosGoleador;
-        
-        /// <summary>
-        /// Control rptPartidos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptPartidos;
+        protected global::System.Web.UI.WebControls.Repeater rptGoleadoresEquipo;
     }
 }

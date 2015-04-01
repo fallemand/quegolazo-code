@@ -20,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody class="tablaFiltro">
-                            <asp:Repeater ID="rptEquipos" runat="server" OnItemCommand="rptEquipos_ItemCommand">
+                            <asp:Repeater ID="rptEquipos1" runat="server" OnItemCommand="rptEquipos1_ItemCommand">
                                 <ItemTemplate>
                                     <tr>
                                         <td>
@@ -107,60 +107,48 @@
             </div>
         </div>
         <div class="row">
-            <br />
+            <br />Partidos Jugados:
             <asp:Label ID="lblPartidosJugados" runat="server" Text=""></asp:Label>
-            <br />
+            <br />Partidos Ganados:
             <asp:Label ID="lblGanados" runat="server" Text=""></asp:Label>
-            <br />
+            <br />Empates:
             <asp:Label ID="lblEmpates" runat="server" Text=""></asp:Label>
-            <br />
+            <br />Partidos Perdidos: 
             <asp:Label ID="lblPerdidos" runat="server" Text=""></asp:Label>
-            <br />
+            <br />Goles a favor:
             <asp:Label ID="lblGolesFavor" runat="server" Text=""></asp:Label>
-            <br />
+            <br />Goles en Contra:
             <asp:Label ID="lblGolesContra" runat="server" Text=""></asp:Label>
-            <br />
+            <br />Tarjetas Amarillas:
             <asp:Label ID="lblAmarillas" runat="server" Text=""></asp:Label>
-            <br />
+            <br />Tarjetas Rojas:
             <asp:Label ID="lblRojas" runat="server" Text=""></asp:Label>
-        </div>
-        <div class="row">
-            <br />
-            Goleador del Equipo
-            <br />
-            <img id="imgGoleador" runat="server" />
-               <br />
-            <asp:Label ID="lblNombreGoleador" runat="server" Text=""></asp:Label>
-            <br />
-            <asp:Label ID="lblGolesGoleador" runat="server" Text=""></asp:Label>
-            <br />
-            <asp:Label ID="lblPartidosGoleador" runat="server" Text=""></asp:Label>
         </div>
         <div class="row">
             <br />
             Ultimos Partidos
                 <div class="panel panel-default">
-                    <div class="panel-body small-padding">
-                        <table id="tabla-fechas" class="table nomargin-bottom">
+                    <div class="panel-body">
+                        <table  class="table">
                             <thead style="display: none;">
                                 <tr>
                                     <th class="col-md-4">Equipo Local</th>
                                     <th class="col-md-2">Resultado</th>
                                     <th class="col-md-4">Equipo Visitante</th>
+                                    <th class="col-md-2">Fecha</th>
                                 </tr>
                             </thead>
-                            <tbody class="tablaFiltro">
-                                <asp:Repeater ID="rptPartidos" runat="server">
+                            <tbody>
+                                <asp:Repeater ID="rptUltimosPartidos" runat="server">
                                     <ItemTemplate>
-                                        <asp:Panel ID="panelPartidoNormal" runat="server" Visible="false">
                                             <tr>
                                                 <td><%# Eval("Equipo Local") %></td>
                                                 <td class="col-xs-4"><%# Eval("Goles Local") %>
                                                        - <%# Eval("Goles Visitante") %>
                                                 </td>
                                                 <td> <%# Eval("Equipo Visitante") %></td>  
+                                                <td> <%# Eval("Fecha") %></td>  
                                             </tr>
-                                        </asp:Panel>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </tbody>
@@ -168,5 +156,34 @@
                     </div>
                 </div>
         </div>
+        <div class="row">
+            <br />
+            Goleadores
+            <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table  class="table">
+                            <thead style="display: none;">
+                                <tr>
+                                    <th class="col-md-1"></th>
+                                    <th class="col-md-4">Jugador</th>
+                                    <th class="col-md-4">Goles</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <asp:Repeater ID="rptGoleadoresEquipo" runat="server">
+                                    <ItemTemplate>
+                                            <tr>
+                                               
+                                                <td> <%# Eval("Jugador") %></td>  
+                                                <td> <%# Eval("Goles") %></td>  
+                                            </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
     </div>
 </asp:Content>
