@@ -69,7 +69,8 @@ address i,
 address a,
 .list li i,
 .events-carousel h4 a,
-.pagination > li:hover a{
+.pagination > li:hover a,
+a{
 	color: #755C3B;
 }
 
