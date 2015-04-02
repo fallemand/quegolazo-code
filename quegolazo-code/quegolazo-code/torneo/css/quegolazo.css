@@ -43,6 +43,22 @@
   padding-bottom:0px !important;
 }
 
+.panel h3.panel-title {
+    padding-bottom:0px;
+}
+
+.panel h3.panel-title {
+    padding-bottom:0px;
+}
+
+.panel.nopadding .panel-body {
+    padding: 10px 0px 0px;
+}
+
+.panel .panel-heading {
+    padding:7px 15px 9px;
+}
+
 .tab-content {
   margin-left: 0px;
 }

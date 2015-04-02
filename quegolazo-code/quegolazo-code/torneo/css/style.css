@@ -73,8 +73,8 @@
 /* ------------------------------------------------------------------------ */
 
 /* bootstrap.css  - include resetes ( Media querys, grid-responsive,layout).*/
-@import url("/torneo/css/bootstrap/bootstrap.css");
-@import url("/torneo/css/bootstrap/bootstrap-theme.css");
+@import url("/torneo/css/bootstrap/sandstone.css");
+/*@import url("/torneo/css/bootstrap/bootstrap-theme.css");*/
 /*Nav.css*/
 @import url("/torneo/css/nav/megafish.css");
 /*jquery.fancybox.css  - Lightbox*/
