@@ -36,187 +36,185 @@
         <!-- Content Central -->
         <div class="container padding-top">
             <div class="row mobile-margin-top">
-                <div class="col-sm-12">
-                    <!-- content Players -->
-                    <div class="panel-box">
-                        <div class="row bg-dark">
-                            <!-- Otros partidos de la fecha -->
-                            <div class="col-sm-12">
-                                <p class="proximos-partidos-title">Otros Partidos de la Fecha</p>
-                                <ul class="proximos-partidos">
-                                    <li class="li-partido" style="width: 120px">
-                                        <span class="fecha theme-bg-color">September 26, 2015</span>
-                                        <div class="text">
-                                            <div class="equipos">
-                                                <a href="#">
-                                                    <span>BOC</span>
-                                                    vs
-                                                <span>ARG</span>
-                                                </a>
-                                                <p class="estado jugado theme-bg-color-2">
-                                                    2 (5) - 2 (3)
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="li-partido" style="width: 120px">
-                                        <span class="fecha theme-bg-color">September 26, 2015</span>
-                                        <div class="text">
-                                            <div class="equipos">
-                                                <a href="#">
-                                                    <span>BOC</span>
-                                                    vs
-                                                <span>ARG</span>
-                                                </a>
-                                                <p class="estado jugado theme-bg-color-2">
-                                                    2 (5) - 2 (3)
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="li-partido" style="width: 120px">
-                                        <span class="fecha theme-bg-color">September 26, 2015</span>
-                                        <div class="text">
-                                            <div class="equipos">
-                                                <a href="#">
-                                                    <span>BOC</span>
-                                                    vs
-                                                <span>ARG</span>
-                                                </a>
-                                                <p class="estado jugado theme-bg-color-2">
-                                                    2 (5) - 2 (3)
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="li-partido" style="width: 120px">
-                                        <span class="fecha theme-bg-color">September 26, 2015</span>
-                                        <div class="text">
-                                            <div class="equipos">
-                                                <a href="#">
-                                                    <span>BOC</span>
-                                                    vs
-                                                <span>ARG</span>
-                                                </a>
-                                                <p class="estado jugado theme-bg-color-2">
-                                                    2 (5) - 2 (3)
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="li-partido" style="width: 120px">
-                                        <span class="fecha theme-bg-color">September 26, 2015</span>
-                                        <div class="text">
-                                            <div class="equipos">
-                                                <a href="#">
-                                                    <span>BOC</span>
-                                                    vs
-                                                <span>ARG</span>
-                                                </a>
-                                                <p class="estado jugado theme-bg-color-2">
-                                                    2 (5) - 2 (3)
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="li-partido" style="width: 120px">
-                                        <span class="fecha theme-bg-color">September 26, 2015</span>
-                                        <div class="text">
-                                            <div class="equipos">
-                                                <a href="#">
-                                                    <span>BOC</span>
-                                                    vs
-                                                <span>ARG</span>
-                                                </a>
-                                                <p class="estado theme-bg-color-2">
-                                                    <i class="fa fa-clock-o"></i>
-                                                    Programado
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="li-partido" style="width: 120px">
-                                        <span class="fecha theme-bg-color">September 26, 2015</span>
-                                        <div class="text">
-                                            <div class="equipos">
-                                                <a href="#">
-                                                    <span>BOC</span>
-                                                    vs
-                                                <span>ARG</span>
-                                                </a>
-                                                <p class="estado theme-bg-color-2">
-                                                    <i class="fa fa-clock-o"></i>
-                                                    Programado
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="li-partido">
-                                        <span class="fecha theme-bg-color">September 26, 2015</span>
-                                        <div class="text">
-                                            <div class="equipos">
-                                                <a href="#">
-                                                    <span>BOC</span>
-                                                    vs
-                                                <span>ARG</span>
-                                                </a>
-                                                <p class="estado theme-bg-color-2">
-                                                    <i class="fa fa-ban"></i>
-                                                    Cancelado
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="li-partido">
-                                        <span class="fecha theme-bg-color">September 26, 2015</span>
-                                        <div class="text">
-                                            <div class="equipos">
-                                                <a href="#">
-                                                    <span>BOC</span>
-                                                    vs
-                                                <span>ARG</span>
-                                                </a>
-                                                <p class="estado theme-bg-color-2">
-                                                    <i class="fa fa-ban"></i>
-                                                    Cancelado
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="li-partido">
-                                        <span class="fecha theme-bg-color">September 26, 2015</span>
-                                        <div class="text">
-                                            <div class="equipos">
-                                                <a href="#">
-                                                    <span>BOC</span>
-                                                    vs
-                                                <span>ARG</span>
-                                                </a>
-                                                <p class="estado theme-bg-color-2">
-                                                    <i class="fa fa-ban"></i>
-                                                    Cancelado
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
 
-                                </ul>
-                            </div>
-                            <!-- END Otros partidos de la fecha -->
+                <!-- Otros Partidos de la Fecha -->
+                <div class="col-sm-12">
+                    <div class="panel nopadding panel-default">
+                        <div class="panel-body">
+                            <!-- Otros partidos de la fecha -->
+                            <p class="proximos-partidos-title">Otros Partidos de la Fecha</p>
+                            <ul class="proximos-partidos">
+                                <li class="li-partido" style="width: 120px">
+                                    <span class="fecha theme-bg-color">September 26, 2015</span>
+                                    <div class="text">
+                                        <div class="equipos">
+                                            <a href="#">
+                                                <span>BOC</span>
+                                                vs
+                                                    <span>ARG</span>
+                                            </a>
+                                            <p class="estado jugado theme-bg-color-2">
+                                                2 (5) - 2 (3)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li-partido" style="width: 120px">
+                                    <span class="fecha theme-bg-color">September 26, 2015</span>
+                                    <div class="text">
+                                        <div class="equipos">
+                                            <a href="#">
+                                                <span>BOC</span>
+                                                vs
+                                                    <span>ARG</span>
+                                            </a>
+                                            <p class="estado jugado theme-bg-color-2">
+                                                2 (5) - 2 (3)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li-partido" style="width: 120px">
+                                    <span class="fecha theme-bg-color">September 26, 2015</span>
+                                    <div class="text">
+                                        <div class="equipos">
+                                            <a href="#">
+                                                <span>BOC</span>
+                                                vs
+                                                    <span>ARG</span>
+                                            </a>
+                                            <p class="estado jugado theme-bg-color-2">
+                                                2 (5) - 2 (3)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li-partido" style="width: 120px">
+                                    <span class="fecha theme-bg-color">September 26, 2015</span>
+                                    <div class="text">
+                                        <div class="equipos">
+                                            <a href="#">
+                                                <span>BOC</span>
+                                                vs
+                                                    <span>ARG</span>
+                                            </a>
+                                            <p class="estado jugado theme-bg-color-2">
+                                                2 (5) - 2 (3)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li-partido" style="width: 120px">
+                                    <span class="fecha theme-bg-color">September 26, 2015</span>
+                                    <div class="text">
+                                        <div class="equipos">
+                                            <a href="#">
+                                                <span>BOC</span>
+                                                vs
+                                                    <span>ARG</span>
+                                            </a>
+                                            <p class="estado jugado theme-bg-color-2">
+                                                2 (5) - 2 (3)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li-partido" style="width: 120px">
+                                    <span class="fecha theme-bg-color">September 26, 2015</span>
+                                    <div class="text">
+                                        <div class="equipos">
+                                            <a href="#">
+                                                <span>BOC</span>
+                                                vs
+                                                    <span>ARG</span>
+                                            </a>
+                                            <p class="estado theme-bg-color-2">
+                                                <i class="fa fa-clock-o"></i>
+                                                Programado
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li-partido" style="width: 120px">
+                                    <span class="fecha theme-bg-color">September 26, 2015</span>
+                                    <div class="text">
+                                        <div class="equipos">
+                                            <a href="#">
+                                                <span>BOC</span>
+                                                vs
+                                                    <span>ARG</span>
+                                            </a>
+                                            <p class="estado theme-bg-color-2">
+                                                <i class="fa fa-clock-o"></i>
+                                                Programado
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li-partido">
+                                    <span class="fecha theme-bg-color">September 26, 2015</span>
+                                    <div class="text">
+                                        <div class="equipos">
+                                            <a href="#">
+                                                <span>BOC</span>
+                                                vs
+                                                    <span>ARG</span>
+                                            </a>
+                                            <p class="estado theme-bg-color-2">
+                                                <i class="fa fa-ban"></i>
+                                                Cancelado
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li-partido">
+                                    <span class="fecha theme-bg-color">September 26, 2015</span>
+                                    <div class="text">
+                                        <div class="equipos">
+                                            <a href="#">
+                                                <span>BOC</span>
+                                                vs
+                                                    <span>ARG</span>
+                                            </a>
+                                            <p class="estado theme-bg-color-2">
+                                                <i class="fa fa-ban"></i>
+                                                Cancelado
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="li-partido">
+                                    <span class="fecha theme-bg-color">September 26, 2015</span>
+                                    <div class="text">
+                                        <div class="equipos">
+                                            <a href="#">
+                                                <span>BOC</span>
+                                                vs
+                                                    <span>ARG</span>
+                                            </a>
+                                            <p class="estado theme-bg-color-2">
+                                                <i class="fa fa-ban"></i>
+                                                Cancelado
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <!-- End Players -->
+                <!-- END Otros partidos de la fecha -->
 
+                <!-- Tablero de Resultados -->
                 <div class="col-sm-12">
-                    <!-- content Players -->
                     <div class="panel-box score bg-dark theme-border">
                         <div class="row">
                             <div class="col-md-4 col-xs-3 nopadding-right padding-top">
                                 <!--<div class="camiseta-equipo text-center">
-                                    <span class="primera-mitad glyphicon glyphicon-triangle-left" style="color:#2966B8;"></span>
-                                    <span class="glyphicon glyphicon-triangle-right" style="color:#DFE32D;"></span>
-                                  </div>-->
+                                        <span class="primera-mitad glyphicon glyphicon-triangle-left" style="color:#2966B8;"></span>
+                                        <span class="glyphicon glyphicon-triangle-right" style="color:#DFE32D;"></span>
+                                      </div>-->
                                 <div class="row">
                                     <div class="camiseta-equipo">
                                         <div>
@@ -258,8 +256,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- End Players -->
+                <!-- END Tablero de Resultado -->
 
+                <!-- Resumen del Partido -->
                 <div class="col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -693,293 +692,295 @@
                                         </table>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- END Resumen del Partido -->
 
                 <!-- Widget Partidos Anteriores Equipo Local -->
-                    <div class="col-md-4 col-sm-6">
-                        <div class="panel nopadding panel-default small-arrows">
-                              <div class="panel-heading">
-                                    <h3 class="panel-title">Ultimos Partidos: Boca Juniors</h3>
-                              </div>
-                              <div class="panel-body">
-                                    <ul class="single-carousel">
-                                        <li>
-                                            <div class="widget-partido">
-                                                <div class="col-xs-4">
-                                                    <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block" style="max-height: 120px;">
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                                <div class="nopadding-left col-xs-4 resultado nopadding-right">
-                                                    <div class="thumbnail text-center col-xs-6">
-                                                        <h2>0</h2>
-                                                    </div>
-                                                    <div class="thumbnail text-center col-xs-6">
-                                                        <h2>0</h2>
-                                                    </div>
-                                                    <div class="col-xs-12 text-center">
-                                                        Fecha 14
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xs-4 nopadding-right">
-                                                    <div class="camiseta-equipo">
-                                                        <div>
-                                                            <i class="flaticon-football114" style="color: #005A96"></i>
-                                                        </div><!--
-                                                     --><div class="segunda-mitad">
-                                                            <i class="flaticon-football114" style="color: #FAD201"></i>
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                              </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="panel nopadding panel-default small-arrows">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Ultimos Partidos: Boca Juniors</h3>
                         </div>
-                    </div>
-
-                    <!-- End Widget Partidos Anteriores Equipo Local -->
-
-                    <!-- Widget Versus -->
-                    <div class="col-md-4 col-sm-6" style="margin-bottom: 10px;">
-                        <div class="panel nopadding panel-default small-arrows">
-                              <div class="panel-heading">
-                                    <h3 class="panel-title">Versus</h3>
-                              </div>
-                              <div class="panel-body">
-                                    <ul class="single-carousel">
-                                        <!-- Versus: Puntos -->
-                                        <li>
-                                            <div class="widget-partido">
-                                                <div class="col-xs-4 resultado">
-                                                    <div class="thumbnail text-center col-xs-12">
-                                                        <h2>39</h2>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                                <div class="col-xs-4 text-center resultado">
-                                                    <span class="flaticon-football31" aria-hidden="true"></span>
-                                                    <div class="col-xs-12 text-center">
-                                                        Puntos
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-4 resultado">
-                                                    <div class="thumbnail text-center col-xs-12">
-                                                        <h2>21</h2>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
+                        <div class="panel-body">
+                            <ul class="single-carousel">
+                                <li>
+                                    <div class="widget-partido">
+                                        <div class="col-xs-4">
+                                            <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block" style="max-height: 120px;">
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                        <div class="nopadding-left col-xs-4 resultado nopadding-right">
+                                            <div class="thumbnail text-center col-xs-6">
+                                                <h2>0</h2>
                                             </div>
-                                        </li>
-                                        <!-- END Versus: Puntos -->
-
-                                        <!-- Versus: Partidos Ganados -->
-                                        <li>
-                                            <div class="widget-partido">
-                                                <div class="col-xs-4 resultado">
-                                                    <div class="thumbnail text-center col-xs-12">
-                                                        <h2>6</h2>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                                <div class="col-xs-4 text-center resultado">
-                                                    <img src="/torneo/img/img-theme/ganador.png" class="img-circle avatar-md" alt="">
-                                                    <div class="col-xs-12 text-center">
-                                                        Partidos Ganados
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-4 resultado">
-                                                    <div class="thumbnail text-center col-xs-12">
-                                                        <h2>4</h2>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
+                                            <div class="thumbnail text-center col-xs-6">
+                                                <h2>0</h2>
                                             </div>
-                                        </li>
-                                        <!-- END Versus: Partidos Ganados -->
-
-                                        <!-- Versus: Tarjetas Rojas -->
-                                        <li>
-                                            <div class="widget-partido">
-                                                <div class="col-xs-4 resultado">
-                                                    <div class="thumbnail text-center col-xs-12">
-                                                        <h2>8</h2>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                                <div class="col-xs-4 text-center resultado">
-                                                    <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-md" alt="">
-                                                    <div class="col-xs-12 text-center">
-                                                        Tarjetas Rojas
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-4 resultado">
-                                                    <div class="thumbnail text-center col-xs-12">
-                                                        <h2>33</h2>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- END Versus: Tarjetas Rojas -->
-
-                                        <!-- Versus: Tarjetas Amarillas -->
-                                        <li>
-                                            <div class="widget-partido">
-                                                <div class="col-xs-4 resultado">
-                                                    <div class="thumbnail text-center col-xs-12">
-                                                        <h2>39</h2>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                                <div class="col-xs-4 text-center resultado">
-                                                    <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-md" alt="">
-                                                    <div class="col-xs-12 text-center">
-                                                        Tarjetas Amarillas
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-4 resultado">
-                                                    <div class="thumbnail text-center col-xs-12">
-                                                        <h2>21</h2>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- END Versus: Tarjetas Amarillas -->
-
-                                        <!-- Versus: Goles -->
-                                        <li>
-                                            <div class="widget-partido">
-                                                <div class="col-xs-4 resultado">
-                                                    <div class="thumbnail text-center col-xs-12">
-                                                        <h2>39</h2>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                                <div class="col-xs-4 text-center resultado">
-                                                    <span class="flaticon-flaming" aria-hidden="true" style="color: #E00C0C;"></span>
-                                                    <div class="col-xs-12 text-center">
-                                                        Goles a Favor
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-4 resultado">
-                                                    <div class="thumbnail text-center col-xs-12">
-                                                        <h2>21</h2>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- END Versus: Goles -->
-                                    </ul>
-                              </div>
-                        </div>
-                    </div>
-                    <!-- End Widget Versus -->
-
-                    <!-- Widget Partidos Anteriores Equipo Visitante -->
-                    <div class="col-md-4 col-sm-6">
-                        <div class="panel nopadding panel-default small-arrows">
-                              <div class="panel-heading">
-                                    <h3 class="panel-title">Ultimos Partidos: Boca Juniors</h3>
-                              </div>
-                              <div class="panel-body">
-                                    <ul class="single-carousel">
-                                        <li>
-                                            <div class="widget-partido">
-                                                <div class="col-xs-4">
-                                                    <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block" style="max-height: 120px;">
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                                <div class="nopadding-left col-xs-4 resultado nopadding-right">
-                                                    <div class="thumbnail text-center col-xs-6">
-                                                        <h2>0</h2>
-                                                    </div>
-                                                    <div class="thumbnail text-center col-xs-6">
-                                                        <h2>0</h2>
-                                                    </div>
-                                                    <div class="col-xs-12 text-center">
-                                                        Fecha 14
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xs-4 nopadding-right">
-                                                    <div class="camiseta-equipo">
-                                                        <div>
-                                                            <i class="flaticon-football114" style="color: #005A96"></i>
-                                                        </div><!--
-                                                     --><div class="segunda-mitad">
-                                                            <i class="flaticon-football114" style="color: #FAD201"></i>
-                                                        </div>
-                                                    </div>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                              </div>
-                        </div>
-                    </div>
-                    <!-- End Widget Partidos -->
-
-                    <!-- Galeria -->
-                    <div class="col-sm-6 col-md-12">
-                        <div class="panel panel-default small-arrows">
-                              <div class="panel-heading">
-                                    <h3 class="panel-title">Fotos del Partido</h3>
-                              </div>
-                              <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <!-- Items Gallery filters-->
-                                            <div class="portfolioContainer">
-                                                <div class="row">
-                                                    <!-- Item Gallery-->
-                                                    <div class="col-xs-6 col-sm-6 col-md-3 soccer">
-                                                        <div class="img-hover">
-                                                            <img src="/torneo/img/gallery/1.jpg" alt="" class="img-responsive">
-                                                            <div class="overlay"><a href="/torneo/img/gallery/1.jpg" class="fancybox">+</a></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Item Gallery-->
-                                                    <!-- Item Gallery-->
-                                                    <div class="col-xs-6 col-sm-6 col-md-3 soccer">
-                                                        <div class="img-hover">
-                                                            <img src="/torneo/img/gallery/2.jpg" alt="" class="img-responsive">
-                                                            <div class="overlay"><a href="/torneo/img/gallery/1.jpg" class="fancybox">+</a></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Item Gallery-->
-                                                    <!-- Item Gallery-->
-                                                    <div class="col-xs-6 col-sm-6 col-md-3 soccer">
-                                                        <div class="img-hover">
-                                                            <img src="/torneo/img/gallery/3.jpg" alt="" class="img-responsive">
-                                                            <div class="overlay"><a href="/torneo/img/gallery/1.jpg" class="fancybox">+</a></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Item Gallery-->
-                                                    <!-- Item Gallery-->
-                                                    <div class="col-xs-6 col-sm-6 col-md-3 soccer">
-                                                        <div class="img-hover">
-                                                            <img src="/torneo/img/gallery/5.jpg" alt="" class="img-responsive">
-                                                            <div class="overlay"><a href="/torneo/img/gallery/1.jpg" class="fancybox">+</a></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Item Gallery-->
-                                                </div>
-                                                <!-- End Items Gallery filters-->
+                                            <div class="col-xs-12 text-center">
+                                                Fecha 14
                                             </div>
                                         </div>
+
+                                        <div class="col-xs-4 nopadding-right">
+                                            <div class="camiseta-equipo">
+                                                <div>
+                                                    <i class="flaticon-football114" style="color: #005A96"></i>
+                                                </div><!--
+                                             --><div class="segunda-mitad">
+                                                    <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                </div>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
                                     </div>
-                              </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <!-- END Galeria de Fotos-->
+                </div>
+                <!-- End Widget Partidos Anteriores Equipo Local -->
+
+                <!-- Widget Versus -->
+                <div class="col-md-4 col-sm-6" style="margin-bottom: 10px;">
+                    <div class="panel nopadding panel-default small-arrows">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Versus</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="single-carousel">
+                                <!-- Versus: Puntos -->
+                                <li>
+                                    <div class="widget-partido">
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2>39</h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                        <div class="col-xs-4 text-center resultado">
+                                            <span class="flaticon-football31" aria-hidden="true"></span>
+                                            <div class="col-xs-12 text-center">
+                                                Puntos
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2>21</h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END Versus: Puntos -->
+
+                                <!-- Versus: Partidos Ganados -->
+                                <li>
+                                    <div class="widget-partido">
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2>6</h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                        <div class="col-xs-4 text-center resultado">
+                                            <img src="/torneo/img/img-theme/ganador.png" class="img-circle avatar-md" alt="">
+                                            <div class="col-xs-12 text-center">
+                                                Partidos Ganados
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2>4</h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END Versus: Partidos Ganados -->
+
+                                <!-- Versus: Tarjetas Rojas -->
+                                <li>
+                                    <div class="widget-partido">
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2>8</h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                        <div class="col-xs-4 text-center resultado">
+                                            <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-md" alt="">
+                                            <div class="col-xs-12 text-center">
+                                                Tarjetas Rojas
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2>33</h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END Versus: Tarjetas Rojas -->
+
+                                <!-- Versus: Tarjetas Amarillas -->
+                                <li>
+                                    <div class="widget-partido">
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2>39</h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                        <div class="col-xs-4 text-center resultado">
+                                            <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-md" alt="">
+                                            <div class="col-xs-12 text-center">
+                                                Tarjetas Amarillas
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2>21</h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END Versus: Tarjetas Amarillas -->
+
+                                <!-- Versus: Goles -->
+                                <li>
+                                    <div class="widget-partido">
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2>39</h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                        <div class="col-xs-4 text-center resultado">
+                                            <span class="flaticon-flaming" aria-hidden="true" style="color: #E00C0C;"></span>
+                                            <div class="col-xs-12 text-center">
+                                                Goles a Favor
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2>21</h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END Versus: Goles -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Widget Versus -->
+
+                <!-- Widget Partidos Anteriores Equipo Visitante -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="panel nopadding panel-default small-arrows">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Ultimos Partidos: Boca Juniors</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="single-carousel">
+                                <li>
+                                    <div class="widget-partido">
+                                        <div class="col-xs-4">
+                                            <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block" style="max-height: 120px;">
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                        <div class="nopadding-left col-xs-4 resultado nopadding-right">
+                                            <div class="thumbnail text-center col-xs-6">
+                                                <h2>0</h2>
+                                            </div>
+                                            <div class="thumbnail text-center col-xs-6">
+                                                <h2>0</h2>
+                                            </div>
+                                            <div class="col-xs-12 text-center">
+                                                Fecha 14
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-4 nopadding-right">
+                                            <div class="camiseta-equipo">
+                                                <div>
+                                                    <i class="flaticon-football114" style="color: #005A96"></i>
+                                                </div><!--
+                                                --><div class="segunda-mitad">
+                                                    <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                </div>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Widget Partidos -->
+
+                <!-- Galeria -->
+                <div class="col-sm-6 col-md-12">
+                    <div class="panel panel-default small-arrows">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Fotos del Partido</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- Items Gallery filters-->
+                                    <div class="portfolioContainer">
+                                        <div class="row">
+                                            <!-- Item Gallery-->
+                                            <div class="col-xs-6 col-sm-6 col-md-3 soccer">
+                                                <div class="img-hover">
+                                                    <img src="/torneo/img/gallery/1.jpg" alt="" class="img-responsive">
+                                                    <div class="overlay"><a href="/torneo/img/gallery/1.jpg" class="fancybox">+</a></div>
+                                                </div>
+                                            </div>
+                                            <!-- End Item Gallery-->
+                                            <!-- Item Gallery-->
+                                            <div class="col-xs-6 col-sm-6 col-md-3 soccer">
+                                                <div class="img-hover">
+                                                    <img src="/torneo/img/gallery/2.jpg" alt="" class="img-responsive">
+                                                    <div class="overlay"><a href="/torneo/img/gallery/1.jpg" class="fancybox">+</a></div>
+                                                </div>
+                                            </div>
+                                            <!-- End Item Gallery-->
+                                            <!-- Item Gallery-->
+                                            <div class="col-xs-6 col-sm-6 col-md-3 soccer">
+                                                <div class="img-hover">
+                                                    <img src="/torneo/img/gallery/3.jpg" alt="" class="img-responsive">
+                                                    <div class="overlay"><a href="/torneo/img/gallery/1.jpg" class="fancybox">+</a></div>
+                                                </div>
+                                            </div>
+                                            <!-- End Item Gallery-->
+                                            <!-- Item Gallery-->
+                                            <div class="col-xs-6 col-sm-6 col-md-3 soccer">
+                                                <div class="img-hover">
+                                                    <img src="/torneo/img/gallery/5.jpg" alt="" class="img-responsive">
+                                                    <div class="overlay"><a href="/torneo/img/gallery/1.jpg" class="fancybox">+</a></div>
+                                                </div>
+                                            </div>
+                                            <!-- End Item Gallery-->
+                                        </div>
+                                        <!-- End Items Gallery filters-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Galeria de Fotos-->
+
             </div>
         </div>
         <!-- End Content Central -->

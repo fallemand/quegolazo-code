@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 
 /* ============================== 
 	- Template Name: Sports Cup- Responsive HTML5  soccer and sports Template
@@ -73,7 +73,7 @@
 /* ------------------------------------------------------------------------ */
 
 /* bootstrap.css  - include resetes ( Media querys, grid-responsive,layout).*/
-@import url("/torneo/css/bootstrap/sandstone.css");
+/*@import url("/torneo/css/bootstrap/superhero.css");*/
 /*@import url("/torneo/css/bootstrap/bootstrap-theme.css");*/
 /*Nav.css*/
 @import url("/torneo/css/nav/megafish.css");
@@ -103,8 +103,6 @@
 /* Standar Styles --------------------------------------------------------*/
 
 body{
-	font-family: 'Open Sans', sans-serif;
-	color: #727272;
 	font-size: 14px;
 	font-weight: normal;
 	line-height: 23px;
@@ -115,9 +113,7 @@ body{
 h1, h2, h3, h4, h5, h6 {	
 	padding: 5px 0 15px 0;	
 	margin: 0;	
-	color: #272727;
 	font-weight: normal;
-	font-family: 'Raleway', sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
 p{
@@ -512,6 +508,8 @@ header{
 .is-sticky .mainmenu {
 	min-height: 30px;
 	left: 0;
+    top:0px;
+    position:fixed;
 }
 .is-sticky .sf-menu .sf-mega ,
 .is-sticky .sf-menu li:hover > .sf-mega,
