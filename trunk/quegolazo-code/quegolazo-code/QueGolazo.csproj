@@ -732,7 +732,6 @@
     <Content Include="resources\torneo\img\sponsors\Descr.WD3" />
     <Content Include="resources\torneo\img\testimonials\Descr.WD3" />
     <Content Include="torneo\torneoMaster.Master" />
-    <Content Include="torneo\js\fancybox\Thumbs.db" />
     <Content Include="torneo\fonts\flaticon.eot" />
     <Content Include="torneo\fonts\flaticon.ttf" />
     <Content Include="torneo\fonts\flaticon.woff" />

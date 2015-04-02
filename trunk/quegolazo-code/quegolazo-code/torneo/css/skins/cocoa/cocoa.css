@@ -91,7 +91,7 @@ address a,
 .item-clubs{
 	border-right: 5px solid #755C3B;	
 }
-.titles h4{
+.panel .panel-heading, .titles h4{
 	border-left: 5px solid #755C3B;
 }
 .pagination > .active > a,
