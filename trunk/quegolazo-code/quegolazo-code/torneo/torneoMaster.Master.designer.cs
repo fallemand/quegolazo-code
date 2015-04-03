@@ -22,6 +22,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.HtmlControls.HtmlHead headTorneoMaster;
         
         /// <summary>
+        /// Control theme.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlLink theme;
+        
+        /// <summary>
         /// Control headTorneoMasterContent.
         /// </summary>
         /// <remarks>

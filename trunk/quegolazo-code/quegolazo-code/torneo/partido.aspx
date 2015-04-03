@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/torneo/torneoMaster.Master" AutoEventWireup="true" CodeBehind="partido.aspx.cs" Inherits="quegolazo_code.torneo.partido" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headTorneoMasterContent" runat="server">
+    <!--Theme Options-->
+    <script type='text/javascript' src="/torneo/js/theme-options/theme-options.js"></script>
+    <link href="css/colorPicker.css" rel="stylesheet" />
+    <script src="../resources/js/jquery.colorPicker.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
     <section class="section-title img-about">
@@ -10,7 +14,6 @@
         </div>
     </section>
     <!-- End Section Title -->
-
     <!-- Section Area - Content Central -->
     <section class="content-info">
         <div class="crumbs">
@@ -985,4 +988,103 @@
         </div>
         <!-- End Content Central -->
     </section>
+    <!-- Theme-options -->
+    <div id="theme-options" style="z-index:9999">
+            <div class="openclose"></div>
+            <div class="title">
+               <span>OPCIONES DEL TEMA</span>
+               </div>
+        <span>Tema</span>
+            <ul id="themeSelector" class="text-center">      
+                <li class="cyborg" title="Cyborg"><span>1</span></li>
+                <li class="darkly" title="Darkly"><span>2</span></li>                    
+                <li class="flatly"  title="Flatly"><span>3</span></li>
+                <li class="sandstone" title="Sandstone"><span>4</span></li>
+                <li class="slate" title="Slate"><span>5</span></li>
+                <li class="hero" title="Super Heroe"><span>6</span></li>
+                <li class="yeti"  title="Yeti"><span>7</span></li>                
+            </ul> 
+            <span>Color destacado</span>
+            <ul id="colorchanger">      
+                <li><a class="colorbox red" href="about0e99.html?theme=red" title="Red Skin"></a></li>
+                <li><a class="colorbox blue" href="aboutca00.html?theme=blue" title="Blue Skin"></a></li>                    
+                <li><a class="colorbox yellow" href="about2746.html?theme=yellow" title="Yellow Skin"></a></li>
+                <li><a class="colorbox green" href="aboutaf91.html?theme=green" title="Green Skin"></a></li>
+                <li><a class="colorbox orange" href="aboutceb0.html?theme=orange" title="Orange Skin"></a></li>
+                <li><a class="colorbox purple" href="about938c.html?theme=purple" title="Purple Skin"></a></li>
+                <li><a class="colorbox pink" href="abouta820.html?theme=pink" title="Pink Skin"></a></li>
+                <li><a class="colorbox cocoa" href="about6788.html?theme=cocoa" title="Cocoa Skin"></a></li>
+            </ul>           
+            <span>Patron del header</span>
+            <ul class="backgrounds-h">
+                    <li class="bgnone" title="None - Default"></li>
+                    <li class="bg1"></li>
+                    <li class="bg2"></li>
+                    <li class="bg3"></li>
+                    <li class="bg4 "></li>
+                    <li class="bg5"></li> 
+                    <li class="bg6"></li>
+                    <li class="bg7"></li>                                  
+                </ul>  
+            <span>Colores:</span>
+           <ul class="layout-style text-center">    
+                <li>
+                    Fondo
+                    <div id="colorFondo" class="conBorde">
+                    <div class="cp-background"></div>
+                    </div>
+                </li>    
+                <li >
+                    Header
+                    <div id="colorHeader" class="conBorde">
+                    <div class="cp-background"></div>
+                    </div>
+                </li>                                 
+            </ul> 
+            <span>ESTILO DE PAGINA</span>
+            <ul class="layout-style">      
+                <li class="wide">ANCHO</li>
+                <li class="semiboxed active">SEMI CAJA</li> 
+                <li class="boxed">CAJA</li> 
+                <li class="boxed-margin">CAJA C/MARGEN</li>               
+            </ul>               
+            <div class="patterns">               
+            <span>PATRON DEL FONDO</span>
+            <ul class="backgrounds">
+                    <li class="bgnone" title="None - Default"></li>
+                    <li class="bg1"></li>
+                    <li class="bg2"></li>
+                    <li class="bg3"></li>
+                    <li class="bg4 "></li>
+                    <li class="bg5"></li> 
+                    <li class="bg6"></li>
+                    <li class="bg7"></li>
+                    <li class="bg8"></li>
+                    <li class="bg9 "></li>
+                    <li class="bg10"></li> 
+                    <li class="bg11"></li> 
+                    <li class="bg12"></li> 
+                    <li class="bg13"></li> 
+                    <li class="bg14"></li> 
+                    <li class="bg15"></li> 
+                    <li class="bg16"></li> 
+                    <li class="bg17"></li> 
+                    <li class="bg18"></li> 
+                    <li class="bg19"></li> 
+                    <li class="bg20"></li> 
+                    <li class="bg21"></li> 
+                    <li class="bg22"></li> 
+                    <li class="bg23"></li>              
+                </ul>  
+            </div>
+            <ul class="layout-style">    
+                <li class="btn btn-danger" id="cerrarConfig">Cerrar</li>    
+                <li onclick="guardarConfiguracion()" class="btn btn-primary">Guardar</li>                                 
+            </ul> 
+            <div class="col-xs-12">
+            <span id="msjeAjax" class="text-center"></span>  
+            </div>                       
+        </div>
+    <!-- End Theme-options -->      
+
 </asp:Content>
