@@ -14,5 +14,6 @@ namespace Entidades
         public string estiloPagina { get; set; }
         public string colorHeader { get; set; }
         public string patronHeader { get; set; }
+        public string theme { get; set; }
     }
 }

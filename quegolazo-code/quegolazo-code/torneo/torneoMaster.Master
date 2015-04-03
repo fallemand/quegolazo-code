@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Theme CSS -->
-    <link href="/torneo/css/bootstrap/sandstone.css" rel="stylesheet" media="screen">
+    <link id="theme" href="/torneo/css/bootstrap/sandstone.css" rel="stylesheet" media="screen">
     <link href="/torneo/css/style.css" rel="stylesheet" media="screen">
     <link href="/torneo/css/quegolazo.css" rel="stylesheet">
 
@@ -28,7 +28,8 @@
 
     <!-- Head Libs -->
     <script src="/torneo/js/modernizr.js"></script>
-
+    <!-- jQuery local-->
+    <script src="/torneo/js/jquery.js"></script>
     <!--[if IE]>
             <link rel="stylesheet" href="css/ie/ie.css">
         <![endif]-->
@@ -182,9 +183,7 @@
     </div>
     <!-- End layout-->
 
-    <!-- ======================= JQuery libs =========================== -->
-    <!-- jQuery local-->
-    <script src="/torneo/js/jquery.js"></script>
+    <!-- ======================= JQuery libs =========================== -->    
     <!--Nav-->
     <script type="text/javascript" src="/torneo/js/nav/jquery.sticky.js" ></script>
     <!--Totop-->
@@ -197,8 +196,6 @@
     <script type='text/javascript' src="/torneo/js/filters/jquery.isotope.js"></script>
     <!-- Counter -->
     <script type='text/javascript' src="/torneo/js/counter/jquery.countdown.js"></script>
-    <!--Theme Options-->
-    <script type='text/javascript' src="/torneo/js/theme-options/theme-options.js"></script>
     <script type="text/javascript" src="/torneo/js/theme-options/jquery.cookies.js"></script>
     <!-- Bootstrap.js-->
     <script type="text/javascript" src="/torneo/js/bootstrap/bootstrap.js"></script>

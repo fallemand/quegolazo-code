@@ -768,9 +768,8 @@
         <!-- flickr Feed-->
         <script src="../resources/torneo/js/flickr/jflickrfeed.min.js"></script> 
         <!-- Counter -->
-        <script src="../resources/torneo/js/counter/jquery.countdown.js"></script>      
-        <!--Theme Options-->        
-        <script type="text/javascript" src="../resources/torneo/js/theme-options/jquery.cookies.js"></script>         
+        <script src="../resources/torneo/js/counter/jquery.countdown.js"></script>  
+      
         <!-- Bootstrap.js-->
         <script type="text/javascript" src="../resources/torneo/js/bootstrap/bootstrap.js"></script> 
         <!--MAIN FUNCTIONS-->

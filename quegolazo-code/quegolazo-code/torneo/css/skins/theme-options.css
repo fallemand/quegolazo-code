@@ -158,7 +158,7 @@
 	width: auto;	
 	left:-220px;
 	width: 220px;
-	top: 100px;
+	top: 10px;
 	border: 1px solid #dbdbdb;
 	border-left: 0;
 	border-radius: 0 8px 8px 0;
@@ -170,6 +170,7 @@
 	-o-transition: 0.3s all ease;
 	-ms-transition: 0.3s all ease;
 	transition: 0.3s all ease;
+    color:black !important;
 }
 #theme-options .title {
 	padding: 10px 5px 0 12px;	
@@ -240,4 +241,38 @@
 	font-size: 11px;
 	color: #424242;
 }
-
+#themeSelector li {
+font-weight:bold;    
+}
+#themeSelector li span{
+  margin-left: -7px;
+  margin-top: -1px; 
+}
+.cyborg {
+  background-color: rgb(34, 34, 34);
+  color: rgb(136, 136, 136);
+}
+.darkly {
+  background-color: rgb(0, 188, 140);
+  color: rgb(255, 255, 255);
+}
+.flatly {
+  background-color: rgb(24, 188, 156);
+  color: rgb(254, 255, 255);
+}
+.sandstone {
+  background-color: rgb(147, 197, 75);
+  color: rgb(110, 152, 49);
+}
+.slate {
+  background-color: rgb(124, 132, 138);
+  color: rgb(199, 199, 199);
+}
+.hero {
+  background-color: rgb(223, 105, 26);
+  color: rgb(234, 228, 224);  
+}
+.yeti {
+  background-color: rgb(0, 140, 186);
+  color: rgb(222, 240, 246);  
+}
