@@ -7,13 +7,15 @@
     <script src="../resources/js/jquery.colorPicker.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
+    <!-- Titulo Sección -->
     <section class="section-title img-about">
         <div class="overlay-bg"></div>
         <div class="container">
             <h1>Partido</h1>
         </div>
     </section>
-    <!-- End Section Title -->
+    <!-- End Titulo Sección -->
+
     <!-- Section Area - Content Central -->
     <section class="content-info">
         <div class="crumbs">
@@ -44,7 +46,6 @@
                 <div class="col-sm-12">
                     <div class="panel nopadding panel-default">
                         <div class="panel-body">
-                            <!-- Otros partidos de la fecha -->
                             <p class="proximos-partidos-title">Otros Partidos de la Fecha</p>
                             <ul class="proximos-partidos">
                                 <li class="li-partido" style="width: 120px">
@@ -202,7 +203,6 @@
                                         </div>
                                     </div>
                                 </li>
-
                             </ul>
                         </div>
                     </div>
@@ -277,8 +277,6 @@
                                         </button>
                                         <span class="navbar-brand visible-xs" href="#">Estadísticas</span>
                                     </div>
-
-                                    <!-- Collect the nav links, forms, and other content for toggling -->
                                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                         <ul class="nav navbar-nav  nav-justified">
                                             <li class="active"><a href="#resumen" data-toggle="tab"><span class="flaticon-football128"></span>Resumen</a></li>
@@ -289,9 +287,7 @@
                                             <li><a href="#sanciones" data-toggle="tab"><span class="flaticon-black188"></span>Sanciones</a></li>
                                         </ul>
                                     </div>
-                                    <!-- /.navbar-collapse -->
                                 </div>
-                                <!-- /.container-fluid -->
                             </nav>
 
 
