@@ -33,8 +33,7 @@
 .owl-theme .owl-controls .owl-page.active span,
 .owl-theme .owl-controls.clickable .owl-page:hover span,
 .pagination > .active > a,
-.pagination > .active:hover > a,
-a{
+.pagination > .active:hover > a {
 	background: #E1483F; 
 	background-color: #E1483F; 
 }
@@ -70,7 +69,8 @@ address i,
 address a,
 .list li i,
 .events-carousel h4 a,
-.pagination > li:hover a{
+.pagination > li:hover a,
+a{
 	color: #E1483F;
 }
 
