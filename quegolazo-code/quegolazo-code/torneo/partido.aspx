@@ -998,7 +998,8 @@
                 <li class="sandstone" title="Sandstone"><span>4</span></li>
                 <li class="slate" title="Slate"><span>5</span></li>
                 <li class="hero" title="Super Heroe"><span>6</span></li>
-                <li class="yeti"  title="Yeti"><span>7</span></li>                
+                <li class="yeti"  title="Yeti"><span>7</span></li>      
+                <li class="bootstrap"  title="Bootstrap"><span>8</span></li>            
             </ul> 
             <span>Color destacado</span>
             <ul id="colorchanger">      
@@ -1070,7 +1071,7 @@
                     <li class="bg20"></li> 
                     <li class="bg21"></li> 
                     <li class="bg22"></li> 
-                    <li class="bg23"></li>              
+                    <li class="bg23"></li>          
                 </ul>  
             </div>
             <ul class="layout-style">    

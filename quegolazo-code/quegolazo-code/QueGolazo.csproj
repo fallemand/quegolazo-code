@@ -578,6 +578,7 @@
     <Content Include="torneo\img\section-titles\Descr.WD3" />
     <Content Include="torneo\img\section-titles\Thumbs.db" />
     <Content Include="torneo\img\bg-theme\Descr.WD3" />
+    <Content Include="torneo\fonts\glyphicon\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
