@@ -397,3 +397,10 @@
   font-size: 13px;
   line-height: 30px;
 }
+
+
+@media (min-width: 768px) {
+    .navbar {
+        border-radius: 0px;
+    }
+}

@@ -85,6 +85,10 @@
 	'use strict';
 
 	    //Theme Selector
+	$("#themeSelector .bootstrap").click(function () {
+	    $("#theme").attr("href", "/torneo/css/bootstrap/bootstrap.css");
+	    return false;
+	});
 	$("#themeSelector .cyborg").click(function () {
 	    $("#theme").attr("href", "/torneo/css/bootstrap/cyborg.css");
 	    return false;
