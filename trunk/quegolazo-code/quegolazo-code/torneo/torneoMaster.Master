@@ -58,12 +58,13 @@
                 <div class="container">
                     <div class="row">
                         <!-- Logo-->
-                        <div class="col-md-2 col-xs-4 col-sm-3">
-                            <img src="/torneo/img/img-theme/torneo.jpg" alt="Torneo XXXX" class="img-thumbnail image-responsive">
+                        <div class="col-md-2 col-xs-3 col-sm-2 mobile-nopadding-right">
+                            <img src="/torneo/img/img-theme/torneo.jpg" alt="Torneo XXXX" style="max-height:100px" class="img-thumbnail image-responsive">
                         </div>
                         <!-- End Logo-->
-                        <div class="col-md-7">
-                            <h1>Torneo Federal Argetina</h1>
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <h1 class="titulo-torneo">Torneo Federal Argetina</h1>
+                            <h2 class="titulo-torneo visible-md visible-lg">Con la tecnología de <strong>QueGolazo!</strong></h2>
                         </div>
                     </div>
                 </div>

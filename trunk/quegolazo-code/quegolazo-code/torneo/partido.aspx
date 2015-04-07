@@ -1003,14 +1003,21 @@
             </ul> 
             <span>Color destacado</span>
             <ul id="colorchanger">      
-                <li><a class="colorbox red" href="about0e99.html?theme=red" title="Red Skin"></a></li>
-                <li><a class="colorbox blue" href="aboutca00.html?theme=blue" title="Blue Skin"></a></li>                    
-                <li><a class="colorbox yellow" href="about2746.html?theme=yellow" title="Yellow Skin"></a></li>
-                <li><a class="colorbox green" href="aboutaf91.html?theme=green" title="Green Skin"></a></li>
-                <li><a class="colorbox orange" href="aboutceb0.html?theme=orange" title="Orange Skin"></a></li>
-                <li><a class="colorbox purple" href="about938c.html?theme=purple" title="Purple Skin"></a></li>
-                <li><a class="colorbox pink" href="abouta820.html?theme=pink" title="Pink Skin"></a></li>
-                <li><a class="colorbox cocoa" href="about6788.html?theme=cocoa" title="Cocoa Skin"></a></li>
+                <li><a class="colorbox red" href="#" title="Red Skin"></a></li>
+                <li><a class="colorbox blue" href="#" title="Blue Skin"></a></li>                    
+                <li><a class="colorbox yellow" href="#" title="Yellow Skin"></a></li>
+                <li><a class="colorbox green" href="#" title="Green Skin"></a></li>
+                <li><a class="colorbox orange" href="#" title="Orange Skin"></a></li>
+                <li><a class="colorbox purple" href="#" title="Purple Skin"></a></li>
+                <li><a class="colorbox pink" href="#" title="Pink Skin"></a></li>
+                <li><a class="colorbox cocoa" href="#" title="Cocoa Skin"></a></li>
+            </ul> 
+            <span>ESTILO DE PAGINA</span>
+            <ul class="layout-style">      
+                <li class="wide">ANCHO</li>
+                <li class="semiboxed active">SEMI CAJA</li> 
+                <li class="boxed">CAJA</li> 
+                <li class="boxed-margin">C/MARGEN</li>               
             </ul>           
             <span>Patron del header</span>
             <ul class="backgrounds-h">
@@ -1037,14 +1044,7 @@
                     <div class="cp-background"></div>
                     </div>
                 </li>                                 
-            </ul> 
-            <span>ESTILO DE PAGINA</span>
-            <ul class="layout-style">      
-                <li class="wide">ANCHO</li>
-                <li class="semiboxed active">SEMI CAJA</li> 
-                <li class="boxed">CAJA</li> 
-                <li class="boxed-margin">CAJA C/MARGEN</li>               
-            </ul>               
+            </ul>           
             <div class="patterns">               
             <span>PATRON DEL FONDO</span>
             <ul class="backgrounds">
@@ -1087,7 +1087,7 @@
                 <li onclick="guardarConfiguracion()" class="btn btn-primary">Guardar</li>                                 
             </ul> 
             <div class="col-xs-12">
-            <span id="msjeAjax" class="text-center"></span>  
+            <span id="msjeAjax" class="text-center nomargin-bottom"></span>  
             </div>                       
         </div>
     <!-- End Theme-options -->      
