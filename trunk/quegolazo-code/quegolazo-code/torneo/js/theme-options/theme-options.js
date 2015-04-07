@@ -157,10 +157,14 @@
 	//=================================== Background Options ====================================//
 	
 	$('#theme-options ul.backgrounds li').click(function(){
-	var 	$bgSrc = $(this).css('background-image');
+	    var $bgSrc = $(this).css('background-image');
 		if ($(this).attr('class') == 'bgnone')
-			$bgSrc = "none";
-		$('body').css('background-image',$bgSrc);
+		    $bgSrc = "none";
+		if ($(this).hasClass('fixed')) 
+		    $('body').addClass('fixed');
+		else 
+		    $('body').removeClass('fixed');
+		$('body').css('background-image', $bgSrc);
 		$.cookie('background', $bgSrc);
 		$.cookie('backgroundclass', $(this).attr('class').replace(' active',''));
 		$(this).addClass('active').siblings().removeClass('active');

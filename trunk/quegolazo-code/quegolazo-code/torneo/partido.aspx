@@ -1071,7 +1071,15 @@
                     <li class="bg20"></li> 
                     <li class="bg21"></li> 
                     <li class="bg22"></li> 
-                    <li class="bg23"></li>          
+                    <li class="bg23"></li> 
+                    <li class="a1"></li>   
+                    <li class="a2"></li> 
+                    <li class="a3"></li>   
+                    <li class="a4"></li>      
+                    <li class="a5"></li>     
+                    <li class="c1 fixed"></li>   
+                    <li class="c2 fixed"></li> 
+                    <li class="c3 fixed"></li>    
                 </ul>  
             </div>
             <ul class="layout-style">    
