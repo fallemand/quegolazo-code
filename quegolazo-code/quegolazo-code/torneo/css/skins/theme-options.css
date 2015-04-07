@@ -115,12 +115,32 @@
 .bg21 { background-image: url("../../img/bg-theme/21.png"); }
 .bg22 { background-image: url("../../img/bg-theme/22.png"); }
 .bg23 { background-image: url("../../img/bg-theme/23.png"); }
-.bg24 { background-image: url("../../img/bg-theme/24.png"); }
-.bg25 { background-image: url("../../img/bg-theme/25.png"); }
-.bg26 { background-image: url("../../img/bg-theme/26.png"); }
+.a1 { background-image: url("../../img/bg-theme/a1.png"); }
+.a2 { background-image: url("../../img/bg-theme/a2.png"); }
+.a3 { background-image: url("../../img/bg-theme/a3.png"); }
+.a4 { background-image: url("../../img/bg-theme/a4.png"); }
+.a5 { background-image: url("../../img/bg-theme/a5.png"); }
+.c1 { background: url("../../img/bg-theme/c1.png") no-repeat center fixed; }
+.c2 { background: url("../../img/bg-theme/c2.png") no-repeat center fixed; }
+.c3 { background: url("../../img/bg-theme/c3.png") no-repeat center fixed; }
+.c1, .c2, .c3 {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body.fixed {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
 
 /* BACKGROUNDS PATTERS -------------------------------*/
-
 #theme-options ul.backgrounds li.bgnone { background-image: url("../../img/bg-theme/none.jpg"); }
 #theme-options ul.backgrounds li.bg1 { background-image: url("../../img/bg-theme/1.png"); }
 #theme-options ul.backgrounds li.bg2 { background-image: url("../../img/bg-theme/2.png"); }
@@ -145,9 +165,11 @@
 #theme-options ul.backgrounds li.bg21 { background-image: url("../../img/bg-theme/21.png"); }
 #theme-options ul.backgrounds li.bg22 { background-image: url("../../img/bg-theme/22.png"); }
 #theme-options ul.backgrounds li.bg23 { background-image: url("../../img/bg-theme/23.png"); }
-#theme-options ul.backgrounds li.bg24 { background-image: url("../../img/bg-theme/24.png"); }
-#theme-options ul.backgrounds li.bg25 { background-image: url("../../img/bg-theme/25.png"); }
-#theme-options ul.backgrounds li.bg26 { background-image: url("../../img/bg-theme/26.png"); }
+#theme-options ul.backgrounds li.a1 { background-image: url("../../img/bg-theme/a1.png"); }
+#theme-options ul.backgrounds li.a2 { background-image: url("../../img/bg-theme/a2.png"); }
+#theme-options ul.backgrounds li.a3 { background-image: url("../../img/bg-theme/a3.png"); }
+#theme-options ul.backgrounds li.a4 { background-image: url("../../img/bg-theme/a4.png"); }
+#theme-options ul.backgrounds li.a5 { background-image: url("../../img/bg-theme/a5.png"); }
 
 
 /* Theme Options ----------------------------------------------*/
