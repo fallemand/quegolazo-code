@@ -228,33 +228,37 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h3>
+                                <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre  %></a></h3>
                             </div>
                             <div class="col-xs-6 col-md-4">
-                                <div class="row text-center resultado">
+                                <div class="row text-center resultado">                                    
                                     <div class="col-xs-5 nopadding-left">
-                                        <h1>9</h1>
+                                        <% if(gestorPartido.partido.golesLocal != null) {%> <h1><%=gestorPartido.partido.golesLocal %> </h1><% } %>
                                     </div>
                                     <div class="col-xs-2 nopadding-right nopadding-left">
                                         <h1>-</h1>
-                                    </div>
+                                    </div>                                    
                                     <div class="col-xs-5 nopadding-right">
-                                        <h1>9</h1>
+                                         <% if(gestorPartido.partido.golesVisitante != null) {%> <h1><%=gestorPartido.partido.golesVisitante %> </h1><% } %>
                                     </div>
                                 </div>
                                 <div class="row text-center">
                                     <div class="col-xs-12">
                                         <ul class="list-group">
-                                            <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs">Sabado </span>27/10/2015</li>
-                                            <li class="list-group-item hidden-xs"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Complejo San Andres</li>
-                                            <li class="list-group-item hidden-xs"><span class="label label-success">Partido Jugado</span></li>
+                                            <% if(gestorPartido.partido.fecha != null) { %>
+                                            <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs">Sábado </span><%= gestorPartido.partido.fecha %></li>
+                                            <% } %>
+                                            <% if(gestorPartido.partido.cancha != null) { %>
+                                            <li class="list-group-item hidden-xs"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><%= gestorPartido.partido.cancha.nombre %></li>
+                                             <% } %>
+                                            <li class="list-group-item hidden-xs"><span class="label label-success"><%= gestorPartido.partido.estado.nombre %></span></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-3 col-md-4 padding-top">
-                                <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block" style="max-height: 150px;">
-                                <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h3>
+                                <img src="<%= gestorPartido.partido.visitante.obtenerImagenGrande() %>" class="img-responsive center-block" style="max-height: 150px;">
+                                <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h3>
                             </div>
                         </div>
                     </div>
