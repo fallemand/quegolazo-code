@@ -30,11 +30,23 @@
 	    $('.semiboxed').removeClass('active');
 	    $('.' + estilos.estiloPagina.replace("layout-", "")).addClass('active');
 	    $("#theme").attr("href", estilos.theme);
+	    $('body').attr('class', estilos.bodyClass);
 	}
 	interface();
     //si tiene estilos guardados, los cargamos
-	if (configuracion != undefined)
+	if (configuracion != undefined && configuracion != null)
 	    cargarEstilosVisuales(configuracion);
+	else
+	    configuracion = {
+	        colorDeFondo: null,
+	        patronDeFondo: null,
+	        colorDestacado: null,
+	        estiloPagina: null,
+	        colorHeader: null,
+	        patronHeader: null,
+	        theme: null,
+	        bodyClass: null
+	    };
 	
 
 	//=================================== Theme Options ====================================//
@@ -243,9 +255,15 @@
 
   });
 
-  function guardarConfiguracion() {
-      configuracion.colorDestacado = $(".skin").attr("href");
-      configuracion.theme = $("#theme").attr("href");
+ function guardarConfiguracion() {
+     configuracion.patronDeFondo = $('body').css('background-image');
+     configuracion.colorHeader = $('.headerbox').css('background-color');
+     configuracion.patronHeader = $('.headerbox').css('background-image');
+     configuracion.colorDeFondo = $('body').css('background-color');
+     configuracion.colorDestacado = $(".skin").attr("href");
+     configuracion.estiloPagina = $('#layout').attr("class");
+     configuracion.theme = $("#theme").attr("href");
+     configuracion.bodyClass = $('body').attr('class');
       $.ajax({
           type: "POST",
           url: "configurarSitio.aspx/guardarConfiguracion",

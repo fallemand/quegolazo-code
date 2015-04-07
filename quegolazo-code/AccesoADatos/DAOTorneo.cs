@@ -354,13 +354,14 @@ namespace AccesoADatos
 	                                    colorDestacado = @colorDestacado,
                                         colorHeader = @colorHeader,
                                         patronHeader = @patronHeader,
-                                        theme = @theme
+                                        theme = @theme,
+                                        bodyClass = @bodyClass
 	                                    WHERE idTorneo = @idTorneo
                                     END
                                     ELSE
                                     BEGIN
-                                       INSERT INTO ConfiguracionesVisuales (idTorneo,colorDeFondo, patronDeFondo, estiloPagina,colorDestacado,colorHeader,patronHeader,theme)
-		                                      VALUES (@idTorneo,@colorDeFondo, @patronDeFondo, @estiloPagina, @colorDestacado,@colorHeader,@patronHeader, @theme)
+                                       INSERT INTO ConfiguracionesVisuales (idTorneo,colorDeFondo, patronDeFondo, estiloPagina,colorDestacado,colorHeader,patronHeader,theme,bodyClass)
+		                                      VALUES (@idTorneo,@colorDeFondo, @patronDeFondo, @estiloPagina, @colorDestacado,@colorHeader,@patronHeader, @theme, @bodyClass)
                                     END";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idTorneo", torneo.idTorneo);
@@ -370,7 +371,8 @@ namespace AccesoADatos
                 cmd.Parameters.AddWithValue("@colorDestacado", torneo.configuracionVisual.colorDestacado);
                 cmd.Parameters.AddWithValue("@colorHeader", torneo.configuracionVisual.colorHeader);
                 cmd.Parameters.AddWithValue("@patronHeader", torneo.configuracionVisual.patronHeader);
-                cmd.Parameters.AddWithValue("@theme", torneo.configuracionVisual.theme);  
+                cmd.Parameters.AddWithValue("@theme", torneo.configuracionVisual.theme);
+                cmd.Parameters.AddWithValue("@bodyClass", torneo.configuracionVisual.bodyClass);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
@@ -417,7 +419,8 @@ namespace AccesoADatos
                         patronHeader = dr["patronHeader"].ToString(),
                         colorDestacado = dr["colorDestacado"].ToString(),
                         estiloPagina = dr["estiloPagina"].ToString(),
-                        theme = dr["theme"].ToString()
+                        theme = dr["theme"].ToString(),
+                        bodyClass = dr["bodyClass"].ToString()
                     };
                 }
                 return respuesta;

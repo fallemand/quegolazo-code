@@ -15,5 +15,6 @@ namespace Entidades
         public string colorHeader { get; set; }
         public string patronHeader { get; set; }
         public string theme { get; set; }
+        public string bodyClass { get; set; }
     }
 }
