@@ -938,5 +938,56 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+
+        /// <summary>
+        /// Permite obtener todos los partidos que arbitró un arbitro por Id de árbitro
+        /// Si idEdicion = null -> Trae todos los partidos que arbitró dicho árbitro de TODAS las ediciones del torneo asociado
+        /// Si idEdición != null -> Trae todos los partidos que arbitró dicho árbitro de UNA las ediciones del torneo asociado
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public DataTable partidosQueArbitroUnArbitro(int idArbitro, int? idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT a.idArbitro AS 'ID ÁRBITRO', a.nombre AS 'ÁRBITRO', equipoLocal.nombre AS 'Equipo Local',
+                                p.golesLocal AS 'Goles Local', p.golesVisitante AS 'Goles Visitante',
+                                equipoVisitante.nombre AS 'Equipo Visitante'
+                                FROM Arbitros a
+                                INNER JOIN Partidos p ON p.idArbitro = a.idArbitro
+                                INNER JOIN Equipos equipoLocal ON p.idEquipoLocal = equipoLocal.idEquipo
+                                INNER JOIN Equipos equipoVisitante ON p.idEquipoVisitante = equipoVisitante.idEquipo
+                                WHERE a.idArbitro = @idArbitro ";
+                if(idEdicion != null)
+                    sql +="AND p.idEdicion = @idEdicion ";
+                sql += "GROUP BY a.idArbitro, a.nombre, equipoLocal.nombre, p.golesLocal, p.golesVisitante, equipoVisitante.nombre";                                
+                                
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idArbitro", idArbitro));
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
