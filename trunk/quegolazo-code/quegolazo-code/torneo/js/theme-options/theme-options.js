@@ -1,5 +1,54 @@
  $(document).ready(function($) {    
-	function interface(){
+     var themes = [
+         {
+             bodyClass: "none fixed",
+             colorDeFondo: "rgb(95, 165, 78)",
+             colorDestacado: "css/skins/cocoa/cocoa.css",
+             colorHeader: "rgb(90, 71, 57)",
+             estiloPagina: "layout-boxed-margin",
+             patronDeFondo: "url(/torneo/img/bg-theme/c3.png)",
+             patronHeader: "url(/torneo/img/bg-theme/8.png)",
+             theme: "/torneo/css/bootstrap/darkly.css"
+         },
+         {
+             bodyClass: "none",
+             colorDeFondo: "rgb(40, 38, 41)",
+             colorDestacado: "css/skins/blue/blue.css",
+             colorHeader: "rgb(0, 126, 168)",
+             estiloPagina: "layout-boxed-margin",
+             patronDeFondo: "url(/torneo/img/bg-theme/18.png)",
+             patronHeader: "url(/torneo/img/bg-theme/8.png)",
+             theme: "/torneo/css/bootstrap/cyborg.css"
+         }, {
+             bodyClass: "none",
+             colorDeFondo: "rgb(40, 38, 41)",
+             colorDestacado: "css/skins/orange/orange.css",
+             colorHeader: "rgb(40, 38, 41)",
+             estiloPagina: "layout-wide",
+             patronDeFondo: "url(/torneo/img/bg-theme/18.png)",
+             patronHeader: "url(/torneo/img/bg-theme/3.png)",
+             theme: "/torneo/css/bootstrap/superhero.css"
+         }, {
+             bodyClass: "none",
+             colorDeFondo: "rgb(219, 219, 219)",
+             colorDestacado: "css/skins/green/green.css",
+             colorHeader: "rgb(112, 113, 117)",
+             estiloPagina: "layout-wide",
+             patronDeFondo: "url(/torneo/img/bg-theme/a1.png)",
+             patronHeader: "url(/torneo/img/bg-theme/3.png)",
+             theme: "/torneo/css/bootstrap/slate.css"
+         }, {
+             bodyClass: "none",
+             colorDeFondo: "rgb(112, 113, 117)",
+             colorDestacado: "css/skins/pink/pink.css",
+             colorHeader: "rgb(219, 219, 219)",
+             estiloPagina: "layout-boxed-margin",
+             patronDeFondo: "url(/torneo/img/bg-theme/1.png)",
+             patronHeader: "url(/torneo/img/bg-theme/14.png)",
+             theme: "/torneo/css/bootstrap/bootstrap.css"
+         }
+     ];
+     function interface() {
     // Skin value
     var skin = "green"; // green (default), red ,yellow,purple,blue, orange, purple, pink, cocoa, custom 
     // Boxed value

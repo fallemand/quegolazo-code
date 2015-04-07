@@ -1022,13 +1022,13 @@
             <span>Patron del header</span>
             <ul class="backgrounds-h">
                     <li class="bgnone" title="None - Default"></li>
-                    <li class="bg1"></li>
-                    <li class="bg2"></li>
                     <li class="bg3"></li>
-                    <li class="bg4 "></li>
-                    <li class="bg5"></li> 
-                    <li class="bg6"></li>
-                    <li class="bg7"></li>                                  
+                    <li class="bg4"></li>
+                    <li class="bg8"></li>
+                    <li class="bg9 "></li>
+                    <li class="bg12"></li> 
+                    <li class="bg14"></li>
+                    <li class="bg19"></li>                                  
                 </ul>  
             <span>Colores:</span>
            <ul class="layout-style text-center">    
