@@ -162,12 +162,14 @@ namespace Logica
         {
             DAOJugador daoJugadores = new DAOJugador();
             DAOCancha daoCancha = new DAOCancha();
+            DAOSancion daoSancion = new DAOSancion();
             partido = new Partido();
             partido.idPartido = Validador.castInt(idPartido);
             partido = daoPartido.obtenerPartidoPorId(partido.idPartido);
             partido.goles = daoPartido.obtenerGoles(partido.idPartido);
             partido.tarjetas = daoPartido.obtenerTarjetas(partido.idPartido);
             partido.cambios = daoPartido.obtenerCambios(partido.idPartido);
+            partido.sanciones = daoSancion.obtenerSancionesDeUnPartido(partido.idPartido);
             partido.local.jugadores = daoJugadores.obtenerJugadoresDeUnEquipo(partido.local.idEquipo);
             partido.visitante.jugadores = daoJugadores.obtenerJugadoresDeUnEquipo(partido.visitante.idEquipo);
             partido.titularesLocal = daoPartido.obtenerTitularesDeUnPartido(partido.idPartido, partido.local.idEquipo);
@@ -265,6 +267,50 @@ namespace Logica
             if (minuto != "")
                 cambio.minuto = Validador.castInt(minuto);
             partido.cambios.Add(cambio);
+        }
+
+        public List<Gol> obtenerGolesPorEquipo(int idEquipo)
+        {
+            List<Gol> golesEquipo = new List<Gol>();
+            foreach (Gol gol in partido.goles)
+            {
+                if(gol.equipo.idEquipo == idEquipo)
+                    golesEquipo.Add(gol);
+            }
+            return golesEquipo;
+        }
+
+        public List<Tarjeta> obtenerTarjetasRojasPorEquipo(int idEquipo)
+        {
+            List<Tarjeta> tarjetasRojas = new List<Tarjeta>();
+            foreach (Tarjeta tarjeta in partido.tarjetas)
+            {
+                if (tarjeta.equipo.idEquipo == idEquipo && tarjeta.tipoTarjeta.Equals('R'))
+                    tarjetasRojas.Add(tarjeta);
+            }
+            return tarjetasRojas;
+        }
+
+        public List<Tarjeta> obtenerTarjetasAmarillasPorEquipo(int idEquipo)
+        {
+            List<Tarjeta> tarjetasAmarillas = new List<Tarjeta>();
+            foreach (Tarjeta tarjeta in partido.tarjetas)
+            {
+                if (tarjeta.equipo.idEquipo == idEquipo && tarjeta.tipoTarjeta.Equals('A'))
+                    tarjetasAmarillas.Add(tarjeta);
+            }
+            return tarjetasAmarillas;
+        }
+
+        public List<Cambio> obtenerCambiosPorEquipo(int idEquipo)
+        {
+            List<Cambio> cambios = new List<Cambio>();
+            foreach (Cambio cambio in partido.cambios)
+            {
+                if (cambio.equipo.idEquipo == idEquipo)
+                    cambios.Add(cambio);
+            }
+            return cambios;
         }
 
         /// <summary>

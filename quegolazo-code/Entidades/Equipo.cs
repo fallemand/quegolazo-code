@@ -31,6 +31,10 @@ namespace Entidades
         {
             return GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, GestorImagen.GRANDE);
         }
+        public bool tieneImagen()
+        {
+            return GestorImagen.tieneImagen(idEquipo, GestorImagen.EQUIPO, GestorImagen.GRANDE);
+        }
         public object Clone()
         {
             return (Equipo)this.MemberwiseClone();

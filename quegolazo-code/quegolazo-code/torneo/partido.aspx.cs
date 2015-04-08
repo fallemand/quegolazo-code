@@ -50,7 +50,77 @@ namespace quegolazo_code.torneo
 
         public void cargarDatosDePartido()
         {
- 
+            cargarRepeaterGoles();
+            cargarRepeaterTarjetas();
+            cargarRepeaterCambios();
+            cargarRepeaterTabGoles();
+            cargarRepeaterTabCambios();
+            cargarRepeaterTabTarjetas();
+            cargarRepeaterTitulares();
+        }
+
+        private void cargarRepeaterGoles()
+        {
+            rptGolesLocal.DataSource = gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.local.idEquipo);
+            rptGolesLocal.DataBind();
+            rptGolesVisitante.DataSource = gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.visitante.idEquipo);
+            rptGolesVisitante.DataBind();
+        }
+
+        private void cargarRepeaterTarjetas()
+        {
+            rptTarjetasRojasLocal.DataSource = gestorPartido.obtenerTarjetasRojasPorEquipo(gestorPartido.partido.local.idEquipo);
+            rptTarjetasRojasLocal.DataBind();
+            rptTarjetasRojasVisitante.DataSource = gestorPartido.obtenerTarjetasRojasPorEquipo(gestorPartido.partido.visitante.idEquipo);
+            rptTarjetasRojasVisitante.DataBind();
+            rptTarjetasAmarillasLocal.DataSource = gestorPartido.obtenerTarjetasAmarillasPorEquipo(gestorPartido.partido.local.idEquipo);
+            rptTarjetasAmarillasLocal.DataBind();
+            rptTarjetasAmarillasVisitante.DataSource = gestorPartido.obtenerTarjetasAmarillasPorEquipo(gestorPartido.partido.visitante.idEquipo);
+            rptTarjetasAmarillasVisitante.DataBind();
+        }
+
+        private void cargarRepeaterCambios()
+        {
+            rptCambiosLocal.DataSource = gestorPartido.obtenerCambiosPorEquipo(gestorPartido.partido.local.idEquipo);
+            rptCambiosLocal.DataBind();
+            rptCambiosVisitante.DataSource = gestorPartido.obtenerCambiosPorEquipo(gestorPartido.partido.visitante.idEquipo);
+            rptCambiosVisitante.DataBind();
+        }
+
+        private void cargarRepeaterTabGoles()
+        {
+            rptTabGolesLocal.DataSource = gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.local.idEquipo);
+            rptTabGolesLocal.DataBind();
+            rptTabGolesVisitante.DataSource = gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.visitante.idEquipo);
+            rptTabGolesVisitante.DataBind();
+        }
+
+        private void cargarRepeaterTabCambios()
+        {
+            rptTabCambiosLocal.DataSource = gestorPartido.obtenerCambiosPorEquipo(gestorPartido.partido.local.idEquipo);
+            rptTabCambiosLocal.DataBind();
+            rptTabCambiosVisitante.DataSource = gestorPartido.obtenerCambiosPorEquipo(gestorPartido.partido.visitante.idEquipo);
+            rptTabCambiosVisitante.DataBind();
+        }
+
+        private void cargarRepeaterTabTarjetas()
+        {
+            rptTabTarjetasAmarillasLocal.DataSource = gestorPartido.obtenerTarjetasAmarillasPorEquipo(gestorPartido.partido.local.idEquipo);
+            rptTabTarjetasAmarillasLocal.DataBind();
+            rptTabTarjetasRojasLocal.DataSource = gestorPartido.obtenerTarjetasRojasPorEquipo(gestorPartido.partido.local.idEquipo);
+            rptTabTarjetasRojasLocal.DataBind();
+            rptTabTarjetasAmarillasVisitante.DataSource = gestorPartido.obtenerTarjetasAmarillasPorEquipo(gestorPartido.partido.visitante.idEquipo);
+            rptTabTarjetasAmarillasVisitante.DataBind();
+            rptTabTarjetasRojasVisitante.DataSource = gestorPartido.obtenerTarjetasRojasPorEquipo(gestorPartido.partido.visitante.idEquipo);
+            rptTabTarjetasRojasVisitante.DataBind();
+        }
+
+        private void cargarRepeaterTitulares()
+        {
+            rptTitularesLocal.DataSource = gestorPartido.partido.titularesLocal;
+            rptTitularesLocal.DataBind();
+            rptTitularesVisitante.DataSource = gestorPartido.partido.titularesVisitante;
+            rptTitularesVisitante.DataBind();
         }
     }
 }
