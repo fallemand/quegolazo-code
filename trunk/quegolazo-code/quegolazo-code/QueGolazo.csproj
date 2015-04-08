@@ -161,6 +161,7 @@
     <Content Include="torneo\fonts\FontAwesome\fontawesome-webfont.svg" />
     <Content Include="torneo\fonts\FontAwesome\fontawesome-webfont862f.svg" />
     <Content Include="torneo\fonts\glyphicon\glyphicons-halflings-regular.svg" />
+    <Content Include="torneo\index.aspx" />
     <Content Include="torneo\img\bg-theme\1.png" />
     <Content Include="torneo\img\bg-theme\10.png" />
     <Content Include="torneo\img\bg-theme\11.png" />
@@ -403,6 +404,13 @@
     </Compile>
     <Compile Include="torneo\configurarSitio.aspx.designer.cs">
       <DependentUpon>configurarSitio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="torneo\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="torneo\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="torneo\partido.aspx.cs">
       <DependentUpon>partido.aspx</DependentUpon>
