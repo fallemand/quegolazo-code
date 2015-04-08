@@ -333,6 +333,55 @@ namespace Utils
             }
             return pathImagen;
         }
+
+        /// <summary>
+        /// Retorna true si tiene imagen la entidad, y false sino tiene imagen
+        /// autor: Facundo Allemand
+        /// </summary>
+        public static bool tieneImagen(int id, int tipo, string tamañoImagen)
+        {
+            string pathImagen;
+            switch (tipo)
+            {
+                case TORNEO:
+                    pathImagen = pathImagenes + pathTorneos + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return true;
+                    else
+                        return false;
+                case EQUIPO:
+                    pathImagen = pathImagenes + pathEquipos + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return true;
+                    else
+                        return false;
+                case COMPLEJO:
+                    pathImagen = pathImagenes + pathComplejos + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return true;
+                    else
+                        return false;
+                case JUGADOR:
+                    pathImagen = pathImagenes + pathJugadores + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return true;
+                    else
+                        return false;
+                case ARBITRO:
+                    pathImagen = pathImagenes + pathArbitros + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return true;
+                    else
+                        return false;
+                case NOTICIA:
+                    pathImagen = pathImagenes + pathNoticias + id + tamañoImagen + extension;
+                    if (File.Exists(System.Web.HttpContext.Current.Server.MapPath(pathImagen)))
+                        return true;
+                    else
+                        return false;
+            }
+            throw new Exception("Error al obtener la imagen");
+        }
     }
 
     /// <summary>

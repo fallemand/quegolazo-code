@@ -218,16 +218,20 @@
                                         <span class="primera-mitad glyphicon glyphicon-triangle-left" style="color:#2966B8;"></span>
                                         <span class="glyphicon glyphicon-triangle-right" style="color:#DFE32D;"></span>
                                       </div>-->
+                                <% if(gestorPartido.partido.local.tieneImagen()) { %>
+                                <img src="<%= gestorPartido.partido.local.obtenerImagenGrande() %>" class="img-responsive center-block" style="max-height: 150px;">
+                                <%} else { %>
                                 <div class="row">
                                     <div class="camiseta-equipo">
                                         <div>
-                                            <i class="flaticon-football114" style="color: #005A96"></i>
+                                            <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaPrimario%>"></i>
                                         </div><!--
                                      --><div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color: #FAD201"></i>
+                                            <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaSecundario%>"></i>
                                         </div>
                                     </div>
                                 </div>
+                                <% } %>
                                 <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre  %></a></h3>
                             </div>
                             <div class="col-xs-6 col-md-4">
@@ -235,12 +239,22 @@
                                     <div class="col-xs-5 nopadding-left">
                                         <% if(gestorPartido.partido.golesLocal != null) {%> <h1><%=gestorPartido.partido.golesLocal %> </h1><% } %>
                                     </div>
+                                    <% if(gestorPartido.partido.empate == true) { %>
+                                    <div class="col-xs-5 nopadding-left">
+                                        <h1>(<%=gestorPartido.partido.penalesLocal %>)</h1>
+                                    </div>
+                                    <% } %>
                                     <div class="col-xs-2 nopadding-right nopadding-left">
                                         <h1>-</h1>
                                     </div>                                    
                                     <div class="col-xs-5 nopadding-right">
                                          <% if(gestorPartido.partido.golesVisitante != null) {%> <h1><%=gestorPartido.partido.golesVisitante %> </h1><% } %>
                                     </div>
+                                    <% if(gestorPartido.partido.empate == true) { %>
+                                    <div class="col-xs-5 nopadding-left">
+                                        <h1>(<%=gestorPartido.partido.penalesVisitante %>)</h1>
+                                    </div>
+                                    <% } %>
                                 </div>
                                 <div class="row text-center">
                                     <div class="col-xs-12">
@@ -257,7 +271,20 @@
                                 </div>
                             </div>
                             <div class="col-xs-3 col-md-4 padding-top">
+                                <% if(gestorPartido.partido.visitante.tieneImagen()) { %>
                                 <img src="<%= gestorPartido.partido.visitante.obtenerImagenGrande() %>" class="img-responsive center-block" style="max-height: 150px;">
+                                <%} else { %>
+                                <div class="row">
+                                    <div class="camiseta-equipo">
+                                        <div>
+                                            <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaPrimario%>"></i>
+                                        </div><!--
+                                     --><div class="segunda-mitad">
+                                            <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaSecundario%>"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
                                 <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h3>
                             </div>
                         </div>
@@ -304,65 +331,83 @@
                                         <thead>
                                             <tr>
                                                 <th class="col-xs-2 col-md-4 text-center">
-                                                    <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                    Boca Juniors
+                                                    <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                    <%= gestorPartido.partido.local.nombre %>
                                                 </th>
                                                 <th class="col-xs-8 col-md-4 text-center">VS</th>
                                                 <th class="col-xs-2 col-md-4 text-center">
-                                                    <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                    Boca Juniors
+                                                    <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                    <%= gestorPartido.partido.visitante.nombre %>
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
                                             <tr>
                                                 <td>
-                                                    <span class="flaticon-football28"></span>
-                                                    <span class="flaticon-football28"></span>
-                                                    <span class="flaticon-football28"></span>
+                                                    <asp:Repeater ID="rptGolesLocal" runat="server">
+                                                            <ItemTemplate>
+                                                                <span class="flaticon-football28"></span>
+                                                            </ItemTemplate>
+                                                     </asp:Repeater>
                                                 </td>
                                                 <td>Goles</td>
                                                 <td>
-                                                    <span class="flaticon-football28"></span>
-                                                    <span class="flaticon-football28"></span>
-                                                    <span class="flaticon-football28"></span>
-                                                    <span class="flaticon-football28"></span>
+                                                    <asp:Repeater ID="rptGolesVisitante" runat="server">
+                                                            <ItemTemplate>
+                                                                <span class="flaticon-football28"></span>
+                                                            </ItemTemplate>
+                                                     </asp:Repeater>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span style="color: red;" class="flaticon-football103"></span>
-                                                    <span style="color: red;" class="flaticon-football103"></span>
+                                                    <asp:Repeater ID="rptTarjetasRojasLocal" runat="server">
+                                                            <ItemTemplate>
+                                                                <span style="color: red;" class="flaticon-football103"></span>
+                                                            </ItemTemplate>
+                                                     </asp:Repeater>
                                                 </td>
                                                 <td class="text-center">Tarjetas Rojas</td>
                                                 <td>
-                                                    <span style="color: red;" class="flaticon-football103"></span>
+                                                    <asp:Repeater ID="rptTarjetasRojasVisitante" runat="server">
+                                                            <ItemTemplate>
+                                                                <span style="color: red;" class="flaticon-football103"></span>
+                                                            </ItemTemplate>
+                                                     </asp:Repeater>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span style="color: yellow;" class="flaticon-football103"></span>
-                                                    <span style="color: yellow;" class="flaticon-football103"></span>
+                                                    <asp:Repeater ID="rptTarjetasAmarillasLocal" runat="server">
+                                                            <ItemTemplate>
+                                                                <span style="color: yellow;" class="flaticon-football103"></span>
+                                                            </ItemTemplate>
+                                                     </asp:Repeater>
                                                 </td>
                                                 <td class="text-center">Tarjetas Amarillas</td>
-                                                <td>-                      
+                                                <td>
+                                                    <asp:Repeater ID="rptTarjetasAmarillasVisitante" runat="server">
+                                                            <ItemTemplate>
+                                                                <span style="color: yellow;" class="flaticon-football103"></span>
+                                                            </ItemTemplate>
+                                                     </asp:Repeater>                      
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img class="img-xs" src="/torneo/img/img-theme/cambio.png" alt="Cambio">
-                                                    <img class="img-xs" src="/torneo/img/img-theme/cambio.png" alt="Cambio">
+                                                    <asp:Repeater ID="rptCambiosLocal" runat="server">
+                                                            <ItemTemplate>
+                                                               <img class="img-xs" src="/torneo/img/img-theme/cambio.png" alt="Cambio">
+                                                            </ItemTemplate>
+                                                     </asp:Repeater>   
                                                 </td>
                                                 <td class="text-center">Cambios</td>
                                                 <td>
-                                                    <img class="img-xs" src="/torneo/img/img-theme/cambio.png" alt="Cambio">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>-
-                                                </td>
-                                                <td class="text-center">Sanciones</td>
-                                                <td>-
+                                                    <asp:Repeater ID="rptCambiosVisitante" runat="server">
+                                                            <ItemTemplate>
+                                                               <img class="img-xs" src="/torneo/img/img-theme/cambio.png" alt="Cambio">
+                                                            </ItemTemplate>
+                                                     </asp:Repeater> 
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -376,36 +421,22 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
+                                                        <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.local.nombre %>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
-                                                </tr>
+                                                <asp:Repeater ID="rptTitularesLocal" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-1">
+                                                                <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                            <td class="col-xs-9"><%# Eval("nombre") %></td>
+                                                            <td class="col-xs-2"><%# Eval("numeroCamiseta") %></td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>                                                 
                                             </tbody>
                                         </table>
                                     </div>
@@ -414,36 +445,22 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
+                                                        <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.visitante.nombre %>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
-                                                </tr>
+                                                <asp:Repeater ID="rptTitularesVisitante" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-1">
+                                                                <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                            <td class="col-xs-9"><%# Eval("nombre") %></td>
+                                                            <td class="col-xs-2"><%# Eval("numeroCamiseta") %></td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>    
                                             </tbody>
                                         </table>
                                     </div>
@@ -456,26 +473,23 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
+                                                        <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.local.nombre %>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="col-xs-2"><span class="text-lg">18'</span></td>
-                                                    <td class="col-xs-7">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-3">Tiro Libre</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2"><span class="text-lg">34'</span></td>
-                                                    <td class="col-xs-7">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-3">Tiro Libre</td>
-                                                </tr>
+                                                <asp:Repeater ID="rptTabGolesLocal" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto %>'</span></td>
+                                                            <td class="col-xs-7">
+                                                                <img src="<%# ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Gol)Container.DataItem).jugador.nombre %></td>
+                                                            <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol.nombre %></td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater> 
                                             </tbody>
                                         </table>
                                     </div>
@@ -484,26 +498,23 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
+                                                        <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.visitante.nombre %>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="col-xs-2"><span class="text-lg">18'</span></td>
-                                                    <td class="col-xs-7">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-3">Tiro Libre</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2"><span class="text-lg">34'</span></td>
-                                                    <td class="col-xs-7">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-3">Tiro Libre</td>
-                                                </tr>
+                                                <asp:Repeater ID="rptTabGolesVisitante" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                        <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto %>'</span></td>
+                                                        <td class="col-xs-7">
+                                                            <img src="<%# ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                            <%# ((Entidades.Gol)Container.DataItem).jugador.nombre %></td>
+                                                        <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol.nombre %></td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                 </asp:Repeater>
                                             </tbody>
                                         </table>
                                     </div>
@@ -516,34 +527,27 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
+                                                        <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.local.nombre %>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="col-xs-1"><span class="text-lg">34'</span></td>
-                                                    <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
-                                                    <td class="col-xs-4">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
-                                                    <td class="col-xs-4">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1"><span class="text-lg">34'</span></td>
-                                                    <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
-                                                    <td class="col-xs-4">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
-                                                    <td class="col-xs-4">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                </tr>
+                                                <asp:Repeater ID="rptTabCambiosLocal" runat="server">
+                                                    <ItemTemplate>
+                                                       <tr>
+                                                        <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto %>'</span></td>
+                                                        <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
+                                                        <td class="col-xs-4">
+                                                            <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                            <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %></td>
+                                                        <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
+                                                        <td class="col-xs-4">
+                                                            <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorSale.obtenerImagenMediana() %>"  class="img-circle avatar-sm" alt="">
+                                                            <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %></td>
+                                                       </tr>
+                                                    </ItemTemplate>
+                                                 </asp:Repeater>                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -552,34 +556,27 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
+                                                        <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.visitante.nombre %>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="col-xs-1"><span class="text-lg">34'</span></td>
-                                                    <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
-                                                    <td class="col-xs-4">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
-                                                    <td class="col-xs-4">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1"><span class="text-lg">34'</span></td>
-                                                    <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
-                                                    <td class="col-xs-4">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
-                                                    <td class="col-xs-4">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                </tr>
+                                                <asp:Repeater ID="rptTabCambiosVisitante" runat="server">
+                                                    <ItemTemplate>
+                                                       <tr>
+                                                        <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto %>'</span></td>
+                                                        <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
+                                                        <td class="col-xs-4">
+                                                            <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                            <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %></td>
+                                                        <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
+                                                        <td class="col-xs-4">
+                                                            <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorSale.obtenerImagenMediana() %>"  class="img-circle avatar-sm" alt="">
+                                                            <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %></td>
+                                                       </tr>
+                                                    </ItemTemplate>
+                                                 </asp:Repeater>  
                                             </tbody>
                                         </table>
                                     </div>
@@ -592,28 +589,36 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
+                                                        <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.local.nombre %>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="col-xs-2"><span class="text-lg">34'</span></td>
-                                                    <td class="col-xs-8">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-2">
-                                                        <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2"><span class="text-lg">34'</span></td>
-                                                    <td class="col-xs-8">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-2">
-                                                        <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>
-                                                </tr>
+                                                <asp:Repeater ID="rptTabTarjetasAmarillasLocal" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
+                                                            <td class="col-xs-8">
+                                                                <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
+                                                            <td class="colrptTabTarjetasAmarillasLocal-xs-2">
+                                                                <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>                                                           
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                 </asp:Repeater> 
+                                                <asp:Repeater ID="rptTabTarjetasRojasLocal" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
+                                                            <td class="col-xs-8">
+                                                                <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
+                                                            <td class="col-xs-2">
+                                                                <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>                                                           
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                 </asp:Repeater> 
                                             </tbody>
                                         </table>
                                     </div>
@@ -622,28 +627,36 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
+                                                        <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.visitante.nombre %>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="col-xs-2"><span class="text-lg">34'</span></td>
-                                                    <td class="col-xs-8">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-2">
-                                                        <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2"><span class="text-lg">34'</span></td>
-                                                    <td class="col-xs-8">
-                                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
-                                                        Fernando Gago</td>
-                                                    <td class="col-xs-2">
-                                                        <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>
-                                                </tr>
+                                                <asp:Repeater ID="rptTabTarjetasAmarillasVisitante" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
+                                                            <td class="col-xs-8">
+                                                                <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
+                                                            <td class="colrptTabTarjetasAmarillasLocal-xs-2">
+                                                                <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>                                                           
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                 </asp:Repeater> 
+                                                <asp:Repeater ID="rptTabTarjetasRojasVisitante" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
+                                                            <td class="col-xs-8">
+                                                                <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
+                                                            <td class="col-xs-2">
+                                                                <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>                                                           
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                 </asp:Repeater>
                                             </tbody>
                                         </table>
                                     </div>
@@ -656,12 +669,22 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
+                                                        <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.local.nombre %>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <asp:Repeater ID="Repeater1" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-1">
+                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                            <td class="col-xs-4">Fernando Gago</td>
+                                                            <td class="col-xs-7">Sancionado por 5 Fechas</td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                 </asp:Repeater>
                                                 <tr>
                                                     <td class="col-xs-1">
                                                         <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
@@ -682,8 +705,8 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
+                                                        <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.visitante.nombre %>
                                                     </th>
                                                 </tr>
                                             </thead>

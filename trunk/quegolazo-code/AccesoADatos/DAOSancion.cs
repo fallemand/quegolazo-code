@@ -153,6 +153,60 @@ namespace AccesoADatos
             }
         }
 
+        public List<Sancion> obtenerSancionesDeUnPartido(int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Sancion> respuesta = new List<Sancion>();
+            Sancion sancion = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM Sanciones s 
+                                WHERE s.idPartido = @idPartido
+                                ORDER BY s.idSancion DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    sancion = new Sancion()
+                    {
+                        idSancion = Int32.Parse(dr["idSancion"].ToString()),
+                        idFase = (dr["idFase"] != DBNull.Value) ? (int?)int.Parse(dr["idFase"].ToString()) : null,
+                        idGrupo = (dr["idGrupo"] != DBNull.Value) ? (int?)int.Parse(dr["idGrupo"].ToString()) : null,
+                        idFecha = (dr["idFecha"] != DBNull.Value) ? (int?)int.Parse(dr["idFecha"].ToString()) : null,
+                        idPartido = (dr["idPartido"] != DBNull.Value) ? (int?)int.Parse(dr["idPartido"].ToString()) : null,
+                        idEquipo = Int32.Parse(dr["idEquipo"].ToString()),
+                        idJugador = (dr["idJugador"] != DBNull.Value) ? (int?)int.Parse(dr["idJugador"].ToString()) : null,
+                        fechaSancion = (dr["idFechaSancion"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fechaSancion"].ToString()) : null,
+                        motivoSancion = obtenerMotivoSancionPorId(int.Parse(dr["idMotivoSancion"].ToString())),
+                        observacion = dr["observacion"].ToString(),
+                        puntosAQuitar = (dr["puntosAQuitar"] != DBNull.Value) ? (int?)int.Parse(dr["puntosAQuitar"].ToString()) : null,
+                        cantidadFechasSuspendidas = (dr["cantidadFechasSuspendidas"] != DBNull.Value) ? (int?)int.Parse(dr["cantidadFechasSuspendidas"].ToString()) : null,
+                    };
+                    respuesta.Add(sancion);
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los árbitros:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
         public DataTable obtenerSancionesDeEdicion(int idEdicion)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);

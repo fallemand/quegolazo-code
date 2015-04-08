@@ -17,7 +17,8 @@ namespace Entidades
         public List<Jugador> titularesVisitante { get; set; } 
         public List<Gol> goles { get; set; } 
         public List<Tarjeta> tarjetas { get; set; } 
-        public List<Cambio> cambios { get; set; } 
+        public List<Cambio> cambios { get; set; }
+        public List<Sancion> sanciones { get; set; } 
         public int idPartido { get; set; }
         public Estado estado { get; set; }
         public int? golesLocal { get; set; }
@@ -40,6 +41,7 @@ namespace Entidades
             estado = new Estado();
             titularesLocal = new List<Jugador>();
             titularesVisitante = new List<Jugador>();
+            sanciones = new List<Sancion>();
             goles = new List<Gol>();
             tarjetas = new List<Tarjeta>();
             cambios = new List<Cambio>();
