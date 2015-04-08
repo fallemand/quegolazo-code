@@ -113,6 +113,55 @@ namespace AccesoADatos
         }
 
         /// <summary>
+        /// Busca un Torneo con un nick determinado en la base de datos.
+        /// autor: Pau Pedrosa
+        /// </summary>
+        /// <param name="idTorneo"> Id del Torneo que se quiere buscar </param>
+        /// <returns>Un objeto Torneo, o null si no encuentra el Torneo.</returns>
+        public Torneo obtenerTorneoPorNick(string nick)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            Torneo respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT idTorneo, nombre, nick, idUsuario, descripcion
+                                FROM Torneos
+                                WHERE nick = @nick";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nick", nick);
+                cmd.CommandText = sql;
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    respuesta = new Torneo()
+                    {
+                        idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
+                        nombre = dr["nombre"].ToString(),
+                        nick = dr["nick"].ToString(),
+                        descripcion = dr["descripcion"].ToString()
+                    };
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al intentar recuperar el Torneo: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        /// <summary>
         /// Busca un Torneo por un nombre y usuario determinado en la base de datos.
         /// autor: Pau Pedrosa
         /// </summary>

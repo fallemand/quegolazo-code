@@ -109,5 +109,15 @@ namespace Logica
         public ConfiguracionVisual obtenerConfiguracionVisual(int idTorneo) {
             return new DAOTorneo().obtenerConfiguracionVisual(idTorneo);
         }
+
+        /// <summary>
+        /// Obtener un Torneo por nick
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public Torneo obtenerTorneoPorNick(string nick)
+        {
+            DAOTorneo daoTorneo = new DAOTorneo();
+            return daoTorneo.obtenerTorneoPorNick(nick);           
+        }
     }
 }
