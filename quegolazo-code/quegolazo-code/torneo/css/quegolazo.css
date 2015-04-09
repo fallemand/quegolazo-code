@@ -73,7 +73,7 @@ h2.titulo-torneo strong {
 }
 
 .panel.nopadding .panel-body {
-    padding: 10px 0px 0px;
+    padding: 0px;
 }
 
 .panel .panel-heading {
@@ -204,6 +204,21 @@ h2.titulo-torneo strong {
 }
 .small-arrows .owl-theme .owl-controls .owl-buttons div {
   padding:0px 6px;
+}
+/**--  END ****  Widget Partidos ****   **/
+
+/**** Slider Equipos ****/
+.otros-equipos .camiseta-equipo {
+  font-size:80px;
+  line-height: 60px;
+  margin-top: 0px;
+}
+.otros-equipos .camiseta-equipo div {
+  width:40px;
+}
+
+.otros-equipos .camiseta-equipo .segunda-mitad i {
+  margin-left:-40px;
 }
 /**--  END ****  Widget Partidos ****   **/
 
@@ -340,6 +355,20 @@ h2.titulo-torneo strong {
     line-height: 20px;
   }
 }
+
+.li-equipo {
+    padding: 5px 0px;
+  -webkit-transition: all .25s linear;
+  -moz-transition: all .25s linear;
+  -ms-transition: all .25s linear;
+  -o-transition: all .25s linear;
+  transition: all .25s linear;
+}
+
+.li-equipo:hover {
+  background-color: rgba(100, 100, 100, 0.12);
+}
+
 .li-partido {
   line-height: 12px;
     margin-top: 4px;
@@ -419,13 +448,13 @@ h2.titulo-torneo strong {
   padding-right:20px;
 }
 
-.proximos-partidos.owl-theme .owl-controls .owl-buttons div {
+.slider-multiple.owl-theme .owl-controls .owl-buttons div {
   padding:0px 6px;
   margin-top:15px;
 }
 
 .proximos-partidos-title {
-  margin-top: -35px;
+  margin-top: -30px;
   margin-bottom: 0px;
   padding-left: 10px;
   font-size: 13px;

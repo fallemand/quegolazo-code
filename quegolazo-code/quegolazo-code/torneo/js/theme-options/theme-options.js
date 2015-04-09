@@ -52,7 +52,7 @@
     // Skin value
     var skin = "green"; // green (default), red ,yellow,purple,blue, orange, purple, pink, cocoa, custom 
     // Boxed value
-    var layout = "layout-semiboxed"; // layout-semiboxed(default), layout-boxed, layout-boxed-margin ,layout-wide
+    var layout = "layout-boxed-margin"; // layout-semiboxed(default), layout-boxed, layout-boxed-margin ,layout-wide
     //Only in boxed version 
     var bg = "none";  // none (default), bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10, bg11 
     $(".skin").attr("href", "css/skins/"+ skin + "/" + skin + ".css");
@@ -83,19 +83,26 @@
 	}
 	interface();
     //si tiene estilos guardados, los cargamos
-	if (configuracion != undefined && configuracion != null)
-	    cargarEstilosVisuales(configuracion);
-	else
-	    configuracion = {
-	        colorDeFondo: null,
-	        patronDeFondo: null,
-	        colorDestacado: null,
-	        estiloPagina: null,
-	        colorHeader: null,
-	        patronHeader: null,
-	        theme: null,
-	        bodyClass: null
-	    };
+    try {
+        if (configuracion == null)
+            setDefaultTheme();
+    } catch (ReferenceError) {
+        setDefaultTheme();
+    }
+    cargarEstilosVisuales(configuracion);
+
+    function setDefaultTheme() {
+        configuracion = {
+            bodyClass: "none",
+            colorDeFondo: "rgb(95, 165, 78)",
+            colorDestacado: "css/skins/green/green.css",
+            colorHeader: "rgb(255, 255, 255)",
+            estiloPagina: "layout-boxed-margin",
+            patronDeFondo: "url(/torneo/img/bg-theme/a1.png)",
+            patronHeader: "url(/torneo/img/bg-theme/19.png)",
+            theme: "/torneo/css/bootstrap/bootstrap.css"
+        };
+    }
 	
 
 	//=================================== Theme Options ====================================//
