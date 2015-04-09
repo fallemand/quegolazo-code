@@ -76,6 +76,10 @@ h2.titulo-torneo strong {
     padding: 0px;
 }
 
+.panel.nopadding .panel-heading {
+    padding: 5px;
+}
+
 .panel .panel-heading {
     padding:7px 15px 9px;
 }
@@ -222,6 +226,15 @@ h2.titulo-torneo strong {
 }
 /**--  END ****  Widget Partidos ****   **/
 
+h5.col-title {
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    font-size: 14px;
+    padding-top:10px;
+}
+
 
 @media (max-width: 1199px) {
   .widget-partido * .camiseta-equipo {
@@ -366,7 +379,7 @@ h2.titulo-torneo strong {
 }
 
 .li-equipo:hover {
-  background-color: rgba(100, 100, 100, 0.12);
+  background-color: rgba(100, 100, 100, 0.20);
 }
 
 .li-partido {
@@ -453,7 +466,7 @@ h2.titulo-torneo strong {
   margin-top:15px;
 }
 
-.proximos-partidos-title {
+.slider-multiple-title {
   margin-top: -30px;
   margin-bottom: 0px;
   padding-left: 10px;
@@ -467,3 +480,29 @@ h2.titulo-torneo strong {
         border-radius: 0px;
     }
 }
+.widget {
+    text-align: center;
+}
+
+.widget h1{
+    font-size:40px;
+    font-weight: 700;
+    margin-bottom:0px;
+    padding-bottom:0px;
+    line-height: 35px;
+}
+
+.widget span{
+    font-weight: normal;
+}
+
+.widget > span{
+    font-size:12px;
+}
+
+canvas{
+        width: 100% !important;
+        max-width: 400px;
+        height: auto !important;
+    }
+
