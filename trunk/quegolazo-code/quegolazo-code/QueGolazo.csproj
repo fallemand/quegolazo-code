@@ -156,6 +156,7 @@
     <Content Include="torneo\css\slide\camera.css" />
     <Content Include="torneo\css\style.css" />
     <Content Include="torneo\css\theme-responsive.css" />
+    <Content Include="torneo\equipos.html" />
     <Content Include="torneo\fonts\flaticon.html" />
     <Content Include="torneo\fonts\flaticon.svg" />
     <Content Include="torneo\fonts\FontAwesome\fontawesome-webfont.svg" />
@@ -256,6 +257,7 @@
     <Content Include="torneo\js\theme-options\theme-options.js" />
     <Content Include="torneo\js\totop\jquery.ui.totop.js" />
     <Content Include="torneo\partido.aspx" />
+    <Content Include="torneo\partido.html" />
     <Content Include="torneo\principal.aspx" />
     <Content Include="usuario\activar.aspx" />
     <Content Include="admin\index.aspx" />

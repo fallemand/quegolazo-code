@@ -66,6 +66,18 @@ $(document).ready(function($) {
     	pagination : false,
         itemsCustom: [[0, 1],[350, 2], [500, 3],[600, 4], [800, 5], [1000, 6], [1100, 7], [1200, 8]]
 	});
+    
+    //=================================== Slide Otros Equipos  ==============================//
+	 
+	$(".otros-equipos").owlCarousel({
+        items : 10,
+		autoPlay: true,  
+    	navigation : true,
+    	autoHeight : true,
+    	slideSpeed : 200,
+    	pagination : false,
+        itemsCustom: [[0, 1],[350, 3], [500, 5],[600, 6], [800, 7], [1000, 9], [1100, 10], [1200, 11]]
+	});
 
   //=================================== Carousel Blog  ==================================//
 
@@ -182,14 +194,14 @@ $(document).ready(function($) {
       container: "body"
    });
 
-	//=================================== Totop  ============================================//
+//=================================== Totop  ============================================//
 
   $().UItoTop({
 		scrollSpeed:500,
 		easingType:'linear'
 	});	
 
-  //=================================== Portfolio Filters  ==============================//
+//=================================== Portfolio Filters  ==============================//
 
   $(window).load(function(){
       var $container = $('.portfolioContainer');
