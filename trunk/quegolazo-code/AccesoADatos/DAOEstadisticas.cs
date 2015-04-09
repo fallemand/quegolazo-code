@@ -690,13 +690,10 @@ namespace AccesoADatos
                                 COUNT(CASE WHEN (p.idPerdedor = equipo1.idEquipo) THEN 1 ELSE NULL END) AS 'PP',
                                 SUM(CASE WHEN idEquipoLocal = equipo1.idEquipo AND golesLocal IS NOT NULL THEN golesLocal ELSE 0 END) + SUM(CASE WHEN idEquipoVisitante = equipo1.idEquipo AND golesVisitante IS NOT NULL THEN golesVisitante ELSE 0 END) AS 'GF',
                                 SUM(CASE WHEN idEquipoLocal = equipo1.idEquipo AND golesVisitante IS NOT NULL THEN golesVisitante ELSE 0 END)+ SUM(CASE WHEN idEquipoVisitante = equipo1.idEquipo AND golesLocal IS NOT NULL THEN golesLocal ELSE 0 END) AS 'GC',
-                                COUNT(CASE idGanador WHEN equipo1.idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN equipo1.idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos',
-                                COUNT(CASE WHEN (t.tipoTarjeta = 'A' AND equipo1.idEquipo = t.idEquipo) THEN 1 ELSE NULL END) AS 'AMARILLAS',
-                                COUNT(CASE WHEN (t.tipoTarjeta = 'R' AND equipo1.idEquipo = t.idEquipo) THEN 1 ELSE NULL END) AS 'ROJAS'
+                                COUNT(CASE idGanador WHEN equipo1.idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN equipo1.idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
                                 FROM Partidos p
                                 INNER JOIN Equipos equipo1 ON (equipo1.idEquipo = p.idEquipoLocal OR equipo1.idEquipo = p.idEquipoVisitante)
                                 INNER JOIN Ediciones edicionActual ON p.idEdicion = edicionActual.idEdicion	
-                                INNER JOIN Tarjetas t ON (t.idPartido = p.idPartido AND t.idEquipo IN(p.idEquipoLocal, p.idEquipoVisitante))
                                 WHERE 
                                 equipo1.idEquipo = @idEquipo AND
                                 edicionActual.idEdicion = @idEdicion
@@ -748,6 +745,53 @@ namespace AccesoADatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
+                cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public DataTable ultimoPartidoPrevioDeUnEquipo(int idEquipo, int idEdicion, int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT TOP 1 equipoLocal.nombre AS 'Equipo Local', equipoLocal.idEquipo AS 'Id Equipo Local',
+                                p.golesLocal AS 'Goles Local', p.golesVisitante AS 'Goles Visitante',
+                                equipoVisitante.nombre AS 'Equipo Visitante', equipoVisitante.idEquipo AS 'Id Equipo Visitante',
+                                p.idFecha AS 'Fecha'
+                                FROM Partidos p 
+                                INNER JOIN Equipos equipoLocal ON p.idEquipoLocal = equipoLocal.idEquipo
+                                INNER JOIN Equipos equipoVisitante ON p.idEquipoVisitante = equipoVisitante.idEquipo
+                                WHERE p.idEdicion = @idEdicion 
+                                AND (p.idEquipoLocal = @idEquipo OR p.idEquipoVisitante = @idEquipo)
+                                AND p.idEstado = @estadoJugado
+                                AND idPartido <> @idPartido                                
+                                ORDER BY idPartido DESC";
+                cmd.Parameters.Clear();
+                //Agregar estta condicion en el where AND idPartido < @idPartido
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
+                cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
                 cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();

@@ -302,6 +302,18 @@ namespace Logica
             return tarjetasAmarillas;
         }
 
+        public List<Sancion> obtenerSancionesPorEquipo(int idEquipo)
+        {
+            List<Sancion> sanciones = new List<Sancion>();
+            foreach (Sancion sancion in partido.sanciones)
+            {
+                if (sancion.equipo.idEquipo == idEquipo)
+                    sanciones.Add(sancion);
+            }
+            return sanciones;
+        }
+
+
         public List<Cambio> obtenerCambiosPorEquipo(int idEquipo)
         {
             List<Cambio> cambios = new List<Cambio>();

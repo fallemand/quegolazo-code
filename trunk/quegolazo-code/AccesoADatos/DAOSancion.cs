@@ -175,16 +175,19 @@ namespace AccesoADatos
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
+                    DAOEquipo daoEquipo = new DAOEquipo();
+                    DAOJugador daoJugador = new DAOJugador();
                     sancion = new Sancion()
                     {
                         idSancion = Int32.Parse(dr["idSancion"].ToString()),
+                        idEdicion = Int32.Parse(dr["idEdicion"].ToString()),
                         idFase = (dr["idFase"] != DBNull.Value) ? (int?)int.Parse(dr["idFase"].ToString()) : null,
                         idGrupo = (dr["idGrupo"] != DBNull.Value) ? (int?)int.Parse(dr["idGrupo"].ToString()) : null,
                         idFecha = (dr["idFecha"] != DBNull.Value) ? (int?)int.Parse(dr["idFecha"].ToString()) : null,
                         idPartido = (dr["idPartido"] != DBNull.Value) ? (int?)int.Parse(dr["idPartido"].ToString()) : null,
-                        idEquipo = Int32.Parse(dr["idEquipo"].ToString()),
-                        idJugador = (dr["idJugador"] != DBNull.Value) ? (int?)int.Parse(dr["idJugador"].ToString()) : null,
-                        fechaSancion = (dr["idFechaSancion"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fechaSancion"].ToString()) : null,
+                        equipo = daoEquipo.obtenerEquipoPorId(Int32.Parse(dr["idEquipo"].ToString())),
+                        jugador = (dr["idJugador"] != DBNull.Value) ? daoJugador.obtenerJugadorPorId(int.Parse(dr["idJugador"].ToString())) : null,
+                        fechaSancion = (dr["fechaSancion"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fechaSancion"].ToString()) : null,
                         motivoSancion = obtenerMotivoSancionPorId(int.Parse(dr["idMotivoSancion"].ToString())),
                         observacion = dr["observacion"].ToString(),
                         puntosAQuitar = (dr["puntosAQuitar"] != DBNull.Value) ? (int?)int.Parse(dr["puntosAQuitar"].ToString()) : null,

@@ -21,6 +21,8 @@ namespace Entidades
         public string observacion { get; set; }
         public int? puntosAQuitar { get; set; }
         public int? cantidadFechasSuspendidas { get; set; }
+        public Equipo equipo { get; set; }
+        public Jugador jugador { get; set; }
 
         public Sancion()
         {
