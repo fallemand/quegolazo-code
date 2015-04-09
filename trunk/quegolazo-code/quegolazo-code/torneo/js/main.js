@@ -73,7 +73,6 @@ $(document).ready(function($) {
         items : 10,
 		autoPlay: true,  
     	navigation : true,
-    	autoHeight : true,
     	slideSpeed : 200,
     	pagination : false,
         itemsCustom: [[0, 1],[350, 3], [500, 5],[600, 6], [800, 7], [1000, 9], [1100, 10], [1200, 11]]
