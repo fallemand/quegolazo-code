@@ -675,28 +675,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <asp:Repeater ID="Repeater1" runat="server">
+                                                <asp:Repeater ID="rptSancionesLocal" runat="server">
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td class="col-xs-1">
-                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                            <td class="col-xs-4">Fernando Gago</td>
-                                                            <td class="col-xs-7">Sancionado por 5 Fechas</td>
+                                                                <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                            <td class="col-xs-4"><%# Eval("jugador.nombre") %></td>
+                                                            <td class="col-xs-7">Sancionado por <%# Eval("cantidadFechasSuspendidas") %> Fechas</td>
                                                         </tr>
                                                     </ItemTemplate>
                                                  </asp:Repeater>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-4">Fernando Gago</td>
-                                                    <td class="col-xs-7">Sancionado por 5 Fechas</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-4">Fernando Gago</td>
-                                                    <td class="col-xs-7">Sancionado hasta el 15/12</td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -711,9 +699,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>No Registra Sanciones</td>
-                                                </tr>
+                                                <asp:Repeater ID="rptSancionesVisitante" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-1">
+                                                                <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                            <td class="col-xs-4"><%# Eval("jugador.nombre") %></td>
+                                                            <td class="col-xs-7">Sancionado por <%# Eval("cantidadFechasSuspendidas") %> Fechas</td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                 </asp:Repeater>
                                             </tbody>
                                         </table>
                                     </div>
@@ -729,29 +724,32 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="panel nopadding panel-default small-arrows">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Ultimos Partidos: Boca Juniors</h3>
+                            <h3 class="panel-title">Últimos Partido: <%= gestorPartido.partido.local.nombre %></h3>
                         </div>
                         <div class="panel-body">
                             <ul class="single-carousel">
                                 <li>
                                     <div class="widget-partido">
                                         <div class="col-xs-4">
-                                            <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block" style="max-height: 120px;">
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <img src=<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEL()[0]).obtenerImagenMediana() %> class="img-responsive center-block" style="max-height: 120px;">
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltUltimoPartidoEqLocal" runat="server" /></a></h5>
                                         </div>
                                         <div class="nopadding-left col-xs-4 resultado nopadding-right">
                                             <div class="thumbnail text-center col-xs-6">
-                                                <h2>0</h2>
+                                                <h2><asp:Literal ID="ltUltimoPartidoGolesLocalEL" runat="server" /></h2>
                                             </div>
                                             <div class="thumbnail text-center col-xs-6">
-                                                <h2>0</h2>
+                                                <h2><asp:Literal ID="ltUltimoPartidoGolesVisitanteEL" runat="server" /></h2>
                                             </div>
                                             <div class="col-xs-12 text-center">
-                                                Fecha 14
+                                                Fecha <asp:Literal ID="litUltimoPartidoFechaEL" runat="server" />
                                             </div>
                                         </div>
-
-                                        <div class="col-xs-4 nopadding-right">
+                                        <div class="col-xs-4">
+                                            <img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEL()[1]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltUltimoPartidoEqVisitante" runat="server" /></a></h5>
+                                        </div>
+                                        <%--<div class="col-xs-4 nopadding-right">
                                             <div class="camiseta-equipo">
                                                 <div>
                                                     <i class="flaticon-football114" style="color: #005A96"></i>
@@ -760,8 +758,8 @@
                                                     <i class="flaticon-football114" style="color: #FAD201"></i>
                                                 </div>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                        </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="" runat="server" /></a></h5>
+                                        </div>--%>
                                     </div>
                                 </li>
                             </ul>
@@ -783,9 +781,9 @@
                                     <div class="widget-partido">
                                         <div class="col-xs-4 resultado">
                                             <div class="thumbnail text-center col-xs-12">
-                                                <h2>39</h2>
+                                                <h2><asp:Literal ID="ltPuntosEL" runat="server"/></h2>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 text-center resultado">
                                             <span class="flaticon-football31" aria-hidden="true"></span>
@@ -795,9 +793,9 @@
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <div class="thumbnail text-center col-xs-12">
-                                                <h2>21</h2>
+                                                <h2><asp:Literal ID="ltPuntosEV" runat="server" /></h2>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
@@ -912,29 +910,32 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="panel nopadding panel-default small-arrows">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Ultimos Partidos: Boca Juniors</h3>
+                            <h3 class="panel-title">Último Partidos: <%= gestorPartido.partido.visitante.nombre %></h3>
                         </div>
                         <div class="panel-body">
                             <ul class="single-carousel">
                                 <li>
                                     <div class="widget-partido">
                                         <div class="col-xs-4">
-                                            <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block" style="max-height: 120px;">
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEV()[0]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltPartidoPrevioEquipoLocalEV" runat="server" /></a></h5>
                                         </div>
                                         <div class="nopadding-left col-xs-4 resultado nopadding-right">
                                             <div class="thumbnail text-center col-xs-6">
-                                                <h2>0</h2>
+                                                <h2><asp:Literal ID="ltPartidoPrevioGolesLocalEV" runat="server" /></h2>
                                             </div>
                                             <div class="thumbnail text-center col-xs-6">
-                                                <h2>0</h2>
+                                                <h2><asp:Literal ID="ltPartidoPrevioGolesVisitanteEV" runat="server" /></h2>
                                             </div>
                                             <div class="col-xs-12 text-center">
-                                                Fecha 14
+                                                Fecha <asp:Literal ID="litPartidoPrevioFechaEV" runat="server" />
                                             </div>
                                         </div>
-
-                                        <div class="col-xs-4 nopadding-right">
+                                        <div class="col-xs-4">
+                                            <img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEV()[1]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltPartidoPrevioEquipoVisitanteEV" runat="server" /></a></h5>
+                                        </div>
+                                        <%--<div class="col-xs-4 nopadding-right">
                                             <div class="camiseta-equipo">
                                                 <div>
                                                     <i class="flaticon-football114" style="color: #005A96"></i>
@@ -943,8 +944,8 @@
                                                     <i class="flaticon-football114" style="color: #FAD201"></i>
                                                 </div>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
-                                        </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltPartidoPrevioEquipoVisitanteEV" runat="server" /></a></h5>
+                                        </div>--%>
                                     </div>
                                 </li>
                             </ul>
