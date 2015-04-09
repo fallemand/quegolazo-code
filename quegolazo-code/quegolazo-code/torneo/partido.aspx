@@ -46,8 +46,8 @@
                 <div class="col-sm-12">
                     <div class="panel nopadding panel-default">
                         <div class="panel-body">
-                            <p class="proximos-partidos-title">Otros Partidos de la Fecha</p>
-                            <ul class="proximos-partidos">
+                            <p class="slider-multiple-title">Otros Partidos de la Fecha</p>
+                            <ul class="proximos-partidos slider-multiple tooltip-hover">
                                 <li class="li-partido" style="width: 120px">
                                     <span class="fecha theme-bg-color">September 26, 2015</span>
                                     <div class="text">
