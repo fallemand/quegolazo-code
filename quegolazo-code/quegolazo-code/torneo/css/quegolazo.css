@@ -213,16 +213,19 @@ h2.titulo-torneo strong {
 
 /**** Slider Equipos ****/
 .otros-equipos .camiseta-equipo {
-  font-size:80px;
-  line-height: 60px;
+  font-size:65px;
+  line-height: 50px;
   margin-top: 0px;
 }
 .otros-equipos .camiseta-equipo div {
-  width:40px;
+  width:32px;
 }
 
 .otros-equipos .camiseta-equipo .segunda-mitad i {
-  margin-left:-40px;
+  margin-left:-32px;
+}
+.otros-equipos .li-equipo img {
+    max-height: 55px;
 }
 /**--  END ****  Widget Partidos ****   **/
 
@@ -289,10 +292,10 @@ h5.col-title {
     line-height: 100px;
   }
   .camiseta-equipo div {
-    width:55px;
+    width:60px;
   }
   .camiseta-equipo .segunda-mitad i {
-    margin-left:-75px;
+    margin-left:-60px;
   }
   .camiseta-equipo {
     margin-top: 0px;
@@ -308,10 +311,10 @@ h5.col-title {
     line-height: 80px;
   }
   .camiseta-equipo div {
-    width:38px;
+    width:45px;
   }
   .camiseta-equipo .segunda-mitad i {
-    margin-left:-47px;
+    margin-left:-50px;
   }
   .mobile-margin-top {
     margin-top:15px;
