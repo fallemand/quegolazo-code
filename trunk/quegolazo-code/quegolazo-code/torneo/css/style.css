@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 
 /* ============================== 
 	- Template Name: Sports Cup- Responsive HTML5  soccer and sports Template
@@ -249,7 +249,11 @@ iframe.video{
 	border:solid 1px #dedede;
 	border-bottom:solid 2px #dedede;
 	margin:0 0 30px 0;
-	padding: auto 10px;	
+	padding: 10px;	
+}
+.panel-box.nopadding-sides{
+	padding-right:0px;
+    padding-left:0px;
 }
 .panel-box .row{
 	margin: 0;

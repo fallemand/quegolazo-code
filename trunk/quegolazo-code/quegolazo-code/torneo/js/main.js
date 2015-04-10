@@ -70,12 +70,12 @@ $(document).ready(function($) {
     //=================================== Slide Otros Equipos  ==============================//
 	 
 	$(".otros-equipos").owlCarousel({
-        items : 10,
+        items : 12,
 		autoPlay: true,  
     	navigation : true,
-    	slideSpeed : 200,
+    	slideSpeed : 100,
     	pagination : false,
-        itemsCustom: [[0, 1],[350, 3], [500, 5],[600, 6], [800, 7], [1000, 9], [1100, 10], [1200, 11]]
+        itemsCustom: [[0, 2],[300, 3],[400, 5], [500, 6],[600, 7], [800, 8], [1000, 10], [1100, 11], [1200, 13]]
 	});
 
   //=================================== Carousel Blog  ==================================//
