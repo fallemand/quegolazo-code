@@ -117,6 +117,7 @@ namespace AccesoADatos
                              partido.faseAsociada = daoFase.obtenerFasePorId(int.Parse(dr["idEdicion"].ToString()), int.Parse(dr["idFase"].ToString()));
                              partido.idPartidoPosterior = (dr["idPartidoPosterior"] != DBNull.Value) ? int.Parse(dr["idPartidoPosterior"].ToString()) : 0;
                              partido.idGrupo = (dr["idGrupo"] != DBNull.Value) ? (int?)int.Parse(dr["idGrupo"].ToString()) : null;
+                             partido.idFecha = int.Parse(dr["idFecha"].ToString());
                              if (dr["idEquipoLocal"] != DBNull.Value && dr["idEquipoVisitante"] != DBNull.Value)
                                 partido.nombreCompleto = daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoLocal"].ToString())).nombre + " vs. " + daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString())).nombre;
                              fechaActual.partidos.Add(partido);
@@ -394,6 +395,9 @@ namespace AccesoADatos
                     partido.faseAsociada = daoFase.obtenerFasePorId(int.Parse(dr["idEdicion"].ToString()), int.Parse(dr["idFase"].ToString()));
                     partido.idPartidoPosterior = (dr["idPartidoPosterior"] != DBNull.Value) ? int.Parse(dr["idPartidoPosterior"].ToString()) : 0;
                     partido.idGrupo = (dr["idGrupo"] != DBNull.Value) ? (int?)int.Parse(dr["idGrupo"].ToString()) : null;
+                    partido.idFecha = int.Parse(dr["idFecha"].ToString());
+                    if (dr["idEquipoLocal"] != DBNull.Value && dr["idEquipoVisitante"] != DBNull.Value)
+                        partido.nombreCompleto = daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoLocal"].ToString())).nombre + " vs. " + daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString())).nombre;
                 }
                 if (dr != null)
                     dr.Close();
@@ -1084,6 +1088,74 @@ namespace AccesoADatos
             catch (Exception ex)
             {
                 throw new Exception("No se pudo cambiar el estado de los partidos: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Permite obtener otros partidos de la fecha. Todos los partidos MENOS el que está siendo consultado
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public List<Partido> otrosPartidosDeLaFecha(int idEdicion, int idFase, int idFecha, int idPartidoActual)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            List<Partido> listaPartidos = new List<Partido>();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT p.idPartido AS 'Id Partido', p.fecha AS 'Fecha Partido', 
+                                equipoLocal.idEquipo AS 'Id Local', UPPER (SUBSTRING (equipoLocal.nombre, 1, 3)) AS 'Equipo Local',
+                                p.golesLocal AS 'Goles Local', p.penalesLocal AS 'Penales Local',
+                                p.golesVisitante AS 'Goles Visitante', p.penalesVisitante AS 'Penales Visitante',
+                                equipoVisitante.idEquipo AS 'Id Visitante', UPPER (SUBSTRING (equipoVisitante.nombre, 1, 3)) AS 'Equipo Visitante',
+                                estado.nombre AS 'Estado Partido', p.huboPenales AS 'Hubo Penales'
+                                FROM Partidos p
+                                INNER JOIN Equipos equipoLocal ON p.idEquipoLocal = equipoLocal.idEquipo
+                                INNER JOIN Equipos equipoVisitante ON p.idEquipoVisitante = equipoVisitante.idEquipo
+                                INNER JOIN Estados estado ON p.idEstado = estado.idEstado
+                                WHERE p.idEdicion = @idEdicion AND p.idFecha = @idFecha AND p.idFase = @idFase
+                                AND p.idPartido <> @idPartidoActual";
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idPartidoActual", idPartidoActual));
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
+                cmd.Parameters.Add(new SqlParameter("@idFecha", idFecha));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Partido partido = new Partido();
+                    partido.idPartido = int.Parse(dr["Id Partido"].ToString());
+                    partido.fecha = (dr["Fecha Partido"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["Fecha Partido"].ToString()) : null;
+                    partido.golesLocal = (dr["Goles Local"] != DBNull.Value) ? (int?)int.Parse(dr["Goles Local"].ToString()) : null;
+                    partido.golesVisitante = (dr["Goles Visitante"] != DBNull.Value) ? (int?)int.Parse(dr["Goles Visitante"].ToString()) : null;
+                    partido.huboPenales = (dr["Hubo Penales"] != DBNull.Value) ? (bool?)bool.Parse(dr["Hubo Penales"].ToString()) : null;
+                    partido.penalesLocal = (dr["Penales Local"] != DBNull.Value) ? (int?)int.Parse(dr["Penales Local"].ToString()) : null;
+                    partido.penalesVisitante = (dr["Penales Visitante"] != DBNull.Value) ? (int?)int.Parse(dr["Penales Visitante"].ToString()) : null;
+                    partido.local.idEquipo = int.Parse(dr["Id Local"].ToString());
+                    partido.local.nombre = (dr["Equipo Local"].ToString());
+                    partido.visitante.idEquipo = int.Parse(dr["Id Visitante"].ToString());
+                    partido.visitante.nombre = (dr["Equipo Visitante"].ToString());
+                    partido.estado.nombre = (dr["Estado Partido"].ToString());           
+                    listaPartidos.Add(partido);
+                }
+                if (dr != null)
+                    dr.Close();
+                return listaPartidos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
             }
         }
     }

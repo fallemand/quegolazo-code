@@ -6,13 +6,14 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Utils;
 
 namespace quegolazo_code.torneo
 {
     public partial class partido : System.Web.UI.Page
     {
-        GestorTorneo gestorTorneo;
-        GestorEdicion gestorEdicion;
+        protected GestorTorneo gestorTorneo;
+        protected GestorEdicion gestorEdicion;
         protected GestorPartido gestorPartido;
         protected GestorEquipo gestorEquipo;
         GestorEstadisticas gestorEstadistica;
@@ -34,10 +35,11 @@ namespace quegolazo_code.torneo
             if (!Page.IsPostBack)
             {
                 gestorPartido.obtenerPartidoporId(Request["partido"]);
+                otrosPartidosDeLaFecha();
                 cargarDatosDePartido();
                 cargarUltimoPartidoEL();
                 cargarUltimoPartidoEV();
-                cargarComparativo();
+                cargarComparativo();                 
             }
         }
 
@@ -70,8 +72,7 @@ namespace quegolazo_code.torneo
 
         private void cargarRepeaterGoles()
         {
-            rptGolesLocal.DataSource = gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.local.idEquipo);
-            rptGolesLocal.DataBind();
+            GestorControles.cargarRepeaterList(rptGolesLocal, gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.local.idEquipo));
             rptGolesVisitante.DataSource = gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.visitante.idEquipo);
             rptGolesVisitante.DataBind();
         }
@@ -124,6 +125,7 @@ namespace quegolazo_code.torneo
             rptTabTarjetasRojasVisitante.DataBind();
         }
 
+        //Repeater Titulares - Local y Visitante
         private void cargarRepeaterTitulares()
         {
             rptTitularesLocal.DataSource = gestorPartido.partido.titularesLocal;
@@ -132,12 +134,11 @@ namespace quegolazo_code.torneo
             rptTitularesVisitante.DataBind();
         }
 
+        //Repeater Sanciones - Local y Visitante
         private void cargarRepeaterTadSanciones()
         {
-            rptSancionesLocal.DataSource = gestorPartido.obtenerSancionesPorEquipo(gestorPartido.partido.local.idEquipo);
-            rptSancionesLocal.DataBind();
-            rptSancionesVisitante.DataSource = gestorPartido.obtenerSancionesPorEquipo(gestorPartido.partido.visitante.idEquipo);
-            rptSancionesVisitante.DataBind();
+            sinSancionesLocal.Visible = !GestorControles.cargarRepeaterList(rptSancionesLocal, gestorPartido.obtenerSancionesPorEquipo(gestorPartido.partido.local.idEquipo));
+            sinSancionesVisitante.Visible = !GestorControles.cargarRepeaterList(rptSancionesVisitante, gestorPartido.obtenerSancionesPorEquipo(gestorPartido.partido.visitante.idEquipo));
         }
 
         protected List<int> cargarUltimoPartidoEL()
@@ -179,9 +180,45 @@ namespace quegolazo_code.torneo
         private void cargarComparativo()
         {
             var comparativoLocal = gestorEstadistica.obtenerEstadisticasEquipo(gestorPartido.partido.local.idEquipo);
-            var comparativoVisitante = gestorEstadistica.obtenerEstadisticasEquipo(gestorPartido.partido.local.idEquipo);
-            ltPuntosEL.Text = (comparativoLocal.Rows.Count > 0) ? comparativoLocal.Rows[0]["Puntos"].ToString() : "";
-            ltPuntosEV.Text = (comparativoVisitante.Rows.Count > 0) ? comparativoVisitante.Rows[0]["Puntos"].ToString() : "";
+            var comparativoVisitante = gestorEstadistica.obtenerEstadisticasEquipo(gestorPartido.partido.visitante.idEquipo);
+            //Equipo Local
+            ltPuntosEL.Text = (comparativoLocal.Rows.Count > 0) ? comparativoLocal.Rows[0]["Puntos"].ToString() : "-";
+            ltPartGanadosEL.Text = (comparativoLocal.Rows.Count > 0) ? comparativoLocal.Rows[0]["PG"].ToString() : "-";
+            ltPartEmpatadosEL.Text = (comparativoLocal.Rows.Count > 0) ? comparativoLocal.Rows[0]["PE"].ToString() : "-";
+            ltPartPerdidosEL.Text = (comparativoLocal.Rows.Count > 0) ? comparativoLocal.Rows[0]["PP"].ToString() : "-";
+            ltComparativoGolesEL.Text = (comparativoLocal.Rows.Count > 0) ? comparativoLocal.Rows[0]["GF"].ToString() : "-";
+            ltComparativoTarjRojasEL.Text = (comparativoLocal.Rows.Count > 0) ? comparativoLocal.Rows[0]["TR"].ToString() : "-";
+            ltComparativoTarjAmarillasEL.Text = (comparativoLocal.Rows.Count > 0) ? comparativoLocal.Rows[0]["TA"].ToString() : "-";
+            //Equipo Visitante
+            ltPuntosEV.Text = (comparativoVisitante.Rows.Count > 0) ? comparativoVisitante.Rows[0]["Puntos"].ToString() : "-";
+            ltPartGanadosEV.Text = (comparativoVisitante.Rows.Count > 0) ? comparativoVisitante.Rows[0]["PG"].ToString() : "-";
+            ltPartEmpatadosEV.Text = (comparativoVisitante.Rows.Count > 0) ? comparativoVisitante.Rows[0]["PE"].ToString() : "-";
+            ltPartPerdidosEV.Text = (comparativoVisitante.Rows.Count > 0) ? comparativoVisitante.Rows[0]["PP"].ToString() : "-";
+            ltComparativoGolesEV.Text = (comparativoVisitante.Rows.Count > 0) ? comparativoVisitante.Rows[0]["GF"].ToString() : "-";
+            ltComparativoTarjRojasEV.Text = (comparativoVisitante.Rows.Count > 0) ? comparativoVisitante.Rows[0]["TR"].ToString() : "-";
+            ltComparativoTarjAmarillasEV.Text = (comparativoVisitante.Rows.Count > 0) ? comparativoVisitante.Rows[0]["TA"].ToString() : "-";
+        }
+
+        private void otrosPartidosDeLaFecha()
+        {
+            rptOtrosPartidosDeLaFecha.DataSource = gestorPartido.otrosPartidosDeLaFecha(gestorEdicion.edicion.idEdicion, gestorPartido.partido.faseAsociada.idFase, gestorPartido.partido.idFecha, gestorPartido.partido.idPartido);
+            rptOtrosPartidosDeLaFecha.DataBind();
+        }
+
+        public string MonthName(int month)
+        {
+            System.Globalization.CultureInfo ci = null;
+            System.Globalization.DateTimeFormatInfo dtfi = null;
+            ci = System.Globalization.CultureInfo.CreateSpecificCulture("es-ES");
+            dtfi = ci.DateTimeFormat;
+            return dtfi.GetMonthName(month);
+        }
+
+        public string DayMonthName(DateTime date)
+        {
+            System.Globalization.CultureInfo ci = null;
+            ci = System.Globalization.CultureInfo.CreateSpecificCulture("es-ES");
+            return date.ToString("dddd", ci).ToUpper();
         }
     }
 }

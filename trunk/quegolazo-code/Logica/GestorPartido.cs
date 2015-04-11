@@ -176,6 +176,11 @@ namespace Logica
             partido.titularesVisitante = daoPartido.obtenerTitularesDeUnPartido(partido.idPartido, partido.visitante.idEquipo);
         }
 
+        public List<Partido> otrosPartidosDeLaFecha(int idEdicion, int idFase, int idFecha, int idPartidoActual)
+        {
+            return daoPartido.otrosPartidosDeLaFecha(idEdicion, idFase, idFecha, idPartidoActual);
+        }
+
         /// <summary>
         /// Retorna si un jugador es titular en el equipo local
         /// autor: Facundo Allemand

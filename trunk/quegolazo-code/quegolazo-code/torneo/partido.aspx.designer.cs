@@ -13,6 +13,15 @@ namespace quegolazo_code.torneo {
     public partial class partido {
         
         /// <summary>
+        /// Control rptOtrosPartidosDeLaFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptOtrosPartidosDeLaFecha;
+        
+        /// <summary>
         /// Control rptGolesLocal.
         /// </summary>
         /// <remarks>
@@ -184,6 +193,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptSancionesLocal;
         
         /// <summary>
+        /// Control sinSancionesLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinSancionesLocal;
+        
+        /// <summary>
         /// Control rptSancionesVisitante.
         /// </summary>
         /// <remarks>
@@ -191,6 +209,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptSancionesVisitante;
+        
+        /// <summary>
+        /// Control sinSancionesVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinSancionesVisitante;
         
         /// <summary>
         /// Control ltUltimoPartidoEqLocal.
@@ -254,6 +281,114 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltPuntosEV;
+        
+        /// <summary>
+        /// Control ltPartGanadosEL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltPartGanadosEL;
+        
+        /// <summary>
+        /// Control ltPartGanadosEV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltPartGanadosEV;
+        
+        /// <summary>
+        /// Control ltPartEmpatadosEL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltPartEmpatadosEL;
+        
+        /// <summary>
+        /// Control ltPartEmpatadosEV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltPartEmpatadosEV;
+        
+        /// <summary>
+        /// Control ltPartPerdidosEL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltPartPerdidosEL;
+        
+        /// <summary>
+        /// Control ltPartPerdidosEV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltPartPerdidosEV;
+        
+        /// <summary>
+        /// Control ltComparativoTarjRojasEL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltComparativoTarjRojasEL;
+        
+        /// <summary>
+        /// Control ltComparativoTarjRojasEV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltComparativoTarjRojasEV;
+        
+        /// <summary>
+        /// Control ltComparativoTarjAmarillasEL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltComparativoTarjAmarillasEL;
+        
+        /// <summary>
+        /// Control ltComparativoTarjAmarillasEV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltComparativoTarjAmarillasEV;
+        
+        /// <summary>
+        /// Control ltComparativoGolesEL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltComparativoGolesEL;
+        
+        /// <summary>
+        /// Control ltComparativoGolesEV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltComparativoGolesEV;
         
         /// <summary>
         /// Control ltPartidoPrevioEquipoLocalEV.

@@ -33,6 +33,7 @@ namespace Entidades
         public int idPartidoPosterior { get; set; }
         public Fase faseAsociada { get; set; }
         public int? idGrupo { get; set; }
+        public int idFecha { get; set; }
 
         public Partido()
         {
