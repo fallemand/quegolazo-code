@@ -690,7 +690,9 @@ namespace AccesoADatos
                                 COUNT(CASE WHEN (p.idPerdedor = equipo1.idEquipo) THEN 1 ELSE NULL END) AS 'PP',
                                 SUM(CASE WHEN idEquipoLocal = equipo1.idEquipo AND golesLocal IS NOT NULL THEN golesLocal ELSE 0 END) + SUM(CASE WHEN idEquipoVisitante = equipo1.idEquipo AND golesVisitante IS NOT NULL THEN golesVisitante ELSE 0 END) AS 'GF',
                                 SUM(CASE WHEN idEquipoLocal = equipo1.idEquipo AND golesVisitante IS NOT NULL THEN golesVisitante ELSE 0 END)+ SUM(CASE WHEN idEquipoVisitante = equipo1.idEquipo AND golesLocal IS NOT NULL THEN golesLocal ELSE 0 END) AS 'GC',
-                                COUNT(CASE idGanador WHEN equipo1.idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN equipo1.idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
+                                COUNT(CASE idGanador WHEN equipo1.idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN equipo1.idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos',
+                                (SELECT COUNT(CASE WHEN t.tipoTarjeta = 'A' THEN 1 ELSE NULL END) FROM Tarjetas t WHERE t.idEquipo = @idEquipo AND t.idPartido IN (SELECT p1.idPartido FROM Partidos p1 WHERE p1.idEdicion = @idEdicion)) AS 'TA',
+                                (SELECT COUNT(CASE WHEN t.tipoTarjeta = 'R' THEN 1 ELSE NULL END) FROM Tarjetas t WHERE t.idEquipo = @idEquipo AND t.idPartido IN (SELECT p1.idPartido FROM Partidos p1 WHERE p1.idEdicion = @idEdicion )) AS 'TR' 
                                 FROM Partidos p
                                 INNER JOIN Equipos equipo1 ON (equipo1.idEquipo = p.idEquipoLocal OR equipo1.idEquipo = p.idEquipoVisitante)
                                 INNER JOIN Ediciones edicionActual ON p.idEdicion = edicionActual.idEdicion	
@@ -1032,6 +1034,6 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-        }
+        }        
     }
 }

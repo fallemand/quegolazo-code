@@ -11,7 +11,7 @@
     <section class="section-title img-about">
         <div class="overlay-bg"></div>
         <div class="container">
-            <h1>Partido</h1>
+            <h1><%=gestorPartido.partido.nombreCompleto %> </h1>
         </div>
     </section>
     <!-- End Titulo Sección -->
@@ -21,15 +21,15 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="index-2.html">Torneo La Rivera</a></li>
+                    <li><a href="index-2.html"><%=gestorTorneo.torneo.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Edición 2014</a></li>
+                    <li><a href="index-2.html"><%=gestorEdicion.edicion.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Fase 1</a></li>
+                    <li><a href="index-2.html">Fase <%=gestorPartido.partido.faseAsociada.idFase%></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Fecha 2</a></li>
+                    <li><a href="index-2.html">Fecha <%=gestorPartido.partido.idFecha %></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Boca Juniors vs Boca Juniors</a></li>
+                    <li><a href="index-2.html"><%=gestorPartido.partido.nombreCompleto %></a></li>
                 </ul>
             </div>
         </div>
@@ -48,22 +48,27 @@
                         <div class="panel-body">
                             <p class="slider-multiple-title">Otros Partidos de la Fecha</p>
                             <ul class="proximos-partidos slider-multiple tooltip-hover">
-                                <li class="li-partido" style="width: 120px">
-                                    <span class="fecha theme-bg-color">September 26, 2015</span>
-                                    <div class="text">
-                                        <div class="equipos">
-                                            <a href="#">
-                                                <span>BOC</span>
-                                                vs
-                                                    <span>ARG</span>
-                                            </a>
-                                            <p class="estado jugado theme-bg-color-2">
-                                                2 (5) - 2 (3)
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="li-partido" style="width: 120px">
+                                <asp:Repeater ID="rptOtrosPartidosDeLaFecha" runat="server">
+                                    <ItemTemplate>
+                                        <li class="li-partido" style="width: 120px">
+                                            <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? MonthName(DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
+                                            <div class="text">
+                                                <div class="equipos">
+                                                    <a href="#">
+                                                        <span><%# Eval("local.nombre") %></span>
+                                                        vs
+                                                        <span><%# Eval("visitante.nombre") %></span>
+                                                    </a>
+                                                    <p class="estado <%# Eval("estado.nombre") %> theme-bg-color-2">
+                                                       <%# ((Entidades.Partido)Container.DataItem).golesLocal != null ? ((Entidades.Partido)Container.DataItem).golesLocal+"-"+((Entidades.Partido)Container.DataItem).golesVisitante : ((Entidades.Partido)Container.DataItem).estado.nombre %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                
+                                <%--<li class="li-partido" style="width: 120px">
                                     <span class="fecha theme-bg-color">September 26, 2015</span>
                                     <div class="text">
                                         <div class="equipos">
@@ -202,7 +207,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                </li>
+                                </li>--%>
                             </ul>
                         </div>
                     </div>
@@ -224,7 +229,7 @@
                                 <div class="row">
                                     <div class="camiseta-equipo">
                                         <div>
-                                            <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaPrimario%>"></i>
+                                            <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaPrimario %>"></i>
                                         </div><!--
                                      --><div class="segunda-mitad">
                                             <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaSecundario%>"></i>
@@ -239,7 +244,7 @@
                                     <div class="col-xs-5 nopadding-left">
                                         <% if(gestorPartido.partido.golesLocal != null) {%> <h1><%=gestorPartido.partido.golesLocal %> </h1><% } %>
                                     </div>
-                                    <% if(gestorPartido.partido.empate == true) { %>
+                                    <% if(gestorPartido.partido.huboPenales == true) { %>
                                     <div class="col-xs-5 nopadding-left">
                                         <h1>(<%=gestorPartido.partido.penalesLocal %>)</h1>
                                     </div>
@@ -250,7 +255,7 @@
                                     <div class="col-xs-5 nopadding-right">
                                          <% if(gestorPartido.partido.golesVisitante != null) {%> <h1><%=gestorPartido.partido.golesVisitante %> </h1><% } %>
                                     </div>
-                                    <% if(gestorPartido.partido.empate == true) { %>
+                                    <% if(gestorPartido.partido.huboPenales == true) { %>
                                     <div class="col-xs-5 nopadding-left">
                                         <h1>(<%=gestorPartido.partido.penalesVisitante %>)</h1>
                                     </div>
@@ -260,11 +265,14 @@
                                     <div class="col-xs-12">
                                         <ul class="list-group">
                                             <% if(gestorPartido.partido.fecha != null) { %>
-                                            <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs">Sábado </span><%= gestorPartido.partido.fecha %></li>
+                                            <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs"><%= DayMonthName(DateTime.Parse(gestorPartido.partido.fecha.ToString())) %> </span><%= gestorPartido.partido.fecha %></li>
                                             <% } %>
                                             <% if(gestorPartido.partido.cancha != null) { %>
                                             <li class="list-group-item hidden-xs"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><%= gestorPartido.partido.cancha.nombre %></li>
                                              <% } %>
+                                            <%--<% if(gestorPartido.partido.arbitro != null) { %>
+                                            <li class="list-group-item hidden-xs"><span class="flaticon-black188" aria-hidden="true"></span><%= gestorPartido.partido.arbitro.nombre %></li>
+                                             <% } %>--%>
                                             <li class="list-group-item hidden-xs"><span class="label label-success"><%= gestorPartido.partido.estado.nombre %></span></li>
                                         </ul>
                                     </div>
@@ -349,6 +357,7 @@
                                                                 <span class="flaticon-football28"></span>
                                                             </ItemTemplate>
                                                      </asp:Repeater>
+                                                    <%--<span id="sinGolesLocal" runat="server" visible="false">-</span>--%>
                                                 </td>
                                                 <td>Goles</td>
                                                 <td>
@@ -685,6 +694,9 @@
                                                         </tr>
                                                     </ItemTemplate>
                                                  </asp:Repeater>
+                                                <tr id="sinSancionesLocal" runat="server" visible="false">
+                                                    <td colspan="3">No hay sanciones registradas</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -709,6 +721,9 @@
                                                         </tr>
                                                     </ItemTemplate>
                                                  </asp:Repeater>
+                                                <tr id="sinSancionesVisitante" runat="server" visible="false">
+                                                    <td colspan="3">No hay sanciones registradas</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -724,7 +739,7 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="panel nopadding panel-default small-arrows">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Últimos Partido: <%= gestorPartido.partido.local.nombre %></h3>
+                            <h3 class="panel-title">Último Partido: <%= gestorPartido.partido.local.nombre %></h3>
                         </div>
                         <div class="panel-body">
                             <ul class="single-carousel">
@@ -806,9 +821,9 @@
                                     <div class="widget-partido">
                                         <div class="col-xs-4 resultado">
                                             <div class="thumbnail text-center col-xs-12">
-                                                <h2>6</h2>
+                                                <h2><asp:Literal ID="ltPartGanadosEL" runat="server" /></h2>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 text-center resultado">
                                             <img src="/torneo/img/img-theme/ganador.png" class="img-circle avatar-md" alt="">
@@ -818,22 +833,70 @@
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <div class="thumbnail text-center col-xs-12">
-                                                <h2>4</h2>
+                                                <h2><asp:Literal ID="ltPartGanadosEV" runat="server" /></h2>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
                                 <!-- END Versus: Partidos Ganados -->
+                                <!-- Versus: Partidos Empatados -->
+                                <li>
+                                    <div class="widget-partido">
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2><asp:Literal ID="ltPartEmpatadosEL" runat="server" /></h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
+                                        </div>
+                                        <div class="col-xs-4 text-center resultado">
+                                            <img src="/torneo/img/img-theme/ganador.png" class="img-circle avatar-md" alt="">
+                                            <div class="col-xs-12 text-center">
+                                                Partidos Empatados
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2><asp:Literal ID="ltPartEmpatadosEV" runat="server" /></h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END Versus: Partidos Empatados -->
+                                <!-- Versus: Partidos Perdidos -->
+                                <li>
+                                    <div class="widget-partido">
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2><asp:Literal ID="ltPartPerdidosEL" runat="server" /></h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
+                                        </div>
+                                        <div class="col-xs-4 text-center resultado">
+                                            <img src="/torneo/img/img-theme/ganador.png" class="img-circle avatar-md" alt="">
+                                            <div class="col-xs-12 text-center">
+                                                Partidos Perdidos
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 resultado">
+                                            <div class="thumbnail text-center col-xs-12">
+                                                <h2><asp:Literal ID="ltPartPerdidosEV" runat="server" /></h2>
+                                            </div>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END Versus: Partidos Perdidos -->
 
                                 <!-- Versus: Tarjetas Rojas -->
                                 <li>
                                     <div class="widget-partido">
                                         <div class="col-xs-4 resultado">
                                             <div class="thumbnail text-center col-xs-12">
-                                                <h2>8</h2>
+                                                <h2><asp:Literal ID="ltComparativoTarjRojasEL" runat="server" /></h2>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 text-center resultado">
                                             <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-md" alt="">
@@ -843,9 +906,9 @@
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <div class="thumbnail text-center col-xs-12">
-                                                <h2>33</h2>
+                                                <h2><asp:Literal ID="ltComparativoTarjRojasEV" runat="server" /></h2>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
@@ -856,9 +919,9 @@
                                     <div class="widget-partido">
                                         <div class="col-xs-4 resultado">
                                             <div class="thumbnail text-center col-xs-12">
-                                                <h2>39</h2>
+                                                <h2><asp:Literal ID="ltComparativoTarjAmarillasEL" runat="server" /></h2>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 text-center resultado">
                                             <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-md" alt="">
@@ -868,22 +931,22 @@
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <div class="thumbnail text-center col-xs-12">
-                                                <h2>21</h2>
+                                                <h2><asp:Literal ID="ltComparativoTarjAmarillasEV" runat="server" /></h2>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
                                 <!-- END Versus: Tarjetas Amarillas -->
 
-                                <!-- Versus: Goles -->
+                                <!-- Versus: Goles a Favor -->
                                 <li>
                                     <div class="widget-partido">
                                         <div class="col-xs-4 resultado">
                                             <div class="thumbnail text-center col-xs-12">
-                                                <h2>39</h2>
+                                                <h2><asp:Literal ID="ltComparativoGolesEL" runat="server" /></h2>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 text-center resultado">
                                             <span class="flaticon-flaming" aria-hidden="true" style="color: #E00C0C;"></span>
@@ -893,13 +956,13 @@
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <div class="thumbnail text-center col-xs-12">
-                                                <h2>21</h2>
+                                                <h2><asp:Literal ID="ltComparativoGolesEV" runat="server" /></h2>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h5>
+                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
-                                <!-- END Versus: Goles -->
+                                <!-- END Versus: Goles a Favor -->
                             </ul>
                         </div>
                     </div>
@@ -917,7 +980,7 @@
                                 <li>
                                     <div class="widget-partido">
                                         <div class="col-xs-4">
-                                            <img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEV()[0]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                            <%--<img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEV()[0]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">--%>
                                             <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltPartidoPrevioEquipoLocalEV" runat="server" /></a></h5>
                                         </div>
                                         <div class="nopadding-left col-xs-4 resultado nopadding-right">
