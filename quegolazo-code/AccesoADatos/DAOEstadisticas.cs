@@ -787,10 +787,10 @@ namespace AccesoADatos
                                 WHERE p.idEdicion = @idEdicion 
                                 AND (p.idEquipoLocal = @idEquipo OR p.idEquipoVisitante = @idEquipo)
                                 AND p.idEstado = @estadoJugado
-                                AND idPartido <> @idPartido                                
+                                AND idPartido <> @idPartido 
+                                AND idPartido < @idPartido                               
                                 ORDER BY idPartido DESC";
                 cmd.Parameters.Clear();
-                //Agregar estta condicion en el where AND idPartido < @idPartido
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
                 cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));

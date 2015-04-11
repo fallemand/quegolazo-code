@@ -357,7 +357,7 @@
                                                                 <span class="flaticon-football28"></span>
                                                             </ItemTemplate>
                                                      </asp:Repeater>
-                                                    <%--<span id="sinGolesLocal" runat="server" visible="false">-</span>--%>
+                                                    <span id="sinGolesLocal" runat="server" visible="false">-</span>
                                                 </td>
                                                 <td>Goles</td>
                                                 <td>
@@ -366,6 +366,7 @@
                                                                 <span class="flaticon-football28"></span>
                                                             </ItemTemplate>
                                                      </asp:Repeater>
+                                                    <span id="sinGolesVisitante" runat="server" visible="false">-</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -375,6 +376,7 @@
                                                                 <span style="color: red;" class="flaticon-football103"></span>
                                                             </ItemTemplate>
                                                      </asp:Repeater>
+                                                    <span id="sinTarjetasRojasLocal" runat="server" visible="false">-</span>
                                                 </td>
                                                 <td class="text-center">Tarjetas Rojas</td>
                                                 <td>
@@ -383,6 +385,7 @@
                                                                 <span style="color: red;" class="flaticon-football103"></span>
                                                             </ItemTemplate>
                                                      </asp:Repeater>
+                                                    <span id="sinTarjetasRojasVisitante" runat="server" visible="false">-</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -392,6 +395,7 @@
                                                                 <span style="color: yellow;" class="flaticon-football103"></span>
                                                             </ItemTemplate>
                                                      </asp:Repeater>
+                                                    <span id="sinTarjetasAmarillasLocal" runat="server" visible="false">-</span>
                                                 </td>
                                                 <td class="text-center">Tarjetas Amarillas</td>
                                                 <td>
@@ -399,7 +403,8 @@
                                                             <ItemTemplate>
                                                                 <span style="color: yellow;" class="flaticon-football103"></span>
                                                             </ItemTemplate>
-                                                     </asp:Repeater>                      
+                                                     </asp:Repeater> 
+                                                    <span id="sinTarjetasAmarillasVisitante" runat="server" visible="false">-</span>                     
                                                 </td>
                                             </tr>
                                             <tr>
@@ -408,7 +413,8 @@
                                                             <ItemTemplate>
                                                                <img class="img-xs" src="/torneo/img/img-theme/cambio.png" alt="Cambio">
                                                             </ItemTemplate>
-                                                     </asp:Repeater>   
+                                                     </asp:Repeater>  
+                                                    <span id="sinCambiosLocal" runat="server" visible="false">-</span> 
                                                 </td>
                                                 <td class="text-center">Cambios</td>
                                                 <td>
@@ -417,6 +423,7 @@
                                                                <img class="img-xs" src="/torneo/img/img-theme/cambio.png" alt="Cambio">
                                                             </ItemTemplate>
                                                      </asp:Repeater> 
+                                                    <span id="sinCambiosVisitante" runat="server" visible="false">-</span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -445,7 +452,10 @@
                                                             <td class="col-xs-2"><%# Eval("numeroCamiseta") %></td>
                                                         </tr>
                                                     </ItemTemplate>
-                                                </asp:Repeater>                                                 
+                                                </asp:Repeater>   
+                                                <tr id="sinTitularesLocal" runat="server" visible="false">
+                                                    <td colspan="3">No hay jugadores titulares registrados</td>
+                                                </tr>                                              
                                             </tbody>
                                         </table>
                                     </div>
@@ -470,6 +480,9 @@
                                                         </tr>
                                                     </ItemTemplate>
                                                 </asp:Repeater>    
+                                                <tr id="sinTitularesVisitante" runat="server" visible="false">
+                                                    <td colspan="3">No hay jugadores titulares registrados</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -491,14 +504,17 @@
                                                 <asp:Repeater ID="rptTabGolesLocal" runat="server">
                                                     <ItemTemplate>
                                                         <tr>
-                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto %>'</span></td>
+                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto != null ? ((Entidades.Gol)Container.DataItem).minuto+"'": "-" %></span></td>
                                                             <td class="col-xs-7">
-                                                                <img src="<%# ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
-                                                                <%# ((Entidades.Gol)Container.DataItem).jugador.nombre %></td>
-                                                            <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol.nombre %></td>
+                                                                <img src="<%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() : "/torneo/img/img-theme/jugador-mediano.jpg" %>" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "" %></td>
+                                                            <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol != null ? ((Entidades.Gol)Container.DataItem).tipoGol.nombre : "-"%></td>
                                                         </tr>
                                                     </ItemTemplate>
                                                 </asp:Repeater> 
+                                                <tr id="sinGolesTabLocal" runat="server" visible="false">
+                                                    <td colspan="3">No hay información de goles registrada</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -516,14 +532,17 @@
                                                 <asp:Repeater ID="rptTabGolesVisitante" runat="server">
                                                     <ItemTemplate>
                                                         <tr>
-                                                        <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto %>'</span></td>
-                                                        <td class="col-xs-7">
-                                                            <img src="<%# ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
-                                                            <%# ((Entidades.Gol)Container.DataItem).jugador.nombre %></td>
-                                                        <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol.nombre %></td>
+                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto != null ? ((Entidades.Gol)Container.DataItem).minuto+"'": "-" %></span></td>
+                                                            <td class="col-xs-7">
+                                                                <img src="<%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() : "/torneo/img/img-theme/jugador-mediano.jpg" %>" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "" %></td>
+                                                            <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol != null ? ((Entidades.Gol)Container.DataItem).tipoGol.nombre : "-"%></td>
                                                         </tr>
                                                     </ItemTemplate>
                                                  </asp:Repeater>
+                                                <tr id="sinGolesTabVisitante" runat="server" visible="false">
+                                                    <td colspan="3">No hay información de goles registrada</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -545,7 +564,7 @@
                                                 <asp:Repeater ID="rptTabCambiosLocal" runat="server">
                                                     <ItemTemplate>
                                                        <tr>
-                                                        <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto %>'</span></td>
+                                                        <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto != null ? ((Entidades.Cambio)Container.DataItem).minuto+"'" : "-" %></span></td>
                                                         <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
                                                         <td class="col-xs-4">
                                                             <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
@@ -556,7 +575,10 @@
                                                             <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %></td>
                                                        </tr>
                                                     </ItemTemplate>
-                                                 </asp:Repeater>                                               
+                                                 </asp:Repeater>  
+                                                <tr id="sinCambiosTabLocal" runat="server" visible="false">
+                                                    <td colspan="5">No hay información de cambios registrada</td>
+                                                </tr>                                             
                                             </tbody>
                                         </table>
                                     </div>
@@ -574,7 +596,7 @@
                                                 <asp:Repeater ID="rptTabCambiosVisitante" runat="server">
                                                     <ItemTemplate>
                                                        <tr>
-                                                        <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto %>'</span></td>
+                                                        <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto != null ? ((Entidades.Cambio)Container.DataItem).minuto+"'" : "-" %></span></td>
                                                         <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
                                                         <td class="col-xs-4">
                                                             <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
@@ -585,7 +607,10 @@
                                                             <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %></td>
                                                        </tr>
                                                     </ItemTemplate>
-                                                 </asp:Repeater>  
+                                                 </asp:Repeater>
+                                                <tr id="sinCambiosTabVisitante" runat="server" visible="false">
+                                                    <td colspan="5">No hay información de cambios registrada</td>
+                                                </tr>   
                                             </tbody>
                                         </table>
                                     </div>
@@ -607,9 +632,9 @@
                                                 <asp:Repeater ID="rptTabTarjetasAmarillasLocal" runat="server">
                                                     <ItemTemplate>
                                                         <tr>
-                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
+                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto != null ? ((Entidades.Tarjeta)Container.DataItem).minuto+"'" : "-" %></span></td>
                                                             <td class="col-xs-8">
-                                                                <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
+                                                                <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
                                                                 <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
                                                             <td class="colrptTabTarjetasAmarillasLocal-xs-2">
                                                                 <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>                                                           
@@ -619,15 +644,18 @@
                                                 <asp:Repeater ID="rptTabTarjetasRojasLocal" runat="server">
                                                     <ItemTemplate>
                                                         <tr>
-                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
+                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto != null ? ((Entidades.Tarjeta)Container.DataItem).minuto+"'" : "-" %></span></td>
                                                             <td class="col-xs-8">
-                                                                <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
+                                                                <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
                                                                 <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
                                                             <td class="col-xs-2">
                                                                 <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>                                                           
                                                         </tr>
                                                     </ItemTemplate>
                                                  </asp:Repeater> 
+                                                <tr id="sinTarjetasTabLocal" runat="server" visible="false">
+                                                    <td colspan="3">No hay información de tarjetas registrada</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -647,7 +675,7 @@
                                                         <tr>
                                                             <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
                                                             <td class="col-xs-8">
-                                                                <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
+                                                                <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
                                                                 <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
                                                             <td class="colrptTabTarjetasAmarillasLocal-xs-2">
                                                                 <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>                                                           
@@ -659,13 +687,16 @@
                                                         <tr>
                                                             <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
                                                             <td class="col-xs-8">
-                                                                <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-sm" alt="">
+                                                                <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
                                                                 <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
                                                             <td class="col-xs-2">
                                                                 <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>                                                           
                                                         </tr>
                                                     </ItemTemplate>
                                                  </asp:Repeater>
+                                                <tr id="sinTarjetasTabVisitante" runat="server" visible="false">
+                                                    <td colspan="3">No hay información de tarjetas registrada</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -688,9 +719,9 @@
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td class="col-xs-1">
-                                                                <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                            <td class="col-xs-4"><%# Eval("jugador.nombre") %></td>
-                                                            <td class="col-xs-7">Sancionado por <%# Eval("cantidadFechasSuspendidas") %> Fechas</td>
+                                                                <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() : "/torneo/img/img-theme/jugador-mediano.jpg"  %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                            <td class="col-xs-4"><%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.nombre : "-" %></td>
+                                                            <td class="col-xs-7">Sancionado por <%# ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas != null ? ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas.ToString() : "-" %> Fechas</td>
                                                         </tr>
                                                     </ItemTemplate>
                                                  </asp:Repeater>
@@ -715,9 +746,9 @@
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td class="col-xs-1">
-                                                                <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                            <td class="col-xs-4"><%# Eval("jugador.nombre") %></td>
-                                                            <td class="col-xs-7">Sancionado por <%# Eval("cantidadFechasSuspendidas") %> Fechas</td>
+                                                                    <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() : "/torneo/img/img-theme/jugador-mediano.jpg"  %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                            <td class="col-xs-4"><%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.nombre : "-" %></td>
+                                                            <td class="col-xs-7"><%# ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas != null ? "Sancionado por "+((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas.ToString()+" Fechas" : "-" %></td>
                                                         </tr>
                                                     </ItemTemplate>
                                                  </asp:Repeater>
@@ -741,6 +772,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">Último Partido: <%= gestorPartido.partido.local.nombre %></h3>
                         </div>
+                        <% if(cargarUltimoPartidoEL().Count != 0) {%>
                         <div class="panel-body">
                             <ul class="single-carousel">
                                 <li>
@@ -776,9 +808,11 @@
                                             <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="" runat="server" /></a></h5>
                                         </div>--%>
                                     </div>
-                                </li>
+                                </li>                                
                             </ul>
                         </div>
+                        <% } %>
+                        <asp:Literal ID="sinPartidosPreviosLocal" runat="server" Visible="false" text="No hay partido previo"/>
                     </div>
                 </div>
                 <!-- End Widget Partidos Anteriores Equipo Local -->
@@ -975,12 +1009,13 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">Último Partidos: <%= gestorPartido.partido.visitante.nombre %></h3>
                         </div>
+                        <% if(cargarUltimoPartidoEV().Count != 0) {%>
                         <div class="panel-body">
                             <ul class="single-carousel">
                                 <li>
                                     <div class="widget-partido">
                                         <div class="col-xs-4">
-                                            <%--<img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEV()[0]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">--%>
+                                            <img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEV()[0]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
                                             <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltPartidoPrevioEquipoLocalEV" runat="server" /></a></h5>
                                         </div>
                                         <div class="nopadding-left col-xs-4 resultado nopadding-right">
@@ -995,7 +1030,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-4">
-                                            <img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEV()[1]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                           <%-- <img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEV()[1]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">--%>
                                             <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltPartidoPrevioEquipoVisitanteEV" runat="server" /></a></h5>
                                         </div>
                                         <%--<div class="col-xs-4 nopadding-right">
@@ -1013,6 +1048,8 @@
                                 </li>
                             </ul>
                         </div>
+                        <%} %>
+                        <asp:Literal ID="sinPartidosPreviosVisitante" runat="server" Visible="false" text="No hay partido previo"/>
                     </div>
                 </div>
                 <!-- End Widget Partidos -->
