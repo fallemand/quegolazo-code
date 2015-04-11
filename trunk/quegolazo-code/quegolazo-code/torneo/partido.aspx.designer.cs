@@ -31,6 +31,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptGolesLocal;
         
         /// <summary>
+        /// Control sinGolesLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinGolesLocal;
+        
+        /// <summary>
         /// Control rptGolesVisitante.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptGolesVisitante;
+        
+        /// <summary>
+        /// Control sinGolesVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinGolesVisitante;
         
         /// <summary>
         /// Control rptTarjetasRojasLocal.
@@ -49,6 +67,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptTarjetasRojasLocal;
         
         /// <summary>
+        /// Control sinTarjetasRojasLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinTarjetasRojasLocal;
+        
+        /// <summary>
         /// Control rptTarjetasRojasVisitante.
         /// </summary>
         /// <remarks>
@@ -56,6 +83,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptTarjetasRojasVisitante;
+        
+        /// <summary>
+        /// Control sinTarjetasRojasVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinTarjetasRojasVisitante;
         
         /// <summary>
         /// Control rptTarjetasAmarillasLocal.
@@ -67,6 +103,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptTarjetasAmarillasLocal;
         
         /// <summary>
+        /// Control sinTarjetasAmarillasLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinTarjetasAmarillasLocal;
+        
+        /// <summary>
         /// Control rptTarjetasAmarillasVisitante.
         /// </summary>
         /// <remarks>
@@ -74,6 +119,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptTarjetasAmarillasVisitante;
+        
+        /// <summary>
+        /// Control sinTarjetasAmarillasVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinTarjetasAmarillasVisitante;
         
         /// <summary>
         /// Control rptCambiosLocal.
@@ -85,6 +139,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptCambiosLocal;
         
         /// <summary>
+        /// Control sinCambiosLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinCambiosLocal;
+        
+        /// <summary>
         /// Control rptCambiosVisitante.
         /// </summary>
         /// <remarks>
@@ -92,6 +155,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptCambiosVisitante;
+        
+        /// <summary>
+        /// Control sinCambiosVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinCambiosVisitante;
         
         /// <summary>
         /// Control rptTitularesLocal.
@@ -103,6 +175,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptTitularesLocal;
         
         /// <summary>
+        /// Control sinTitularesLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinTitularesLocal;
+        
+        /// <summary>
         /// Control rptTitularesVisitante.
         /// </summary>
         /// <remarks>
@@ -110,6 +191,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptTitularesVisitante;
+        
+        /// <summary>
+        /// Control sinTitularesVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinTitularesVisitante;
         
         /// <summary>
         /// Control rptTabGolesLocal.
@@ -121,6 +211,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptTabGolesLocal;
         
         /// <summary>
+        /// Control sinGolesTabLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinGolesTabLocal;
+        
+        /// <summary>
         /// Control rptTabGolesVisitante.
         /// </summary>
         /// <remarks>
@@ -128,6 +227,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptTabGolesVisitante;
+        
+        /// <summary>
+        /// Control sinGolesTabVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinGolesTabVisitante;
         
         /// <summary>
         /// Control rptTabCambiosLocal.
@@ -139,6 +247,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptTabCambiosLocal;
         
         /// <summary>
+        /// Control sinCambiosTabLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinCambiosTabLocal;
+        
+        /// <summary>
         /// Control rptTabCambiosVisitante.
         /// </summary>
         /// <remarks>
@@ -146,6 +263,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptTabCambiosVisitante;
+        
+        /// <summary>
+        /// Control sinCambiosTabVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinCambiosTabVisitante;
         
         /// <summary>
         /// Control rptTabTarjetasAmarillasLocal.
@@ -166,6 +292,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptTabTarjetasRojasLocal;
         
         /// <summary>
+        /// Control sinTarjetasTabLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinTarjetasTabLocal;
+        
+        /// <summary>
         /// Control rptTabTarjetasAmarillasVisitante.
         /// </summary>
         /// <remarks>
@@ -182,6 +317,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptTabTarjetasRojasVisitante;
+        
+        /// <summary>
+        /// Control sinTarjetasTabVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinTarjetasTabVisitante;
         
         /// <summary>
         /// Control rptSancionesLocal.
@@ -263,6 +407,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltUltimoPartidoEqVisitante;
+        
+        /// <summary>
+        /// Control sinPartidosPreviosLocal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal sinPartidosPreviosLocal;
         
         /// <summary>
         /// Control ltPuntosEL.
@@ -434,5 +587,14 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltPartidoPrevioEquipoVisitanteEV;
+        
+        /// <summary>
+        /// Control sinPartidosPreviosVisitante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal sinPartidosPreviosVisitante;
     }
 }
