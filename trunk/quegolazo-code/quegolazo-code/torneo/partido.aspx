@@ -51,7 +51,7 @@
                                 <asp:Repeater ID="rptOtrosPartidosDeLaFecha" runat="server">
                                     <ItemTemplate>
                                         <li class="li-partido" style="width: 120px">
-                                            <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? MonthName(DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
+                                            <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? nombreMes(DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
                                             <div class="text">
                                                 <div class="equipos">
                                                     <a href="#">
@@ -60,7 +60,7 @@
                                                         <span><%# Eval("visitante.nombre") %></span>
                                                     </a>
                                                     <p class="estado <%# Eval("estado.nombre") %> theme-bg-color-2">
-                                                       <%# ((Entidades.Partido)Container.DataItem).golesLocal != null ? ((Entidades.Partido)Container.DataItem).golesLocal+"-"+((Entidades.Partido)Container.DataItem).golesVisitante : ((Entidades.Partido)Container.DataItem).estado.nombre %>
+                                                       <%# (((Entidades.Partido)Container.DataItem).golesLocal != null) ? ((Entidades.Partido)Container.DataItem).golesLocal+"-"+((Entidades.Partido)Container.DataItem).golesVisitante : ((Entidades.Partido)Container.DataItem).estado.nombre %>
                                                     </p>
                                                 </div>
                                             </div>
@@ -265,7 +265,7 @@
                                     <div class="col-xs-12">
                                         <ul class="list-group">
                                             <% if(gestorPartido.partido.fecha != null) { %>
-                                            <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs"><%= DayMonthName(DateTime.Parse(gestorPartido.partido.fecha.ToString())) %> </span><%= gestorPartido.partido.fecha %></li>
+                                            <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs"><%= nombreDia(DateTime.Parse(gestorPartido.partido.fecha.ToString())) %> </span><%= gestorPartido.partido.fecha %></li>
                                             <% } %>
                                             <% if(gestorPartido.partido.cancha != null) { %>
                                             <li class="list-group-item hidden-xs"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><%= gestorPartido.partido.cancha.nombre %></li>
@@ -766,53 +766,94 @@
                 </div>
                 <!-- END Resumen del Partido -->
 
+               
                 <!-- Widget Partidos Anteriores Equipo Local -->
                 <div class="col-md-4 col-sm-6">
                     <div class="panel nopadding panel-default small-arrows">
+                        <% if(hayPartidosPrevios) {%>
                         <div class="panel-heading">
-                            <h3 class="panel-title">Último Partido: <%= gestorPartido.partido.local.nombre %></h3>
-                        </div>
-                        <% if(cargarUltimoPartidoEL().Count != 0) {%>
+                            <h3 class="panel-title">Últimos Partidos: <%= gestorPartido.partido.local.nombre %></h3>
+                        </div>                        
                         <div class="panel-body">
                             <ul class="single-carousel">
-                                <li>
-                                    <div class="widget-partido">
-                                        <div class="col-xs-4">
-                                            <img src=<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEL()[0]).obtenerImagenMediana() %> class="img-responsive center-block" style="max-height: 120px;">
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltUltimoPartidoEqLocal" runat="server" /></a></h5>
-                                        </div>
-                                        <div class="nopadding-left col-xs-4 resultado nopadding-right">
-                                            <div class="thumbnail text-center col-xs-6">
-                                                <h2><asp:Literal ID="ltUltimoPartidoGolesLocalEL" runat="server" /></h2>
-                                            </div>
-                                            <div class="thumbnail text-center col-xs-6">
-                                                <h2><asp:Literal ID="ltUltimoPartidoGolesVisitanteEL" runat="server" /></h2>
-                                            </div>
-                                            <div class="col-xs-12 text-center">
-                                                Fecha <asp:Literal ID="litUltimoPartidoFechaEL" runat="server" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEL()[1]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltUltimoPartidoEqVisitante" runat="server" /></a></h5>
-                                        </div>
-                                        <%--<div class="col-xs-4 nopadding-right">
-                                            <div class="camiseta-equipo">
-                                                <div>
-                                                    <i class="flaticon-football114" style="color: #005A96"></i>
-                                                </div><!--
-                                             --><div class="segunda-mitad">
-                                                    <i class="flaticon-football114" style="color: #FAD201"></i>
+                                <asp:Repeater ID="rptUltimosPartidosEquipoLocal" runat="server">
+                                    <ItemTemplate>
+                                        <li>
+                                            <div class="widget-partido">
+                                                <div class="col-xs-4">
+                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                </div>
+                                                <div class="nopadding-left col-xs-4 resultado nopadding-right">
+                                                    <div class="thumbnail text-center col-xs-6">
+                                                        <h2><%# Eval("golesLocal") %></h2>
+                                                    </div>
+                                                    <div class="thumbnail text-center col-xs-6">
+                                                        <h2><%# Eval("golesVisitante") %></h2>
+                                                    </div>
+                                                    <div class="col-xs-12 text-center">
+                                                        Fecha <%# Eval("idFecha") %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="" runat="server" /></a></h5>
-                                        </div>--%>
-                                    </div>
-                                </li>                                
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>                                                                                             
                             </ul>
                         </div>
-                        <% } %>
-                        <asp:Literal ID="sinPartidosPreviosLocal" runat="server" Visible="false" text="No hay partido previo"/>
+                        <% } else{ %> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Próximos Partidos: <%= gestorPartido.partido.local.nombre %></h3>
+                        </div>                        
+                        <div class="panel-body">
+                            <ul class="single-carousel">
+                                <asp:Repeater ID="rptProximosPartidosEquipoLocal" runat="server">
+                                    <ItemTemplate>
+                                        <li>
+                                            <div class="widget-partido">
+                                                <div class="col-xs-4">
+                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                    <%--<%# (((Entidades.Partido)Container.DataItem).local.tieneImagen()) ? %>
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        :
+                                                        <div class="row">
+                                                            <div class="camiseta-equipo">
+                                                                <div>
+                                                                    <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local.colorCamisetaPrimario %>"></i>
+                                                                </div><!--
+                                                                --><div class="segunda-mitad">
+                                                                    <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local.colorCamisetaSecundario %>"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>--%>
+                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                </div>
+                                                <div class="nopadding-left col-xs-4 resultado nopadding-right">
+                                                    <div class="thumbnail text-center col-xs-6">
+                                                        <h2>-</h2>
+                                                    </div>
+                                                    <div class="thumbnail text-center col-xs-6">
+                                                        <h2>-</h2>
+                                                    </div>
+                                                    <div class="col-xs-12 text-center">
+                                                        Fecha <%# Eval("idFecha") %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
+                                                </div>                                                
+                                            </div>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>                                                                                             
+                            </ul>
+                        </div>
+                        <% } %>                      
                     </div>
                 </div>
                 <!-- End Widget Partidos Anteriores Equipo Local -->
@@ -1006,50 +1047,77 @@
                 <!-- Widget Partidos Anteriores Equipo Visitante -->
                 <div class="col-md-4 col-sm-6">
                     <div class="panel nopadding panel-default small-arrows">
+                        <% if(hayPartidosPrevios) {%>
                         <div class="panel-heading">
-                            <h3 class="panel-title">Último Partidos: <%= gestorPartido.partido.visitante.nombre %></h3>
+                            <h3 class="panel-title">Últimos Partidos: <%= gestorPartido.partido.visitante.nombre %></h3>
                         </div>
-                        <% if(cargarUltimoPartidoEV().Count != 0) {%>
                         <div class="panel-body">
                             <ul class="single-carousel">
-                                <li>
-                                    <div class="widget-partido">
-                                        <div class="col-xs-4">
-                                            <img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEV()[0]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltPartidoPrevioEquipoLocalEV" runat="server" /></a></h5>
-                                        </div>
-                                        <div class="nopadding-left col-xs-4 resultado nopadding-right">
-                                            <div class="thumbnail text-center col-xs-6">
-                                                <h2><asp:Literal ID="ltPartidoPrevioGolesLocalEV" runat="server" /></h2>
-                                            </div>
-                                            <div class="thumbnail text-center col-xs-6">
-                                                <h2><asp:Literal ID="ltPartidoPrevioGolesVisitanteEV" runat="server" /></h2>
-                                            </div>
-                                            <div class="col-xs-12 text-center">
-                                                Fecha <asp:Literal ID="litPartidoPrevioFechaEV" runat="server" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                           <%-- <img src="<%= gestorEquipo.obtenerEquipoPorId(cargarUltimoPartidoEV()[1]).obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">--%>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltPartidoPrevioEquipoVisitanteEV" runat="server" /></a></h5>
-                                        </div>
-                                        <%--<div class="col-xs-4 nopadding-right">
-                                            <div class="camiseta-equipo">
-                                                <div>
-                                                    <i class="flaticon-football114" style="color: #005A96"></i>
-                                                </div><!--
-                                                --><div class="segunda-mitad">
-                                                    <i class="flaticon-football114" style="color: #FAD201"></i>
+                                <asp:Repeater ID="rptUltimosPartidosEquipoVisitante" runat="server">
+                                    <ItemTemplate>
+                                        <li>
+                                            <div class="widget-partido">
+                                                <div class="col-xs-4">
+                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                </div>
+                                                <div class="nopadding-left col-xs-4 resultado nopadding-right">
+                                                    <div class="thumbnail text-center col-xs-6">
+                                                        <h2><%# Eval("golesLocal") %></h2>
+                                                    </div>
+                                                    <div class="thumbnail text-center col-xs-6">
+                                                        <h2><%# Eval("golesVisitante") %></h2>
+                                                    </div>
+                                                    <div class="col-xs-12 text-center">
+                                                        Fecha <%# Eval("idFecha") %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>
-                                            <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><asp:Literal ID="ltPartidoPrevioEquipoVisitanteEV" runat="server" /></a></h5>
-                                        </div>--%>
-                                    </div>
-                                </li>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater> 
                             </ul>
                         </div>
-                        <%} %>
-                        <asp:Literal ID="sinPartidosPreviosVisitante" runat="server" Visible="false" text="No hay partido previo"/>
+                        <% } else{ %> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Próximos Partidos: <%= gestorPartido.partido.visitante.nombre %></h3>
+                        </div>                        
+                        <div class="panel-body">
+                            <ul class="single-carousel">
+                                <asp:Repeater ID="rptProximosPartidosEquipoVisitante" runat="server">
+                                    <ItemTemplate>
+                                        <li>
+                                            <div class="widget-partido">
+                                                <div class="col-xs-4">
+                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                </div>
+                                                <div class="nopadding-left col-xs-4 resultado nopadding-right">
+                                                    <div class="thumbnail text-center col-xs-6">
+                                                        <h2>-</h2>
+                                                    </div>
+                                                    <div class="thumbnail text-center col-xs-6">
+                                                        <h2>-</h2>
+                                                    </div>
+                                                    <div class="col-xs-12 text-center">
+                                                        Fecha <%# Eval("idFecha") %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>                                                                                             
+                            </ul>
+                        </div>
+                        <% } %>                                          
                     </div>
                 </div>
                 <!-- End Widget Partidos -->

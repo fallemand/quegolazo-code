@@ -777,7 +777,7 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT TOP 1 equipoLocal.nombre AS 'Equipo Local', equipoLocal.idEquipo AS 'Id Equipo Local',
+                string sql = @"SELECT TOP 3 equipoLocal.nombre AS 'Equipo Local', equipoLocal.idEquipo AS 'Id Equipo Local',
                                 p.golesLocal AS 'Goles Local', p.golesVisitante AS 'Goles Visitante',
                                 equipoVisitante.nombre AS 'Equipo Visitante', equipoVisitante.idEquipo AS 'Id Equipo Visitante',
                                 p.idFecha AS 'Fecha'
