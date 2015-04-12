@@ -1131,15 +1131,22 @@
             </ul> 
             <span>Color destacado</span>
             <ul id="colorchanger">      
-                <li><a class="colorbox red" href="#" title="Red Skin"></a></li>
-                <li><a class="colorbox blue" href="#" title="Blue Skin"></a></li>                    
-                <li><a class="colorbox yellow" href="#" title="Yellow Skin"></a></li>
-                <li><a class="colorbox green" href="#" title="Green Skin"></a></li>
-                <li><a class="colorbox orange" href="#" title="Orange Skin"></a></li>
-                <li><a class="colorbox purple" href="#" title="Purple Skin"></a></li>
-                <li><a class="colorbox pink" href="#" title="Pink Skin"></a></li>
-                <li><a class="colorbox cocoa" href="#" title="Cocoa Skin"></a></li>
-            </ul> 
+                  <li><a class="colorbox red" href="#" title="Red Skin"></a></li>
+                  <li><a class="colorbox red-dark" href="#" title="Red Skin"></a></li>
+                  <li><a class="colorbox blue" href="#" title="Blue Skin"></a></li>           
+                  <li><a class="colorbox blue-dark" href="#" title="Blue Skin"></a></li>  
+                  <li><a class="colorbox green" href="#" title="Green Skin"></a></li>
+                  <li><a class="colorbox green-dark" href="#" title="Green Skin"></a></li>
+                  <li><a class="colorbox yellow" href="#" title="Yellow Skin"></a></li>
+                  <li><a class="colorbox orange" href="#" title="Orange Skin"></a></li>
+                  <li><a class="colorbox orange-dark" href="#" title="Orange Skin"></a></li>
+                  <li><a class="colorbox purple" href="#" title="Purple Skin"></a></li>
+                  <li><a class="colorbox pink" href="#" title="Pink Skin"></a></li>
+                  <li><a class="colorbox cocoa" href="#" title="Cocoa Skin"></a></li>
+                  <li><a class="colorbox lynch" href="#" title="Lynch Skin"></a></li>
+                  <li><a class="colorbox grey" href="#" title="Grey Skin"></a></li>
+                  <li><a class="colorbox black" href="#" title="Black Skin"></a></li>
+            </ul>  
             <span>ESTILO DE PAGINA</span>
             <ul class="layout-style">      
                 <li class="wide">ANCHO</li>
