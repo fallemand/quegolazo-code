@@ -81,13 +81,20 @@
 
 .colorbox { width:100%; height:100%; cursor:pointer; display:block; }
 .blue { background-color:#0088cc; }
+.blue-dark { background-color:#4D8FAC; }
 .red { background-color:#E1483F; }
-.yellow { background-color:#fff000; }
+.red-dark { background-color:#C3272B; }
+.yellow { background-color:#F7CA18; }
 .green { background-color:#88C425; }
+.green-dark { background-color:#26A65B; }
 .orange { background-color:#FFB43F; }
+.orange-dark { background-color:#F9690E; }
 .purple { background-color:#894997; }
 .pink { background-color:#FF3D7F; }
 .cocoa { background-color:#755C3B; }
+.grey { background-color:#BFBFBF; }
+.lynch { background-color:#6C7A89; }
+.black { background-color:#151515; }
 
 /* BACKGROUNDS PATTERS -------------------------------*/
 

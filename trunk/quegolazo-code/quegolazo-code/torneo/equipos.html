@@ -453,17 +453,13 @@
                                 <!-- Tab Resumen -->
                                 <div class="tab-pane fade in active" id="resumen">
                                     <div class="row">
-                                        <div class="col-md-4 col-sm-6">
+                                        <div class="col-sm-6">
                                             <h5 class="col-title">Partidos Ganados</h5>
-                                            <canvas id="barChart" max-width="00"></canvas>
+                                            <canvas id="barChart" max-width="200"></canvas>
                                         </div>
-                                        <div class="col-md-4 col-sm-6">
+                                        <div class="col-sm-6">
                                             <h5 class="col-title">Partidos Ganados</h5>
                                             <canvas id="pieChart" max-width="200"></canvas>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6">
-                                            <h5 class="col-title">Partidos Ganados</h5>
-                                            <canvas id="lineChart" max-width="200"></canvas>
                                         </div>
                                     </div>
                                     
@@ -471,46 +467,69 @@
 
                                 <!-- Tab Historial de Partidos -->
                                 <div class="tab-pane fade" id="titulares">
-                                    <div class="col-sm-6 col-xs-12">
+                                    <div class="col-sm-5 col-xs-12">
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center" colspan="3">
-                                                        <img src="/torneo/img/img-theme/equipo1.png" style="max-height: 20px;">
-                                                        Boca Juniors
-                                                    </th>
+                                                    <th class="text-center" colspan="2">VS</th>
+                                                    <th class="text-center" colspan="2">Resultado</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
+                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                    <td class="col-xs-6 col-md-5">River Plate</td>
+                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                    <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
+                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                    <td class="col-xs-6 col-md-5">River Plate</td>
+                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                    <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
+                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                    <td class="col-xs-6 col-md-5">River Plate</td>
+                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                    <td class="col-xs-3 col-md-2"><span class="label label-warning">Empatado</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
+                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                    <td class="col-xs-6 col-md-5">River Plate</td>
+                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                    <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                    <td class="col-xs-6 col-md-5">River Plate</td>
+                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                    <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                    <td class="col-xs-6 col-md-5">River Plate</td>
+                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                    <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                    <td class="col-xs-6 col-md-5">River Plate</td>
+                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                    <td class="col-xs-3 col-md-2"><span class="label label-warning">Empatado</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                    <td class="col-xs-6 col-md-5">River Plate</td>
+                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                    <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-sm-6 col-xs-12">
-                                        <canvas id="lineChart" max-width="200"></canvas>
+                                    <div class="col-sm-7 col-xs-12">
+                                        <h5 class="col-title">Evolución de Puntos</h5>
+                                        <canvas id="lineChart" max-width="600"></canvas>
                                     </div>
                                 </div>
                                 <!-- END Tab Historial de Partidos  -->
@@ -743,13 +762,20 @@
               <span>Color destacado</span>
               <ul id="colorchanger">      
                   <li><a class="colorbox red" href="#" title="Red Skin"></a></li>
-                  <li><a class="colorbox blue" href="#" title="Blue Skin"></a></li>                    
-                  <li><a class="colorbox yellow" href="#" title="Yellow Skin"></a></li>
+                  <li><a class="colorbox red-dark" href="#" title="Red Skin"></a></li>
+                  <li><a class="colorbox blue" href="#" title="Blue Skin"></a></li>           
+                  <li><a class="colorbox blue-dark" href="#" title="Blue Skin"></a></li>  
                   <li><a class="colorbox green" href="#" title="Green Skin"></a></li>
+                  <li><a class="colorbox green-dark" href="#" title="Green Skin"></a></li>
+                  <li><a class="colorbox yellow" href="#" title="Yellow Skin"></a></li>
                   <li><a class="colorbox orange" href="#" title="Orange Skin"></a></li>
+                  <li><a class="colorbox orange-dark" href="#" title="Orange Skin"></a></li>
                   <li><a class="colorbox purple" href="#" title="Purple Skin"></a></li>
                   <li><a class="colorbox pink" href="#" title="Pink Skin"></a></li>
                   <li><a class="colorbox cocoa" href="#" title="Cocoa Skin"></a></li>
+                  <li><a class="colorbox lynch" href="#" title="Lynch Skin"></a></li>
+                  <li><a class="colorbox grey" href="#" title="Grey Skin"></a></li>
+                  <li><a class="colorbox black" href="#" title="Black Skin"></a></li>
               </ul> 
               <span>ESTILO DE PAGINA</span>
               <ul class="layout-style">      
