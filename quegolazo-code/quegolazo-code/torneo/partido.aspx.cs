@@ -16,6 +16,7 @@ namespace quegolazo_code.torneo
         protected GestorEdicion gestorEdicion;
         protected GestorPartido gestorPartido;
         protected GestorEquipo gestorEquipo;
+        protected bool hayPartidosPrevios;
         GestorEstadisticas gestorEstadistica;
         JavaScriptSerializer serializador;
         protected void Page_Load(object sender, EventArgs e)
@@ -24,7 +25,7 @@ namespace quegolazo_code.torneo
             gestorTorneo = Sesion.getGestorTorneo();
             gestorEdicion = Sesion.getGestorEdicion();
             //TODO esto está harcodeado para que funque!
-            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(2006);
+            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(2008);
             gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorId(87);
             serializador = new JavaScriptSerializer();
             string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(gestorTorneo.torneo.idTorneo));
@@ -35,11 +36,11 @@ namespace quegolazo_code.torneo
             if (!Page.IsPostBack)
             {
                 gestorPartido.obtenerPartidoporId(Request["partido"]);
-                otrosPartidosDeLaFecha();
-                cargarDatosDePartido();
-                cargarUltimoPartidoEL();
-                cargarUltimoPartidoEV();
-                cargarComparativo();                 
+                otrosPartidosDeLaFecha(); // Carga Otros Partidos de la Fecha
+                cargarDatosDePartido(); // Carga Resumen y Estadísticas del Partido
+                if (!cargarUltimosPartidos())// Carga los Widgets Partidos Anteriores Equipo Local y Visitante
+                    cargarProximosPartidos();// Carga Próximos partidos en caso que no haya partidos previos
+                cargarComparativo(); //Carga widget Comparativo                
             }
         }
 
@@ -57,6 +58,8 @@ namespace quegolazo_code.torneo
             }
         }
 
+        //Carga todos los datos del Partido: RESUMEN Y ESTADÍSTICAS
+        //autor: Pau Pedrosa
         public void cargarDatosDePartido()
         {
             cargarResumenDePartido();
@@ -64,6 +67,7 @@ namespace quegolazo_code.torneo
         }
 
         //Métodos de Carga de Resumen de Partido
+        //autor: Pau Pedrosa
         private void cargarResumenDePartido()
         {   //Carga Repeater de Goles
             sinGolesLocal.Visible = !GestorControles.cargarRepeaterList(rptGolesLocal, gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.local.idEquipo));
@@ -79,6 +83,7 @@ namespace quegolazo_code.torneo
         }
         
         //Métodos de Carga de Repeater de Tab Titulares - Goles - Cambios - Tarjetas y Sanciones
+        //autor: Pau Pedrosa
         private void cargarEstadisticasDePartido()
         {   //Repeater Titulares - Local y Visitante
             sinTitularesLocal.Visible = !GestorControles.cargarRepeaterList(rptTitularesLocal, gestorPartido.partido.titularesLocal);
@@ -97,51 +102,35 @@ namespace quegolazo_code.torneo
             sinSancionesVisitante.Visible = !GestorControles.cargarRepeaterList(rptSancionesVisitante, gestorPartido.obtenerSancionesPorEquipo(gestorPartido.partido.visitante.idEquipo));
         }
 
+        //Carga Repeater de Otros Partidos de la Fecha
+        //autor: Pau Pedrosa
         private void otrosPartidosDeLaFecha()
         {
             GestorControles.cargarRepeaterList(rptOtrosPartidosDeLaFecha, gestorPartido.otrosPartidosDeLaFecha(gestorEdicion.edicion.idEdicion, gestorPartido.partido.faseAsociada.idFase, gestorPartido.partido.idFecha, gestorPartido.partido.idPartido));
         }
         
-        protected List<int> cargarUltimoPartidoEL()
+        //Carga los repeater de últimos partidos del equipo local y visitante
+        //Devuelve true si hay partidos previos y false si no hay partidos previos
+        //autor: Pau Pedrosa
+        protected bool cargarUltimosPartidos()
         {
-            List<int> idEquipos = new List<int>();
-            var ultimoPartidoLocal = gestorEstadistica.ultimoPartidoPrevioDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorPartido.partido.idPartido);
-            if (ultimoPartidoLocal.Rows.Count > 0)
-            {
-                //ULTIMO PARTIDO EQUIPO LOCAL
-                ltUltimoPartidoEqLocal.Text = ultimoPartidoLocal.Rows[0]["Equipo Local"].ToString();
-                ltUltimoPartidoEqVisitante.Text = ultimoPartidoLocal.Rows[0]["Equipo Visitante"].ToString();
-                ltUltimoPartidoGolesLocalEL.Text = ultimoPartidoLocal.Rows[0]["Goles Local"].ToString();
-                ltUltimoPartidoGolesVisitanteEL.Text = ultimoPartidoLocal.Rows[0]["Goles Visitante"].ToString();
-                litUltimoPartidoFechaEL.Text = ultimoPartidoLocal.Rows[0]["Fecha"].ToString();
-                idEquipos.Add(int.Parse(ultimoPartidoLocal.Rows[0]["Id Equipo Local"].ToString()));
-                idEquipos.Add(int.Parse(ultimoPartidoLocal.Rows[0]["Id Equipo Visitante"].ToString()));
-            }
-            else
-                sinPartidosPreviosLocal.Visible = true;
-            return idEquipos;           
+            hayPartidosPrevios = true;
+            if (GestorControles.cargarRepeaterList(rptUltimosPartidosEquipoLocal, gestorPartido.ultimosPartidosPrevioDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido)) == false ||
+                GestorControles.cargarRepeaterList(rptUltimosPartidosEquipoVisitante, gestorPartido.ultimosPartidosPrevioDeUnEquipo(gestorPartido.partido.visitante.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido)) == false)
+                hayPartidosPrevios = false;            
+            return hayPartidosPrevios;
         }
 
-        protected List<int> cargarUltimoPartidoEV()
+        //Carga próximos partidos
+        //autor: Pau Pedrosa
+        private void cargarProximosPartidos()
         {
-            List<int> idEquipos = new List<int>();
-            var ultimoPartidoLocal = gestorEstadistica.ultimoPartidoPrevioDeUnEquipo(gestorPartido.partido.visitante.idEquipo, gestorPartido.partido.idPartido);
-            if (ultimoPartidoLocal.Rows.Count > 0)
-            {
-                //ULTIMO PARTIDO EQUIPO VISITANTE
-                ltPartidoPrevioEquipoLocalEV.Text = ultimoPartidoLocal.Rows[0]["Equipo Local"].ToString();
-                ltPartidoPrevioEquipoVisitanteEV.Text = ultimoPartidoLocal.Rows[0]["Equipo Visitante"].ToString();
-                ltPartidoPrevioGolesLocalEV.Text = ultimoPartidoLocal.Rows[0]["Goles Local"].ToString();
-                ltPartidoPrevioGolesVisitanteEV.Text = ultimoPartidoLocal.Rows[0]["Goles Visitante"].ToString();
-                litPartidoPrevioFechaEV.Text = ultimoPartidoLocal.Rows[0]["Fecha"].ToString();
-                idEquipos.Add(int.Parse(ultimoPartidoLocal.Rows[0]["Id Equipo Local"].ToString()));
-                idEquipos.Add(int.Parse(ultimoPartidoLocal.Rows[0]["Id Equipo Visitante"].ToString()));
-            }
-            else
-                sinPartidosPreviosVisitante.Visible = true;
-            return idEquipos;
+            GestorControles.cargarRepeaterList(rptProximosPartidosEquipoLocal, gestorPartido.proximosPartidosDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido));
+            GestorControles.cargarRepeaterList(rptProximosPartidosEquipoVisitante, gestorPartido.proximosPartidosDeUnEquipo(gestorPartido.partido.visitante.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido)); 
         }
 
+        //Carga Widget Comparativo
+        //autor: Pau Pedrosa
         private void cargarComparativo()
         {
             var comparativoLocal = gestorEstadistica.obtenerEstadisticasEquipo(gestorPartido.partido.local.idEquipo);
@@ -164,20 +153,13 @@ namespace quegolazo_code.torneo
             ltComparativoTarjAmarillasEV.Text = (comparativoVisitante.Rows.Count > 0) ? comparativoVisitante.Rows[0]["TA"].ToString() : "-";
         }        
 
-        public string MonthName(int month)
+        public string nombreMes(int numeroMes)
         {
-            System.Globalization.CultureInfo ci = null;
-            System.Globalization.DateTimeFormatInfo dtfi = null;
-            ci = System.Globalization.CultureInfo.CreateSpecificCulture("es-ES");
-            dtfi = ci.DateTimeFormat;
-            return dtfi.GetMonthName(month);
+            return GestorExtra.nombreMes(numeroMes);
         }
-
-        public string DayMonthName(DateTime date)
+        public string nombreDia(DateTime date)
         {
-            System.Globalization.CultureInfo ci = null;
-            ci = System.Globalization.CultureInfo.CreateSpecificCulture("es-ES");
-            return date.ToString("dddd", ci).ToUpper();
+            return GestorExtra.nombreDia(date);
         }
     }
 }

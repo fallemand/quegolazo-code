@@ -364,58 +364,22 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinSancionesVisitante;
         
         /// <summary>
-        /// Control ltUltimoPartidoEqLocal.
+        /// Control rptUltimosPartidosEquipoLocal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltUltimoPartidoEqLocal;
+        protected global::System.Web.UI.WebControls.Repeater rptUltimosPartidosEquipoLocal;
         
         /// <summary>
-        /// Control ltUltimoPartidoGolesLocalEL.
+        /// Control rptProximosPartidosEquipoLocal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltUltimoPartidoGolesLocalEL;
-        
-        /// <summary>
-        /// Control ltUltimoPartidoGolesVisitanteEL.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltUltimoPartidoGolesVisitanteEL;
-        
-        /// <summary>
-        /// Control litUltimoPartidoFechaEL.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litUltimoPartidoFechaEL;
-        
-        /// <summary>
-        /// Control ltUltimoPartidoEqVisitante.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltUltimoPartidoEqVisitante;
-        
-        /// <summary>
-        /// Control sinPartidosPreviosLocal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal sinPartidosPreviosLocal;
+        protected global::System.Web.UI.WebControls.Repeater rptProximosPartidosEquipoLocal;
         
         /// <summary>
         /// Control ltPuntosEL.
@@ -544,57 +508,21 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Literal ltComparativoGolesEV;
         
         /// <summary>
-        /// Control ltPartidoPrevioEquipoLocalEV.
+        /// Control rptUltimosPartidosEquipoVisitante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltPartidoPrevioEquipoLocalEV;
+        protected global::System.Web.UI.WebControls.Repeater rptUltimosPartidosEquipoVisitante;
         
         /// <summary>
-        /// Control ltPartidoPrevioGolesLocalEV.
+        /// Control rptProximosPartidosEquipoVisitante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltPartidoPrevioGolesLocalEV;
-        
-        /// <summary>
-        /// Control ltPartidoPrevioGolesVisitanteEV.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltPartidoPrevioGolesVisitanteEV;
-        
-        /// <summary>
-        /// Control litPartidoPrevioFechaEV.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litPartidoPrevioFechaEV;
-        
-        /// <summary>
-        /// Control ltPartidoPrevioEquipoVisitanteEV.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltPartidoPrevioEquipoVisitanteEV;
-        
-        /// <summary>
-        /// Control sinPartidosPreviosVisitante.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal sinPartidosPreviosVisitante;
+        protected global::System.Web.UI.WebControls.Repeater rptProximosPartidosEquipoVisitante;
     }
 }

@@ -181,6 +181,16 @@ namespace Logica
             return daoPartido.otrosPartidosDeLaFecha(idEdicion, idFase, idFecha, idPartidoActual);
         }
 
+        public List<Partido> ultimosPartidosPrevioDeUnEquipo(int idEquipo, int idEdicion, int idPartido)
+        {
+            return daoPartido.ultimosPartidosPrevioDeUnEquipo(idEquipo, idEdicion, idPartido);
+        }
+
+        public List<Partido> proximosPartidosDeUnEquipo(int idEquipo, int idEdicion, int idPartido)
+        {
+            return daoPartido.proximosPartidosDeUnEquipo(idEquipo, idEdicion, idPartido);
+        }
+
         /// <summary>
         /// Retorna si un jugador es titular en el equipo local
         /// autor: Facundo Allemand

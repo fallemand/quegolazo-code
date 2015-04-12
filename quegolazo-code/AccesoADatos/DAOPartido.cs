@@ -1158,5 +1158,132 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public List<Partido> ultimosPartidosPrevioDeUnEquipo(int idEquipo, int idEdicion, int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Partido> listaPartidos = new List<Partido>();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT TOP 5 equipoLocal.nombre AS 'Equipo Local', equipoLocal.idEquipo AS 'Id Equipo Local',
+                                p.golesLocal AS 'Goles Local', p.golesVisitante AS 'Goles Visitante',
+                                equipoVisitante.nombre AS 'Equipo Visitante', equipoVisitante.idEquipo AS 'Id Equipo Visitante',
+                                p.idFecha AS 'Fecha', p.idPartido AS 'Id Partido', p.huboPenales AS 'Hubo Penales', p.penalesLocal AS
+                                'Penales Local', p.penalesVisitante AS 'Penales Visitante'
+                                FROM Partidos p 
+                                INNER JOIN Equipos equipoLocal ON p.idEquipoLocal = equipoLocal.idEquipo
+                                INNER JOIN Equipos equipoVisitante ON p.idEquipoVisitante = equipoVisitante.idEquipo
+                                WHERE p.idEdicion = @idEdicion 
+                                AND (p.idEquipoLocal = @idEquipo OR p.idEquipoVisitante = @idEquipo)
+                                AND p.idEstado = @estadoJugado
+                                AND idPartido <> @idPartido 
+                                AND idPartido < @idPartido                               
+                                ORDER BY idPartido DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
+                cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
+                cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Partido partido = new Partido();
+                    partido.idPartido = int.Parse(dr["Id Partido"].ToString());
+                    partido.idFecha = int.Parse(dr["Fecha"].ToString());
+                    partido.golesLocal = (dr["Goles Local"] != DBNull.Value) ? (int?)int.Parse(dr["Goles Local"].ToString()) : null;
+                    partido.golesVisitante = (dr["Goles Visitante"] != DBNull.Value) ? (int?)int.Parse(dr["Goles Visitante"].ToString()) : null;
+                    partido.huboPenales = (dr["Hubo Penales"] != DBNull.Value) ? (bool?)bool.Parse(dr["Hubo Penales"].ToString()) : null;
+                    partido.penalesLocal = (dr["Penales Local"] != DBNull.Value) ? (int?)int.Parse(dr["Penales Local"].ToString()) : null;
+                    partido.penalesVisitante = (dr["Penales Visitante"] != DBNull.Value) ? (int?)int.Parse(dr["Penales Visitante"].ToString()) : null;
+                    partido.local.idEquipo = int.Parse(dr["Id Equipo Local"].ToString());
+                    partido.local.nombre = (dr["Equipo Local"].ToString());
+                    partido.visitante.idEquipo = int.Parse(dr["Id Equipo Visitante"].ToString());
+                    partido.visitante.nombre = (dr["Equipo Visitante"].ToString());
+                    listaPartidos.Add(partido);
+                }
+                if (dr != null)
+                    dr.Close();
+                return listaPartidos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public List<Partido> proximosPartidosDeUnEquipo(int idEquipo, int idEdicion, int idPartido)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Partido> listaPartidos = new List<Partido>();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT TOP 5 equipoLocal.nombre AS 'Equipo Local', equipoLocal.idEquipo AS 'Id Equipo Local',
+                                p.golesLocal AS 'Goles Local', p.golesVisitante AS 'Goles Visitante',
+                                equipoVisitante.nombre AS 'Equipo Visitante', equipoVisitante.idEquipo AS 'Id Equipo Visitante',
+                                p.idFecha AS 'Fecha', p.idPartido AS 'Id Partido', p.huboPenales AS 'Hubo Penales', p.penalesLocal AS
+                                'Penales Local', p.penalesVisitante AS 'Penales Visitante'
+                                FROM Partidos p 
+                                INNER JOIN Equipos equipoLocal ON p.idEquipoLocal = equipoLocal.idEquipo
+                                INNER JOIN Equipos equipoVisitante ON p.idEquipoVisitante = equipoVisitante.idEquipo
+                                WHERE p.idEdicion = @idEdicion 
+                                AND (p.idEquipoLocal = @idEquipo OR p.idEquipoVisitante = @idEquipo)
+                                AND (p.idEstado = @estadoProgramado OR p.idEstado = @estadoDiagramado)
+                                AND idPartido <> @idPartido 
+                                AND idPartido > @idPartido                               
+                                ORDER BY idPartido ASC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
+                cmd.Parameters.Add(new SqlParameter("@idPartido", idPartido));
+                cmd.Parameters.Add(new SqlParameter("@estadoProgramado", Estado.partidoPROGRAMADO));
+                cmd.Parameters.Add(new SqlParameter("@estadoDiagramado", Estado.partidoDIAGRAMADO));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Partido partido = new Partido();
+                    partido.idPartido = int.Parse(dr["Id Partido"].ToString());
+                    partido.idFecha = int.Parse(dr["Fecha"].ToString());
+                    partido.golesLocal = (dr["Goles Local"] != DBNull.Value) ? (int?)int.Parse(dr["Goles Local"].ToString()) : null;
+                    partido.golesVisitante = (dr["Goles Visitante"] != DBNull.Value) ? (int?)int.Parse(dr["Goles Visitante"].ToString()) : null;
+                    partido.huboPenales = (dr["Hubo Penales"] != DBNull.Value) ? (bool?)bool.Parse(dr["Hubo Penales"].ToString()) : null;
+                    partido.penalesLocal = (dr["Penales Local"] != DBNull.Value) ? (int?)int.Parse(dr["Penales Local"].ToString()) : null;
+                    partido.penalesVisitante = (dr["Penales Visitante"] != DBNull.Value) ? (int?)int.Parse(dr["Penales Visitante"].ToString()) : null;
+                    partido.local.idEquipo = int.Parse(dr["Id Equipo Local"].ToString());
+                    partido.local.nombre = (dr["Equipo Local"].ToString());
+                    partido.visitante.idEquipo = int.Parse(dr["Id Equipo Visitante"].ToString());
+                    partido.visitante.nombre = (dr["Equipo Visitante"].ToString());
+                    listaPartidos.Add(partido);
+                }
+                if (dr != null)
+                    dr.Close();
+                return listaPartidos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
