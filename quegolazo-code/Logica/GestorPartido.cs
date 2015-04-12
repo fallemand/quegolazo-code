@@ -284,14 +284,42 @@ namespace Logica
             partido.cambios.Add(cambio);
         }
 
+        //Para cargar Resumen de Goles del Partido. Se contempla el caso que se cargo el resultado pero no hay 
+        //instancias en la lista de goles
+        public List<Gol> obtenerGolesPorEquipo(int idEquipo, bool esEquipoLocal)
+        {
+            int? cantidadGoles;
+            List<Gol> golesEquipo = new List<Gol>();
+            //Partido con resultado cargado y lista de goles vacía
+            if ((partido.golesLocal != null && partido.golesVisitante != null) && partido.goles.Count == 0) 
+            {
+                cantidadGoles = (esEquipoLocal) ? partido.golesLocal : partido.golesVisitante;
+                for (int i = 0; i < cantidadGoles; i++)
+                {
+                    Gol gol = new Gol();
+                    golesEquipo.Add(gol);
+                }
+            }
+            else
+            {
+                foreach (Gol gol in partido.goles)
+                {
+                    if (gol.equipo.idEquipo == idEquipo)
+                        golesEquipo.Add(gol);
+                } 
+            }
+            return golesEquipo;
+        }
+
+        //Para cargar Tab de Goles 
         public List<Gol> obtenerGolesPorEquipo(int idEquipo)
         {
             List<Gol> golesEquipo = new List<Gol>();
             foreach (Gol gol in partido.goles)
             {
-                if(gol.equipo.idEquipo == idEquipo)
+                if (gol.equipo.idEquipo == idEquipo)
                     golesEquipo.Add(gol);
-            }
+            }            
             return golesEquipo;
         }
 

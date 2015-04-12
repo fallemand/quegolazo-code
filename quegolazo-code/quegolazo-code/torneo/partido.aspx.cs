@@ -70,8 +70,8 @@ namespace quegolazo_code.torneo
         //autor: Pau Pedrosa
         private void cargarResumenDePartido()
         {   //Carga Repeater de Goles
-            sinGolesLocal.Visible = !GestorControles.cargarRepeaterList(rptGolesLocal, gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.local.idEquipo));
-            sinGolesVisitante.Visible = !GestorControles.cargarRepeaterList(rptGolesVisitante, gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.visitante.idEquipo));
+            sinGolesLocal.Visible = !GestorControles.cargarRepeaterList(rptGolesLocal, gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.local.idEquipo, true));
+            sinGolesVisitante.Visible = !GestorControles.cargarRepeaterList(rptGolesVisitante, gestorPartido.obtenerGolesPorEquipo(gestorPartido.partido.visitante.idEquipo, false));
             //Carga Repeater de Tarjetas
             sinTarjetasRojasLocal.Visible = !GestorControles.cargarRepeaterList(rptTarjetasRojasLocal, gestorPartido.obtenerTarjetasRojasPorEquipo(gestorPartido.partido.local.idEquipo));
             sinTarjetasRojasVisitante.Visible = !GestorControles.cargarRepeaterList(rptTarjetasRojasVisitante, gestorPartido.obtenerTarjetasRojasPorEquipo(gestorPartido.partido.visitante.idEquipo));
