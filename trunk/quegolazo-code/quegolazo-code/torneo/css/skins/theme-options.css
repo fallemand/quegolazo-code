@@ -125,12 +125,28 @@
 .a1 { background-image: url("../../img/bg-theme/a1.png"); }
 .a2 { background-image: url("../../img/bg-theme/a2.png"); }
 .a3 { background-image: url("../../img/bg-theme/a3.png"); }
-.a4 { background-image: url("../../img/bg-theme/a4.png"); }
-.a5 { background-image: url("../../img/bg-theme/a5.png"); }
-.c1 { background: url("../../img/bg-theme/c1.png") no-repeat center fixed; }
-.c2 { background: url("../../img/bg-theme/c2.png") no-repeat center fixed; }
-.c3 { background: url("../../img/bg-theme/c3.png") no-repeat center fixed; }
-.c1, .c2, .c3 {
+.c1 { background: url("../../img/bg-theme/c1-sm.png") no-repeat center fixed; }
+.c2 { background: url("../../img/bg-theme/c2-sm.png") no-repeat center fixed; }
+.c3 { background: url("../../img/bg-theme/c3-sm.png") no-repeat center fixed; }
+.c4 { background: url("../../img/bg-theme/c4-sm.png") no-repeat center fixed; }
+.c5 { background: url("../../img/bg-theme/c5-sm.png") no-repeat center fixed; }
+.c6 { background: url("../../img/bg-theme/c6-sm.png") no-repeat center fixed; }
+.c7 { background: url("../../img/bg-theme/c7-sm.png") no-repeat center fixed; }
+.c8 { background: url("../../img/bg-theme/c8-sm.png") no-repeat center fixed; }
+.c9 { background: url("../../img/bg-theme/c9-sm.png") no-repeat center fixed; }
+.c10 { background: url("../../img/bg-theme/c10-sm.png") no-repeat center fixed; }
+.c11 { background: url("../../img/bg-theme/c11-sm.png") no-repeat center fixed; }
+.c12 { background: url("../../img/bg-theme/c12-sm.png") no-repeat center fixed; }
+.c13 { background: url("../../img/bg-theme/c13-sm.png") no-repeat center fixed; }
+.c14 { background: url("../../img/bg-theme/c14-sm.png") no-repeat center fixed; }
+.c15 { background: url("../../img/bg-theme/c15-sm.png") no-repeat center fixed; }
+.c16 { background: url("../../img/bg-theme/c16-sm.png") no-repeat center fixed; }
+.c17 { background: url("../../img/bg-theme/c17-sm.png") no-repeat center fixed; }
+.c18 { background: url("../../img/bg-theme/c18-sm.png") no-repeat center fixed; }
+.c19 { background: url("../../img/bg-theme/c19-sm.png") no-repeat center fixed; }
+.c20 { background: url("../../img/bg-theme/c20-sm.png") no-repeat center fixed; }
+.c21 { background: url("../../img/bg-theme/c21-sm.png") no-repeat center fixed; }
+.c1, .c2, .c3, .c4, .c5, .c6, .c7, .c8, .c9, .c10, .c11, .c12, .c13, .c14, .c15, .c16, .c17, .c18, .c19, .c20, .c21 {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -175,8 +191,6 @@ body.fixed {
 #theme-options ul.backgrounds li.a1 { background-image: url("../../img/bg-theme/a1.png"); }
 #theme-options ul.backgrounds li.a2 { background-image: url("../../img/bg-theme/a2.png"); }
 #theme-options ul.backgrounds li.a3 { background-image: url("../../img/bg-theme/a3.png"); }
-#theme-options ul.backgrounds li.a4 { background-image: url("../../img/bg-theme/a4.png"); }
-#theme-options ul.backgrounds li.a5 { background-image: url("../../img/bg-theme/a5.png"); }
 
 
 /* Theme Options ----------------------------------------------*/
