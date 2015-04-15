@@ -11,5 +11,14 @@ namespace quegolazo_code.torneo {
     
     
     public partial class Formulario_web11 {
+        
+        /// <summary>
+        /// Control nickTorneo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label nickTorneo;
     }
 }

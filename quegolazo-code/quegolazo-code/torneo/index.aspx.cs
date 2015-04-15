@@ -13,8 +13,7 @@ namespace quegolazo_code.torneo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Torneo t = new GestorTorneo().obtenerTorneoPorNick(Request["nick"]);
-            String nombre = t.nombre;
+            nickTorneo.Text = Request["nickTorneo"];
         }
     }
 }
