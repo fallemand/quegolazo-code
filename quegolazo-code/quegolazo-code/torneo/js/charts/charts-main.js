@@ -12,60 +12,85 @@
 
 $(document).ready(function($) {
     
+    function colors(color,typeColor) {
+        //blue, red, yellow, green, orange, purple, grey
+        var colors = {
+            blue:   'rgba(52, 73, 94,',
+            red:    'rgba(192, 57, 43,',
+            yellow: 'rgba(241, 196, 15,', 
+            green:  'rgba(39, 174, 96,', 
+            orange: 'rgba(211, 84, 0,', 
+            purple: 'rgba(142, 68, 173,',
+            grey:   'rgba(127, 140, 141,'
+        };
+        var transparencies = {
+            fillColor:      '0.7',
+            strokeColor:    '0.8',
+            highlightFill:  '0.8',
+            highlightStroke:'1.0',
+            color:'0.8',
+            highlight: '0.9'
+        }
+        var end=')';
+        return colors[color] + transparencies[typeColor] + end;
+    }
+    
     //=================================== Bar Chart ===================================//
     // Get context with jQuery - using jQuery's .get() method.
     //Chart.defaults.global.responsive = true;
     var ctx = $('#barChart').get(0).getContext("2d");
     var data = {
-        labels: ["P. Ganados", "P. Empatados", "P. Perdidos"],
+        labels: ["Convertidos", "En Contra"],
         datasets: [
             {
-                label: "Partidos Ganados",
+                label: "Goles",
                 fillColor: "rgba(151,187,205,0.5)",
                 strokeColor: "rgba(151,187,205,0.8)",
                 highlightFill: "rgba(151,187,205,0.75)",
                 highlightStroke: "rgba(151,187,205,1)",
-                data: [12,4,3]
+                data: [12,4]
             }
         ]
     };
     
     // This will get the first returned node in the jQuery collection.
     var myBarChart = new Chart(ctx).Bar(data);
-    myBarChart.datasets[0].bars[0].fillColor = "rgb(175, 215, 175)"; //bar 1
-    myBarChart.datasets[0].bars[0].strokeColor = "rgb(65, 147, 65)"; //bar 1
-    myBarChart.datasets[0].bars[1].fillColor = "rgb(255, 238, 152)"; //bar 2
-    myBarChart.datasets[0].bars[1].strokeColor = "rgb(231, 179, 84)"; //bar 2
-    myBarChart.datasets[0].bars[2].fillColor = "rgb(231, 184, 184)"; //bar 3
-    myBarChart.datasets[0].bars[2].strokeColor = "rgb(199, 45, 45)"; //bar 3
-    myBarChart.update();
-    
+    myBarChart.datasets[0].bars[0].fillColor = colors('green','fillColor'); //bar 1
+    myBarChart.datasets[0].bars[0].strokeColor = colors('green','strokeColor'); //bar 1
+    myBarChart.datasets[0].bars[0].highlightFill = colors('green','highlightFill'); //bar 1
+    myBarChart.datasets[0].bars[0].highlightStroke = colors('green','highlightStroke'); //bar 1
+    myBarChart.datasets[0].bars[1].fillColor = colors('red','fillColor'); //bar 2
+    myBarChart.datasets[0].bars[1].strokeColor = colors('red','strokeColor'); //bar 2
+    myBarChart.datasets[0].bars[1].highlightFill = colors('red','highlightFill'); //bar 2
+    myBarChart.datasets[0].bars[1].highlightStroke = colors('red','highlightStroke'); //bar 2
+    myBarChart.update();    
     
     //=================================== Pie Chart ===================================//
     var ctx = $("#pieChart").get(0).getContext("2d");
     var data = [
         {
-            value: 300,
-            color:"#F7464A",
-            highlight: "#FF5A5E",
-            label: "Red"
+            value: 70,
+            color: colors('green','color'),
+            highlight: colors('green','highlight'),
+            label: "Partidos Ganados"
         },
         {
-            value: 50,
-            color: "#46BFBD",
-            highlight: "#5AD3D1",
-            label: "Green"
+            value: 12,
+            color: colors('yellow','color'),
+            highlight: colors('yellow','highlight'),
+            label: "Partidos Empatados"
         },
         {
-            value: 100,
-            color: "#FDB45C",
-            highlight: "#FFC870",
-            label: "Yellow"
+            value: 18,
+            color: colors('red','color'),
+            highlight: colors('red','highlight'),
+            label: "Partidos Perdidos"
         }
     ];
     
     var myPieChart = new Chart(ctx).Doughnut(data, {
-        animateScale: true
+        animateScale: true,
+        tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value+'%' %>",
     });
     
     //=================================== Line Chart ===================================//
@@ -87,6 +112,7 @@ $(document).ready(function($) {
     };
     
     var myLineChart = new Chart(ctx).Line(data, {
-        bezierCurve: false
+        bezierCurve: false,
+        tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value+' Puntos' %>",
     });
 });	
