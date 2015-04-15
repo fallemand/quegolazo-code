@@ -1182,23 +1182,23 @@
     </section>
     <!-- Theme-options -->
     <div id="theme-options" style="z-index:9999">
-            <div class="openclose"></div>
-            <div class="title">
-               <span>OPCIONES DEL TEMA</span>
-               </div>
-        <span>Tema</span>
-            <ul id="themeSelector" class="text-center">      
-                <li class="cyborg" title="Cyborg"><span>1</span></li>
-                <li class="darkly" title="Darkly"><span>2</span></li>                    
-                <li class="flatly"  title="Flatly"><span>3</span></li>
-                <li class="sandstone" title="Sandstone"><span>4</span></li>
-                <li class="slate" title="Slate"><span>5</span></li>
-                <li class="hero" title="Super Heroe"><span>6</span></li>
-                <li class="yeti"  title="Yeti"><span>7</span></li>      
-                <li class="bootstrap"  title="Bootstrap"><span>8</span></li>            
-            </ul> 
-            <span>Color destacado</span>
-            <ul id="colorchanger">      
+              <div class="openclose"></div>
+              <div class="title">
+                 <span>OPCIONES DEL TEMA</span>
+                 </div>
+          <span>Tema</span>
+              <ul id="themeSelector" class="text-center">      
+                  <li class="cyborg" title="Cyborg"><span>1</span></li>
+                  <li class="darkly" title="Darkly"><span>2</span></li>                    
+                  <li class="flatly"  title="Flatly"><span>3</span></li>
+                  <li class="sandstone" title="Sandstone"><span>4</span></li>
+                  <li class="slate" title="Slate"><span>5</span></li>
+                  <li class="hero" title="Super Heroe"><span>6</span></li>
+                  <li class="yeti"  title="Yeti"><span>7</span></li>      
+                  <li class="bootstrap"  title="Bootstrap"><span>8</span></li>            
+              </ul> 
+              <span>Color destacado</span>
+              <ul id="colorchanger">      
                   <li><a class="colorbox red" href="#" title="Red Skin"></a></li>
                   <li><a class="colorbox red-dark" href="#" title="Red Skin"></a></li>
                   <li><a class="colorbox blue" href="#" title="Blue Skin"></a></li>           
@@ -1214,85 +1214,101 @@
                   <li><a class="colorbox lynch" href="#" title="Lynch Skin"></a></li>
                   <li><a class="colorbox grey" href="#" title="Grey Skin"></a></li>
                   <li><a class="colorbox black" href="#" title="Black Skin"></a></li>
-            </ul>  
-            <span>ESTILO DE PAGINA</span>
-            <ul class="layout-style">      
-                <li class="wide">ANCHO</li>
-                <li class="semiboxed active">SEMI CAJA</li> 
-                <li class="boxed">CAJA</li> 
-                <li class="boxed-margin">C/MARGEN</li>               
-            </ul>           
-            <span>Patron del header</span>
-            <ul class="backgrounds-h">
-                    <li class="bgnone" title="None - Default"></li>
-                    <li class="bg3"></li>
-                    <li class="bg4"></li>
-                    <li class="bg8"></li>
-                    <li class="bg9 "></li>
-                    <li class="bg12"></li> 
-                    <li class="bg14"></li>
-                    <li class="bg19"></li>                                  
-                </ul>  
-            <span>Colores:</span>
-           <ul class="layout-style text-center">    
-                <li>
-                    Fondo
-                    <div id="colorFondo" class="conBorde">
-                    <div class="cp-background"></div>
-                    </div>
-                </li>    
-                <li >
-                    Header
-                    <div id="colorHeader" class="conBorde">
-                    <div class="cp-background"></div>
-                    </div>
-                </li>                                 
-            </ul>           
-            <div class="patterns">               
-            <span>PATRON DEL FONDO</span>
-            <ul class="backgrounds">
-                    <li class="bgnone" title="None - Default"></li>
-                    <li class="bg1"></li>
-                    <li class="bg2"></li>
-                    <li class="bg3"></li>
-                    <li class="bg4 "></li>
-                    <li class="bg5"></li> 
-                    <li class="bg6"></li>
-                    <li class="bg7"></li>
-                    <li class="bg8"></li>
-                    <li class="bg9 "></li>
-                    <li class="bg10"></li> 
-                    <li class="bg11"></li> 
-                    <li class="bg12"></li> 
-                    <li class="bg13"></li> 
-                    <li class="bg14"></li> 
-                    <li class="bg15"></li> 
-                    <li class="bg16"></li> 
-                    <li class="bg17"></li> 
-                    <li class="bg18"></li> 
-                    <li class="bg19"></li> 
-                    <li class="bg20"></li> 
-                    <li class="bg21"></li> 
-                    <li class="bg22"></li> 
-                    <li class="bg23"></li> 
-                    <li class="a1"></li>   
-                    <li class="a2"></li> 
-                    <li class="a3"></li>   
-                    <li class="a4"></li>      
-                    <li class="a5"></li>     
-                    <li class="c1 fixed"></li>   
-                    <li class="c2 fixed"></li> 
-                    <li class="c3 fixed"></li>    
-                </ul>  
-            </div>
-            <ul class="layout-style">    
-                <li class="btn btn-danger" id="cerrarConfig">Cerrar</li>    
-                <li onclick="guardarConfiguracion()" class="btn btn-primary">Guardar</li>                                 
-            </ul> 
-            <div class="col-xs-12">
-            <span id="msjeAjax" class="text-center nomargin-bottom"></span>  
-            </div>                       
-        </div>
+              </ul> 
+              <span>ESTILO DE PAGINA</span>
+              <ul class="layout-style">      
+                  <li class="wide">ANCHO</li>
+                  <li class="semiboxed active">SEMI CAJA</li> 
+                  <li class="boxed">CAJA</li> 
+                  <li class="boxed-margin">C/MARGEN</li>               
+              </ul>           
+              <span>Patron del header</span>
+              <ul class="backgrounds-h">
+                      <li class="bgnone" title="None - Default"></li>
+                      <li class="bg3"></li>
+                      <li class="bg4"></li>
+                      <li class="bg8"></li>
+                      <li class="bg9 "></li>
+                      <li class="bg12"></li> 
+                      <li class="bg14"></li>
+                      <li class="bg19"></li>                                  
+                  </ul>  
+              <span>Colores:</span>
+             <ul class="layout-style text-center">    
+                  <li>
+                      Fondo
+                      <div id="colorFondo" class="conBorde">
+                      <div class="cp-background"></div>
+                      </div>
+                  </li>    
+                  <li >
+                      Header
+                      <div id="colorHeader" class="conBorde">
+                      <div class="cp-background"></div>
+                      </div>
+                  </li>                                 
+              </ul>           
+              <div class="patterns">               
+              <span>PATRON DEL FONDO</span>
+              <ul class="backgrounds">
+                      <li class="bgnone" title="None - Default"></li>
+                      <li class="bg1"></li>
+                      <li class="bg2"></li>
+                      <li class="bg3"></li>
+                      <li class="bg4 "></li>
+                      <li class="bg5"></li> 
+                      <li class="bg6"></li>
+                      <li class="bg7"></li>
+                      <li class="bg8"></li>
+                      <li class="bg9 "></li>
+                      <li class="bg10"></li> 
+                      <li class="bg11"></li> 
+                      <li class="bg12"></li> 
+                      <li class="bg13"></li> 
+                      <li class="bg14"></li> 
+                      <li class="bg15"></li> 
+                      <li class="bg16"></li> 
+                      <li class="bg17"></li> 
+                      <li class="bg18"></li> 
+                      <li class="bg19"></li> 
+                      <li class="bg20"></li> 
+                      <li class="bg21"></li> 
+                      <li class="bg22"></li> 
+                      <li class="bg23"></li> 
+                      <li class="a1"></li>   
+                      <li class="a2"></li> 
+                      <li class="a3"></li>       
+                      <li class="c1 fixed"></li>   
+                      <li class="c2 fixed"></li> 
+                      <li class="c3 fixed"></li>    
+                      <li class="c4 fixed"></li>   
+                      <li class="c5 fixed"></li> 
+                      <li class="c6 fixed"></li>   
+                      <li class="c7 fixed"></li>   
+                      <li class="c8 fixed"></li> 
+                      <li class="c9 fixed"></li>   
+                      <li class="c10 fixed"></li>   
+                      <li class="c11 fixed"></li> 
+                      <li class="c12 fixed"></li>   
+                      <li class="c13 fixed"></li>   
+                      <li class="c14 fixed"></li> 
+                      <li class="c15 fixed"></li>   
+                      <li class="c16 fixed"></li>
+                      <li class="c17 fixed"></li>   
+                      <li class="c18 fixed"></li> 
+                      <li class="c19 fixed"></li>   
+                      <li class="c20 fixed"></li>
+                      <li class="c21 fixed"></li>
+                  </ul>  
+              </div>
+              <ul class="layout-style">    
+                  <li class="btn btn-danger" id="cerrarConfig">Cerrar</li>    
+                  <li onclick="guardarConfiguracion()" class="btn btn-primary">Guardar</li>                                 
+              </ul> 
+              <div class="col-xs-12">
+              <span id="msjeAjax" class="text-center nomargin-bottom"></span>  
+              </div>                       
+          </div>
     <!-- End Theme-options -->      
 
 </asp:Content>

@@ -71,9 +71,9 @@ $(document).ready(function($) {
 	 
 	$(".otros-equipos").owlCarousel({
         items : 12,
-		autoPlay: 3000,  
+		autoPlay: true,  
     	navigation : true,
-    	slideSpeed : 200,
+    	slideSpeed : 400,
     	pagination : false,
         itemsCustom: [[0, 2],[300, 3],[400, 5], [500, 6],[600, 7], [800, 8], [1000, 10], [1100, 11], [1200, 13]]
 	});
