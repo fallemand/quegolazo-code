@@ -88,6 +88,10 @@ h2.titulo-torneo strong {
   margin-left: 0px;
 }
 
+th.no-strong {
+    font-weight: normal;
+}
+
 .header-title {
   font-size:60px;
   text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135;
@@ -505,8 +509,13 @@ h5.col-title {
 }
 
 canvas{
-        width: 100% !important;
-        max-width: 600px;
-        height: auto !important;
-    }
+    width: 100% !important;
+    height: auto !important;
+}
+.canvas-md {
+    max-width: 400px;
+}
+.canvas-lg {
+    max-width: 600px;
+}
 

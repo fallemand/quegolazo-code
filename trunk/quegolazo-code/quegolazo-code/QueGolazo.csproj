@@ -117,7 +117,6 @@
     <Content Include="resources\js\trumbowyg.min.js" />
     <Content Include="resources\js\widgetFases.js" />
     <Content Include="resources\js\widgetLlaves.js" />
-    <Content Include="torneo\configurarSitio.aspx" />
     <Content Include="torneo\css\animations\animate.css" />
     <Content Include="torneo\css\bootstrap\bootstrap-theme.css" />
     <Content Include="torneo\css\bootstrap\bootstrap.css" />
@@ -447,13 +446,6 @@
     </Compile>
     <Compile Include="admin\sanciones.aspx.designer.cs">
       <DependentUpon>sanciones.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="torneo\configurarSitio.aspx.cs">
-      <DependentUpon>configurarSitio.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="torneo\configurarSitio.aspx.designer.cs">
-      <DependentUpon>configurarSitio.aspx</DependentUpon>
     </Compile>
     <Compile Include="torneo\fixture.aspx.cs">
       <DependentUpon>fixture.aspx</DependentUpon>
