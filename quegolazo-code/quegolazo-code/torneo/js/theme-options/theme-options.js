@@ -3,7 +3,7 @@
          {
              bodyClass: "none fixed",
              colorDeFondo: "rgb(95, 165, 78)",
-             colorDestacado: "css/skins/cocoa/cocoa.css",
+             colorDestacado: "css/skins/cocoa.css",
              colorHeader: "rgb(90, 71, 57)",
              estiloPagina: "layout-boxed-margin",
              patronDeFondo: "url(/torneo/img/bg-theme/c3.png)",
@@ -13,7 +13,7 @@
          {
              bodyClass: "none",
              colorDeFondo: "rgb(40, 38, 41)",
-             colorDestacado: "css/skins/blue/blue.css",
+             colorDestacado: "css/skins/blue.css",
              colorHeader: "rgb(0, 126, 168)",
              estiloPagina: "layout-boxed-margin",
              patronDeFondo: "url(/torneo/img/bg-theme/18.png)",
@@ -22,7 +22,7 @@
          }, {
              bodyClass: "none",
              colorDeFondo: "rgb(40, 38, 41)",
-             colorDestacado: "css/skins/orange/orange.css",
+             colorDestacado: "css/skins/orange.css",
              colorHeader: "rgb(40, 38, 41)",
              estiloPagina: "layout-wide",
              patronDeFondo: "url(/torneo/img/bg-theme/18.png)",
@@ -31,7 +31,7 @@
          }, {
              bodyClass: "none",
              colorDeFondo: "rgb(219, 219, 219)",
-             colorDestacado: "css/skins/green/green.css",
+             colorDestacado: "css/skins/green.css",
              colorHeader: "rgb(112, 113, 117)",
              estiloPagina: "layout-wide",
              patronDeFondo: "url(/torneo/img/bg-theme/a1.png)",
@@ -40,7 +40,7 @@
          }, {
              bodyClass: "none",
              colorDeFondo: "rgb(112, 113, 117)",
-             colorDestacado: "css/skins/pink/pink.css",
+             colorDestacado: "css/skins/pink.css",
              colorHeader: "rgb(219, 219, 219)",
              estiloPagina: "layout-boxed-margin",
              patronDeFondo: "url(/torneo/img/bg-theme/1.png)",
@@ -55,7 +55,7 @@
     var layout = "layout-boxed-margin"; // layout-semiboxed(default), layout-boxed, layout-boxed-margin ,layout-wide
     //Only in boxed version 
     var bg = "none";  // none (default), bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10, bg11 
-    $(".skin").attr("href", "css/skins/"+ skin + "/" + skin + ".css");
+    $(".skin").attr("href", "css/skins/"+ skin + ".css");
     $("#layout").addClass(layout);	
     $("body").addClass(bg);   
     return false;    
@@ -188,35 +188,63 @@
 
     // Color changer
 	$("#colorchanger .red").click(function () {
-	    $(".skin").attr("href", "css/skins/red/red.css");	    
+	    $(".skin").attr("href", "css/skins/red.css");	    
+	    return false;
+	});
+    $("#colorchanger .red-dark").click(function () {
+	    $(".skin").attr("href", "css/skins/red-dark.css");	    
 	    return false;
 	});
 	$("#colorchanger .blue").click(function () {
-	    $(".skin").attr("href", "css/skins/blue/blue.css");	    
+	    $(".skin").attr("href", "css/skins/blue.css");	    
+	    return false;
+	});
+    $("#colorchanger .blue-dark").click(function () {
+	    $(".skin").attr("href", "css/skins/blue-dark.css");	    
 	    return false;
 	});
 	$("#colorchanger .yellow").click(function () {
-	    $(".skin").attr("href", "css/skins/yellow/yellow.css");	    
+	    $(".skin").attr("href", "css/skins/yellow.css");	    
 	    return false;
 	});
 	$("#colorchanger .green").click(function () {
-	    $(".skin").attr("href", "css/skins/green/green.css");	    
+	    $(".skin").attr("href", "css/skins/green.css");	    
+	    return false;
+	});
+    $("#colorchanger .green-dark").click(function () {
+	    $(".skin").attr("href", "css/skins/green-dark.css");	    
 	    return false;
 	});
 	$("#colorchanger .orange").click(function () {
-	    $(".skin").attr("href", "css/skins/orange/orange.css");	    
+	    $(".skin").attr("href", "css/skins/orange.css");	    
+    	return false;
+	});
+    $("#colorchanger .orange-dark").click(function () {
+	    $(".skin").attr("href", "css/skins/orange-dark.css");	    
     	return false;
 	});
 	$("#colorchanger .purple").click(function () {
-	    $(".skin").attr("href", "css/skins/purple/purple.css");	    
+	    $(".skin").attr("href", "css/skins/purple.css");	    
 	    return false;
 	});
 	$("#colorchanger .pink").click(function () {
-	    $(".skin").attr("href", "css/skins/pink/pink.css");	    
+	    $(".skin").attr("href", "css/skins/pink.css");	    
 	    return false;
 	});
 	$("#colorchanger .cocoa").click(function () {
-	    $(".skin").attr("href", "css/skins/cocoa/cocoa.css");	    
+	    $(".skin").attr("href", "css/skins/cocoa.css");	    
+        return false;
+	});
+    $("#colorchanger .grey").click(function () {
+	    $(".skin").attr("href", "css/skins/grey.css");	    
+        return false;
+	});
+    $("#colorchanger .lynch").click(function () {
+	    $(".skin").attr("href", "css/skins/lynch.css");	    
+        return false;
+	});
+    $("#colorchanger .black").click(function () {
+	    $(".skin").attr("href", "css/skins/black.css");	    
         return false;
 	});
 
@@ -228,8 +256,10 @@
 	    var $bgSrc = $(this).css('background-image');
 		if ($(this).attr('class') == 'bgnone')
 		    $bgSrc = "none";
-		if ($(this).hasClass('fixed')) 
+		if ($(this).hasClass('fixed')) {
+            $bgSrc = $bgSrc.replace('-sm', '');
 		    $('body').addClass('fixed');
+        }
 		else 
 		    $('body').removeClass('fixed');
 		$('body').css('background-image', $bgSrc);
