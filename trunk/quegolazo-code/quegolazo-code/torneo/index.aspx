@@ -2,4 +2,5 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="headTorneoMasterContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
+    <asp:Label ID="nickTorneo" runat="server" Text="Label"></asp:Label>
 </asp:Content>

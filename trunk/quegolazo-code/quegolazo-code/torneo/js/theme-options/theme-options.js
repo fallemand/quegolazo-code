@@ -93,12 +93,12 @@
 
     function setDefaultTheme() {
         configuracion = {
-            bodyClass: "none",
+            bodyClass: "none fixed",
             colorDeFondo: "rgb(95, 165, 78)",
-            colorDestacado: "css/skins/green/green.css",
+            colorDestacado: "css/skins/black.css",
             colorHeader: "rgb(255, 255, 255)",
             estiloPagina: "layout-boxed-margin",
-            patronDeFondo: "url(/torneo/img/bg-theme/a1.png)",
+            patronDeFondo: "url(/torneo/img/bg-theme/c5.png)",
             patronHeader: "url(/torneo/img/bg-theme/19.png)",
             theme: "/torneo/css/bootstrap/bootstrap.css"
         };

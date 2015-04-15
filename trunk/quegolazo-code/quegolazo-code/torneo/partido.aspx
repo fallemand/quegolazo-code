@@ -270,9 +270,9 @@
                                             <% if(gestorPartido.partido.cancha != null) { %>
                                             <li class="list-group-item hidden-xs"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><%= gestorPartido.partido.cancha.nombre %></li>
                                              <% } %>
-                                            <%--<% if(gestorPartido.partido.arbitro != null) { %>
+                                            <% if(gestorPartido.partido.arbitro != null) { %>
                                             <li class="list-group-item hidden-xs"><span class="flaticon-black188" aria-hidden="true"></span><%= gestorPartido.partido.arbitro.nombre %></li>
-                                             <% } %>--%>
+                                             <% } %>
                                             <li class="list-group-item hidden-xs"><span class="label label-success"><%= gestorPartido.partido.estado.nombre %></span></li>
                                         </ul>
                                     </div>
