@@ -165,6 +165,7 @@
     <Content Include="torneo\css\style.css" />
     <Content Include="torneo\css\theme-responsive.css" />
     <Content Include="torneo\equipos.html" />
+    <Content Include="torneo\fixture.aspx" />
     <Content Include="torneo\fonts\flaticon.html" />
     <Content Include="torneo\fonts\flaticon.svg" />
     <Content Include="torneo\fonts\FontAwesome\fontawesome-webfont.svg" />
@@ -453,6 +454,13 @@
     </Compile>
     <Compile Include="torneo\configurarSitio.aspx.designer.cs">
       <DependentUpon>configurarSitio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="torneo\fixture.aspx.cs">
+      <DependentUpon>fixture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="torneo\fixture.aspx.designer.cs">
+      <DependentUpon>fixture.aspx</DependentUpon>
     </Compile>
     <Compile Include="torneo\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
