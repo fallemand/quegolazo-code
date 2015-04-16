@@ -98,6 +98,61 @@ th.no-strong {
   line-height:100px;
 }
 
+#resumen-equipo .table > thead > tr > th {
+  padding-bottom:4px;
+  padding-top:12px;
+}
+
+.camiseta-back {
+  background-image: url(/torneo/img/img-theme/camiseta-back-sm.png);
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  padding: 20px 20px 5px 20px;
+}
+
+.camiseta-back .numero {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.camiseta-back .apellido {
+  font-size: 10px;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: -.5px;
+}
+
+.popover .icon {
+  padding: 4px 8px 5px 6px;
+  margin: -5px 2px;
+  width:26px;
+  height:24px;
+  border: 0px solid #ddd;
+  color: #fff !important;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.35);
+  border-radius: 3px;
+}
+
+.popover .facebook {
+  background-color: #4769A5;
+  padding-left:9px;
+  padding-top:5px;
+}
+
+.popover {
+width:300px;
+}
+
+.popover .mail {
+  background-color: #47791b;
+}
+
+.popover .profile {
+  background-color: #aa2f2f;
+}
+
+
+
 .navbar-nav.nav-justified > li{
     float:none;
 }
@@ -492,12 +547,20 @@ h5.col-title {
     text-align: center;
 }
 
-.widget h1{
+.widget-md h1{
     font-size:40px;
     font-weight: 700;
     margin-bottom:0px;
     padding-bottom:0px;
     line-height: 35px;
+}
+
+.widget-xs h1{
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  line-height: 25px;
 }
 
 .widget span{

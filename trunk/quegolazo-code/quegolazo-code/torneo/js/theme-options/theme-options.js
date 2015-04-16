@@ -95,12 +95,12 @@
         configuracion = {
             bodyClass: "none fixed",
             colorDeFondo: "rgb(95, 165, 78)",
-            colorDestacado: "css/skins/black.css",
+            colorDestacado: "css/skins/green.css",
             colorHeader: "rgb(255, 255, 255)",
             estiloPagina: "layout-boxed-margin",
-            patronDeFondo: "url(/torneo/img/bg-theme/c5.png)",
+            patronDeFondo: "url(/torneo/img/bg-theme/c11.png)",
             patronHeader: "url(/torneo/img/bg-theme/19.png)",
-            theme: "/torneo/css/bootstrap/bootstrap.css"
+            theme: "/torneo/css/bootstrap/sandstone.css"
         };
     }
 	
