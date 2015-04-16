@@ -289,7 +289,7 @@
     <Content Include="torneo\js\bootstrap\bootstrap.js" />
     <Content Include="torneo\js\carousel\carousel.js" />
     <Content Include="torneo\js\charts\Chart.min.js" />
-    <Content Include="torneo\js\charts\charts-main.js" />
+    <Content Include="torneo\js\charts\charts-equipo.js" />
     <Content Include="torneo\js\counter\jquery.countdown.js" />
     <Content Include="torneo\js\fancybox\blank.gif" />
     <Content Include="torneo\js\fancybox\fancybox_loading.gif" />
