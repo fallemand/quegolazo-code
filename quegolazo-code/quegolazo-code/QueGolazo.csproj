@@ -48,7 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -138,7 +138,7 @@
     <Content Include="torneo\css\bootstrap\yeti.css" />
     <Content Include="torneo\css\carousel\owl.carousel.css" />
     <Content Include="torneo\css\carousel\owl.theme.css" />
-    <Content Include="torneo\css\colorPicker.css" />
+    <Content Include="torneo\css\skins\colorPicker.css" />
     <Content Include="torneo\css\icons\flaticon.css" />
     <Content Include="torneo\css\icons\font-awesome.min.css" />
     <Content Include="torneo\css\nav\megafish.css" />
@@ -163,6 +163,7 @@
     <Content Include="torneo\css\slide\camera.css" />
     <Content Include="torneo\css\style.css" />
     <Content Include="torneo\css\theme-responsive.css" />
+    <Content Include="torneo\equipo.aspx" />
     <Content Include="torneo\equipos.html" />
     <Content Include="torneo\fixture.aspx" />
     <Content Include="torneo\fonts\flaticon.html" />
@@ -209,6 +210,7 @@
     <Content Include="torneo\img\bg-theme\c8.png" />
     <Content Include="torneo\img\bg-theme\c9-sm.png" />
     <Content Include="torneo\img\bg-theme\c9.png" />
+    <Content Include="torneo\img\img-theme\camiseta-back-sm.png" />
     <Content Include="torneo\index.aspx" />
     <Content Include="torneo\img\bg-theme\1.png" />
     <Content Include="torneo\img\bg-theme\10.png" />
@@ -300,6 +302,7 @@
     <Content Include="torneo\js\main.js" />
     <Content Include="torneo\js\modernizr.js" />
     <Content Include="torneo\js\nav\jquery.sticky.js" />
+    <Content Include="torneo\js\theme-options\jquery.colorPicker.min.js" />
     <Content Include="torneo\js\theme-options\jquery.cookies.js" />
     <Content Include="torneo\js\theme-options\theme-options.js" />
     <Content Include="torneo\js\totop\jquery.ui.totop.js" />
@@ -446,6 +449,13 @@
     </Compile>
     <Compile Include="admin\sanciones.aspx.designer.cs">
       <DependentUpon>sanciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="torneo\equipo.aspx.cs">
+      <DependentUpon>equipo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="torneo\equipo.aspx.designer.cs">
+      <DependentUpon>equipo.aspx</DependentUpon>
     </Compile>
     <Compile Include="torneo\fixture.aspx.cs">
       <DependentUpon>fixture.aspx</DependentUpon>

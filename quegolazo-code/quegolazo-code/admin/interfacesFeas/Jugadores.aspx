@@ -21,7 +21,7 @@
                             </tr>
                         </thead>
                         <tbody class="tablaFiltro">
-                            <asp:Repeater ID="rptJugadores" runat="server" OnItemCommand="rptJugadores_ItemCommand">
+                            <asp:Repeater ID="rptJugadores" runat="server">
                                 <ItemTemplate>
                                     <tr>
                                         <td>
