@@ -22,7 +22,7 @@
     <!-- Responsive CSS -->
     <link href="/torneo/css/theme-responsive.css" rel="stylesheet" media="screen">
     <!-- Skins Theme -->
-    <link href="#" rel="stylesheet" media="screen" class="skin">
+    <link href="/torneo/css/skins/green.css" rel="stylesheet" media="screen" class="skin">
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="/torneo/img/icons/favicon.ico">
