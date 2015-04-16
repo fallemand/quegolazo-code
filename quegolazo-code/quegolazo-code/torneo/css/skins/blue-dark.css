@@ -35,6 +35,9 @@
 	background: #4D8FAC; 
 	background-color: #4D8FAC; 
 }
+.footer-down{
+	background: #4D8FAC url("/torneo/img/img-theme/footer-down.png") repeat-x left 1px;
+}
 .events-carousel li .header-post .date{
 	background: #4D8FAC;  
 	background: rgba(0, 136, 204, 0.6);
