@@ -524,7 +524,7 @@
                                 </div>
 
                                 <!-- Tab Historial de Partidos -->
-                                <div class="tab-pane fade" id="historial-partidos">
+                                <div class="tab-pane active fade in" id="historial-partidos">
                                     <div class="col-sm-5 col-xs-12">
                                         <table class="table table-striped">
                                             <thead>
@@ -593,7 +593,7 @@
                                 <!-- END Tab Historial de Partidos  -->
 
                                 <!-- Tab de Goleadores -->
-                                <div class="tab-pane fade" id="goleadores">
+                                <div class="tab-pane fade active in " id="goleadores">
                                     <div class="col-sm-5 col-xs-12">
                                         <table class="table table-striped">
                                             <thead>

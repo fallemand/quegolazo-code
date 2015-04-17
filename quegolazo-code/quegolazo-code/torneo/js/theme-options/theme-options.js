@@ -148,10 +148,6 @@
 
      //=================================== Skins Changer ====================================//
 
-	google.setOnLoadCallback(function(){
-
-	'use strict';
-
 	    //Theme Selector
 	$("#themeSelector .bootstrap").click(function () {
 	    $("#theme").attr("href", "/torneo/css/bootstrap/bootstrap.css");
@@ -248,7 +244,6 @@
         return false;
 	});
 
- });
 
 	//=================================== Background Options ====================================//
 	

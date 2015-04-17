@@ -634,79 +634,81 @@
                                             <canvas id="graficoPartidos" class="canvas-md"></canvas>
                                         </div>
                                     </div>
-                                </div>                          
+                                </div>      
 
                                 <!-- Tab Historial de Partidos -->
-                                <div class="tab-pane fade" id="historial-partidos">
-                                    <div class="col-sm-5 col-xs-12">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" colspan="2">VS</th>
-                                                    <th class="text-center" colspan="2">Resultado</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-warning">Empatado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-warning">Empatado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <h5 class="col-title">Evolución de Puntos</h5>
-                                        <canvas id="graficoPuntos" class="canvas-lg"></canvas>
+                                <div class="tab-pane fade active in" id="historial-partidos">
+                                    <div class="row">
+                                        <div class="col-sm-5 col-xs-12">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" colspan="2">VS</th>
+                                                        <th class="text-center" colspan="2">Resultado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                        <td class="col-xs-6 col-md-5">River Plate</td>
+                                                        <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                        <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                        <td class="col-xs-6 col-md-5">River Plate</td>
+                                                        <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                        <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                        <td class="col-xs-6 col-md-5">River Plate</td>
+                                                        <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                        <td class="col-xs-3 col-md-2"><span class="label label-warning">Empatado</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                        <td class="col-xs-6 col-md-5">River Plate</td>
+                                                        <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                        <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                        <td class="col-xs-6 col-md-5">River Plate</td>
+                                                        <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                        <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                        <td class="col-xs-6 col-md-5">River Plate</td>
+                                                        <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                        <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                        <td class="col-xs-6 col-md-5">River Plate</td>
+                                                        <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                        <td class="col-xs-3 col-md-2"><span class="label label-warning">Empatado</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                        <td class="col-xs-6 col-md-5">River Plate</td>
+                                                        <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
+                                                        <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h5 class="col-title">Evolución de Puntos</h5>
+                                            <canvas id="graficoPuntos" class="canvas-lg"></canvas>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- END Tab Historial de Partidos  -->
 
                                 <!-- Tab de Goleadores -->
-                                <div class="tab-pane fade" id="goleadores">
+                                <div class="tab-pane fade active in" id="goleadores">
                                     <div class="col-sm-5 col-xs-12">
                                         <table class="table table-striped">
                                             <thead>

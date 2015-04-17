@@ -136,4 +136,7 @@ $(document).ready(function($) {
 
     // This will get the first returned node in the jQuery collection.
     var myBarChart = new Chart(ctx).Bar(data);
+
+    $('#goleadores').removeClass("active");
+    $('#historial-partidos').removeClass("active");
 });	
