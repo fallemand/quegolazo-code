@@ -77,6 +77,17 @@ $(document).ready(function($) {
     	pagination : false,
         itemsCustom: [[0, 2],[300, 3],[400, 5], [500, 6],[600, 7], [800, 8], [1000, 10], [1100, 11], [1200, 13]]
 	});
+    
+    //=================================== Slide Otros Judaores  ==============================//
+	 
+	$(".otros-jugadores").owlCarousel({
+        items : 14,
+		autoPlay: true,  
+    	navigation : true,
+    	slideSpeed : 400,
+    	pagination : false,
+        itemsCustom: [[0, 3],[300, 4],[400, 6], [500, 8],[600, 9], [800, 10], [1000, 12], [1100, 13], [1200, 15]]
+	});
 
   //=================================== Carousel Blog  ==================================//
 

@@ -47,7 +47,7 @@
                             <ul class="proximos-partidos slider-multiple tooltip-hover">
                                 <asp:Repeater ID="rptOtrosPartidosDeLaFecha" runat="server">
                                     <ItemTemplate>
-                                        <li class="li-partido" style="width: 120px">
+                                        <li class="li-item" style="width: 120px">
                                             <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? nombreMes(DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
                                             <div class="text">
                                                 <div class="equipos">
