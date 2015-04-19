@@ -17,18 +17,18 @@ namespace quegolazo_code.torneo
         protected GestorEquipo gestorEquipo;
         protected GestorPartido gestorPartido;
         GestorEstadisticas gestorEstadistica;
-        protected bool tieneLogo;
-        protected int idEquipo;
+        //protected bool tieneLogo;
+        //protected int idEquipo;
         protected void Page_Load(object sender, EventArgs e)
         {
             gestorTorneo = Sesion.getGestorTorneo();
             gestorEdicion = Sesion.getGestorEdicion();
-            //TODO esto está harcodeado para que funque! 2008
+            //TODO esto está harcodeado para que funque!
             gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(4007);
             gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorId(87);
             gestorEquipo = Sesion.getGestorEquipo();
             gestorPartido = Sesion.getGestorPartido();
-            gestorEstadistica = new GestorEstadisticas(); 
+            gestorEstadistica = new GestorEstadisticas();
             if (!Page.IsPostBack)
             {
                 gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(Request["idEquipo"]));
@@ -62,26 +62,36 @@ namespace quegolazo_code.torneo
         }
 
         public void cargarHistorialDePartidos()
-        {
-            GestorControles.cargarRepeaterList(rptHistorialPartidos, gestorPartido.ultimosPartidosDeUnEquipo(gestorEquipo.equipo.idEquipo, gestorEdicion.edicion.idEdicion));
-            //GestorControles.cargarRepeaterTable(rptHistorialPartidos, gestorEstadistica.obtenerUltimosPartidosEquipo(gestorEquipo.equipo.idEquipo));
+        {//Carga el historial de Partido
+           sinHistorialDePartido.Visible = !GestorControles.cargarRepeaterList(rptHistorialPartidos, gestorPartido.ultimosPartidosDeUnEquipo(gestorEquipo.equipo.idEquipo, gestorEdicion.edicion.idEdicion));
         }
-
         public void cargarGoleadores()
-        {
-            GestorControles.cargarRepeaterList(rptGoleadores, gestorEquipo.goleadoresDeUnEquipo(gestorEquipo.equipo.idEquipo, gestorEdicion.edicion.idEdicion));
+        {//Carga los goleadores de la edición
+            sinGoleadores.Visible = !GestorControles.cargarRepeaterList(rptGoleadores, gestorEquipo.goleadoresDeUnEquipo(gestorEquipo.equipo.idEquipo, gestorEdicion.edicion.idEdicion));
         }
-
-
         public void cargarRepeaterOtrosEquiposDeEdicion()
-        {
+        {//Carga el repeater de los otros equipos de la edición
             GestorControles.cargarRepeaterList(rptOtroseEquiposDeEdicion, gestorEdicion.obtenerEquipos());
-        }
-
+        }                
         public void cargarRepeaterJugadores()
+        {//Carga el repeater con todos los datos del Jugador
+            sinJugadores.Visible = !GestorControles.cargarRepeaterList(rptJugadoresDelEquipo, gestorEquipo.jugadoresDeUnEquipo(gestorEdicion.edicion.idEdicion, gestorEquipo.equipo.idEquipo));
+        }
+        protected void rptHistorialPartidos_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            List<Jugador> jugadores = gestorEquipo.jugadoresDeUnEquipo(gestorEdicion.edicion.idEdicion, gestorEquipo.equipo.idEquipo);
-            GestorControles.cargarRepeaterList(rptJugadoresDelEquipo, gestorEquipo.jugadoresDeUnEquipo(gestorEdicion.edicion.idEdicion, gestorEquipo.equipo.idEquipo));
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                //Contempla el caso que el partido se haya definido por penales
+                Literal ltPenalesLocal = (Literal)e.Item.FindControl("ltPenalesLocal");
+                Literal ltPenalesVisitante = (Literal)e.Item.FindControl("ltPenalesVisitante");
+                if(((Partido)e.Item.DataItem).huboPenales != null && ((Partido)e.Item.DataItem).huboPenales == true)
+                {
+                    ltPenalesLocal.Visible = true;
+                    ltPenalesLocal.Text = "(" + ((Partido)e.Item.DataItem).penalesLocal.ToString() + ")";
+                    ltPenalesVisitante.Visible = true;
+                    ltPenalesVisitante.Text = "(" + ((Partido)e.Item.DataItem).penalesVisitante.ToString() + ")";
+                }
+            }
         }
     }
 }

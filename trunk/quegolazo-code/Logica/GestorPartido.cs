@@ -181,6 +181,11 @@ namespace Logica
             return daoPartido.otrosPartidosDeLaFecha(idEdicion, idFase, idFecha, idPartidoActual);
         }
 
+        public List<Partido> ultimosPartidosDeUnEquipo(int idEquipo, int idEdicion)
+        {
+            return daoPartido.ultimosPartidosDeUnEquipo(idEquipo, idEdicion);
+        }
+
         public List<Partido> ultimosPartidosPrevioDeUnEquipo(int idEquipo, int idEdicion, int idPartido)
         {
             return daoPartido.ultimosPartidosPrevioDeUnEquipo(idEquipo, idEdicion, idPartido);

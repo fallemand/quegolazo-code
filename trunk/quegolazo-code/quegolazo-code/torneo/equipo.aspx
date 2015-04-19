@@ -167,11 +167,11 @@
                                     <ItemTemplate>
                                         <!-- Jugador -->
                                         <div class="col-md-2 col-xs-3">
-                                            <a id='jugador-2' class="popover-jugador" href="#" >
+                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador" href="#" >
                                               <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle img-responsive" alt="imagen"></img>
                                             </a>
-                                            <%--<!-- Popover del Jugador -->
-                                            <div id="popover-jugador-2" style="display:none">
+                                            <!-- Popover del Jugador -->
+                                            <div id="popover-jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>" style="display:none">
                                                 <div class="row">
                                                     <div class="col-md-7">
                                                         <div class="row">
@@ -201,17 +201,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="popover-title-jugador-2" style="display:none">
+                                            <div id="popover-title-jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString()%>" style="display:none">
                                                <%#((Entidades.Jugador)Container.DataItem).nombre %>
                                                    <a href="#" class="icon pull-right facebook" ><i data-toggle="tooltip" title="Perfil de Facebook" class="fa fa-facebook"></i></a>
                                                    <a href="#" class="icon pull-right mail" ><i  data-toggle="tooltip" title="Copiar Mail" class="glyphicon glyphicon-envelope"></i></a>
                                             </div>
-                                            <!-- END Popover del Jugador -->--%>
+                                            <!-- END Popover del Jugador -->
                                         </div>
                                         <!-- END Jugador -->
                                         <!-- Jugador -->
                                     </ItemTemplate>
-                                </asp:Repeater>                                     
+                                </asp:Repeater>   
+                                <asp:Literal ID="sinJugadores" runat="server" Visible="false" Text="No registra información de Jugadores"></asp:Literal>                                      
                                 </div>
                             </div>
                         </div>
@@ -326,18 +327,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <asp:Repeater ID="rptHistorialPartidos" runat="server">
+                                                <asp:Repeater ID="rptHistorialPartidos" runat="server" OnItemDataBound="rptHistorialPartidos_ItemDataBound">
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td class="col-xs-2 col-md-1"><img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt=""></td>
                                                             <td class="col-xs-6 col-md-3"><%# Eval("local.nombre") %></td>
-                                                            <td class="col-xs-6 col-md-3"><%# Eval("golesLocal") %><small>(5)</small> - <%# Eval("golesVisitante") %><small>(2)</small></td>
+                                                            <td class="col-xs-6 col-md-3"><%# Eval("golesLocal") %><small><asp:Literal ID="ltPenalesLocal" runat="server" Visible="false"/></small> - <%# Eval("golesVisitante") %><small><asp:Literal ID="ltPenalesVisitante" runat="server" Visible="false"/></small></td>
                                                             <td class="col-xs-6 col-md-3"><%# Eval("visitante.nombre") %></td>
                                                             <td class="col-xs-2 col-md-1"><img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt=""></td>
                                                             <td class="col-xs-3 col-md-2"><span class="label label-success"><%# Eval("resultadoParaUnEquipo") %></span></td>
                                                         </tr>
                                                     </ItemTemplate>
-                                                </asp:Repeater>    
+                                                </asp:Repeater>
+                                                <tr id="sinHistorialDePartido" runat="server" visible="false">
+                                                    <td colspan="6">No hay información de partidos anteriores jugados</td>
+                                                </tr>    
                                             </tbody>
                                         </table>
                                     </div>
@@ -370,6 +374,9 @@
                                                         </tr>
                                                     </ItemTemplate>
                                                 </asp:Repeater> 
+                                                <tr id="sinGoleadores" runat="server" visible="false">
+                                                    <td colspan="3">No hay información de goleadores</td>
+                                                </tr>  
                                                 <%--<tr>
                                                     <td class="col-xs-1">
                                                         <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
