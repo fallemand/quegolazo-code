@@ -47,7 +47,7 @@
                             <ul class="otros-equipos slider-multiple tooltip-hover">
                                 <asp:Repeater ID="rptOtroseEquiposDeEdicion" runat="server">
                                     <ItemTemplate>
-                                        <li class="li-equipo" data-toggle="tooltip" title="<%# Eval("nombre") %>">
+                                        <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre") %>">
                                             <a href="#ver equipo">
                                                 <asp:Panel ID="panelLogoEquipo" runat="server" Visible="<%# ((Entidades.Equipo)Container.DataItem).tieneImagen() ? true : false %>">
                                                     <a href="#ver equipo">

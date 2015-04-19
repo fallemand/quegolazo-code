@@ -122,7 +122,7 @@ th.no-strong {
   letter-spacing: -.5px;
 }
 
-.popover .icon {
+.icon {
   padding: 4px 8px 5px 6px;
   margin: -5px 2px;
   width:26px;
@@ -133,7 +133,7 @@ th.no-strong {
   border-radius: 3px;
 }
 
-.popover .facebook {
+.icon.facebook {
   background-color: #4769A5;
   padding-left:9px;
   padding-top:5px;
@@ -143,11 +143,11 @@ th.no-strong {
 width:300px;
 }
 
-.popover .mail {
+.icon.mail {
   background-color: #47791b;
 }
 
-.popover .profile {
+.profile {
   background-color: #aa2f2f;
 }
 
@@ -283,7 +283,7 @@ width:300px;
 .otros-equipos .camiseta-equipo .segunda-mitad i {
   margin-left:-32px;
 }
-.otros-equipos .li-equipo img {
+.li-item img {
     max-height: 55px;
 }
 /**--  END ****  Widget Partidos ****   **/
@@ -432,7 +432,7 @@ h5.col-title {
   }
 }
 
-.li-equipo {
+.li-item {
     padding: 5px 0px;
   -webkit-transition: all .25s linear;
   -moz-transition: all .25s linear;
@@ -441,7 +441,7 @@ h5.col-title {
   transition: all .25s linear;
 }
 
-.li-equipo:hover {
+.li-item:hover {
   background-color: rgba(100, 100, 100, 0.20);
 }
 
@@ -580,4 +580,85 @@ canvas{
 }
 .canvas-lg {
     max-width: 600px;
+}
+
+.avatar-slider h1{
+  font-size: 35px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  line-height: 30px;
+  padding-top:2px;
+}
+
+.avatar-principal h1{
+  font-size: 55px;
+  padding-bottom: 0px;
+  line-height: 50px;
+}
+a.avatar-principal {
+  margin: 15px 30px !important;
+  padding:30px 10px;
+}
+
+
+
+.avatar-slider {
+    height:45px;
+    width:55px;
+}
+
+.avatar-jugador {
+    margin:5px;
+    borcer:1px solid rgba(0,0,0,0.2);
+    padding:5px;
+    text-align: center;
+    margin: 5px auto;
+}
+a.avatar-jugador {
+    display: block;
+    color:#FFF;
+}
+
+a.avatar-jugador h1, a.avatar-jugador h4 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+}
+
+a.avatar-jugador:hover {
+    text-decoration: none;
+}
+
+.avatar-bg-1 {
+    background-color:#3498db !important;
+}
+.avatar-bg-2 {
+    background-color:#2ecc71 !important;
+}
+.avatar-bg-3 {
+    background-color:#9b59b6 !important;
+}
+.avatar-bg-4 {
+    background-color:#34495e !important;
+}
+.avatar-bg-5 {
+    background-color:#1abc9c !important;
+}
+.avatar-bg-6 {
+    background-color:#e74c3c !important;
+}
+.avatar-bg-7 {
+    background-color:#f1c40f !important;
+}
+.avatar-bg-8 {
+    background-color:#e67e22 !important;
+}
+.avatar-bg-9 {
+    background-color:#323232 !important;
+}
+.avatar-bg-0 {
+    background-color:#95a5a6 !important;
+}
+
+.text-yellow {
+    color: #f1c40f;
 }
