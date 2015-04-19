@@ -252,15 +252,15 @@
                         <a href="#verJugador" class="avatar-jugador avatar-principal avatar-bg-7" data-toggle="tooltip" title="Román Riquelme">
                             <h1>RR</h1>
                         </a>
-                        <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Román Riquelme</a></h3>
+                        <h3 class="text-center text-thin"><a href="#">Román Riquelme</a></h3>
                         <div class="row text-center">
                           <div class="col-xs-12">
-                            <ul class="list-group">
-                              <li class="list-group-item"><span class="flaticon-football95" aria-hidden="true"></span> Equipo: Boca Juniors</li>
-                              <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <span class="hidden-xs">Sabado </span>27/10/2015</li>
+                            <ul class="list-group tooltip-hover">
+                                <li class="list-group-item" ><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""><a href=# data-toggle="tooltip" title="Ver Equipo"> Boca Juniors</a></li>
+                              <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <span class="hidden-xs"></span> Edad: 22 Años</li>
                               <li class="list-group-item center-block">
-                                  <a href="#" class="icon facebook" ><i data-toggle="tooltip" title="Perfil de Facebook" class="fa fa-facebook"></i></a>
                                   <a href="#" class="icon mail" ><i  data-toggle="tooltip" title="Copiar Mail" class="glyphicon glyphicon-envelope"></i></a>
+                                  <a href="#" class="icon facebook" ><i data-toggle="tooltip" title="Perfil de Facebook" class="fa fa-facebook"></i></a>
                               </li>
                             </ul>
                           </div>
@@ -334,7 +334,7 @@
                                                 <ul class="nav navbar-nav nav-justified">
                                                     <li class="active"><a href="#resumen-equipo" data-toggle="tab"><span class="flaticon-football128"></span>Resumen</a></li>
                                                     <li><a href="#historial-partidos" data-toggle="tab"><span class="flaticon-football118"></span>Historial de Partidos</a></li>
-                                                    <li><a href="#goleadores" data-toggle="tab"><span class="flaticon-football28"></span> Goleadores</a></li>
+                                                    <li><a href="#goleadores" data-toggle="tab"><span class="flaticon-football28"></span> Goles</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -347,62 +347,37 @@
                                         <div class="tab-pane fade in active" id="resumen-equipo">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <table class="table text-center table-striped nomargin-bottom">
+                                                   <table class="table table-striped">
                                                         <thead>
                                                             <tr>
-                                                                <th class="text-center col-xs-3">Partidos</th>
-                                                                <th class="text-center no-strong"><small>Ganados</small></th>
-                                                                <th class="text-center no-strong"><small>Empatados</small></th>
-                                                                <th class="text-center no-strong"><small>Perdidos</small></th>
+                                                                <th class="text-center" colspan="2">Datos del Jugador</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
+                                                                <td>Partidos Jugados: </td>
                                                                 <td>22</td>
-                                                                <td class="success">17</td>
-                                                                <td class="warning">4</td>
-                                                                <td class="danger">3</td>
                                                             </tr>
-                                                            </tbody>
-                                                    </table>
-                                                    <table class="table text-center table-striped nomargin-bottom">
-                                                        <thead>
                                                             <tr>
-                                                                <th class="text-center col-xs-3">Goles</th>
-                                                                <th class="text-center no-strong"><small>Convertidos</small></th>
-                                                                <th class="text-center no-strong"><small>En Contra</small></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
+                                                                <td>Goles Convertidos: </td>
                                                                 <td>22</td>
-                                                                <td class="success">20</td>
-                                                                <td class="danger">3</td>
                                                             </tr>
-                                                            </tbody>
+                                                            <tr>
+                                                                <td>Tarjetas Rojas: </td>
+                                                                <td>22</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Tarjetas Amarillas: </td>
+                                                                <td>22</td>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
-                                                    <table class="table text-center table-striped nomargin-bottom">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="text-center col-xs-3">Tarjetas</th>
-                                                                <th class="text-center no-strong"><small>Amarillas</small></th>
-                                                                <th class="text-center no-strong"><small>Rojas</small></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>18</td>
-                                                                <td class="warning">13</td>
-                                                                <td class="danger">6</td>
-                                                            </tr>
-                                                            </tbody>
-                                                    </table>               
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <h5 class="col-title">Número Camiseta</h5>
                                                     <div class="camiseta-back center-block">
-                                                        <span class="numero">18</span>
-                                                        <span class="apellido">Allemand</span>
+                                                        <span class="numero">10</span>
+                                                        <span class="apellido">Riquelme</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
@@ -415,7 +390,7 @@
                                         <!-- Tab Historial de Partidos -->
                                         <div class="tab-pane fade in" id="historial-partidos">
                                             <div class="row">
-                                                <div class="col-sm-5 col-xs-12">
+                                                <div class="col-sm-7 col-xs-12">
                                                     <table class="table table-striped">
                                                         <thead>
                                                             <tr>
@@ -454,28 +429,10 @@
                                                                 <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
                                                                 <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
                                                             </tr>
-                                                            <tr>
-                                                                <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                                <td class="col-xs-6 col-md-5">River Plate</td>
-                                                                <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                                <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                                <td class="col-xs-6 col-md-5">River Plate</td>
-                                                                <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                                <td class="col-xs-3 col-md-2"><span class="label label-warning">Empatado</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                                <td class="col-xs-6 col-md-5">River Plate</td>
-                                                                <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                                <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
-                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-5">
                                                     <h5 class="col-title">Evolución de Puntos</h5>
                                                     <canvas id="graficoPuntos" class="canvas-lg"></canvas>
                                                 </div>
@@ -487,68 +444,38 @@
                                         <div class="tab-pane fade in" id="goleadores">
                                             <div class="col-sm-5 col-xs-12">
                                                 <table class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="text-center" colspan="2">Jugador</th>
-                                                            <th class="text-center" colspan="2">Goles</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="col-xs-1">
-                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                            </td>
-                                                            <td class="col-xs-9">Fernando Gago</td>
-                                                            <td class="col-xs-2">8</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="col-xs-1">
-                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                            </td>
-                                                            <td class="col-xs-9">Fernando Gago</td>
-                                                            <td class="col-xs-2">5</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="col-xs-1">
-                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                            </td>
-                                                            <td class="col-xs-9">Fernando Gago</td>
-                                                            <td class="col-xs-2">4</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="col-xs-1">
-                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                            </td>
-                                                            <td class="col-xs-9">Fernando Gago</td>
-                                                            <td class="col-xs-2">3</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="col-xs-1">
-                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                            </td>
-                                                            <td class="col-xs-9">Fernando Gago</td>
-                                                            <td class="col-xs-2">3</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="col-xs-1">
-                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                            </td>
-                                                            <td class="col-xs-9">Fernando Gago</td>
-                                                            <td class="col-xs-2">1</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="col-xs-1">
-                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                            </td>
-                                                            <td class="col-xs-9">Fernando Gago</td>
-                                                            <td class="col-xs-2">1</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center" colspan="2">VS</th>
+                                                                <th class="text-center">Cantidad</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                                <td class="col-xs-6 col-md-7">River Plate</td>
+                                                                <td class="col-xs-4 col-md-4">2 Goles</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                                <td class="col-xs-6 col-md-7">River Plate</td>
+                                                                <td class="col-xs-4 col-md-4">2 Goles</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                                <td class="col-xs-6 col-md-7">River Plate</td>
+                                                                <td class="col-xs-4 col-md-4">2 Goles</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
+                                                                <td class="col-xs-6 col-md-7">River Plate</td>
+                                                                <td class="col-xs-4 col-md-4">2 Goles</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                             </div>
                                             <div class="col-sm-7">
                                                 <h5 class="col-title">Goleadores</h5>
-                                                <canvas id="graficoGoleadores" class="canvas-lg"></canvas>
                                             </div>
                                         </div>
                                         <!-- END Tab de Goleadores -->

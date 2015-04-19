@@ -123,20 +123,32 @@ th.no-strong {
 }
 
 .icon {
-  padding: 4px 8px 5px 6px;
-  margin: -5px 2px;
-  width:26px;
-  height:24px;
+  padding: 4px 8px;
+  width: 30px;
+  height: 24px;
   border: 0px solid #ddd;
   color: #fff !important;
   text-shadow: 1px 1px 1px rgba(0,0,0,.35);
+  margin-right: 5px;
   border-radius: 3px;
+  display: inline-block;
 }
 
 .icon.facebook {
   background-color: #4769A5;
-  padding-left:9px;
+}
+
+li .icon {
+  padding-top:2px;
+}
+
+.popover .icon.facebook {
+  padding-left:11px;
   padding-top:5px;
+}
+
+.popover .icon {
+  margin-top:-5px;
 }
 
 .popover {
@@ -248,8 +260,18 @@ width:300px;
   border-right: 7px solid;
 }
 
-.score a{
+.score h3 a{
   color: #FFF;
+}
+
+.score h3 a:hover{
+  color: #f4f4f4;
+  text-decoration: none;
+}
+
+.text-thin {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
 }
 
 /****  Widget Partidos ****/
