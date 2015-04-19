@@ -10,7 +10,7 @@
     <section class="section-title img-about">
         <div class="overlay-bg"></div>
         <div class="container">
-            <h1>Boca Juniors</h1>
+            <h1><%=gestorEquipo.equipo.nombre %> </h1>
         </div>
     </section>
     <!-- End Titulo Sección -->
@@ -20,13 +20,13 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="index-2.html">Torneo La Rivera</a></li>
+                    <li><a href="index-2.html"><%=gestorTorneo.torneo.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Edición 2014</a></li>
+                    <li><a href="index-2.html"><%=gestorEdicion.edicion.nombre%></a></li>
                     <li>/</li>
                     <li><a href="index-2.html">Equipos</a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Boca Juniors</a></li>
+                    <li><a href="index-2.html"><%=gestorEquipo.equipo.nombre %></a></li>
                 </ul>
             </div>
         </div>
@@ -45,142 +45,30 @@
                         <div class="panel-body">
                             <p class="slider-multiple-title">Otros Equipos de la Edición</p>
                             <ul class="otros-equipos slider-multiple tooltip-hover">
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                              <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                              </div><!--
-                                           --><div class="segunda-mitad">
-                                                <i class="flaticon-football114" style="color:#FAD201"></i>
-                                              </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                              <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                              </div><!--
-                                           --><div class="segunda-mitad">
-                                                <i class="flaticon-football114" style="color:#FAD201"></i>
-                                              </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                              <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                              </div><!--
-                                           --><div class="segunda-mitad">
-                                                <i class="flaticon-football114" style="color:#FAD201"></i>
-                                              </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                              <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                              </div><!--
-                                           --><div class="segunda-mitad">
-                                                <i class="flaticon-football114" style="color:#FAD201"></i>
-                                              </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                              <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                              </div><!--
-                                           --><div class="segunda-mitad">
-                                                <i class="flaticon-football114" style="color:#FAD201"></i>
-                                              </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                              <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                              </div><!--
-                                           --><div class="segunda-mitad">
-                                                <i class="flaticon-football114" style="color:#FAD201"></i>
-                                              </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                              <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                              </div><!--
-                                           --><div class="segunda-mitad">
-                                                <i class="flaticon-football114" style="color:#FAD201"></i>
-                                              </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                              <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                              </div><!--
-                                           --><div class="segunda-mitad">
-                                                <i class="flaticon-football114" style="color:#FAD201"></i>
-                                              </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-equipo" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo1.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
+                                <asp:Repeater ID="rptOtroseEquiposDeEdicion" runat="server">
+                                    <ItemTemplate>
+                                        <li class="li-equipo" data-toggle="tooltip" title="<%# Eval("nombre") %>">
+                                            <a href="#ver equipo">
+                                                <asp:Panel ID="panelLogoEquipo" runat="server" Visible="<%# ((Entidades.Equipo)Container.DataItem).tieneImagen() ? true : false %>">
+                                                    <a href="#ver equipo">
+                                                        <img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive center-block">
+                                                    </a>  
+                                                </asp:Panel>  
+                                                <asp:Panel ID="panelCamisetaEquipo" runat="server" Visible="<%# ((Entidades.Equipo)Container.DataItem).tieneImagen() ? false : true %>">
+                                                    <div class="camiseta-equipo" runat="server">
+                                                      <div>
+                                                        <i class="flaticon-football114" style="color:<%# Eval("colorCamisetaPrimario") %>"></i>
+                                                      </div><!--
+                                                   --><div class="segunda-mitad">
+                                                        <i class="flaticon-football114" style="color:<%# Eval("colorCamisetaSecundario") %>"></i>
+                                                      </div>
+                                                    </div>
+                                                </asp:Panel>     
+                                                
+                                            </a>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>                                
                             </ul>
                         </div>
                     </div>
@@ -190,21 +78,35 @@
                 <!-- Datos del Equipo -->
                 <div class="col-sm-4">
                     <div class="panel-box bg-dark score theme-border">
-                        <div class="camiseta-equipo">
+                        <%--<div class="camiseta-equipo">
                               <div>
                                 <i class="flaticon-football114" style="color:#005A96"></i>
                               </div><!--
                            --><div class="segunda-mitad">
                                 <i class="flaticon-football114" style="color:#FAD201"></i>
                               </div>
-                        </div>
-                            <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo">Boca Juniors</a></h3>
+                        </div>--%>
+                        <% if(gestorEquipo.equipo.tieneImagen()) { %>
+                            <img src="<%= gestorEquipo.equipo.obtenerImagenGrande() %>" class="img-responsive center-block" style="max-height: 150px;">
+                            <%} else { %>
+                            <div class="row">
+                                <div class="camiseta-equipo">
+                                    <div>
+                                        <i class="flaticon-football114" style="color: <%= gestorEquipo.equipo.colorCamisetaPrimario %>"></i>
+                                    </div><!--
+                                    --><div class="segunda-mitad">
+                                        <i class="flaticon-football114" style="color: <%= gestorEquipo.equipo.colorCamisetaSecundario%>"></i>
+                                    </div>
+                                </div>
+                            </div>
+                         <% } %>
+                            <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%=gestorEquipo.equipo.nombre %></a></h3>
                             <div class="row text-center">
                               <div class="col-xs-12">
                                 <ul class="list-group">
                                   <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <span class="hidden-xs">Sabado </span>27/10/2015</li>
-                                  <li class="list-group-item"><span class="flaticon-football95" aria-hidden="true"></span> DT: Marcelo Bielsa</li>
-                                  <li class="list-group-item"><span class="flaticon-football119" aria-hidden="true"></span> Delegado: Facundo Allemand</li>
+                                  <li class="list-group-item"><span class="flaticon-football95" aria-hidden="true"></span> DT: <%=gestorEquipo.equipo.directorTecnico %></li>
+                                  <li class="list-group-item"><span class="flaticon-football119" aria-hidden="true"></span> Delegado: <%=gestorEquipo.equipo.delegadoPrincipal.nombre %></li>
                                   <li class="list-group-item"><span class="label label-success">Partido Jugado</span></li>
                                 </ul>
                               </div>
@@ -220,7 +122,7 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body widget widget-md">
                                     <h1>
-                                        <span class="flaticon-football31" aria-hidden="true"></span>58
+                                        <span class="flaticon-football31" aria-hidden="true"></span><asp:Literal ID="ltPuntos" runat="server"/>
                                     </h1>
                                     <span>Puntos</span>
                                 </div>
@@ -230,7 +132,7 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body widget widget-md text-success">
                                     <h1 class="text-success">
-                                        <span class="flaticon-football28" aria-hidden="true"></span>15
+                                        <span class="flaticon-football28" aria-hidden="true"></span><asp:Literal ID="ltGolesAFavor" runat="server"/>
                                     </h1>
                                     <span class="text-success">Goles a Favor</span>
                                 </div>
@@ -240,7 +142,7 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body widget widget-md">
                                     <h1 class="text-danger">
-                                        <span class="flaticon-football28" aria-hidden="true"></span>8
+                                        <span class="flaticon-football28" aria-hidden="true"></span><asp:Literal ID="ltGolesEnContra" runat="server"/>
                                     </h1>
                                     <span class="text-danger">Goles en Contra</span>
                                 </div>
@@ -250,7 +152,7 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body widget widget-md">
                                     <h1>
-                                        <span class="flaticon-football68" aria-hidden="true"></span>12
+                                        <span class="flaticon-football68" aria-hidden="true"></span><asp:Literal ID="ltPartidosJugados" runat="server"/>
                                     </h1>
                                     <span>Partidos Jugados</span>
                                 </div>
@@ -261,165 +163,55 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                  
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='jugador-2' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                        <!-- Popover del Jugador -->
-                                        <div id="popover-jugador-2" style="display:none">
-                                            <div class="row">
-                                                <div class="col-md-7">
-                                                    <div class="row">
-                                                      <div class="col-xs-6 widget widget-xs">
-                                                        <h1><span class="flaticon-football68"></span>28</h1>
-                                                        <span>Partidos</span>
-                                                      </div>
-                                                      <div class="col-xs-6 widget widget-xs">
-                                                        <h1><span class="flaticon-football28"></span>28</h1>
-                                                        <span>Goles</span>
-                                                      </div>
-                                                      <div class="col-xs-6 widget widget-xs">
-                                                        <h1><span style="color: #c41a1a;" class="flaticon-football103"></span>9</h1>
-                                                        <span>Rojas</span>
-                                                      </div>
-                                                      <div class="col-xs-6 widget widget-xs">
-                                                        <h1><span style="color: #e5e520;" class="flaticon-football103"></span>10</h1>
-                                                        <span>Amarillas</span>
-                                                      </div>
+                                  <asp:Repeater ID="rptJugadoresDelEquipo" runat="server">
+                                    <ItemTemplate>
+                                        <!-- Jugador -->
+                                        <div class="col-md-2 col-xs-3">
+                                            <a id='jugador-2' class="popover-jugador" href="#" >
+                                              <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle img-responsive" alt="imagen"></img>
+                                            </a>
+                                            <%--<!-- Popover del Jugador -->
+                                            <div id="popover-jugador-2" style="display:none">
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <div class="row">
+                                                          <div class="col-xs-6 widget widget-xs">
+                                                            <h1><span class="flaticon-football68"><%#((Entidades.Jugador)Container.DataItem).PJ %></h1>
+                                                            <span>Partidos</span>
+                                                          </div>
+                                                          <div class="col-xs-6 widget widget-xs">
+                                                            <h1><span class="flaticon-football28"></span><%#((Entidades.Jugador)Container.DataItem).cantidadGoles %></h1>
+                                                            <span>Goles</span>
+                                                          </div>
+                                                          <div class="col-xs-6 widget widget-xs">
+                                                            <h1><span style="color: #c41a1a;" class="flaticon-football103"></span><%#((Entidades.Jugador)Container.DataItem).cantidadRojas %></h1>
+                                                            <span>Rojas</span>
+                                                          </div>
+                                                          <div class="col-xs-6 widget widget-xs">
+                                                            <h1><span style="color: #e5e520;" class="flaticon-football103"></span><%#((Entidades.Jugador)Container.DataItem).cantidadAmarillas %></h1>
+                                                            <span>Amarillas</span>
+                                                          </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-5 text-center">
-                                                    <div class="camiseta-back">
-                                                        <span class="numero">18</span>
-                                                        <span class="apellido">Allemand</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="popover-title-jugador-2" style="display:none">
-                                            Facundo Allemand
-                                               <a href="#" class="icon pull-right facebook" ><i data-toggle="tooltip" title="Perfil de Facebook" class="fa fa-facebook"></i></a>
-                                               <a href="#" class="icon pull-right mail" ><i  data-toggle="tooltip" title="Copiar Mail" class="glyphicon glyphicon-envelope"></i></a>
-                                        </div>
-                                        <!-- END Popover del Jugador -->
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='jugador-3' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                        <!-- Popover del Jugador -->
-                                        <div id="popover-jugador-3" style="display:none">
-                                            <div class="row">
-                                                <div class="col-md-7">
-                                                    <div class="row">
-                                                      <div class="col-xs-6 widget widget-xs">
-                                                        <h1><span class="flaticon-football68"></span>28</h1>
-                                                        <span>Partidos</span>
-                                                      </div>
-                                                      <div class="col-xs-6 widget widget-xs">
-                                                        <h1><span class="flaticon-football28"></span>28</h1>
-                                                        <span>Goles</span>
-                                                      </div>
-                                                      <div class="col-xs-6 widget widget-xs">
-                                                        <h1><span style="color: #c41a1a;" class="flaticon-football103"></span>9</h1>
-                                                        <span>Rojas</span>
-                                                      </div>
-                                                      <div class="col-xs-6 widget widget-xs">
-                                                        <h1><span style="color: #e5e520;" class="flaticon-football103"></span>10</h1>
-                                                        <span>Amarillas</span>
-                                                      </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 text-center">
-                                                    <div class="camiseta-back">
-                                                        <span class="numero">14</span>
-                                                        <span class="apellido">Allemand</span>
+                                                    <div class="col-md-5 text-center">
+                                                        <div class="camiseta-back">
+                                                            <span class="numero"><%#((Entidades.Jugador)Container.DataItem).numeroCamiseta %></span>
+                                                            <span class="apellido"><%#((Entidades.Jugador)Container.DataItem).nombre %></span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div id="popover-title-jugador-2" style="display:none">
+                                               <%#((Entidades.Jugador)Container.DataItem).nombre %>
+                                                   <a href="#" class="icon pull-right facebook" ><i data-toggle="tooltip" title="Perfil de Facebook" class="fa fa-facebook"></i></a>
+                                                   <a href="#" class="icon pull-right mail" ><i  data-toggle="tooltip" title="Copiar Mail" class="glyphicon glyphicon-envelope"></i></a>
+                                            </div>
+                                            <!-- END Popover del Jugador -->--%>
                                         </div>
-                                        <div id="popover-title-jugador-3" style="display:none">
-                                            Facundo Allemand
-                                               <a href="#" class="icon pull-right facebook" ><i data-toggle="tooltip" title="Perfil de Facebook" class="fa fa-facebook"></i></a>
-                                               <a href="#" class="icon pull-right mail" ><i  data-toggle="tooltip" title="Copiar Mail" class="glyphicon glyphicon-envelope"></i></a>
-                                        </div>
-                                        <!-- END Popover del Jugador -->
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='jugador-1' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='A1' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='A2' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='A3' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='A4' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='A5' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='A6' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='A7' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='A8' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                    </div>
-                                    <!-- END Jugador -->
-                                    <!-- Jugador -->
-                                    <div class="col-md-2 col-xs-3">
-                                        <a id='A9' class="popover-jugador" href="#" >
-                                          <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-responsive" alt="imagen"></img>
-                                        </a>
-                                    </div>
-                                    <!-- END Jugador -->
+                                        <!-- END Jugador -->
+                                        <!-- Jugador -->
+                                    </ItemTemplate>
+                                </asp:Repeater>                                     
                                 </div>
                             </div>
                         </div>
@@ -471,26 +263,26 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>22</td>
-                                                        <td class="success">17</td>
-                                                        <td class="warning">4</td>
-                                                        <td class="danger">3</td>
+                                                        <td><asp:Literal ID="ltResumenPartidosJugados" runat="server"/></td>
+                                                        <td class="success"><asp:Literal ID="ltResumenPartidosGanados" runat="server"/></td>
+                                                        <td class="warning"><asp:Literal ID="ltResumenPartidosEmpatados" runat="server"/></td>
+                                                        <td class="danger"><asp:Literal ID="ltResumenPartidosPerdidos" runat="server"/></td>
                                                     </tr>
                                                     </tbody>
                                             </table>
                                             <table class="table text-center table-striped nomargin-bottom">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center col-xs-3">Goles</th>
-                                                        <th class="text-center no-strong"><small>Convertidos</small></th>
+                                                        <th class="text-center col-xs-3">Dif. Goles</th>
+                                                        <th class="text-center no-strong"><small>A Favor</small></th>
                                                         <th class="text-center no-strong"><small>En Contra</small></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>22</td>
-                                                        <td class="success">20</td>
-                                                        <td class="danger">3</td>
+                                                        <td><asp:Literal ID="ltResumenGoles" runat="server"/></td>
+                                                        <td class="success"><asp:Literal ID="ltResumenGolesConvertidos" runat="server"/></td>
+                                                        <td class="danger"><asp:Literal ID="ltResumenGolesEnContra" runat="server"/></td>
                                                     </tr>
                                                     </tbody>
                                             </table>
@@ -504,9 +296,9 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>18</td>
-                                                        <td class="warning">13</td>
-                                                        <td class="danger">6</td>
+                                                        <td><asp:Literal ID="ltResumenTarjetas" runat="server"/></td>
+                                                        <td class="warning"><asp:Literal ID="ltResumenTarjetasAmarillas" runat="server"/></td>
+                                                        <td class="danger"><asp:Literal ID="ltResumenTarjetasRojas" runat="server"/></td>
                                                     </tr>
                                                     </tbody>
                                             </table>               
@@ -529,59 +321,23 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center" colspan="2">VS</th>
-                                                    <th class="text-center" colspan="2">Resultado</th>
+                                                    <th class="text-center" colspan="5">VS</th>
+                                                    <th class="text-center">Resultado</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-warning">Empatado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-success">Ganado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-warning">Empatado</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-2 col-md-1"><img src="/torneo/img/img-theme/equipo1.png" class="img-circle avatar-xs" alt=""></td>
-                                                    <td class="col-xs-6 col-md-5">River Plate</td>
-                                                    <td class="col-xs-6 col-md-3">5<small>(5)</small> - 5<small>(2)</small></td>
-                                                    <td class="col-xs-3 col-md-2"><span class="label label-danger">Perdido</span></td>
-                                                </tr>
+                                                <asp:Repeater ID="rptHistorialPartidos" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-2 col-md-1"><img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt=""></td>
+                                                            <td class="col-xs-6 col-md-3"><%# Eval("local.nombre") %></td>
+                                                            <td class="col-xs-6 col-md-3"><%# Eval("golesLocal") %><small>(5)</small> - <%# Eval("golesVisitante") %><small>(2)</small></td>
+                                                            <td class="col-xs-6 col-md-3"><%# Eval("visitante.nombre") %></td>
+                                                            <td class="col-xs-2 col-md-1"><img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt=""></td>
+                                                            <td class="col-xs-3 col-md-2"><span class="label label-success"><%# Eval("resultadoParaUnEquipo") %></span></td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>    
                                             </tbody>
                                         </table>
                                     </div>
@@ -602,15 +358,19 @@
                                                     <th class="text-center" colspan="2">Goles</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                    </td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">8</td>
-                                                </tr>
-                                                <tr>
+                                            <tbody>                                                
+                                                <asp:Repeater ID="rptGoleadores" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td class="col-xs-1">
+                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
+                                                            </td>
+                                                            <td class="col-xs-9"><%# Eval("nombre") %></td>
+                                                            <td class="col-xs-2"><%# Eval("cantidadGoles") %></td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater> 
+                                                <%--<tr>
                                                     <td class="col-xs-1">
                                                         <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
                                                     </td>
@@ -651,7 +411,7 @@
                                                     </td>
                                                     <td class="col-xs-9">Fernando Gago</td>
                                                     <td class="col-xs-2">1</td>
-                                                </tr>
+                                                </tr>--%>
                                             </tbody>
                                         </table>
                                     </div>
