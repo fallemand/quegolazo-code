@@ -34,6 +34,7 @@ namespace Entidades
         public Fase faseAsociada { get; set; }
         public int? idGrupo { get; set; }
         public int idFecha { get; set; }
+        public string resultadoParaUnEquipo { get; set; }
 
         public Partido()
         {

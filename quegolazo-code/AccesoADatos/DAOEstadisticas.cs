@@ -736,7 +736,12 @@ namespace AccesoADatos
                 string sql = @"SELECT TOP 5 equipoLocal.nombre AS 'Equipo Local', 
                                 p.golesLocal AS 'Goles Local', p.golesVisitante AS 'Goles Visitante',
                                 equipoVisitante.nombre AS 'Equipo Visitante', 
-                                p.fecha AS 'Fecha'
+                                p.fecha AS 'Fecha', idGanador, idPerdedor, 
+                                CASE  
+					                WHEN p.idGanador = 14 THEN 'Ganado' 
+					                WHEN p.idPerdedor = 14 THEN 'Perdido'  
+					                ELSE 'Empatado' 
+					            END AS 'Resultado' 
                                 FROM Partidos p 
                                 INNER JOIN Equipos equipoLocal ON p.idEquipoLocal = equipoLocal.idEquipo
                                 INNER JOIN Equipos equipoVisitante ON p.idEquipoVisitante = equipoVisitante.idEquipo
@@ -811,47 +816,7 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-        }
-
-        public DataTable goleadoresDeUnEquipo(int idEquipo, int idEdicion)
-        {
-            SqlConnection con = new SqlConnection(cadenaDeConexion);
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader dr;
-            DataTable tablaDeDatos = new DataTable();
-            try
-            {
-                if (con.State == ConnectionState.Closed)
-                    con.Open();
-                cmd.Connection = con;
-                string sql = @"SELECT TOP 5 j.idJugador AS 'Id Jugador', j.nombre AS 'Jugador', count(g.idGol) AS 'Goles'
-                                FROM Goles g
-                                JOIN Jugadores j ON g.idJugador = j.idJugador
-                                JOIN Partidos p ON p.idPartido = g.idPartido
-                                WHERE j.idEquipo = @idEquipo 
-                                AND p.idEdicion = @idEdicion
-                                GROUP BY j.idJugador, j.nombre
-                                ORDER BY 'GOLES' DESC";
-                cmd.Parameters.Clear();
-                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
-                cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
-                cmd.CommandText = sql;
-                dr = cmd.ExecuteReader();
-                tablaDeDatos.Load(dr);
-                if (dr != null)
-                    dr.Close();
-                return tablaDeDatos;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
-            }
-            finally
-            {
-                if (con != null && con.State == ConnectionState.Open)
-                    con.Close();
-            }
-        }
+        }        
 
         public DataTable estadisticasDeUnJugador(int idJugador, int idEdicion)
         {
@@ -874,7 +839,7 @@ namespace AccesoADatos
                                 (select count(g.idGol) from goles g where g.idJugador = j.idJugador AND g.idPartido = p.idPartido AND g.idTipoGol = 5) AS 'Goles En Contra',
                                 COUNT(Distinct tarjetasAmarillas.idTarjeta) AS 'Amarillas',
                                 COUNT(Distinct tarjetasRojas.idTarjeta) AS 'Rojas',
-                                COUNT(Distinct txp.idPartido) AS 'PARTIDOS JUGADOS'
+                                COUNT(Distinct txp.idPartido) AS 'PARTIDOS JUGADOS'                                
                                 FROM Jugadores j 
                                 INNER JOIN Goles g ON g.idJugador = j.idJugador
                                 INNER JOIN Tarjetas tarjetasAmarillas ON (tarjetasAmarillas.idJugador = j.idJugador AND tarjetasAmarillas.tipoTarjeta = 'A')

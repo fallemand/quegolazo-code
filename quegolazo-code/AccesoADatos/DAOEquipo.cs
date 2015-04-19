@@ -400,6 +400,108 @@ namespace AccesoADatos
                 throw new Exception("No se pudo registrar el equipo: " + ex.Message);
             }
         }
+
+        public List<Jugador> goleadoresDeUnEquipo(int idEquipo, int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Jugador> listaJugadores = new List<Jugador>();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT TOP 8 j.idJugador AS 'Id Jugador', j.nombre AS 'Jugador', count(g.idGol) AS 'Goles'
+                                FROM Goles g
+                                JOIN Jugadores j ON g.idJugador = j.idJugador
+                                JOIN Partidos p ON p.idPartido = g.idPartido
+                                WHERE j.idEquipo = @idEquipo 
+                                AND p.idEdicion = @idEdicion
+                                GROUP BY j.idJugador, j.nombre
+                                ORDER BY 'GOLES' DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Jugador jugador = new Jugador();
+                    jugador.idJugador = int.Parse(dr["Id Jugador"].ToString());
+                    jugador.nombre = dr["Jugador"].ToString();
+                    jugador.cantidadGoles = int.Parse(dr["Goles"].ToString());
+                    listaJugadores.Add(jugador);
+                }
+                if (dr != null)
+                    dr.Close();
+                return listaJugadores;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public List<Jugador> jugadoresDeUnEquipo(int idEdicion, int idEquipo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Jugador> listaJugadores = new List<Jugador>();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT j.idJugador AS 'Id Jugador', j.nombre AS 'Nombre Jugador', COUNT(g.idGol) AS 'Cantidad Goles', 
+                                COUNT(tarjetasAmarillas.idTarjeta) AS 'Cantidad Tarjetas Amarillas',
+                                COUNT(tarjetasRojas.idTarjeta) AS 'Cantidad Tarjetas Rojas', 
+                                COUNT(txp.idJugador) AS 'Cantidad Partidos Jugados'
+                                FROM Jugadores j
+                                LEFT JOIN Goles g ON (g.idJugador = j.idJugador AND g.idPartido IN (select idPartido from Partidos where idEdicion = @idEdicion))
+                                LEFT JOIN Tarjetas tarjetasAmarillas ON (tarjetasAmarillas.idJugador = j.idJugador AND tarjetasAmarillas.tipoTarjeta = 'A'
+                                AND tarjetasAmarillas.idPartido IN (select idPartido from Partidos where idEdicion = @idEdicion))
+                                LEFT JOIN Tarjetas tarjetasRojas ON (tarjetasRojas.idJugador = j.idJugador AND tarjetasRojas.tipoTarjeta = 'R'
+                                AND tarjetasRojas.idPartido IN (select idPartido from Partidos where idEdicion = @idEdicion))
+                                LEFT JOIN TitularesXPartido txp ON (txp.idJugador = j.idJugador AND txp.idPartido IN (select idPartido from Partidos where idEdicion = @idEdicion))
+                                WHERE j.idEquipo = @idEquipo
+                                GROUP BY j.idJugador, j.nombre";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Jugador jugador = new Jugador();
+                    jugador.idJugador = int.Parse(dr["Id Jugador"].ToString());
+                    jugador.nombre = dr["Nombre Jugador"].ToString();
+                    jugador.PJ = int.Parse(dr["Cantidad Partidos Jugados"].ToString());
+                    jugador.cantidadGoles = int.Parse(dr["Cantidad Goles"].ToString());
+                    jugador.cantidadAmarillas = int.Parse(dr["Cantidad Tarjetas Amarillas"].ToString());
+                    jugador.cantidadRojas = int.Parse(dr["Cantidad Tarjetas Rojas"].ToString());
+                    listaJugadores.Add(jugador);
+                }
+                if (dr != null)
+                    dr.Close();
+                return listaJugadores;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
 

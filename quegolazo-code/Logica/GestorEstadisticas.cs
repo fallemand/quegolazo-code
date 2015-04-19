@@ -95,6 +95,11 @@ namespace Logica
            return DaoEstadisticas.estadisticasDeUnEquipo(idEquipo, edicion.idEdicion);
        }
 
+       public DataTable estadisticasDeUnJugador(int idJugador)
+       {
+           return DaoEstadisticas.estadisticasDeUnJugador(idJugador, edicion.idEdicion);
+       }
+
        public DataTable obtenerUltimosPartidosEquipo(int idEquipo)
        {
            return DaoEstadisticas.ultimosPartidosDeUnEquipo(idEquipo, edicion.idEdicion);

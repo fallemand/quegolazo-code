@@ -19,6 +19,10 @@ namespace Entidades
         public string facebook { get; set; }
         public string sexo { get; set; }
         public bool tieneFichaMedica { get; set; }
+        public int? cantidadGoles { get; set; }
+        public int? cantidadAmarillas { get; set; }
+        public int? cantidadRojas { get; set; }
+        public int? PJ { get; set; }
 
         public string obtenerImagenChicha()
         {

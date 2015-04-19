@@ -213,6 +213,12 @@ namespace Logica
             GestorImagen.borrrarImagen(idEquipo, GestorImagen.EQUIPO);
         }
 
+        public List<Jugador> jugadoresDeUnEquipo(int idEdicion, int idEquipo)
+        {
+            DAOEquipo daoEquipo = new DAOEquipo();
+            return daoEquipo.jugadoresDeUnEquipo(idEdicion, idEquipo); 
+        }
+
         /// <summary>
         /// Registra los Equipos en una Edición
         /// autor: Pau Pedrosa
@@ -249,6 +255,12 @@ namespace Logica
         {
             DAOEquipo daoEquipo = new DAOEquipo();
             return daoEquipo.obtenerEquipoReducidoPorId(idEquipo);
+        }
+
+        public List<Jugador> goleadoresDeUnEquipo(int idEquipo, int idEdicion)
+        {
+            DAOEquipo daoEquipo = new DAOEquipo();
+            return daoEquipo.goleadoresDeUnEquipo(idEquipo, idEdicion);
         }
     }
 }
