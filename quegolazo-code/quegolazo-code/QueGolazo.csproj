@@ -306,6 +306,7 @@
     <Content Include="torneo\js\theme-options\jquery.cookies.js" />
     <Content Include="torneo\js\theme-options\theme-options.js" />
     <Content Include="torneo\js\totop\jquery.ui.totop.js" />
+    <Content Include="torneo\jugador.html" />
     <Content Include="torneo\partido.aspx" />
     <Content Include="torneo\partido.html" />
     <Content Include="torneo\principal.aspx" />
