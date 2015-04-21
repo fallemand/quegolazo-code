@@ -220,6 +220,11 @@ width:300px;
   max-width:60px;
 }
 
+img.img-principal {
+  height:150px; 
+  margin: 0 auto;
+}
+
 .logo-torneo {
   max-height: 145px;
 }
@@ -266,6 +271,10 @@ width:300px;
 
 .score h3 a:hover{
   color: #f4f4f4;
+  text-decoration: none;
+}
+
+.score ul li a {
   text-decoration: none;
 }
 
@@ -575,6 +584,14 @@ h5.col-title {
     margin-bottom:0px;
     padding-bottom:0px;
     line-height: 35px;
+}
+
+.widget-lg h1{
+    font-size:50px;
+    font-weight: 700;
+    margin-bottom:0px;
+    padding-bottom:0px;
+    line-height: 60px;
 }
 
 .widget-xs h1{

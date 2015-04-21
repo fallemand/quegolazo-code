@@ -172,6 +172,7 @@
     <Content Include="torneo\fonts\FontAwesome\fontawesome-webfont862f.svg" />
     <Content Include="torneo\fonts\glyphicon\glyphicons-halflings-regular.svg" />
     <Content Include="torneo\fecha.aspx" />
+    <Content Include="torneo\js\charts\charts-jugador.js" />
     <Content Include="torneo\jugador.aspx" />
     <Content Include="torneo\img\bg-theme\c1-sm.png" />
     <Content Include="torneo\img\bg-theme\c10-sm.png" />
@@ -266,7 +267,7 @@
     <Content Include="torneo\img\img-theme\bgfooter.jpg" />
     <Content Include="torneo\img\img-theme\border-pattern.gif" />
     <Content Include="torneo\img\img-theme\cambio.png" />
-    <Content Include="torneo\img\img-theme\equipo1.png" />
+    <Content Include="torneo\img\img-theme\equipo.png" />
     <Content Include="torneo\img\img-theme\footer-down.png" />
     <Content Include="torneo\img\img-theme\ganador.png" />
     <Content Include="torneo\img\img-theme\holder.png" />
