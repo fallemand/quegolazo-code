@@ -17,8 +17,7 @@ namespace quegolazo_code.torneo
         protected GestorEquipo gestorEquipo;
         protected GestorPartido gestorPartido;
         GestorEstadisticas gestorEstadistica;
-        //protected bool tieneLogo;
-        //protected int idEquipo;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             gestorTorneo = Sesion.getGestorTorneo();
