@@ -5,6 +5,12 @@
   color: #FAFAFA;
 }
 
+.resultado h1 small {
+  font-weight: 100;
+  text-shadow: 2px 1px 1px rgba(202, 202, 202, 0.6);
+  color: #FAFAFA;
+}
+
 .resultado span {
   font-size: 65px;
   line-height: 60px;
@@ -73,11 +79,13 @@ h2.titulo-torneo strong {
 }
 
 .panel.nopadding .panel-body {
-    padding: 0px;
+    padding:0px;
 }
 
-.panel.nopadding .panel-heading {
-    padding: 5px;
+.panel.only-top-padding .panel-body {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom:0px;
 }
 
 .panel .panel-heading {
