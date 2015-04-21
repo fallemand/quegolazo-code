@@ -36,5 +36,9 @@ namespace Entidades
         {
             return GestorImagen.obtenerImagen(idJugador, GestorImagen.JUGADOR, GestorImagen.GRANDE);
         }
+        public bool tieneImagen()
+        {
+            return GestorImagen.tieneImagen(idJugador, GestorImagen.JUGADOR, GestorImagen.GRANDE);
+        }
     }
 }

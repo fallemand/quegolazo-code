@@ -20,15 +20,15 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="index-2.html">Torneo La Rivera</a></li>
+                    <li><a href="index-2.html">Torneo Jockey Club</a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Edición 2014</a></li>
+                    <li><a href="index-2.html">La Cachiporra</a></li>
                     <li>/</li>
                     <li><a href="index-2.html">Equipos</a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Boca Juniors</a></li>
+                    <li><a href="index-2.html">Independiente Rivadavia</a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Roman Riquelme</a></li>
+                    <li><a href="index-2.html">Fernando Gago</a></li>
                 </ul>
             </div>
         </div>
@@ -41,132 +41,70 @@
         <div class="container padding-top">
             <div class="row mobile-margin-top">
 
-                <!-- Otros Partidos de la Fecha -->
+                <!-- Otros jugadores -->
                 <div class="col-sm-12">
                     <div class="panel nopadding panel-default">
                         <div class="panel-body">
-                            <p class="slider-multiple-title">Otros Judadores del Equipo</p>
+                            <p class="slider-multiple-title">Jugadores del Equipo</p>
                             <ul class="otros-jugadores slider-multiple tooltip-hover">
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#verJugador">
-                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-responsive img-circle center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#verJugador">
-                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-responsive img-circle center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item">
-                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-1" data-toggle="tooltip" title="Román Riquelme">
-                                        <h1>RR</h1>
-                                    </a>
-                                </li>
-                                <li class="li-item">
-                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-2" data-toggle="tooltip" title="Román Riquelme">
-                                        <h1>RR</h1>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#verJugador">
-                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-responsive img-circle center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item">
-                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-3" data-toggle="tooltip" title="Román Riquelme">
-                                        <h1>RR</h1>
-                                    </a>
-                                </li>
-                                <li class="li-item">
-                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-4" data-toggle="tooltip" title="Román Riquelme">
-                                        <h1>RR</h1>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#verJugador">
-                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-responsive img-circle center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item">
-                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-5" data-toggle="tooltip" title="Román Riquelme">
-                                        <h1>RR</h1>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#verJugador">
-                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-responsive img-circle center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item">
-                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-6" data-toggle="tooltip" title="Román Riquelme">
-                                        <h1>RR</h1>
-                                    </a>
-                                </li>
-                                <li class="li-item">
-                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-7" data-toggle="tooltip" title="Román Riquelme">
-                                        <h1>RR</h1>
-                                    </a>
-                                </li><li class="li-item">
-                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-8" data-toggle="tooltip" title="Román Riquelme">
-                                        <h1>RR</h1>
-                                    </a>
-                                </li>
-                                <li class="li-item">
-                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-9" data-toggle="tooltip" title="Román Riquelme">
-                                        <h1>RR</h1>
-                                    </a>
-                                </li>
-                                <li class="li-item">
-                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-0" data-toggle="tooltip" title="Román Riquelme">
-                                        <h1>RR</h1>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#verJugador">
-                                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-responsive img-circle center-block">
-                                    </a>
-                                </li>
+                                <asp:Repeater ID="rptOtroseJugadores" runat="server">
+                                    <ItemTemplate>
+                                        <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre")%>">
+                                            <a href="#verJugador">
+                                                <asp:Panel ID="panelFotoJugador" runat="server" Visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen() ? true : false %>">
+                                                    <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive img-circle center-block">
+                                                </asp:Panel>
+                                                <asp:Panel ID="panelJugadorSinFoto" runat="server" Visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen() ? false : true %>">
+                                                    <a href="#verJugador" class="avatar-jugador avatar-slider avatar-bg-1" data-toggle="tooltip" title="<%= gestorJugador.jugador.nombre %>">
+                                                        <h1><%# Eval("nombre") %></h1>
+                                                    </a>
+                                                </asp:Panel>
+                                            </a>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <!-- END Otros partidos de la fecha -->
+                <!-- END Otros jugadores -->
 
-                <!-- Datos del Equipo -->
+                <!-- Datos del Jugador -->
                 <div class="col-sm-4">
                     <div class="panel-box bg-dark score theme-border">
-                        <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle img-principal img-responsive" alt="imagen"></img>
-                        <!-- 
-                        <a href="#verJugador" class="avatar-jugador avatar-principal avatar-bg-7" data-toggle="tooltip" title="Román Riquelme">
-                            <h1>RR</h1>
-                        </a>
-                        -->
-                        
-                        <h3 class="text-center text-thin"><a href="#">Román Riquelme</a></h3>
+                          <% if(gestorJugador.jugador.tieneImagen()) { %>
+                            <img src="<%= gestorJugador.jugador.obtenerImagenMediana() %>" class="img-circle img-principal img-responsive" alt="imagen"></img>
+                            <%} else { %>
+                                    <a href="#verJugador" class="avatar-jugador avatar-principal avatar-bg-7" data-toggle="tooltip" title="<%= gestorJugador.jugador.nombre %>">
+                                        <h1><%= gestorJugador.jugador.nombre %></h1>
+                                    </a>
+                         <% } %>
+                        <h3 class="text-center text-thin"><a href="#"><%= gestorJugador.jugador.nombre %></a></h3>
                         <div class="row text-center">
                           <div class="col-xs-12">
                             <ul class="list-group tooltip-hover">
-                                <li class="list-group-item" ><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""><a href=# data-toggle="tooltip" title="Ver Equipo"> Boca Juniors</a></li>
-                              <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <span class="hidden-xs"></span> Nac: 22/14/1991</li>
+                                <li class="list-group-item" ><img src="<%= gestorEquipo.equipo.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt=""><a href=# data-toggle="tooltip" title="Ver Equipo"> <%= gestorEquipo.equipo.nombre %></a></li>
+                              <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <span class="hidden-xs"></span>Nac: <%= ((DateTime)gestorJugador.jugador.fechaNacimiento).ToString("dd/MM/yyyy") %></li>
                               <li class="list-group-item center-block">
-                                  <a href="#" class="icon mail" data-toggle="tooltip" title="Copiar Mail"><i class="glyphicon glyphicon-envelope"></i></a>
-                                  <a href="#" class="icon facebook" data-toggle="tooltip" title="Perfil de Facebook"><i class="fa fa-facebook"></i></a>
+                                  <a href="<%= gestorJugador.jugador.email %>" class="icon mail" data-toggle="tooltip" title="Copiar Mail"><i class="glyphicon glyphicon-envelope"></i></a>
+                                  <a href="https://www.facebook.com/search/results/?q=<%= gestorJugador.jugador.facebook %>" target="_blank" class="icon facebook" data-toggle="tooltip" title="Perfil de Facebook"><i class="fa fa-facebook"></i></a>
                               </li>
                             </ul>
                           </div>
                         </div>
                     </div>
                 </div>
-                <!-- END Datos del Equipo -->
+                <!-- END Datos del Jugador -->
                 
-                <!-- Jugadores del Equipo -->
+                <!-- Principales Datos Jugadores  -->
                 <div class="col-sm-8">
                     <div class="row">
                         <div class="col-md-3 col-xs-6">
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body widget widget-md">
                                     <h1>
-                                        <span class="flaticon-football68" aria-hidden="true"></span>12
+                                        <span class="flaticon-football68" aria-hidden="true"></span>
+                                        <asp:Literal ID="litPartidoJugados" runat="server"></asp:Literal>
                                     </h1>
                                     <span>Partidos Jugados</span>
                                 </div>
@@ -176,7 +114,8 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body widget widget-md text-success">
                                     <h1 class="text-success">
-                                        <span class="flaticon-football28" aria-hidden="true"></span>15
+                                        <span class="flaticon-football28" aria-hidden="true"></span>
+                                        <asp:Literal ID="litGolesConvertidos" runat="server"></asp:Literal>
                                     </h1>
                                     <span class="text-success">Goles Convertidos</span>
                                 </div>
@@ -186,7 +125,8 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body widget widget-md">
                                     <h1 class="text-danger">
-                                        <span class="flaticon-football103" aria-hidden="true"></span>34
+                                        <span class="flaticon-football103" aria-hidden="true"></span>
+                                        <asp:Literal ID="litRojas" runat="server"></asp:Literal>
                                     </h1>
                                     <span class="text-danger">Tarjetas Rojas</span>
                                 </div>
@@ -196,7 +136,8 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body widget widget-md">
                                     <h1 class="text-yellow">
-                                        <span class="flaticon-football103" aria-hidden="true"></span>34
+                                        <span class="flaticon-football103" aria-hidden="true"></span>
+                                        <asp:Literal ID="litAmarillas" runat="server"></asp:Literal>
                                     </h1>
                                     <span class="text-yellow">Tarjetas Amarillas</span>
                                 </div>
@@ -246,19 +187,19 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>Partidos Jugados: </td>
-                                                                <td>22</td>
+                                                                <td><asp:Literal ID="litResumenPJ" runat="server"></asp:Literal></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Goles Convertidos: </td>
-                                                                <td>22</td>
+                                                                <td><asp:Literal ID="litResumenGC" runat="server"></asp:Literal></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Tarjetas Rojas: </td>
-                                                                <td>22</td>
+                                                                <td><asp:Literal ID="litResumenTR" runat="server"></asp:Literal></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Tarjetas Amarillas: </td>
-                                                                <td>22</td>
+                                                                <td><asp:Literal ID="litResumenTA" runat="server"></asp:Literal></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -266,14 +207,14 @@
                                                 <div class="col-sm-3">
                                                     <h5 class="col-title">Número Camiseta</h5>
                                                     <div class="camiseta-back center-block">
-                                                        <span class="numero">10</span>
-                                                        <span class="apellido">Riquelme</span>
+                                                        <span class="numero"><asp:Literal ID="litResumenNroCamiseta" runat="server"></asp:Literal></span>
+                                                        <span class="apellido"><asp:Literal ID="litResumenApellido" runat="server"></asp:Literal></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <h5 class="col-title">Edad</h5>
                                                     <div class="widget widget-lg">
-                                                      <h1>22</h1>
+                                                      <h1><asp:Literal ID="litResumenEdad" runat="server"></asp:Literal></h1>
                                                       <span>Años</span>
                                                   </div>
                                                 </div>
