@@ -11,7 +11,7 @@ namespace quegolazo_code.torneo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label1.Text = Request["idJugador"] + "/" + Request["fase"] + "/" + Request["grupo"] + "/" + Request["fecha"];
+            
         }
     }
 }
