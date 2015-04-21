@@ -10,7 +10,7 @@
 namespace quegolazo_code.torneo {
     
     
-    public partial class fixture {
+    public partial class fechas {
         
         /// <summary>
         /// Control rptFases.
