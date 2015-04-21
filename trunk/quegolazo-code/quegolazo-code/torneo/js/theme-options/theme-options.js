@@ -1,52 +1,6 @@
  $(document).ready(function($) {    
      var themes = [
-         {
-             bodyClass: "none fixed",
-             colorDeFondo: "rgb(95, 165, 78)",
-             colorDestacado: "css/skins/cocoa.css",
-             colorHeader: "rgb(90, 71, 57)",
-             estiloPagina: "layout-boxed-margin",
-             patronDeFondo: "url(/torneo/img/bg-theme/c3.png)",
-             patronHeader: "url(/torneo/img/bg-theme/8.png)",
-             theme: "/torneo/css/bootstrap/darkly.css"
-         },
-         {
-             bodyClass: "none",
-             colorDeFondo: "rgb(40, 38, 41)",
-             colorDestacado: "css/skins/blue.css",
-             colorHeader: "rgb(0, 126, 168)",
-             estiloPagina: "layout-boxed-margin",
-             patronDeFondo: "url(/torneo/img/bg-theme/18.png)",
-             patronHeader: "url(/torneo/img/bg-theme/8.png)",
-             theme: "/torneo/css/bootstrap/cyborg.css"
-         }, {
-             bodyClass: "none",
-             colorDeFondo: "rgb(40, 38, 41)",
-             colorDestacado: "css/skins/orange.css",
-             colorHeader: "rgb(40, 38, 41)",
-             estiloPagina: "layout-wide",
-             patronDeFondo: "url(/torneo/img/bg-theme/18.png)",
-             patronHeader: "url(/torneo/img/bg-theme/3.png)",
-             theme: "/torneo/css/bootstrap/superhero.css"
-         }, {
-             bodyClass: "none",
-             colorDeFondo: "rgb(219, 219, 219)",
-             colorDestacado: "css/skins/green.css",
-             colorHeader: "rgb(112, 113, 117)",
-             estiloPagina: "layout-wide",
-             patronDeFondo: "url(/torneo/img/bg-theme/a1.png)",
-             patronHeader: "url(/torneo/img/bg-theme/3.png)",
-             theme: "/torneo/css/bootstrap/slate.css"
-         }, {
-             bodyClass: "none",
-             colorDeFondo: "rgb(112, 113, 117)",
-             colorDestacado: "css/skins/pink.css",
-             colorHeader: "rgb(219, 219, 219)",
-             estiloPagina: "layout-boxed-margin",
-             patronDeFondo: "url(/torneo/img/bg-theme/1.png)",
-             patronHeader: "url(/torneo/img/bg-theme/14.png)",
-             theme: "/torneo/css/bootstrap/bootstrap.css"
-         }
+         {}
      ];
      function interface() {
     // Skin value
@@ -95,7 +49,7 @@
         configuracion = {
             bodyClass: "none fixed",
             colorDeFondo: "rgb(95, 165, 78)",
-            colorDestacado: "css/skins/green.css",
+            colorDestacado: "/torneo/css/skins/green.css",
             colorHeader: "rgb(255, 255, 255)",
             estiloPagina: "layout-boxed-margin",
             patronDeFondo: "url(/torneo/img/bg-theme/c11.png)",
@@ -184,63 +138,63 @@
 
     // Color changer
 	$("#colorchanger .red").click(function () {
-	    $(".skin").attr("href", "css/skins/red.css");	    
+	    $(".skin").attr("href", "/torneo/css/skins/red.css");
 	    return false;
 	});
     $("#colorchanger .red-dark").click(function () {
-	    $(".skin").attr("href", "css/skins/red-dark.css");	    
+        $(".skin").attr("href", "/torneo/css/skins/red-dark.css");
 	    return false;
 	});
 	$("#colorchanger .blue").click(function () {
-	    $(".skin").attr("href", "css/skins/blue.css");	    
+	    $(".skin").attr("href", "/torneo/css/skins/blue.css");
 	    return false;
 	});
     $("#colorchanger .blue-dark").click(function () {
-	    $(".skin").attr("href", "css/skins/blue-dark.css");	    
+        $(".skin").attr("href", "/torneo/css/skins/blue-dark.css");
 	    return false;
 	});
 	$("#colorchanger .yellow").click(function () {
-	    $(".skin").attr("href", "css/skins/yellow.css");	    
+	    $(".skin").attr("href", "/torneo/css/skins/yellow.css");
 	    return false;
 	});
 	$("#colorchanger .green").click(function () {
-	    $(".skin").attr("href", "css/skins/green.css");	    
+	    $(".skin").attr("href", "/torneo/css/skins/green.css");
 	    return false;
 	});
     $("#colorchanger .green-dark").click(function () {
-	    $(".skin").attr("href", "css/skins/green-dark.css");	    
+        $(".skin").attr("href", "/torneo/css/skins/green-dark.css");
 	    return false;
 	});
 	$("#colorchanger .orange").click(function () {
-	    $(".skin").attr("href", "css/skins/orange.css");	    
+	    $(".skin").attr("href", "/torneo/css/skins/orange.css");
     	return false;
 	});
     $("#colorchanger .orange-dark").click(function () {
-	    $(".skin").attr("href", "css/skins/orange-dark.css");	    
+        $(".skin").attr("href", "/torneo/css/skins/orange-dark.css");
     	return false;
 	});
 	$("#colorchanger .purple").click(function () {
-	    $(".skin").attr("href", "css/skins/purple.css");	    
+	    $(".skin").attr("href", "/torneo/css/skins/purple.css");
 	    return false;
 	});
 	$("#colorchanger .pink").click(function () {
-	    $(".skin").attr("href", "css/skins/pink.css");	    
+	    $(".skin").attr("href", "/torneo/css/skins/pink.css");
 	    return false;
 	});
 	$("#colorchanger .cocoa").click(function () {
-	    $(".skin").attr("href", "css/skins/cocoa.css");	    
+	    $(".skin").attr("href", "/torneo/css/skins/cocoa.css");
         return false;
 	});
     $("#colorchanger .grey").click(function () {
-	    $(".skin").attr("href", "css/skins/grey.css");	    
+        $(".skin").attr("href", "/torneo/css/skins/grey.css");
         return false;
 	});
     $("#colorchanger .lynch").click(function () {
-	    $(".skin").attr("href", "css/skins/lynch.css");	    
+        $(".skin").attr("href", "/torneo/css/skins/lynch.css");
         return false;
 	});
     $("#colorchanger .black").click(function () {
-	    $(".skin").attr("href", "css/skins/black.css");	    
+        $(".skin").attr("href", "/torneo/css/skins/black.css");
         return false;
 	});
 
