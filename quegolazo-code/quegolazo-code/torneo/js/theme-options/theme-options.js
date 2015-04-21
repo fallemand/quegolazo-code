@@ -337,13 +337,13 @@
   });
 
  function guardarConfiguracion() {
-     configuracion.patronDeFondo = $('body').css('background-image');
+     configuracion.patronDeFondo = $('body').css('background-image').replace('http://' + window.location.hostname, '');
      configuracion.colorHeader = $('.headerbox').css('background-color');
-     configuracion.patronHeader = $('.headerbox').css('background-image');
+     configuracion.patronHeader = $('.headerbox').css('background-image').replace('http://' + window.location.hostname, '');
      configuracion.colorDeFondo = $('body').css('background-color');
-     configuracion.colorDestacado = $(".skin").attr("href");
+     configuracion.colorDestacado = $(".skin").attr("href").replace('http://' + window.location.hostname, '');
      configuracion.estiloPagina = $('#layout').attr("class");
-     configuracion.theme = $("#theme").attr("href");
+     configuracion.theme = $("#theme").attr("href").replace('http://' + window.location.hostname, '');
      configuracion.bodyClass = $('body').attr('class');
       $.ajax({
           type: "POST",

@@ -21,12 +21,13 @@ namespace quegolazo_code.torneo
         JavaScriptSerializer serializador;
         protected void Page_Load(object sender, EventArgs e)
         {
-
             gestorTorneo = Sesion.getGestorTorneo();
             gestorEdicion = Sesion.getGestorEdicion();
-            //TODO esto está harcodeado para que funque!
-            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(2008);
-            gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorId(87);
+            //TODO falta agregarle el try/catch y que redirija a una pagina de error...
+            int idEdicion = int.Parse(Request["edicion"]);            
+            string nickTorneo = Request["nickTorneo"];
+            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
+            gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
             serializador = new JavaScriptSerializer();
             string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(gestorTorneo.torneo.idTorneo));
             ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "var configuracion = " + estilos + ";", true);
