@@ -47,14 +47,14 @@
                             <ul class="proximos-partidos slider-multiple tooltip-hover">
                                 <asp:Repeater ID="rptOtrosPartidosDeLaFecha" runat="server">
                                     <ItemTemplate>
-                                        <li class="li-item" style="width: 120px">
+                                        <li class="li-partido" style="width: 120px">
                                             <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? nombreMes(DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
                                             <div class="text">
                                                 <div class="equipos">
                                                     <a href="#">
-                                                        <span><%# Eval("local.nombre") %></span>
+                                                        <span data-toggle="tooltip" title="<%# Eval("local.nombre") %>"><%# Eval("local.nombreCorto") %></span>
                                                         vs
-                                                        <span><%# Eval("visitante.nombre") %></span>
+                                                        <span data-toggle="tooltip" title="<%# Eval("visitante.nombre") %>"><%# Eval("visitante.nombreCorto") %></span>
                                                     </a>
                                                     <p class="estado <%# Eval("estado.nombre") %> theme-bg-color-2">
                                                        <%# (((Entidades.Partido)Container.DataItem).golesLocal != null) ? ((Entidades.Partido)Container.DataItem).golesLocal+"-"+((Entidades.Partido)Container.DataItem).golesVisitante : ((Entidades.Partido)Container.DataItem).estado.nombre %>
@@ -64,147 +64,6 @@
                                         </li>
                                     </ItemTemplate>
                                 </asp:Repeater>
-                                
-                                <%--<li class="li-partido" style="width: 120px">
-                                    <span class="fecha theme-bg-color">September 26, 2015</span>
-                                    <div class="text">
-                                        <div class="equipos">
-                                            <a href="#">
-                                                <span>BOC</span>
-                                                vs
-                                                    <span>ARG</span>
-                                            </a>
-                                            <p class="estado jugado theme-bg-color-2">
-                                                2 (5) - 2 (3)
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="li-partido" style="width: 120px">
-                                    <span class="fecha theme-bg-color">September 26, 2015</span>
-                                    <div class="text">
-                                        <div class="equipos">
-                                            <a href="#">
-                                                <span>BOC</span>
-                                                vs
-                                                    <span>ARG</span>
-                                            </a>
-                                            <p class="estado jugado theme-bg-color-2">
-                                                2 (5) - 2 (3)
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="li-partido" style="width: 120px">
-                                    <span class="fecha theme-bg-color">September 26, 2015</span>
-                                    <div class="text">
-                                        <div class="equipos">
-                                            <a href="#">
-                                                <span>BOC</span>
-                                                vs
-                                                    <span>ARG</span>
-                                            </a>
-                                            <p class="estado jugado theme-bg-color-2">
-                                                2 (5) - 2 (3)
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="li-partido" style="width: 120px">
-                                    <span class="fecha theme-bg-color">September 26, 2015</span>
-                                    <div class="text">
-                                        <div class="equipos">
-                                            <a href="#">
-                                                <span>BOC</span>
-                                                vs
-                                                    <span>ARG</span>
-                                            </a>
-                                            <p class="estado jugado theme-bg-color-2">
-                                                2 (5) - 2 (3)
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="li-partido" style="width: 120px">
-                                    <span class="fecha theme-bg-color">September 26, 2015</span>
-                                    <div class="text">
-                                        <div class="equipos">
-                                            <a href="#">
-                                                <span>BOC</span>
-                                                vs
-                                                    <span>ARG</span>
-                                            </a>
-                                            <p class="estado theme-bg-color-2">
-                                                <i class="fa fa-clock-o"></i>
-                                                Programado
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="li-partido" style="width: 120px">
-                                    <span class="fecha theme-bg-color">September 26, 2015</span>
-                                    <div class="text">
-                                        <div class="equipos">
-                                            <a href="#">
-                                                <span>BOC</span>
-                                                vs
-                                                    <span>ARG</span>
-                                            </a>
-                                            <p class="estado theme-bg-color-2">
-                                                <i class="fa fa-clock-o"></i>
-                                                Programado
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="li-partido">
-                                    <span class="fecha theme-bg-color">September 26, 2015</span>
-                                    <div class="text">
-                                        <div class="equipos">
-                                            <a href="#">
-                                                <span>BOC</span>
-                                                vs
-                                                    <span>ARG</span>
-                                            </a>
-                                            <p class="estado theme-bg-color-2">
-                                                <i class="fa fa-ban"></i>
-                                                Cancelado
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="li-partido">
-                                    <span class="fecha theme-bg-color">September 26, 2015</span>
-                                    <div class="text">
-                                        <div class="equipos">
-                                            <a href="#">
-                                                <span>BOC</span>
-                                                vs
-                                                    <span>ARG</span>
-                                            </a>
-                                            <p class="estado theme-bg-color-2">
-                                                <i class="fa fa-ban"></i>
-                                                Cancelado
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="li-partido">
-                                    <span class="fecha theme-bg-color">September 26, 2015</span>
-                                    <div class="text">
-                                        <div class="equipos">
-                                            <a href="#">
-                                                <span>BOC</span>
-                                                vs
-                                                    <span>ARG</span>
-                                            </a>
-                                            <p class="estado theme-bg-color-2">
-                                                <i class="fa fa-ban"></i>
-                                                Cancelado
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>--%>
                             </ul>
                         </div>
                     </div>
@@ -239,38 +98,40 @@
                             <div class="col-xs-6 col-md-4">
                                 <div class="row text-center resultado">                                    
                                     <div class="col-xs-5 nopadding-left">
-                                        <% if(gestorPartido.partido.golesLocal != null) {%> <h1><%=gestorPartido.partido.golesLocal %> </h1><% } %>
+                                        <% if(gestorPartido.partido.golesLocal != null) {%> 
+                                            <h1><%=gestorPartido.partido.golesLocal %> 
+                                            <% if(gestorPartido.partido.huboPenales == true) { %>
+                                                <small>(<%=gestorPartido.partido.penalesLocal %>)</small>
+                                            <% } %>
+                                            </h1>
+                                        <% } %>
                                     </div>
-                                    <% if(gestorPartido.partido.huboPenales == true) { %>
-                                    <div class="col-xs-5 nopadding-left">
-                                        <h1>(<%=gestorPartido.partido.penalesLocal %>)</h1>
-                                    </div>
-                                    <% } %>
                                     <div class="col-xs-2 nopadding-right nopadding-left">
                                         <h1>-</h1>
                                     </div>                                    
                                     <div class="col-xs-5 nopadding-right">
-                                         <% if(gestorPartido.partido.golesVisitante != null) {%> <h1><%=gestorPartido.partido.golesVisitante %> </h1><% } %>
+                                        <% if(gestorPartido.partido.golesVisitante != null) {%> 
+                                            <h1><%=gestorPartido.partido.golesVisitante %> 
+                                            <% if(gestorPartido.partido.huboPenales == true) { %>
+                                                <small>(<%=gestorPartido.partido.penalesVisitante %>)</small>
+                                            <% } %>
+                                            </h1>
+                                        <% } %>
                                     </div>
-                                    <% if(gestorPartido.partido.huboPenales == true) { %>
-                                    <div class="col-xs-5 nopadding-left">
-                                        <h1>(<%=gestorPartido.partido.penalesVisitante %>)</h1>
-                                    </div>
-                                    <% } %>
                                 </div>
                                 <div class="row text-center">
                                     <div class="col-xs-12">
                                         <ul class="list-group">
                                             <% if(gestorPartido.partido.fecha != null) { %>
-                                            <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs"><%= nombreDia(DateTime.Parse(gestorPartido.partido.fecha.ToString())) %> </span><%= gestorPartido.partido.fecha %></li>
+                                            <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs"> <%= nombreDia(DateTime.Parse(gestorPartido.partido.fecha.ToString())) %> </span><%= gestorPartido.partido.fecha %></li>
                                             <% } %>
                                             <% if(gestorPartido.partido.cancha != null) { %>
-                                            <li class="list-group-item hidden-xs"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><%= gestorPartido.partido.cancha.nombre %></li>
+                                            <li class="list-group-item hidden-xs"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <%= gestorPartido.partido.cancha.nombre %></li>
                                              <% } %>
                                             <% if(gestorPartido.partido.arbitro != null) { %>
-                                            <li class="list-group-item hidden-xs"><span class="flaticon-black188" aria-hidden="true"></span><%= gestorPartido.partido.arbitro.nombre %></li>
+                                            <li class="list-group-item hidden-xs"><span class="flaticon-black188" aria-hidden="true"></span> <%= gestorPartido.partido.arbitro.nombre %></li>
                                              <% } %>
-                                            <li class="list-group-item hidden-xs"><span class="label label-success"><%= gestorPartido.partido.estado.nombre %></span></li>
+                                            <li class="list-group-item hidden-xs"><span class="label label-success"> Partido <%= gestorPartido.partido.estado.nombre %></span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -766,7 +627,7 @@
                
                 <!-- Widget Partidos Anteriores Equipo Local -->
                 <div class="col-md-4 col-sm-6">
-                    <div class="panel nopadding panel-default small-arrows">
+                    <div class="panel only-top-padding panel-default small-arrows">
                         <% if(hayPartidosPrevios) {%>
                         <div class="panel-heading">
                             <h3 class="panel-title">Últimos Partidos: <%= gestorPartido.partido.local.nombre %></h3>
@@ -779,7 +640,7 @@
                                             <div class="widget-partido">
                                                 <asp:Panel ID="pnlTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? true : false %>">
                                                     <div class="col-xs-4">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 95px;">
                                                         <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
                                                     </div>
                                                 </asp:Panel>
@@ -807,7 +668,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-4">
-                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 95px;">
                                                     <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>
@@ -828,7 +689,7 @@
                                             <div class="widget-partido">
                                                 <asp:Panel ID="pnlTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? true : false %>">
                                                     <div class="col-xs-4">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 95px;">
                                                         <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
                                                     </div>
                                                 </asp:Panel>
@@ -857,7 +718,7 @@
                                                 </div>
                                                 <asp:Panel ID="pnlTieneImagenEV" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? true : false %>">
                                                     <div class="col-xs-4">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 95px;">
                                                         <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                     </div>
                                                 </asp:Panel>
@@ -886,7 +747,7 @@
 
                 <!-- Widget Versus -->
                 <div class="col-md-4 col-sm-6" style="margin-bottom: 10px;">
-                    <div class="panel nopadding panel-default small-arrows">
+                    <div class="panel only-top-padding panel-default small-arrows">
                         <div class="panel-heading">
                             <h3 class="panel-title">Versus</h3>
                         </div>
@@ -1072,7 +933,7 @@
 
                 <!-- Widget Partidos Anteriores Equipo Visitante -->
                 <div class="col-md-4 col-sm-6">
-                    <div class="panel nopadding panel-default small-arrows">
+                    <div class="panel only-top-padding panel-default small-arrows">
                         <% if(hayPartidosPrevios) {%>
                         <div class="panel-heading">
                             <h3 class="panel-title">Últimos Partidos: <%= gestorPartido.partido.visitante.nombre %></h3>
@@ -1085,7 +946,7 @@
                                             <div class="widget-partido">                                                
                                                 <asp:Panel ID="pnlTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? true : false %>">
                                                     <div class="col-xs-4">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 95px;">
                                                         <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
                                                     </div>
                                                 </asp:Panel>
@@ -1114,7 +975,7 @@
                                                 </div>
                                                 <asp:Panel ID="pnlTieneImagenEV" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? true : false %>">
                                                     <div class="col-xs-4">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 95px;">
                                                         <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                     </div>
                                                 </asp:Panel>
@@ -1148,7 +1009,7 @@
                                             <div class="widget-partido">
                                                 <asp:Panel ID="pnlTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? true : false %>">
                                                     <div class="col-xs-4">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 95px;">
                                                         <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
                                                     </div>
                                                 </asp:Panel>
@@ -1177,7 +1038,7 @@
                                                 </div>
                                                 <asp:Panel ID="pnlTieneImagenEV" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? true : false %>">
                                                     <div class="col-xs-4">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 95px;">
                                                         <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                     </div>
                                                 </asp:Panel>

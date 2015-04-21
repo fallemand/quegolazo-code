@@ -1140,8 +1140,8 @@ namespace AccesoADatos
                     partido.penalesLocal = (dr["Penales Local"] != DBNull.Value) ? (int?)int.Parse(dr["Penales Local"].ToString()) : null;
                     partido.penalesVisitante = (dr["Penales Visitante"] != DBNull.Value) ? (int?)int.Parse(dr["Penales Visitante"].ToString()) : null;
                     partido.local.idEquipo = int.Parse(dr["Id Local"].ToString());
-                    partido.local.nombre = (dr["Equipo Local Nombre Corto"].ToString());
-                    partido.local.nombreCorto = (dr["Equipo Local"].ToString());
+                    partido.local.nombre = (dr["Equipo Local"].ToString());
+                    partido.local.nombreCorto = (dr["Equipo Local Nombre Corto"].ToString());
                     partido.visitante.idEquipo = int.Parse(dr["Id Visitante"].ToString());
                     partido.visitante.nombreCorto = (dr["Equipo Visitante Nombre Corto"].ToString());
                     partido.visitante.nombre = (dr["Equipo Visitante"].ToString());
