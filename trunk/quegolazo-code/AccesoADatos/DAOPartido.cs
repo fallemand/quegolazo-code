@@ -1108,10 +1108,12 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"SELECT p.idPartido AS 'Id Partido', p.fecha AS 'Fecha Partido', 
-                                equipoLocal.idEquipo AS 'Id Local', UPPER (SUBSTRING (equipoLocal.nombre, 1, 3)) AS 'Equipo Local',
+                                equipoLocal.idEquipo AS 'Id Local', UPPER (SUBSTRING (equipoLocal.nombre, 1, 3)) AS 'Equipo Local Nombre Corto',
+                                equipoLocal.nombre AS 'Equipo Local',
                                 p.golesLocal AS 'Goles Local', p.penalesLocal AS 'Penales Local',
                                 p.golesVisitante AS 'Goles Visitante', p.penalesVisitante AS 'Penales Visitante',
-                                equipoVisitante.idEquipo AS 'Id Visitante', UPPER (SUBSTRING (equipoVisitante.nombre, 1, 3)) AS 'Equipo Visitante',
+                                equipoVisitante.idEquipo AS 'Id Visitante', UPPER (SUBSTRING (equipoVisitante.nombre, 1, 3)) AS 'Equipo Visitante Nombre Corto',
+                                equipoVisitante.nombre AS 'Equipo Visitante',
                                 estado.nombre AS 'Estado Partido', p.huboPenales AS 'Hubo Penales'
                                 FROM Partidos p
                                 INNER JOIN Equipos equipoLocal ON p.idEquipoLocal = equipoLocal.idEquipo
@@ -1138,8 +1140,10 @@ namespace AccesoADatos
                     partido.penalesLocal = (dr["Penales Local"] != DBNull.Value) ? (int?)int.Parse(dr["Penales Local"].ToString()) : null;
                     partido.penalesVisitante = (dr["Penales Visitante"] != DBNull.Value) ? (int?)int.Parse(dr["Penales Visitante"].ToString()) : null;
                     partido.local.idEquipo = int.Parse(dr["Id Local"].ToString());
-                    partido.local.nombre = (dr["Equipo Local"].ToString());
+                    partido.local.nombre = (dr["Equipo Local Nombre Corto"].ToString());
+                    partido.local.nombreCorto = (dr["Equipo Local"].ToString());
                     partido.visitante.idEquipo = int.Parse(dr["Id Visitante"].ToString());
+                    partido.visitante.nombreCorto = (dr["Equipo Visitante Nombre Corto"].ToString());
                     partido.visitante.nombre = (dr["Equipo Visitante"].ToString());
                     partido.estado.nombre = (dr["Estado Partido"].ToString());           
                     listaPartidos.Add(partido);

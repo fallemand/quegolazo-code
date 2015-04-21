@@ -11,6 +11,7 @@ namespace Entidades
     {
         public int idEquipo { get; set; }
         public string nombre { get; set; }
+        public string nombreCorto { get; set; }
         public string colorCamisetaPrimario { get; set; }
         public string colorCamisetaSecundario { get; set; }
         public string directorTecnico { get; set; }
