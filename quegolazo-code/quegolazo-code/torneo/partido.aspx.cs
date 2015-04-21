@@ -36,7 +36,7 @@ namespace quegolazo_code.torneo
             gestorEquipo = Sesion.getGestorEquipo();
             if (!Page.IsPostBack)
             {
-                gestorPartido.obtenerPartidoporId(Request["partido"]);
+                gestorPartido.obtenerPartidoporId(Request["idPartido"]);
                 otrosPartidosDeLaFecha(); // Carga Otros Partidos de la Fecha
                 cargarDatosDePartido(); // Carga Resumen y Estadísticas del Partido
                 if (!cargarUltimosPartidos())// Carga los Widgets Partidos Anteriores Equipo Local y Visitante

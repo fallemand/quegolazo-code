@@ -777,10 +777,24 @@
                                     <ItemTemplate>
                                         <li>
                                             <div class="widget-partido">
-                                                <div class="col-xs-4">
-                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
-                                                </div>
+                                                <asp:Panel ID="pnlTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? true : false %>">
+                                                    <div class="col-xs-4">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                    </div>
+                                                </asp:Panel>
+                                                <asp:Panel ID="pnlNoTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? false : true %>">
+                                                    <div class="row">
+                                                        <div class="camiseta-equipo">
+                                                            <div>
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaPrimario %>"></i>
+                                                            </div><!--
+                                                         --><div class="segunda-mitad">
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaSecundario%>"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </asp:Panel>
                                                 <div class="nopadding-left col-xs-4 resultado nopadding-right">
                                                     <div class="thumbnail text-center col-xs-6">
                                                         <h2><%# Eval("golesLocal") %></h2>
@@ -812,23 +826,24 @@
                                     <ItemTemplate>
                                         <li>
                                             <div class="widget-partido">
-                                                <div class="col-xs-4">
-                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
-                                                    <%--<%# (((Entidades.Partido)Container.DataItem).local.tieneImagen()) ? %>
+                                                <asp:Panel ID="pnlTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? true : false %>">
+                                                    <div class="col-xs-4">
                                                         <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
-                                                        :
-                                                        <div class="row">
-                                                            <div class="camiseta-equipo">
-                                                                <div>
-                                                                    <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local.colorCamisetaPrimario %>"></i>
-                                                                </div><!--
-                                                                --><div class="segunda-mitad">
-                                                                    <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local.colorCamisetaSecundario %>"></i>
-                                                                </div>
+                                                        <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                    </div>
+                                                </asp:Panel>
+                                                <asp:Panel ID="pnlNoTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? false : true %>">
+                                                    <div class="row">
+                                                        <div class="camiseta-equipo">
+                                                            <div>
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaPrimario %>"></i>
+                                                            </div><!--
+                                                         --><div class="segunda-mitad">
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaSecundario%>"></i>
                                                             </div>
-                                                        </div>--%>
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
-                                                </div>
+                                                        </div>
+                                                    </div>
+                                                </asp:Panel>
                                                 <div class="nopadding-left col-xs-4 resultado nopadding-right">
                                                     <div class="thumbnail text-center col-xs-6">
                                                         <h2>-</h2>
@@ -840,10 +855,24 @@
                                                         Fecha <%# Eval("idFecha") %>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-4">
-                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
-                                                </div>                                                
+                                                <asp:Panel ID="pnlTieneImagenEV" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? true : false %>">
+                                                    <div class="col-xs-4">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
+                                                    </div>
+                                                </asp:Panel>
+                                                <asp:Panel ID="pnlNoTieneImagenEV" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? false : true %>">
+                                                    <div class="row">
+                                                        <div class="camiseta-equipo">
+                                                            <div>
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaPrimario %>"></i>
+                                                            </div><!--
+                                                         --><div class="segunda-mitad">
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaSecundario%>"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </asp:Panel>                                               
                                             </div>
                                         </li>
                                     </ItemTemplate>
@@ -1053,11 +1082,25 @@
                                 <asp:Repeater ID="rptUltimosPartidosEquipoVisitante" runat="server">
                                     <ItemTemplate>
                                         <li>
-                                            <div class="widget-partido">
-                                                <div class="col-xs-4">
-                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
-                                                </div>
+                                            <div class="widget-partido">                                                
+                                                <asp:Panel ID="pnlTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? true : false %>">
+                                                    <div class="col-xs-4">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                    </div>
+                                                </asp:Panel>
+                                                <asp:Panel ID="pnlNoTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? false : true %>">
+                                                    <div class="row">
+                                                        <div class="camiseta-equipo">
+                                                            <div>
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaPrimario %>"></i>
+                                                            </div><!--
+                                                         --><div class="segunda-mitad">
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaSecundario%>"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </asp:Panel>
                                                 <div class="nopadding-left col-xs-4 resultado nopadding-right">
                                                     <div class="thumbnail text-center col-xs-6">
                                                         <h2><%# Eval("golesLocal") %></h2>
@@ -1069,10 +1112,24 @@
                                                         Fecha <%# Eval("idFecha") %>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-4">
-                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
-                                                </div>
+                                                <asp:Panel ID="pnlTieneImagenEV" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? true : false %>">
+                                                    <div class="col-xs-4">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
+                                                    </div>
+                                                </asp:Panel>
+                                                <asp:Panel ID="pnlNoTieneImagenEV" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? false : true %>">
+                                                    <div class="row">
+                                                        <div class="camiseta-equipo">
+                                                            <div>
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaPrimario %>"></i>
+                                                            </div><!--
+                                                         --><div class="segunda-mitad">
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaSecundario%>"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </asp:Panel>
                                             </div>
                                         </li>
                                     </ItemTemplate>
@@ -1089,10 +1146,24 @@
                                     <ItemTemplate>
                                         <li>
                                             <div class="widget-partido">
-                                                <div class="col-xs-4">
-                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
-                                                </div>
+                                                <asp:Panel ID="pnlTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? true : false %>">
+                                                    <div class="col-xs-4">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                    </div>
+                                                </asp:Panel>
+                                                <asp:Panel ID="pnlNoTieneImagenEL" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? false : true %>">
+                                                    <div class="row">
+                                                        <div class="camiseta-equipo">
+                                                            <div>
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaPrimario %>"></i>
+                                                            </div><!--
+                                                         --><div class="segunda-mitad">
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaSecundario%>"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </asp:Panel>
                                                 <div class="nopadding-left col-xs-4 resultado nopadding-right">
                                                     <div class="thumbnail text-center col-xs-6">
                                                         <h2>-</h2>
@@ -1104,10 +1175,24 @@
                                                         Fecha <%# Eval("idFecha") %>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-4">
-                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
-                                                    <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
-                                                </div>
+                                                <asp:Panel ID="pnlTieneImagenEV" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? true : false %>">
+                                                    <div class="col-xs-4">
+                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block" style="max-height: 120px;">
+                                                        <h5 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
+                                                    </div>
+                                                </asp:Panel>
+                                                <asp:Panel ID="pnlNoTieneImagenEV" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? false : true %>">
+                                                    <div class="row">
+                                                        <div class="camiseta-equipo">
+                                                            <div>
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaPrimario %>"></i>
+                                                            </div><!--
+                                                         --><div class="segunda-mitad">
+                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaSecundario%>"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </asp:Panel>
                                             </div>
                                         </li>
                                     </ItemTemplate>
