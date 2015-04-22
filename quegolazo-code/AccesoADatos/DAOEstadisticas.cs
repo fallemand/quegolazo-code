@@ -1042,6 +1042,57 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
+        }
+
+        //Últimos goles de un jugador
+        //autor: Pau Pedrosa
+        public DataTable ultimosGolesDeUnJugador(int idJugador, int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT TOP 5 jugador.idJugador AS 'Id Jugador', jugador.nombre AS 'Nombre Jugador', 
+                                partido.idFase AS 'Fase', partido.idFecha AS 'Fecha', gol.minuto AS 'Minuto',
+                                tipoGol.nombre AS 'Tipo Gol', otroEquipo.nombre AS 'Otro Equipo',
+                                otroEquipo.idEquipo AS 'Id Otro equipo'
+                                FROM Goles gol
+                                INNER JOIN Jugadores jugador ON gol.idJugador = jugador.idJugador
+                                INNER JOIN partidos partido ON gol.idPartido = partido.idPartido
+                                INNER JOIN TiposGol tipoGol ON gol.idTipoGol = tipoGol.idTipoGol
+                                INNER JOIN Equipos equipoJugador ON equipoJugador.idEquipo = jugador.idEquipo
+                                INNER JOIN Equipos otroEquipo ON otroEquipo.idEquipo = (SELECT TOP 1 eq.idEquipo
+														                                FROM Equipos eq inner join partidos	p
+														                                on (p.idEquipoLocal = eq.idEquipo OR p.idEquipoVisitante = eq.idEquipo)
+														                                WHERE eq.idEquipo <> equipoJugador.idEquipo
+														                                AND p.idPartido = partido.idPartido
+														                                )
+                                WHERE jugador.idJugador = @idJugador
+                                AND partido.idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idJugador", idJugador));
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
         }  
     }
 }
