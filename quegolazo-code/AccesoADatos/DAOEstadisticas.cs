@@ -1098,6 +1098,46 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
+        }
+
+        public DataTable cantidadDeGolesPorTipoGol(int idJugador, int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT tiposGol.idTipoGol AS 'Id Tipo Gol', tiposGol.nombre AS 'Tipo Gol', 
+                                COUNT(CASE goles.idTipoGol WHEN tiposGol.idTipoGol THEN 1 ELSE NULL END) AS 'Cantidad Goles'
+                                FROM Goles goles
+                                INNER JOIN TiposGol tiposGol ON goles.idTipoGol = tiposGol.idTipoGol
+                                INNER JOIN Partidos partidos ON goles.idPartido = partidos.idPartido
+                                WHERE goles.idJugador = @idJugador
+                                AND partidos.idEdicion = @idEdicion
+                                GROUP BY tiposGol.idTipoGol, tiposGol.nombre";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idJugador", idJugador));
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
         }  
     }
 }
