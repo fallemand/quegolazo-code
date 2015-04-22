@@ -312,7 +312,6 @@
     <Content Include="torneo\jugador.html" />
     <Content Include="torneo\partido.aspx" />
     <Content Include="torneo\partido.html" />
-    <Content Include="torneo\principal.aspx" />
     <Content Include="usuario\activar.aspx" />
     <Content Include="admin\index.aspx" />
     <Content Include="usuario\login.aspx" />
@@ -495,13 +494,6 @@
     </Compile>
     <Compile Include="torneo\partido.aspx.designer.cs">
       <DependentUpon>partido.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="torneo\principal.aspx.cs">
-      <DependentUpon>principal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="torneo\principal.aspx.designer.cs">
-      <DependentUpon>principal.aspx</DependentUpon>
     </Compile>
     <Compile Include="torneo\torneoMaster.Master.cs">
       <DependentUpon>torneoMaster.Master</DependentUpon>

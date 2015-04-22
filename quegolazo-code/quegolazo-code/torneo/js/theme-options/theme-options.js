@@ -301,7 +301,7 @@
      configuracion.bodyClass = $('body').attr('class');
       $.ajax({
           type: "POST",
-          url: "configurarSitio.aspx/guardarConfiguracion",
+          url: "/torneo/index.aspx/guardarConfiguracion",
           contentType: "application/json",
           dataType: "json",
           async: false,
@@ -309,9 +309,9 @@
           data: "{configuracion :" + JSON.stringify(configuracion) + " }",
           success: function (response) {
               if (response.d.indexOf("MAS TARDE") != 0)
-                  $("#msjeAjax").text(response.d).addClass("alert").addClass("alert-success").show('slow');
+                  $("#msjeAjax").text(response.d).addClass("alert").addClass("alert-success").slideDown('slow');
                   else
-                  $("#msjeAjax").text(response.d).addClass("alert").addClass("alert-danger").show('slow');
+                  $("#msjeAjax").text(response.d).addClass("alert").addClass("alert-danger").slideDown('slow');
           },
           error: function (response) {
               console.log(response);
