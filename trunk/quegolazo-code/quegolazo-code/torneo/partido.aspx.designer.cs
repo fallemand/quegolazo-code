@@ -364,6 +364,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinSancionesVisitante;
         
         /// <summary>
+        /// Control ltUltimosOProximosEL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltUltimosOProximosEL;
+        
+        /// <summary>
         /// Control rptUltimosPartidosEquipoLocal.
         /// </summary>
         /// <remarks>
@@ -497,6 +506,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltComparativoGolesEV;
+        
+        /// <summary>
+        /// Control ltUltimosOProximosEV.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltUltimosOProximosEV;
         
         /// <summary>
         /// Control rptUltimosPartidosEquipoVisitante.

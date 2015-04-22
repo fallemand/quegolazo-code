@@ -629,7 +629,7 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="panel only-top-padding panel-default small-arrows">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Últimos Partidos: <%= gestorPartido.partido.local.nombre %></h3>
+                            <h3 class="panel-title"><asp:Literal ID="ltUltimosOProximosEL" runat="server" Text="Últimos"></asp:Literal> Partidos: <%= gestorPartido.partido.local.nombre %></h3>
                         </div>                        
                         <div class="panel-body">
                             <ul class="single-carousel">
@@ -861,7 +861,7 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="panel only-top-padding panel-default small-arrows">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Últimos Partidos: <%= gestorPartido.partido.visitante.nombre %></h3>
+                            <h3 class="panel-title"><asp:Literal ID="ltUltimosOProximosEV" runat="server" Text="Últimos"></asp:Literal> Partidos: <%= gestorPartido.partido.visitante.nombre %></h3>
                         </div>
                         <div class="panel-body">
                             <ul class="single-carousel">

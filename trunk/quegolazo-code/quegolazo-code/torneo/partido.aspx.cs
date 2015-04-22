@@ -39,8 +39,7 @@ namespace quegolazo_code.torneo
                 gestorPartido.obtenerPartidoporId(Request["idPartido"]);
                 otrosPartidosDeLaFecha(); // Carga Otros Partidos de la Fecha
                 cargarDatosDePartido(); // Carga Resumen y Estadísticas del Partido
-                if (!cargarUltimosPartidos())// Carga los Widgets Partidos Anteriores Equipo Local y Visitante
-                    cargarProximosPartidos();// Carga Próximos partidos en caso que no haya partidos previos
+                cargarUltimosOProximosPartidos();// Carga Próximos o Ultimos Partidos
                 cargarComparativo(); //Carga widget Comparativo                
             }
         }
@@ -110,24 +109,33 @@ namespace quegolazo_code.torneo
             GestorControles.cargarRepeaterList(rptOtrosPartidosDeLaFecha, gestorPartido.otrosPartidosDeLaFecha(gestorEdicion.edicion.idEdicion, gestorPartido.partido.faseAsociada.idFase, gestorPartido.partido.idFecha, gestorPartido.partido.idPartido));
         }
         
-        //Carga los repeater de últimos partidos del equipo local y visitante
         //Devuelve true si hay partidos previos y false si no hay partidos previos
         //autor: Pau Pedrosa
         protected bool cargarUltimosPartidos()
         {
             hayPartidosPrevios = true;
-            if (GestorControles.cargarRepeaterList(rptUltimosPartidosEquipoLocal, gestorPartido.ultimosPartidosPrevioDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido)) == false ||
-                GestorControles.cargarRepeaterList(rptUltimosPartidosEquipoVisitante, gestorPartido.ultimosPartidosPrevioDeUnEquipo(gestorPartido.partido.visitante.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido)) == false)
-                hayPartidosPrevios = false;            
+            if(gestorPartido.ultimosPartidosPrevioDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido).Count == 0 ||
+               gestorPartido.ultimosPartidosPrevioDeUnEquipo(gestorPartido.partido.visitante.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido).Count == 0 )
+                hayPartidosPrevios = false;           
             return hayPartidosPrevios;
         }
 
         //Carga próximos partidos
         //autor: Pau Pedrosa
-        private void cargarProximosPartidos()
+        private void cargarUltimosOProximosPartidos()
         {
-            //GestorControles.cargarRepeaterList(rptProximosPartidosEquipoLocal, gestorPartido.proximosPartidosDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido));
-            //GestorControles.cargarRepeaterList(rptProximosPartidosEquipoVisitante, gestorPartido.proximosPartidosDeUnEquipo(gestorPartido.partido.visitante.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido)); 
+            if (hayPartidosPrevios)
+            {
+                GestorControles.cargarRepeaterList(rptUltimosPartidosEquipoLocal, gestorPartido.ultimosPartidosPrevioDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido));
+                GestorControles.cargarRepeaterList(rptUltimosPartidosEquipoVisitante, gestorPartido.ultimosPartidosPrevioDeUnEquipo(gestorPartido.partido.visitante.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido));
+            }
+            else
+            {
+                GestorControles.cargarRepeaterList(rptUltimosPartidosEquipoLocal, gestorPartido.proximosPartidosDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido));
+                GestorControles.cargarRepeaterList(rptUltimosPartidosEquipoVisitante, gestorPartido.proximosPartidosDeUnEquipo(gestorPartido.partido.visitante.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido));
+                ltUltimosOProximosEL.Text = "Próximos";
+                ltUltimosOProximosEV.Text = "Próximos";
+            }
         }
 
         //Carga Widget Comparativo
