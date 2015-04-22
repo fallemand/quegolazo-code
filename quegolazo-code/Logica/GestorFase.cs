@@ -123,7 +123,7 @@ namespace Logica
       public void eliminarConfiguracionGuardada(List<Fase> fases)
       {
           Sesion.getGestorEdicion().edicion.fases = new List<Fase>();
-          new DAOFase().eliminarFases(fases[0].idEdicion);
+          new DAOFase().eliminarFases(Sesion.getGestorEdicion().edicion.idEdicion);
       }
 
       /// <summary>
