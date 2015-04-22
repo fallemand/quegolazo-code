@@ -104,10 +104,10 @@
                             <div class="row text-center">
                               <div class="col-xs-12">
                                 <ul class="list-group">
-                                  <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <span class="hidden-xs">Sabado </span>27/10/2015</li>
+                                  <%--<li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <span class="hidden-xs">Sabado </span>27/10/2015</li>--%>
                                   <li class="list-group-item"><span class="flaticon-football95" aria-hidden="true"></span> DT: <%=gestorEquipo.equipo.directorTecnico %></li>
-                                  <li class="list-group-item"><span class="flaticon-football119" aria-hidden="true"></span> Delegado: <%=gestorEquipo.equipo.delegadoPrincipal.nombre %></li>
-                                  <li class="list-group-item"><span class="label label-success">Partido Jugado</span></li>
+                                  <li class="list-group-item"><span class="flaticon-football50" aria-hidden="true"></span> Delegado: <%=gestorEquipo.equipo.delegadoPrincipal.nombre %></li>
+                                  <%--<li class="list-group-item"><span class="label label-success">Partido Jugado</span></li>--%>
                                 </ul>
                               </div>
                         </div>
