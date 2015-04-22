@@ -88,6 +88,17 @@ $(document).ready(function($) {
     	pagination : false,
         itemsCustom: [[0, 3],[300, 4],[400, 6], [500, 8],[600, 9], [800, 10], [1000, 12], [1100, 13], [1200, 15]]
 	});
+    
+    //=================================== Slide Otros Judaores  ==============================//
+	 
+	$(".fases").owlCarousel({
+		autoPlay: true, 
+        items: 4,
+        responsive: true,
+    	navigation : true,
+    	slideSpeed : 400,
+    	pagination : false,
+	});
 
   //=================================== Carousel Blog  ==================================//
 
@@ -101,6 +112,17 @@ $(document).ready(function($) {
        itemsMobile : [480,1],
        pagination: true
    });
+    
+    //=================================== Slide Otros Judaores  ==============================//
+	 
+	$(".fechas").owlCarousel({
+		autoPlay: true, 
+        items: 8,
+        responsive: true,
+    	navigation : true,
+    	slideSpeed : 400,
+    	pagination : false,
+	});
 
   //=================================== Carousel Players  ==================================//
 
