@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head id="headTorneoMaster" runat="server">
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <title>TorneoX - Con la Tecnología de QueGolazo!</title>
+    <meta name="keywords" content="futbol, torneo, partido, campeonato, goles, gol, goleadores" />
+    <meta name="description" content="Sitio web del torneo en donde encontrarás toda la información necesaria">
+    <meta name="author" content="quegolazo.org">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Theme CSS -->
+    <link id="theme" href="/torneo/css/bootstrap/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/torneo/css/style.css" rel="stylesheet" media="screen">
+    <link href="/torneo/css/quegolazo.css" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="/torneo/css/theme-responsive.css" rel="stylesheet" media="screen">
+    <!-- Skins Theme -->
+    <link href="#" rel="stylesheet" media="screen" class="skin">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/torneo/img/icons/favicon.ico">
+
+    <!-- Head Libs -->
+    <script src="/torneo/js/modernizr.js"></script>
+    <!-- jQuery local-->
+    <script src="/torneo/js/jquery.js"></script>
+    <!--[if IE]>
+            <link rel="stylesheet" href="css/ie/ie.css">
+        <![endif]-->
+    <!--[if lte IE 8]>
+            <script src="js/responsive/html5shiv.js"></script>
+            <script src="js/responsive/respond.js"></script>
+        <![endif]-->
+
+    <!-- Skins Changer-->
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    
+    <!-- Content Head-->
+    <!--Theme Options-->
+    <script type='text/javascript' src="/torneo/js/theme-options/theme-options.js"></script>
+    <link href="/torneo/css/skins/colorPicker.css" rel="stylesheet" />
+    <script type="text/javascript" src="/torneo/js/theme-options/jquery.colorPicker.min.js"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="MainScriptManager" runat="server" />
+    </form>
+    <!-- layout-->
+    <div id="layout">
+        <!-- Header-->
+        <header>
+            <!-- End headerbox-->
+            <div class="headerbox">
+                <div class="container">
+                    <div class="row">
+                        <!-- Logo-->
+                        <div class="col-md-2 col-xs-3 col-sm-2 mobile-nopadding-right">
+                            <img src="/torneo/img/img-theme/torneo.jpg" alt="Torneo XXXX" style="max-height:100px" class="img-thumbnail image-responsive">
+                        </div>
+                        <!-- End Logo-->
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <h1 class="titulo-torneo">Torneo Federal Argetina</h1>
+                            <h2 class="titulo-torneo visible-md visible-lg">Con la tecnología de <strong>QueGolazo!</strong></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End headerbox-->
+
+            <!-- mainmenu-->
+            <nav class="mainmenu navbar navbar-default navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Torneo Federal</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#about">Noticias</a></li>
+                            <li><a href="#contact">Fixture</a></li>
+                            <li><a href="#contact">Posiciones</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estadísticas <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#contact">Equipos</a></li>
+                                    <li><a href="#">Goleadores</a></li>
+                                    <li><a href="#">Tipos de Goles</a></li>
+                                    <li><a href="#">Rusticos</a></li>
+                                    <li><a href="#">Arqueros</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#contact">Sanciones</a></li>
+                        </ul>
+                        <ul class="hidden-sm nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ediciones <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Edicion 2015</a></li>
+                                    <li><a href="#">Edicion 2014</a></li>
+                                    <li><a href="#">Edicion 2013</a></li>
+                                </ul>
+                                <li><a href="#contact">Contacto</a></li>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </nav>
+            <!-- End mainmenu-->
+        </header>
+        <!-- End Header-->
+
+        <!-- contentPages-->
+        <!-- Titulo Sección -->
+    <section class="section-title img-about">
+        <div class="overlay-bg"></div>
+        <div class="container">
+            <h1>Fase 1 - Fecha 2</h1>
+        </div>
+    </section>
+    <!-- End Titulo Sección -->
+
+    <!-- Section Area - Content Central -->
+    <section class="content-info">
+        <div class="crumbs">
+            <div class="container">
+                <ul>
+                    <li><a href="index-2.html">Torneo La Rivera</a></li>
+                    <li>/</li>
+                    <li><a href="index-2.html">Edición 2014</a></li>
+                    <li>/</li>
+                    <li><a href="index-2.html">Equipos</a></li>
+                    <li>/</li>
+                    <li><a href="index-2.html">Boca Juniors</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="semiboxshadow text-center">
+            <img src="/torneo/img/img-theme/shp.png" class="img-responsive" alt="">
+        </div>
+
+        <!-- Content Central -->
+        <div class="container padding-top">
+            <div class="row mobile-margin-top">
+                
+                <!-- Seleccionar la Fase -->
+                <div class="col-sm-4">
+                    <div class="panel nopadding panel-default">
+                        <div class="panel-body theme-bg-color-2">
+                            <p class="slider-multiple-title">Seleccione la Fase</p>
+                            <ul class="fases slider-multiple tooltip-hover">
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fase">
+                                    <div class="widget widget-md">
+                                        <h1>1</h1>
+                                        <span>Fase</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fase">
+                                    <div class="widget widget-md">
+                                        <h1>2</h1>
+                                        <span>Fase</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fase">
+                                    <div class="widget widget-md">
+                                        <h1>3</h1>
+                                        <span>Fase</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fase">
+                                    <div class="widget widget-md">
+                                        <h1>4</h1>
+                                        <span>Fase</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Seleccionar la Fase -->
+                
+                <!-- Seleccionar la Fecha -->
+                <div class="col-sm-8">
+                    <div class="panel nopadding panel-default">
+                        <div class="panel-body theme-bg-color-2">
+                            <p class="slider-multiple-title">Seleccione la Fecha</p>
+                            <ul class="fechas slider-multiple tooltip-hover">
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>1</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>2</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>3</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>4</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>5</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>6</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>7</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>8</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>9</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>10</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>11</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Seleccionar Fecha">
+                                    <div class="widget widget-md">
+                                        <h1>12</h1>
+                                        <span>Fecha</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Seleccionar la Fecha -->
+
+                <!-- Seleccionar la Fecha -->
+                <div class="col-sm-12">
+                    <div class="panel score bg-dark theme-border panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <!-- Widget Partido -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="widget-partido">
+                                                <div class="col-xs-4">
+                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                                <div class="col-xs-4 resultado">
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    Fecha 14
+                                                </div>
+
+                                                <div class="col-xs-4">
+                                                    <div class="camiseta-equipo">
+                                                        <div>
+                                                            <i class="flaticon-football114" style="color: #005A96"></i>
+                                                        </div><!--
+                                                     --><div class="segunda-mitad">
+                                                            <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                        </div>
+                                                    </div>
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Widget Partido -->
+                                <!-- Widget Partido -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="widget-partido">
+                                                <div class="col-xs-4">
+                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                                <div class="col-xs-4 resultado">
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    Fecha 14
+                                                </div>
+
+                                                <div class="col-xs-4">
+                                                    <div class="camiseta-equipo">
+                                                        <div>
+                                                            <i class="flaticon-football114" style="color: #005A96"></i>
+                                                        </div><!--
+                                                     --><div class="segunda-mitad">
+                                                            <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                        </div>
+                                                    </div>
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Widget Partido -->
+                                <!-- Widget Partido -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="widget-partido">
+                                                <div class="col-xs-4">
+                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                                <div class="col-xs-4 resultado">
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    Fecha 14
+                                                </div>
+
+                                                <div class="col-xs-4">
+                                                    <div class="camiseta-equipo">
+                                                        <div>
+                                                            <i class="flaticon-football114" style="color: #005A96"></i>
+                                                        </div><!--
+                                                     --><div class="segunda-mitad">
+                                                            <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                        </div>
+                                                    </div>
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Widget Partido -->
+                                <!-- Widget Partido -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="widget-partido">
+                                                <div class="col-xs-4">
+                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                                <div class="col-xs-4 resultado">
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    Fecha 14
+                                                </div>
+
+                                                <div class="col-xs-4">
+                                                    <div class="camiseta-equipo">
+                                                        <div>
+                                                            <i class="flaticon-football114" style="color: #005A96"></i>
+                                                        </div><!--
+                                                     --><div class="segunda-mitad">
+                                                            <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                        </div>
+                                                    </div>
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Widget Partido -->
+                                <!-- Widget Partido -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="widget-partido">
+                                                <div class="col-xs-4">
+                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                                <div class="col-xs-4 resultado">
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    Fecha 14
+                                                </div>
+
+                                                <div class="col-xs-4">
+                                                    <div class="camiseta-equipo">
+                                                        <div>
+                                                            <i class="flaticon-football114" style="color: #005A96"></i>
+                                                        </div><!--
+                                                     --><div class="segunda-mitad">
+                                                            <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                        </div>
+                                                    </div>
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Widget Partido -->
+                                <!-- Widget Partido -->
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="widget-partido">
+                                                <div class="col-xs-4">
+                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                                <div class="col-xs-4 resultado">
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    <div class="thumbnail"><h2>0</h2></div>
+                                                    Fecha 14
+                                                </div>
+
+                                                <div class="col-xs-4">
+                                                    <div class="camiseta-equipo">
+                                                        <div>
+                                                            <i class="flaticon-football114" style="color: #005A96"></i>
+                                                        </div><!--
+                                                     --><div class="segunda-mitad">
+                                                            <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                        </div>
+                                                    </div>
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Widget Partido -->
+                            </div>  
+                        </div>  
+                    </div>
+                </div>
+                <!-- END Seleccionar la Fecha -->
+            </div>
+        </div>
+        <!-- End Content Central -->
+      </section>
+      <!-- Theme-options -->
+      <div id="theme-options" style="z-index: 9999">
+        <div class="openclose"></div>
+        <div class="title">
+            <span>OPCIONES DEL TEMA</span>
+        </div>
+        <span>Estilo</span>
+        <ul id="themeSelector" class="text-center">
+            <li class="cyborg" title="Cyborg"><span>1</span></li>
+            <li class="darkly" title="Darkly"><span>2</span></li>
+            <li class="flatly" title="Flatly"><span>3</span></li>
+            <li class="sandstone" title="Sandstone"><span>4</span></li>
+            <li class="slate" title="Slate"><span>5</span></li>
+            <li class="hero" title="Super Heroe"><span>6</span></li>
+            <li class="yeti" title="Yeti"><span>7</span></li>
+            <li class="bootstrap" title="Bootstrap"><span>8</span></li>
+        </ul>
+        <span>Color Destacado</span>
+        <ul id="colorchanger">
+            <li><a class="colorbox red" href="#" title="Red Skin"></a></li>
+            <li><a class="colorbox red-dark" href="#" title="Red Skin"></a></li>
+            <li><a class="colorbox blue" href="#" title="Blue Skin"></a></li>
+            <li><a class="colorbox blue-dark" href="#" title="Blue Skin"></a></li>
+            <li><a class="colorbox green" href="#" title="Green Skin"></a></li>
+            <li><a class="colorbox green-dark" href="#" title="Green Skin"></a></li>
+            <li><a class="colorbox yellow" href="#" title="Yellow Skin"></a></li>
+            <li><a class="colorbox orange" href="#" title="Orange Skin"></a></li>
+            <li><a class="colorbox orange-dark" href="#" title="Orange Skin"></a></li>
+            <li><a class="colorbox purple" href="#" title="Purple Skin"></a></li>
+            <li><a class="colorbox pink" href="#" title="Pink Skin"></a></li>
+            <li><a class="colorbox cocoa" href="#" title="Cocoa Skin"></a></li>
+            <li><a class="colorbox lynch" href="#" title="Lynch Skin"></a></li>
+            <li><a class="colorbox grey" href="#" title="Grey Skin"></a></li>
+            <li><a class="colorbox black" href="#" title="Black Skin"></a></li>
+        </ul>
+        <span>Formato de Página</span>
+        <ul class="layout-style">
+            <li class="wide">ANCHO</li>
+            <li class="semiboxed active">SEMI CAJA</li>
+            <li class="boxed">CAJA</li>
+            <li class="boxed-margin">C/MARGEN</li>
+        </ul>
+        <span>Patrón del Header</span>
+        <ul class="backgrounds-h">
+            <li class="bgnone" title="None - Default"></li>
+            <li class="bg3"></li>
+            <li class="bg4"></li>
+            <li class="bg8"></li>
+            <li class="bg9 "></li>
+            <li class="bg12"></li>
+            <li class="bg14"></li>
+            <li class="bg19"></li>
+        </ul>
+        <span>Colores:</span>
+        <ul class="layout-style text-center">
+            <li>Fondo
+                     
+                <div id="colorFondo" class="conBorde">
+                    <div class="cp-background"></div>
+                </div>
+            </li>
+            <li>Header
+                     
+                <div id="colorHeader" class="conBorde">
+                    <div class="cp-background"></div>
+                </div>
+            </li>
+        </ul>
+        <div class="patterns">
+            <span>Patrón del Fondo</span>
+            <ul class="backgrounds">
+                <li class="bgnone" title="None - Default"></li>
+                <li class="bg1"></li>
+                <li class="bg2"></li>
+                <li class="bg3"></li>
+                <li class="bg4 "></li>
+                <li class="bg5"></li>
+                <li class="bg6"></li>
+                <li class="bg7"></li>
+                <li class="bg8"></li>
+                <li class="bg9 "></li>
+                <li class="bg10"></li>
+                <li class="bg11"></li>
+                <li class="bg12"></li>
+                <li class="bg13"></li>
+                <li class="bg14"></li>
+                <li class="bg15"></li>
+                <li class="bg16"></li>
+                <li class="bg17"></li>
+                <li class="bg18"></li>
+                <li class="bg19"></li>
+                <li class="bg20"></li>
+                <li class="bg21"></li>
+                <li class="bg22"></li>
+                <li class="bg23"></li>
+                <li class="a1"></li>
+                <li class="a2"></li>
+                <li class="a3"></li>
+                <li class="c1 fixed"></li>
+                <li class="c2 fixed"></li>
+                <li class="c3 fixed"></li>
+                <li class="c4 fixed"></li>
+                <li class="c5 fixed"></li>
+                <li class="c6 fixed"></li>
+                <li class="c7 fixed"></li>
+                <li class="c8 fixed"></li>
+                <li class="c9 fixed"></li>
+                <li class="c10 fixed"></li>
+                <li class="c11 fixed"></li>
+                <li class="c12 fixed"></li>
+                <li class="c13 fixed"></li>
+                <li class="c14 fixed"></li>
+                <li class="c15 fixed"></li>
+                <li class="c16 fixed"></li>
+                <li class="c17 fixed"></li>
+                <li class="c18 fixed"></li>
+                <li class="c19 fixed"></li>
+                <li class="c20 fixed"></li>
+                <li class="c21 fixed"></li>
+            </ul>
+        </div>
+        <ul class="layout-style">
+            <li class="btn btn-danger" id="cerrarConfig">Cerrar</li>
+            <li onclick="guardarConfiguracion()" class="btn btn-primary">Guardar</li>
+        </ul>
+        <div class="col-xs-12">
+            <span id="msjeAjax" class="text-center nomargin-bottom"></span>
+        </div>
+    </div>
+        <!-- End Theme-options -->  
+        <!-- contentPages-->
+
+        <!-- footer-->
+        <footer id="footer" class="footer-2">
+            <div class="container">
+                <!-- Social Icons-->
+                <div class="row">
+                    <ul class="social nopadding-top">
+                        <li>
+                            <div>
+                                <a href="#" class="facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#" class="twitter-icon">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#" class="youtube">
+                                    <i class="fa fa-youtube"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Social Icons-->
+
+            </div>
+        </footer>
+        <!-- End footer-->
+
+        <!-- footer Down-->
+        <div class="footer-down">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p>Sitio desarrollado con la tecnología de <a href="#">QueGolazo!</a><span class="hidden-xs"> &copy; 2015</span></p>
+                    </div>
+                    <div class="col-md-7 hidden-xs">
+                        <!-- Nav Footer-->
+                        <ul class="nav-footer">
+                            <li><a href="#">INICIO</a> </li>
+                            <li><a href="#">NOTICIAS</a></li>
+                            <li><a href="#">EDICIONES</a></li>
+                            <li><a href="#">CONTACTO</a></li>
+                        </ul>
+                        <!-- End Nav Footer-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer Down-->
+
+    </div>
+    <!-- End layout-->
+
+    <!-- ======================= JQuery libs =========================== -->    
+    <!--Nav-->
+    <script type="text/javascript" src="/torneo/js/nav/jquery.sticky.js" ></script>
+    <!--Totop-->
+    <script type="text/javascript" src="/torneo/js/totop/jquery.ui.totop.js"></script>
+    <!--Ligbox-->
+    <script type="text/javascript" src="/torneo/js/fancybox/jquery.fancybox.js"></script>
+    <!-- carousel.js-->
+    <script type='text/javascript' src="/torneo/js/carousel/carousel.js"></script>
+    <!-- Filter -->
+    <script type='text/javascript' src="/torneo/js/filters/jquery.isotope.js"></script>
+    <!-- Counter -->
+    <script type='text/javascript' src="/torneo/js/counter/jquery.countdown.js"></script>
+    <script type="text/javascript" src="/torneo/js/theme-options/jquery.cookies.js"></script>
+    <!-- Bootstrap.js-->
+    <script type="text/javascript" src="/torneo/js/bootstrap/bootstrap.js"></script>
+    <!--MAIN FUNCTIONS-->
+    <script type="text/javascript" src="/torneo/js/main.js"></script>
+    <!-- Charts.js-->
+    <script type="text/javascript" src="/torneo/js/charts/Chart.min.js"></script>
+    <!-- ======================= End JQuery libs =========================== -->
+</body>
+</html>

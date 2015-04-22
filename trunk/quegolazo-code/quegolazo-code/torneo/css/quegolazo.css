@@ -4,7 +4,6 @@
   text-shadow: 2px 1px 1px rgba(202, 202, 202, 0.6);
   color: #FAFAFA;
 }
-
 .resultado h1 small {
   font-weight: 100;
   text-shadow: 2px 1px 1px rgba(202, 202, 202, 0.6);
@@ -38,10 +37,6 @@ h2.titulo-torneo strong {
     font-weight: 600; 
 }
 
-.resultado h2 {
-  font-size: 45px;
-  font-weight: 700;
-}
 .padding-top {
   padding-top:35px;
 }
@@ -126,6 +121,8 @@ th.no-strong {
 
 .camiseta-back .apellido {
   font-size: 10px;
+  display: block;
+  line-height: 13px;
   font-family: 'Open Sans', sans-serif;
   letter-spacing: -.5px;
 }
@@ -291,25 +288,80 @@ img.img-principal {
     font-weight: 100;
 }
 
-/****  Widget Partidos ****/
+/*----------------------- Widget Partidos y Widget Versus -----------------------------*/
+
+.widget-partido .resultado h2, .widget-versus .resultado h2 {
+  font-size: 45px;
+  font-weight: 700;
+}
+
 .widget-partido * .camiseta-equipo {
-  font-size:100px;
-  line-height: 90px;
+  font-size:90px;
+  line-height: 82px;
   margin-top: 0px;
 }
 .widget-partido .camiseta-equipo div {
-  width:50px;
+  width:45px;
 }
 
 .widget-partido .camiseta-equipo .segunda-mitad i {
-  margin-left:-55px;
+  margin-left:-50px;
 }
+
+.widget-partido img {
+  max-height:95px;
+}
+
+.widget-partido .col-xs-4 {
+  padding-left:3px;
+  padding-right:3px;
+}
+
+.widget-partido .resultado, .widget-versus .resultado  {
+  text-align: center;
+  padding-left:0px;
+  padding-right:0px;
+}
+
+.widget-partido .resultado div.thumbnail  {
+  width:45%;
+  display: inline-block;
+}
+
+.widget-partido .resultado .thumbnail h2, .widget-versus .resultado.thumbnail h2 {
+  padding-bottom: 5px;
+  line-height: 45px;
+}
+
+.widget-partido h5{
+  padding-bottom: 5px;
+}
+
+.widget-partido {
+    text-align: center;
+}
+
+@media (max-width: 1199px) and (min-width:992px) {
+  .widget-partido * .camiseta-equipo {
+    font-size:80px;
+    line-height: 70px;
+  }
+  .widget-partido img {
+    max-height:80px;
+  }
+  .widget-partido .camiseta-equipo div {
+    width:37px;
+  }
+  .widget-partido .camiseta-equipo .segunda-mitad i {
+    margin-left:-45px;
+  }
+}
+
 .small-arrows .owl-theme .owl-controls .owl-buttons div {
   padding:0px 6px;
 }
-/**--  END ****  Widget Partidos ****   **/
 
-/**** Slider Equipos ****/
+/* Widget Equipos en Slider Equipos */
 .otros-equipos .camiseta-equipo {
   font-size:65px;
   line-height: 50px;
@@ -325,7 +377,8 @@ img.img-principal {
 .li-item img {
     max-height: 55px;
 }
-/**--  END ****  Widget Partidos ****   **/
+
+/*----------------------- END: Widget Partidos y Widget Versus -----------------------------*/
 
 h5.col-title {
   padding-bottom: 5px;
@@ -337,20 +390,7 @@ h5.col-title {
   padding-top: 10px;
 }
 
-
 @media (max-width: 1199px) {
-  .widget-partido * .camiseta-equipo {
-    font-size:90px;
-    line-height: 90px;
-    margin-top: 0px;
-  }
-  .widget-partido .camiseta-equipo div {
-    width:40px;
-  }
-
-  .widget-partido .camiseta-equipo .segunda-mitad i {
-    margin-left:-50px;
-  }
   h1.titulo-torneo {
     font-size: 40px;
   }

@@ -126,8 +126,8 @@ namespace quegolazo_code.torneo
         //autor: Pau Pedrosa
         private void cargarProximosPartidos()
         {
-            GestorControles.cargarRepeaterList(rptProximosPartidosEquipoLocal, gestorPartido.proximosPartidosDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido));
-            GestorControles.cargarRepeaterList(rptProximosPartidosEquipoVisitante, gestorPartido.proximosPartidosDeUnEquipo(gestorPartido.partido.visitante.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido)); 
+            //GestorControles.cargarRepeaterList(rptProximosPartidosEquipoLocal, gestorPartido.proximosPartidosDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido));
+            //GestorControles.cargarRepeaterList(rptProximosPartidosEquipoVisitante, gestorPartido.proximosPartidosDeUnEquipo(gestorPartido.partido.visitante.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido)); 
         }
 
         //Carga Widget Comparativo

@@ -373,15 +373,6 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptUltimosPartidosEquipoLocal;
         
         /// <summary>
-        /// Control rptProximosPartidosEquipoLocal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptProximosPartidosEquipoLocal;
-        
-        /// <summary>
         /// Control ltPuntosEL.
         /// </summary>
         /// <remarks>
@@ -515,14 +506,5 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptUltimosPartidosEquipoVisitante;
-        
-        /// <summary>
-        /// Control rptProximosPartidosEquipoVisitante.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptProximosPartidosEquipoVisitante;
     }
 }
