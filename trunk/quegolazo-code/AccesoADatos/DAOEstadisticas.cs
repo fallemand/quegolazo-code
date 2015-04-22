@@ -999,6 +999,49 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-        }        
+        }
+
+        //Evolucion de puntos de un equipo por edicion y por fase
+        //autor: Pau Pedrosa
+        public DataTable evolucionPuntosDeUnEquipo(int idEdicion, int idFase, int idEquipo)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT partido.idFecha AS 'Fecha', COUNT(CASE idGanador WHEN @idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN @idEquipo  THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
+                                FROM Partidos partido
+                                INNER JOIN Ediciones edicion ON partido.idEdicion = edicion.idEdicion
+                                WHERE (partido.idEquipoLocal = @idEquipo  OR partido.idEquipoVisitante = @idEquipo)
+                                AND edicion.idEdicion = @idEdicion
+                                AND partido.idFase = @idFase
+                                GROUP BY partido.idFecha, edicion.puntosGanado, edicion.puntosEmpatado, edicion.puntosPerdido
+                                ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }  
     }
 }

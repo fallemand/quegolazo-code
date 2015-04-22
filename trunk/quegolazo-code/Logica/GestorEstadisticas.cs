@@ -100,6 +100,13 @@ namespace Logica
            return DaoEstadisticas.estadisticasDeUnJugador(idJugador, edicion.idEdicion);
        }
 
+       public DataTable evolucionPuntosDeUnEquipo(int idEquipo)
+       {
+           GestorEdicion gestorEdicion = new GestorEdicion();
+           gestorEdicion.getFaseActual();
+           return DaoEstadisticas.evolucionPuntosDeUnEquipo(edicion.idEdicion, gestorEdicion.faseActual.idFase, idEquipo); 
+       }
+
        public DataTable obtenerUltimosPartidosEquipo(int idEquipo)
        {
            return DaoEstadisticas.ultimosPartidosDeUnEquipo(idEquipo, edicion.idEdicion);
