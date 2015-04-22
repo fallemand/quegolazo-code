@@ -22,7 +22,7 @@ namespace quegolazo_code.torneo
         {
             gestorTorneo = Sesion.getGestorTorneo();
             gestorEdicion = Sesion.getGestorEdicion();
-            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(1006);
+            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(2010);
             gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorId(87);
             gestorEquipo = Sesion.getGestorEquipo();
             gestorJugador = Sesion.getGestorJugador();
@@ -31,12 +31,16 @@ namespace quegolazo_code.torneo
             if (!Page.IsPostBack)
             {
                 //gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(Request["idEquipo"]));
-                gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(19);
+                gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(1);
                 GestorControles.cargarRepeaterList(rptOtroseJugadores, gestorEquipo.equipo.jugadores);
-                gestorJugador.jugador = gestorJugador.obtenerJugadorPorId(2039);
+                gestorJugador.jugador = gestorJugador.obtenerJugadorPorId(2068);
                 cargarDatosJugador();
+                cargarPartidosJugador();
+                cargarGolesJugador();
             }
         }
+
+
 
         private void cargarDatosJugador()
         {
@@ -56,6 +60,37 @@ namespace quegolazo_code.torneo
             litResumenTA.Text = (datosPrincipalesJugador.Rows.Count > 0) ? datosPrincipalesJugador.Rows[0]["Amarillas"].ToString() : "-";
             litResumenTR.Text = (datosPrincipalesJugador.Rows.Count > 0) ? datosPrincipalesJugador.Rows[0]["Rojas"].ToString() : "-";
         }
+
+
+        private void cargarPartidosJugador()
+        {
+           GestorControles.cargarRepeaterTable(rptHistorialPartidos,gestorEstadisticas.obtenerUltimosPartidosJugador(gestorJugador.jugador.idJugador));
+        }
+
+        private void cargarGolesJugador()
+        {
+
+            GestorControles.cargarRepeaterTable(rptGolesJugador, gestorEstadisticas.ultimosGolesDeUnJugador(gestorJugador.jugador.idJugador));
+        }
+
+        protected void rptOtroseJugadores_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+
+          if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                {
+                    Literal litIniciales = (Literal)e.Item.FindControl("litIniciales");
+                     string [] split = ((Jugador)e.Item.DataItem).nombre.Split(new Char [] {' '});
+
+                foreach (string s in split) 
+                {
+                        if (s.Trim() != "")
+                            litIniciales.Text+=s.Substring(0,1);
+                 }
+                   }
+        
+           
+        }
+
 
      
     }

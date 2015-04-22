@@ -881,8 +881,13 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT p.idPartido, eLocal.nombre AS 'Equipo Local', p.golesLocal AS 'Goles Local',
-                                p.golesVisitante AS 'Goles Visitante', eVisitante.nombre AS 'Equipo Visitante'
+                string sql = @"SELECT p.idPartido, eLocal.idEquipo AS 'idEquipoLocal', eLocal.nombre AS 'Equipo Local', p.golesLocal AS 'Goles Local',
+                                p.golesVisitante AS 'Goles Visitante', eVisitante.nombre AS 'Equipo Visitante', eVisitante.idEquipo AS 'idEquipoVisitante',
+                                CASE  
+					                WHEN p.idGanador = txp.idEquipo THEN 'Ganado' 
+					                WHEN p.idPerdedor = txp.idEquipo THEN 'Perdido'  
+					                ELSE 'Empatado' 
+					            END AS 'Resultado' 
                                 FROM Partidos p
                                 INNER JOIN TitularesXPartido txp ON p.idPartido = txp.idPartido
                                 INNER JOIN Equipos eLocal ON p.idEquipoLocal = eLocal.idEquipo

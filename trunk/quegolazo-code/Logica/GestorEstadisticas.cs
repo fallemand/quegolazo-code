@@ -141,6 +141,10 @@ namespace Logica
            DAOEdicion daoEdicion = new DAOEdicion();
            return daoEdicion.obtenerUltimaEdicionTorneo(Sesion.getTorneo().idTorneo);
        }
+       public DataTable obtenerUltimosPartidosJugador(int idJugador)
+       {
+           return DaoEstadisticas.ultimosPartidosDeJugadorComoTitular(idJugador, edicion.idEdicion);
+       }
 
        public string generarDatosParaGraficoGoles(DataTable datosPrincipalesEquipo)
        {
