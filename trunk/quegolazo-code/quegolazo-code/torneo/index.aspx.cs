@@ -15,5 +15,19 @@ namespace quegolazo_code.torneo
         {
             nickTorneo.Text = Request["nickTorneo"];
         }
+
+        [System.Web.Services.WebMethod(enableSession: true)]
+        public static string guardarConfiguracion(object configuracion)
+        {
+            try
+            {
+                new GestorTorneo().registrarConfiguracionVisual(configuracion);
+                return "CAMBIOS GUARDADOS!";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

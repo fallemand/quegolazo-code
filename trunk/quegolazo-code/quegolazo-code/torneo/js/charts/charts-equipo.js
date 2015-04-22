@@ -39,22 +39,22 @@ $(document).ready(function($) {
     // Get context with jQuery - using jQuery's .get() method.
     //Chart.defaults.global.responsive = true;
     var ctx = $('#graficoGoles').get(0).getContext("2d");
-    var data = {
-        labels: ["Convertidos", "En Contra"],
-        datasets: [
-            {
-                label: "Goles",
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
-                data: [12,4]
-            }
-        ]
-    };
+    //var datosGoles = {
+    //    labels: ["Convertidos", "En Contra"],
+    //    datasets: [
+    //        {
+    //            label: "Goles",
+    //            fillColor: "rgba(151,187,205,0.5)",
+    //            strokeColor: "rgba(151,187,205,0.8)",
+    //            highlightFill: "rgba(151,187,205,0.75)",
+    //            highlightStroke: "rgba(151,187,205,1)",
+    //            data: [12,4]
+    //        }
+    //    ]
+    //};
     
     // This will get the first returned node in the jQuery collection.
-    var myBarChart = new Chart(ctx).Bar(data);
+    var myBarChart = new Chart(ctx).Bar(datosGoles);
     myBarChart.datasets[0].bars[0].fillColor = colors('green','fillColor'); //bar 1
     myBarChart.datasets[0].bars[0].strokeColor = colors('green','strokeColor'); //bar 1
     myBarChart.datasets[0].bars[0].highlightFill = colors('green','highlightFill'); //bar 1
@@ -67,51 +67,51 @@ $(document).ready(function($) {
     
     //=================================== Pie Chart ===================================//
     var ctx = $("#graficoPartidos").get(0).getContext("2d");
-    var data = [
-        {
-            value: 70,
-            color: colors('green','color'),
-            highlight: colors('green','highlight'),
-            label: "Partidos Ganados"
-        },
-        {
-            value: 12,
-            color: colors('yellow','color'),
-            highlight: colors('yellow','highlight'),
-            label: "Partidos Empatados"
-        },
-        {
-            value: 18,
-            color: colors('red','color'),
-            highlight: colors('red','highlight'),
-            label: "Partidos Perdidos"
-        }
-    ];
+    //var data = [
+    //    {
+    //        value: 70,
+    //        color: colors('green','color'),
+    //        highlight: colors('green','highlight'),
+    //        label: "Partidos Ganados"
+    //    },
+    //    {
+    //        value: 12,
+    //        color: colors('yellow','color'),
+    //        highlight: colors('yellow','highlight'),
+    //        label: "Partidos Empatados"
+    //    },
+    //    {
+    //        value: 18,
+    //        color: colors('red','color'),
+    //        highlight: colors('red','highlight'),
+    //        label: "Partidos Perdidos"
+    //    }
+    //];
     
-    var myPieChart = new Chart(ctx).Doughnut(data, {
+    var myPieChart = new Chart(ctx).Doughnut(datosPartidos, {
         animateScale: true,
         tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value+'%' %>",
     });
     
     //=================================== Line Chart ===================================//
     var ctx = $("#graficoPuntos").get(0).getContext("2d");
-    var data = {
-        labels: ["Fecha 1", "Fecha 2", "Fecha 3", "Fecha 4", "Fecha 5", "Fecha 6", "Fecha 7", "Fecha 8", "Fecha 9", "Fecha 10"],
-        datasets: [
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [3, 4, 7, 7, 7, 10, 11, 14, 17, 20]
-            }
-        ]
-    };
+    //var data = {
+    //    labels: ["Fecha 1", "Fecha 2", "Fecha 3", "Fecha 4", "Fecha 5", "Fecha 6", "Fecha 7", "Fecha 8", "Fecha 9", "Fecha 10"],
+    //    datasets: [
+    //        {
+    //            label: "My Second dataset",
+    //            fillColor: "rgba(151,187,205,0.2)",
+    //            strokeColor: "rgba(151,187,205,1)",
+    //            pointColor: "rgba(151,187,205,1)",
+    //            pointStrokeColor: "#fff",
+    //            pointHighlightFill: "#fff",
+    //            pointHighlightStroke: "rgba(151,187,205,1)",
+    //            data: [3, 4, 7, 7, 7, 10, 11, 14, 17, 20]
+    //        }
+    //    ]
+    //};
     
-    var myLineChart = new Chart(ctx).Line(data, {
+    var myLineChart = new Chart(ctx).Line(datosEvolucionPuntos, {
         bezierCurve: false,
         tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value+' Puntos' %>",
     });
@@ -120,22 +120,22 @@ $(document).ready(function($) {
     // Get context with jQuery - using jQuery's .get() method.
     //Chart.defaults.global.responsive = true;
     var ctx = $('#graficoGoleadores').get(0).getContext("2d");
-    var data = {
-        labels: ["Fernando Gago", "Fernando Gago", "Fernando Gago", "Fernando Gago", "Fernando Gago", "Fernando Gago"],
-        datasets: [
-            {
-                label: "Goles",
-                fillColor: colors('blue', 'fillColor'),
-                strokeColor: colors('blue', 'strokeColor'),
-                highlightFill: colors('blue', 'highlightFill'),
-                highlightStroke: colors('blue', 'highlightStroke'),
-                data: [8, 5, 4, 4, 3, 1]
-            }
-        ]
-    };
+    //var data = {
+    //    labels: ["Fernando Gago", "Fernando Gago", "Fernando Gago", "Fernando Gago", "Fernando Gago", "Fernando Gago"],
+    //    datasets: [
+    //        {
+    //            label: "Goles",
+    //            fillColor: colors('blue', 'fillColor'),
+    //            strokeColor: colors('blue', 'strokeColor'),
+    //            highlightFill: colors('blue', 'highlightFill'),
+    //            highlightStroke: colors('blue', 'highlightStroke'),
+    //            data: [8, 5, 4, 4, 3, 1]
+    //        }
+    //    ]
+    //};
 
     // This will get the first returned node in the jQuery collection.
-    var myBarChart = new Chart(ctx).Bar(data);
+    var myBarChart = new Chart(ctx).Bar(datosGoleadores);
 
     $('#goleadores').removeClass("active");
     $('#historial-partidos').removeClass("active");

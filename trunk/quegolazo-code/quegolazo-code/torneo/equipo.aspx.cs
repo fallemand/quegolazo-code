@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using Logica;
 using Utils;
 using Entidades;
+using System.Data;
+using System.Web.Script.Serialization;
 
 namespace quegolazo_code.torneo
 {
@@ -16,15 +18,22 @@ namespace quegolazo_code.torneo
         protected GestorEdicion gestorEdicion;
         protected GestorEquipo gestorEquipo;
         protected GestorPartido gestorPartido;
+        private List<Jugador> goleadoresDelEquipo;
+        private DataTable datosPrincipalesEquipo;
         GestorEstadisticas gestorEstadistica;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             gestorTorneo = Sesion.getGestorTorneo();
             gestorEdicion = Sesion.getGestorEdicion();
-            //TODO esto está harcodeado para que funque!
-            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(4007);
-            gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorId(87);
+            //TODO falta agregarle el try/catch y que redirija a una pagina de error...
+            int idEdicion = int.Parse(Request["edicion"]);
+            string nickTorneo = Request["nickTorneo"];
+            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
+            gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
+            gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
+            gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+            gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
             gestorEquipo = Sesion.getGestorEquipo();
             gestorPartido = Sesion.getGestorPartido();
             gestorEstadistica = new GestorEstadisticas();
@@ -37,11 +46,25 @@ namespace quegolazo_code.torneo
                 cargarRepeaterOtrosEquiposDeEdicion();
                 cargarRepeaterJugadores();
             }
+            cargarGraficos();
         }
+
+        private void cargarGraficos()
+        {
+            if (datosPrincipalesEquipo.Rows.Count > 0)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "partidos", "var datosPartidos=" + gestorEstadistica.generarDatosParaGraficoPArtidos(datosPrincipalesEquipo) + ";", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "goles", "var datosGoles=" + gestorEstadistica.generarDatosParaGraficoGoles(datosPrincipalesEquipo) + ";", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "puntos", "var datosEvolucionPuntos=" + gestorEstadistica.generarDatosParaGraficoEvolucionDePuntos(gestorEquipo.equipo.idEquipo, gestorEdicion.edicion.fases) + ";", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "goleadores", "var datosGoleadores=" + gestorEstadistica.generarDatosGoleadores(goleadoresDelEquipo) + ";", true);
+            }
+        
+        }
+
 
         public void cargarDatosPrincipalesEquipo()
         {
-            var datosPrincipalesEquipo = gestorEstadistica.obtenerEstadisticasEquipo(gestorEquipo.equipo.idEquipo);
+            datosPrincipalesEquipo = gestorEstadistica.obtenerEstadisticasEquipo(gestorEquipo.equipo.idEquipo);
             //Datos Equipo
             ltPuntos.Text = (datosPrincipalesEquipo.Rows.Count > 0) ? datosPrincipalesEquipo.Rows[0]["Puntos"].ToString() : "-";
             ltGolesAFavor.Text = (datosPrincipalesEquipo.Rows.Count > 0) ? datosPrincipalesEquipo.Rows[0]["GF"].ToString() : "-";
@@ -66,7 +89,8 @@ namespace quegolazo_code.torneo
         }
         public void cargarGoleadores()
         {//Carga los goleadores de la edición
-            sinGoleadores.Visible = !GestorControles.cargarRepeaterList(rptGoleadores, gestorEquipo.goleadoresDeUnEquipo(gestorEquipo.equipo.idEquipo, gestorEdicion.edicion.idEdicion));
+            goleadoresDelEquipo = gestorEquipo.goleadoresDeUnEquipo(gestorEquipo.equipo.idEquipo, gestorEdicion.edicion.idEdicion);
+            sinGoleadores.Visible = !GestorControles.cargarRepeaterList(rptGoleadores, goleadoresDelEquipo);
         }
         public void cargarRepeaterOtrosEquiposDeEdicion()
         {//Carga el repeater de los otros equipos de la edición
