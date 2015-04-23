@@ -30,8 +30,6 @@ namespace quegolazo_code.torneo
             int idEdicion = int.Parse(Request["edicion"]);
             string nickTorneo = Request["nickTorneo"];
             gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
-            gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
-            gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
             gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
             gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
             gestorEquipo = Sesion.getGestorEquipo();
