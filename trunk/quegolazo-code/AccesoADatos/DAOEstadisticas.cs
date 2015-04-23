@@ -1111,7 +1111,7 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT tiposGol.idTipoGol AS 'Id Tipo Gol', tiposGol.nombre AS 'Tipo Gol', 
+                string sql = @"SELECT tiposGol.nombre AS 'Tipo Gol', 
                                 COUNT(CASE goles.idTipoGol WHEN tiposGol.idTipoGol THEN 1 ELSE NULL END) AS 'Cantidad Goles'
                                 FROM Goles goles
                                 INNER JOIN TiposGol tiposGol ON goles.idTipoGol = tiposGol.idTipoGol
