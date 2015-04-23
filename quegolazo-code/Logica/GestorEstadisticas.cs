@@ -20,7 +20,7 @@ namespace Logica
        public GestorEstadisticas()
        {
            edicion = Sesion.getGestorEdicion().edicion;
-           if(edicion.idEdicion==0)
+           if(edicion == null || edicion.idEdicion==0)
            edicion = buscarUltimaEdicionTorneo();
            Sesion.setEdicion(edicion);
        }
@@ -191,6 +191,37 @@ namespace Logica
            datosPartidos.Add(partidosGanados);
            JavaScriptSerializer s = new JavaScriptSerializer();
            return s.Serialize(datosPartidos);
+       }
+       public string generarDatosParaGraficoDeTorta(DataTable datosGrafico)
+       {
+           List<string> labels = new List<string>();
+           List<double> datos = new List<double>();
+           double totales = 0;
+           foreach (DataRow fila in datosGrafico.Rows)
+           {
+               labels.Add(fila.ItemArray[0].ToString());
+               datos.Add(double.Parse(fila.ItemArray[1].ToString()));
+               totales += double.Parse(fila.ItemArray[1].ToString());
+           }
+           List<ChartsUtils.pieChartDataObject> datosGraficoJSON = new List<ChartsUtils.pieChartDataObject>();
+           int indiceColores = 0;
+           for (int i = 0; i < labels.Count; i++)
+           {
+               //si se acaban los colores, volvemos a poner el mismo color del principio.
+               if (i >= ChartsUtils.listaDeColores.Length - 1)
+                   indiceColores = 0;
+               ChartsUtils.pieChartDataObject datoGrafico = new ChartsUtils.pieChartDataObject
+               {
+                   color = ChartsUtils.listaDeColores[i] + ChartsUtils.transparences.color,
+                   highlight = ChartsUtils.listaDeColores[i] + ChartsUtils.transparences.highlight,
+                   label = labels[i],
+                   value = Math.Round(datos[i] / totales * 100, 2)
+               };
+               indiceColores++;
+               datosGraficoJSON.Add(datoGrafico);
+           }    
+           JavaScriptSerializer s = new JavaScriptSerializer();
+           return s.Serialize(datosGraficoJSON);
        }
        public string generarDatosParaGraficoEvolucionDePuntos(int idEquipo, List<Fase> fases)
        {

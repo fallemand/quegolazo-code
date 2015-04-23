@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Logica;
 using Utils;
 using Entidades;
+using System.Data;
 
 namespace quegolazo_code.torneo
 {
@@ -17,27 +18,51 @@ namespace quegolazo_code.torneo
         protected GestorEquipo gestorEquipo;
         protected GestorJugador gestorJugador;
         protected GestorEstadisticas gestorEstadisticas;
+        private int idJugador, idEdicion, idEquipo;
+        private string nickTorneo;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                idJugador = int.Parse(Request["idJugador"]);
+                nickTorneo = Request["nickTorneo"].ToString();
+                idEdicion = int.Parse(Request["idEdicion"]);
+                idEquipo = int.Parse(Request["idEquipo"]);
+            }
+            catch (Exception)
+            {
+                //TODO redireccionar a pagina de error
+                throw;
+            }
             gestorTorneo = Sesion.getGestorTorneo();
             gestorEdicion = Sesion.getGestorEdicion();
-            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(2010);
-            gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorId(87);
+            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);//2010
+            gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo); //jockeyClub
             gestorEquipo = Sesion.getGestorEquipo();
             gestorJugador = Sesion.getGestorJugador();
             gestorEstadisticas = Sesion.getGestorEstadisticas();
 
             if (!Page.IsPostBack)
             {
-                //gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(Request["idEquipo"]));
-                gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(1);
+                
+                gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(idEquipo);//1
                 GestorControles.cargarRepeaterList(rptOtroseJugadores, gestorEquipo.equipo.jugadores);
-                gestorJugador.jugador = gestorJugador.obtenerJugadorPorId(2068);
+                gestorJugador.jugador = gestorJugador.obtenerJugadorPorId(idJugador);//2068
                 cargarDatosJugador();
                 cargarPartidosJugador();
                 cargarGolesJugador();
+                cargarGraficoGoles();
             }
+        }
+
+        private void cargarGraficoGoles()
+        {
+            DataTable datos = gestorEstadisticas.cantidadDeGolesPorTipoGol(idJugador);
+            if (datos.Rows.Count > 0) {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGoles", "var tiposDeGoles=" + gestorEstadisticas.generarDatosParaGraficoDeTorta(datos)+ ";", true);
+              }
+           
         }
 
 
