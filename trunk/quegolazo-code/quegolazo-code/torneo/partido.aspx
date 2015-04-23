@@ -655,10 +655,12 @@
                                                 </div>
                                                 <div class="col-xs-4 resultado">
                                                     <div class="thumbnail">
-                                                        <h2><%# Eval("golesLocal") %></h2>
+                                                        <%--<h2><%# Eval("golesLocal") %></h2>--%>
+                                                         <h2><%# (((Entidades.Partido)Container.DataItem).golesLocal != null) ? ((Entidades.Partido)Container.DataItem).golesLocal.ToString() :  "-" %></h2>
                                                     </div>
                                                     <div class="thumbnail">
-                                                        <h2><%# Eval("golesVisitante") %></h2>
+                                                        <%--<h2><%# Eval("golesVisitante") %></h2>--%>
+                                                        <h2><%# (((Entidades.Partido)Container.DataItem).golesVisitante != null) ? ((Entidades.Partido)Container.DataItem).golesVisitante.ToString() :  "-" %></h2>
                                                     </div>
                                                     Fecha <%# Eval("idFecha") %>
                                                 </div>
@@ -676,7 +678,7 @@
                                                             </div>
                                                         </div>
                                                     </asp:Panel>
-                                                    <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                    <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>
                                         </li>
@@ -887,10 +889,12 @@
                                                 </div>
                                                 <div class="col-xs-4 resultado">
                                                     <div class="thumbnail">
-                                                        <h2><%# Eval("golesLocal") %></h2>
+                                                        <%--<h2><%# Eval("golesLocal") %></h2>--%>
+                                                        <h2><%# (((Entidades.Partido)Container.DataItem).golesLocal != null) ? ((Entidades.Partido)Container.DataItem).golesLocal.ToString() :  "-" %></h2>
                                                     </div>
                                                     <div class="thumbnail">
-                                                        <h2><%# Eval("golesVisitante") %></h2>
+                                                        <%--<h2><%# Eval("golesVisitante") %></h2>--%>
+                                                         <h2><%# (((Entidades.Partido)Container.DataItem).golesVisitante != null) ? ((Entidades.Partido)Container.DataItem).golesVisitante.ToString() :  "-" %></h2>
                                                     </div>
                                                     Fecha <%# Eval("idFecha") %>
                                                 </div>
@@ -908,7 +912,7 @@
                                                             </div>
                                                         </div>
                                                     </asp:Panel>
-                                                    <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                    <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>
                                         </li>

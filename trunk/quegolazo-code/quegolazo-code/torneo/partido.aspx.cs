@@ -95,8 +95,8 @@ namespace quegolazo_code.torneo
             sinCambiosTabLocal.Visible = !GestorControles.cargarRepeaterList(rptTabCambiosLocal, gestorPartido.obtenerCambiosPorEquipo(gestorPartido.partido.local.idEquipo));
             sinCambiosTabVisitante.Visible = !GestorControles.cargarRepeaterList(rptTabCambiosVisitante, gestorPartido.obtenerCambiosPorEquipo(gestorPartido.partido.visitante.idEquipo));
             //Repeater Tarjetas - Local y Visitante
-            sinTarjetasTabLocal.Visible = !(GestorControles.cargarRepeaterList(rptTabTarjetasAmarillasLocal, gestorPartido.obtenerTarjetasAmarillasPorEquipo(gestorPartido.partido.local.idEquipo)) && GestorControles.cargarRepeaterList(rptTabTarjetasRojasLocal, gestorPartido.obtenerTarjetasRojasPorEquipo(gestorPartido.partido.local.idEquipo)));
-            sinTarjetasTabVisitante.Visible = !(GestorControles.cargarRepeaterList(rptTabTarjetasAmarillasVisitante, gestorPartido.obtenerTarjetasAmarillasPorEquipo(gestorPartido.partido.visitante.idEquipo)) && GestorControles.cargarRepeaterList(rptTabTarjetasRojasVisitante, gestorPartido.obtenerTarjetasRojasPorEquipo(gestorPartido.partido.visitante.idEquipo)));
+            sinTarjetasTabLocal.Visible = !(GestorControles.cargarRepeaterList(rptTabTarjetasAmarillasLocal, gestorPartido.obtenerTarjetasAmarillasPorEquipo(gestorPartido.partido.local.idEquipo)) || GestorControles.cargarRepeaterList(rptTabTarjetasRojasLocal, gestorPartido.obtenerTarjetasRojasPorEquipo(gestorPartido.partido.local.idEquipo)));
+            sinTarjetasTabVisitante.Visible = !(GestorControles.cargarRepeaterList(rptTabTarjetasAmarillasVisitante, gestorPartido.obtenerTarjetasAmarillasPorEquipo(gestorPartido.partido.visitante.idEquipo)) || GestorControles.cargarRepeaterList(rptTabTarjetasRojasVisitante, gestorPartido.obtenerTarjetasRojasPorEquipo(gestorPartido.partido.visitante.idEquipo)));
             //Repeater Sanciones - Local y Visitante
             sinSancionesLocal.Visible = !GestorControles.cargarRepeaterList(rptSancionesLocal, gestorPartido.obtenerSancionesPorEquipo(gestorPartido.partido.local.idEquipo));
             sinSancionesVisitante.Visible = !GestorControles.cargarRepeaterList(rptSancionesVisitante, gestorPartido.obtenerSancionesPorEquipo(gestorPartido.partido.visitante.idEquipo));
@@ -111,7 +111,7 @@ namespace quegolazo_code.torneo
         
         //Devuelve true si hay partidos previos y false si no hay partidos previos
         //autor: Pau Pedrosa
-        protected bool cargarUltimosPartidos()
+        protected bool hayUltimosPartidos()
         {
             hayPartidosPrevios = true;
             if(gestorPartido.ultimosPartidosPrevioDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido).Count == 0 ||
@@ -124,6 +124,7 @@ namespace quegolazo_code.torneo
         //autor: Pau Pedrosa
         private void cargarUltimosOProximosPartidos()
         {
+            hayUltimosPartidos();
             if (hayPartidosPrevios)
             {
                 GestorControles.cargarRepeaterList(rptUltimosPartidosEquipoLocal, gestorPartido.ultimosPartidosPrevioDeUnEquipo(gestorPartido.partido.local.idEquipo, gestorEdicion.edicion.idEdicion, gestorPartido.partido.idPartido));
