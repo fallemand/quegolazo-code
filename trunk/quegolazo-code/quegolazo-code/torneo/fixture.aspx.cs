@@ -42,12 +42,10 @@ namespace quegolazo_code.torneo
         /// </summary>
         private static void obtenerEdiciónSeleccionada()
         {
-            
                 gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(4);
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                 gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
-            
         }
 
         /// <summary>
@@ -132,13 +130,12 @@ namespace quegolazo_code.torneo
                     }
                     else
                     {
-                        string llaves = new GestorFase().armarLlavesDeUnaFase(((Fase)e.Item.DataItem));
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "llaves", "$('#containerLlaves').generadorDeLlaves(" + llaves + ");", true);
-                        //ScriptManager.RegisterStartupScript(this, this.GetType(), "llaves", "var options = " + llaves + ";", true);
+                       
                         Panel panelTCT = (Panel)e.Item.FindControl("panelTCT");
                         panelTCT.Visible = false;
                         Panel panelLlaves = (Panel)e.Item.FindControl("panelLlaves");
                         panelLlaves.Visible = true;
+
                     }
                 }
             }
