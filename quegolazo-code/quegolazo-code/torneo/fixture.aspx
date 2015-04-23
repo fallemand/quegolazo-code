@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/torneo/torneoMaster.Master" AutoEventWireup="true" CodeBehind="fixture.aspx.cs" Inherits="quegolazo_code.torneo.fechas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headTorneoMasterContent" runat="server">
-     <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/widgetLlaves.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
     <div class="container">
@@ -110,14 +109,7 @@
                                     </div>
                                   </asp:Panel>
                                     <asp:Panel ID="panelLlaves" runat="server">
-                                        <div class="panel-heading botones botones-small">
-                                            <span class="flaticon-sports24"></span>
-                                            Llaves Eliminatorias
-                                            <a id="btnAgrandar" title="Expandir" rel="txtTooltip" class="btn btn-panel shadow-xs"onclick="agrandarLlaves();" style="float:right; margin-top:-5px;"><span  class="glyphicon glyphicon-resize-full"  ></span></a>
-                                           <a id="btnAchicar" title="Contraer" rel="txtTooltip" class="btn btn-panel shadow-xs" onclick="achicarLlaves();" style="display:none;float:right; margin-top:-5px;" > <span class="glyphicon glyphicon-resize-small"></span></a>
-                                             </div>
-                                        <div class="panel-body" id="containerLlaves">
-                                        </div>
+                                        
                                     </asp:Panel>
                                 </div>
                             </ItemTemplate>
