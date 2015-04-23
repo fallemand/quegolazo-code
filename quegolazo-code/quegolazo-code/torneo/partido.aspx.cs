@@ -19,28 +19,39 @@ namespace quegolazo_code.torneo
         protected bool hayPartidosPrevios;
         GestorEstadisticas gestorEstadistica;
         JavaScriptSerializer serializador;
+        protected int idEdicion;
+        protected string nickTorneo, idPartido;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorTorneo = Sesion.getGestorTorneo();
-            gestorEdicion = Sesion.getGestorEdicion();
-            //TODO falta agregarle el try/catch y que redirija a una pagina de error...
-            int idEdicion = int.Parse(Request["edicion"]);            
-            string nickTorneo = Request["nickTorneo"];
-            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
-            gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-            serializador = new JavaScriptSerializer();
-            string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(gestorTorneo.torneo.idTorneo));
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "var configuracion = " + estilos + ";", true);
-            gestorEstadistica = new GestorEstadisticas(); 
-            gestorPartido = Sesion.getGestorPartido();
-            gestorEquipo = Sesion.getGestorEquipo();
-            if (!Page.IsPostBack)
+            try
             {
-                gestorPartido.obtenerPartidoporId(Request["idPartido"]);
-                otrosPartidosDeLaFecha(); // Carga Otros Partidos de la Fecha
-                cargarDatosDePartido(); // Carga Resumen y Estadísticas del Partido
-                cargarUltimosOProximosPartidos();// Carga Próximos o Ultimos Partidos
-                cargarComparativo(); //Carga widget Comparativo                
+                nickTorneo = Request["nickTorneo"].ToString();
+                idEdicion = int.Parse(Request["idEdicion"]);
+                idPartido =Request["idPartido"];
+                gestorTorneo = Sesion.getGestorTorneo();
+                gestorEdicion = Sesion.getGestorEdicion();
+                //TODO falta agregarle el try/catch y que redirija a una pagina de error...
+                gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
+                gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
+                serializador = new JavaScriptSerializer();
+                string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(gestorTorneo.torneo.idTorneo));
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "var configuracion = " + estilos + ";", true);
+                gestorEstadistica = new GestorEstadisticas();
+                gestorPartido = Sesion.getGestorPartido();
+                gestorEquipo = Sesion.getGestorEquipo();
+                if (!Page.IsPostBack)
+                {
+                    gestorPartido.obtenerPartidoporId(idPartido);
+                    otrosPartidosDeLaFecha(); // Carga Otros Partidos de la Fecha
+                    cargarDatosDePartido(); // Carga Resumen y Estadísticas del Partido
+                    cargarUltimosOProximosPartidos();// Carga Próximos o Ultimos Partidos
+                    cargarComparativo(); //Carga widget Comparativo                
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
