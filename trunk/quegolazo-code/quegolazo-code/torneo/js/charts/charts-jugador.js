@@ -24,7 +24,7 @@ $(document).ready(function($) {
     //}
     
     ////=================================== Pie Chart ===================================//
-    var ctx = $("#graficoGoles").get(0).getContext("2d");
+    
     //var data = [
     //    {
     //        value: 30,
@@ -45,10 +45,12 @@ $(document).ready(function($) {
     //        label: "Tiro Libre"
     //    }
     //];
-    
-    var myPieChart = new Chart(ctx).Doughnut(tiposDeGoles, {
-        animateScale: true,
-        tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value+'%' %>",
-    });    
-    $('#goleadores').removeClass("active");
-});	
+    function cargarGrafico(tiposDeGoles) {
+        var ctx = $("#graficoGoles").get(0).getContext("2d");
+        var myPieChart = new Chart(ctx).Doughnut(tiposDeGoles, {
+            animateScale: true,
+            tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value+'%' %>",
+        });
+        $('#goleadores').removeClass("active");
+    }
+});

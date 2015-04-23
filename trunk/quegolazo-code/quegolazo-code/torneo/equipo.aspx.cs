@@ -21,30 +21,43 @@ namespace quegolazo_code.torneo
         private List<Jugador> goleadoresDelEquipo;
         private DataTable datosPrincipalesEquipo;
         GestorEstadisticas gestorEstadistica;
+        protected int idEdicion, idEquipo;
+        protected string nickTorneo;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            gestorTorneo = Sesion.getGestorTorneo();
-            gestorEdicion = Sesion.getGestorEdicion();
-            //TODO falta agregarle el try/catch y que redirija a una pagina de error...
-            int idEdicion = int.Parse(Request["edicion"]);
-            string nickTorneo = Request["nickTorneo"];
-            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
-            gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-            gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-            gestorEquipo = Sesion.getGestorEquipo();
-            gestorPartido = Sesion.getGestorPartido();
-            gestorEstadistica = new GestorEstadisticas();
-            if (!Page.IsPostBack)
+            try
             {
-                gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(Request["idEquipo"]));
-                cargarDatosPrincipalesEquipo();
-                cargarHistorialDePartidos();
-                cargarGoleadores();
-                cargarRepeaterOtrosEquiposDeEdicion();
-                cargarRepeaterJugadores();
+                gestorTorneo = Sesion.getGestorTorneo();
+                gestorEdicion = Sesion.getGestorEdicion();
+                //TODO falta agregarle el try/catch y que redirija a una pagina de error...
+                idEdicion = int.Parse(Request["edicion"]);
+                nickTorneo = Request["nickTorneo"];
+                idEquipo = int.Parse(Request["idEquipo"]);
+                gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
+                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
+                gestorEquipo = Sesion.getGestorEquipo();
+                gestorPartido = Sesion.getGestorPartido();
+                gestorEstadistica = new GestorEstadisticas();
+                if (!Page.IsPostBack)
+                {
+                    gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(idEquipo);
+                    cargarDatosPrincipalesEquipo();
+                    cargarHistorialDePartidos();
+                    cargarGoleadores();
+                    cargarRepeaterOtrosEquiposDeEdicion();
+                    cargarRepeaterJugadores();
+                    cargarGraficos();
+                }
+                
             }
-            cargarGraficos();
+            catch (Exception)
+            {
+                //TODO redireccionar a pagina de error
+                throw;
+            }
+          
         }
 
         private void cargarGraficos()

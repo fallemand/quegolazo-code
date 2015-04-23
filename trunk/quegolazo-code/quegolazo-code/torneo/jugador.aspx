@@ -21,15 +21,15 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="index-2.html">Torneo Jockey Club</a></li>
+                    <li><a href="/<%=nickTorneo%>"><%= gestorTorneo.torneo.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">La Cachiporra</a></li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>"><%= gestorEdicion.edicion.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Equipos</a></li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>">Equipos</a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Independiente Rivadavia</a></li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>"><%= gestorEquipo.equipo.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Fernando Gago</a></li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>/jugador-<%=idJugador%>"><%= gestorJugador.jugador.nombre%></a></li>
                 </ul>
             </div>
         </div>
@@ -270,63 +270,6 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <%--<table class="table table-striped">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="text-center" colspan="2">VS</th>
-                                                                <th>Fase</th>
-                                                                <th>Fecha</th>
-                                                                <th class="text-center" colspan="2">Resultado</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                                                <td>Fase 1</td>
-                                                                <td>Fecha 2</td>
-                                                                <td>River Plate</td>
-                                                                <td>5<small>(5)</small> - 5<small>(2)</small></td>
-                                                                <td><span class="label label-success">Ganado</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                                                <td>Fase 1</td>
-                                                                <td>Fecha 2</td>
-                                                                <td>River Plate</td>
-                                                                <td>5<small>(5)</small> - 5<small>(2)</small></td>
-                                                                <td><span class="label label-success">Ganado</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                                                <td>Fase 1</td>
-                                                                <td>Fecha 2</td>
-                                                                <td>River Plate</td>
-                                                                <td>5<small>(5)</small> - 5<small>(2)</small></td>
-                                                                <td><span class="label label-warning">Empatado</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                                                <td>Fase 1</td>
-                                                                <td>Fecha 2</td>
-                                                                <td>River Plate</td>
-                                                                <td>5<small>(5)</small> - 5<small>(2)</small></td>
-                                                                <td><span class="label label-danger">Perdido</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                                                <td>Fase 1</td>
-                                                                <td>Fecha 2</td>
-                                                                <td>River Plate</td>
-                                                                <td>5<small>(5)</small> - 5<small>(2)</small></td>
-                                                                <td><span class="label label-warning">Empatado</span></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>--%>
                                                 </div>
                                             </div>
                                         </div>
@@ -355,12 +298,17 @@
                                                                 </tr>
                                                             </ItemTemplate>
                                                         </asp:Repeater>
+                                                         <tr id="sinGolesJugador" runat="server" visible="false">
+                                                                <td colspan="6">No hay información de goles convertidos</td>
+                                                            </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="col-sm-5">
                                                 <h5 class="col-title">Tipos de Goles</h5>
-                                                <canvas id="graficoGoles" class="canvas-md"></canvas>
+                                                 <div id="graphics" runat="server">
+                                                <canvas id="graficoGoles" class="canvas-md"></canvas></div>
+                                                <div id="noGraphics" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
                                             </div>
                                         </div>
                                         <!-- END Tab de Goleadores -->

@@ -61,9 +61,11 @@ namespace quegolazo_code.torneo
             DataTable datos = gestorEstadisticas.cantidadDeGolesPorTipoGol(idJugador);
             if (datos.Rows.Count > 0)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGoles", "var tiposDeGoles=" + gestorEstadisticas.generarDatosParaGraficoDeTorta(datos) + ";", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGoles", "cargarGrafico(" + gestorEstadisticas.generarDatosParaGraficoDeTorta(datos) + ");", true);
             }
-            else { 
+            else {
+                noGraphics.Visible = true;
+                graphics.Visible = false;
             //TODO
              //   algo que diga que no hay datos en ambos lados
             }
@@ -74,7 +76,7 @@ namespace quegolazo_code.torneo
 
         private void cargarDatosJugador()
         {
-            var datosPrincipalesJugador= gestorEstadisticas.estadisticasDeUnJugador(gestorJugador.jugador.idJugador);
+            var datosPrincipalesJugador = gestorEstadisticas.estadisticasDeUnJugador(idJugador);
 
             litPartidoJugados.Text = (datosPrincipalesJugador.Rows.Count > 0) ? datosPrincipalesJugador.Rows[0]["PARTIDOS JUGADOS"].ToString() : "-"; 
             litGolesConvertidos.Text = (datosPrincipalesJugador.Rows.Count > 0) ? datosPrincipalesJugador.Rows[0]["Goles Convertidos"].ToString() : "-";
@@ -94,13 +96,13 @@ namespace quegolazo_code.torneo
 
         private void cargarPartidosJugador()
         {
-           GestorControles.cargarRepeaterTable(rptHistorialPartidos,gestorEstadisticas.obtenerUltimosPartidosJugador(gestorJugador.jugador.idJugador));
+          sinHistorialDePartido.Visible= !GestorControles.cargarRepeaterTable(rptHistorialPartidos,gestorEstadisticas.obtenerUltimosPartidosJugador(gestorJugador.jugador.idJugador));
         }
 
         private void cargarGolesJugador()
         {
 
-            GestorControles.cargarRepeaterTable(rptGolesJugador, gestorEstadisticas.ultimosGolesDeUnJugador(gestorJugador.jugador.idJugador));
+          sinGolesJugador.Visible =  !GestorControles.cargarRepeaterTable(rptGolesJugador, gestorEstadisticas.ultimosGolesDeUnJugador(gestorJugador.jugador.idJugador));
         }
 
         protected void rptOtroseJugadores_ItemDataBound(object sender, RepeaterItemEventArgs e)

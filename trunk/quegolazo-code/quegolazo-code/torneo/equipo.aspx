@@ -20,13 +20,13 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="index-2.html"><%=gestorTorneo.torneo.nombre%></a></li>
+                    <li><a href="/<%=nickTorneo%>" ><%=gestorTorneo.torneo.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html"><%=gestorEdicion.edicion.nombre%></a></li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>" ><%=gestorEdicion.edicion.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Equipos</a></li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>">Equipos</a></li>
                     <li>/</li>
-                    <li><a href="index-2.html"><%=gestorEquipo.equipo.nombre %></a></li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%> "><%=gestorEquipo.equipo.nombre %></a></li>
                 </ul>
             </div>
         </div>
@@ -50,7 +50,7 @@
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre") %>">
                                             <a href="#ver equipo">
                                                 <asp:Panel ID="panelLogoEquipo" runat="server" Visible="<%# ((Entidades.Equipo)Container.DataItem).tieneImagen() ? true : false %>">
-                                                    <a href="#ver equipo">
+                                                    <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%# Eval("idEquipo") %> ">
                                                         <img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive center-block">
                                                     </a>  
                                                 </asp:Panel>  
@@ -167,7 +167,7 @@
                                     <ItemTemplate>
                                         <!-- Jugador -->
                                         <div class="col-md-2 col-xs-3">
-                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador" href="#" >
+                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador" href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>/jugador-<%# Eval("idJugador")%>" >
                                               <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle img-responsive" alt="imagen"></img>
                                             </a>
                                             <!-- Popover del Jugador -->
