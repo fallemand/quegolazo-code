@@ -26,6 +26,7 @@ namespace Entidades
             public static string highlight {get {return  "0.9)";}}            
         }
 
+        private string[] listaDeColores = {colors.green, colors.blue, colors.red, colors.yellow, colors.orange, colors.purple, colors.grey };
         
         public class barChartData
         {
