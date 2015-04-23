@@ -18,8 +18,8 @@ namespace quegolazo_code.torneo
         protected GestorEquipo gestorEquipo;
         protected GestorJugador gestorJugador;
         protected GestorEstadisticas gestorEstadisticas;
-        private int idJugador, idEdicion, idEquipo;
-        private string nickTorneo;
+        protected int idJugador, idEdicion, idEquipo;
+        protected string nickTorneo;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -59,9 +59,14 @@ namespace quegolazo_code.torneo
         private void cargarGraficoGoles()
         {
             DataTable datos = gestorEstadisticas.cantidadDeGolesPorTipoGol(idJugador);
-            if (datos.Rows.Count > 0) {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGoles", "var tiposDeGoles=" + gestorEstadisticas.generarDatosParaGraficoDeTorta(datos)+ ";", true);
-              }
+            if (datos.Rows.Count > 0)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGoles", "var tiposDeGoles=" + gestorEstadisticas.generarDatosParaGraficoDeTorta(datos) + ";", true);
+            }
+            else { 
+            //TODO
+             //   algo que diga que no hay datos en ambos lados
+            }
            
         }
 
