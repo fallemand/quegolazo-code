@@ -48,7 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -172,7 +172,7 @@
     <Content Include="torneo\fonts\FontAwesome\fontawesome-webfont.svg" />
     <Content Include="torneo\fonts\FontAwesome\fontawesome-webfont862f.svg" />
     <Content Include="torneo\fonts\glyphicon\glyphicons-halflings-regular.svg" />
-    <Content Include="torneo\fecha.aspx" />
+    <Content Include="torneo\fechas.aspx" />
     <Content Include="torneo\js\charts\charts-jugador.js" />
     <Content Include="torneo\jugador.aspx" />
     <Content Include="torneo\img\bg-theme\c1-sm.png" />
@@ -468,12 +468,12 @@
     <Compile Include="torneo\fixture.aspx.designer.cs">
       <DependentUpon>fixture.aspx</DependentUpon>
     </Compile>
-    <Compile Include="torneo\fecha.aspx.cs">
-      <DependentUpon>fecha.aspx</DependentUpon>
+    <Compile Include="torneo\fechas.aspx.cs">
+      <DependentUpon>fechas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="torneo\fecha.aspx.designer.cs">
-      <DependentUpon>fecha.aspx</DependentUpon>
+    <Compile Include="torneo\fechas.aspx.designer.cs">
+      <DependentUpon>fechas.aspx</DependentUpon>
     </Compile>
     <Compile Include="torneo\jugador.aspx.cs">
       <DependentUpon>jugador.aspx</DependentUpon>
