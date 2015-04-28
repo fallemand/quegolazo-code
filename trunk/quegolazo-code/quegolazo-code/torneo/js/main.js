@@ -6,13 +6,15 @@
 // Author: Iwthemes.
 // Name File: main.js
 // Version 1.0 - Created on 20 May 2014
-// Website: http://www.iwthemes.com 
+// Website: http://www.iwthemes.com
 // Email: support@iwthemes.com
 // Copyright: (C) 2014
 
+//=================================== Totop  ============================================//
+
 $(document).ready(function($) {
 
-	'use strict';
+    'use strict';
 
   //=================================== Sticky nav ===================================//
 
@@ -42,68 +44,68 @@ $(document).ready(function($) {
       + '<span>%M <br> <small>min</small> </span>  '
       + '<span>%S <br> <small>sec</small></span> '));
    });
- 	
-	//=================================== Slide Services  ==============================//
-	 
-	$(".single-carousel").owlCarousel({
-		  items : 1,
-		  autoPlay: true,  
-    	navigation : true,
-    	autoHeight : true,
-    	slideSpeed : 200,
-    	singleItem: true,
-    	pagination : false
-	});
-  
+
+    //=================================== Slide Services  ==============================//
+
+    $(".single-carousel").owlCarousel({
+          items : 1,
+          autoPlay: true,
+        navigation : true,
+        autoHeight : true,
+        slideSpeed : 200,
+        singleItem: true,
+        pagination : false
+    });
+
   //=================================== Slide Proximos Partidos  ==============================//
-	 
-	$(".proximos-partidos").owlCarousel({
+
+    $(".proximos-partidos").owlCarousel({
         items : 8,
-		autoPlay: true,  
-    	navigation : true,
-    	autoHeight : true,
-    	slideSpeed : 200,
-    	pagination : false,
+        autoPlay: true,
+        navigation : true,
+        autoHeight : true,
+        slideSpeed : 200,
+        pagination : false,
         itemsCustom: [[0, 1],[350, 2], [500, 3],[600, 4], [800, 5], [1000, 6], [1100, 7], [1200, 8]]
-	});
-    
+    });
+
     //=================================== Slide Otros Equipos  ==============================//
-	 
-	$(".otros-equipos").owlCarousel({
+
+    $(".otros-equipos").owlCarousel({
         items : 12,
-		autoPlay: true,  
-    	navigation : true,
-    	slideSpeed : 400,
-    	pagination : false,
+        autoPlay: true,
+        navigation : true,
+        slideSpeed : 400,
+        pagination : false,
         itemsCustom: [[0, 2],[300, 3],[400, 5], [500, 6],[600, 7], [800, 8], [1000, 10], [1100, 11], [1200, 13]]
-	});
-    
+    });
+
     //=================================== Slide Otros Judaores  ==============================//
-	 
-	$(".otros-jugadores").owlCarousel({
+
+    $(".otros-jugadores").owlCarousel({
         items : 14,
-		autoPlay: true,  
-    	navigation : true,
-    	slideSpeed : 400,
-    	pagination : false,
+        autoPlay: true,
+        navigation : true,
+        slideSpeed : 400,
+        pagination : false,
         itemsCustom: [[0, 3],[300, 4],[400, 6], [500, 8],[600, 9], [800, 10], [1000, 12], [1100, 13], [1200, 15]]
-	});
-    
+    });
+
     //=================================== Slide Otros Judaores  ==============================//
-	 
-	$(".fases").owlCarousel({
-		autoPlay: true, 
+
+    $(".fases").owlCarousel({
+        autoPlay: true,
         items: 4,
         responsive: true,
-    	navigation : true,
-    	slideSpeed : 400,
-    	pagination : false,
-	});
+        navigation : true,
+        slideSpeed : 400,
+        pagination : false,
+    });
 
   //=================================== Carousel Blog  ==================================//
 
   $("#events-carousel").owlCarousel({
-       autoPlay: 3200,      
+       autoPlay: 3200,
        items : 3,
        navigation: false,
        itemsDesktop : [1199,3],
@@ -112,22 +114,22 @@ $(document).ready(function($) {
        itemsMobile : [480,1],
        pagination: true
    });
-    
+
     //=================================== Slide Otros Judaores  ==============================//
-	 
-	$(".fechas").owlCarousel({
-		autoPlay: true, 
+
+    $(".fechas").owlCarousel({
+        autoPlay: true,
         items: 8,
         responsive: true,
-    	navigation : true,
-    	slideSpeed : 400,
-    	pagination : false,
-	});
+        navigation : true,
+        slideSpeed : 400,
+        pagination : false,
+    });
 
   //=================================== Carousel Players  ==================================//
 
    $("#players-carousel").owlCarousel({
-       autoPlay: 3200,      
+       autoPlay: 3200,
        items : 4,
        navigation: false,
        itemsDesktopSmall : [1024,3],
@@ -139,7 +141,7 @@ $(document).ready(function($) {
   //=================================== Carousel Clubs  ==================================//
 
    $("#clubs-carousel").owlCarousel({
-       autoPlay: 3200,      
+       autoPlay: 3200,
        items : 1,
        navigation: false,
        singleItem: true,
@@ -149,7 +151,7 @@ $(document).ready(function($) {
    //=================================== Carousel Sponsor  ==================================//
 
    $("#sponsors").owlCarousel({
-       autoPlay: 3200,      
+       autoPlay: 3200,
        items : 6,
        navigation: false,
        itemsDesktop : [1199,5],
@@ -158,12 +160,12 @@ $(document).ready(function($) {
        itemsMobile : [500,2],
        pagination: true
    });
-  
+
   //=================================== PopOvers  ==================================//
-  $(".popover-jugador").popover({ 
-      trigger: "manual", 
-      html: true, 
-      animation:true, 
+  $(".popover-jugador").popover({
+      trigger: "manual",
+      html: true,
+      animation:true,
       container:'.content-info',
       placement:'left',
       content: function() {
@@ -189,7 +191,7 @@ $(document).ready(function($) {
    //=================================== Carousel Testimonials  ============================//
 
   $("#testimonials").owlCarousel({
-       autoPlay: 3200,      
+       autoPlay: 3200,
        items : 3,
        navigation: false,
        itemsDesktop : [1199,3],
@@ -199,41 +201,41 @@ $(document).ready(function($) {
        pagination: true
   });
 
-	//=================================== Carousel Twitter  ===============================//
-	 
-	$(".tweet_list").owlCarousel({
-		  items : 1,
-		  autoPlay: 3200,  
-    	navigation : false,
-    	autoHeight : true,
-    	slideSpeed : 400,
-    	singleItem: true,
-    	pagination : true
-	});
+    //=================================== Carousel Twitter  ===============================//
 
-	//=================================== Subtmit Form  ===================================//
+    $(".tweet_list").owlCarousel({
+          items : 1,
+          autoPlay: 3200,
+        navigation : false,
+        autoHeight : true,
+        slideSpeed : 400,
+        singleItem: true,
+        pagination : true
+    });
 
-	$('.form-theme').submit(function(event) {  
-	     event.preventDefault();  
-	     var url = $(this).attr('action');  
-	     var datos = $(this).serialize();  
-	     	$.get(url, datos, function(resultado) {  
-	     	$('.result').html(resultado);  
-		});  
- 	});
+    //=================================== Subtmit Form  ===================================//
+
+    $('.form-theme').submit(function(event) {
+         event.preventDefault();
+         var url = $(this).attr('action');
+         var datos = $(this).serialize();
+             $.get(url, datos, function(resultado) {
+             $('.result').html(resultado);
+        });
+     });
 
   //=================================== Form Newslleter  =================================//
 
-  $('#newsletterForm').submit(function(event) {  
-       event.preventDefault();  
-       var url = $(this).attr('action');  
-       var datos = $(this).serialize();  
-        $.get(url, datos, function(resultado) {  
-        $('#result-newsletter').html(resultado);  
-    });  
-  });  
+  $('#newsletterForm').submit(function(event) {
+       event.preventDefault();
+       var url = $(this).attr('action');
+       var datos = $(this).serialize();
+        $.get(url, datos, function(resultado) {
+        $('#result-newsletter').html(resultado);
+    });
+  });
 
-  //=================================== Ligbox  ===========================================//	
+  //=================================== Ligbox  ===========================================//
 
   $(".fancybox").fancybox({
       openEffect  : 'elastic',
@@ -245,20 +247,20 @@ $(document).ready(function($) {
         }
       }
   });
-	
+
 //=============================  tooltip demo ===========================================//
 
   $('.tooltip-hover').tooltip({
       selector: "[data-toggle=tooltip]",
       container: "body"
    });
-  
+
 //=================================== Totop  ============================================//
 
   $().UItoTop({
-		scrollSpeed:500,
-		easingType:'linear'
-	});	
+        scrollSpeed:500,
+        easingType:'linear'
+    });
 
 //=================================== Portfolio Filters  ==============================//
 
@@ -270,9 +272,9 @@ $(document).ready(function($) {
           duration: 750,
           easing: 'linear',
           queue: false
-  	}
+      }
   });
-	 
+
   $('.portfolioFilter a').click(function(){
       $('.portfolioFilter .current').removeClass('current');
       $(this).addClass('current');
@@ -286,6 +288,6 @@ $(document).ready(function($) {
             }
         });
        return false;
-      }); 
+      });
    });
-});	
+});
