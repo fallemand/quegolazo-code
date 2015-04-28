@@ -61,13 +61,13 @@ namespace quegolazo_code.torneo
             DataTable datos = gestorEstadisticas.cantidadDeGolesPorTipoGol(idJugador);
             if (datos.Rows.Count > 0)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGoles", "cargarGrafico(" + gestorEstadisticas.generarDatosParaGraficoDeTorta(datos) + ");", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGoles", "var tiposDeGoles = " + gestorEstadisticas.generarDatosParaGraficoDeTorta(datos) + ";", true);
             }
             else {
                 noGraphics.Visible = true;
                 graphics.Visible = false;
-            //TODO
-             //   algo que diga que no hay datos en ambos lados
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGoles", "var tiposDeGoles = null;", true);
+           
             }
            
         }

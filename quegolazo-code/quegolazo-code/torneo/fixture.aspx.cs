@@ -14,14 +14,25 @@ namespace quegolazo_code.torneo
     {
        protected  GestorPartido gestorPartido;
        public static GestorEdicion gestorEdicion;
-       public int fecha;
+       protected int fecha;
+       protected int idEdicion;
+       protected string nickTorneo;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+                try
+                {
+                    idEdicion = int.Parse(Request["idEdicion"].ToString());
+                    nickTorneo = Request["nickTorneo"].ToString();
+                }
+                catch (Exception)
+                {
+                    //TODO Redicreccionar a página de error
+                    throw;
+                }
                 gestorEdicion = Sesion.getGestorEdicion();
-                gestorPartido = Sesion.getGestorPartido();
-                fecha = 2;
+                gestorPartido = Sesion.getGestorPartido();               
                 if (!Page.IsPostBack)
                 {
                     gestorPartido.partido = null;
@@ -40,9 +51,9 @@ namespace quegolazo_code.torneo
         /// Obtiene la Edición de Sesión
         /// autor: Facu Allemand
         /// </summary>
-        private static void obtenerEdiciónSeleccionada()
+        private void  obtenerEdiciónSeleccionada()
         {
-                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(4);
+                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                 gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
@@ -135,7 +146,8 @@ namespace quegolazo_code.torneo
                         panelTCT.Visible = false;
                         Panel panelLlaves = (Panel)e.Item.FindControl("panelLlaves");
                         panelLlaves.Visible = true;
-
+                        string llaves = new GestorFase().armarLlavesDeUnaFase((Fase)e.Item.DataItem);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "llaves", "var datosLlaves = " + llaves + ";", true);
                     }
                 }
             }

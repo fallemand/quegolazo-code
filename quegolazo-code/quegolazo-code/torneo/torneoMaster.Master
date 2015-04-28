@@ -30,7 +30,7 @@
     <!-- Head Libs -->
     <script src="/torneo/js/modernizr.js"></script>
     <!-- jQuery local-->
-    <script src="/torneo/js/jquery.js"></script>
+    <script src="/torneo/js/jquery.min.js"></script>
     <!--[if IE]>
             <link rel="stylesheet" href="css/ie/ie.css">
         <![endif]-->

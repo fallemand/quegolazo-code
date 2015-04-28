@@ -1,5 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/torneo/torneoMaster.Master" AutoEventWireup="true" CodeBehind="fixture.aspx.cs" Inherits="quegolazo_code.torneo.fechas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headTorneoMasterContent" runat="server">
+    <script src="/torneo/js/jquery-ui.min.js"></script>   
+    <script src="/torneo/js/jquery.bracket.min.js"></script>
+    <link href="/torneo/css/jquery.bracket.min.css" rel="stylesheet" />
+    <script src="/torneo/js/widgetLlaves.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
     <div class="container">
@@ -109,7 +113,9 @@
                                     </div>
                                   </asp:Panel>
                                     <asp:Panel ID="panelLlaves" runat="server">
-                                        
+                                        <div id="divLlaves">
+
+                                        </div>
                                     </asp:Panel>
                                 </div>
                             </ItemTemplate>
@@ -131,6 +137,9 @@
          Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
     </script>--%>
           <script type="text/javascript">
+              $(document).ready(function ($) {
+                  $("#divLlaves").generadorDeLlaves(datosLlaves);
+              });
               $('body').on('keyup', '#filtro', function () {
                   if ($(this).val().length > 0) {
                       $('.panel-collapse').collapse('show');
@@ -177,6 +186,7 @@
                   $("#btnAchicar").hide();
               };
 
+              
     </script>
         
 </asp:Content>
