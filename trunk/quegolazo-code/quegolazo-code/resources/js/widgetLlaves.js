@@ -2,6 +2,7 @@
     options: {
         container: null,
         equipos: null,
+        equiposGenericos : null,
         mezclar: false,
         numFase: null,
         generica: false,
@@ -36,9 +37,10 @@
         //si mezclar viene en false, no habia fase precargada
         if (widget.options.mezclar || widget.options.generica)//sort(function () { return 0.5 - Math.random() }) sirve para randomizar la lista.
         {
-            widget.options.equipos.sort(function () { return 0.5 - Math.random() });
-            for (var i = 0; i < widget.options.equipos.length; i++) {
-                var equipo = { nombre: widget.options.equipos[i].nombre, idEquipo: widget.options.equipos[i].idEquipo };
+            var equiposAReordenar = (this.options.equiposGenericos != null) ? this.options.equiposGenericos : widget.options.equipos;
+            equiposAReordenar.sort(function () { return 0.5 - Math.random() });
+            for (var i = 0; i < equiposAReordenar.length; i++) {
+                var equipo = { nombre: equiposAReordenar[i].nombre, idEquipo: equiposAReordenar[i].idEquipo };
                 partido.push(equipo);
                 //cada 2 equipos forman un partido
                 if ((i + 1) % 2 == 0 && i != 0) {
