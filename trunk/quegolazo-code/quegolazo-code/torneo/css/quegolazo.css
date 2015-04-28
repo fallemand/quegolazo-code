@@ -416,6 +416,38 @@ img.img-principal {
 
 /*----------------------- END: Widget Partidos y Widget Versus -----------------------------*/
 
+/*----------------------- Colores de Los Estados -----------------------------*/
+.fase-Registrada {
+    background-color: #777;
+}
+.fase-Diagramada {
+    background-color: #337ab7;
+}
+.fase-Iniciada {
+    background-color: #f0ad4e;
+}
+.fase-Finalizada {
+    background-color: #5cb85c;
+}
+.fase-Cancelada {
+    background-color: #d9534f;
+}
+.fecha-Diagramada {
+    background-color: #337ab7;
+}
+.fecha-Completa {
+    background-color: #5cb85c;
+}
+.fecha-Incompleta {
+    background-color: #f0ad4e;
+}
+.fecha-Cancelada {
+    background-color: #d9534f;
+}
+
+
+/*----------------------- END: Colores de Los Estados -----------------------------*/
+
 h5.col-title {
   padding-bottom: 5px;
   margin-bottom: 10px;
@@ -660,6 +692,14 @@ h5.page-title {
   padding-left: 10px;
   font-size: 13px;
   line-height: 30px;
+}
+
+.slider-multiple a {
+    color:#fff;
+}
+
+.slider-multiple a:hover {
+    text-decoration: none;
 }
 
 
