@@ -119,8 +119,6 @@ namespace quegolazo_code.torneo
                             litIniciales.Text+=s.Substring(0,1);
                  }
                    }
-        
-           
         }
 
 

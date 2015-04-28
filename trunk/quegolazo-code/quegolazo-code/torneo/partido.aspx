@@ -20,9 +20,9 @@
                 <ul>
                     <li><a href="index-2.html"><%=gestorTorneo.torneo.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html"><%=gestorEdicion.edicion.nombre%></a></li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/"><%=gestorEdicion.edicion.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Fase <%=gestorPartido.partido.faseAsociada.idFase%></a></li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/>Fase <%=gestorPartido.partido.faseAsociada.idFase%></a></li>
                     <li>/</li>
                     <li><a href="index-2.html">Fecha <%=gestorPartido.partido.idFecha %></a></li>
                     <li>/</li>

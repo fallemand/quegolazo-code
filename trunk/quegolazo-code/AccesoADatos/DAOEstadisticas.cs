@@ -836,10 +836,10 @@ namespace AccesoADatos
                                 from Jugadores j 
                                 left join goles g on (g.idJugador = j.idJugador AND g.idPartido IN (SELECT idPartido FROM Partidos WHERE idEdicion = @idEdicion))
                                 left JOIN Tarjetas tarjetasAmarillas ON (tarjetasAmarillas.idJugador = j.idJugador AND tarjetasAmarillas.tipoTarjeta = 'A'
-                                AND tarjetasAmarillas.idPartido IN (SELECT idPartido FROM Partidos WHERE idEdicion = @idEdicion))))
+                                AND tarjetasAmarillas.idPartido IN (SELECT idPartido FROM Partidos WHERE idEdicion = @idEdicion))
                                 left JOIN Tarjetas tarjetasRojas ON (tarjetasRojas.idJugador = j.idJugador AND tarjetasRojas.tipoTarjeta = 'R'
-                                AND tarjetasRojas.idPartido IN (SELECT idPartido FROM Partidos WHERE idEdicion = @idEdicion))))
-                                LEFT JOIN TitularesXPartido txp ON (txp.idJugador = j.idJugador AND txp.idPartido IN (SELECT idPartido FROM Partidos WHERE idEdicion = @idEdicion))))
+                                AND tarjetasRojas.idPartido IN (SELECT idPartido FROM Partidos WHERE idEdicion = @idEdicion))
+                                LEFT JOIN TitularesXPartido txp ON (txp.idJugador = j.idJugador AND txp.idPartido IN (SELECT idPartido FROM Partidos WHERE idEdicion = @idEdicion))
                                 where j.idJugador = @idJugador";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
