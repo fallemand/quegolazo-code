@@ -27,6 +27,7 @@ namespace Logica
       {
           //si bien dice equipos, se debe pasar un conjunto de Partidos porque de ahi obtiene los equipos que se renderizarán en la llave
           public List<Partido> equipos { get; set; }
+          public List<Equipo> equiposGenericos { get; set; }
           public int numFase { get; set; }         
           public bool generica { get; set; }
           public bool mezclar { get; set; }
@@ -39,6 +40,7 @@ namespace Logica
               generica = false;
               mezclar = false;
               noSwap = true;
+              equiposGenericos = null;
           }
       }
       public IGenerarFixture generadorFixture { get; set; }
@@ -271,28 +273,46 @@ namespace Logica
       public string armarLlavesDeUnaFase(Fase faseEliminatoria) {
           string res = string.Empty;
           GeneradorDeLlaves llaves = new GeneradorDeLlaves();
-          llaves.equipos = faseEliminatoria.grupos[0].fechas[0].partidos;
-          List<List<int[]>> resultadosParaWidget = new List<List<int[]>>();
-          foreach (Fecha fecha  in faseEliminatoria.grupos[0].fechas)
-          {            
-            List<int[]> resultados = new List<int[]>();
-            foreach (Partido partido in fecha.partidos)
-            {
-                int[] resultado = null;
-                if(partido.estado.idEstado== Estado.partidoJUGADO)
-                {
-                    resultado = new int[2]; 
-                    resultado[0] = (int)partido.golesLocal;
-                    resultado[1] = (int)partido.golesVisitante;
-                    resultados.Add(resultado);
-                }                
-            }
-            resultadosParaWidget.Add(resultados);  
+          if (faseEliminatoria.esGenerica)
+          {
+              llaves.equiposGenericos = crearEquiposGenericos(faseEliminatoria.cantidadDeEquipos);
+              llaves.generica = true;
           }
-          llaves.resultados.Add(resultadosParaWidget);
+          else
+          {
+              llaves.equipos = faseEliminatoria.grupos[0].fechas[0].partidos;
+              List<List<int[]>> resultadosParaWidget = new List<List<int[]>>();
+              foreach (Fecha fecha in faseEliminatoria.grupos[0].fechas)
+              {
+                  List<int[]> resultados = new List<int[]>();
+                  foreach (Partido partido in fecha.partidos)
+                  {
+                      int[] resultado = null;
+                      if (partido.estado.idEstado == Estado.partidoJUGADO)
+                      {
+                          resultado = new int[2];
+                          resultado[0] = (int)partido.golesLocal;
+                          resultado[1] = (int)partido.golesVisitante;
+                          resultados.Add(resultado);
+                      }
+                  }
+                  resultadosParaWidget.Add(resultados);
+              }
+              llaves.resultados.Add(resultadosParaWidget);
+          }
           llaves.numFase = faseEliminatoria.idFase;
           JavaScriptSerializer s = new JavaScriptSerializer();
           return s.Serialize(llaves);
+      }
+
+      private List<Equipo> crearEquiposGenericos(int p)
+      {
+          List<Equipo> lista = new List<Equipo>();
+          for (int i = 0; i < p; i++)
+          {
+              lista.Add(new Equipo() { nombre = "Equipo " + (i + 1).ToString(), idEquipo = i+1 });
+          }
+          return lista;
       }
   
   
