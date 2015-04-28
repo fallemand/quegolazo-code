@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.torneo.master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="quegolazo_code.admin.index" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentHeaderAdminTorneo" runat="server">
     <script type="text/javascript" src="<%=Logica.GestorUrl.rJS %>/jquery.percentageloader-0.1.js"></script>
-        <script src="/resources/js/jquery.ui/jquery-ui.min.js"></script>
+    <script src="/resources/js/jquery.ui/jquery-ui.min.js"></script>
     <script src="/resources/js/quegolazo.js"></script>
     <script src="/resources/js/jquery.bracket.min.js"></script>
     <link href="/resources/css/jquery.bracket.min.css" rel="stylesheet" />
