@@ -95,10 +95,11 @@ $(document).ready(function($) {
 
     $(".fases").owlCarousel({
         autoPlay: true,
-        items: 4,
+        items: 3,
         responsive: true,
         navigation : true,
         slideSpeed : 400,
+        autoPlay: false,
         pagination : false,
     });
 
@@ -122,6 +123,7 @@ $(document).ready(function($) {
         items: 8,
         responsive: true,
         navigation : true,
+        autoPlay: false,
         slideSpeed : 400,
         pagination : false,
     });
