@@ -13,7 +13,7 @@ namespace Utils
     public class GestorImagen
     {
         private static double tamanioMax = 1048576; // 1MB = 1048576bytes
-        private static string extension = ".jpg";
+        private static string extension = ".png";
 
         //Paths de Imágenes
         private static string pathImagenes = "/resources/img/";
@@ -61,12 +61,12 @@ namespace Utils
                         Bitmap img = CrearImagen(pathImagenTemporal, imagen.width, imagen.height);
                         switch (tipoImagen)
                         {
-                            case TORNEO: img.Save(pathImagenesDisco + pathTorneos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
-                            case EQUIPO: img.Save(pathImagenesDisco + pathEquipos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
-                            case COMPLEJO: img.Save(pathImagenesDisco + pathComplejos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
-                            case JUGADOR: img.Save(pathImagenesDisco + pathJugadores + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
-                            case ARBITRO: img.Save(pathImagenesDisco + pathArbitros + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
-                            case NOTICIA: img.Save(pathImagenesDisco + pathNoticias + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Jpeg); break;
+                            case TORNEO: img.Save(pathImagenesDisco + pathTorneos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Png); break;
+                            case EQUIPO: img.Save(pathImagenesDisco + pathEquipos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Png); break;
+                            case COMPLEJO: img.Save(pathImagenesDisco + pathComplejos + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Png); break;
+                            case JUGADOR: img.Save(pathImagenesDisco + pathJugadores + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Png); break;
+                            case ARBITRO: img.Save(pathImagenesDisco + pathArbitros + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Png); break;
+                            case NOTICIA: img.Save(pathImagenesDisco + pathNoticias + id + imagen.abreviacion + extension, System.Drawing.Imaging.ImageFormat.Png); break;
                         }
                         img.Dispose();
                     }
@@ -230,11 +230,11 @@ namespace Utils
                 }
                 bmpOut = new Bitmap(lnNewWidth, lnNewHeight);
                 Graphics g = Graphics.FromImage(bmpOut);
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-                g.FillRectangle(Brushes.White, 0, 0, lnNewWidth, lnNewHeight);
+                //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                //g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                //g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                //g.FillRectangle(Brushes.White, 0, 0, lnNewWidth, lnNewHeight);
                 g.DrawImage(loBMP, 0, 0, lnNewWidth, lnNewHeight);
 
                 loBMP.Dispose();

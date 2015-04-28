@@ -627,11 +627,11 @@
                
                 <!-- Widget Partidos Anteriores Equipo Local -->
                 <div class="col-md-4 col-sm-6">
-                    <div class="panel only-top-padding panel-default small-arrows">
+                    <div class="panel panel-default small-arrows">
                         <div class="panel-heading">
                             <h3 class="panel-title"><asp:Literal ID="ltUltimosOProximosEL" runat="server" Text="Últimos"></asp:Literal> Partidos: <%= gestorPartido.partido.local.nombre %></h3>
                         </div>                        
-                        <div class="panel-body">
+                        <div class="panel-body nopadding">
                             <ul class="single-carousel">
                                 <asp:Repeater ID="rptUltimosPartidosEquipoLocal" runat="server">
                                     <ItemTemplate>
@@ -692,11 +692,11 @@
 
                 <!-- Widget Versus -->
                 <div class="col-md-4 col-sm-6" style="margin-bottom: 10px;">
-                    <div class="panel only-top-padding panel-default small-arrows">
+                    <div class="panel panel-default small-arrows">
                         <div class="panel-heading">
                             <h3 class="panel-title">Versus</h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body onlypadding-top">
                             <ul class="single-carousel">
                                 <!-- Versus: Puntos -->
                                 <li>
@@ -861,11 +861,11 @@
 
                 <!-- Widget Partidos Anteriores Equipo Visitante -->
                 <div class="col-md-4 col-sm-6">
-                    <div class="panel only-top-padding panel-default small-arrows">
+                    <div class="panel panel-default small-arrows">
                         <div class="panel-heading">
                             <h3 class="panel-title"><asp:Literal ID="ltUltimosOProximosEV" runat="server" Text="Últimos"></asp:Literal> Partidos: <%= gestorPartido.partido.visitante.nombre %></h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body nopadding">
                             <ul class="single-carousel">
                                 <asp:Repeater ID="rptUltimosPartidosEquipoVisitante" runat="server">
                                     <ItemTemplate>

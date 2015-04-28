@@ -347,6 +347,11 @@ img.img-principal {
     margin-right:5px;
 }
 
+.widget-versus .resultado span {
+    font-size: 48px;
+    line-height: 48px;
+}
+
 .widget-partido .resultado span  {
     font-size:16px;
     cursor:pointer;
@@ -443,6 +448,15 @@ img.img-principal {
 }
 .fecha-Cancelada {
     background-color: #d9534f;
+}
+.partido-Ganado {
+    background-color: #5cb85c;
+}
+.partido-Perdido {
+    background-color: #d9534f;
+}
+.partido-Empatado {
+    background-color: #F0B74E;
 }
 
 
