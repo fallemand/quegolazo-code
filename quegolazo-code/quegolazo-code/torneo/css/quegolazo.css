@@ -276,22 +276,22 @@ img.img-principal {
   font-weight: bold;
 }
 
-.score {
+.panel-box .score, .panel.score {
   background-image: url(/torneo/img/img-theme/bg-score.png);
   border-left: 7px solid;
   border-right: 7px solid;
 }
 
-.score h3 a{
+.panel-box.score h3 a, .panel.score h3 a{
   color: #FFF;
 }
 
-.score h3 a:hover{
+.panel-box.score h3 a:hover, .panel.score h3 a:hover{
   color: #f4f4f4;
   text-decoration: none;
 }
 
-.score ul li a {
+.panel-box.score ul li a, .panel.score ul li a {
   text-decoration: none;
 }
 
