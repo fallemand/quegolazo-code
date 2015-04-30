@@ -8,7 +8,7 @@
         <section class="section-title img-about">
             <div class="overlay-bg"></div>
             <div class="container">
-                <h1>Fase 1 <small>|</small> Fecha 2 <small>|</small> Grupo B</h1>
+                <h1> Fase <%= idFase  %><small>|</small> Fecha <%= idFecha  %> <small>|</small> Grupo <%= idGrupo  %></h1>
             </div>
         </section>
         <!-- End Titulo Sección -->
@@ -18,13 +18,13 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="index-2.html">Torneo La Rivera</a></li>
+                    <li><a href="index-2.html"><%= gestorTorneo.torneo.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Edición 2014</a></li>
+                    <li><a href="index-2.html"><%= gestorEdicion.edicion.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Fase 1</a></li>
+                    <li><a href="index-2.html">Fase <%= idFase  %></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Fecha 2</a></li>
+                    <li><a href="index-2.html">Fecha <%= idFecha  %></a></li>
                 </ul>
             </div>
         </div>
