@@ -58,6 +58,10 @@ namespace Logica
             return "/" + nickTorneo + "/edicion-" + idEdicion + "/equipo-" + idEquipo + "/jugador-"+idJugador;
         }
 
+        public static string urlGoleadores(string nickTorneo, int idEdicion)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion;
+        }
 
         //Forms en el root 
         public const string rINDEX = "/index.aspx";
