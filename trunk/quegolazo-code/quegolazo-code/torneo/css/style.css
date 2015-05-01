@@ -259,10 +259,9 @@ iframe.video{
     margin: 0;
 }
 .section-wide{
-    margin-top: 20px;
-    background-color: #fff;
+    border-radius: 0px !important; */
     border-top: 1px solid #dedede;
-    padding: 50px 0;
+    padding: 0px;
 }
 
 /* Titles ----------------------------------------------*/
@@ -364,7 +363,6 @@ iframe.video{
     z-index: 0;
 }
 .nav-tabs{
-    margin-top: -44px;
     border-bottom: 0;
 }
 .tab-content{
@@ -386,7 +384,6 @@ iframe.video{
     color: #fff;
 }
 .title-color{
-    margin-top: -47px;
     border-radius: 5px 5px 0 0;
     padding: 14px 10px;
 }
@@ -636,7 +633,7 @@ header{
     position: relative;
 }
 .content-counter-home{
-    height: 441px;
+    height: 373px;
     border-bottom: 1px solid #dedede;
 }
 .content-counter p{
@@ -1181,8 +1178,8 @@ footer .social li i {
 /* Blog Post ------------------------------------------------------------------*/
 
 .post-item{
-    padding-bottom: 35px;
-    margin-bottom: 35px;
+    padding-bottom: 28px;
+    margin-bottom: 28px;
     background: url("../img/img-theme/border-pattern.gif") bottom left repeat-x;
 }
 .post-item:last-child{
@@ -1192,9 +1189,6 @@ footer .social li i {
 .post-item h4{
     padding:0 0 10px 0;
     line-height: 20px;
-}
-.post-item h4 a{
-    color: #252525;
 }
 .post-item h4 a:hover{
     text-decoration: none;

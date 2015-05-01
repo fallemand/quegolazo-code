@@ -1,78 +1,82 @@
 /*  Layout Styles -----------------------------------------*/
 
 #layout{
-	overflow: hidden;
-	position: relative;
-	background: transparent;
-	-webkit-transition: 0.5s all ease;
-	-moz-transition: 0.5s all ease;
-	-o-transition: 0.5s all ease;
-	-ms-transition: 0.5s all ease;
-	transition: 0.5s all ease;
+    overflow: hidden;
+    position: relative;
+    background: transparent;
+    -webkit-transition: 0.5s all ease;
+    -moz-transition: 0.5s all ease;
+    -o-transition: 0.5s all ease;
+    -ms-transition: 0.5s all ease;
+    transition: 0.5s all ease;
 }
-.content-info{	
-	max-width: 1230px;
-	margin: 0px auto;
-	background: #F4F4F4;
-	margin-top: -160px;
-	-webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
-	-moz-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
-	box-shadow: 0 1px 10px rgba(0,0,0,0.3);
-	z-index: 99;
-	position: relative;
-	margin-bottom: -120px;
-	border-bottom: medium double #ccc;
+.content-info{
+    max-width: 1230px;
+    margin: 0px auto;
+    background: #F4F4F4;
+    margin-top: -160px;
+    -webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    z-index: 99;
+    position: relative;
+    margin-bottom: -120px;
+    border-bottom: medium double #ccc;
+}
+.content-info.home{
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 .layout-wide .content-info,
-.layout-wide .dark-home{	
-	max-width: 100%;	
+.layout-wide .dark-home{
+    max-width: 100%;
 }
-.layout-wide .content-info{	
-	/*margin-top: -100px;*/
+.layout-wide .content-info{
+    /*margin-top: -100px;*/
 }
 .layout-wide .dark-home .row{
-	max-width: 1170px;
-	margin: 0px auto;
+    max-width: 1170px;
+    margin: 0px auto;
 }
 .layout-wide .semiboxshadow{
-	display: none;
+    display: none;
 }
 .layout-wide .tab-content{
-	margin-left: 0;
+    margin-left: 0;
 }
 .layout-wide .section-title{
-	/*height: 250px;*/
+    /*height: 250px;*/
 }
 .layout-wide .crumbs:before{
     left: 23%;
 }
 .layout-boxed{
-	max-width: 1230px;
-	margin: 0 auto;
-	-webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
-	-moz-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
-	box-shadow: 0 1px 10px rgba(0,0,0,0.3);
-	-webkit-transition: 0.5s all ease;
-	-moz-transition: 0.5s all ease;
-	-o-transition: 0.5s all ease;
-	-ms-transition: 0.5s all ease;
-	transition: 0.5s all ease;
+    max-width: 1230px;
+    margin: 0 auto;
+    -webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    -webkit-transition: 0.5s all ease;
+    -moz-transition: 0.5s all ease;
+    -o-transition: 0.5s all ease;
+    -ms-transition: 0.5s all ease;
+    transition: 0.5s all ease;
 }
 .layout-boxed-margin{
-	max-width: 1230px;
-	margin: 50px auto;
-	-webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
-	-moz-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
-	box-shadow: 0 1px 10px rgba(0,0,0,0.3);
-	-webkit-transition: 0.5s all ease;
-	-moz-transition: 0.5s all ease;
-	-o-transition: 0.5s all ease;
-	-ms-transition: 0.5s all ease;
-	transition: 0.5s all ease;
+    max-width: 1230px;
+    margin: 50px auto;
+    -webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    -webkit-transition: 0.5s all ease;
+    -moz-transition: 0.5s all ease;
+    -o-transition: 0.5s all ease;
+    -ms-transition: 0.5s all ease;
+    transition: 0.5s all ease;
 }
-.layout-boxed header, 
+.layout-boxed header,
 .layout-boxed-margin header{
-	position: relative;
+    position: relative;
 }
 
 
@@ -156,8 +160,8 @@
 body.fixed {
     -webkit-background-size: cover;
     -moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -195,101 +199,101 @@ body.fixed {
 
 /* Theme Options ----------------------------------------------*/
 
-#theme-options {	
-	position:fixed;	
-	z-index: 9999;	
-	width: auto;	
-	left:-220px;
-	width: 220px;
-	top: 10px;
-	border: 1px solid #dbdbdb;
-	border-left: 0;
-	border-radius: 0 8px 8px 0;
-	background: #fff;
-	z-index: 999999;	
-	padding-bottom: 10px;
-	-webkit-transition: 0.3s all ease;
-	-moz-transition: 0.3s all ease;
-	-o-transition: 0.3s all ease;
-	-ms-transition: 0.3s all ease;
-	transition: 0.3s all ease;
+#theme-options {
+    position:fixed;
+    z-index: 9999;
+    width: auto;
+    left:-220px;
+    width: 220px;
+    top: 10px;
+    border: 1px solid #dbdbdb;
+    border-left: 0;
+    border-radius: 0 8px 8px 0;
+    background: #fff;
+    z-index: 999999;
+    padding-bottom: 10px;
+    -webkit-transition: 0.3s all ease;
+    -moz-transition: 0.3s all ease;
+    -o-transition: 0.3s all ease;
+    -ms-transition: 0.3s all ease;
+    transition: 0.3s all ease;
     color:black !important;
 }
 #theme-options .title {
-	padding: 10px 5px 0 12px;	
-	font-size: 11px;
-	line-height: 18px;
-	font-weight: normal;
-	position: relative;
+    padding: 10px 5px 0 12px;
+    font-size: 11px;
+    line-height: 18px;
+    font-weight: normal;
+    position: relative;
 }
 #theme-options .title p{
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 #theme-options .title span{
-	margin-left: -12px;
+    margin-left: -12px;
 }
 #theme-options .openclose {
-	cursor: pointer;
-	display: block;
-	height: 301px;
-	position: absolute;
-	top: 20px;
-	right: -39px;
-	width: 40px;
-	background: transparent url("/torneo/img/img-theme/theme-options.png") no-repeat top left;
+    cursor: pointer;
+    display: block;
+    height: 301px;
+    position: absolute;
+    top: 20px;
+    right: -39px;
+    width: 40px;
+    background: transparent url("/torneo/img/img-theme/theme-options.png") no-repeat top left;
 }
 #theme-options span {
-	display: block;
-	width: 100%;
-	padding: 0 12px 0 12px;
-	font-size: 14px;
+    display: block;
+    width: 100%;
+    padding: 0 12px 0 12px;
+    font-size: 14px;
 }
-#theme-options ul { 
-	padding: 2px 12px; 
-	margin: 0;
+#theme-options ul {
+    padding: 2px 12px;
+    margin: 0;
 }
 #theme-options ul li {
-	display: inline-block;
-	margin: 0;
-	border: 1px solid #dbdbdb;
-	overflow: hidden;
-	width: 20px;
-	height: 20px;
-	background-repeat: repeat;
-	cursor: pointer;
+    display: inline-block;
+    margin: 0;
+    border: 1px solid #dbdbdb;
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+    background-repeat: repeat;
+    cursor: pointer;
 }
-#theme-options ul.backgrounds li:hover { 
-	border-color: #ccc; 
+#theme-options ul.backgrounds li:hover {
+    border-color: #ccc;
 }
-#theme-options ul.backgrounds li.active,#theme-options ul.backgrounds li.active:hover { 
-	border-color: #ff9600; 
+#theme-options ul.backgrounds li.active,#theme-options ul.backgrounds li.active:hover {
+    border-color: #ff9600;
 }
 #theme-options .layout-style li{
-	width: 48%;
-	padding:5px 3px;	
-	display: inline-block;
-	height: auto;
-	font-size: 11px;
-	line-height: 20px;
-	text-align: center;
+    width: 48%;
+    padding:5px 3px;
+    display: inline-block;
+    height: auto;
+    font-size: 11px;
+    line-height: 20px;
+    text-align: center;
 }
 #theme-options .layout-style li.active,
 #theme-options .layout-style li.active a{
-	color: #fff;
+    color: #fff;
 }
 #theme-options .layout-style li  a:hover{
-	text-decoration: none;
+    text-decoration: none;
 }
 #theme-options .layout-style li a{
-	font-size: 11px;
-	color: #424242;
+    font-size: 11px;
+    color: #424242;
 }
 #themeSelector li {
-font-weight:bold;    
+font-weight:bold;
 }
 #themeSelector li span{
   margin-left: -7px;
-  margin-top: -1px; 
+  margin-top: -1px;
 }
 .cyborg {
   background-color: rgb(34, 34, 34);
@@ -313,9 +317,9 @@ font-weight:bold;
 }
 .hero {
   background-color: rgb(223, 105, 26);
-  color: rgb(234, 228, 224);  
+  color: rgb(234, 228, 224);
 }
 .yeti {
   background-color: rgb(0, 140, 186);
-  color: rgb(222, 240, 246);  
+  color: rgb(222, 240, 246);
 }

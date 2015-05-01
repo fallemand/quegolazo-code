@@ -193,6 +193,7 @@
     <Content Include="torneo\fonts\glyphicon\glyphicons-halflings-regular.svg" />
     <Content Include="torneo\fechas.aspx" />
     <Content Include="torneo\goleador.aspx" />
+    <Content Include="torneo\index.html" />
     <Content Include="torneo\js\charts\charts-jugador.js" />
     <Content Include="torneo\js\charts\charts-goleador.js" />
     <Content Include="torneo\js\jquery-ui.min.js" />

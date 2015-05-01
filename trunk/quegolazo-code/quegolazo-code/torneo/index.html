@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head id="headTorneoMaster" runat="server">
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <title>TorneoX - Con la Tecnología de QueGolazo!</title>
+    <meta name="keywords" content="futbol, torneo, partido, campeonato, goles, gol, goleadores" />
+    <meta name="description" content="Sitio web del torneo en donde encontrarás toda la información necesaria">
+    <meta name="author" content="quegolazo.org">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Theme CSS -->
+    <link id="theme" href="/torneo/css/bootstrap/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/torneo/css/style.css" rel="stylesheet" media="screen">
+    <link href="/torneo/css/quegolazo.css" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="/torneo/css/theme-responsive.css" rel="stylesheet" media="screen">
+    <!-- Skins Theme -->
+    <link href="#" rel="stylesheet" media="screen" class="skin">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/torneo/img/icons/favicon.ico">
+
+    <!-- Head Libs -->
+    <script src="/torneo/js/modernizr.js"></script>
+    <!-- jQuery local-->
+    <script src="/torneo/js/jquery.js"></script>
+    <!--[if IE]>
+            <link rel="stylesheet" href="css/ie/ie.css">
+        <![endif]-->
+    <!--[if lte IE 8]>
+            <script src="js/responsive/html5shiv.js"></script>
+            <script src="js/responsive/respond.js"></script>
+        <![endif]-->
+
+    <!-- Skins Changer-->
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+    <!-- Content Head-->
+    <!--Theme Options-->
+    <script type='text/javascript' src="/torneo/js/theme-options/theme-options.js"></script>
+    <link href="/torneo/css/skins/colorPicker.css" rel="stylesheet" />
+    <script type="text/javascript" src="/torneo/js/theme-options/jquery.colorPicker.min.js"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="MainScriptManager" runat="server" />
+    </form>
+    <!-- layout-->
+    <div id="layout">
+        <!-- Header-->
+        <header>
+            <!-- End headerbox-->
+            <div class="headerbox">
+                <div class="container">
+                    <div class="row">
+                        <!-- Logo-->
+                        <div class="col-md-2 col-xs-3 col-sm-2 mobile-nopadding-right">
+                            <img src="/torneo/img/img-theme/torneo.jpg" alt="Torneo XXXX" style="max-height:100px" class="img-thumbnail image-responsive">
+                        </div>
+                        <!-- End Logo-->
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <h1 class="titulo-torneo">Torneo Federal Argetina</h1>
+                            <h2 class="titulo-torneo visible-md visible-lg">Con la tecnología de <strong>QueGolazo!</strong></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End headerbox-->
+
+            <!-- mainmenu-->
+            <nav class="mainmenu navbar navbar-default navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Torneo Federal</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#about">Noticias</a></li>
+                            <li><a href="#contact">Fixture</a></li>
+                            <li><a href="#contact">Posiciones</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estadísticas <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#contact">Equipos</a></li>
+                                    <li><a href="#">Goleadores</a></li>
+                                    <li><a href="#">Tipos de Goles</a></li>
+                                    <li><a href="#">Rusticos</a></li>
+                                    <li><a href="#">Arqueros</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#contact">Sanciones</a></li>
+                        </ul>
+                        <ul class="hidden-sm nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ediciones <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Edicion 2015</a></li>
+                                    <li><a href="#">Edicion 2014</a></li>
+                                    <li><a href="#">Edicion 2013</a></li>
+                                </ul>
+                                <li><a href="#contact">Contacto</a></li>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </nav>
+            <!-- End mainmenu-->
+        </header>
+        <!-- End Header-->
+
+        <!-- contentPages-->
+
+        <!-- Section Area - Content Central -->
+        <section class="content-info home">
+
+            <!-- Content Central -->
+            <div class="container padding-top">
+                <div class="row mobile-margin-top">
+
+                    <!-- Otros Partidos de la Fecha -->
+                    <div class="col-sm-12">
+                        <div class="panel nopadding panel-default">
+                            <div class="panel-body bg-dark">
+                                <p class="slider-multiple-title">Fecha Actual</p>
+                                <ul class="proximos-partidos slider-multiple">
+                                    <li class="li-partido" style="width: 120px">
+                                        <span class="fecha theme-bg-color">September 26, 2015</span>
+                                        <div class="text">
+                                            <div class="equipos">
+                                                <a href="#">
+                                                    <span>BOC</span>
+                                                    vs
+                                                    <span>ARG</span>
+                                                </a>
+                                                <p class="estado partido-Jugado">
+                                                    2 (5) - 2 (3)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="li-partido" style="width: 120px">
+                                        <span class="fecha theme-bg-color">September 26, 2015</span>
+                                        <div class="text">
+                                            <div class="equipos">
+                                                <a href="#">
+                                                    <span>BOC</span>
+                                                    vs
+                                                    <span>ARG</span>
+                                                </a>
+                                                <p class="estado partido-Jugado">
+                                                    2 (5) - 2 (3)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="li-partido" style="width: 120px">
+                                        <span class="fecha theme-bg-color">September 26, 2015</span>
+                                        <div class="text">
+                                            <div class="equipos">
+                                                <a href="#">
+                                                    <span>BOC</span>
+                                                    vs
+                                                    <span>ARG</span>
+                                                </a>
+                                                <p class="estado partido-Jugado">
+                                                    2 (5) - 2 (3)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="li-partido" style="width: 120px">
+                                        <span class="fecha theme-bg-color">September 26, 2015</span>
+                                        <div class="text">
+                                            <div class="equipos">
+                                                <a href="#">
+                                                    <span>BOC</span>
+                                                    vs
+                                                    <span>ARG</span>
+                                                </a>
+                                                <p class="estado partido-Jugado">
+                                                    2 (5) - 2 (3)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="li-partido" style="width: 120px">
+                                        <span class="fecha theme-bg-color">September 26, 2015</span>
+                                        <div class="text">
+                                            <div class="equipos">
+                                                <a href="#">
+                                                    <span>BOC</span>
+                                                    vs
+                                                    <span>ARG</span>
+                                                </a>
+                                                <p class="estado partido-Jugado">
+                                                    2 (5) - 2 (3)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="li-partido" style="width: 120px">
+                                        <span class="fecha theme-bg-color">September 26, 2015</span>
+                                        <div class="text">
+                                            <div class="equipos">
+                                                <a href="#">
+                                                    <span>BOC</span>
+                                                    vs
+                                                    <span>ARG</span>
+                                                </a>
+                                                <p class="estado partido-Programado">
+
+                                                    Programado
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="li-partido" style="width: 120px">
+                                        <span class="fecha theme-bg-color">September 26, 2015</span>
+                                        <div class="text">
+                                            <div class="equipos">
+                                                <a href="#">
+                                                    <span>BOC</span>
+                                                    vs
+                                                    <span>ARG</span>
+                                                </a>
+                                                <p class="estado partido-Programado">
+
+                                                    Programado
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="li-partido">
+                                        <span class="fecha theme-bg-color">September 26, 2015</span>
+                                        <div class="text">
+                                            <div class="equipos">
+                                                <a href="#">
+                                                    <span>BOC</span>
+                                                    vs
+                                                    <span>ARG</span>
+                                                </a>
+                                                <p class="estado partido-Cancelado">
+
+                                                    Cancelado
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="li-partido">
+                                        <span class="fecha theme-bg-color">September 26, 2015</span>
+                                        <div class="text">
+                                            <div class="equipos">
+                                                <a href="#">
+                                                    <span>BOC</span>
+                                                    vs
+                                                    <span>ARG</span>
+                                                </a>
+                                                <p class="estado partido-Cancelado">
+                                                    Cancelado
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="li-partido">
+                                        <span class="fecha theme-bg-color">September 26, 2015</span>
+                                        <div class="text">
+                                            <div class="equipos">
+                                                <a href="#">
+                                                    <span>BOC</span>
+                                                    vs
+                                                    <span>ARG</span>
+                                                </a>
+                                                <p class="estado partido-Cancelado">
+
+                                                    Cancelado
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Otros partidos de la fecha -->
+
+                    <!-- Dark Home -->
+                    <div class="col-sm-12">
+                            <div class="row">
+                                <!-- Left Content - Tabs and Carousel -->
+                                <div class="col-md-9">
+                                    <!-- Nav Tabs -->
+                                    <ul class="nav nav-tabs" id="myTab">
+                                        <li class="active"><a href="#feature-news" data-toggle="tab">FEATURED EVENTS</a></li>
+                                        <li><a href="#players-staff" data-toggle="tab">PLAYERS AND STAFF</a></li>
+                                        <li><a href="#club-news" data-toggle="tab">CLUB TEAMS</a></li>
+                                    </ul>
+                                    <!-- End Nav Tabs -->
+
+                                    <!-- Content Tabs -->
+                                    <div class="tab-content home bg-dark">
+                                        <!-- Tab One - Feature News -->
+                                        <div class="tab-pane active" id="feature-news">
+                                            <!-- blog post-->
+                                            <ul id="events-carousel" class="events-carousel padding-top">
+                                                <!-- Item blog post -->
+                                                <li>
+                                                    <div class="header-post">
+                                                        <div class="date">
+                                                            <span>08/jan</span>
+                                                            2014
+                                                        </div>
+                                                        <a href="single-news.html"><img src="img/blog/1.jpg" alt=""></a>
+                                                        <div class="meta-tag">
+                                                            <ul>
+                                                                <li><i class="fa fa-user"></i><a href="#">Admin</a></li>
+                                                                <li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>
+                                                                <li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-post">
+                                                        <h4><a href="single-news.html">CTA Placement</a></h4>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                    </div>
+                                                </li>
+                                                <!-- End Item blog post -->
+
+                                                <!-- Item blog post -->
+                                                <li>
+                                                    <div class="header-post">
+                                                        <div class="date">
+                                                            <span>08/jan</span>
+                                                            2014
+                                                        </div>
+                                                        <a href="single-news.html"><img src="img/blog/2.jpg" alt=""></a>
+                                                        <div class="meta-tag">
+                                                            <ul>
+                                                                <li><i class="fa fa-user"></i><a href="#">Admin</a></li>
+                                                                <li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>
+                                                                <li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-post">
+                                                        <h4><a href="single-news.html">Championship Final</a></h4>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                    </div>
+                                                </li>
+                                                <!-- End Item blog post -->
+
+                                                <!-- Item blog post -->
+                                                <li>
+                                                    <div class="header-post">
+                                                        <div class="date">
+                                                            <span>08/jan</span>
+                                                            2014
+                                                        </div>
+                                                        <a href="single-news.html"><img src="img/blog/3.jpg" alt=""></a>
+                                                        <div class="meta-tag">
+                                                            <ul>
+                                                                <li><i class="fa fa-user"></i><a href="#">Admin</a></li>
+                                                                <li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>
+                                                                <li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-post">
+                                                        <h4><a href="single-news.html">Confidence indicators</a></h4>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                    </div>
+                                                </li>
+                                                <!-- End Item blog post -->
+
+                                                <!-- Item blog post -->
+                                                <li>
+                                                    <div class="header-post">
+                                                        <div class="date">
+                                                            <span>08/jan</span>
+                                                            2014
+                                                        </div>
+                                                        <a href="single-news.html"><img src="img/blog/4.jpg" alt=""></a>
+                                                        <div class="meta-tag">
+                                                            <ul>
+                                                                <li><i class="fa fa-user"></i><a href="#">Admin</a></li>
+                                                                <li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>
+                                                                <li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-post">
+                                                        <h4><a href="single-news.html">Championship Final.</a></h4>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                    </div>
+                                                </li>
+                                                <!-- End Item blog post -->
+
+                                                <!-- Item blog post -->
+                                                <li>
+                                                    <div class="header-post">
+                                                        <div class="date">
+                                                            <span>08/jan</span>
+                                                            2014
+                                                        </div>
+                                                        <a href="single-news.html"><img src="img/blog/2.jpg" alt=""></a>
+                                                        <div class="meta-tag">
+                                                            <ul>
+                                                                <li><i class="fa fa-user"></i><a href="#">Admin</a></li>
+                                                                <li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>
+                                                                <li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-post">
+                                                        <h4><a href="single-news.html">Great Prospects.</a></h4>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                    </div>
+                                                </li>
+                                                <!-- End Item blog post -->
+                                            </ul>
+                                            <!-- End blog post-->
+                                        </div>
+                                        <!-- Tab One - Feature News -->
+
+                                        <!-- Tab Two - Players Staff -->
+                                        <div class="tab-pane" id="players-staff">
+                                            <h3>Players Staff</h3>
+                                            <!-- Item Players-->
+                                            <ul id="players-carousel" class="players ">
+                                                <!-- Item Player -->
+                                                <li class="item-player">
+                                                    <img src="img/players/1.jpg" alt="" class="img-responsive">
+                                                    <div class="info-player">
+                                                        <h4><a href="#">Robert</a></h4>
+                                                        <h5><span>Bmx Sport</span></h5>
+                                                        <div class="overlay-player">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodn culpa qui officia deserunt mollit anim id est laborum.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- End Player post -->
+
+                                                <!-- Item Player -->
+                                                <li class="item-player">
+                                                    <img src="img/players/2.jpg" alt="" class="img-responsive">
+                                                    <div class="info-player">
+                                                        <h4><a href="#">Robert</a></h4>
+                                                        <h5><span>Bmx Sport</span></h5>
+                                                        <div class="overlay-player">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodn culpa qui officia deserunt mollit anim id est laborum.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- End Player post -->
+
+                                                <!-- Item Player -->
+                                                <li class="item-player">
+                                                    <img src="img/players/3.jpg" alt="" class="img-responsive">
+                                                    <div class="info-player">
+                                                        <h4><a href="#">Robert</a></h4>
+                                                        <h5><span>Bmx Sport</span></h5>
+                                                        <div class="overlay-player">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodn culpa qui officia deserunt mollit anim id est laborum.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- End Player post -->
+
+                                                <!-- Item Player -->
+                                                <li class="item-player">
+                                                    <img src="img/players/4.jpg" alt="" class="img-responsive">
+                                                    <div class="info-player">
+                                                        <h4><a href="#">Robert</a></h4>
+                                                        <h5><span>Bmx Sport</span></h5>
+                                                        <div class="overlay-player">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodn culpa qui officia deserunt mollit anim id est laborum.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- End Player post -->
+
+                                                <!-- Item Player -->
+                                                <li class="item-player">
+                                                    <img src="img/players/5.jpg" alt="" class="img-responsive">
+                                                    <div class="info-player">
+                                                        <h4><a href="#">Robert</a></h4>
+                                                        <h5><span>Bmx Sport</span></h5>
+                                                        <div class="overlay-player">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodn culpa qui officia deserunt mollit anim id est laborum.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- End Player post -->
+
+                                                <!-- Item Player -->
+                                                <li class="item-player">
+                                                    <img src="img/players/6.jpg" alt="" class="img-responsive">
+                                                    <div class="info-player">
+                                                        <h4><a href="#">Robert</a></h4>
+                                                        <h5><span>Bmx Sport</span></h5>
+                                                        <div class="overlay-player">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodn culpa qui officia deserunt mollit anim id est laborum.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- End Player post -->
+                                            </ul>
+                                            <!-- End Item Players-->
+                                        </div>
+                                        <!-- Tab Two - Players Staff -->
+
+                                        <!-- Tab Theree - Club Teams -->
+                                        <div class="tab-pane" id="club-news">
+                                            <h3>Club Teams</h3>
+                                            <!-- Clubs Carousel-->
+                                            <ul id="clubs-carousel" class="clubs-teams">
+                                                <!-- Item carousel club -->
+                                                <li class="row">
+                                                    <!-- Item clubs -->
+                                                    <div class="col-sx-12 col-sm-6 col-md-6">
+                                                        <div class="item-clubs">
+                                                            <div class="img-clubs">
+                                                                <img src="img/clubs-team/1.png" alt="" class="img-responsive">
+                                                            </div>
+                                                            <div class="info-clubs">
+                                                                <h4><a href="#">Team 1</a></h4>
+                                                                <p>Lorem ipsum dolor sit amet,ectetur adipiscing elit.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Item clubs -->
+
+                                                    <!-- Item clubs -->
+                                                    <div class="col-sx-12 col-sm-6 col-md-6">
+                                                        <div class="item-clubs">
+                                                            <div class="img-clubs">
+                                                                <img src="img/clubs-team/2.png" alt="" class="img-responsive">
+                                                            </div>
+                                                            <div class="info-clubs">
+                                                                <h4><a href="#">Team 2</a></h4>
+                                                                <p>Lorem ipsum dolor sit amet, ctetur adipiscing elit.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Item clubs -->
+
+                                                    <!-- Item clubs -->
+                                                    <div class="col-sx-12 col-sm-6 col-md-6">
+                                                        <div class="item-clubs">
+                                                            <div class="img-clubs">
+                                                                <img src="img/clubs-team/3.png" alt="" class="img-responsive">
+                                                            </div>
+                                                            <div class="info-clubs">
+                                                                <h4><a href="#">Team 3</a></h4>
+                                                                <p>Lorem ipsum dolor sit amet, coetur adipiscing elit.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Item clubs -->
+
+                                                    <!-- Item clubs -->
+                                                    <div class="col-sx-12 col-sm-6 col-md-6">
+                                                        <div class="item-clubs">
+                                                            <div class="img-clubs">
+                                                                <img src="img/clubs-team/4.png" alt="" class="img-responsive">
+                                                            </div>
+                                                            <div class="info-clubs">
+                                                                <h4><a href="#">Team 4</a></h4>
+                                                                <p>Lorem ipsum dolor sit amet, contur adipiscing elit.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Item clubs -->
+                                                </li>
+                                                <!-- End Item carousel club -->
+
+                                                <!-- Item carousel club -->
+                                                <li class="row">
+                                                    <!-- Item clubs -->
+                                                    <div class="col-sx-12 col-sm-6 col-md-6">
+                                                        <div class="item-clubs">
+                                                            <div class="img-clubs">
+                                                                <img src="img/clubs-team/5.png" alt="" class="img-responsive">
+                                                            </div>
+                                                            <div class="info-clubs">
+                                                                <h4><a href="#">Team 5</a></h4>
+                                                                <p>Lorem ipsum dolor sit amet,ectetur adipiscing elit.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Item clubs -->
+
+                                                    <!-- Item clubs -->
+                                                    <div class="col-sx-12 col-sm-6 col-md-6">
+                                                        <div class="item-clubs">
+                                                            <div class="img-clubs">
+                                                                <img src="img/clubs-team/6.png" alt="" class="img-responsive">
+                                                            </div>
+                                                            <div class="info-clubs">
+                                                                <h4><a href="#">Team 6</a></h4>
+                                                                <p>Lorem ipsum dolor sit amet, ctetur adipiscing elit.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Item clubs -->
+
+                                                    <!-- Item clubs -->
+                                                    <div class="col-sx-12 col-sm-6 col-md-6">
+                                                        <div class="item-clubs">
+                                                            <div class="img-clubs">
+                                                                <img src="img/clubs-team/1.png" alt="" class="img-responsive">
+                                                            </div>
+                                                            <div class="info-clubs">
+                                                                <h4><a href="#">Team 7</a></h4>
+                                                                <p>Lorem ipsum dolor sit amet, coetur adipiscing elit.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Item clubs -->
+
+                                                    <!-- Item clubs -->
+                                                    <div class="col-sx-12 col-sm-6 col-md-6">
+                                                        <div class="item-clubs">
+                                                            <div class="img-clubs">
+                                                                <img src="img/clubs-team/4.png" alt="" class="img-responsive">
+                                                            </div>
+                                                            <div class="info-clubs">
+                                                                <h4><a href="#">Team 8</a></h4>
+                                                                <p>Lorem ipsum dolor sit amet, contur adipiscing elit.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Item clubs -->
+                                                </li>
+                                                <!-- End Item carousel club -->
+                                            </ul>
+                                            <!-- End Clubs Carousel-->
+                                        </div>
+                                        <!-- Tab Theree - Club Teams -->
+                                    </div>
+                                    <!-- Content Tabs -->
+                                </div>
+                                <!-- Left Content - Tabs and Carousel -->
+
+                                <!-- Right Content - Content Counter -->
+                                <div class="col-md-3">
+                                    <aside>
+                                        <div class="title-color text-center">
+                                            <h4>World Cup Championship</h4>
+                                        </div>
+
+                                        <div class="content-counter content-counter-home">
+                                            <p class="text-center">
+                                                <i class="fa fa-clock-o"></i>
+                                                Countdown Till Start
+                                            </p>
+                                            <div id="event-one" class="counter"></div>
+                                            <ul class="post-options">
+                                                <li><i class="fa fa-calendar"></i>June 12, 2014</li>
+                                                <li><i class="fa fa-clock-o"></i>Kick-of, 12:00 PM</li>
+                                            </ul>
+                                            <p>Ei eum affert postulant, ius te mazim zril alterum. Illum dolorem ius ut, eu postulant principes sit.  ert postulant, ius te mazim zril alterum Tibique scriptorem cu pri, te fugit voluptatum mel, nibh exerci denique at qui.</p>
+                                            <a class="btn btn-primary" href="#">
+                                                VIEW EVENT PAGE
+                                                <i class="fa fa-trophy"></i>
+                                            </a>
+                                        </div>
+                                    </aside>
+                                    <!-- Content Counter -->
+                                </div>
+                                <!-- End Right Content - Content Counter -->
+                            </div>
+                    </div>
+                    <!-- Dark Home -->
+
+                    <!-- content Column Left -->
+                    <div class="col-md-8 padding-top col-sm-12">
+                        <!-- Recent Post -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Ultimas Noticias</h3>
+                            </div>
+                            <div class="panel-body">
+                                <!-- Post Item -->
+                                <div class="post-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="img-hover">
+                                                <img src="img/blog/1.jpg" alt="" class="img-responsive">
+                                                <div class="overlay"><a href="single-news.html">+</a></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h4><a href="single-news.html">Porto Alegre and Cuiabá to welcome Valcke</a></h4>
+                                            <p class="data-info">January 3, 2014  / <i class="fa fa-comments"></i><a href="#">0</a></p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rutrum, libero id imperdiet elementum, nunc... <a href="single-news.html">Read More [+]</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Post Item -->
+
+                                <!-- Post Item -->
+                                <div class="post-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="img-hover">
+                                                <img src="img/blog/3.jpg" alt="" class="img-responsive">
+                                                <div class="overlay"><a href="single-news.html">+</a></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h4><a href="single-news.html">Porto Alegre and Cuiabá to welcome Valcke</a></h4>
+                                            <p class="data-info">January  4, 2014  / <i class="fa fa-comments"></i><a href="#">3</a></p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rutrum, libero id imperdiet elementum, nunc... <a href="single-news.html">Read More [+]</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Post Item -->
+
+                                <!-- Post Item -->
+                                <div class="post-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="img-hover">
+                                                <img src="img/blog/4.jpg" alt="" class="img-responsive">
+                                                <div class="overlay"><a href="single-news.html">+</a></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h4><a href="single-news.html">Porto Alegre and Cuiabá to welcome Valcke</a></h4>
+                                            <p class="data-info">January 8, 2014  / <i class="fa fa-comments"></i><a href="#">2</a></p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rutrum, libero id imperdiet elementum, nunc... <a href="single-news.html">Read More [+]</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Post Item -->
+                            </div>
+                        </div>
+                        <!-- End Recent Post -->
+                    </div>
+                    <!-- End content Left -->
+
+                    <!-- Widget Partido -->
+                    <div class="col-md-4  padding-top col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Últimos Partidos</h3>
+                            </div>
+                            <div class="panel-body nopadding">
+                                <div class="widget-partido">
+                                    <div class="col-xs-4">
+                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                        <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                    </div>
+                                    <div class="col-xs-4 resultado">
+                                        <div class="thumbnail">
+                                            <h2>2<small><small>3</small></small></h2>
+                                        </div>
+                                        <div class="thumbnail">
+                                            <h2>2<small><small>5</small></small></h2>
+                                        </div>
+                                        <i class="flaticon-football85" data-toggle="tooltip" title="Árbitro: Gabriel Faballe"></i>
+                                        <span class="glyphicon glyphicon-time" data-toggle="tooltip" title="25 Marzo 2015 22:00"></span>
+                                        <i class="flaticon-football96" data-toggle="tooltip" title="Complejo Tiruyaki"></i>
+                                        <a href="#ruta-al-partido" class="btn btn-primary btn-xs">+ Info</a>
+                                    </div>
+
+                                    <div class="col-xs-4">
+                                        <div class="camiseta-equipo">
+                                            <div>
+                                                <i class="flaticon-football114" style="color: #005A96"></i>
+                                            </div><!--
+--><div class="segunda-mitad">
+                                            <i class="flaticon-football114" style="color: #FAD201"></i>
+                                            </div>
+                                        </div>
+                                        <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Widget Partido -->
+
+                    <!-- Tabla Posiciones -->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Tabla de Posiciones <a href="#mas-info">+ Info</a></h3>
+                            </div>
+                            <div class="panel-body nopadding">
+                                <table class="table table-striped text-center">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" colspan="2">Equipo</th>
+                                            <th>PTS</th>
+                                            <th>PJ</th>
+                                            <th>PG</th>
+                                            <th>PE</th>
+                                            <th>PP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
+                                            <td>River Plate</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
+                                            <td>River Plate</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
+                                            <td>River Plate</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
+                                            <td>River Plate</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
+                                            <td>River Plate</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
+                                            <td>River Plate</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
+                                            <td>River Plate</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>3</td>
+                                            <td>3</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Tabla Posiciones -->
+                    <div class="col-md-2 col-xs-4">
+                        <div class="panel nopadding panel-default">
+                            <div class="panel-body widget widget-md">
+                                <h1>
+                                    <span class="flaticon-football68" aria-hidden="true"></span>12
+                                </h1>
+                                <span>Partidos Jugados</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xs-4">
+                        <div class="panel nopadding panel-default">
+                            <div class="panel-body widget widget-md text-success">
+                                <h1 class="text-success">
+                                    <span class="flaticon-football28" aria-hidden="true"></span>15
+                                </h1>
+                                <span class="text-success">Goles</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- End Content Central -->
+
+            <!-- Sponsors -->
+            <div class="section-wide panel panel-default">
+                <div class="container panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <h2><span class="text-resalt">32</span> equipos participantes <small>Conocelos</small></h2>
+                            </div>
+                            <ul class="equipos-home tooltip-hover">
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <div class="camiseta-equipo">
+                                            <div>
+                                                <i class="flaticon-football114" style="color:#005A96"></i>
+                                            </div><!--
+--><div class="segunda-mitad">
+                                            <i class="flaticon-football114" style="color:#FAD201"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <div class="camiseta-equipo">
+                                            <div>
+                                                <i class="flaticon-football114" style="color:#005A96"></i>
+                                            </div><!--
+--><div class="segunda-mitad">
+                                            <i class="flaticon-football114" style="color:#FAD201"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <div class="camiseta-equipo">
+                                            <div>
+                                                <i class="flaticon-football114" style="color:#005A96"></i>
+                                            </div><!--
+--><div class="segunda-mitad">
+                                            <i class="flaticon-football114" style="color:#FAD201"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <div class="camiseta-equipo">
+                                            <div>
+                                                <i class="flaticon-football114" style="color:#005A96"></i>
+                                            </div><!--
+--><div class="segunda-mitad">
+                                            <i class="flaticon-football114" style="color:#FAD201"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <div class="camiseta-equipo">
+                                            <div>
+                                                <i class="flaticon-football114" style="color:#005A96"></i>
+                                            </div><!--
+--><div class="segunda-mitad">
+                                            <i class="flaticon-football114" style="color:#FAD201"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <div class="camiseta-equipo">
+                                            <div>
+                                                <i class="flaticon-football114" style="color:#005A96"></i>
+                                            </div><!--
+--><div class="segunda-mitad">
+                                            <i class="flaticon-football114" style="color:#FAD201"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <div class="camiseta-equipo">
+                                            <div>
+                                                <i class="flaticon-football114" style="color:#005A96"></i>
+                                            </div><!--
+--><div class="segunda-mitad">
+                                            <i class="flaticon-football114" style="color:#FAD201"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <div class="camiseta-equipo">
+                                            <div>
+                                                <i class="flaticon-football114" style="color:#005A96"></i>
+                                            </div><!--
+--><div class="segunda-mitad">
+                                            <i class="flaticon-football114" style="color:#FAD201"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
+                                    <a href="#ver equipo">
+                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Sponsors -->
+
+        <div class="semiboxshadow text-center">
+            <img src="/torneo/img/img-theme/shp.png" class="img-responsive" alt="">
+        </div>
+
+      </section>
+
+        <!-- Theme-options -->
+        <div id="theme-options" style="z-index: 9999">
+        <div class="openclose"></div>
+        <div class="title">
+            <span>OPCIONES DEL TEMA</span>
+        </div>
+        <span>Estilo</span>
+        <ul id="themeSelector" class="text-center">
+            <li class="cyborg" title="Cyborg"><span>1</span></li>
+            <li class="darkly" title="Darkly"><span>2</span></li>
+            <li class="flatly" title="Flatly"><span>3</span></li>
+            <li class="sandstone" title="Sandstone"><span>4</span></li>
+            <li class="slate" title="Slate"><span>5</span></li>
+            <li class="hero" title="Super Heroe"><span>6</span></li>
+            <li class="yeti" title="Yeti"><span>7</span></li>
+            <li class="bootstrap" title="Bootstrap"><span>8</span></li>
+        </ul>
+        <span>Color Destacado</span>
+        <ul id="colorchanger">
+            <li><a class="colorbox red" href="#" title="Red Skin"></a></li>
+            <li><a class="colorbox red-dark" href="#" title="Red Skin"></a></li>
+            <li><a class="colorbox blue" href="#" title="Blue Skin"></a></li>
+            <li><a class="colorbox blue-dark" href="#" title="Blue Skin"></a></li>
+            <li><a class="colorbox green" href="#" title="Green Skin"></a></li>
+            <li><a class="colorbox green-dark" href="#" title="Green Skin"></a></li>
+            <li><a class="colorbox yellow" href="#" title="Yellow Skin"></a></li>
+            <li><a class="colorbox orange" href="#" title="Orange Skin"></a></li>
+            <li><a class="colorbox orange-dark" href="#" title="Orange Skin"></a></li>
+            <li><a class="colorbox purple" href="#" title="Purple Skin"></a></li>
+            <li><a class="colorbox pink" href="#" title="Pink Skin"></a></li>
+            <li><a class="colorbox cocoa" href="#" title="Cocoa Skin"></a></li>
+            <li><a class="colorbox lynch" href="#" title="Lynch Skin"></a></li>
+            <li><a class="colorbox grey" href="#" title="Grey Skin"></a></li>
+            <li><a class="colorbox black" href="#" title="Black Skin"></a></li>
+        </ul>
+        <span>Formato de Página</span>
+        <ul class="layout-style">
+            <li class="wide">ANCHO</li>
+            <li class="semiboxed active">SEMI CAJA</li>
+            <li class="boxed">CAJA</li>
+            <li class="boxed-margin">C/MARGEN</li>
+        </ul>
+        <span>Patrón del Header</span>
+        <ul class="backgrounds-h">
+            <li class="bgnone" title="None - Default"></li>
+            <li class="bg3"></li>
+            <li class="bg4"></li>
+            <li class="bg8"></li>
+            <li class="bg9 "></li>
+            <li class="bg12"></li>
+            <li class="bg14"></li>
+            <li class="bg19"></li>
+        </ul>
+        <span>Colores:</span>
+        <ul class="layout-style text-center">
+            <li>Fondo
+
+                <div id="colorFondo" class="conBorde">
+                    <div class="cp-background"></div>
+                </div>
+            </li>
+            <li>Header
+
+                <div id="colorHeader" class="conBorde">
+                    <div class="cp-background"></div>
+                </div>
+            </li>
+        </ul>
+        <div class="patterns">
+            <span>Patrón del Fondo</span>
+            <ul class="backgrounds">
+                <li class="bgnone" title="None - Default"></li>
+                <li class="bg1"></li>
+                <li class="bg2"></li>
+                <li class="bg3"></li>
+                <li class="bg4 "></li>
+                <li class="bg5"></li>
+                <li class="bg6"></li>
+                <li class="bg7"></li>
+                <li class="bg8"></li>
+                <li class="bg9 "></li>
+                <li class="bg10"></li>
+                <li class="bg11"></li>
+                <li class="bg12"></li>
+                <li class="bg13"></li>
+                <li class="bg14"></li>
+                <li class="bg15"></li>
+                <li class="bg16"></li>
+                <li class="bg17"></li>
+                <li class="bg18"></li>
+                <li class="bg19"></li>
+                <li class="bg20"></li>
+                <li class="bg21"></li>
+                <li class="bg22"></li>
+                <li class="bg23"></li>
+                <li class="a1"></li>
+                <li class="a2"></li>
+                <li class="a3"></li>
+                <li class="c1 fixed"></li>
+                <li class="c2 fixed"></li>
+                <li class="c3 fixed"></li>
+                <li class="c4 fixed"></li>
+                <li class="c5 fixed"></li>
+                <li class="c6 fixed"></li>
+                <li class="c7 fixed"></li>
+                <li class="c8 fixed"></li>
+                <li class="c9 fixed"></li>
+                <li class="c10 fixed"></li>
+                <li class="c11 fixed"></li>
+                <li class="c12 fixed"></li>
+                <li class="c13 fixed"></li>
+                <li class="c14 fixed"></li>
+                <li class="c15 fixed"></li>
+                <li class="c16 fixed"></li>
+                <li class="c17 fixed"></li>
+                <li class="c18 fixed"></li>
+                <li class="c19 fixed"></li>
+                <li class="c20 fixed"></li>
+                <li class="c21 fixed"></li>
+            </ul>
+        </div>
+        <ul class="layout-style">
+            <li class="btn btn-danger" id="cerrarConfig">Cerrar</li>
+            <li onclick="guardarConfiguracion()" class="btn btn-primary">Guardar</li>
+        </ul>
+        <div class="col-xs-12">
+            <span id="msjeAjax" class="text-center nomargin-bottom"></span>
+        </div>
+    </div>
+        <!-- End Theme-options -->
+
+        <!-- contentPages-->
+
+        <!-- footer-->
+        <footer id="footer" class="footer-2 home">
+            <div class="container">
+                <!-- Social Icons-->
+                <div class="row">
+                    <ul class="social nopadding-top">
+                        <li>
+                            <div>
+                                <a href="#" class="facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#" class="twitter-icon">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#" class="youtube">
+                                    <i class="fa fa-youtube"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Social Icons-->
+
+            </div>
+        </footer>
+        <!-- End footer-->
+
+        <!-- footer Down-->
+        <div class="footer-down">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <p>Sitio desarrollado con la tecnología de <a href="#">QueGolazo!</a><span class="hidden-xs"> &copy; 2015</span></p>
+                    </div>
+                    <div class="col-md-7 hidden-xs">
+                        <!-- Nav Footer-->
+                        <ul class="nav-footer">
+                            <li><a href="#">INICIO</a></li>
+                            <li><a href="#">NOTICIAS</a></li>
+                            <li><a href="#">EDICIONES</a></li>
+                            <li><a href="#">CONTACTO</a></li>
+                        </ul>
+                        <!-- End Nav Footer-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer Down-->
+
+    </div>
+    <!-- End layout-->
+
+    <!-- ======================= JQuery libs =========================== -->
+    <!--Nav-->
+    <script type="text/javascript" src="/torneo/js/nav/jquery.sticky.js" ></script>
+    <!--Totop-->
+    <script type="text/javascript" src="/torneo/js/totop/jquery.ui.totop.js"></script>
+    <!--Ligbox-->
+    <script type="text/javascript" src="/torneo/js/fancybox/jquery.fancybox.js"></script>
+    <!-- carousel.js-->
+    <script type='text/javascript' src="/torneo/js/carousel/carousel.js"></script>
+    <!-- Filter -->
+    <script type='text/javascript' src="/torneo/js/filters/jquery.isotope.js"></script>
+    <!-- Counter -->
+    <script type='text/javascript' src="/torneo/js/counter/jquery.countdown.js"></script>
+    <script type="text/javascript" src="/torneo/js/theme-options/jquery.cookies.js"></script>
+    <!-- Bootstrap.js-->
+    <script type="text/javascript" src="/torneo/js/bootstrap/bootstrap.js"></script>
+    <!--MAIN FUNCTIONS-->
+    <script type="text/javascript" src="/torneo/js/main.js"></script>
+    <!-- Charts.js-->
+    <script type="text/javascript" src="/torneo/js/charts/Chart.min.js"></script>
+    <!-- ======================= End JQuery libs =========================== -->
+</body>
+</html>
