@@ -129,6 +129,16 @@ namespace Logica
            return DaoEstadisticas.obtenerGoleadorEquipo(edicion.idEdicion, idEquipo);
        }
 
+       public DataTable cantidadGolesPorEquipo()
+       {
+           return DaoEstadisticas.cantidadGolesPorEquipo(edicion.idEdicion); 
+       }
+
+       public DataTable cantidadGolesPorTipoGol()
+       {
+           return DaoEstadisticas.cantidadGolesPorTipoGol(edicion.idEdicion);
+       }
+
        public void guardarTablaPosicionesFinal(List<Int64> idEquipos, int idEdicion)
        {
            List<Equipo> equipos = new List<Equipo>();
