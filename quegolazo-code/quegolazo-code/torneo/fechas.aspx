@@ -4,12 +4,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
     <!-- contentPages-->
-
+    <asp:UpdatePanel ID="upListadoFases" runat="server">
+                    <ContentTemplate>
     <!-- Titulo Sección -->
     <section class="section-title img-about">
         <div class="overlay-bg"></div>
         <div class="container">
-            <h1>Fase <%= idFase  %><small>|</small> Fecha <%= idFecha  %> <small>|</small> Grupo <%= idGrupo  %></h1>
+            <h1>Fase <asp:Literal ID="litFase" runat="server"></asp:Literal><small>|</small> Fecha <asp:Literal ID="litFecha" runat="server"></asp:Literal> </h1>
         </div>
     </section>
     <!-- End Titulo Sección -->
@@ -23,9 +24,9 @@
                     <li>/</li>
                     <li><a href="index-2.html"><%= gestorEdicion.edicion.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Fase <%=idFase%></a></li>
+                    <li><a href="index-2.html">Fase <asp:Literal ID="litLnkFase" runat="server"></asp:Literal></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Fecha <%=idFecha%></a></li>
+                    <li><a href="index-2.html">Fecha <asp:Literal ID="litLnkFecha" runat="server"></asp:Literal></a></li>
                 </ul>
             </div>
         </div>
@@ -37,7 +38,7 @@
         <!-- Content Central -->
         <div class="container padding-top">
             <div class="row mobile-margin-top">
-                
+                 
                 <!-- Seleccionar la Fase -->
                 <div class="col-sm-3">
                     <div class="panel nopadding panel-default">
@@ -46,15 +47,15 @@
                             <ul class="fases slider-multiple tooltip-hover">
                                 <asp:Repeater ID="rptFases" runat="server" OnItemCommand="rptFases_ItemCommand1" OnItemDataBound="rptFases_ItemDataBound">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="LinkButton1" runat="server" CommandName="SeleccionarFase" CommandArgument='<%# Eval("idFase") %>'>
-                                        <a href="#cargar-esta-fase" >
+                                        <asp:LinkButton ID="lnkFase" runat="server" ClientIDMode="AutoID" CommandName="SeleccionarFase" CommandArgument='<%# Eval("idFase") %>'>
+                                        <%--<a href="#cargar-esta-fase" >--%>
                                            <li class="li-item fase-<%# Eval("estado.nombre") %>" data-toggle="tooltip" title="Seleccionar Fase">
                                                 <div class="widget widget-md">
                                                     <h1><%# Eval("idFase") %></h1>
                                                     <span><%# Eval("estado.nombre") %></span>
                                                 </div>
                                            </li>
-                                        </a>
+                                        <%--</a>--%>
                                         </asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:Repeater>
@@ -65,6 +66,7 @@
                 <!-- END Seleccionar la Fase -->
 
                 <!-- Seleccionar la Fecha -->
+                
                 <div class="col-sm-9">
                     <div class="panel nopadding panel-default">
                         <div class="panel-body">
@@ -73,14 +75,14 @@
                                 <asp:Repeater ID="rptFechas" runat="server" OnItemCommand="rptFechas_ItemCommand">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="lnkFecha" CommandName="SeleccionarFecha" ClientIDMode="AutoID"  runat="server" CommandArgument='<%# Eval("idFecha") %>'>
-                                        <a href="#cargar-esta-fecha">
+                                       <%-- <a href="#cargar-esta-fecha">--%>
                                             <li class="li-item fecha-<%# Eval("estado.nombre") %>" data-toggle="tooltip" title="Seleccionar Fecha">
                                                 <div class="widget widget-md">
                                                     <h1><%# Eval("idFecha") %></h1>
                                                     <span><%# Eval("estado.nombre") %></span>
                                                 </div>
                                             </li>
-                                        </a>
+                                        <%--</a>--%>
                                         </asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:Repeater>
@@ -88,6 +90,7 @@
                         </div>
                     </div>
                 </div>
+                       
                 <!-- END Seleccionar la Fecha -->
 
                 <!-- Listado de Partidos -->
@@ -120,7 +123,7 @@
                                                       </div>
                                                     </div>
                                                 </asp:Panel>
-                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).local.nombre%></a></h5>
+                                                    <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("local.idEquipo").ToString())) %>" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).local.nombre%></a></h5>
                                                 </div>
                                                 <div class="col-xs-4 resultado">
                                                     <div class="thumbnail">
@@ -132,7 +135,7 @@
                                                     <i class="flaticon-football85" data-toggle="tooltip" title="Árbitro: <%# Eval("arbitro.nombre")%>"></i>
                                                     <span class="glyphicon glyphicon-time" data-toggle="tooltip" title="<%# Eval("fecha")%>"></span>
                                                     <i class="flaticon-football96" data-toggle="tooltip" title="<%# Eval("cancha.nombre")%>"></i>
-                                                    <a href="#ruta-al-partido" class="btn btn-primary btn-xs">+ Info</a>
+                                                    <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion,Eval("idPartido").ToString()) %>" class="btn btn-primary btn-xs">+ Info</a>
                                                 </div>
                                                <div class="col-xs-4">
                                                      <asp:Panel ID="panelLogoVisitante" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? true : false %>">
@@ -148,7 +151,7 @@
                                                       </div>
                                                     </div>
                                                 </asp:Panel>
-                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).visitante.nombre%></a></h5>
+                                                    <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("visitante.idEquipo").ToString())) %>" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).visitante.nombre%></a></h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -412,6 +415,8 @@
                 </div>--%>
                 <!-- END Listado de Partidos -->
             </div>
+                         </ContentTemplate>
+                     </asp:UpdatePanel>
         </div>
         <!-- End Content Central -->
                         
