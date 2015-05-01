@@ -3,6 +3,7 @@ $(document).ready(function ($) {
     $("#menu-fases li").on("click", function () {        
         var index = ($(this).text().length > 1) ? 0 : parseInt($(this).text());
         if (datosFases[index] != null) {
+            $("#graficosFases").show();
             $("#numFaseGrafico").text($(this).text());
             var ctx = $("#graficosFases").get(0).getContext("2d");
             myPieChart.destroy();

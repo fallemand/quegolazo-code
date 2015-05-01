@@ -39,7 +39,6 @@ namespace Logica
        {
            return DaoEstadisticas.obtenerTablaGoleadores(edicion.idEdicion);
        }
-
        public DataTable ultimoPartidoPrevioDeUnEquipo(int idEquipo, int idPartido)
        {
            return DaoEstadisticas.ultimoPartidoPrevioDeUnEquipo(idEquipo, edicion.idEdicion, idPartido);
@@ -260,8 +259,8 @@ namespace Logica
            return s.Serialize(datosGoleadores);
        }
        public string generarJsonParaGraficoBarraGoleadores() {
-           List<DataTable> datos = new List<DataTable>();           
-           datos.Add(obtenerTablaGoleadores());
+           List<DataTable> datos = new List<DataTable>();
+           datos.Add(obtenerTablaGoleadores());                    
            foreach (Fase fase in this.edicion.fases)
            {
                datos.Add(goleadoresPorFaseDeEdicion(fase.idFase));
@@ -269,18 +268,39 @@ namespace Logica
            List<ChartsUtils.barChartData> datosProcesados = new List<ChartsUtils.barChartData>();
            foreach (DataTable tabla in datos)
            {
-               datosProcesados.Add((tabla.Rows.Count > 0) ? generarObjetoParaGraficoDeBarra(tabla) : null);
+               datosProcesados.Add((tabla.Rows.Count > 0) ? generarObjetoParaGraficoDeBarraGoleadores(tabla) : null);
            }
            return new JavaScriptSerializer().Serialize(datosProcesados);
        }
        public ChartsUtils.barChartData generarObjetoParaGraficoDeBarra(DataTable datosGrafico)
        {
            List<string> labels = new List<string>();
-           List<int> datos = new List<int>();
+           List<int> datos = new List<int>();           
            foreach (DataRow fila in datosGrafico.Rows)
            {
                labels.Add(fila.ItemArray[0].ToString());
                datos.Add(int.Parse(fila.ItemArray[1].ToString()));
+           }
+           ChartsUtils.barChartDataSet dato = new ChartsUtils.barChartDataSet()
+           {
+               data = datos,
+               fillColor = ChartsUtils.colors.green + ChartsUtils.transparences.fillColor,
+               highlightFill = ChartsUtils.colors.green + ChartsUtils.transparences.highlightFill,
+               highlightStroke = ChartsUtils.colors.green + ChartsUtils.transparences.highlightStroke,
+               strokeColor = ChartsUtils.colors.green + ChartsUtils.transparences.strokeColor
+           };
+           ChartsUtils.barChartData datosGoleadores = new ChartsUtils.barChartData(labels, new List<ChartsUtils.barChartDataSet>() { dato });
+
+           return datosGoleadores;
+       }
+       public ChartsUtils.barChartData generarObjetoParaGraficoDeBarraGoleadores(DataTable datosGrafico)
+       {
+           List<string> labels = new List<string>();
+           List<int> datos = new List<int>();
+           foreach (DataRow fila in datosGrafico.Rows)
+           {
+               labels.Add(fila.ItemArray[1].ToString().Split(' ').Last());
+               datos.Add(int.Parse(fila.ItemArray[4].ToString()));
            }
            ChartsUtils.barChartDataSet dato = new ChartsUtils.barChartDataSet()
            {
