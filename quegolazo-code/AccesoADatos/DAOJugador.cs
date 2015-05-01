@@ -294,5 +294,42 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public int obtenerIdEquipo(int idJugador)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            int idEquipo = 0;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT j.idEquipo AS 'IDEQUIPO'
+                                FROM Jugadores j 
+                                WHERE j.idJugador = @idJugador";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idJugador", idJugador));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    idEquipo = Int32.Parse(dr["IDEQUIPO"].ToString());
+                }
+                if (dr != null)
+                    dr.Close();
+                return idEquipo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los jugadores:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
