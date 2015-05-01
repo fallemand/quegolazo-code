@@ -76,6 +76,24 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinEquipos;
         
         /// <summary>
+        /// Control graficoEquipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl graficoEquipos;
+        
+        /// <summary>
+        /// Control noGraphicsGolesPorEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noGraphicsGolesPorEquipo;
+        
+        /// <summary>
         /// Control rptGolesPorTipoGol.
         /// </summary>
         /// <remarks>
@@ -92,5 +110,23 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinTiposDeGoles;
+        
+        /// <summary>
+        /// Control graficoTipos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl graficoTipos;
+        
+        /// <summary>
+        /// Control noGraphicsTipoGol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noGraphicsTipoGol;
     }
 }

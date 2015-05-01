@@ -51,7 +51,7 @@
                                 <asp:Repeater ID="rptOtroseJugadores" runat="server" OnItemDataBound="rptOtroseJugadores_ItemDataBound" >
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre")%>">
-                                            <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>">
+                                            <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo, idEdicion, idEquipo, int.Parse(Eval("idJugador").ToString()))%>">
                                                 <asp:Panel ID="panelFotoJugador" runat="server" Visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen() ? true : false %>">
                                                     <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive img-circle center-block">
                                                 </asp:Panel>
