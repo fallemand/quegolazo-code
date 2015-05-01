@@ -54,7 +54,7 @@
                                                 </asp:Panel>
                                                 <asp:Panel ID="panelJugadorSinFoto" runat="server" Visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen() ? false : true %>">
                                                     <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>/jugador-<%# Eval("idJugador")%>" class="avatar-jugador avatar-slider avatar-bg-<%# Eval("idJugador").ToString().Substring(Eval("idJugador").ToString().Length -1 , 1) %>">
-                                                        <h1><asp:Literal ID="litIniciales" runat="server" Text="">AB</asp:Literal></h1>
+                                                        <h1><asp:Literal ID="litIniciales" runat="server" Text=""></asp:Literal></h1>
                                                     </a>
                                                 </asp:Panel>
                                             </a>
@@ -88,9 +88,11 @@
                                     <div class="collapse navbar-collapse" id="menu-fases">
                                         <ul class="nav navbar-nav  nav-justified">
                                             <li class="active"><a href="#todas" data-toggle="tab">Todas</a></li>
-                                            <li class=""><a href="#fase1" data-toggle="tab">1</a></li>
-                                            <li class=""><a href="#fase2" data-toggle="tab">2</a></li>
-                                            <li class=""><a href="#fase3" data-toggle="tab">3</a></li>                                           
+                                            <asp:Repeater ID="rptFasesEdicion" runat="server" Visible="false">
+                                                <ItemTemplate>
+                                                    <li class=""><a href="#fase<%# Eval("idFase") %>" data-toggle="tab"><%# Eval("idFase") %></a></li>
+                                                </ItemTemplate>
+                                            </asp:Repeater>                                        
                                         </ul>
                                     </div>
                                 </div>
@@ -112,204 +114,58 @@
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Antonio Herrera</td>
-                                                <td>Que Golazo</td>
-                                                <td>20</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Gustavo Alzogaray</td>
-                                                <td>Otra tesis</td>
-                                                <td>18</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>El Apache Tevez</td>
-                                                <td>Juventus</td>
-                                                <td>18</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Pipita Higuain</td>
-                                                <td>Palermo</td>
-                                                <td>14</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Gonzalo Alberti</td>
-                                                <td>Yupanqui</td>
-                                                <td>10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Amadeo Sabattini</td>
-                                                <td>Historiadores</td>
-                                                <td>8</td>
-                                            </tr>
-                                              <tr>
-                                                    <td>7</td>
-                                                    <td>Paula Pedrosa</td>
-                                                    <td>Las rompe huevos</td>
-                                                    <td>6</td>
-                                                </tr>
-
+                                            <asp:Repeater ID="rptGoleadoresTodasLasFases" runat="server" OnItemDataBound="rptGoleadoresTodasLasFases_ItemDataBound">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td><asp:Literal ID="litPosicionJugador" runat="server" Text=""></asp:Literal></td>
+                                                        <td><%# Eval("JUGADOR") %></td>
+                                                        <td><%# Eval("EQUIPO") %></td>
+                                                        <td><%# Eval("GOLES") %></td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                            <tr id="sinGoleadoresTodas" runat="server" visible="false">
+                                                <td colspan="4">No hay información de goleadores registrada</td>
+                                            </tr>                                            
                                         </tbody>
                                     </table>
                                 </div>
-                                 <div class="tab-pane fade" id="fase1">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="col-xs-1 col-md-1 text-center">#</th>
-                                                <th class="col-xs-8 col-md-4 text-center">Jugador</th>
-                                                <th class="col-xs-2 col-md-4 text-center">Equipo</th>
-                                                <th class="col-xs-2 col-md-4 text-center">Goles</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Antonio Herrera</td>
-                                                <td>Que Golazo</td>
-                                                <td>5</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Gustavo Alzogaray</td>
-                                                <td>Otra tesis</td>
-                                                <td>8</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>El Apache Tevez</td>
-                                                <td>Juventus</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Pipita Higuain</td>
-                                                <td>Palermo</td>
-                                                <td>5</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Gonzalo Alberti</td>
-                                                <td>Yupanqui</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Amadeo Sabattini</td>
-                                                <td>Historiadores</td>
-                                                <td>6</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>Paula Pedrosa</td>
-                                                <td>Las rompe huevos</td>
-                                                <td>1</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                 <div class="tab-pane fade" id="fase2">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="col-xs-1 col-md-1 text-center">#</th>
-                                                <th class="col-xs-8 col-md-4 text-center">Jugador</th>
-                                                <th class="col-xs-2 col-md-4 text-center">Equipo</th>
-                                                <th class="col-xs-2 col-md-4 text-center">Goles</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Antonio Herrera</td>
-                                                <td>Que Golazo</td>
-                                                <td>4</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Gustavo Alzogaray</td>
-                                                <td>Otra tesis</td>
-                                                <td>8</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>El Apache Tevez</td>
-                                                <td>Juventus</td>
-                                                <td>3</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Pipita Higuain</td>
-                                                <td>Palermo</td>
-                                                <td>4</td>
-                                            </tr>
-                                            
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                 <div class="tab-pane fade" id="fase3">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="col-xs-1 col-md-1 text-center">#</th>
-                                                <th class="col-xs-8 col-md-4 text-center">Jugador</th>
-                                                <th class="col-xs-2 col-md-4 text-center">Equipo</th>
-                                                <th class="col-xs-2 col-md-4 text-center">Goles</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Antonio Herrera</td>
-                                                <td>Que Golazo</td>
-                                                <td>10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Gustavo Alzogaray</td>
-                                                <td>Otra tesis</td>
-                                                <td>8</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>El Apache Tevez</td>
-                                                <td>Juventus</td>
-                                                <td>8</td>
-                                            </tr>
-                                        
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Gonzalo Alberti</td>
-                                                <td>Yupanqui</td>
-                                                <td>10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Amadeo Sabattini</td>
-                                                <td>Historiadores</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Paula Pedrosa</td>
-                                                <td>Las rompe huevos</td>
-                                                <td>1</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                               
-
+                                <asp:Repeater ID="rptFasesIndividuales" runat="server" Visible="false" OnItemDataBound="rptFasesIndividuales_ItemDataBound">
+                                    <ItemTemplate>
+                                        <div class="tab-pane fade" id="fase<%# Eval("idFase") %>">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-xs-1 col-md-1 text-center">#</th>
+                                                        <th class="col-xs-8 col-md-4 text-center">Jugador</th>
+                                                        <th class="col-xs-2 col-md-4 text-center">Equipo</th>
+                                                        <th class="col-xs-2 col-md-4 text-center">Goles</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="text-center">
+                                                    <asp:Repeater ID="rptFaseHija" runat="server" OnItemDataBound="rptFaseHija_ItemDataBound">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td><asp:Literal ID="litPosicionJugador" runat="server" Text=""></asp:Literal></td>
+                                                                <td><%# Eval("JUGADOR") %></td>
+                                                                <td><%# Eval("EQUIPO") %></td>
+                                                                <td><%# Eval("GOLES") %></td>
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                    <asp:Panel ID="pnlSinGoleadoresFaseIndividual" runat="server" visible="false">
+                                                        <tr id="sinGoleadoresFaseIndividual" runat="server" >
+                                                            <td colspan="4">No hay información de goleadores registrada</td>
+                                                        </tr>
+                                                    </asp:Panel>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                       <%--</div>--%>
+                                    </FooterTemplate>
+                                </asp:Repeater>                                
                             </div>
                         </div>
                     </div>
@@ -361,51 +217,31 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th class="col-xs-1 col-md-1 text-center"></th>
                                                 <th class="col-xs-1 col-md-1 text-center">Equipo</th>
                                                 <th class="col-xs-8 col-md-4 text-center">Cantidad</th>
-
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
-                                            <tr>
-                                                <td>Estudiantes</td>
-                                                <td>15</td>
+                                            <asp:Repeater ID="rptEquiposQueConvirtieron" runat="server">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("Id equipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
+                                                        <td><%# Eval("Equipo") %></td>
+                                                        <td><%# Eval("Goles") %></td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                            <tr id="sinEquipos" runat="server" >
+                                               <td colspan="3">No hay información de equipos registrada</td>
                                             </tr>
-                                            <tr>
-                                                <td>River</td>
-                                                <td>15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Boca</td>
-                                                <td>12</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Arsenal</td>
-                                                <td>9</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Godoy Cruz</td>
-                                                <td>8</td>
-                                            </tr>  
-                                            <tr>
-                                                <td>Velez</td>
-                                                <td>6</td>
-                                            </tr> 
-                                            <tr>
-                                                <td>Excursionistas</td>
-                                                <td>2</td>
-                                            </tr>  
                                         </tbody>
                                     </table>
                                 </div>
                                  <div class="tab-pane fade" id="graficoEquipos">
                                   <canvas id="canvasTiposGoles" class="canvas-md" ></canvas>
-                                </div>                   
-                               
-
+                                </div>  
                             </div>
-    
-       
                         </div>
                     </div>
                </div>
@@ -443,47 +279,31 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th class="col-xs-1 col-md-1 text-center"></th>
                                                 <th class="col-xs-1 col-md-1 text-center">Tipo de Gol</th>
                                                 <th class="col-xs-8 col-md-4 text-center">Cantidad</th>
-
                                             </tr>
                                         </thead>
-                                        <tbody class="text-center">
-                                            <tr>
-                                                <td>Cabeza</td>
-                                                <td>15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jugada</td>
-                                                <td>15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Penal</td>
-                                                <td>12</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tiro Libre</td>
-                                                <td>9</td>
-                                            </tr>
-                                            <tr>
-                                                <td>En contra</td>
-                                                <td>8</td>
-                                            </tr> 
-                                            <tr>
-                                                <td>No definido</td>
-                                                <td>3</td>
-                                            </tr> 
+                                        <tbody class="text-center">                                            
+                                            <asp:Repeater ID="rptGolesPorTipoGol" runat="server">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td><span class="flaticon-<%# Eval("tipo") %>"></span></td>
+                                                        <td><%# Eval("Tipo Gol") %></td>
+                                                        <td><%# Eval("Goles") %></td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater> 
+                                            <tr id="sinTiposDeGoles" runat="server" >
+                                                <td colspan="3">No hay información de tipos de goles registrada</td>
+                                            </tr>                                           
                                         </tbody>
                                     </table>
                                 </div>
                                  <div class="tab-pane fade active in" id="graficoTipos">
                                   <canvas id="graficoTiposDeGol" class="canvas-md" ></canvas>
-                                </div>                   
-                               
-
+                                </div> 
                             </div>
-    
-       
                         </div>
                     </div>
                </div>

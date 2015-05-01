@@ -96,5 +96,11 @@ namespace Logica
             DAOJugador daoJugador = new DAOJugador();
             daoJugador.eliminarJugador(idJugador);
         }
+
+        public List<Jugador> obtenerJugadoresGoleadores(int idEdicion)
+        {
+            DAOJugador daoJugador = new DAOJugador();
+            return daoJugador.obtenerJugadoresGoleadores(idEdicion);
+        }
     }
 }

@@ -70,7 +70,23 @@ $(document).ready(function ($) {
         datosFases.push(data2);
         datosFases.push(data3);
         datosFases.push(data4);
-        var myPieChart = new Chart(ctx).Bar(data);     
+        var myPieChart = new Chart(ctx).Bar(data);
+
+        if (golesDeEquipo != null) {
+            var ctx = $("#canvasTiposGoles").get(0).getContext("2d");
+            var myPieChart = new Chart(ctx).Doughnut(golesDeEquipo, {
+                animateScale: true,
+                tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value+'%' %>",
+            });
+        }
+
+        if (tiposDeGol != null) {
+            var ctx = $("#graficoTiposDeGol").get(0).getContext("2d");
+            var myPieChart = new Chart(ctx).Doughnut(tiposDeGol, {
+                animateScale: true,
+                tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value+'%' %>",
+            });
+        }
     
 });
 

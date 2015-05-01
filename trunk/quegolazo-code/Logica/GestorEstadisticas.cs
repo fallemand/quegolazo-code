@@ -133,14 +133,14 @@ namespace Logica
            return DaoEstadisticas.obtenerGoleadorEquipo(edicion.idEdicion, idEquipo);
        }
 
-       public DataTable cantidadGolesPorEquipo()
+       public DataTable cantidadGolesPorEquipo(bool paraGrafico)
        {
-           return DaoEstadisticas.cantidadGolesPorEquipo(edicion.idEdicion); 
+           return DaoEstadisticas.cantidadGolesPorEquipo(edicion.idEdicion, paraGrafico); 
        }
 
-       public DataTable cantidadGolesPorTipoGol()
+       public DataTable cantidadGolesPorTipoGol(bool paraGrafico)
        {
-           return DaoEstadisticas.cantidadGolesPorTipoGol(edicion.idEdicion);
+           return DaoEstadisticas.cantidadGolesPorTipoGol(edicion.idEdicion, paraGrafico);
        }
 
        public void guardarTablaPosicionesFinal(List<Int64> idEquipos, int idEdicion)
