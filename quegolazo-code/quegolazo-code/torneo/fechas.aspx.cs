@@ -21,15 +21,15 @@ namespace quegolazo_code.torneo
         {
             try
             {
-                idEdicion = int.Parse(Request["idEdicion"]);
-                nickTorneo = Request["nickTorneo"].ToString();
-                idFase =(Request["idFase"]!=null) ? int.Parse(Request["idFase"]):0;
-                idGrupo = (Request["idGrupo"] != null) ? int.Parse(Request["idGrupo"]) : 0;
-                idFecha = (Request["idFecha"] != null) ? int.Parse(Request["idFecha"]) : 0;
                 gestorTorneo = Sesion.getGestorTorneo();
                 gestorEdicion = Sesion.getGestorEdicion();
                 if (!Page.IsPostBack)
                 {
+                    idEdicion = int.Parse(Request["idEdicion"]);
+                    nickTorneo = Request["nickTorneo"].ToString();
+                    idFase = (Request["idFase"] != null) ? int.Parse(Request["idFase"]) : 0;
+                    idGrupo = (Request["idGrupo"] != null) ? int.Parse(Request["idGrupo"]) : 0;
+                    idFecha = (Request["idFecha"] != null) ? int.Parse(Request["idFecha"]) : 0;
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);//2010
                     gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                     gestorTorneo.torneo = gestorTorneo.obtenerTorneoPorNick(nickTorneo); //jockeyClub
@@ -43,17 +43,13 @@ namespace quegolazo_code.torneo
             }
         }
 
-        protected void rptFases_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-            if (e.CommandName == "SeleccionarFase")
-            {
-                GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas());
-            }
-        }
 
         protected void rptFechas_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-
+            if (e.CommandName == "SeleccionarFecha")
+            {
+               // GestorControles.cargarRepeaterList(rptGrupos, ((Fase)e.Item.DataItem).obtenerFechas());
+            }
         }
 
         protected void rptFases_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -102,6 +98,14 @@ namespace quegolazo_code.torneo
             {  
                 Repeater rptPartidos = (Repeater)e.Item.FindControl("rptPartidos");
                 GestorControles.cargarRepeaterList(rptPartidos, ((Grupo)e.Item.DataItem).fechas[idFecha].partidos);
+            }
+        }
+
+        protected void rptFases_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "SeleccionarFase")
+            {
+                GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas());
             }
         }
     }
