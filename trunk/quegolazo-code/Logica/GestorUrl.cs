@@ -55,7 +55,8 @@ namespace Logica
         }
         public static string urlJugador(string nickTorneo, int idEdicion, int idEquipo, int idJugador)
         {
-            return "/" + nickTorneo + "/edicion-" + idEdicion + "/equipo-" + idEquipo + "/jugador-"+idJugador;
+            idEquipo = (idEquipo != 0) ? idEquipo : new GestorJugador().obtenerIdEquipo(idJugador);
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/equipo-" + idEquipo + "/jugador-" + idJugador;
         }
 
         public static string urlGoleadores(string nickTorneo, int idEdicion)

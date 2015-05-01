@@ -25,35 +25,40 @@ namespace quegolazo_code.torneo
         {
             try
             {
+                
+                gestorEquipo = Sesion.getGestorEquipo();
+                gestorJugador = Sesion.getGestorJugador();
+
                 idJugador = int.Parse(Request["idJugador"]);
                 nickTorneo = Request["nickTorneo"].ToString();
                 idEdicion = int.Parse(Request["idEdicion"]);
-                idEquipo = int.Parse(Request["idEquipo"]);
+                idEquipo = (int.Parse(Request["idEquipo"]) != 0) ? int.Parse(Request["idEquipo"]) : gestorJugador.obtenerIdEquipo(idJugador);
+                gestorTorneo = Sesion.getGestorTorneo();
+                gestorEdicion = Sesion.getGestorEdicion();
+
+                if (!Page.IsPostBack)
+                {
+                    gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);//2010
+                    gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo); //jockeyClub
+                    Sesion.setTorneo(gestorTorneo.torneo);
+                    gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(idEquipo);//1
+                    GestorControles.cargarRepeaterList(rptOtroseJugadores, gestorEquipo.equipo.jugadores);
+                    gestorJugador.jugador = gestorJugador.obtenerJugadorPorId(idJugador);//2068
+                    gestorEstadisticas = Sesion.getGestorEstadisticas();
+                    cargarDatosJugador();
+                    cargarPartidosJugador();
+                    cargarGolesJugador();
+                    cargarGraficoGoles();
+                }
+                
             }
             catch (Exception)
             {
                 //TODO redireccionar a pagina de error
                 throw;
             }
-            gestorTorneo = Sesion.getGestorTorneo();
-            gestorEdicion = Sesion.getGestorEdicion();
-            gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);//2010
-            gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo); //jockeyClub
-            gestorEquipo = Sesion.getGestorEquipo();
-            gestorJugador = Sesion.getGestorJugador();
-            gestorEstadisticas = Sesion.getGestorEstadisticas();
-
-            if (!Page.IsPostBack)
-            {
-                
-                gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(idEquipo);//1
-                GestorControles.cargarRepeaterList(rptOtroseJugadores, gestorEquipo.equipo.jugadores);
-                gestorJugador.jugador = gestorJugador.obtenerJugadorPorId(idJugador);//2068
-                cargarDatosJugador();
-                cargarPartidosJugador();
-                cargarGolesJugador();
-                cargarGraficoGoles();
-            }
+            
+           
         }
 
         private void cargarGraficoGoles()
