@@ -26,8 +26,7 @@ namespace quegolazo_code.torneo
             try
             {
                 gestorTorneo = Sesion.getGestorTorneo();
-                gestorEdicion = Sesion.getGestorEdicion();
-                //TODO falta agregarle el try/catch y que redirija a una pagina de error...
+                gestorEdicion = Sesion.getGestorEdicion();                
                 idEdicion = int.Parse(Request["idEdicion"]);
                 nickTorneo = Request["nickTorneo"];
                 gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
@@ -35,16 +34,19 @@ namespace quegolazo_code.torneo
                 gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
                 gestorEstadistica = new GestorEstadisticas();
                 if (!Page.IsPostBack)
-                {
+                {                    
                     GestorEquipo gestorEsuipo = new GestorEquipo();
                     gestorEsuipo.equipo = gestorEsuipo.obtenerEquipoPorId(11);
                     GestorControles.cargarRepeaterList(rptGoleadores, gestorEsuipo.equipo.jugadores);
                 }
-
+            }
+            catch (ArgumentNullException)
+            {
+                //TODO redireccionar a pagina de error
             }
             catch (Exception)
             {
-                //TODO redireccionar a pagina de error
+                
                 throw;
             }
 
