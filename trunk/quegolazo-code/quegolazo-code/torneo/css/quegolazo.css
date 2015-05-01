@@ -898,3 +898,69 @@ a.avatar-jugador:hover {
     margin-top: 0px;
     padding-top: 30px;
 }
+
+
+
+/*----------------------- Widget Podio -----------------------------*/
+.podio {
+    background-image: url("../img/img-theme/podio.png");
+    background-size:100% 100%;
+    position: relative;
+}
+
+.podio-md {
+    height:230px;
+}
+
+.podio-md div img{
+    max-height: 85px;
+    max-width: 75px;
+}
+
+.podio div {
+    display: inline-block;
+    position: absolute;
+}
+
+.podio div.segundo {
+    top:19%;
+    left:10%;
+}
+
+.podio div.primero {
+    top:2%;
+    left:41%;
+}
+
+.podio div.tercero {
+    top:23%;
+    left:70%;
+}
+
+.podio div a {
+    width: 80px;
+    display: block;
+}
+
+.podio-md .camiseta-equipo {
+    font-size:85px;
+    line-height: 70px;
+    margin-top: 10px;
+    width:84px;
+}
+.podio-md .camiseta-equipo div {
+    width:42px;
+}
+
+.podio-md .camiseta-equipo div:first-child {
+    left:0%;
+}
+
+.podio-md .camiseta-equipo .segunda-mitad {
+    left:50%;
+}
+
+.podio-md .camiseta-equipo .segunda-mitad i {
+    margin-left:-48px;
+}
+/*----------------------- END: Widget Podio -----------------------------*/
