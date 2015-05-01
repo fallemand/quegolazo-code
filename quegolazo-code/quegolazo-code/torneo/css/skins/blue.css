@@ -32,15 +32,21 @@
 .thumbs li:hover,
 .owl-theme .owl-controls .owl-page.active span,
 .owl-theme .owl-controls.clickable .owl-page:hover span{
-	background: #0088cc; 
-	background-color: #0088cc; 
+    background: #0088cc;
+    background-color: #0088cc;
 }
 .footer-down{
-	background: #0088cc url("/torneo/img/img-theme/footer-down.png") repeat-x left 1px;
+    background: #0088cc url("/torneo/img/img-theme/footer-down.png") repeat-x left 1px;
 }
 .events-carousel li .header-post .date{
-	background: #0088cc;  
-	background: rgba(0, 136, 204, 0.6);
+    background: #0088cc;
+    background: rgba(0, 136, 204, 0.6);
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background: #0088cc;
+    background-color: #0088cc;
+    color:#FFF;
 }
 
 /* Colors ----------------------------------------------------------*/
@@ -68,41 +74,41 @@ address i,
 address a,
 .list li i,
 a{
-	color: #0088cc;
+    color: #0088cc;
 }
 
 /* Borders ----------------------------------------------------------*/
 
 .nav-tabs li.active:after {
-	border: 6px solid #0088cc;
-	border-left-color: transparent;
-	border-right-color: transparent;
-	border-bottom-color: transparent;
-	bottom: -11px;
-	content: "";
-	left: 50%;
-	margin-left: -6px;
-	position: absolute;
-	z-index: 101;
+    border: 6px solid #0088cc;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    bottom: -11px;
+    content: "";
+    left: 50%;
+    margin-left: -6px;
+    position: absolute;
+    z-index: 101;
 }
 .style-caption p,
 .item-clubs{
-	border-right: 5px solid #0088cc;	
+    border-right: 5px solid #0088cc;
 }
 .panel .panel-heading, .titles h4{
-	border-left: 5px solid #0088cc;
+    border-left: 5px solid #0088cc;
 }
 .pagination > .active > a,
 .pagination > .active:hover > a{
-	border-color: #0088cc;
+    border-color: #0088cc;
 }
 .style-caption h1:before{
-	border-top: 40px solid transparent;
-	border-bottom: 40px solid transparent;
-	border-left: 40px solid #0088cc;
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-left: 40px solid #0088cc;
 }
 .crumbs:before{
-	border-bottom: 20px solid #0088cc;
+    border-bottom: 20px solid #0088cc;
 }
 .tooltip.top .tooltip-arrow {
   border-top-color: #0088cc;
@@ -113,12 +119,12 @@ a{
 .sf-menu .sub-current,
 .header-2,
 .header-2 .is-sticky{
-	border-bottom: 3px solid #0088cc;
+    border-bottom: 3px solid #0088cc;
 }
 header,
 .overlay-player,
 .crumbs{
-	border-top: 3px solid #0088cc;
+    border-top: 3px solid #0088cc;
 }
 .sf-arrows > li > .sf-with-ul:focus:after,
 .sf-arrows > li:hover > .sf-with-ul:after,

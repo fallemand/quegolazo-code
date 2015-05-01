@@ -34,15 +34,21 @@
 .owl-theme .owl-controls.clickable .owl-page:hover span,
 .pagination > .active > a,
 .pagination > .active:hover > a{
-	background: #F9690E; 
-	background-color: #F9690E; 
+    background: #F9690E;
+    background-color: #F9690E;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background: #F9690E;
+    background-color: #F9690E;
+    color:#FFF;
 }
 .footer-down{
-	background: #F9690E url("/torneo/img/img-theme/footer-down.png") repeat-x left 1px;
+    background: #F9690E url("/torneo/img/img-theme/footer-down.png") repeat-x left 1px;
 }
 .events-carousel li .header-post .date{
-	background: #F9690E;  
-	background: rgba(255, 180, 63, 0.6);
+    background: #F9690E;
+    background: rgba(255, 180, 63, 0.6);
 }
 
 /* Colors ----------------------------------------------------------*/
@@ -71,41 +77,41 @@ address a,
 .events-carousel h4 a,
 .pagination > li:hover a,
 a{
-	color: #F9690E;
+    color: #F9690E;
 }
 
 /* Borders ----------------------------------------------------------*/
 
 .nav-tabs li.active:after {
-	border: 6px solid #F9690E;
-	border-left-color: transparent;
-	border-right-color: transparent;
-	border-bottom-color: transparent;
-	bottom: -11px;
-	content: "";
-	left: 50%;
-	margin-left: -6px;
-	position: absolute;
-	z-index: 101;
+    border: 6px solid #F9690E;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    bottom: -11px;
+    content: "";
+    left: 50%;
+    margin-left: -6px;
+    position: absolute;
+    z-index: 101;
 }
 .style-caption p,
 .item-clubs{
-	border-right: 5px solid #F9690E;	
+    border-right: 5px solid #F9690E;
 }
 .panel .panel-heading, .titles h4{
-	border-left: 5px solid #F9690E;
+    border-left: 5px solid #F9690E;
 }
 .pagination > .active > a,
 .pagination > .active:hover > a{
-	border-color: #F9690E;
+    border-color: #F9690E;
 }
 .style-caption h1:before{
-	border-top: 40px solid transparent;
-	border-bottom: 40px solid transparent;
-	border-left: 40px solid #F9690E;
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-left: 40px solid #F9690E;
 }
 .crumbs:before{
-	border-bottom: 20px solid #F9690E;
+    border-bottom: 20px solid #F9690E;
 }
 .tooltip.top .tooltip-arrow {
   border-top-color: #F9690E;
@@ -116,12 +122,12 @@ a{
 .sf-menu .sub-current,
 .header-2,
 .header-2 .is-sticky{
-	border-bottom: 3px solid #F9690E;
+    border-bottom: 3px solid #F9690E;
 }
 header,
 .overlay-player,
 .crumbs{
-	border-top: 3px solid #F9690E;
+    border-top: 3px solid #F9690E;
 }
 .sf-arrows > li > .sf-with-ul:focus:after,
 .sf-arrows > li:hover > .sf-with-ul:after,

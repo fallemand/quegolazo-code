@@ -415,9 +415,28 @@ img.img-principal {
 .otros-equipos .camiseta-equipo .segunda-mitad i {
   margin-left:-32px;
 }
+
 .li-item img {
     max-height: 55px;
 }
+
+.equipos-home .camiseta-equipo {
+    font-size:95px;
+    line-height: 75px;
+    margin-top: 0px;
+}
+.equipos-home .camiseta-equipo div {
+    width:48px;
+}
+
+.equipos-home .camiseta-equipo .segunda-mitad i {
+    margin-left:-48px;
+}
+
+.equipos-home .li-item img {
+    max-height: 82px;
+}
+
 
 /*----------------------- END: Widget Partidos y Widget Versus -----------------------------*/
 
@@ -457,6 +476,18 @@ img.img-principal {
 }
 .partido-Empatado {
     background-color: #F0B74E;
+}
+.partido-Diagramado {
+    background-color: #337ab7;
+}
+.partido-Programado {
+    background-color: #f0ad4e;
+}
+.partido-Jugado {
+    background-color: #5cb85c;
+}
+.partido-Cancelado {
+    background-color: #d9534f;
 }
 
 
@@ -675,7 +706,7 @@ h5.page-title {
 }
 
 .li-partido .text .equipos p.estado {
-  font-size: 10px;
+  font-size: 11px;
   color: #FFF;
   padding: 3px 7px;
   margin-top:8px;
@@ -685,7 +716,7 @@ h5.page-title {
   float: none;
 }
 
-.li-partido .text .equipos p.estado.jugado {
+.li-partido .text .equipos p.estado.partido-Jugado {
   font-size: 12px;
 }
 
@@ -848,4 +879,22 @@ a.avatar-jugador:hover {
 
 .text-yellow {
     color: #f1c40f;
+}
+
+
+.dark-home .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border: none;
+}
+
+.tab-content.home {
+    padding-left:40px;
+}
+
+.home .nav-tabs {
+    margin-top: 0px !important;
+}
+
+#footer.home {
+    margin-top: 0px;
+    padding-top: 30px;
 }
