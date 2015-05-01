@@ -133,7 +133,7 @@
                         <div class="panel nopadding panel-default">
                             <div class="panel-body bg-dark">
                                 <p class="slider-multiple-title">Fecha Actual</p>
-                                <ul class="proximos-partidos slider-multiple">
+                                <ul class="partidos-fecha-actual slider-multiple">
                                     <li class="li-partido" style="width: 120px">
                                         <span class="fecha theme-bg-color">September 26, 2015</span>
                                         <div class="text">
@@ -732,6 +732,24 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="img-hover">
+                                                <img src="img/blog/3.jpg" alt="" class="img-responsive">
+                                                <div class="overlay"><a href="single-news.html">+</a></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h4><a href="single-news.html">Porto Alegre and Cuiabá to welcome Valcke</a></h4>
+                                            <p class="data-info">January  4, 2014  / <i class="fa fa-comments"></i><a href="#">3</a></p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rutrum, libero id imperdiet elementum, nunc... <a href="single-news.html">Read More [+]</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Post Item -->
+
+                                <!-- Post Item -->
+                                <div class="post-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="img-hover">
                                                 <img src="img/blog/4.jpg" alt="" class="img-responsive">
                                                 <div class="overlay"><a href="single-news.html">+</a></div>
                                             </div>
@@ -750,14 +768,17 @@
                     </div>
                     <!-- End content Left -->
 
-                    <!-- Widget Partido -->
+                    <!-- Side Bar -->
                     <div class="col-md-4  padding-top col-sm-6">
-                        <div class="panel panel-default">
+                        <!-- Widget Partidos Anteriores -->
+                        <div class="panel panel-default small-arrows">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Últimos Partidos</h3>
                             </div>
                             <div class="panel-body nopadding">
-                                <div class="widget-partido">
+                                <ul class="single-carousel">
+                                    <li>
+                                        <div class="widget-partido">
                                     <div class="col-xs-4">
                                         <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
                                         <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
@@ -787,13 +808,45 @@
                                         <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
                                     </div>
                                 </div>
+                                    </li>
+                                    <li>
+                                        <div class="widget-partido">
+                                            <div class="col-xs-4">
+                                                <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
+                                                <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                            </div>
+                                            <div class="col-xs-4 resultado">
+                                                <div class="thumbnail">
+                                                    <h2>2<small><small>3</small></small></h2>
+                                                </div>
+                                                <div class="thumbnail">
+                                                    <h2>2<small><small>5</small></small></h2>
+                                                </div>
+                                                <i class="flaticon-football85" data-toggle="tooltip" title="Árbitro: Gabriel Faballe"></i>
+                                                <span class="glyphicon glyphicon-time" data-toggle="tooltip" title="25 Marzo 2015 22:00"></span>
+                                                <i class="flaticon-football96" data-toggle="tooltip" title="Complejo Tiruyaki"></i>
+                                                <a href="#ruta-al-partido" class="btn btn-primary btn-xs">+ Info</a>
+                                            </div>
+
+                                            <div class="col-xs-4">
+                                                <div class="camiseta-equipo">
+                                                    <div>
+                                                        <i class="flaticon-football114" style="color: #005A96"></i>
+                                                    </div><!--
+--><div class="segunda-mitad">
+                                                    <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                    </div>
+                                                </div>
+                                                <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-                    <!-- End Widget Partido -->
+                        <!-- END Widget Partidos Anteriores -->
 
-                    <!-- Widget Partido -->
-                    <div class="col-md-4 col-sm-6">
+                        <!-- Widget Tabla de Posiciones -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Podio</h3>
@@ -811,7 +864,7 @@
                                                 <div>
                                                     <i class="flaticon-football114" style="color: #005A96"></i>
                                                 </div><!--
-                                            --><div class="segunda-mitad">
+--><div class="segunda-mitad">
                                                 <i class="flaticon-football114" style="color: #FAD201"></i>
                                                 </div>
                                             </div>
@@ -825,13 +878,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- End Widget Partido -->
+                        <!-- Widget Tabla de Posiciones -->
 
-
-
-                    <!-- Tabla Posiciones -->
-                    <div class="col-md-4 col-sm-6">
+                        <!-- Widget Podio -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Tabla de Posiciones <a href="#mas-info">+ Info</a></h3>
@@ -917,30 +966,35 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                    <!-- End Tabla Posiciones -->
-                    <div class="col-md-2 col-xs-4">
-                        <div class="panel nopadding panel-default">
-                            <div class="panel-body widget widget-md">
-                                <h1>
-                                    <span class="flaticon-football68" aria-hidden="true"></span>12
-                                </h1>
-                                <span>Partidos Jugados</span>
+                        <!-- END Widget Podio -->
+
+                        <!-- Widget Stats -->
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="panel nopadding panel-default">
+                                    <div class="panel-body widget widget-md">
+                                        <h1>
+                                            <span class="flaticon-football68" aria-hidden="true"></span>12
+                                        </h1>
+                                        <span>Partidos Jugados</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="panel nopadding panel-default">
+                                    <div class="panel-body widget widget-md text-success">
+                                        <h1 class="text-success">
+                                            <span class="flaticon-football28" aria-hidden="true"></span>15
+                                        </h1>
+                                        <span class="text-success">Goles</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 col-xs-4">
-                        <div class="panel nopadding panel-default">
-                            <div class="panel-body widget widget-md text-success">
-                                <h1 class="text-success">
-                                    <span class="flaticon-football28" aria-hidden="true"></span>15
-                                </h1>
-                                <span class="text-success">Goles</span>
-                            </div>
-                        </div>
-                    </div>
+                        <!-- END Widget Stats -->
 
-
+                    </div>
+                    <!-- End Side Bar -->
                 </div>
             </div>
             <!-- End Content Central -->

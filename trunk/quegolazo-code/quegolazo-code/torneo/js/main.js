@@ -69,6 +69,20 @@ $(document).ready(function($) {
         itemsCustom: [[0, 1],[350, 2], [500, 3],[600, 4], [800, 5], [1000, 6], [1100, 7], [1200, 8]]
     });
 
+    //=================================== Slide Partidos Fecha Actual  ==============================//
+
+    $(".partidos-fecha-actual").owlCarousel({
+        items : 8,
+        autoPlay: false,
+        navigation : true,
+        autoHeight : true,
+        slideSpeed : 200,
+        pagination : false,
+        itemsCustom: [[0, 1],[350, 2], [500, 3],[600, 4], [800, 5], [1000, 6], [1100, 7], [1200, 8]]
+    });
+
+
+
     //=================================== Slide Otros Equipos  ==============================//
 
     $(".otros-equipos").owlCarousel({

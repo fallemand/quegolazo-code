@@ -441,6 +441,8 @@ img.img-principal {
 /*----------------------- END: Widget Partidos y Widget Versus -----------------------------*/
 
 /*----------------------- Colores de Los Estados -----------------------------*/
+
+
 .fase-Registrada {
     background-color: #777;
 }
@@ -456,6 +458,8 @@ img.img-principal {
 .fase-Cancelada {
     background-color: #d9534f;
 }
+
+
 .fecha-Diagramada {
     background-color: #337ab7;
 }
@@ -468,6 +472,8 @@ img.img-principal {
 .fecha-Cancelada {
     background-color: #d9534f;
 }
+
+
 .partido-Ganado {
     background-color: #5cb85c;
 }
@@ -477,17 +483,23 @@ img.img-principal {
 .partido-Empatado {
     background-color: #F0B74E;
 }
+
+
 .partido-Diagramado {
-    background-color: #337ab7;
+    background-color: rgba(51, 122, 183, 0.7);
+    /*background-color: #337ab7;*/
 }
 .partido-Programado {
-    background-color: #f0ad4e;
+    background-color: rgba(240, 173, 78, 0.7);
+    /*background-color: #f0ad4e;*/
 }
 .partido-Jugado {
-    background-color: #5cb85c;
+    background-color: rgba(92, 184, 92, 0.7);
+    /*background-color: #5cb85c;*/
 }
 .partido-Cancelado {
-    background-color: #d9534f;
+    background-color: rgba(217, 83, 79, 0.7);
+    /*background-color: #d9534f;*/
 }
 
 
@@ -721,7 +733,7 @@ h5.page-title {
 }
 
 
-.proximos-partidos {
+.proximos-partidos, .partidos-fecha-actual {
   padding-left:34px;
   padding-right:20px;
 }
@@ -929,7 +941,7 @@ a.avatar-jugador:hover {
 
 .podio div.primero {
     top:2%;
-    left:41%;
+    left:40%;
 }
 
 .podio div.tercero {
