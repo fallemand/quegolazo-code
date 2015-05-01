@@ -247,5 +247,52 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public List<Jugador> obtenerJugadoresGoleadores(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Jugador> respuesta = new List<Jugador>();
+            Jugador jugador = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @" SELECT TOP 10 j.idJugador AS 'IDJUGADOR', j.nombre AS 'JUGADOR', e.idEquipo AS 'IDEQUIPO', e.nombre AS 'EQUIPO', count(g.idGol) AS 'GOLES'
+                                FROM Goles g
+	                            JOIN Equipos e ON e.idEquipo = g.idEquipo 
+	                            JOIN Jugadores j ON g.idJugador = j.idJugador
+	                            JOIN Partidos p ON p.idPartido = g.idPartido
+	                            GROUP BY j.idJugador, p.idEdicion, j.nombre, e.nombre, e.idEquipo 
+	                            HAVING p.idEdicion = @idEdicion
+	                            ORDER BY 'GOLES' DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    jugador = new Jugador();
+                    jugador.idJugador = Int32.Parse(dr["IDJUGADOR"].ToString());
+                    jugador.nombre = dr["JUGADOR"].ToString();
+                    jugador.cantidadGoles = Int32.Parse(dr["GOLES"].ToString());
+                    respuesta.Add(jugador);
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los jugadores:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

@@ -1134,7 +1134,7 @@ namespace AccesoADatos
 
         //Cantidad de goles de cada equipo de una edición
         //autor: Pau Pedrosa
-        public DataTable cantidadGolesPorEquipo(int idEdicion)
+        public DataTable cantidadGolesPorEquipo(int idEdicion, bool paraGrafico)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -1145,14 +1145,16 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT equipo.idEquipo AS 'Id equipo', equipo.nombre AS 'Equipo',
-                                SUM(CASE WHEN partido.idEquipoLocal = equipo.idEquipo AND partido.golesLocal IS NOT NULL THEN partido.golesLocal ELSE 0 END) + SUM(CASE WHEN partido.idEquipoVisitante = equipo.idEquipo AND partido.golesVisitante IS NOT NULL THEN partido.golesVisitante ELSE 0 END) AS 'Goles'
-                                FROM Equipos equipo
-                                INNER JOIN EquipoXEdicion exe ON equipo.idEquipo = exe.idEquipo
-                                LEFT JOIN Partidos partido ON ((partido.idEquipoLocal = equipo.idEquipo OR partido.idEquipoVisitante = equipo.idEquipo) AND partido.idEdicion = @idEdicion AND partido.idEstado = @partidoJugado)
-                                WHERE exe.idEdicion = @idEdicion
-                                GROUP BY equipo.idEquipo, equipo.nombre
-                                ORDER BY Goles DESC";
+                string sql = @"SELECT ";
+                if(!paraGrafico)
+                    sql +="equipo.idEquipo AS 'Id equipo',";
+                sql += @" equipo.nombre AS 'Equipo', SUM(CASE WHEN partido.idEquipoLocal = equipo.idEquipo AND partido.golesLocal IS NOT NULL THEN partido.golesLocal ELSE 0 END) + SUM(CASE WHEN partido.idEquipoVisitante = equipo.idEquipo AND partido.golesVisitante IS NOT NULL THEN partido.golesVisitante ELSE 0 END) AS 'Goles'
+                        FROM Equipos equipo
+                        INNER JOIN EquipoXEdicion exe ON equipo.idEquipo = exe.idEquipo
+                        LEFT JOIN Partidos partido ON ((partido.idEquipoLocal = equipo.idEquipo OR partido.idEquipoVisitante = equipo.idEquipo) AND partido.idEdicion = @idEdicion AND partido.idEstado = @partidoJugado)
+                        WHERE exe.idEdicion = @idEdicion
+                        GROUP BY equipo.idEquipo, equipo.nombre
+                        ORDER BY Goles DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.Parameters.Add(new SqlParameter("@partidoJugado", Estado.partidoJUGADO));
@@ -1176,7 +1178,7 @@ namespace AccesoADatos
 
         //Cantidad de goles de por tipo de gol por edición
         //autor: Pau Pedrosa
-        public DataTable cantidadGolesPorTipoGol(int idEdicion)
+        public DataTable cantidadGolesPorTipoGol(int idEdicion, bool paraGrafico)
         {
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
@@ -1187,11 +1189,21 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT tipoGol.idTipoGol AS 'Id Tipo Gol', tipoGol.nombre AS 'Tipo Gol',
-                                COUNT(CASE gol.idTipoGol WHEN tipoGol.idTipoGol THEN 1 ELSE NULL END) AS 'Goles'
-                                FROM TiposGol tipoGol
-                                LEFT JOIN Goles gol ON (gol.idTipoGol = tipoGol.idTipoGol AND gol.idPartido IN (SELECT p.idPartido FROM Partidos p WHERE p.idEdicion = @idEdicion AND p.idEstado = @partidoJugado))
-                                GROUP BY tipoGol.idTipoGol, tipoGol.nombre";
+                string sql = @"SELECT ";
+                if(!paraGrafico)
+                    sql += @"CASE  
+					            WHEN tipoGol.idTipoGol = 1 THEN 'football110' 
+					            WHEN tipoGol.idTipoGol = 2 THEN 'football61'
+                                WHEN tipoGol.idTipoGol = 3 THEN 'football118'  
+                                WHEN tipoGol.idTipoGol = 4 THEN 'football102'  
+                                WHEN tipoGol.idTipoGol = 5 THEN 'football120'  
+                                WHEN tipoGol.idTipoGol = 6 THEN 'football51'    
+					        END AS 'tipo', tipoGol.idTipoGol AS 'Id Tipo Gol', ";
+                sql += @" tipoGol.nombre AS 'Tipo Gol',
+                            COUNT(CASE gol.idTipoGol WHEN tipoGol.idTipoGol THEN 1 ELSE NULL END) AS 'Goles'
+                            FROM TiposGol tipoGol
+                            LEFT JOIN Goles gol ON (gol.idTipoGol = tipoGol.idTipoGol AND gol.idPartido IN (SELECT p.idPartido FROM Partidos p WHERE p.idEdicion = @idEdicion AND p.idEstado = @partidoJugado))
+                            GROUP BY tipoGol.idTipoGol, tipoGol.nombre";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.Parameters.Add(new SqlParameter("@partidoJugado", Estado.partidoJUGADO));
