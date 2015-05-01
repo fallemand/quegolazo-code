@@ -50,6 +50,10 @@ namespace Logica
            return DaoEstadisticas.estadisticasDeUnEquipo(idEquipo, edicion.idEdicion);
        }
 
+       public DataTable goleadoresPorFaseDeEdicion(int idFase)
+       {
+           return DaoEstadisticas.goleadoresPorFaseDeEdicion(edicion.idEdicion, idFase);
+       }
 
        public DataTable obtenerVersus(int idEquipoLocal, int idEquipoVisitante, int idTorneo)
        {

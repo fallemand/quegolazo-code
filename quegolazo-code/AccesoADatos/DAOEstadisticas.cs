@@ -1211,6 +1211,50 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
+        }
+
+        //Tabla de goleadores por fase
+        //autor: Pau Pedrosa
+        public DataTable goleadoresPorFaseDeEdicion(int idEdicion, int idFase)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT TOP 10 j.idJugador AS 'IDJUGADOR', j.nombre AS 'JUGADOR', e.idEquipo AS 'IDEQUIPO', e.nombre AS 'EQUIPO', 
+                                COUNT(g.idGol) AS 'GOLES'
+                                FROM Goles g
+                                JOIN Equipos e ON e.idEquipo = g.idEquipo 
+                                JOIN Jugadores j ON g.idJugador = j.idJugador
+                                JOIN Partidos p ON p.idPartido = g.idPartido
+                                GROUP BY j.idJugador, p.idEdicion, p.idFase, j.nombre, e.nombre, e.idEquipo
+                                HAVING p.idEdicion = @idEdicion
+                                AND p.idFase = @idFase
+                                ORDER BY 'GOLES' DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
         }  
     }
 }
