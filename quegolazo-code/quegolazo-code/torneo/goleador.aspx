@@ -239,7 +239,7 @@
                                     </table>
                                 </div>
                                  <div class="tab-pane fade active in" id="graficoEquipos">
-                                  <canvas id="canvasTiposGoles" class="canvas-lg" ></canvas>
+                                  <canvas id="canvasTiposGoles" style="margin-top:10px" class="canvas-lg" ></canvas>
                                 </div>  
                             </div>
                         </div>
@@ -301,7 +301,7 @@
                                     </table>
                                 </div>
                                  <div class="tab-pane fade active in" id="graficoTipos">
-                                  <canvas id="graficoTiposDeGol" class="canvas-lg" ></canvas>
+                                  <canvas id="graficoTiposDeGol" style="margin-top:10px;" class="canvas-lg" ></canvas>
                                 </div> 
                             </div>
                         </div>
