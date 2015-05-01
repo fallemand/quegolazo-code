@@ -23,13 +23,20 @@ namespace quegolazo_code.torneo
             {
                 gestorTorneo = Sesion.getGestorTorneo();
                 gestorEdicion = Sesion.getGestorEdicion();
+                idEdicion = gestorEdicion.edicion.idEdicion;
+                nickTorneo = gestorTorneo.torneo.nick;
                 if (!Page.IsPostBack)
                 {
                     idEdicion = int.Parse(Request["idEdicion"]);
                     nickTorneo = Request["nickTorneo"].ToString();
                     idFase = (Request["idFase"] != null) ? int.Parse(Request["idFase"]) : 0;
-                    idGrupo = (Request["idGrupo"] != null) ? int.Parse(Request["idGrupo"]) : 0;
                     idFecha = (Request["idFecha"] != null) ? int.Parse(Request["idFecha"]) : 0;
+                    ViewState["idFecha"] = idFecha;
+                    ViewState["idFase"] = idFase;
+                    litFase.Text=idFase.ToString();
+                    litFecha.Text= idFecha.ToString();
+                    litLnkFase.Text=idFase.ToString();
+                    litLnkFecha.Text = idFecha.ToString();
                     gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);//2010
                     gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                     gestorTorneo.torneo = gestorTorneo.obtenerTorneoPorNick(nickTorneo); //jockeyClub
@@ -48,7 +55,10 @@ namespace quegolazo_code.torneo
         {
             if (e.CommandName == "SeleccionarFecha")
             {
-               // GestorControles.cargarRepeaterList(rptGrupos, ((Fase)e.Item.DataItem).obtenerFechas());
+                ViewState["idFecha"] = e.CommandArgument.ToString();
+                litFecha.Text = e.CommandArgument.ToString();
+                litLnkFecha.Text = e.CommandArgument.ToString();
+                GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
             }
         }
 
@@ -61,52 +71,37 @@ namespace quegolazo_code.torneo
                     //Panel panelEstadoFase = (Panel)e.Item.FindControl("panelEstadoFase");
                     //if (((Fase)e.Item.DataItem).estado.idEstado == Estado.faseINICIADA)
                     //    panelEstadoFase.Visible = true;
-                    if (((Fase)e.Item.DataItem).tipoFixture.idTipoFixture.ToString().Contains("TCT") && ((Fase)e.Item.DataItem).idFase == idFase)
+                    if (((Fase)e.Item.DataItem).tipoFixture.idTipoFixture.ToString().Contains("TCT") && ((Fase)e.Item.DataItem).idFase ==int.Parse(ViewState["idFase"].ToString()))
                     {
                         GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas());
                         GestorControles.cargarRepeaterList(rptGrupos, ((Fase)e.Item.DataItem).grupos);
-                        
-                    //    Panel panelTCT = e.Item.FindControl("panelTCT") as Panel;
-                    //    panelTCT.Visible = true;
-                    //    Panel panelLlaves = e.Item.FindControl("panelLlaves") as Panel;
-                    //    panelLlaves.Visible = false;
-                    //    Repeater rptFechas = (Repeater)e.Item.FindControl("rptFechas");
-                    //    int idFase = ((Fase)e.Item.DataItem).idFase;
-                    //    gestorEdicion.faseActual = ((Fase)e.Item.DataItem);
-                    //    Panel panelSinFechas = e.Item.FindControl("panelSinFechas") as Panel;
-                    //    panelSinFechas.Visible = !GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas());
                     }
                     else
                     {
-
-                        //Panel panelTCT = (Panel)e.Item.FindControl("panelTCT");
-                        //panelTCT.Visible = false;
-                        //Panel panelLlaves = (Panel)e.Item.FindControl("panelLlaves");
-                        //panelLlaves.Visible = true;
-                        //string llaves = new GestorFase().armarLlavesDeUnaFase((Fase)e.Item.DataItem);
-                        //ScriptManager.RegisterStartupScript(this, this.GetType(), "llaves", "var datosLlaves = " + llaves + ";", true);
+                       
                     }
                 }
             }
             catch (Exception ex) {  }
-
         }
 
         protected void rptGrupos_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (((Grupo)e.Item.DataItem).idGrupo == idGrupo)
-            {  
                 Repeater rptPartidos = (Repeater)e.Item.FindControl("rptPartidos");
-                GestorControles.cargarRepeaterList(rptPartidos, ((Grupo)e.Item.DataItem).fechas[idFecha].partidos);
-            }
+                GestorControles.cargarRepeaterList(rptPartidos, ((Grupo)e.Item.DataItem).fechas[int.Parse(ViewState["idFecha"].ToString()) - 1].partidos);
         }
 
         protected void rptFases_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "SeleccionarFase")
             {
-                GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas());
+                ViewState["idFase"] = int.Parse(e.CommandArgument.ToString());
+                litFase.Text = e.CommandArgument.ToString();
+                litLnkFase.Text = e.CommandArgument.ToString();
+                GestorControles.cargarRepeaterList(rptFechas, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].obtenerFechas());
+                GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
             }
         }
+
     }
 }
