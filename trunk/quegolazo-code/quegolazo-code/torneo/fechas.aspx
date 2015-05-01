@@ -44,9 +44,9 @@
                         <div class="panel-body">
                             <p class="slider-multiple-title">Seleccione la Fase</p>
                             <ul class="fases slider-multiple tooltip-hover">
-                                <asp:Repeater ID="rptFases" runat="server" OnItemCommand="rptFases_ItemCommand" OnItemDataBound="rptFases_ItemDataBound">
+                                <asp:Repeater ID="rptFases" runat="server" OnItemCommand="rptFases_ItemCommand1" OnItemDataBound="rptFases_ItemDataBound">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkFase" CommandName="SeleccionarFase" runat="server"  CommandArgument='<%# Eval("idFase") %>'>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CommandName="SeleccionarFase" CommandArgument='<%# Eval("idFase") %>'>
                                         <a href="#cargar-esta-fase" >
                                            <li class="li-item fase-<%# Eval("estado.nombre") %>" data-toggle="tooltip" title="Seleccionar Fase">
                                                 <div class="widget widget-md">
@@ -72,7 +72,7 @@
                             <ul class="fechas slider-multiple tooltip-hover">
                                 <asp:Repeater ID="rptFechas" runat="server" OnItemCommand="rptFechas_ItemCommand">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkFecha" CommandName="SeleccionarFecha" runat="server" CommandArgument='<%# Eval("idFecha") %>'>
+                                        <asp:LinkButton ID="lnkFecha" CommandName="SeleccionarFecha" ClientIDMode="AutoID"  runat="server" CommandArgument='<%# Eval("idFecha") %>'>
                                         <a href="#cargar-esta-fecha">
                                             <li class="li-item fecha-<%# Eval("estado.nombre") %>" data-toggle="tooltip" title="Seleccionar Fecha">
                                                 <div class="widget widget-md">
