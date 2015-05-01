@@ -36,6 +36,29 @@ namespace Logica
         public const string uREGISTRO = "/usuario/registro.aspx";
         public const string uMODIFICAR = "/usuario/modificar.aspx";
 
+        //Forms en carpeta Torneo
+        public static string urlPartido(string nickTorneo,int idEdicion, string idPartido)
+        {
+            return "/"+nickTorneo+"/edicion-"+idEdicion+"/partido-"+idPartido;
+        }
+        public static string urlTorneo(string nickTorneo)
+        {
+            return "/" + nickTorneo;
+        }
+        public static string urlEdicion(string nickTorneo, int idEdicion)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion;
+        }
+        public static string urlEquipo(string nickTorneo, int idEdicion, int idEquipo)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/equipo-" + idEquipo;
+        }
+        public static string urlJugador(string nickTorneo, int idEdicion, int idEquipo, int idJugador)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/equipo-" + idEquipo + "/jugador-"+idJugador;
+        }
+
+
         //Forms en el root 
         public const string rINDEX = "/index.aspx";
 
