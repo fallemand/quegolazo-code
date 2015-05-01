@@ -39,7 +39,7 @@
              
             <div class="row mobile-margin-top">
 
-              <!-- Otros jugadores -->
+              <!-- Goleadores del torneo -->
                 <div class="col-sm-12">
                     <div class="panel nopadding panel-default">
                         <div class="panel-body">
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- END Otros jugadores -->
+                <!-- END Otros Goleadores del torneo -->
 
                <div class="col-sm-6">
                     <div class="panel panel-default">
@@ -324,10 +324,169 @@
                           <canvas id="graficosFases" class="canvas-lg"></canvas>   
                         </div>
                     </div>
-               </div>
-                <!-- END Datos del Jugador -->
+               </div>                
+            </div>
+            <div class="row mobile-margin-top">        
+            <div class="col-sm-6">
+                    <div class="panel panel-default">
+                         <div class="panel-heading">
+                         <h3 class="panel-title text-center ">Equipos que convirtieron </h3>
+                         </div>
+                        <div class="panel-body">
+                              <nav class="navbar navbar-default navbar-nav-small nomargin-bottom">
+                                <div class="container-fluid">
+                                    <!-- Brand and toggle get grouped for better mobile display -->
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                            <span class="sr-only">Menú</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        <span class="navbar-brand visible-xs" href="#">Goleadores</span>
+                                    </div>
+                                    <div class="collapse navbar-collapse">
+                                        <ul class="nav navbar-nav  nav-justified">
+                                            <li class="active"><a href="#tabla" data-toggle="tab">Tabla</a></li>
+                                            <li class=""><a href="#graficoEquipos" data-toggle="tab">Gráfico</a></li>                                          
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                                <!-- Tabs -->
+                            <div class="tab-content highlight">
 
-              
+                                <!-- Tab Resumen -->
+                                <div class="tab-pane fade active in" id="tabla">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-xs-1 col-md-1 text-center">Equipo</th>
+                                                <th class="col-xs-8 col-md-4 text-center">Cantidad</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+                                            <tr>
+                                                <td>Estudiantes</td>
+                                                <td>15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>River</td>
+                                                <td>15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Boca</td>
+                                                <td>12</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Arsenal</td>
+                                                <td>9</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Godoy Cruz</td>
+                                                <td>8</td>
+                                            </tr>  
+                                            <tr>
+                                                <td>Velez</td>
+                                                <td>6</td>
+                                            </tr> 
+                                            <tr>
+                                                <td>Excursionistas</td>
+                                                <td>2</td>
+                                            </tr>  
+                                        </tbody>
+                                    </table>
+                                </div>
+                                 <div class="tab-pane fade" id="graficoEquipos">
+                                  <canvas id="canvasTiposGoles" class="canvas-md" ></canvas>
+                                </div>                   
+                               
+
+                            </div>
+    
+       
+                        </div>
+                    </div>
+               </div>
+            <div class="col-sm-6">
+                    <div class="panel panel-default">
+                         <div class="panel-heading">
+                         <h3 class="panel-title text-center ">Tipos de goles de la Edición </h3>
+                         </div>
+                        <div class="panel-body">
+                              <nav class="navbar navbar-default navbar-nav-small nomargin-bottom">
+                                <div class="container-fluid">
+                                    <!-- Brand and toggle get grouped for better mobile display -->
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                            <span class="sr-only">Menú</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        <span class="navbar-brand visible-xs" href="#">Goleadores</span>
+                                    </div>
+                                    <div class="collapse navbar-collapse">
+                                        <ul class="nav navbar-nav  nav-justified">
+                                            <li class=""><a href="#tablaTipos" data-toggle="tab">Tabla</a></li>
+                                            <li class="active"><a href="#graficoTipos" data-toggle="tab">Gráfico</a></li>                                          
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                                <!-- Tabs -->
+                            <div class="tab-content highlight">
+
+                                <!-- Tab Resumen -->
+                                <div class="tab-pane fade" id="tablaTipos">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-xs-1 col-md-1 text-center">Tipo de Gol</th>
+                                                <th class="col-xs-8 col-md-4 text-center">Cantidad</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+                                            <tr>
+                                                <td>Cabeza</td>
+                                                <td>15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jugada</td>
+                                                <td>15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Penal</td>
+                                                <td>12</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tiro Libre</td>
+                                                <td>9</td>
+                                            </tr>
+                                            <tr>
+                                                <td>En contra</td>
+                                                <td>8</td>
+                                            </tr> 
+                                            <tr>
+                                                <td>No definido</td>
+                                                <td>3</td>
+                                            </tr> 
+                                        </tbody>
+                                    </table>
+                                </div>
+                                 <div class="tab-pane fade active in" id="graficoTipos">
+                                  <canvas id="graficoTiposDeGol" class="canvas-md" ></canvas>
+                                </div>                   
+                               
+
+                            </div>
+    
+       
+                        </div>
+                    </div>
+               </div>
             </div>
         </div>
         <!-- End Content Central -->
