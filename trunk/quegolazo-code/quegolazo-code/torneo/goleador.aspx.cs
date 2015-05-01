@@ -34,6 +34,7 @@ namespace quegolazo_code.torneo
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
                 gestorEstadistica = new GestorEstadisticas();
+                gestorEstadistica.edicion = gestorEdicion.edicion;
                 gestorJugador = new GestorJugador();
                 if (!Page.IsPostBack)
                 { 
@@ -113,18 +114,13 @@ namespace quegolazo_code.torneo
 
         private void cargarGraficos()
         {
-            DataTable datosGolesPorEquipo = gestorEstadistica.cantidadGolesPorEquipo(true);
-            if (datosGolesPorEquipo.Rows.Count > 0)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "golesDeEquipo", "var golesDeEquipo = " + gestorEstadistica.generarDatosParaGraficoDeTorta(datosGolesPorEquipo) + ";", true);
-            }
-            //Acá hay que poner sino tiene datos
+            DataTable datosGolesPorEquipo = gestorEstadistica.cantidadGolesPorEquipo(true);            
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "golesDeEquipo",(datosGolesPorEquipo.Rows.Count > 0) ? "var golesDeEquipo = " + gestorEstadistica.generarDatosParaGraficoDeTorta(datosGolesPorEquipo) + ";" : "var golesDeEquipo = null;" , true);
             DataTable datosTiposGol = gestorEstadistica.cantidadGolesPorTipoGol(true);
-            if (datosTiposGol.Rows.Count > 0)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGol", "var tiposDeGol = " + gestorEstadistica.generarDatosParaGraficoDeTorta(datosTiposGol) + ";", true);
-            }
-            //Acá hay que poner sino tiene datos
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGol",(datosTiposGol.Rows.Count > 0) ? "var tiposDeGol = " + gestorEstadistica.generarDatosParaGraficoDeTorta(datosTiposGol) + ";" :"var tiposDeGol = null;", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "datosFases","var datosFases = " + gestorEstadistica.generarJsonParaGraficoBarraGoleadores() + ";", true);
+            
+            
         }
     }
 }

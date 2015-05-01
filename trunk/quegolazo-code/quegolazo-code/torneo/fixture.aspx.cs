@@ -14,6 +14,7 @@ namespace quegolazo_code.torneo
     {
        protected  GestorPartido gestorPartido;
        public static GestorEdicion gestorEdicion;
+       protected GestorTorneo gestorTorneo;
        protected int fecha;
        protected int idEdicion;
        protected string nickTorneo;
@@ -26,7 +27,7 @@ namespace quegolazo_code.torneo
                     idEdicion = int.Parse(Request["idEdicion"].ToString());
                     nickTorneo = Request["nickTorneo"].ToString();
                 }
-                catch (Exception)
+                catch (ArgumentNullException)
                 {
                     //TODO Redicreccionar a página de error
                     throw;
@@ -36,13 +37,15 @@ namespace quegolazo_code.torneo
                 if (!Page.IsPostBack)
                 {
                     gestorPartido.partido = null;
+                    gestorTorneo = new GestorTorneo();
+                    gestorTorneo.torneo = gestorTorneo.obtenerTorneoPorNick(nickTorneo);
                     obtenerEdiciónSeleccionada();
                     cargarRepeaterFases();
                 }
             }
             catch
             {
-
+                //TODO, manejar mensaje de error
             }
 
         }

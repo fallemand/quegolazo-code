@@ -72,7 +72,7 @@
                          <div class="panel-heading">
                          <h3 class="panel-title text-center ">Fases de la Edicion: <%= gestorEdicion.edicion.nombre %> </h3>
                          </div>
-                        <div class="panel-body">
+                        <div class="panel-body" style="height:300px; overflow-y:scroll;">
                             <nav class="navbar navbar-default navbar-nav-small nomargin-bottom">
                                 <div class="container-fluid">
                                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -188,7 +188,7 @@
                          <div class="panel-heading">
                          <h3 class="panel-title text-center ">Equipos que convirtieron </h3>
                          </div>
-                        <div class="panel-body">
+                        <div class="panel-body" style="height:360px; overflow-y:scroll;">
                               <nav class="navbar navbar-default navbar-nav-small nomargin-bottom">
                                 <div class="container-fluid">
                                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -204,7 +204,7 @@
                                     <div class="collapse navbar-collapse">
                                         <ul class="nav navbar-nav  nav-justified">
                                             <li class="active"><a href="#tabla" data-toggle="tab">Tabla</a></li>
-                                            <li class=""><a href="#graficoEquipos" data-toggle="tab">Gráfico</a></li>                                          
+                                            <li id="liGraficoGolesEquipos" class=""><a href="#graficoEquipos" data-toggle="tab">Gráfico</a></li>                                          
                                         </ul>
                                     </div>
                                 </div>
@@ -238,8 +238,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                 <div class="tab-pane fade" id="graficoEquipos">
-                                  <canvas id="canvasTiposGoles" class="canvas-md" ></canvas>
+                                 <div class="tab-pane fade active in" id="graficoEquipos">
+                                  <canvas id="canvasTiposGoles" class="canvas-lg" ></canvas>
                                 </div>  
                             </div>
                         </div>
@@ -266,7 +266,7 @@
                                     <div class="collapse navbar-collapse">
                                         <ul class="nav navbar-nav  nav-justified">
                                             <li class=""><a href="#tablaTipos" data-toggle="tab">Tabla</a></li>
-                                            <li class="active"><a href="#graficoTipos" data-toggle="tab">Gráfico</a></li>                                          
+                                            <li id="liGraficoTiposGoles" class="active" ><a href="#graficoTipos" data-toggle="tab">Gráfico</a></li>                                          
                                         </ul>
                                     </div>
                                 </div>
@@ -301,15 +301,19 @@
                                     </table>
                                 </div>
                                  <div class="tab-pane fade active in" id="graficoTipos">
-                                  <canvas id="graficoTiposDeGol" class="canvas-md" ></canvas>
+                                  <canvas id="graficoTiposDeGol" class="canvas-lg" ></canvas>
                                 </div> 
                             </div>
                         </div>
                     </div>
-               </div>
+             </div>
             </div>
         </div>
         <!-- End Content Central -->
     </section>
     <!-- END contentPages-->
+    <script>    
+       
+
+    </script>
 </asp:Content>
