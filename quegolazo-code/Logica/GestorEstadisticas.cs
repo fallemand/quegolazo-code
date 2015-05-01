@@ -226,16 +226,73 @@ namespace Logica
                    indiceColores = 0;
                ChartsUtils.pieChartDataObject datoGrafico = new ChartsUtils.pieChartDataObject
                {
-                   color = ChartsUtils.listaDeColores[i] + ChartsUtils.transparences.color,
-                   highlight = ChartsUtils.listaDeColores[i] + ChartsUtils.transparences.highlight,
+                   color = ChartsUtils.listaDeColores[indiceColores] + ChartsUtils.transparences.color,
+                   highlight = ChartsUtils.listaDeColores[indiceColores] + ChartsUtils.transparences.highlight,
                    label = labels[i],
                    value = Math.Round(datos[i] / totales * 100, 2)
                };
                indiceColores++;
                datosGraficoJSON.Add(datoGrafico);
+
            }    
            JavaScriptSerializer s = new JavaScriptSerializer();
-           return s.Serialize(datosGraficoJSON);
+           return s.Serialize(GestorColecciones.desordenarLista(datosGraficoJSON));
+       }
+       public string generarJsonParaGraficoDeBarra(DataTable datosGrafico)
+       {         
+           List<string> labels = new List<string>();
+           List<int> datos = new List<int>();           
+           foreach (DataRow fila in datosGrafico.Rows)
+           {
+               labels.Add(fila.ItemArray[0].ToString().Split(' ').Last());
+               datos.Add(int.Parse(fila.ItemArray[1].ToString()));               
+           }
+           ChartsUtils.barChartDataSet dato = new ChartsUtils.barChartDataSet()
+           {
+               data = datos,
+               fillColor = ChartsUtils.colors.green + ChartsUtils.transparences.fillColor,
+               highlightFill = ChartsUtils.colors.green + ChartsUtils.transparences.highlightFill,
+               highlightStroke = ChartsUtils.colors.green + ChartsUtils.transparences.highlightStroke,
+               strokeColor = ChartsUtils.colors.green + ChartsUtils.transparences.strokeColor
+           };
+           ChartsUtils.barChartData datosGoleadores = new ChartsUtils.barChartData(labels, new List<ChartsUtils.barChartDataSet>() { dato });
+           JavaScriptSerializer s = new JavaScriptSerializer();
+           return s.Serialize(datosGoleadores);
+       }
+       public string generarJsonParaGraficoBarraGoleadores() {
+           List<DataTable> datos = new List<DataTable>();           
+           datos.Add(obtenerTablaGoleadores());
+           foreach (Fase fase in this.edicion.fases)
+           {
+               datos.Add(goleadoresPorFaseDeEdicion(fase.idFase));
+           }           
+           List<ChartsUtils.barChartData> datosProcesados = new List<ChartsUtils.barChartData>();
+           foreach (DataTable tabla in datos)
+           {
+               datosProcesados.Add((tabla.Rows.Count > 0) ? generarObjetoParaGraficoDeBarra(tabla) : null);
+           }
+           return new JavaScriptSerializer().Serialize(datosProcesados);
+       }
+       public ChartsUtils.barChartData generarObjetoParaGraficoDeBarra(DataTable datosGrafico)
+       {
+           List<string> labels = new List<string>();
+           List<int> datos = new List<int>();
+           foreach (DataRow fila in datosGrafico.Rows)
+           {
+               labels.Add(fila.ItemArray[0].ToString());
+               datos.Add(int.Parse(fila.ItemArray[1].ToString()));
+           }
+           ChartsUtils.barChartDataSet dato = new ChartsUtils.barChartDataSet()
+           {
+               data = datos,
+               fillColor = ChartsUtils.colors.green + ChartsUtils.transparences.fillColor,
+               highlightFill = ChartsUtils.colors.green + ChartsUtils.transparences.highlightFill,
+               highlightStroke = ChartsUtils.colors.green + ChartsUtils.transparences.highlightStroke,
+               strokeColor = ChartsUtils.colors.green + ChartsUtils.transparences.strokeColor
+           };
+           ChartsUtils.barChartData datosGoleadores = new ChartsUtils.barChartData(labels, new List<ChartsUtils.barChartDataSet>() { dato });
+
+           return datosGoleadores;
        }
        public string generarDatosParaGraficoEvolucionDePuntos(int idEquipo, List<Fase> fases)
        {
@@ -264,13 +321,12 @@ namespace Logica
            
        }
        public string generarDatosGoleadores(List<Jugador> jugadores)
-       {
-           
+       {           
            List<string> labels = new List<string>();
            List<int> datos = new List<int>();
            foreach (Jugador jug in jugadores)
            {
-               labels.Add(jug.nombre);
+               labels.Add(jug.nombre.Split(' ').Last());
                datos.Add((int)jug.cantidadGoles);
            }
            ChartsUtils.barChartDataSet dato = new ChartsUtils.barChartDataSet()

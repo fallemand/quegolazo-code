@@ -6,12 +6,43 @@
     <script src="/torneo/js/widgetLlaves.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
-    <div class="container">
-        <asp:Repeater ID="rptFases" runat="server" OnItemDataBound="rptFases_ItemDataBound">
+    
+    <!-- contentPages-->
+    <!-- Titulo Sección -->
+    <section class="section-title img-about">
+        <div class="overlay-bg"></div>
+        <div class="container">
+            <h1> <%= gestorEdicion.edicion.nombre %> - Fixture</h1>
+        </div>
+    </section>
+    <!-- End Titulo Sección -->
+
+    <!-- Section Area - Content Central -->
+    <section class="content-info">
+        <div class="crumbs">
+            <div class="container">
+                <ul>
+                    <li><a href="/<%=nickTorneo%>"><%= gestorTorneo.torneo.nombre %></a></li>
+                    <li>/</li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>"><%= gestorEdicion.edicion.nombre %></a></li>
+                    <li>/</li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/fixture">Fixture</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="semiboxshadow text-center">
+            <img src="/torneo/img/img-theme/shp.png" class="img-responsive" alt="">
+        </div>
+                
+        <!-- Content Central -->
+        <div class="container padding-top">
+
+              <asp:Repeater ID="rptFases" runat="server" OnItemDataBound="rptFases_ItemDataBound">
                             <HeaderTemplate>
                                 <div class="panel-group" id="fases">
                             </HeaderTemplate>
-                            <ItemTemplate>
+                            <ItemTemplate>                                
                                 <div class="panel panel-default">
                                     <div class="panel-heading panel-heading-master">
                                         <div class="row clearfix" id="masterContainer">
@@ -34,27 +65,33 @@
                                     <asp:Panel ID="panelTCT" runat="server">
                                     <div id='fase-<%# Eval("idFase") %>' class="panel-collapse collapse">
                                         <div class="panel-body">
+                                            
                                             <asp:Repeater ID="rptFechas" runat="server" OnItemDataBound="rptFechas_ItemDataBound">
                                                 <HeaderTemplate>
                                                     <div class="panel-group" id="fechas">
                                                 </HeaderTemplate>
-                                                <ItemTemplate>
+                                                <ItemTemplate> 
+                                                   <div class="col-md-6"> 
                                                     <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#fechas" href="#fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>" style="font-size: 15px;"><%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).tipoFixture.idTipoFixture=="ELIM" ?  Eval("nombre") + " " : "Fecha "+ Eval("idFecha")%>  <small>Ver Más Detalles</small></a>
-                                                                <small><span class="label pull-right fecha-<%# ((Entidades.Fecha)Container.DataItem).estado.nombre%>" rel="txtTooltip" title="<%# ((Entidades.Fecha)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fecha)Container.DataItem).estado.nombre  %></span></small>
+                                                       <a data-toggle="collapse" data-parent="#fechas"  href="#fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>" style="font-size: 15px;">                                                           
+                                                        <div class="panel-heading">                                                           
+                                                            <h4 class="panel-title">    
+                                                                <%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).tipoFixture.idTipoFixture=="ELIM" ?  Eval("nombre") + " " : "Fecha "+ Eval("idFecha")%>
                                                             </h4>
+                                                            <span class="glyphicon glyphicon-eye-open pull-right"></span>
+                                                            <span class="label pull-right fecha-<%# ((Entidades.Fecha)Container.DataItem).estado.nombre%>" rel="txtTooltip" title="<%# ((Entidades.Fecha)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fecha)Container.DataItem).estado.nombre  %></span>
                                                         </div>
+                                                           </a>
+                                                         
                                                         <div id='fase<%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).idFase %>-fecha<%# Eval("idFecha") %>' class="panel-collapse collapse">
                                                             <div class="panel-body small-padding">
-                                                                <table id="tabla-fechas" class="table nomargin-bottom">
-                                                                    <thead style="display: none;">
-                                                                        <tr>
-                                                                            <th class="col-md-4">Equipo Local</th>
-                                                                            <th class="col-md-2">Resultado</th>
-                                                                            <th class="col-md-4">Equipo Visitante</th>
-                                                                            <th class="col-md-2"></th>
+                                                                <table id="tabla-fechas" class="table table-striped nomargin-bottom">
+                                                                    <thead>
+                                                                        <tr >
+                                                                            <th class="col-md-4 text-center">Local</th>
+                                                                            <th class="col-md-2 text-center">Resultado</th>
+                                                                            <th class="col-md-4 text-center">Visitante</th>
+                                                                            <th class="col-md-2 text-center">Opciones</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody class="tablaFiltro">
@@ -96,12 +133,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                   </div>
                                                 </ItemTemplate>
-
                                                 <FooterTemplate>
                                                     </div>
                                                 </FooterTemplate>
                                             </asp:Repeater>
+                                            
                                             <asp:Panel ID="panelSinFechas" runat="server">
                                                 <div class="panel panel-default">
                                                     <div class="panel-body">
@@ -117,25 +155,28 @@
 
                                         </div>
                                     </asp:Panel>
-                                </div>
+                                </div>                                
                             </ItemTemplate>
                             <FooterTemplate>
                                 </div>
                             </FooterTemplate>
                         </asp:Repeater>
-                        <asp:Panel ID="panelSinFases" runat="server">
+              <asp:Panel ID="panelSinFases" runat="server">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <span>No hay fases registradas para la edición</span>
                                 </div>
                             </div>
                         </asp:Panel>
-                  </div>
-           
-     <%--<script type="text/javascript">
+            
+            <div class="row mobile-margin-top">        
+            
+            </div>
+        </div>
+        <!-- End Content Central -->
+    </section>
+    <!-- END contentPages-->
 
-         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
-    </script>--%>
           <script type="text/javascript">
               $(document).ready(function ($) {
                   $("#divLlaves").generadorDeLlaves(datosLlaves);
