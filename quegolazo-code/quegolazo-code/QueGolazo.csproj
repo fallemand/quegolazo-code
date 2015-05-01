@@ -192,7 +192,9 @@
     <Content Include="torneo\fonts\FontAwesome\fontawesome-webfont862f.svg" />
     <Content Include="torneo\fonts\glyphicon\glyphicons-halflings-regular.svg" />
     <Content Include="torneo\fechas.aspx" />
+    <Content Include="torneo\goleador.aspx" />
     <Content Include="torneo\js\charts\charts-jugador.js" />
+    <Content Include="torneo\js\charts\charts-goleador.js" />
     <Content Include="torneo\js\jquery-ui.min.js" />
     <Content Include="torneo\js\jquery.bracket.min.js" />
     <Content Include="torneo\js\jquery.min.js" />
@@ -497,6 +499,13 @@
     </Compile>
     <Compile Include="torneo\fechas.aspx.designer.cs">
       <DependentUpon>fechas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="torneo\goleador.aspx.cs">
+      <DependentUpon>goleador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="torneo\goleador.aspx.designer.cs">
+      <DependentUpon>goleador.aspx</DependentUpon>
     </Compile>
     <Compile Include="torneo\jugador.aspx.cs">
       <DependentUpon>jugador.aspx</DependentUpon>
