@@ -22,7 +22,7 @@
                     <li>/</li>
                     <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/"><%=gestorEdicion.edicion.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/>Fase <%=gestorPartido.partido.faseAsociada.idFase%></a></li>
+                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/">Fase <%=gestorPartido.partido.faseAsociada.idFase%></a></li>
                     <li>/</li>
                     <li><a href="index-2.html">Fecha <%=gestorPartido.partido.idFecha %></a></li>
                     <li>/</li>
@@ -51,7 +51,8 @@
                                             <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? nombreMes(DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
                                             <div class="text">
                                                 <div class="equipos">
-                                                    <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/partido-<%# Eval("idPartido") %>">
+                                                   <%-- <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/partido-<%# Eval("idPartido") %>">--%>
+                                                    <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("idPartido").ToString()) %>">
                                                         <span data-toggle="tooltip" title="<%# Eval("local.nombre") %>"><%# Eval("local.nombreCorto") %></span>
                                                         vs
                                                         <span data-toggle="tooltip" title="<%# Eval("visitante.nombre") %>"><%# Eval("visitante.nombreCorto") %></span>
@@ -93,7 +94,7 @@
                                     </div>
                                 </div>
                                 <% } %>
-                                <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre  %></a></h3>
+                                <h3 class="text-center"><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre  %></a></h3>
                             </div>
                             <div class="col-xs-6 col-md-4">
                                 <div class="row text-center resultado">                                    
@@ -151,7 +152,7 @@
                                     </div>
                                 </div>
                                 <% } %>
-                                <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h3>
+                                <h3 class="text-center"><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h3>
                             </div>
                         </div>
                     </div>

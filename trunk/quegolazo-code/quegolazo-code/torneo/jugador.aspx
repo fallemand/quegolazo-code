@@ -21,15 +21,15 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="/<%=nickTorneo%>"><%= gestorTorneo.torneo.nombre %></a></li>
+                    <li><a href="<%=Logica.GestorUrl.urlTorneo(nickTorneo)%>"><%= gestorTorneo.torneo.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>"><%= gestorEdicion.edicion.nombre %></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion)%>"><%= gestorEdicion.edicion.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>">Equipos</a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion)%>">Equipos</a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>"><%= gestorEquipo.equipo.nombre %></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,idEquipo)%>"><%= gestorEquipo.equipo.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>/jugador-<%=idJugador%>"><%= gestorJugador.jugador.nombre%></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,idJugador)%>"><%= gestorJugador.jugador.nombre%></a></li>
                 </ul>
             </div>
         </div>
@@ -51,12 +51,12 @@
                                 <asp:Repeater ID="rptOtroseJugadores" runat="server" OnItemDataBound="rptOtroseJugadores_ItemDataBound" >
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre")%>">
-                                            <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>/jugador-<%# Eval("idJugador")%>">
+                                            <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>">
                                                 <asp:Panel ID="panelFotoJugador" runat="server" Visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen() ? true : false %>">
                                                     <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive img-circle center-block">
                                                 </asp:Panel>
                                                 <asp:Panel ID="panelJugadorSinFoto" runat="server" Visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen() ? false : true %>">
-                                                    <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>/jugador-<%# Eval("idJugador")%>" class="avatar-jugador avatar-slider avatar-bg-<%# Eval("idJugador").ToString().Substring(Eval("idJugador").ToString().Length -1 , 1) %>">
+                                                    <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" class="avatar-jugador avatar-slider avatar-bg-<%# Eval("idJugador").ToString().Substring(Eval("idJugador").ToString().Length -1 , 1) %>">
                                                         <h1><asp:Literal ID="litIniciales" runat="server" Text=""></asp:Literal></h1>
                                                     </a>
                                                 </asp:Panel>
@@ -88,7 +88,7 @@
                             <div class="col-xs-12">
                                 <ul class="list-group tooltip-hover">
                                     <li class="list-group-item">
-                                        <img src="<%= gestorEquipo.equipo.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt=""><a href="#" data-toggle="tooltip" title="Ver Equipo"> <%= gestorEquipo.equipo.nombre %></a></li>
+                                        <img src="<%= gestorEquipo.equipo.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt=""><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorEquipo.equipo.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"> <%= gestorEquipo.equipo.nombre %></a></li>
                                     <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs"></span>Nac: <%= ((DateTime)gestorJugador.jugador.fechaNacimiento).ToString("dd/MM/yyyy") %></li>
                                     <li class="list-group-item center-block">
                                         <a href="<%= gestorJugador.jugador.email %>" class="icon mail" data-toggle="tooltip" title="Copiar Mail"><i class="glyphicon glyphicon-envelope"></i></a>

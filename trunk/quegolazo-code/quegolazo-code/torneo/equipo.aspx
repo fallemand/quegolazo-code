@@ -20,13 +20,13 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="/<%=nickTorneo%>" ><%=gestorTorneo.torneo.nombre%></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlTorneo(nickTorneo) %>" ><%=gestorTorneo.torneo.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>" ><%=gestorEdicion.edicion.nombre%></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion) %>" ><%=gestorEdicion.edicion.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>">Equipos</a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion) %>">Equipos</a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%> "><%=gestorEquipo.equipo.nombre %></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,idEquipo) %>" "><%=gestorEquipo.equipo.nombre %></a></li>
                 </ul>
             </div>
         </div>
@@ -50,11 +50,12 @@
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre") %>">
                                             <a href="#ver equipo">
                                                 <asp:Panel ID="panelLogoEquipo" runat="server" Visible="<%# ((Entidades.Equipo)Container.DataItem).tieneImagen() ? true : false %>">
-                                                    <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%# Eval("idEquipo") %> ">
+                                                    <a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
                                                         <img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive center-block">
                                                     </a>  
                                                 </asp:Panel>  
                                                 <asp:Panel ID="panelCamisetaEquipo" runat="server" Visible="<%# ((Entidades.Equipo)Container.DataItem).tieneImagen() ? false : true %>">
+                                                    <a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
                                                     <div class="camiseta-equipo" runat="server">
                                                       <div>
                                                         <i class="flaticon-football114" style="color:<%# Eval("colorCamisetaPrimario") %>"></i>
@@ -63,6 +64,7 @@
                                                         <i class="flaticon-football114" style="color:<%# Eval("colorCamisetaSecundario") %>"></i>
                                                       </div>
                                                     </div>
+                                                        </a>
                                                 </asp:Panel>     
                                                 
                                             </a>
@@ -167,7 +169,7 @@
                                     <ItemTemplate>
                                         <!-- Jugador -->
                                         <div class="col-md-2 col-xs-3">
-                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador" href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>/jugador-<%# Eval("idJugador")%>" >
+                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
                                               <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle img-responsive" alt="imagen"></img>
                                             </a>
                                             <!-- Popover del Jugador -->
@@ -377,48 +379,6 @@
                                                 <tr id="sinGoleadores" runat="server" visible="false">
                                                     <td colspan="3">No hay información de goleadores</td>
                                                 </tr>  
-                                                <%--<tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                    </td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">5</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                    </td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">4</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                    </td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                    </td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">3</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                    </td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">1</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-1">
-                                                        <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
-                                                    </td>
-                                                    <td class="col-xs-9">Fernando Gago</td>
-                                                    <td class="col-xs-2">1</td>
-                                                </tr>--%>
                                             </tbody>
                                         </table>
                                     </div>
