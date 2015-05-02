@@ -114,13 +114,26 @@ namespace quegolazo_code.torneo
 
         private void cargarGraficos()
         {
-            DataTable datosGolesPorEquipo = gestorEstadistica.cantidadGolesPorEquipo(true);            
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "golesDeEquipo",(datosGolesPorEquipo.Rows.Count > 0) ? "var golesDeEquipo = " + gestorEstadistica.generarDatosParaGraficoDeTorta(datosGolesPorEquipo) + ";" : "var golesDeEquipo = null;" , true);
+            DataTable datosGolesPorEquipo = gestorEstadistica.cantidadGolesPorEquipo(true);
+            if (datosGolesPorEquipo.Rows.Count > 0)
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "golesDeEquipo", "var golesDeEquipo = " + gestorEstadistica.generarDatosParaGraficoDeTorta(datosGolesPorEquipo) + ";", true);
+            else
+            {
+                noGraphicsEquipos.Visible = true;
+                graficoEquipos.Visible = false;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "golesDeEquipo", "var golesDeEquipo = null;", true);
+            } 
+
             DataTable datosTiposGol = gestorEstadistica.cantidadGolesPorTipoGol(true);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGol",(datosTiposGol.Rows.Count > 0) ? "var tiposDeGol = " + gestorEstadistica.generarDatosParaGraficoDeTorta(datosTiposGol) + ";" :"var tiposDeGol = null;", true);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "datosFases","var datosFases = " + gestorEstadistica.generarJsonParaGraficoBarraGoleadores() + ";", true);
-            
-            
+            if (datosTiposGol.Rows.Count > 0)
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGol", "var tiposDeGol = " + gestorEstadistica.generarDatosParaGraficoDeTorta(datosTiposGol) + ";", true);
+            else
+            {
+                noGraphicsTipos.Visible = true;
+                graficoTipos.Visible = false;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGol", "var tiposDeGol = null;", true);
+            }            
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "datosFases","var datosFases = " + gestorEstadistica.generarJsonParaGraficoBarraGoleadores() + ";", true); 
         }
     }
 }
