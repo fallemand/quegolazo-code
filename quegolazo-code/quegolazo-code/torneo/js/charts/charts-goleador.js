@@ -21,6 +21,7 @@ $(document).ready(function ($) {
     } else {
         //mostrar cartel de grafico no disponible
         $("#graficosFases").hide();
+        $("#sinGoleadoresFase").show();
     }
 
     if (golesDeEquipo != null) {          

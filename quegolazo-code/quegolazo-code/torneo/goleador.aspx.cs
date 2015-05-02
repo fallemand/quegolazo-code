@@ -37,7 +37,7 @@ namespace quegolazo_code.torneo
                 gestorEstadistica.edicion = gestorEdicion.edicion;
                 gestorJugador = new GestorJugador();
                 if (!Page.IsPostBack)
-                { 
+                {
                     GestorControles.cargarRepeaterList(rptGoleadores, gestorJugador.obtenerJugadoresGoleadores(gestorEdicion.edicion.idEdicion));
                     cargarGoleadoresFases();
                     sinGoleadoresTodas.Visible = !GestorControles.cargarRepeaterTable(rptGoleadoresTodasLasFases, gestorEstadistica.obtenerTablaGoleadores());                                                             
@@ -120,17 +120,19 @@ namespace quegolazo_code.torneo
             else
             {
                 noGraphicsEquipos.Visible = true;
-                graficoEquipos.Visible = false;
+                pnlGraficoEquipos.Visible = false;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "golesDeEquipo", "var golesDeEquipo = null;", true);
             } 
 
             DataTable datosTiposGol = gestorEstadistica.cantidadGolesPorTipoGol(true);
-            if (datosTiposGol.Rows.Count > 0)
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGol", "var tiposDeGol = " + gestorEstadistica.generarDatosParaGraficoDeTorta(datosTiposGol) + ";", true);
+            if (datosTiposGol != null)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGol", "var tiposDeGol = " + gestorEstadistica.generarDatosParaGraficoDeTorta(datosTiposGol) + ";", true);                
+            }
             else
             {
                 noGraphicsTipos.Visible = true;
-                graficoTipos.Visible = false;
+                pnlGraficoTipos.Visible = false;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGol", "var tiposDeGol = null;", true);
             }            
             ScriptManager.RegisterStartupScript(this, this.GetType(), "datosFases","var datosFases = " + gestorEstadistica.generarJsonParaGraficoBarraGoleadores() + ";", true); 
