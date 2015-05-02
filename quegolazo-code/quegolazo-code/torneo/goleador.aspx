@@ -43,7 +43,7 @@
                 <div class="col-sm-12">
                     <div class="panel nopadding panel-default">
                         <div class="panel-body">
-                            <p class="slider-multiple-title">Goleadores del Torneo</p>
+                            <p class="slider-multiple-title">Goleadores de la Edición</p>
                             <ul class="otros-jugadores slider-multiple tooltip-hover">
                                 <asp:Repeater ID="rptGoleadores" runat="server" OnItemDataBound="rptGoleadores_ItemDataBound" >
                                     <ItemTemplate>
@@ -238,9 +238,10 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                 <div class="tab-pane fade active in" id="graficoEquipos">
+                                 <div class="tab-pane fade active in" id="graficoEquipos" runat="server">
                                   <canvas id="canvasTiposGoles" style="margin-top:10px" class="canvas-lg" ></canvas>
                                 </div>  
+                                <div id="noGraphicsEquipos" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
                             </div>
                         </div>
                     </div>
@@ -300,9 +301,10 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                 <div class="tab-pane fade active in" id="graficoTipos">
+                                 <div class="tab-pane fade active in" id="graficoTipos" runat="server">
                                   <canvas id="graficoTiposDeGol" style="margin-top:10px;" class="canvas-lg" ></canvas>
                                 </div> 
+                                 <div id="noGraphicsTipos" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
                             </div>
                         </div>
                     </div>

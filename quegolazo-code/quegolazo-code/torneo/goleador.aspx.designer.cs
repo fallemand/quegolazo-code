@@ -85,13 +85,13 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl graficoEquipos;
         
         /// <summary>
-        /// Control noGraphicsGolesPorEquipo.
+        /// Control noGraphicsEquipos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noGraphicsGolesPorEquipo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noGraphicsEquipos;
         
         /// <summary>
         /// Control rptGolesPorTipoGol.
@@ -121,12 +121,12 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl graficoTipos;
         
         /// <summary>
-        /// Control noGraphicsTipoGol.
+        /// Control noGraphicsTipos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noGraphicsTipoGol;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noGraphicsTipos;
     }
 }
