@@ -59,7 +59,10 @@ namespace quegolazo_code.torneo
                 ViewState["idFecha"] = e.CommandArgument.ToString();
                 litFecha.Text = e.CommandArgument.ToString();
                 litLnkFecha.Text = e.CommandArgument.ToString();
-                GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
+                if (gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos[0].fechas[int.Parse(ViewState["idFecha"].ToString()) - 1].estado.idEstado != Estado.fechaREGISTRADA)
+                {
+                   sinGrupos.Visible=!GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
+                }
             }
         }
 
@@ -69,13 +72,17 @@ namespace quegolazo_code.torneo
             {
                 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
                 {
-                    tipoFixture = new TipoFixture();
-                    tipoFixture.idTipoFixture = ((Fase)e.Item.DataItem).tipoFixture.idTipoFixture;
+                    //tipoFixture = new TipoFixture();
+                    //tipoFixture.idTipoFixture = ((Fase)e.Item.DataItem).tipoFixture.idTipoFixture;
 
                     if (((Fase)e.Item.DataItem).tipoFixture.idTipoFixture.ToString().Contains("TCT") && ((Fase)e.Item.DataItem).idFase ==int.Parse(ViewState["idFase"].ToString()))
                     {
+                        gestorEdicion.faseActual = (Fase)e.Item.DataItem;
                        sinFechas.Visible= !GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas());
-                       sinGrupos.Visible = !GestorControles.cargarRepeaterList(rptGrupos, ((Fase)e.Item.DataItem).grupos);
+                       if (gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos[0].fechas[int.Parse(ViewState["idFecha"].ToString()) - 1].estado.idEstado != Estado.fechaREGISTRADA)
+                       {
+                           sinGrupos.Visible = !GestorControles.cargarRepeaterList(rptGrupos, ((Fase)e.Item.DataItem).grupos);
+                       }                   
                     }
                     else
                     {
@@ -99,10 +106,12 @@ namespace quegolazo_code.torneo
             if (e.CommandName == "SeleccionarFase")
             {
                 ViewState["idFase"] = int.Parse(e.CommandArgument.ToString());
+                gestorEdicion.faseActual = gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1];
                 litFase.Text = e.CommandArgument.ToString();
                 litLnkFase.Text = e.CommandArgument.ToString();
-                sinFechas.Visible = !GestorControles.cargarRepeaterList(rptFechas, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].obtenerFechas());
-                sinGrupos.Visible= ! GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
+                sinFechas.Visible = !GestorControles.cargarRepeaterList(rptFechas, gestorEdicion.faseActual.obtenerFechas());
+                sinGrupos.Visible = !GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
+                
             }
         }
 
