@@ -24,15 +24,12 @@ $(document).ready(function ($) {
 
     //=================================== Counter  ==============================//
 
-    $('#event-one').countdown('2014/06/12', function (event) {
-        var $this = $(this).html(event.strftime('' + '<span>%D <br> <small>days</small></span>  ' + '<span>%H <br> <small>hr</small> </span>  ' + '<span>%M <br> <small>min</small> </span>  ' + '<span>%S <br> <small>sec</small></span> '));
-    });
-
-    $('#event-two').countdown('2014/09/10', function (event) {
-        var $this = $(this).html(event.strftime('' + '<span>%D <br> <small>days</small></span>  ' + '<span>%H <br> <small>hr</small> </span>  ' + '<span>%M <br> <small>min</small> </span>  ' + '<span>%S <br> <small>sec</small></span> '));
-    });
-    $('#event-three').countdown('2014/12/24', function (event) {
-        var $this = $(this).html(event.strftime('' + '<span>%D <br> <small>days</small></span>  ' + '<span>%H <br> <small>hr</small> </span>  ' + '<span>%M <br> <small>min</small> </span>  ' + '<span>%S <br> <small>sec</small></span> '));
+    $('#counter-proximo-partido').countdown('2015/05/12', function (event) {
+        var $this = $(this).html(event.strftime('' +
+            '<span>%D <br> <small>días</small></span>  ' +
+            '<span>%H <br> <small>horas</small> </span>  ' +
+            '<span>%M <br> <small>min</small> </span>  ' +
+            '<span>%S <br> <small>seg</small></span> '));
     });
 
     //=================================== Slide Services  ==============================//
@@ -283,7 +280,7 @@ $(document).ready(function ($) {
             slideSpeed: 400,
             pagination: false,
         });
-    
+
 
         $(".fases").owlCarousel({
             autoPlay: true,
@@ -294,9 +291,9 @@ $(document).ready(function ($) {
             autoPlay: false,
             pagination: false,
         });
-        
+
         $('.tooltip.in').removeClass('in');
-        
+
         $('.tooltip-hover').tooltip({
             selector: "[data-toggle=tooltip]",
             container: "body"
