@@ -4,12 +4,13 @@ $(document).ready(function ($) {
         var index = ($(this).text().length > 1) ? 0 : parseInt($(this).text());
         if (datosFases[index] != null) {
             $("#graficosFases").show();
+            $("#sinGoleadoresFase").hide();
             $("#numFaseGrafico").text($(this).text());
             var ctx = $("#graficosFases").get(0).getContext("2d");
             myPieChart.destroy();
             myPieChart = new Chart(ctx).Bar(datosFases[index]);
         } else {
-            //mostrar cartel de grafico no disponible
+            $("#sinGoleadoresFase").show();
             $("#graficosFases").hide();
         }
     });
@@ -22,8 +23,8 @@ $(document).ready(function ($) {
         $("#graficosFases").hide();
     }
 
-        if (golesDeEquipo != null) {
-            var canvasEquipos = $("#canvasTiposGoles").get(0).getContext("2d");
+    if (golesDeEquipo != null) {          
+            var canvasEquipos = $("#graficoGolesEquipos").get(0).getContext("2d");
             var graficoTiposGoles = new Chart(canvasEquipos).Doughnut(golesDeEquipo, {
                 animateScale: true,
                 tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value+'%' %>",
@@ -32,14 +33,14 @@ $(document).ready(function ($) {
 
         }
     
-        if (tiposDeGol != null) {
+    if (tiposDeGol != null) {
+            
             var canvasTiposGoles = $("#graficoTiposDeGol").get(0).getContext("2d");
             var graficoTiposGol = new Chart(canvasTiposGoles).Doughnut(tiposDeGol, {
                 animateScale: true,
                 tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value+'%' %>",
             });
-            $("#graficoEquipos").removeClass("active in");
-          
+            $("#graficoTipos").removeClass("active in");
         }
         $("#liGraficoTiposGoles").on("click", function () {
             $("#graficoTipos").addClass("active in");
