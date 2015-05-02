@@ -995,3 +995,51 @@ a.avatar-jugador:hover {
     margin-left:-48px;
 }
 /*----------------------- END: Widget Podio -----------------------------*/
+/*----------------------- Estilos ficture -----------------------------*/
+.panel-fechas {
+background-color: #fff;
+border: solid 1px #dedede;
+border-bottom: solid 2px #dedede;
+margin: 0 0 30px 0;
+padding: 0px !important;
+}
+.tabla-fechas td {
+white-space:nowrap;
+overflow-x: hidden;
+}
+.tabla-fechas {
+ margin-bottom:0px;
+ cursor:n-resize !important;
+ background-color:white;
+}
+.tabla-fechas th {
+    background-color:white;
+}
+
+.panel-fechas .post-item {
+    max-height : 150px;
+    overflow:auto;
+}
+.panel-fechas .post-item::-webkit-scrollbar { display:none }
+.panel-fechas .post-item p {
+      font-size: 12px; 
+      margin-bottom: 0px;
+}
+.estadoFecha {
+margin-top:15px;
+float:right;
+margin-right:15px;
+}
+.panel-fechas span.label {
+font-weight:normal !important;
+}
+.filtroFixture {
+  height: 35px;
+  margin-top: 3px;
+}
+.label-big {
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 3;  
+}
+/*----------------------- END Estilos ficture -----------------------------*/

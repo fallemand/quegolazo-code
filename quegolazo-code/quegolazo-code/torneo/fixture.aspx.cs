@@ -150,7 +150,7 @@ namespace quegolazo_code.torneo
                         Panel panelLlaves = (Panel)e.Item.FindControl("panelLlaves");
                         panelLlaves.Visible = true;
                         string llaves = new GestorFase().armarLlavesDeUnaFase((Fase)e.Item.DataItem);
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "llaves", "var datosLlaves = " + llaves + ";", true);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "llaves", "$('#divLlaves" + ((Fase)e.Item.DataItem).idFase + "').generadorDeLlaves("+llaves+");", true);
                     }
                 }
             }
