@@ -76,6 +76,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptFechas;
         
         /// <summary>
+        /// Control sinFechas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal sinFechas;
+        
+        /// <summary>
         /// Control rptGrupos.
         /// </summary>
         /// <remarks>
@@ -83,5 +92,14 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptGrupos;
+        
+        /// <summary>
+        /// Control sinGrupos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal sinGrupos;
     }
 }
