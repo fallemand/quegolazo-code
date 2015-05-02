@@ -49,7 +49,7 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body">
                                     <p class="slider-multiple-title">Seleccione la Fase</p>
-                                    <ul class="fases slider-multiple tooltip-hover">
+                                    <ul class="fases slider-multiple theme-bg-color-2 tooltip-hover">
                                         <asp:Repeater ID="rptFases" runat="server" OnItemCommand="rptFases_ItemCommand1" OnItemDataBound="rptFases_ItemDataBound">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkFase" runat="server" ClientIDMode="AutoID" CommandName="SeleccionarFase" CommandArgument='<%# Eval("idFase") %>'>
@@ -76,7 +76,7 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body">
                                     <p class="slider-multiple-title">Seleccione la Fecha</p>
-                                    <ul class="fechas <%= (tipoFixture.idTipoFixture=="ELIM")? "eliminatoria" : "" %> slider-multiple tooltip-hover">
+                                    <ul class="fechas theme-bg-color-2 <%= (tipoFixture.idTipoFixture=="ELIM")? "eliminatoria" : "" %> slider-multiple tooltip-hover">
                                         <asp:Repeater ID="rptFechas" runat="server" OnItemCommand="rptFechas_ItemCommand">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkFecha" CommandName="SeleccionarFecha" ClientIDMode="AutoID" runat="server" CommandArgument='<%# Eval("idFecha") %>'>

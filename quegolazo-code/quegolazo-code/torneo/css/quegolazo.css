@@ -472,6 +472,10 @@ img.img-principal {
 .fecha-Cancelada {
     background-color: #d9534f;
 }
+.fecha-Registrada {
+    background-color: #6a6a6a;
+}
+
 
 
 .partido-Ganado {
@@ -775,6 +779,13 @@ h5.page-title {
     margin-bottom:0px;
     padding-bottom:0px;
     line-height: 35px;
+}
+
+.fechas.eliminatoria .widget-md h1{
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 15px;
+    height: 40px;
 }
 
 .widget-lg h1{
