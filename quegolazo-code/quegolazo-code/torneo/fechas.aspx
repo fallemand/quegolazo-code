@@ -76,7 +76,7 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body">
                                     <p class="slider-multiple-title">Seleccione la Fecha</p>
-                                    <ul class="fechas slider-multiple tooltip-hover">
+                                    <ul class="fechas <%= (tipoFixture.idTipoFixture=="ELIM")? "eliminatoria" : "" %> slider-multiple tooltip-hover">
                                         <asp:Repeater ID="rptFechas" runat="server" OnItemCommand="rptFechas_ItemCommand">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkFecha" CommandName="SeleccionarFecha" ClientIDMode="AutoID" runat="server" CommandArgument='<%# Eval("idFecha") %>'>

@@ -30,8 +30,8 @@ namespace quegolazo_code.torneo
                 {
                     idEdicion = int.Parse(Request["idEdicion"]);
                     nickTorneo = Request["nickTorneo"].ToString();
-                    idFase = (Request["idFase"] != null) ? int.Parse(Request["idFase"]) : 0;
-                    idFecha = (Request["idFecha"] != null) ? int.Parse(Request["idFecha"]) : 0;
+                    idFase = (Request["idFase"] != null) ? int.Parse(Request["idFase"]) : 1;
+                    idFecha = (Request["idFecha"] != null) ? int.Parse(Request["idFecha"]) : 1;
                     ViewState["idFecha"] = idFecha;
                     ViewState["idFase"] = idFase;
                     litFase.Text=idFase.ToString();
