@@ -16,6 +16,7 @@ namespace quegolazo_code.torneo
         protected string nickTorneo;
         protected GestorTorneo gestorTorneo;
         protected GestorEdicion gestorEdicion;
+        protected static TipoFixture tipoFixture;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -68,16 +69,17 @@ namespace quegolazo_code.torneo
             {
                 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
                 {
-                    //Panel panelEstadoFase = (Panel)e.Item.FindControl("panelEstadoFase");
-                    //if (((Fase)e.Item.DataItem).estado.idEstado == Estado.faseINICIADA)
-                    //    panelEstadoFase.Visible = true;
+                    tipoFixture = new TipoFixture();
+                    tipoFixture.idTipoFixture = ((Fase)e.Item.DataItem).tipoFixture.idTipoFixture;
+
                     if (((Fase)e.Item.DataItem).tipoFixture.idTipoFixture.ToString().Contains("TCT") && ((Fase)e.Item.DataItem).idFase ==int.Parse(ViewState["idFase"].ToString()))
                     {
-                        GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas());
-                        GestorControles.cargarRepeaterList(rptGrupos, ((Fase)e.Item.DataItem).grupos);
+                       sinFechas.Visible= !GestorControles.cargarRepeaterList(rptFechas, ((Fase)e.Item.DataItem).obtenerFechas());
+                       sinGrupos.Visible = !GestorControles.cargarRepeaterList(rptGrupos, ((Fase)e.Item.DataItem).grupos);
                     }
                     else
                     {
+                        
                        
                     }
                 }
@@ -88,7 +90,8 @@ namespace quegolazo_code.torneo
         protected void rptGrupos_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
                 Repeater rptPartidos = (Repeater)e.Item.FindControl("rptPartidos");
-                GestorControles.cargarRepeaterList(rptPartidos, ((Grupo)e.Item.DataItem).fechas[int.Parse(ViewState["idFecha"].ToString()) - 1].partidos);
+                Literal sinPartidos = (Literal)e.Item.FindControl("sinPartidos");
+                sinPartidos.Visible = !GestorControles.cargarRepeaterList(rptPartidos, ((Grupo)e.Item.DataItem).fechas[int.Parse(ViewState["idFecha"].ToString()) - 1].partidos);
         }
 
         protected void rptFases_ItemCommand1(object source, RepeaterCommandEventArgs e)
@@ -98,8 +101,8 @@ namespace quegolazo_code.torneo
                 ViewState["idFase"] = int.Parse(e.CommandArgument.ToString());
                 litFase.Text = e.CommandArgument.ToString();
                 litLnkFase.Text = e.CommandArgument.ToString();
-                GestorControles.cargarRepeaterList(rptFechas, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].obtenerFechas());
-                GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
+                sinFechas.Visible = !GestorControles.cargarRepeaterList(rptFechas, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].obtenerFechas());
+                sinGrupos.Visible= ! GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
             }
         }
 
