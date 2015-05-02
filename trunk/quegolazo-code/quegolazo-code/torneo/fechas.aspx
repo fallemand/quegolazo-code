@@ -123,10 +123,8 @@
                                                                                 <div id="Div1" class="camiseta-equipo" runat="server">
                                                                                     <div>
                                                                                         <i class="flaticon-football114" style="color: <%#  Eval("local.colorCamisetaPrimario") %>"></i>
-                                                                                    </div>
-                                                                                    <!--
-                                                   -->
-                                                                                    <div class="segunda-mitad">
+                                                                                    </div><!--
+                                                                                 --><div class="segunda-mitad">
                                                                                         <i class="flaticon-football114" style="color: <%# Eval("local.colorCamisetaSecundario") %>"></i>
                                                                                     </div>
                                                                                 </div>
@@ -153,8 +151,8 @@
                                                                                 <div id="Div2" class="camiseta-equipo" runat="server">
                                                                                     <div>
                                                                                         <i class="flaticon-football114" style="color: <%#  Eval("visitante.colorCamisetaPrimario") %>"></i>
-                                                                                    </div>
-                                                                                    <div class="segunda-mitad">
+                                                                                    </div><!--
+                                                                                 --><div class="segunda-mitad">
                                                                                         <i class="flaticon-football114" style="color: <%# Eval("visitante.colorCamisetaSecundario") %>"></i>
                                                                                     </div>
                                                                                 </div>
