@@ -294,6 +294,13 @@ $(document).ready(function ($) {
             autoPlay: false,
             pagination: false,
         });
+        
+        $('.tooltip.in').removeClass('in');
+        
+        $('.tooltip-hover').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        });
     };
 
     //=================================== Portfolio Filters  ==============================//
