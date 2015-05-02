@@ -59,6 +59,16 @@ namespace Logica
             return "/" + nickTorneo + "/edicion-" + idEdicion + "/equipo-" + idEquipo + "/jugador-" + idJugador;
         }
 
+        public static string urlFechas(string nickTorneo, int idEdicion, int idFase, int idFecha)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/fase-" + idFase + "/fecha-" + idFecha;
+        }
+
+        public static string urlGoleadores(string nickTorneo, int idEdicion)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/goleadores";
+        }
+
         public static string urlGoleadores(string nickTorneo, int idEdicion)
         {
             return "/" + nickTorneo + "/edicion-" + idEdicion + "/goleadores";
