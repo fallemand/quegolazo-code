@@ -78,6 +78,23 @@ namespace Logica
         {
             return "/" + nickTorneo + "/edicion-" + idEdicion + "/goleadores";
         }
+        public static string urlFixture(string nickTorneo, int idEdicion)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/fixture";
+        }
+        public static string urlPosiciones(string nickTorneo, int idEdicion)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/posiciones";
+        }
+        public static string urlSanciones(string nickTorneo, int idEdicion)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/sanciones";
+        }
+        public static string urlEquipos(string nickTorneo, int idEdicion)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/equipos";
+        }
+
 
         //Forms en el root 
         public const string rINDEX = "/index.aspx";
