@@ -23,11 +23,11 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="/<%=nickTorneo%>"><%= gestorTorneo.torneo.nombre %></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlTorneo(nickTorneo)%>"><%= gestorTorneo.torneo.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>"><%= gestorEdicion.edicion.nombre %></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion)%>"><%= gestorEdicion.edicion.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/fixture">Fixture</a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlFixture(nickTorneo,idEdicion)%>">Fixture</a></li>
                 </ul>
             </div>
         </div>
@@ -49,9 +49,10 @@
                                           <div class="row clearfix" id="masterContainer">    
                                             <a data-toggle="collapse" data-parent="#fases" href="#fase-<%# Eval("idFase") %>">                                        
                                             <div class="col-md-7 col-xs-4">    
-                                              <h4>                                                     
-                                                   <span class="glyphicon glyphicon-plus"></span>                                                      
+                                              <h4> <%--<a href="<%# Logica.GestorUrl.urlFechasFase(nickTorneo,idEdicion,int.Parse(Eval("idFase").ToString())) %>">         --%>                                           
+                                                   <span class="glyphicon glyphicon-plus"></span>                                             
                                                     Fase <%# Eval("idFase") %>
+                                                  <%--</a>--%>
                                                </h4>                                                                                            
                                             </div>
                                             </a>
@@ -79,7 +80,7 @@
                                                                         <div class="titles row">
                                                                             <div class="col-md-6" >                                                                                
                                                                                 <h4>
-                                                                                    <a href="#">
+                                                                                    <a href="<%# Logica.GestorUrl.urlFechas(nickTorneo,idEdicion,((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).idFase,((Entidades.Fecha)Container.DataItem).idFecha) %>">
                                                                                     <span class="glyphicon glyphicon-zoom-in"></span>
                                                                                     </a>
                                                                                     <%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).tipoFixture.idTipoFixture=="ELIM" ?  Eval("nombre") + " " : "Fecha "+ Eval("idFecha")%>
