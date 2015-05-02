@@ -254,6 +254,10 @@ img.img-principal {
   display: block;
   text-align: center;
 }
+
+.camiseta-equipo i {
+    text-shadow: -1px 0 rgba(100, 100, 100, 0.40), 0 1px rgba(100, 100, 100, 0.40), 1px 0 rgba(100, 100, 100, 0.40), 0 -1px rgba(100, 100, 100, 0.40);
+}
 .camiseta-equipo div {
   width:75px;
   display: inline-block;
