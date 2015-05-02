@@ -177,8 +177,12 @@
                          <h3 class="panel-title text-center ">Gráfico de goleadores para la fase: <span id="numFaseGrafico">Todas</span> </h3>
                          </div>
                         <div class="panel-body" id="containerCanvas">
-                          <canvas id="graficosFases" class="canvas-lg"></canvas>   
+                          <canvas id="graficosFases" class="canvas-lg"></canvas>  
+                        <div id="sinGoleadoresFase" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  style="display:none;">
+                            No Hay información de goleadores registrada para esta fase
+                        </div> 
                         </div>
+                     
                     </div>
                </div>                
             </div>
@@ -203,8 +207,8 @@
                                     </div>
                                     <div class="collapse navbar-collapse">
                                         <ul class="nav navbar-nav  nav-justified">
-                                            <li class="active"><a href="#tabla" data-toggle="tab">Tabla</a></li>
-                                            <li id="liGraficoGolesEquipos" class=""><a href="#graficoEquipos" data-toggle="tab">Gráfico</a></li>                                          
+                                            <li class=""><a href="#tabla" data-toggle="tab">Tabla</a></li>
+                                            <li id="liGraficoGolesEquipos" class="active"><a href="#graficoEquipos" data-toggle="tab">Gráfico</a></li>                                          
                                         </ul>
                                     </div>
                                 </div>
@@ -213,7 +217,7 @@
                             <div class="tab-content highlight">
 
                                 <!-- Tab Resumen -->
-                                <div class="tab-pane fade active in" id="tabla">
+                                <div class="tab-pane fade" id="tabla">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -238,11 +242,11 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                 <div class="tab-pane fade active in" id="graficoEquipos" runat="server">
-                                  <canvas id="canvasTiposGoles" style="margin-top:10px" class="canvas-lg" ></canvas>
-                                </div>  
-                                <div id="noGraphicsEquipos" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
-                            </div>
+                                 <div class="tab-pane fade active in" id="graficoEquipos" ClientIDMode="Static" runat="server">
+                                  <canvas id="graficoGolesEquipos" style="margin-top:10px" class="canvas-lg" ></canvas>
+                                 </div>  
+                                 <div id="noGraphicsEquipos" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
+                               </div>
                         </div>
                     </div>
                </div>
@@ -266,8 +270,8 @@
                                     </div>
                                     <div class="collapse navbar-collapse">
                                         <ul class="nav navbar-nav  nav-justified">
-                                            <li class=""><a href="#tablaTipos" data-toggle="tab">Tabla</a></li>
-                                            <li id="liGraficoTiposGoles" class="active" ><a href="#graficoTipos" data-toggle="tab">Gráfico</a></li>                                          
+                                            <li class="active"><a href="#tablaTipos" data-toggle="tab">Tabla</a></li>
+                                            <li id="liGraficoTiposGoles" class="" ><a href="#graficoTipos" data-toggle="tab">Gráfico</a></li>                                          
                                         </ul>
                                     </div>
                                 </div>
@@ -276,7 +280,7 @@
                             <div class="tab-content highlight">
 
                                 <!-- Tab Resumen -->
-                                <div class="tab-pane fade" id="tablaTipos">
+                                <div class="tab-pane fade active in" id="tablaTipos">
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
@@ -301,10 +305,10 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                 <div class="tab-pane fade active in" id="graficoTipos" runat="server">
+                                 <div class="tab-pane fade active in" id="graficoTipos" ClientIDMode="Static" runat="server">
                                   <canvas id="graficoTiposDeGol" style="margin-top:10px;" class="canvas-lg" ></canvas>
                                 </div> 
-                                 <div id="noGraphicsTipos" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
+                                 <div id="noGraphicsTipos" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
                             </div>
                         </div>
                     </div>
