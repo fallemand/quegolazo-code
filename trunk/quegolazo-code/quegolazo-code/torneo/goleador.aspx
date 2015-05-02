@@ -207,7 +207,7 @@
                                     </div>
                                     <div class="collapse navbar-collapse">
                                         <ul class="nav navbar-nav  nav-justified">
-                                            <li class=""><a href="#tabla" data-toggle="tab">Tabla</a></li>
+                                            <li class="liTablas"><a href="#tabla" data-toggle="tab">Tabla</a></li>
                                             <li id="liGraficoGolesEquipos" class="active"><a href="#graficoEquipos" data-toggle="tab">Gráfico</a></li>                                          
                                         </ul>
                                     </div>
@@ -246,8 +246,9 @@
                                      <asp:Panel ID="pnlGraficoEquipos" runat="server">
                                         <canvas id="graficoGolesEquipos" style="margin-top:10px" class="canvas-lg" ></canvas></asp:Panel>
                                      <div id="noGraphicsEquipos" class="alert alert-info col-md-10 col-md-offset-1 msobile-margin-top" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
-                                 </div>
-                             </div> 
+                                 </div>  
+                                 <div id="noGraphicsEquipos" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
+                               </div>
                         </div>
                     </div>
                </div>
@@ -271,7 +272,7 @@
                                     </div>
                                     <div class="collapse navbar-collapse">
                                         <ul class="nav navbar-nav  nav-justified">
-                                            <li class="active"><a href="#tablaTipos" data-toggle="tab">Tabla</a></li>
+                                            <li class="active liTablas"><a href="#tablaTipos" data-toggle="tab">Tabla</a></li>
                                             <li id="liGraficoTiposGoles" class="" ><a href="#graficoTipos" data-toggle="tab">Gráfico</a></li>                                          
                                         </ul>
                                     </div>
@@ -310,7 +311,7 @@
                                   <asp:Panel ID="pnlGraficoTipos" runat="server">
                                   <canvas id="graficoTiposDeGol" style="margin-top:10px;" class="canvas-lg" ></canvas></asp:Panel>
                                      <div id="noGraphicsTipos" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                     </div>

@@ -199,6 +199,7 @@
     <Content Include="torneo\js\jquery-ui.min.js" />
     <Content Include="torneo\js\jquery.bracket.min.js" />
     <Content Include="torneo\js\jquery.min.js" />
+    <Content Include="torneo\js\jquery.stickytableheaders.min.js" />
     <Content Include="torneo\js\widgetLlaves.js" />
     <Content Include="torneo\jugador.aspx" />
     <Content Include="torneo\img\bg-theme\c1-sm.png" />
