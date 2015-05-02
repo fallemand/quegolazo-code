@@ -139,7 +139,12 @@ namespace Logica
 
        public DataTable cantidadGolesPorTipoGol(bool paraGrafico)
        {
-           return DaoEstadisticas.cantidadGolesPorTipoGol(edicion.idEdicion, paraGrafico);
+           DataTable datosTiposGol = DaoEstadisticas.cantidadGolesPorTipoGol(edicion.idEdicion, paraGrafico);
+           if (datosTiposGol.Rows[0]["Goles"].ToString().Equals("0") && datosTiposGol.Rows[1]["Goles"].ToString().Equals("0") &&
+                  datosTiposGol.Rows[2]["Goles"].ToString().Equals("0") && datosTiposGol.Rows[3]["Goles"].ToString().Equals("0")
+                   && datosTiposGol.Rows[4]["Goles"].ToString().Equals("0") && datosTiposGol.Rows[5]["Goles"].ToString().Equals("0"))
+               datosTiposGol = null;
+           return datosTiposGol;
        }
 
        public void guardarTablaPosicionesFinal(List<Int64> idEquipos, int idEdicion)
