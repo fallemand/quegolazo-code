@@ -180,7 +180,10 @@ width:300px;
   background-color: #aa2f2f;
 }
 
-
+.tarjetas-icon {
+    max-height:15px;
+    vertical-align: top;
+}
 
 .navbar-nav.nav-justified > li{
     float:none;
@@ -917,17 +920,23 @@ a.avatar-jugador:hover {
     border: none;
 }
 
-.tab-content.home {
-    padding-left:40px;
-}
+
 
 .home .nav-tabs {
     margin-top: 0px !important;
+    margin-left:1px;
 }
 
 #footer.home {
     margin-top: 0px;
     padding-top: 30px;
+}
+#ultimos-partidos {
+    padding-left:20px;
+}
+.tab-content.home .tab-pane h3 {
+    color: #fff;
+    margin: 15px 0px 5px 20px;
 }
 
 
@@ -1022,7 +1031,7 @@ overflow-x: hidden;
 }
 .panel-fechas .post-item::-webkit-scrollbar { display:none }
 .panel-fechas .post-item p {
-      font-size: 12px; 
+      font-size: 12px;
       margin-bottom: 0px;
 }
 .estadoFecha {
@@ -1040,6 +1049,6 @@ font-weight:normal !important;
 .label-big {
   font-size: 13px;
   font-weight: normal;
-  line-height: 3;  
+  line-height: 3;
 }
 /*----------------------- END Estilos ficture -----------------------------*/
