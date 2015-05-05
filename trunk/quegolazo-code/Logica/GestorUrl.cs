@@ -95,7 +95,6 @@ namespace Logica
             return "/" + nickTorneo + "/edicion-" + idEdicion + "/equipos";
         }
 
-
         //Forms en el root 
         public const string rINDEX = "/index.aspx";
 
