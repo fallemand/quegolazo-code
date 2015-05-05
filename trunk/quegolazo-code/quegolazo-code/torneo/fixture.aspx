@@ -1,19 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/torneo/torneoMaster.Master" AutoEventWireup="true" CodeBehind="fixture.aspx.cs" Inherits="quegolazo_code.torneo.fechas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headTorneoMasterContent" runat="server">
-    <script src="/torneo/js/jquery-ui.min.js"></script>   
+    <script src="/torneo/js/jquery-ui.min.js"></script>
     <script src="/torneo/js/jquery.bracket.min.js"></script>
     <link href="/torneo/css/jquery.bracket.min.css" rel="stylesheet" />
     <script src="/torneo/js/widgetLlaves.js"></script>
     <script src="/torneo/js/jquery.stickytableheaders.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
-    
+
     <!-- contentPages-->
     <!-- Titulo Sección -->
     <section class="section-title img-about">
         <div class="overlay-bg"></div>
         <div class="container">
-            <h1> <%= gestorEdicion.edicion.nombre %> - Fixture</h1>
+            <h1><%= gestorEdicion.edicion.nombre %> - Fixture</h1>
         </div>
     </section>
     <!-- End Titulo Sección -->
@@ -31,76 +31,73 @@
                 </ul>
             </div>
         </div>
-
         <div class="semiboxshadow text-center">
             <img src="/torneo/img/img-theme/shp.png" class="img-responsive" alt="">
         </div>
-                
         <!-- Content Central -->
         <div class="container padding-top">
+            <asp:Repeater ID="rptFases" runat="server" OnItemDataBound="rptFases_ItemDataBound">
+                <HeaderTemplate>
+                    <div class="panel-group" id="fases">
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <div class="panel panel-default tooltip-hover">
+                        <div class="panel-heading">
+                            <div class="row" id="masterContainer">
+                                <div class="col-md-7 col-xs-4">
+                                    <a data-toggle="collapse" data-parent="#fases" href="#fase-<%# Eval("idFase") %>">
+                                        <h4>
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                            Fase <%# Eval("idFase") %>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div class="col-md-3 col-xs-5">
+                                    <input type="text" id="filtro" class="form-control filtroFixture" placeholder="Filtrar por Equipo" />
+                                </div>
+                                <div class="col-md-2 col-xs-3" style="padding-top:10px;">
+                                    <asp:Panel ID="panelEstadoFase" runat="server">
+                                        <span class="label label-lg fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" data-toggle="tooltip" title="<%# ((Entidades.Fase)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
+                                    </asp:Panel>
+                                </div>
+                            </div>
+                        </div>
+                        <asp:Panel ID="panelTCT" runat="server">
+                            <div id='fase-<%# Eval("idFase") %>' class="panel-collapse collapse <%# (Container.ItemIndex==0) ? "in" : ""%>">
+                                <div class="panel-body">
 
-              <asp:Repeater ID="rptFases" runat="server" OnItemDataBound="rptFases_ItemDataBound">
-                            <HeaderTemplate>
-                        <div class="panel-group" id="fases">
-                            </HeaderTemplate>
-                            <ItemTemplate>                                
-                                <div class="panel panel-default">                                    
-                                    <div class="panel-heading panel-heading-master"> 
-                                          <div class="row clearfix" id="masterContainer">    
-                                            <a data-toggle="collapse" data-parent="#fases" href="#fase-<%# Eval("idFase") %>">                                        
-                                            <div class="col-md-7 col-xs-4">    
-                                              <h4> <%--<a href="<%# Logica.GestorUrl.urlFechasFase(nickTorneo,idEdicion,int.Parse(Eval("idFase").ToString())) %>">         --%>                                           
-                                                   <span class="glyphicon glyphicon-plus"></span>                                             
-                                                    Fase <%# Eval("idFase") %>
-                                                  <%--</a>--%>
-                                               </h4>                                                                                            
-                                            </div>
-                                            </a>
-                                            <div class="col-md-3 nopadding-left mobile-nopadding-right col-xs-2">
-                                                <input type="text" id="filtro" class="pull-right form-control input-xs filtroFixture" placeholder="Filtrar Fechas" />
-                                            </div>                                               
-                                            <div class="col-md-1 col-xs-4">
-                                                <asp:Panel ID="panelEstadoFase" runat="server">
-                                                    <span class="label label-big fase-<%# ((Entidades.Fase)Container.DataItem).estado.nombre %>" rel="txtTooltip" title="<%# ((Entidades.Fase)Container.DataItem).estado.descripcion %>" data-placement="left"><%# ((Entidades.Fase)Container.DataItem).estado.nombre %></span>
-                                                </asp:Panel>
-                                            </div>                                               
-                                        </div>                                             
-                                    </div>                                    
-                                    <asp:Panel ID="panelTCT" runat="server">
-                                    <div id='fase-<%# Eval("idFase") %>' class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            
-                                            <asp:Repeater ID="rptFechas" runat="server" OnItemDataBound="rptFechas_ItemDataBound">
-                                                <HeaderTemplate>
-                                                <div class="row" id="fechas">
-                                                </HeaderTemplate>
-                                                <ItemTemplate> 
-                                                   <div class="col-md-4">                                                       
-                                                        <div class="panel-box panel-fechas">                            
-                                                                        <div class="titles row">
-                                                                            <div class="col-md-6" >                                                                                
-                                                                                <h4>
-                                                                                    <a href="<%# Logica.GestorUrl.urlFechas(nickTorneo,idEdicion,((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).idFase,((Entidades.Fecha)Container.DataItem).idFecha) %>">
-                                                                                    <span class="glyphicon glyphicon-zoom-in"></span>
-                                                                                    </a>
-                                                                                    <%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).tipoFixture.idTipoFixture=="ELIM" ?  Eval("nombre") + " " : "Fecha "+ Eval("idFecha")%>
-                                                                                </h4>
-                                                                            </div>
-                                                                            <div class="col-md-6" >
-                                                                                <span class="label estadoFecha fecha-<%# ((Entidades.Fecha)Container.DataItem).estado.nombre%>" rel="txtTooltip" title="<%# ((Entidades.Fecha)Container.DataItem).estado.descripcion %>" data-placement="left">
-                                                                                 <%# ((Entidades.Fecha)Container.DataItem).estado.nombre  %>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- Fecha -->
-                                                                        <div class="post-item">
-                                                                            <div class="row">
-                                                                                 <table  class="table .table-condensed tabla-fechas" >
+                                    <asp:Repeater ID="rptFechas" runat="server" OnItemDataBound="rptFechas_ItemDataBound">
+                                        <HeaderTemplate>
+                                            <div class="row" id="fechas">
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <div class="col-md-6">
+                                                <div class="panel panel-default panel-fecha">
+                                                    <div class="panel-heading">
+                                                        <div class="row">
+                                                            <div class="col-sm-9 col-xs-8">
+                                                                <a href="<%# Logica.GestorUrl.urlFechas(nickTorneo,idEdicion,((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).idFase,((Entidades.Fecha)Container.DataItem).idFecha) %>">
+                                                                    <h3 class="panel-title">
+                                                                        <span class="glyphicon glyphicon-zoom-in"></span>
+                                                                        <%# ((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).tipoFixture.idTipoFixture=="ELIM" ?  Eval("nombre") + " " : "Fecha "+ Eval("idFecha")%>
+                                                                    </h3>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-sm-3 col-xs-4">
+                                                                <div class="label label-md fecha-<%# ((Entidades.Fecha)Container.DataItem).estado.nombre%>" data-toggle="tooltip" title="<%# ((Entidades.Fecha)Container.DataItem).estado.descripcion %>">
+                                                                    <%# ((Entidades.Fecha)Container.DataItem).estado.nombre  %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body nopadding">                                                    
+                                                        <!-- Fecha -->
+                                                                <table class="table table-condensed nomargin-bottom table-hover table-fecha">
                                                                     <thead>
-                                                                        <tr >
-                                                                            <th class="col-md-5 text-center">Local</th>
+                                                                        <tr>
+                                                                            <th class="col-md-5 text-center" colspan="2">Local</th>
                                                                             <th class="col-md-2 text-center"><span class="glyphicon glyphicon-search"></span></th>
-                                                                            <th class="col-md-5 text-center">Visitante</th>
+                                                                            <th class="col-md-5 text-center" colspan="2">Visitante</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody class="tablaFiltro">
@@ -108,27 +105,49 @@
                                                                             <ItemTemplate>
                                                                                 <asp:Panel ID="panelPartidoNormal" runat="server" Visible="false">
                                                                                     <tr class="grupo-<%# Eval("idGrupo") %>">
+                                                                                        <td>
+                                                                                            <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenChicha() %>" class="img-responsive avatar-xs" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen()%>">
+                                                                                            <div class="camiseta-equipo" runat="server" visible="<%# !((Entidades.Partido)Container.DataItem).local.tieneImagen()%>">
+                                                                                                <div>
+                                                                                                    <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local.colorCamisetaPrimario %>"></i>
+                                                                                                </div><!--
+                                                                                                --><div class="segunda-mitad">
+                                                                                                    <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).local.colorCamisetaSecundario%>"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </td>
                                                                                         <td class="text-left">
                                                                                             <asp:Label Font-Size="17px" ID="lblPrimerPuesto" class="flaticon-football81" runat="server" Visible="false" title="Final" rel="txtTooltip" data-placement="left"></asp:Label><asp:Label Font-Size="16px" ID="lblTercerPuesto" class="flaticon-football78" runat="server" Visible="false" title="Tercer Puesto" rel="txtTooltip" data-placement="left"></asp:Label>
-                                                                                            
+
                                                                                             <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : "" %></td>
-                                                                                           <td class="text-center">
-                                                                                           <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,gestorEdicion.edicion.idEdicion,Eval("idPartido").ToString()) %>">
-                                                                                               <p class="partido-<%# ((Entidades.Partido)Container.DataItem).estado.nombre %>">   
-                                                                                               <%# ((Entidades.Partido)Container.DataItem).golesLocal%>
-                                                                                               <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesLocal.ToString()+")" : "" %>
-                                                                                             - <%# ((Entidades.Partido)Container.DataItem).golesVisitante%>
-                                                                                               <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesVisitante.ToString()+")" : "" %>
-                                                                                             </p>
-                                                                                           </a>                                                                                           
+                                                                                        <td class="text-center partido-<%# ((Entidades.Partido)Container.DataItem).estado.nombre %>">
+                                                                                            <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,gestorEdicion.edicion.idEdicion,Eval("idPartido").ToString()) %>">
+                                                                                                <span>
+                                                                                                    <%# ((Entidades.Partido)Container.DataItem).golesLocal%>
+                                                                                                    <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesLocal.ToString()+")" : "" %>
+                                                                                                 - <%# ((Entidades.Partido)Container.DataItem).golesVisitante%>
+                                                                                                    <%# (((Entidades.Partido)Container.DataItem).huboPenales==true) ? "("+((Entidades.Partido)Container.DataItem).penalesVisitante.ToString()+")" : "" %>
+                                                                                                </span>
+                                                                                            </a>
                                                                                         </td>
-                                                                                        <td class="text-right"><%# ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.nombre : "" %></td>                                                                                       
+                                                                                        <td class="text-right"><%# ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.nombre : "" %></td>
+                                                                                        <td>
+                                                                                            <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenChicha() %>" class="img-responsive avatar-xs" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen()%>">
+                                                                                            <div class="camiseta-equipo" runat="server" visible="<%# !((Entidades.Partido)Container.DataItem).visitante.tieneImagen()%>">
+                                                                                                <div>
+                                                                                                    <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).visitante.colorCamisetaPrimario %>"></i>
+                                                                                                </div><!--
+                                                                                                --><div class="segunda-mitad">
+                                                                                                    <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).visitante.colorCamisetaSecundario%>"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </td>
                                                                                     </tr>
                                                                                 </asp:Panel>
                                                                                 <asp:Panel ID="panelPartidoLibre" runat="server" Visible="false">
-                                                                                     <tr class="grupo-<%# Eval("idGrupo") %>">
+                                                                                    <tr class="grupo-<%# Eval("idGrupo") %>">
                                                                                         <td colspan="4">
-                                                                                            <asp:Literal ID="litLibre" runat="server" Text=""></asp:Literal></td>                                                                                        
+                                                                                            <asp:Literal ID="litLibre" runat="server" Text=""></asp:Literal></td>
                                                                                     </tr>
                                                                                 </asp:Panel>
 
@@ -141,118 +160,118 @@
                                                                         </asp:Panel>
                                                                     </tbody>
                                                                 </table>
-                                                                           </div>
-                                                                        </div>
-                                                                         <!-- End Fecha -->
-                                                        </div>                                             
-                                                   </div>
-                                                </ItemTemplate>
-                                                <FooterTemplate>
-                                                    </div>
-                                                </FooterTemplate>
-                                            </asp:Repeater>                                            
-                                            <asp:Panel ID="panelSinFechas" runat="server">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-body">
-                                                        <span>No hay fechas registradas para la fase</span>
+                                                        <!-- End Fecha -->
                                                     </div>
                                                 </div>
-                                            </asp:Panel>
-                                        </div>
-                                    </div>
-                                  </asp:Panel>
-                                    <asp:Panel ID="panelLlaves" runat="server">
-                                        <div id="divLlaves<%# Eval("idFase") %>">
-
+                                            </div>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </div>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
+                                    <asp:Panel ID="panelSinFechas" runat="server">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <span>No hay fechas registradas para la fase</span>
+                                            </div>
                                         </div>
                                     </asp:Panel>
-                                </div>                                
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                </div>
-                            </FooterTemplate>
-                        </asp:Repeater>
-              <asp:Panel ID="panelSinFases" runat="server">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <span>No hay fases registradas para la edición</span>
                                 </div>
                             </div>
                         </asp:Panel>
-            
-            <div class="row mobile-margin-top">        
-            
-
+                        <asp:Panel ID="panelLlaves" runat="server">
+                            <div id="divLlaves<%# Eval("idFase") %>">
+                            </div>
+                        </asp:Panel>
+                    </div>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </div>
+                </FooterTemplate>
+            </asp:Repeater>
+            <asp:Panel ID="panelSinFases" runat="server">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <span>No hay fases registradas para la edición</span>
+                    </div>
+                </div>
+            </asp:Panel>
+            <div class="row mobile-margin-top">
             </div>
         </div>
         <!-- End Content Central -->
-    
     </section>
     <!-- END contentPages-->
 
-          <script type="text/javascript">              
-              $(document).ready(function ($) {
-                  
-                  //Deja visible el header de todas las tablas
-                  var tablas = $(".tabla-fechas");
-                  for (var i = 0; i < tablas.length; i++) {
-                      $(tablas[i]).stickyTableHeaders({ scrollableArea: $(tablas[i]).parent().parent(), "fixedOffset": "offset"});
-                  }
-                  //hace que el scroll en las tablas detenga el scroll en la pagina
-                  $('.panel-fechas .post-item').bind('mousewheel DOMMouseScroll', function (e) {
-                      var e0 = e.originalEvent,
-                          delta = e0.wheelDelta || -e0.detail;
-                      this.scrollTop += (delta < 0 ? 1 : -1) * 30;
-                      e.preventDefault();
-                  });
-              });
-              $('body').on('keyup', '#filtro', function () {
-                  if ($(this).val().length > 0) {
-                      $('.panel-collapse').collapse('show');
-                      $('.panel-title').attr('data-toggle', '');
-                  }
-                  else {
-                      $('.panel-collapse').collapse('hide');
-                      $('.panel-title').attr('data-toggle', 'collapse');
-                  }
-                  var rex = new RegExp($(this).val(), 'i');
-                  $('.tablaFiltro tr').hide();
-                  $('.tablaFiltro tr').filter(function () {
-                      return rex.test($(this).text());
-                  }).show();
-              });
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            $('.table-fecha tr:not(:has(th))').tooltip({
+                title: 'Ver Partido',
+                placement: 'right',
+                container: 'body'
+            }).click(function () {
+                window.location = $(this).find('a').attr('href');
+            }).hover(function () {
+                $(this).toggleClass('hover');
+            });
 
-              function filtrarPosiciones(idGrupo) {
-                  $('#tabla-posiciones tbody tr').hide();
-                  $('#tabla-posiciones tbody tr').filter(function () {
-                      return $(this).find('td:last-child').text() == idGrupo;
-                  }).show('fast');
-              };
+            //Deja visible el header de todas las tablas
+            var tablas = $(".tabla-fecha");
+            for (var i = 0; i < tablas.length; i++) {
+                $(tablas[i]).stickyTableHeaders({ scrollableArea: $(tablas[i]).parent().parent(), "fixedOffset": "offset" });
+            }
+            //hace que el scroll en las tablas detenga el scroll en la pagina
+            //$('.panel-fechas .post-item').bind('mousewheel DOMMouseScroll', function (e) {
+            //    var e0 = e.originalEvent,
+            //        delta = e0.wheelDelta || -e0.detail;
+            //    this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+            //    e.preventDefault();
+            //});
 
-              function filtrarFechasPorGrupo(Grupo) {
-                  $('#tabla-fechas tbody tr').hide();
-                  $('#tabla-fechas tbody tr').filter(function () {
-                      return $(this).find('td:last-child').text() == Grupo;
-                  }).show('fast');
-              };
-              function agrandarLlaves() {
-                  $("#divFechas").hide('slow');
-                  $("#divLlaves").removeClass('col-md-6', 'slow').addClass('col-md-12');
-                  $("#divLlaves").hide();
-                  $("#divLlaves").show('slow');
-                  $("#btnAgrandar").hide();
-                  $("#btnAchicar").show();
-              };
-              function achicarLlaves() {
-                  $("#divFechas").show('slow');
-                  $("#divLlaves").removeClass('col-md-12', 'slow').addClass('col-md-6', 800, 'easeOutBounce');
-                  $("#divLlaves").hide();
-                  $("#divLlaves").show('slow');
-                  $("#btnAgrandar").show();
-                  $("#btnAchicar").hide();
-              };
 
-              
+        });
+        $('body').on('keyup', '#filtro', function () {
+            if ($(this).val().length > 0) {
+                $('.panel-collapse').collapse('show');
+                $('.panel-title').attr('data-toggle', '');
+            }
+            else {
+                $('.panel-collapse').collapse('hide');
+                $('.panel-title').attr('data-toggle', 'collapse');
+            }
+            var rex = new RegExp($(this).val(), 'i');
+            $('.tablaFiltro tr').hide();
+            $('.tablaFiltro tr').filter(function () {
+                return rex.test($(this).text());
+            }).show();
+        });
+        function filtrarPosiciones(idGrupo) {
+            $('#tabla-posiciones tbody tr').hide();
+            $('#tabla-posiciones tbody tr').filter(function () {
+                return $(this).find('td:last-child').text() == idGrupo;
+            }).show('fast');
+        };
+        function filtrarFechasPorGrupo(Grupo) {
+            $('#tabla-fechas tbody tr').hide();
+            $('#tabla-fechas tbody tr').filter(function () {
+                return $(this).find('td:last-child').text() == Grupo;
+            }).show('fast');
+        };
+        function agrandarLlaves() {
+            $("#divFechas").hide('slow');
+            $("#divLlaves").removeClass('col-md-6', 'slow').addClass('col-md-12');
+            $("#divLlaves").hide();
+            $("#divLlaves").show('slow');
+            $("#btnAgrandar").hide();
+            $("#btnAchicar").show();
+        };
+        function achicarLlaves() {
+            $("#divFechas").show('slow');
+            $("#divLlaves").removeClass('col-md-12', 'slow').addClass('col-md-6', 800, 'easeOutBounce');
+            $("#divLlaves").hide();
+            $("#divLlaves").show('slow');
+            $("#btnAgrandar").show();
+            $("#btnAchicar").hide();
+        };
     </script>
-        
 </asp:Content>
