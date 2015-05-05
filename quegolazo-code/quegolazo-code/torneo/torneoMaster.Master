@@ -5,9 +5,9 @@
 <head id="headTorneoMaster" runat="server">
     <!-- Basic -->
     <meta charset="utf-8">
-    <title>TorneoX - Con la Tecnología de QueGolazo!</title>
+    <title><%= torneo.nombre%> - Con la Tecnología de QueGolazo!</title>
     <meta name="keywords" content="futbol, torneo, partido, campeonato, goles, gol, goleadores" />
-    <meta name="description" content="Sitio web del torneo en donde encontrarás toda la información necesaria">
+    <meta name="description" content="Sitio web del torneo en donde encontrarás toda la información necesaria.">
     <meta name="author" content="quegolazo.org">
 
     <!-- Mobile Metas -->
@@ -59,11 +59,11 @@
                         <div class="row">
                             <!-- Logo-->
                             <div class="col-md-2 col-xs-3 col-sm-2 mobile-nopadding-right">
-                                <img src="/torneo/img/img-theme/torneo.jpg" alt="Torneo XXXX" style="max-height:100px" class="img-thumbnail image-responsive">
+                                <img src="<%=torneo.obtenerImagenMediana()%>" alt="<%= torneo.nombre%>" style="max-height:100px" class="img-thumbnail image-responsive">
                             </div>
                             <!-- End Logo-->
                             <div class="col-md-10 col-sm-10 col-xs-9">
-                                <h1 class="titulo-torneo">Torneo Federal Argetina</h1>
+                                <h1 class="titulo-torneo"><%= torneo.nombre%></h1>
                                 <h2 class="titulo-torneo visible-md visible-lg">Con la tecnología de <strong>QueGolazo!</strong></h2>
                             </div>
                         </div>
@@ -81,30 +81,32 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#">Torneo Federal</a>
+                            <a class="navbar-brand" href="#"><%= edicion.nombre %> </a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="#about">Noticias</a></li>
-                                <li><a href="#contact">Fixture</a></li>
-                                <li><a href="#contact">Posiciones</a></li>
+                                <li><a href="<%= Logica.GestorUrl.urlFixture(torneo.nick,edicion.idEdicion) %>">Fixture</a></li>
+                                <li><a href="<%= Logica.GestorUrl.urlPosiciones(torneo.nick,edicion.idEdicion) %>">Posiciones</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estadísticas <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#contact">Equipos</a></li>
-                                        <li><a href="#">Goleadores</a></li>
-                                        <li><a href="#">Tipos de Goles</a></li>
-                                        <li><a href="#">Rusticos</a></li>
-                                        <li><a href="#">Arqueros</a></li>
+                                        <li><a href="<%= Logica.GestorUrl.urlEquipos(torneo.nick,edicion.idEdicion) %>">Equipos</a></li>
+                                        <li><a href="<%= Logica.GestorUrl.urlGoleadores(torneo.nick,edicion.idEdicion) %>">Goleadores</a></li>
+                                        <li><a href="#">Misceláneas</a></li>                                        
                                     </ul>
                                 </li>
-                                <li><a href="#contact">Sanciones</a></li>
+                                <li><a href="<%= Logica.GestorUrl.urlSanciones(torneo.nick,edicion.idEdicion) %>">Sanciones</a></li>
                             </ul>
                             <ul class="hidden-sm nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ediciones <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Edicion 2015</a></li>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Otras Ediciones <span class="caret"></span></a>                                   
+                                     <ul class="dropdown-menu" role="menu">
+                                          <asp:Repeater ID="rptEdicionesMaster" runat="server" >                                              
+                                                <ItemTemplate> 
+                                                <li><a href="<%#Logica.GestorUrl.urlEdicion(torneo.nick, ((Entidades.Edicion)Container.DataItem).idEdicion)%>"><%#Eval("nombre")%></a></li>
+                                                </ItemTemplate>                                             
+                                           </asp:Repeater> 
                                         <li><a href="#">Edicion 2014</a></li>
                                         <li><a href="#">Edicion 2013</a></li>
                                     </ul>

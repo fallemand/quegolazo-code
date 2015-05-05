@@ -58,6 +58,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.ScriptManager MainScriptManager;
         
         /// <summary>
+        /// Control rptEdicionesMaster.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptEdicionesMaster;
+        
+        /// <summary>
         /// Control contentMasterTorneo.
         /// </summary>
         /// <remarks>

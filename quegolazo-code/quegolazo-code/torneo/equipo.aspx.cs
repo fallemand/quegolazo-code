@@ -31,7 +31,7 @@ namespace quegolazo_code.torneo
                 gestorTorneo = Sesion.getGestorTorneo();
                 gestorEdicion = Sesion.getGestorEdicion();
                 //TODO falta agregarle el try/catch y que redirija a una pagina de error...
-                idEdicion = int.Parse(Request["edicion"]);
+                idEdicion = int.Parse(Request["idEdicion"]);
                 nickTorneo = Request["nickTorneo"];
                 idEquipo = int.Parse(Request["idEquipo"]);
                 gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
