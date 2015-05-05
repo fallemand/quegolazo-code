@@ -1045,39 +1045,22 @@ a.avatar-jugador:hover {
 .panel-fecha .panel-heading {
     border-left:none !important;
 }
-.panel-fechas {
-background-color: #fff;
-border: solid 1px #dedede;
-border-bottom: solid 2px #dedede;
-margin: 0 0 30px 0;
-padding: 0px !important;
-}
-.tabla-fechas td {
-white-space:nowrap;
-overflow-x: hidden;
-}
-.tabla-fechas {
- margin-bottom:0px;
- cursor:n-resize !important;
- background-color:white;
-}
-.tabla-fechas th {
-    background-color:white;
+
+.table-fecha td {
+    white-space:nowrap;
+    overflow-x: hidden;
 }
 
-.panel-fechas .post-item {
-    max-height : 150px;
+.panel-maxheight {
+    max-height : 180px;
     overflow:auto;
 }
-.panel-fechas .post-item::-webkit-scrollbar { display:none }
-.panel-fechas .post-item p {
-      font-size: 12px;
-      margin-bottom: 0px;
-}
 
-.panel-fechas span.label {
-font-weight:normal !important;
+.panel-maxheight tbody {
+    overflow:hidden;
 }
+.panel-maxheight::-webkit-scrollbar { display:none }
+
 .filtroFixture {
   height: 35px;
   margin-top: 3px;
