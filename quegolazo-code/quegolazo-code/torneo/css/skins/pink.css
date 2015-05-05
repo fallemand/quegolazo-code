@@ -116,6 +116,15 @@ a{
 .tooltip.top .tooltip-arrow {
   border-top-color: #FF3D7F;
 }
+.tooltip.right .tooltip-arrow {
+    border-right-color: #FF3D7F;
+}
+.tooltip.left .tooltip-arrow {
+    border-left-color: #FF3D7F;
+}
+.tooltip.bottom .tooltip-arrow  {
+  border-bottom-color: #FF3D7F;
+}
 .sf-menu li:hover > .sf-mega,
 .sf-menu li.sfHover > .sf-mega,
 .mainmenu,
