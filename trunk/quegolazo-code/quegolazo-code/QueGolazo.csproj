@@ -66,8 +66,6 @@
     <Content Include="admin\edicion\equipos.aspx" />
     <Content Include="admin\edicion\fases.aspx" />
     <Content Include="admin\fechas.aspx" />
-    <Content Include="admin\interfacesFeas\Equipos.aspx" />
-    <Content Include="admin\interfacesFeas\Jugadores.aspx" />
     <Content Include="admin\jugadores.aspx" />
     <Content Include="admin\equipos.aspx" />
     <Content Include="admin\noticias.aspx" />
@@ -341,6 +339,7 @@
     <Content Include="torneo\jugador.html" />
     <Content Include="torneo\partido.aspx" />
     <Content Include="torneo\partido.html" />
+    <Content Include="torneo\posiciones.aspx" />
     <Content Include="usuario\activar.aspx" />
     <Content Include="admin\index.aspx" />
     <Content Include="usuario\login.aspx" />
@@ -440,20 +439,6 @@
     <Compile Include="admin\fechas.aspx.designer.cs">
       <DependentUpon>fechas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\interfacesFeas\Equipos.aspx.cs">
-      <DependentUpon>Equipos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\interfacesFeas\Equipos.aspx.designer.cs">
-      <DependentUpon>Equipos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\interfacesFeas\Jugadores.aspx.cs">
-      <DependentUpon>Jugadores.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\interfacesFeas\Jugadores.aspx.designer.cs">
-      <DependentUpon>Jugadores.aspx</DependentUpon>
-    </Compile>
     <Compile Include="admin\jugadores.aspx.cs">
       <DependentUpon>jugadores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -530,6 +515,13 @@
     </Compile>
     <Compile Include="torneo\partido.aspx.designer.cs">
       <DependentUpon>partido.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="torneo\posiciones.aspx.cs">
+      <DependentUpon>posiciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="torneo\posiciones.aspx.designer.cs">
+      <DependentUpon>posiciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="torneo\torneoMaster.Master.cs">
       <DependentUpon>torneoMaster.Master</DependentUpon>
