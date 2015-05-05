@@ -13,6 +13,10 @@
 .nav-tabs {
     margin-top: -43px !important;
 }
+/*! Custom CSS QueGolazo */
+.panel-maxheight th{
+    background-color:#fff !important;
+}
 /*END Custom CSS*/
 
 html {

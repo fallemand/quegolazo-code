@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 
 /* ==============================
     - Template Name: Sports Cup- Responsive HTML5  soccer and sports Template
@@ -551,11 +551,11 @@ header{
     right: 0;
     bottom: 0;
     opacity: 1;
-    background: rgba(0, 0, 0, 0.3);
-    background: -webkit-radial-gradient(50% 55%, ellipse closest-corner, rgba(0, 0, 0, 0.27) 1%, rgba(0, 0, 0, 0.5) 100%);
+    background: rgba(0, 0, 0, 0.5);
+    /*background: -webkit-radial-gradient(50% 55%, ellipse closest-corner, rgba(0, 0, 0, 0.27) 1%, rgba(0, 0, 0, 0.5) 100%);
     background: -moz-radial-gradient(50% 55%, ellipse closest-corner, rgba(0, 0, 0, 0.27) 1%, rgba(0, 0, 0, 0.5) 100%);
     background: -ms-radial-gradient(50% 55%, ellipse closest-corner, rgba(0, 0, 0, 0.27) 1%, rgba(0, 0, 0, 0.5) 100%);
-    background: radial-gradient(50% 55%, ellipse closest-corner, rgba(0, 0, 0, 0.27) 1%, rgba(0, 0, 0, 0.5) 100%);
+    background: radial-gradient(50% 55%, ellipse closest-corner, rgba(0, 0, 0, 0.27) 1%, rgba(0, 0, 0, 0.5) 100%);*/
     z-index: 0;
 }
 .img-about{

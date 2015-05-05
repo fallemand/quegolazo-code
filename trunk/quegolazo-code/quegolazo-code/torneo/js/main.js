@@ -16,6 +16,30 @@ $(document).ready(function ($) {
 
     'use strict';
 
+    //=================================== MaxHeight Tables ===================================//
+    $('.table-fecha tr:not(:has(th))').tooltip({
+        title: 'Ver Partido',
+        placement: 'right',
+        container: 'body'
+    }).click(function () {
+        window.location = $(this).find('a').attr('href');
+    }).hover(function () {
+        $(this).toggleClass('hover');
+    });
+
+    //Deja visible el header de todas las tablas
+    var tablas = $(".panel-maxheight table");
+    for (var i = 0; i < tablas.length; i++) {
+        $(tablas[i]).stickyTableHeaders({ scrollableArea: $(tablas[i]).parent(), "fixedOffset": "offset" });
+    }
+    //hace que el scroll en las tablas detenga el scroll en la pagina
+    $('.panel-maxheight').bind('mousewheel DOMMouseScroll', function (e) {
+        var e0 = e.originalEvent,
+            delta = e0.wheelDelta || -e0.detail;
+        this.scrollTop += (delta < 0 ? 1 : -1) * 30;
+        e.preventDefault();
+    });
+
     //=================================== Sticky nav ===================================//
 
     $(".mainmenu").sticky({
