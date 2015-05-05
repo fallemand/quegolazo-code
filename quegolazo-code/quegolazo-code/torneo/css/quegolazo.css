@@ -31,7 +31,9 @@ h2.titulo-torneo {
 h2.titulo-torneo strong {
     font-weight: 600;
 }
-
+.margin-bottom {
+    margin-bottom:15px !important;
+}
 .padding-top {
   padding-top:35px;
 }
@@ -46,6 +48,9 @@ h2.titulo-torneo strong {
 }
 .nomargin-top{
   margin-top:0px;
+}
+.noborder{
+  border:none !important;
 }
 .nopadding-right{
   padding-right:0px !important;
@@ -75,10 +80,6 @@ h2.titulo-torneo strong {
 .onlypadding-top{
     padding:0px !important;
     padding-top:5px !important;
-}
-
-.panel h3.panel-title {
-    padding-bottom:0px;
 }
 
 .panel h3.panel-title {
@@ -271,6 +272,25 @@ img.img-principal {
   margin-left:-75px;
 }
 
+
+
+.table .camiseta-equipo {
+    font-size:20px;
+    line-height: 20px;
+    margin-top: 0px;
+}
+
+.table .camiseta-equipo i {
+    text-shadow: -1px 0 rgba(100, 100, 100, 0.40), 0 1px rgba(100, 100, 100, 0.40), 1px 0 rgba(100, 100, 100, 0.40), 0 -1px rgba(100, 100, 100, 0.40);
+}
+.table .camiseta-equipo div {
+    width:9px;
+}
+
+.table .camiseta-equipo .segunda-mitad i {
+    margin-left:-10px;
+}
+
 /*.primera-mitad {
   letter-spacing: -117px;
 }*/
@@ -281,6 +301,10 @@ img.img-principal {
 .footer-down p a{
   color: #fff;
   font-weight: bold;
+}
+
+.panel-heading a {
+    text-decoration: none;
 }
 
 .panel-box .score, .panel.score {
@@ -511,6 +535,11 @@ img.img-principal {
 .partido-Cancelado {
     background-color: rgba(217, 83, 79, 0.7);
     /*background-color: #d9534f;*/
+}
+
+.partido-Cancelado a, .partido-Diagramado a, .partido-Programado a, .partido-Jugado a {
+    color:#fff;
+    text-decoration: none !important;
 }
 
 
@@ -1005,6 +1034,17 @@ a.avatar-jugador:hover {
 }
 /*----------------------- END: Widget Podio -----------------------------*/
 /*----------------------- Estilos ficture -----------------------------*/
+.table-fecha tbody tr {
+    cursor:pointer;
+}
+
+.panel-fecha {
+    margin-bottom:15px !important;
+}
+
+.panel-fecha .panel-heading {
+    border-left:none !important;
+}
 .panel-fechas {
 background-color: #fff;
 border: solid 1px #dedede;
@@ -1034,11 +1074,7 @@ overflow-x: hidden;
       font-size: 12px;
       margin-bottom: 0px;
 }
-.estadoFecha {
-margin-top:15px;
-float:right;
-margin-right:15px;
-}
+
 .panel-fechas span.label {
 font-weight:normal !important;
 }
@@ -1046,9 +1082,16 @@ font-weight:normal !important;
   height: 35px;
   margin-top: 3px;
 }
-.label-big {
-  font-size: 13px;
+.label-md {
+  font-size: 11px;
   font-weight: normal;
-  line-height: 3;
+}
+.label-lg {
+    font-size: 14px;
+    font-weight: normal;
 }
 /*----------------------- END Estilos ficture -----------------------------*/
+
+/*----------------------- Tabla Fechas -----------------------------*/
+
+/*----------------------- END Tabla Fechas -----------------------------*/
