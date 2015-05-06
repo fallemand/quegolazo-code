@@ -17,14 +17,6 @@ $(document).ready(function ($) {
     'use strict';
 
     //=================================== MaxHeight Tables ===================================//
-    $('.panel-maxheight').slimscroll({
-        color: '#999',
-        size: '9px',
-        width: '100%',
-        height: '100%'                  
-    });
-
-    //=================================== MaxHeight Tables ===================================//
     $('.table-fecha tr:not(:has(th))').tooltip({
         title: 'Ver Partido',
         placement: 'right',
@@ -46,6 +38,14 @@ $(document).ready(function ($) {
             delta = e0.wheelDelta || -e0.detail;
         this.scrollTop += (delta < 0 ? 1 : -1) * 30;
         e.preventDefault();
+    });
+
+    //=================================== MaxHeight Tables ===================================//
+    $('.panel-maxheight').slimscroll({
+        color: '#999',
+        size: '6px',
+        width: '100%',
+        height: '100%'
     });
 
     //=================================== Sticky nav ===================================//
