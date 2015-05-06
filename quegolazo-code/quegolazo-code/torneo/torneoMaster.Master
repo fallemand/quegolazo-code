@@ -330,6 +330,8 @@
         <script type='text/javascript' src="/torneo/js/filters/jquery.isotope.js"></script>
         <!-- Counter -->
         <script type='text/javascript' src="/torneo/js/counter/jquery.countdown.js"></script>
+        <!-- SlimScroll -->
+        <script type='text/javascript' src="/torneo/js/jquery.slimscroll.min.js"></script>
         <!-- Theme-->
         <script type="text/javascript" src="/torneo/js/theme-options/jquery.colorPicker.min.js"></script>
         <script type="text/javascript" src="/torneo/js/theme-options/jquery.cookies.js"></script>
