@@ -1054,6 +1054,13 @@ a.avatar-jugador:hover {
 .panel-maxheight {
     max-height : 150px;
 }
+
+div.panel-maxheight {
+    overflow: hidden;
+}
+div.panel-maxheight:hover {
+    overflow-y: scroll;
+}
 /*.panel-maxheight::-webkit-scrollbar { display:none }*/
 
 .filtroFixture {
