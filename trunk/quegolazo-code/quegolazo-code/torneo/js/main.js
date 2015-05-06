@@ -17,6 +17,14 @@ $(document).ready(function ($) {
     'use strict';
 
     //=================================== MaxHeight Tables ===================================//
+    $('.panel-maxheight').slimscroll({
+        color: '#999',
+        size: '9px',
+        width: '100%',
+        height: '100%'                  
+    });
+
+    //=================================== MaxHeight Tables ===================================//
     $('.table-fecha tr:not(:has(th))').tooltip({
         title: 'Ver Partido',
         placement: 'right',
