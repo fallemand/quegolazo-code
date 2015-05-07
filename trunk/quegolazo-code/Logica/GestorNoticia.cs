@@ -34,10 +34,17 @@ namespace Logica
         /// Obtener noticias de un torneo de la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public DataTable obtenerNoticias()
+        public DataTable obtenerNoticias(int idEdicion)
         {
             DAONoticia daoNoticia = new DAONoticia();
-            DataTable noticias = daoNoticia.obtenerNoticias(Sesion.getGestorEdicion().edicion.idEdicion);
+            DataTable noticias = daoNoticia.obtenerNoticias(idEdicion);
+            return noticias;
+        }
+
+        public DataTable obtenerNoticiasXCategoria(int idEdicion, int idCategoria)
+        {
+            DAONoticia daoNoticia = new DAONoticia();
+            DataTable noticias = daoNoticia.obtenerNoticiasXCategoria(idEdicion,idCategoria);
             return noticias;
         }
 

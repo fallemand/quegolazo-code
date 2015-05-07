@@ -20,6 +20,7 @@ namespace Entidades
         public bool esGenerica { get; set; }
         public int cantidadDeGrupos { get; set; }
         public int cantidadDeEquipos { get; set; }
+        public Fecha fechaActual { get; set; }
 
 
         public Fase()
@@ -30,6 +31,7 @@ namespace Entidades
                 estado = new Estado();
                 grupos = new List<Grupo>();
                 equipos = new List<Equipo>();
+                fechaActual = new Fecha();
             }
             catch (Exception ex)
             {
@@ -85,6 +87,55 @@ namespace Entidades
                 fechasFase.Add(fechaFase);
             }
             return fechasFase;
+        }
+
+        /// <summary>
+        /// Actualiza la fecha actual de una fase, basandose en los estados, se considera fecha actual a la primera fecha que encuentre en estado  incompleta
+        /// </summary>
+        /// <param name="gestor">El gestor que se va a actualizar</param>
+        public void getFechaActual()
+        {
+            bool hayFechaIncompleta = false;
+            bool hayFechaDiagramada = false;
+
+            if(esGenerica!=true)
+            {
+                if (grupos[0].fechas != null)
+                {
+                    foreach (Fecha fecha in this.grupos[0].fechas)
+                    {
+                        if (fecha.estado.idEstado == Estado.fechaINCOMPLETA)//busco primero la primer fecha incompleta
+                        {
+                            this.fechaActual = fecha;
+                            hayFechaIncompleta = true;
+                            break;
+                        }
+                    }
+                    if (!hayFechaIncompleta)//si no existen fechas incompletas, busco la primer fecha diagramada
+                    {
+                        foreach (Fecha fecha in this.grupos[0].fechas)
+                        {
+                            if (fecha.estado.idEstado == Estado.fechaDIAGRAMADA)
+                            {
+                                this.fechaActual = fecha;
+                                hayFechaDiagramada = true;
+                                break;
+                            }
+                        }
+                        if (!hayFechaDiagramada)// si no existen fechas diagramadas, tomo la ultima fecha
+                            this.fechaActual = this.grupos[0].fechas[this.grupos[0].fechas.Count - 1];
+                    }
+                   
+                }
+                else
+                {
+                    fechaActual = null;
+                    return;
+                }
+            }
+            else
+                fechaActual = null;
+           
         }
     }
 }

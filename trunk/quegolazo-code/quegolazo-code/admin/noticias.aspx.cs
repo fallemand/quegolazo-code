@@ -161,7 +161,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterNoticias()
         {
-            sinNoticias.Visible = (GestorControles.cargarRepeaterTable(rptNoticias, gestorNoticia.obtenerNoticias())) ?
+            sinNoticias.Visible = (GestorControles.cargarRepeaterTable(rptNoticias, gestorNoticia.obtenerNoticias(Sesion.getGestorEdicion().edicion.idEdicion))) ?
                 false : true;
         }
         private void cargarComboCategoriasNoticia()

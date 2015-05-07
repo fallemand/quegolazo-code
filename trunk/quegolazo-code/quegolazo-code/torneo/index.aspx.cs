@@ -1,6 +1,7 @@
 ﻿using System;
-using Entidades;
 using Logica;
+using Utils;
+using Entidades;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,20 +12,33 @@ namespace quegolazo_code.torneo
 {
     public partial class Formulario_web11 : System.Web.UI.Page
     {
-        protected Torneo torneo;
-        protected Edicion edicion;
+        protected int idEdicion;
+        protected string nickTorneo;
+        protected GestorTorneo gestorTorneo;
+        protected GestorEdicion gestorEdicion;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                torneo = new GestorTorneo().obtenerTorneoPorNick(Request["nickTorneo"]);
-                edicion = new GestorEdicion().obtenerEdicionPorId(int.Parse(Request["idEdicion"]));
-                if (!IsPostBack) { 
-                    //aca mandamos como parametro una efcha con id negativo para que traiga todos los partidos de una fecha...
-                 //var partidos = new GestorPartido().otrosPartidosDeLaFecha(edicion.idEdicion, 
-                 //Utils.GestorControles.cargarRepeaterTable
-                
+                idEdicion = int.Parse(Request["idEdicion"]);
+                nickTorneo = Request["nickTorneo"];
+
+                if (!IsPostBack) {
+
+                    gestorTorneo = new GestorTorneo();
+                    gestorEdicion = new GestorEdicion();
+                    gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
+                    gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
+                    gestorEdicion.edicion.fases= gestorEdicion.obtenerFases();
+                    gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
+                    gestorEdicion.edicion.equipos= gestorEdicion.obtenerEquipos();
+                    gestorEdicion.getFaseActual();
+                    gestorEdicion.faseActual.getFechaActual();
+                    otrosPartidosDeLaFecha(); // Carga Otros Partidos de la Fecha
+                    cargarNoticias();
                 }
+
             }
             catch (ArgumentNullException)
             {
@@ -36,6 +50,16 @@ namespace quegolazo_code.torneo
             }
 
 
+        }
+
+        private void otrosPartidosDeLaFecha()
+        {
+            GestorControles.cargarRepeaterList(rptFechaActual, (new GestorPartido()).otrosPartidosDeLaFecha(gestorEdicion.edicion.idEdicion, gestorEdicion.faseActual.idFase, gestorEdicion.faseActual.fechaActual.idFecha, 0));
+        }
+
+         private void cargarNoticias()
+         {
+            GestorControles.cargarRepeaterTable(rptEventos, (new GestorNoticia()).obtenerNoticiasXCategoria(gestorEdicion.edicion.idEdicion, CategoriaNoticia.noticiaEVENTOS));
         }
 
         [System.Web.Services.WebMethod(enableSession: true)]
@@ -51,5 +75,16 @@ namespace quegolazo_code.torneo
                 return ex.Message;
             }
         }
+
+        public string nombreMes(int numeroMes)
+        {
+            return GestorExtra.nombreMes(numeroMes);
+        }
+        public string nombreDia(DateTime date)
+        {
+            return GestorExtra.nombreDia(date);
+        }
+
+
     }
 }
