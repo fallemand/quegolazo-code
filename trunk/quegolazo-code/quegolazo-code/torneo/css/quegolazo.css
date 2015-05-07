@@ -240,6 +240,11 @@ width:300px;
   height:55px;
   max-width:60px;
 }
+.avatar-lg {
+    width:95% !important;
+    height: 90px !important;
+    padding-top:10px !important;
+}
 
 img.img-principal {
   height:150px;
@@ -871,6 +876,18 @@ canvas{
   padding-top:2px;
 }
 
+td .avatar-jugador h1{
+    font-size: 11px;
+    line-height: 12px;
+    margin: 0px;
+    padding: 0px;
+}
+
+td .avatar-jugador{
+    margin: 0px;
+    padding: 2px;
+}
+
 .avatar-principal h1{
   font-size: 55px;
   padding-bottom: 0px;
@@ -885,12 +902,19 @@ a.avatar-principal {
 
 .avatar-slider {
     height:45px;
-    width:55px;
+    width: 90%;
+}
+
+.avatar-jugador p {
+    font-size: 10px;
+    line-height: 12px;
+    color: #FFF;
+    padding-top:10px;
 }
 
 .avatar-jugador {
     margin:5px;
-    borcer:1px solid rgba(0,0,0,0.2);
+    border:1px solid rgba(0,0,0,0.2);
     padding:5px;
     text-align: center;
     margin: 5px auto;

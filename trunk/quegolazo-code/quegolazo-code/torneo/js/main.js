@@ -10,7 +10,21 @@
 // Email: support@iwthemes.com
 // Copyright: (C) 2014
 
-//=================================== Totop  ============================================//
+function showPanelMessage(idPanel, idMensaje, mensaje) {
+    setTimeout(function () {
+        $('#' + idMensaje).text(mensaje);
+        $('#' + idPanel).toggleClass('in');
+    }, 1);
+};
+
+function hidePanelMessage(idPanel) {
+    if ($('#' + idPanel).hasClass('in')) {
+        setTimeout(function () {
+            $('#' + idPanel).removeClass('in');
+        }, 1);
+        $('#' + idPanel).find(".panel-text").text('');
+    }
+};
 
 $(document).ready(function ($) {
 
@@ -116,12 +130,13 @@ $(document).ready(function ($) {
     //=================================== Slide Otros Judaores  ==============================//
 
     $(".otros-jugadores").owlCarousel({
-        items: 14,
+        items: 13,
         autoPlay: true,
         navigation: true,
         slideSpeed: 400,
+        autoWidth:true,
         pagination: false,
-        itemsCustom: [[0, 3], [300, 4], [400, 6], [500, 8], [600, 9], [800, 10], [1000, 12], [1100, 13], [1200, 15]]
+        itemsCustom: [[0, 3], [300, 4], [400, 6], [500, 8], [600, 9], [800, 9], [1000, 11], [1100, 12], [1200, 14]]
     });
 
     //=================================== Slide Otros Judaores  ==============================//

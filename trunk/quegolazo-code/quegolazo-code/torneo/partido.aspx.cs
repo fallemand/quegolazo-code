@@ -35,8 +35,6 @@ namespace quegolazo_code.torneo
                 gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
                 gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
                 serializador = new JavaScriptSerializer();
-                string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(gestorTorneo.torneo.idTorneo));
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "var configuracion = " + estilos + ";", true);
                 gestorEstadistica = new GestorEstadisticas();
                 gestorPartido = Sesion.getGestorPartido();
                 gestorEquipo = Sesion.getGestorEquipo();
@@ -51,7 +49,7 @@ namespace quegolazo_code.torneo
             }
             catch (Exception ex)
             {
-
+                GestorError.mostrarPanelFracaso(ex.Message);
             }
         }
 
