@@ -223,7 +223,7 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 string sql = @"SELECT s.idSancion, s.idFecha AS 'Fecha', s.fechaSancion AS 'FechaSancion', e.nombre AS 'NombreEquipo', j.nombre AS 'NombreJugador',
                                 m.nombre AS 'MotivoSancion', s.puntosAQuitar AS 'PtosAQuitar', s.cantidadFechasSuspendidas AS 'CantFechas',
-                                s.idEdicion AS 'IdEdicion'
+                                s.idEdicion AS 'IdEdicion', j.idJugador, e.idEquipo
                                 FROM Sanciones s 
                                 LEFT OUTER JOIN Equipos e ON e.idEquipo = s.idEquipo
                                 LEFT OUTER JOIN Jugadores j ON j.idJugador = s.idJugador
