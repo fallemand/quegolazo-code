@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 
 namespace quegolazo_code.torneo
 {
@@ -14,12 +14,17 @@ namespace quegolazo_code.torneo
     {
         protected Torneo torneo;
         protected Edicion edicion;
+        protected GestorTorneo gestorTorneo;
+        JavaScriptSerializer serializador;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {               
                 
                 if (!IsPostBack) {
+                    gestorTorneo = new GestorTorneo();
+                    string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(gestorTorneo.torneo.idTorneo));
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "var configuracion = " + estilos + ";", true);
                     torneo = new GestorTorneo().obtenerTorneoPorNick(Request["nickTorneo"]);
                     edicion = new GestorEdicion().obtenerEdicionPorId(int.Parse(Request["idEdicion"]));
                     Utils.GestorControles.cargarRepeaterList(rptEdicionesMaster, new GestorEdicion().obtenerEdicionesPorTorneo(torneo.idTorneo));

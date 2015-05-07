@@ -30,7 +30,7 @@ $(document).ready(function ($) {
 
     'use strict';
 
-    //=================================== MaxHeight Tables ===================================//
+    //================================== Tooltip y Link Tablas=================================//
     $('.table-fecha tr:not(:has(th))').tooltip({
         title: 'Ver Partido',
         placement: 'right',
@@ -41,6 +41,27 @@ $(document).ready(function ($) {
         $(this).toggleClass('hover');
     });
 
+    $('.table-jugadores tr:not(:has(th))').tooltip({
+        title: 'Ver Jugador',
+        placement: 'right',
+        container: 'body'
+    }).click(function () {
+        window.location = $(this).find('a').attr('href');
+    }).hover(function () {
+        $(this).toggleClass('hover');
+    });
+
+    $('.table-partidos tr:not(:has(th))').tooltip({
+        title: 'Ver Partido',
+        placement: 'right',
+        container: 'body'
+    }).click(function () {
+        window.location = $(this).find('a').attr('href');
+    }).hover(function () {
+        $(this).toggleClass('hover');
+    });
+
+    //=================================== MaxHeight Tables ===================================//
     //Deja visible el header de todas las tablas
     var tablas = $(".panel-maxheight table");
     for (var i = 0; i < tablas.length; i++) {
