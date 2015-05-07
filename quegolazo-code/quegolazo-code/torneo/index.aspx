@@ -71,30 +71,34 @@
                                                     <!-- blog post-->
                                                     <ul id="events-carousel" class="events-carousel padding-top">
                                                         <!-- Item blog post -->
+                                                          <asp:Repeater ID="rptEventos" runat="server">
+                                                              <ItemTemplate>
                                                         <li>
                                                             <div class="header-post">
                                                                 <div class="date">
-                                                                    <span>08/jan</span>
-                                                                    2014
+                                                                    <span><%# ((DateTime)Eval("fecha")).ToString("dd/MM/yyyy") %></span>
+                                                                   <%# ((DateTime)Eval("fecha")).Year %> 
                                                                 </div>
                                                                 <a href="single-news.html"><img src="/torneo/img/blog/1.jpg" alt=""></a>
                                                                 <div class="meta-tag">
                                                                     <ul>
-                                                                        <li><i class="fa fa-user"></i><a href="#">Admin</a></li>
-                                                                        <li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>
-                                                                        <li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>
+                                                                        <%--<li><i class="fa fa-user"></i><a href="#">Admin</a></li>--%>
+                                                                        <%--<li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>--%>
+                                                                        <%--<li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>--%>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                             <div class="info-post">
-                                                                <h4><a href="single-news.html">CTA Placement</a></h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                                <h4><a href="single-news.html"><%# Eval("titulo") %></a></h4>
+                                                                <p><%# Eval("descripcion") %></p>
                                                             </div>
                                                         </li>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
                                                         <!-- End Item blog post -->
 
                                                         <!-- Item blog post -->
-                                                        <li>
+                                                       <%-- <li>
                                                             <div class="header-post">
                                                                 <div class="date">
                                                                     <span>08/jan</span>
@@ -113,11 +117,11 @@
                                                                 <h4><a href="single-news.html">Championship Final</a></h4>
                                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                                             </div>
-                                                        </li>
+                                                        </li>--%>
                                                         <!-- End Item blog post -->
 
                                                         <!-- Item blog post -->
-                                                        <li>
+                                                        <%--<li>
                                                             <div class="header-post">
                                                                 <div class="date">
                                                                     <span>08/jan</span>
@@ -136,11 +140,11 @@
                                                                 <h4><a href="single-news.html">Confidence indicators</a></h4>
                                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                                             </div>
-                                                        </li>
+                                                        </li>--%>
                                                         <!-- End Item blog post -->
 
                                                         <!-- Item blog post -->
-                                                        <li>
+                                                      <%--  <li>
                                                             <div class="header-post">
                                                                 <div class="date">
                                                                     <span>08/jan</span>
@@ -159,11 +163,11 @@
                                                                 <h4><a href="single-news.html">Championship Final.</a></h4>
                                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                                             </div>
-                                                        </li>
+                                                        </li>--%>
                                                         <!-- End Item blog post -->
 
                                                         <!-- Item blog post -->
-                                                        <li>
+                                                       <%-- <li>
                                                             <div class="header-post">
                                                                 <div class="date">
                                                                     <span>08/jan</span>
@@ -182,7 +186,7 @@
                                                                 <h4><a href="single-news.html">Great Prospects.</a></h4>
                                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                                             </div>
-                                                        </li>
+                                                        </li>--%>
                                                         <!-- End Item blog post -->
                                                     </ul>
                                                     <!-- End blog post-->

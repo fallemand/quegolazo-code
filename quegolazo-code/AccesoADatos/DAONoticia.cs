@@ -274,5 +274,44 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        /// <summary>
+        /// Obtener noticias de un torneo de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public DataTable obtenerNoticiasXCategoria(int idEdicion,int idCategoria)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT n.idNoticia, CONVERT (char(10), n.fecha, 103)  AS 'fecha', n.titulo AS 'titulo', n.descripcion AS 'descripcion', c.nombre AS 'nombre'
+                                FROM Noticias n INNER JOIN CategoriasNoticia c ON n.idCategoriaNoticia = c.idCategoriaNoticia
+                                WHERE n.idEdicion = @idEdicion and n.idCategoriaNoticia = @idCategoriaNoticia
+                                ORDER BY fecha DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idCategoriaNoticia", idCategoria));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                DataTable tabla = new DataTable();
+                tabla.Load(dr);
+                con.Close();
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las noticias:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

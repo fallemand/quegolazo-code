@@ -10,5 +10,8 @@ namespace Entidades
     {
         public int idCategoriaNoticia { get; set; }
         public string nombre { get; set; }
+
+        public const int noticiaEVENTOS = 1;
+        public const int noticiaBOLETIN = 2;
     }
 }
