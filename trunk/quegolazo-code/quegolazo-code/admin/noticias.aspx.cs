@@ -18,13 +18,13 @@ namespace quegolazo_code.admin
             try
             {
                 gestorEdicion = Sesion.getGestorEdicion();
-                gestorNoticia = Sesion.getGestorNoticia();
-                
+                gestorNoticia = Sesion.getGestorNoticia();               
 
                 if (!Page.IsPostBack)
                 {
-                    cargarRepeaterNoticias();
                     cargarComboEdiciones();
+                    cargarRepeaterNoticias();                    
+                    cargarComboCategoriasNoticia();
                     imagenpreview.Src = GestorImagen.obtenerImagenDefault(GestorImagen.NOTICIA, GestorImagen.MEDIANA);
                 }
             }
@@ -51,7 +51,7 @@ namespace quegolazo_code.admin
         {
             try
             {
-                gestorNoticia.registrarNoticia(txtTituloNoticia.Value, txtDescripcionNoticia.Text, gestorEdicion.edicion.idEdicion.ToString());
+                gestorNoticia.registrarNoticia(txtTituloNoticia.Value, txtDescripcionNoticia.Text, gestorEdicion.edicion.idEdicion.ToString(), ddlCategoriaNoticia.SelectedValue);
                 GestorImagen.guardarImagen(gestorNoticia.noticia.idNoticia, GestorImagen.NOTICIA);
                 limpiarCamposNoticias();
                 cargarRepeaterNoticias();
@@ -163,6 +163,10 @@ namespace quegolazo_code.admin
         {
             sinNoticias.Visible = (GestorControles.cargarRepeaterTable(rptNoticias, gestorNoticia.obtenerNoticias())) ?
                 false : true;
+        }
+        private void cargarComboCategoriasNoticia()
+        {
+            GestorControles.cargarComboList(ddlCategoriaNoticia, gestorNoticia.obtenerCategoriasNoticia(), "idCategoriaNoticia", "nombre");
         }
         /// <summary>
         /// Limpia los campos de noticia

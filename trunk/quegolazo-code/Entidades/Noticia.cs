@@ -13,7 +13,13 @@ namespace Entidades
         public string titulo { get; set; }
         public string descripcion { get; set; }
         public int idEdicion { get; set; }
-        public DateTime fecha { get; set; } 
+        public DateTime fecha { get; set; }
+        public CategoriaNoticia categoria { get; set; }
+
+        public Noticia()
+        {
+            categoria = new CategoriaNoticia();
+        }
 
         public string obtenerImagenChicha()
         {
@@ -27,6 +33,5 @@ namespace Entidades
         {
             return GestorImagen.obtenerImagen(idNoticia, GestorImagen.NOTICIA, GestorImagen.GRANDE);
         }
-
     }
 }
