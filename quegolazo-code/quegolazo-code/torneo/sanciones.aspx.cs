@@ -13,6 +13,7 @@ namespace quegolazo_code.torneo
     {
        protected GestorEdicion gestorEdicion;
        protected GestorTorneo gestorTorneo;
+       protected GestorEquipo gestorEquipo = new GestorEquipo();
 
         protected int idEdicion;
         protected string nickTorneo;
@@ -21,9 +22,8 @@ namespace quegolazo_code.torneo
         {
             idEdicion = int.Parse(Request["idEdicion"]);
             nickTorneo = Request["nickTorneo"];
-            gestorEdicion = Sesion.getGestorEdicion();
-            gestorTorneo = Sesion.getGestorTorneo();
-            
+            gestorEdicion = new GestorEdicion();
+            gestorTorneo = new GestorTorneo();
 
             if (!Page.IsPostBack)
             {
@@ -46,6 +46,7 @@ namespace quegolazo_code.torneo
             GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
             sinTarjetas.Visible = !GestorControles.cargarRepeaterTable(rptTarjetas, gestorEstadisticas.obtenerTablaTarjetas());
         }
+        
 
          protected  void obtenerEdicionSeleccionada()
         {
