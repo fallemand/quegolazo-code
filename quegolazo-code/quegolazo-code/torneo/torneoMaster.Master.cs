@@ -18,9 +18,10 @@ namespace quegolazo_code.torneo
         {
             try
             {               
-                torneo = new GestorTorneo().obtenerTorneoPorNick(Request["nickTorneo"]);
-                edicion = new GestorEdicion().obtenerEdicionPorId(int.Parse(Request["idEdicion"]));
+                
                 if (!IsPostBack) {
+                    torneo = new GestorTorneo().obtenerTorneoPorNick(Request["nickTorneo"]);
+                    edicion = new GestorEdicion().obtenerEdicionPorId(int.Parse(Request["idEdicion"]));
                     Utils.GestorControles.cargarRepeaterList(rptEdicionesMaster, new GestorEdicion().obtenerEdicionesPorTorneo(torneo.idTorneo));
                 }
 

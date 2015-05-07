@@ -11,20 +11,20 @@ namespace quegolazo_code.torneo
 {
     public partial class posiciones : System.Web.UI.Page
     {
-        GestorEdicion gestorEdicion;
-        GestorTorneo gestorTorneo;
+        protected GestorEdicion gestorEdicion;
+        protected GestorTorneo gestorTorneo;
+        protected GestorEquipo gestorEquipo = new GestorEquipo();
         protected int idEdicion;
         protected string nickTorneo;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            idEdicion = int.Parse(Request["idEdicion"]);
-            nickTorneo = Request["nickTorneo"];
-            gestorEdicion = Sesion.getGestorEdicion();
-            gestorTorneo = Sesion.getGestorTorneo();
-
             if (!Page.IsPostBack)
             {
+                idEdicion = int.Parse(Request["idEdicion"]);
+                nickTorneo = Request["nickTorneo"];
+                gestorEdicion = Sesion.getGestorEdicion();
+                gestorTorneo = Sesion.getGestorTorneo();
                 gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo); 
                 obtenerEdiciónSeleccionada();
                 cargarEquipos();
@@ -44,6 +44,7 @@ namespace quegolazo_code.torneo
             GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
             GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase - 1].grupos);
             GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
+            GestorControles.cargarRepeaterList(rptListaEquipos, gestorEdicion.edicion.equipos);
         }
     }
 }
