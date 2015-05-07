@@ -169,8 +169,10 @@
                                     <ItemTemplate>
                                         <!-- Jugador -->
                                         <div class="col-md-2 col-xs-3">
-                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
-                                              <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle img-responsive" alt="imagen"></img>
+                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador <%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-lg avatar-slider avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
+                                                <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
+                                                <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
+                                                <p runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>" class="text-thin"><%# ((Entidades.Jugador)Container.DataItem).nombre %></p>
                                             </a>
                                             <!-- Popover del Jugador -->
                                             <div id="popover-jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>" style="display:none">
@@ -320,7 +322,7 @@
 
                                 <!-- Tab Historial de Partidos -->
                                 <div class="tab-pane active fade in" id="historial-partidos">
-                                    <div class="col-sm-5 col-xs-12">
+                                    <div class="col-sm-6 col-xs-12">
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
@@ -332,11 +334,32 @@
                                                 <asp:Repeater ID="rptHistorialPartidos" runat="server" OnItemDataBound="rptHistorialPartidos_ItemDataBound">
                                                     <ItemTemplate>
                                                         <tr>
-                                                            <td class="col-xs-2 col-md-1"><img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt=""></td>
+                                                            <td class="col-xs-2 col-md-1">
+                                                                <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen()%>">
+                                                                <div class="camiseta-equipo" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen()==false%>">
+                                                                    <div>
+                                                                        <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local.colorCamisetaPrimario %>"></i>
+                                                                    </div><!--
+                                                                    --><div class="segunda-mitad">
+                                                                        <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).local.colorCamisetaSecundario%>"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
                                                             <td class="col-xs-6 col-md-3"><%# Eval("local.nombre") %></td>
                                                             <td class="col-xs-6 col-md-3"><%# Eval("golesLocal") %><small><asp:Literal ID="ltPenalesLocal" runat="server" Visible="false"/></small> - <%# Eval("golesVisitante") %><small><asp:Literal ID="ltPenalesVisitante" runat="server" Visible="false"/></small></td>
                                                             <td class="col-xs-6 col-md-3"><%# Eval("visitante.nombre") %></td>
-                                                            <td class="col-xs-2 col-md-1"><img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt=""></td>
+                                                            <td class="col-xs-2 col-md-1">
+                                                                <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen()%>">
+                                                                <div class="camiseta-equipo" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen()==false%>">
+                                                                    <div>
+                                                                        <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).visitante.colorCamisetaPrimario %>"></i>
+                                                                    </div><!--
+                                                                    --><div class="segunda-mitad">
+                                                                        <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).visitante.colorCamisetaSecundario%>"></i>
+                                                                    </div>
+                                                                </div>
+
+                                                            </td>
                                                             <td class="col-xs-3 col-md-2"><span class="label label-success"><%# Eval("resultadoParaUnEquipo") %></span></td>
                                                         </tr>
                                                     </ItemTemplate>
@@ -347,7 +370,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-sm-7 col-xs-12">
+                                    <div class="col-sm-6 col-xs-12">
                                         <h5 class="col-title">Evolución de Puntos</h5>
                                         <canvas id="graficoPuntos" class="canvas-lg"></canvas>
                                     </div>
@@ -369,7 +392,10 @@
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td class="col-xs-1">
-                                                                <img src="/torneo/img/img-theme/jugador.jpg" class="img-responsive avatar-xs" alt="">
+                                                                <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="<%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
+                                                                    <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="avatar-xs img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
+                                                                    <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
+                                                                </a>
                                                             </td>
                                                             <td class="col-xs-9"><%# Eval("nombre") %></td>
                                                             <td class="col-xs-2"><%# Eval("cantidadGoles") %></td>

@@ -48,18 +48,13 @@
                         <div class="panel-body">
                             <p class="slider-multiple-title">Jugadores del Equipo</p>
                             <ul class="otros-jugadores slider-multiple tooltip-hover">
-                                <asp:Repeater ID="rptOtroseJugadores" runat="server" OnItemDataBound="rptOtroseJugadores_ItemDataBound" >
+                                <asp:Repeater ID="rptOtroseJugadores" runat="server">
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre")%>">
-                                            <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo, idEdicion, idEquipo, int.Parse(Eval("idJugador").ToString()))%>">
-                                                <asp:Panel ID="panelFotoJugador" runat="server" Visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen() ? true : false %>">
-                                                    <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive img-circle center-block">
-                                                </asp:Panel>
-                                                <asp:Panel ID="panelJugadorSinFoto" runat="server" Visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen() ? false : true %>">
-                                                    <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" class="avatar-jugador avatar-slider avatar-bg-<%# Eval("idJugador").ToString().Substring(Eval("idJugador").ToString().Length -1 , 1) %>">
-                                                        <h1><asp:Literal ID="litIniciales" runat="server" Text=""></asp:Literal></h1>
-                                                    </a>
-                                                </asp:Panel>
+                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador <%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-slider avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
+                                                <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
+                                                <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
+                                                <p runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>" class="text-thin"><%# ((Entidades.Jugador)Container.DataItem).nombre %></p>
                                             </a>
                                         </li>
                                     </ItemTemplate>
@@ -73,16 +68,13 @@
                 <!-- Datos del Jugador -->
                 <div class="col-sm-4">
                     <div class="panel-box bg-dark score theme-border">
-                        <% if (gestorJugador.jugador.tieneImagen())
-                           { %>
-                        <img src="<%= gestorJugador.jugador.obtenerImagenMediana() %>" class="img-circle img-principal img-responsive" alt="imagen"></img>
-                        <%}
-                           else
-                           { %>
-                        <a href="#verJugador" class="avatar-jugador avatar-principal avatar-bg-7" data-toggle="tooltip" title="<%= gestorJugador.jugador.nombre %>">
-                            <h1><%= gestorJugador.jugador.nombre %></h1>
+                        <%if(gestorJugador.jugador.tieneImagen()) {%>
+                        <img src="<%= gestorJugador.jugador.obtenerImagenMediana() %>" class="img-circle img-principal img-responsive" alt="imagen" />
+                        <%} else {%>
+                        <a href="#verJugador" class="avatar-jugador avatar-principal avatar-bg-<%= gestorJugador.jugador.lastNumber() %>" data-toggle="tooltip" title="<%= gestorJugador.jugador.nombre %>">
+                            <h1><%= gestorJugador.jugador.iniciales() %></h1>
                         </a>
-                        <% } %>
+                        <%} %>
                         <h3 class="text-center text-thin"><a href="#"><%= gestorJugador.jugador.nombre %></a></h3>
                         <div class="row text-center">
                             <div class="col-xs-12">

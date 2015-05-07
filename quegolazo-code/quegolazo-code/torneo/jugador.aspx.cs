@@ -72,12 +72,9 @@ namespace quegolazo_code.torneo
                 noGraphics.Visible = true;
                 graphics.Visible = false;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "tiposDeGoles", "var tiposDeGoles = null;", true);
-           
             }
            
         }
-
-
 
         private void cargarDatosJugador()
         {
@@ -106,27 +103,7 @@ namespace quegolazo_code.torneo
 
         private void cargarGolesJugador()
         {
-
           sinGolesJugador.Visible =  !GestorControles.cargarRepeaterTable(rptGolesJugador, gestorEstadisticas.ultimosGolesDeUnJugador(gestorJugador.jugador.idJugador));
         }
-
-        protected void rptOtroseJugadores_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-
-          if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-                {
-                    Literal litIniciales = (Literal)e.Item.FindControl("litIniciales");
-                     string [] split = ((Jugador)e.Item.DataItem).nombre.Split(new Char [] {' '});
-
-                foreach (string s in split) 
-                {
-                        if (s.Trim() != "")
-                            litIniciales.Text+=s.Substring(0,1);
-                 }
-                   }
-        }
-
-
-     
     }
 }

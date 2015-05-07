@@ -134,6 +134,7 @@
     <Content Include="resources\js\widgetFases.js" />
     <Content Include="resources\js\widgetLlaves.js" />
     <Content Include="torneo\css\jquery.bracket.min.css" />
+    <Content Include="torneo\equipo.html" />
     <Content Include="torneo\fechas.html" />
     <Content Include="torneo\css\animations\animate.css" />
     <Content Include="torneo\css\bootstrap\bootstrap-theme.css" />
@@ -182,7 +183,6 @@
     <Content Include="torneo\css\style.css" />
     <Content Include="torneo\css\theme-responsive.css" />
     <Content Include="torneo\equipo.aspx" />
-    <Content Include="torneo\equipos.html" />
     <Content Include="torneo\fixture.aspx" />
     <Content Include="torneo\fonts\flaticon.html" />
     <Content Include="torneo\fonts\flaticon.svg" />
