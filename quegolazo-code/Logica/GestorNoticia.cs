@@ -17,7 +17,7 @@ namespace Logica
         /// Registra una Nueva Noticia en la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public void registrarNoticia(string titulo, string descripcion, string idEdicion)
+        public void registrarNoticia(string titulo, string descripcion, string idEdicion, string idCategoriaNoticia)
         {
             if (Validador.castInt(idEdicion) == 0)
                 throw new Exception("Debe seleccionar primero una edición!");
@@ -25,6 +25,7 @@ namespace Logica
                 noticia = new Noticia();
             noticia.titulo = titulo;
             noticia.descripcion = descripcion;
+            noticia.categoria.idCategoriaNoticia = Int32.Parse(idCategoriaNoticia);
             DAONoticia daoNoticia = new DAONoticia();
             daoNoticia.registrarNoticia(noticia, Validador.castInt(idEdicion));
         }
@@ -71,6 +72,12 @@ namespace Logica
         {
             DAONoticia daoNoticia = new DAONoticia();
             daoNoticia.eliminarNoticia(idNoticia);
+        }
+
+        public List<CategoriaNoticia> obtenerCategoriasNoticia()
+        {
+            DAONoticia daoNoticia = new DAONoticia();
+            return daoNoticia.obtenerCategoriasNoticia();
         }
     }
 }

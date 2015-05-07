@@ -51,6 +51,12 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label for="select" class="col-md-2 control-label">Categoría</label>
+                                                <div class="col-md-10">
+                                                    <asp:DropDownList ID="ddlCategoriaNoticia" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="select" class="col-md-2 control-label">Cuerpo</label>
                                                 <div class="col-md-10">
                                                     <asp:TextBox class="form-control" ID="txtDescripcionNoticia" ClientIDMode="Static" runat="server" Height="110px" TextMode="MultiLine" Width="341px" rangelength="0, 1500" ValidateRequestMode="Disabled"></asp:TextBox>
@@ -135,7 +141,8 @@
                                         <tr>
                                            <%-- <th class="col-md-1"></th>--%>
                                             <th class="col-md-1 hidden-xs">Fecha</th>
-                                            <th class="col-md-5">Título</th>
+                                            <th class="col-md-1">Categoría</th>
+                                            <th class="col-md-5">Título</th>                                            
                                             <th class="col-md-1"></th>
                                         </tr>
                                     </thead>
@@ -145,7 +152,8 @@
                                                 <tr>                  
                                                     <%--<td><img src="<%# ((Entidades.Noticia)Container.DataItem).obtenerImagenChicha() %>" class="img-responsive" alt="" style="height:22px; max-width:30px; " /></td>--%>                            
                                                     <td class="hidden-xs"><%# Eval("fecha") %></td>
-                                                    <td><%# Eval("titulo") %></td>
+                                                    <td><%# Eval("nombre") %></td>
+                                                    <td><%# Eval("titulo") %></td>                                                    
                                                     <td>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEditarNoticia" title="Editar Noticia" runat="server" CommandName="editarNoticia" CommandArgument='<%#Eval("idNoticia")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
                                                         <asp:LinkButton ClientIDMode="AutoID" ID="lnkEliminarNoticia" title="Eliminar Noticia" runat="server" CommandName="eliminarNoticia" CommandArgument='<%#Eval("idNoticia")%>' rel="txtTooltip" data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-remove eliminar""></span></asp:LinkButton>
@@ -154,7 +162,7 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                         <tr id="sinNoticias" runat="server" visible="false">
-                                            <td colspan="5">No hay noticias registradas</td>
+                                            <td colspan="4">No hay noticias registradas</td>
                                         </tr>
                                     </tbody>
                                 </table>

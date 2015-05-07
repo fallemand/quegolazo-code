@@ -25,12 +25,13 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"INSERT INTO Noticias (titulo,  idEdicion, descripcion, fecha, tipoNoticia)
-                                    VALUES (@titulo, @idEdicion, @descripcion, getDate(), 1)
-                                    SELECT SCOPE_IDENTITY()";//el 1 esta hardcodeado, no se alarmen, es porque actualmente no usamos este campo, pero tal vez en el futuro si, y la bd no permite nullos, y generar una nueva versión para q admita nullos, no valia la pena
+                string sql = @"INSERT INTO Noticias (titulo, idEdicion, descripcion, fecha, idCategoriaNoticia)
+                                    VALUES (@titulo, @idEdicion, @descripcion, getDate(), @idCategoriaNoticia)
+                                    SELECT SCOPE_IDENTITY()";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@titulo", noticia.titulo);
                 cmd.Parameters.AddWithValue("@idEdicion", idEdicion);
+                cmd.Parameters.AddWithValue("@idCategoriaNoticia", noticia.categoria.idCategoriaNoticia);
                 cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValueNull(noticia.descripcion));
                 cmd.CommandText = sql;
                 noticia.idNoticia = int.Parse(cmd.ExecuteScalar().ToString());
@@ -60,9 +61,9 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT idNoticia, CONVERT (char(10), fecha, 103)  AS 'fecha', titulo, descripcion
-                                FROM Noticias n
-                                WHERE idEdicion = @idEdicion
+                string sql = @"SELECT n.idNoticia, CONVERT (char(10), n.fecha, 103)  AS 'fecha', n.titulo AS 'titulo', n.descripcion, c.nombre AS 'nombre'
+                                FROM Noticias n INNER JOIN CategoriasNoticia c ON n.idCategoriaNoticia = c.idCategoriaNoticia
+                                WHERE n.idEdicion = @idEdicion
                                 ORDER BY fecha DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
@@ -114,6 +115,7 @@ namespace AccesoADatos
                     respuesta.idEdicion = Int32.Parse(dr["idEdicion"].ToString());
                     respuesta.fecha = DateTime.Parse(dr["fecha"].ToString());
                     respuesta.descripcion = (dr["descripcion"] != System.DBNull.Value) ? dr["descripcion"].ToString() : null;
+                    respuesta.categoria = obtenerCategoriaNoticiaPorId(Int32.Parse(dr["idCategoriaNoticia"].ToString()));
                 }
                 if (dr != null)
                     dr.Close();
@@ -144,12 +146,13 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"UPDATE Noticias
-                                SET titulo = @titulo, descripcion = @descripcion
+                                SET titulo = @titulo, descripcion = @descripcion, idCategoriaNoticia = @idCategoriaNoticia
                                 WHERE idNoticia = @idNoticia";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idNoticia", noticia.idNoticia);
                 cmd.Parameters.AddWithValue("@titulo", noticia.titulo);
-                cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValueNull(noticia.descripcion));               
+                cmd.Parameters.AddWithValue("@descripcion", DAOUtils.dbValueNull(noticia.descripcion));
+                cmd.Parameters.AddWithValue("@idCategoriaNoticia", noticia.categoria.idCategoriaNoticia);
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }
@@ -187,6 +190,83 @@ namespace AccesoADatos
             catch (SqlException ex)
             {
                 throw new Exception("No se pudo eliminar la Noticia: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public List<CategoriaNoticia> obtenerCategoriasNoticia()
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<CategoriaNoticia> respuesta = new List<CategoriaNoticia>();
+            CategoriaNoticia categoriaNoticia = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM CategoriasNoticia";
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    categoriaNoticia = new CategoriaNoticia()
+                    {
+                        idCategoriaNoticia = Int32.Parse(dr["idCategoriaNoticia"].ToString()),
+                        nombre = dr["nombre"].ToString()
+                    };
+                    respuesta.Add(categoriaNoticia);
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar las Categorías de Noticias: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public CategoriaNoticia obtenerCategoriaNoticiaPorId(int idCategoriaNoticia)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            CategoriaNoticia respuesta = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT *
+                                FROM CategoriasNoticia
+                                WHERE idCategoriaNoticia = @idCategoriaNoticia";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idCategoriaNoticia", idCategoriaNoticia);
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    respuesta = new CategoriaNoticia();
+                    respuesta.idCategoriaNoticia = Int32.Parse(dr["idCategorieNoticia"].ToString());
+                    respuesta.nombre = dr["nombre"].ToString();
+                }
+                if (dr != null)
+                    dr.Close();
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al intentar recuperar la Categoria Noticia: " + ex.Message);
             }
             finally
             {
