@@ -195,6 +195,7 @@
     <Content Include="torneo\index.html" />
     <Content Include="torneo\js\charts\charts-jugador.js" />
     <Content Include="torneo\js\charts\charts-goleador.js" />
+    <Content Include="torneo\js\fechas.js" />
     <Content Include="torneo\js\jquery-ui.min.js" />
     <Content Include="torneo\js\jquery.bracket.min.js" />
     <Content Include="torneo\js\jquery.min.js" />
