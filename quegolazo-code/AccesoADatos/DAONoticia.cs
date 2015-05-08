@@ -279,8 +279,9 @@ namespace AccesoADatos
         /// Obtener noticias de un torneo de la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public DataTable obtenerNoticiasXCategoria(int idEdicion,int idCategoria)
+        public List<Noticia> obtenerNoticiasXCategoria(int idEdicion,int idCategoria)
         {
+            List<Noticia> noticias = new List<Noticia>();
             SqlConnection con = new SqlConnection(cadenaDeConexion);
             SqlCommand cmd = new SqlCommand();
             SqlDataReader dr;
@@ -289,7 +290,7 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT n.idNoticia, CONVERT (char(10), n.fecha, 103)  AS 'fecha', n.titulo AS 'titulo', n.descripcion AS 'descripcion', c.nombre AS 'nombre'
+                string sql = @"SELECT n.idNoticia, CONVERT (char(10), n.fecha, 103)  AS 'fecha', n.titulo AS 'titulo', n.descripcion AS 'descripcion', c.idCategoriaNoticia AS 'idCategoriaNoticia', c.nombre AS 'nombre'
                                 FROM Noticias n INNER JOIN CategoriasNoticia c ON n.idCategoriaNoticia = c.idCategoriaNoticia
                                 WHERE n.idEdicion = @idEdicion and n.idCategoriaNoticia = @idCategoriaNoticia
                                 ORDER BY fecha DESC";
@@ -298,10 +299,17 @@ namespace AccesoADatos
                 cmd.Parameters.Add(new SqlParameter("@idCategoriaNoticia", idCategoria));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
-                DataTable tabla = new DataTable();
-                tabla.Load(dr);
+                while (dr.Read())
+                {
+                    Noticia noticia = new Noticia();
+                    noticia.categoria = new CategoriaNoticia { idCategoriaNoticia = Int32.Parse(dr["idCategorieNoticia"].ToString()), nombre = dr["nombre"].ToString() };
+                    noticia.descripcion = dr["descripcion"].ToString();
+                    noticia.titulo = dr["titulo"].ToString();
+                    noticia.fecha = DateTime.Parse(dr["fecha"].ToString());
+                    noticias.Add(noticia);
+                }
                 con.Close();
-                return tabla;
+                return noticias;
             }
             catch (Exception ex)
             {

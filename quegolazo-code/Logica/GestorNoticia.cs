@@ -41,11 +41,11 @@ namespace Logica
             return noticias;
         }
 
-        public DataTable obtenerNoticiasXCategoria(int idEdicion, int idCategoria)
+        public List<Noticia> obtenerNoticiasXCategoria(int idEdicion, int idCategoria)
         {
             DAONoticia daoNoticia = new DAONoticia();
-            DataTable noticias = daoNoticia.obtenerNoticiasXCategoria(idEdicion,idCategoria);
-            return noticias;
+            return daoNoticia.obtenerNoticiasXCategoria(idEdicion, idCategoria);
+            
         }
 
         /// <summary>
