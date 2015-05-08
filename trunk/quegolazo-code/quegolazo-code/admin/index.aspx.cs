@@ -22,7 +22,7 @@ namespace quegolazo_code.admin
             {
                 panelEstadisticas.Visible = true;
                 gestorEdicion = Sesion.getGestorEdicion();
-                gestorEstadisticas = new GestorEstadisticas(); 
+                gestorEstadisticas = new GestorEstadisticas(Sesion.getGestorEdicion().edicion); 
                 
                 if (!Page.IsPostBack)
                 {

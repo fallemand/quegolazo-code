@@ -49,7 +49,7 @@ namespace quegolazo_code.torneo
                 gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
                 gestorEquipo = Sesion.getGestorEquipo();
                 gestorPartido = Sesion.getGestorPartido();
-                gestorEstadistica = new GestorEstadisticas();
+                gestorEstadistica = new GestorEstadisticas(gestorEdicion.edicion);
                 if (!Page.IsPostBack)
                 {
                     gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(idEquipo);

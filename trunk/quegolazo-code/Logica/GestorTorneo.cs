@@ -29,10 +29,10 @@ namespace Logica
         /// Obtiene el ultimo torneo del usuario, si no tiene devuelve null.
         /// autor: Facu Allemand
         /// </summary>
-        public Torneo obtenerUltimoTorneoDelUsuario()
+        public Torneo obtenerUltimoTorneoDelUsuario(int idUsuario)
         {
             DAOTorneo daoTorneo = new DAOTorneo();
-            Torneo torneo = daoTorneo.obtenerUltimoTorneoDelUsuario(Sesion.getUsuario().idUsuario);
+            Torneo torneo = daoTorneo.obtenerUltimoTorneoDelUsuario(idUsuario);
             return torneo;
         }
 
@@ -40,10 +40,10 @@ namespace Logica
         /// Obtiene los torneos de un usuario
         /// autor: Pau Pedrosa
         /// </summary>
-        public List<Torneo> obtenerTorneosPorUsuario()
+        public List<Torneo> obtenerTorneosPorUsuario(int idUsuario)
         {
             DAOTorneo daoTorneo = new DAOTorneo();
-            List<Torneo> torneos = daoTorneo.obtenerTorneosPorUsuario(Sesion.getUsuario().idUsuario);
+            List<Torneo> torneos = daoTorneo.obtenerTorneosPorUsuario(idUsuario);
             return torneos;
         }      
 

@@ -50,8 +50,6 @@ namespace quegolazo_code.torneo
             catch(Exception){
                 throw;
             }
-
-
         }
 
         private void otrosPartidosDeLaFecha()

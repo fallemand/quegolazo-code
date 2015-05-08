@@ -40,11 +40,11 @@ namespace Logica
         /// Obtiene todos los jugadores de un equipo
         /// autor: Pau Pedrosa
         /// </summary>
-        public List<Jugador> obtenerJugadoresDeUnEquipo()
+        public List<Jugador> obtenerJugadoresDeUnEquipo(int idEquipo)
         {
             DAOJugador daoJugador = new DAOJugador();
             List<Jugador> jugadores = null;
-            int idEquipo = Sesion.getGestorEquipo().equipo.idEquipo;//obtiene el Id del equipo que está en Session
+            //int idEquipo = Sesion.getGestorEquipo().equipo.idEquipo;//obtiene el Id del equipo que está en Session
             if(idEquipo>0)
                 jugadores = daoJugador.obtenerJugadoresDeUnEquipo(idEquipo);
             return jugadores;

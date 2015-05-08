@@ -149,10 +149,10 @@ namespace Logica
         /// autor: Pau Pedrosa
         /// </summary>
         /// <returns>Lista genérica de objetos Equipos</returns>
-        public List<Equipo> obtenerEquiposDeUnTorneo()
+        public List<Equipo> obtenerEquiposDeUnTorneo(int idTorneo)
         {
             DAOEquipo daoEquipo = new DAOEquipo();
-            int idTorneo = Sesion.getTorneo().idTorneo;
+            //int idTorneo = Sesion.getTorneo().idTorneo;
             List<Equipo> equipos = daoEquipo.obtenerEquiposDeUnTorneo(idTorneo);
             return equipos;         
         }

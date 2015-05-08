@@ -32,7 +32,7 @@ namespace quegolazo_code.admin
                 FormsAuthentication.RedirectFromLoginPage(txtEmail.Value, noCerrarSesion.Checked);
                 Session["login"] = null;
                 GestorTorneo gestorTorneo = new GestorTorneo();
-                gestorTorneo.torneo = gestorTorneo.obtenerUltimoTorneoDelUsuario();
+                gestorTorneo.torneo = gestorTorneo.obtenerUltimoTorneoDelUsuario(Sesion.getUsuario().idUsuario);
                 if (gestorTorneo.torneo != null)
                     Sesion.setTorneo(gestorTorneo.torneo);
                 else

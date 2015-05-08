@@ -34,8 +34,8 @@ namespace quegolazo_code.torneo
                 //TODO falta agregarle el try/catch y que redirija a una pagina de error...
                 gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
                 gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-                
-                gestorEstadistica = new GestorEstadisticas();
+
+                gestorEstadistica = new GestorEstadisticas(gestorEdicion.edicion);
                 gestorPartido = Sesion.getGestorPartido();
                 gestorEquipo = Sesion.getGestorEquipo();
                 if (!Page.IsPostBack)
