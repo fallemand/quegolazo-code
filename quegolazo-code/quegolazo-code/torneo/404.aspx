@@ -116,7 +116,7 @@
             $(document).ready(function ($) {
                 $(".torneos-slide").owlCarousel({
                     autoPlay: 3200,
-                    items: 8,
+                    items: 7,
                     navigation: false,
                     itemsDesktop: [1199, 5],
                     itemsDesktopSmall: [1024, 4],
