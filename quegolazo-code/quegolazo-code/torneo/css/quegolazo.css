@@ -1104,3 +1104,37 @@ div.panel-maxheight:hover {
 /*----------------------- Tabla Fechas -----------------------------*/
 
 /*----------------------- END Tabla Fechas -----------------------------*/
+
+.torneos-slide img {
+    max-height: 110px;
+    max-width: 90%;
+}
+
+a.torneo-default {
+    display:block;
+    text-align: center;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+a.torneo-default h1, a.torneo-default p{
+    margin-bottom:5px;
+    padding-bottom:0px;
+}
+
+a.torneo-default p{
+    line-height: 12px;
+    font-size: 12px;
+}
+
+a.torneo-default h1, a.torneo-default p{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+    color:#FFF !important;
+}
+
+a.torneo-default:hover {
+    text-decoration: none;
+}

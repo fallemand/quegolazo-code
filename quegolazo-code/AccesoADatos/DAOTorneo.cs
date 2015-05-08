@@ -13,6 +13,54 @@ namespace AccesoADatos
     public class DAOTorneo
     {
         public string cadenaDeConexion = System.Configuration.ConfigurationManager.ConnectionStrings["localhost"].ConnectionString;
+
+        /// <summary>
+        /// Obtiene todos los Torneos
+        /// autor: Facundo Allemand
+        /// </summary>
+        /// <returns>Lista genérica de Torneos</returns>
+        public List<Torneo> obtenerTorneos()
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Torneo> respuesta = new List<Torneo>();
+            Torneo torneo = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT * 
+                             FROM Torneos
+                             ORDER BY idTorneo DESC";
+                cmd.Parameters.Clear();
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    torneo = new Torneo()
+                    {
+                        idTorneo = Int32.Parse(dr["idTorneo"].ToString()),
+                        nombre = dr["nombre"].ToString(),
+                        nick = dr["nick"].ToString(),
+                        descripcion = dr["descripcion"].ToString()
+                    };
+                    respuesta.Add(torneo);
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los Torneos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
         /// <summary>
         /// Obtiene todos los Torneos de un Usuario
         /// autor: Pau Pedrosa
@@ -151,7 +199,6 @@ namespace AccesoADatos
             }
             catch (Exception ex)
             {
-
                 throw new Exception("Error al intentar recuperar el Torneo: " + ex.Message);
             }
             finally

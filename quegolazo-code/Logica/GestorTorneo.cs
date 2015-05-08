@@ -16,6 +16,16 @@ namespace Logica
         public Torneo torneo = new Torneo();
 
         /// <summary>
+        /// Obtiene todos los Torneos.
+        /// autor: Facu Allemand
+        /// </summary>
+        public List<Torneo> obtenerTorneos()
+        {
+            DAOTorneo daoTorneo = new DAOTorneo();
+            return daoTorneo.obtenerTorneos();
+        }
+
+        /// <summary>
         /// Obtiene el ultimo torneo del usuario, si no tiene devuelve null.
         /// autor: Facu Allemand
         /// </summary>

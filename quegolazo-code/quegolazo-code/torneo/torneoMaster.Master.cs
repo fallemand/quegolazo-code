@@ -23,9 +23,10 @@ namespace quegolazo_code.torneo
                 
                 if (!IsPostBack) {
                     gestorTorneo = new GestorTorneo();
-                    string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(gestorTorneo.torneo.idTorneo));
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "var configuracion = " + estilos + ";", true);
                     torneo = new GestorTorneo().obtenerTorneoPorNick(Request["nickTorneo"]);
+                    serializador = new JavaScriptSerializer();
+                    string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(torneo.idTorneo));
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "var configuracion = " + estilos + ";", true);
                     edicion = new GestorEdicion().obtenerEdicionPorId(int.Parse(Request["idEdicion"]));
                     Utils.GestorControles.cargarRepeaterList(rptEdicionesMaster, new GestorEdicion().obtenerEdicionesPorTorneo(torneo.idTorneo));
                 }

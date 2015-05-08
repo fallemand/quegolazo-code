@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 
 /* ==============================
     - Template Name: Sports Cup- Responsive HTML5  soccer and sports Template
@@ -1028,7 +1028,7 @@ footer .social li i {
 
 .page-error{
     max-width: 80%;
-    margin:70px auto 50px auto;
+    margin:30px auto 40px auto;
     text-align: center;
     position: relative;
 }

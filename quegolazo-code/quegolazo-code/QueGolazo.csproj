@@ -48,7 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -133,6 +133,8 @@
     <Content Include="resources\js\trumbowyg.min.js" />
     <Content Include="resources\js\widgetFases.js" />
     <Content Include="resources\js\widgetLlaves.js" />
+    <Content Include="torneo\404.aspx" />
+    <Content Include="torneo\ediciones.aspx" />
     <Content Include="torneo\css\jquery.bracket.min.css" />
     <Content Include="torneo\equipo.html" />
     <Content Include="torneo\fechas.html" />
@@ -191,6 +193,7 @@
     <Content Include="torneo\fonts\glyphicon\glyphicons-halflings-regular.svg" />
     <Content Include="torneo\fechas.aspx" />
     <Content Include="torneo\goleador.aspx" />
+    <Content Include="torneo\img\img-theme\logo-big.png" />
     <Content Include="torneo\img\img-theme\tarjetas.png" />
     <Content Include="torneo\index.html" />
     <Content Include="torneo\js\charts\charts-jugador.js" />
@@ -469,6 +472,20 @@
     </Compile>
     <Compile Include="admin\sanciones.aspx.designer.cs">
       <DependentUpon>sanciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="torneo\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="torneo\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="torneo\ediciones.aspx.cs">
+      <DependentUpon>ediciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="torneo\ediciones.aspx.designer.cs">
+      <DependentUpon>ediciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="torneo\equipo.aspx.cs">
       <DependentUpon>equipo.aspx</DependentUpon>
