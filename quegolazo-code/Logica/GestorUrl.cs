@@ -40,6 +40,7 @@ namespace Logica
 
         //Forms en carpeta Torneo
         public const string t404 = "/torneo/404.aspx";
+        public const string tEDICIONES = "/torneo/ediciones.aspx";
         public static string urlPartido(string nickTorneo,int idEdicion, string idPartido)
         {
             return "/"+nickTorneo+"/edicion-"+idEdicion+"/partido-"+idPartido;

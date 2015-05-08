@@ -21,6 +21,8 @@ namespace quegolazo_code.torneo
         {
             try
             {
+                if (Request["idEdicion"] == null)
+                    Response.Redirect(GestorUrl.tEDICIONES);
                 idEdicion = int.Parse(Request["idEdicion"]);
                 nickTorneo = Request["nickTorneo"];
 
