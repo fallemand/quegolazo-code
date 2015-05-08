@@ -30,8 +30,8 @@ namespace quegolazo_code.torneo
 
                     gestorTorneo = new GestorTorneo();
                     gestorEdicion = new GestorEdicion();
-                    gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-                    gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
+                    gestorTorneo.torneo = gestorTorneo.obtenerTorneoPorNick(nickTorneo);
+                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
                     gestorEdicion.edicion.fases= gestorEdicion.obtenerFases();
                     gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
                     gestorEdicion.edicion.equipos= gestorEdicion.obtenerEquipos();
