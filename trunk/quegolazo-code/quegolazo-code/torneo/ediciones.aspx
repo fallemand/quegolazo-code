@@ -49,11 +49,11 @@
         <div id="layout">
 
             <!-- Section Area - Content Central -->
-            <section class="content-info home">
+            <section class="content-info error">
 
                 <!-- Crumbs --->
                 <div class="crumbs">
-                    <div class="container">
+                    <div class="">
                         <ul>
                             <li><a href="#"><%= torneo.nombre%></a></li>
                             <li>/</li>
@@ -64,7 +64,7 @@
                 <!-- END Crumbs --->
 
                 <!-- Content Central -->
-                <div class="container">
+                <div class="">
                     <div class="row">
                         <div class="page-error">
                             <h1><img src="<%=torneo.obtenerImagenMediana()%>" alt="<%= torneo.nombre%>" class="img-responsive center-block" /></h1>
@@ -78,7 +78,7 @@
 
                 <!-- Sponsors -->
                 <div class="section-wide panel panel-default">
-                    <div class="container panel-body">
+                    <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="text-center">

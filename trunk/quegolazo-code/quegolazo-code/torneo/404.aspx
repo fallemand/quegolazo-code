@@ -49,11 +49,11 @@
         <div id="layout">
 
             <!-- Section Area - Content Central -->
-            <section class="content-info home">
+            <section class="content-info error">
 
                 <!-- Crumbs --->
                 <div class="crumbs">
-                    <div class="container">
+                    <div class=>
                         <ul>
                             <li><a href="#">QueGolazo</a></li>
                             <li>/</li>
@@ -64,7 +64,7 @@
                 <!-- END Crumbs --->
 
                 <!-- Content Central -->
-                <div class="container">
+                <div class=>
                     <div class="row">
                         <div class="page-error">
                             <h1>404 <img src="/torneo/img/img-theme/logo-big.png" alt="Logo" /></h1>
@@ -78,7 +78,7 @@
 
                 <!-- Sponsors -->
                 <div class="section-wide panel panel-default">
-                    <div class="container panel-body">
+                    <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="text-center">

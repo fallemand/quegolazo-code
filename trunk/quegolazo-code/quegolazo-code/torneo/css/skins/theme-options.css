@@ -27,6 +27,11 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
+.content-info.error{
+    max-width: 1000px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 .layout-wide .content-info,
 .layout-wide .dark-home{
     max-width: 100%;
