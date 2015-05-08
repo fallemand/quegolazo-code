@@ -117,7 +117,7 @@ namespace Logica
         public static GestorEstadisticas getGestorEstadisticas()
         {
             if (System.Web.HttpContext.Current.Session["gestorEstadisticas"] == null)
-                System.Web.HttpContext.Current.Session["gestorEstadisticas"] = new GestorEstadisticas();
+                System.Web.HttpContext.Current.Session["gestorEstadisticas"] = new GestorEstadisticas(Sesion.getGestorEdicion().edicion);
             return (GestorEstadisticas)System.Web.HttpContext.Current.Session["gestorEstadisticas"];
         }
         /// <summary>

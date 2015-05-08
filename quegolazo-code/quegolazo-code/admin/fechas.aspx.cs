@@ -552,7 +552,7 @@ namespace quegolazo_code.admin
         private void cargarComboArbitros()
         {
             GestorArbitro gestorArbitro = new GestorArbitro();
-            GestorControles.cargarComboList(ddlArbitros, gestorArbitro.obtenerArbitrosDeUnTorneo(),
+            GestorControles.cargarComboList(ddlArbitros, gestorArbitro.obtenerArbitrosDeUnTorneo(Sesion.getTorneo().idTorneo),
                 "idArbitro", "nombre", "Sin Árbitro Asignado", true);
         }
 
@@ -657,7 +657,7 @@ namespace quegolazo_code.admin
         /// </summary>
         public void cargarEquipos()
         {
-            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
+            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas(gestorEdicion.edicion);
             GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase-1].grupos);
             GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
         }
@@ -668,7 +668,7 @@ namespace quegolazo_code.admin
         /// </summary>
         public void cargarPosicionesFinales()
         {
-            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
+            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas(Sesion.getGestorEdicion().edicion);
             GestorControles.cargarRepeaterTable(rptPosiciones, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
         }
 

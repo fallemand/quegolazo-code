@@ -41,7 +41,7 @@ namespace quegolazo_code.torneo
         public void cargarEquipos()
         {
             gestorEdicion.getFaseActual();
-            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
+            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas(gestorEdicion.edicion);
             GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase - 1].grupos);
             GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
             GestorControles.cargarRepeaterList(rptListaEquipos, gestorEdicion.edicion.equipos);

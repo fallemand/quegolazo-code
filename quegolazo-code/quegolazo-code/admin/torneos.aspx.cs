@@ -168,7 +168,7 @@ namespace quegolazo_code.admin
         /// </summary>
         private void cargarRepeaterTorneos()
         {
-            panelSinTorneos.Visible = !(GestorControles.cargarRepeaterList(rptTorneos, gestorTorneo.obtenerTorneosPorUsuario()));
+            panelSinTorneos.Visible = !(GestorControles.cargarRepeaterList(rptTorneos, gestorTorneo.obtenerTorneosPorUsuario(Sesion.getUsuario().idUsuario)));
         }
 
         /// <summary>

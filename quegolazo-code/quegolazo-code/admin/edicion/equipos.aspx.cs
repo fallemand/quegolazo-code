@@ -99,7 +99,7 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         public void cargarEquipos()
         {
-            lstEquiposSeleccionados.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo();
+            lstEquiposSeleccionados.DataSource = gestorEquipo.obtenerEquiposDeUnTorneo(Sesion.getTorneo().idTorneo);
             lstEquiposSeleccionados.DataValueField = "idEquipo";
             lstEquiposSeleccionados.DataTextField = "nombre";
             lstEquiposSeleccionados.DataBind();

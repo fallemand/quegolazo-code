@@ -66,7 +66,7 @@ namespace quegolazo_code.admin
                 if (e.CommandName == "configurarEdicion")
                 {
                     GestorEquipo gestorEquipo = new GestorEquipo();
-                    gestorTorneo.torneo.equipos = gestorEquipo.obtenerEquiposDeUnTorneo();
+                    gestorTorneo.torneo.equipos = gestorEquipo.obtenerEquiposDeUnTorneo(Sesion.getTorneo().idTorneo);
                     if (gestorTorneo.torneo.equipos.Count <= 1)
                         throw new Exception("El torneo asociado a la edición no tiene la cantidad de equipos mínima para configurarla. Registre al menos dos equipos para continuar.");
                     if (gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA) // Si la edicion esta personalizada
@@ -99,7 +99,7 @@ namespace quegolazo_code.admin
             {
                 limpiarPaneles();
                 gestorEdicion.cargarDatos(txtNombreEdicion.Value, ddlTamañoCancha.SelectedValue, ddlTipoSuperficie.SelectedValue, txtPuntosPorGanar.Value, txtPuntosPorEmpatar.Value, txtPuntosPorPerder.Value, ddlGenero.SelectedValue);
-                gestorEdicion.registrarEdicion();
+                gestorEdicion.registrarEdicion(Sesion.getTorneo().idTorneo);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "closeModal('modalEdicion');", true);
                 cargarRepeaterEdiciones();
             }

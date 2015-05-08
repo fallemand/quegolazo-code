@@ -17,7 +17,7 @@ namespace Logica
        public Edicion edicion;
        DAOEstadisticas DaoEstadisticas = new DAOEstadisticas();
 
-       public GestorEstadisticas()
+       public GestorEstadisticas(Edicion edicion)
        {
            edicion = Sesion.getGestorEdicion().edicion;
            if(edicion == null || edicion.idEdicion==0)

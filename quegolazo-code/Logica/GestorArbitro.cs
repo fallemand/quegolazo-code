@@ -32,10 +32,10 @@ namespace Logica
         /// Obtiene todos los árbitros de un torneo
         /// autor: Pau Pedrosa
         /// </summary>
-        public List<Arbitro> obtenerArbitrosDeUnTorneo()
+        public List<Arbitro> obtenerArbitrosDeUnTorneo(int idTorneo)
         {
             DAOArbitro daoArbitro = new DAOArbitro();
-            int idTorneo = Sesion.getTorneo().idTorneo;
+            //int idTorneo = Sesion.getTorneo().idTorneo;
             List<Arbitro> arbitros = daoArbitro.obtenerArbitrosDeUnTorneo(idTorneo);
             return arbitros;
         }

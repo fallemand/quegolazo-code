@@ -43,7 +43,7 @@ namespace quegolazo_code.torneo
 
         private void cargarRepeaterTarjetas()
         {
-            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas();
+            GestorEstadisticas gestorEstadisticas = new GestorEstadisticas(gestorEdicion.edicion);
             sinTarjetas.Visible = !GestorControles.cargarRepeaterTable(rptTarjetas, gestorEstadisticas.obtenerTablaTarjetas());
         }
         

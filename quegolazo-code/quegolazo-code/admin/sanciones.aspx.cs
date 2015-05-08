@@ -100,7 +100,7 @@ namespace quegolazo_code.admin
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "cambioPartido1", "cambioPartido();", true);
             ddlPartido.Items.Clear();
-            GestorControles.cargarComboList(ddlPartido, gestorSancion.obtenerPartidosDeFecha(ddlFecha.SelectedValue),
+            GestorControles.cargarComboList(ddlPartido, gestorSancion.obtenerPartidosDeFecha(ddlFecha.SelectedValue, Sesion.getGestorEdicion()),
                 "idPartido", "nombreCompleto", "Seleccionar Partido", false);
         }
 
@@ -205,7 +205,7 @@ namespace quegolazo_code.admin
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "edicionJugadorYPartido", "jugadorYPartido();", true);
                         ddlFecha.SelectedValue = gestorSancion.sancion.idFecha.ToString();
-                        GestorControles.cargarComboList(ddlPartido, gestorSancion.obtenerPartidosDeFecha(ddlFecha.SelectedValue),
+                        GestorControles.cargarComboList(ddlPartido, gestorSancion.obtenerPartidosDeFecha(ddlFecha.SelectedValue, Sesion.getGestorEdicion()),
                         "idPartido", "nombreCompleto", "Seleccionar Partido", false);
                         ddlPartido.SelectedValue = gestorSancion.sancion.idPartido.ToString();
                         GestorControles.cargarComboList(ddlEquipo, gestorSancion.obtenerEquiposDePartido(ddlPartido.SelectedValue),
@@ -234,7 +234,7 @@ namespace quegolazo_code.admin
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "edicionEquipoYPartido()", "equipoYPartido();", true);
                         ddlFecha.SelectedValue = gestorSancion.sancion.idFecha.ToString();
-                        GestorControles.cargarComboList(ddlPartido, gestorSancion.obtenerPartidosDeFecha(ddlFecha.SelectedValue),
+                        GestorControles.cargarComboList(ddlPartido, gestorSancion.obtenerPartidosDeFecha(ddlFecha.SelectedValue, Sesion.getGestorEdicion()),
                         "idPartido", "nombreCompleto", "Seleccionar Partido", false);
                         ddlPartido.SelectedValue = gestorSancion.sancion.idPartido.ToString();
                         GestorControles.cargarComboList(ddlEquipo, gestorSancion.obtenerEquiposDePartido(ddlPartido.SelectedValue),

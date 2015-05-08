@@ -187,7 +187,7 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         private void cargarComboEquipos()
         {
-            GestorControles.cargarComboList(ddlEquipos, gestorEquipo.obtenerEquiposDeUnTorneo(), "idEquipo", "nombre", "Seleccionar Equipo", false);
+            GestorControles.cargarComboList(ddlEquipos, gestorEquipo.obtenerEquiposDeUnTorneo(Sesion.getTorneo().idTorneo), "idEquipo", "nombre", "Seleccionar Equipo", false);
             ddlEquipos.SelectedValue = (gestorEquipo.equipo.idEquipo > 0) ? gestorEquipo.equipo.idEquipo.ToString() : "";
         }
         /// <summary>
@@ -216,7 +216,7 @@ namespace quegolazo_code.admin.edicion
         /// </summary>
         private void cargarRepeaterJugadores()
         {
-            sinJugadores.Visible = !(GestorControles.cargarRepeaterList(rptJugadores, gestorJugador.obtenerJugadoresDeUnEquipo()));
+            sinJugadores.Visible = !(GestorControles.cargarRepeaterList(rptJugadores, gestorJugador.obtenerJugadoresDeUnEquipo(Sesion.getGestorEquipo().equipo.idEquipo)));
         }
         /// <summary>
         /// Limpia los paneles de éxito y fracaso

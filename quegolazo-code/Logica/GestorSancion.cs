@@ -16,11 +16,12 @@ namespace Logica
         public List<Partido> partidos = new List<Partido>();
         public List<Equipo> equipos = new List<Equipo>();
         public List<Jugador> jugadores = new List<Jugador>();
-        public List<Partido> obtenerPartidosDeFecha(string idFecha)
+
+        public List<Partido> obtenerPartidosDeFecha(string idFecha, GestorEdicion gestorEdicion)
         {
             List<Partido> todosPartidos = new List<Partido>();
             partidos.Clear();
-            GestorEdicion gestorEdicion = Sesion.getGestorEdicion();
+            //GestorEdicion gestorEdicion = Sesion.getGestorEdicion();
             foreach (Fecha fecha in gestorEdicion.faseActual.obtenerFechas())
             {
                 if (fecha.idFecha == int.Parse(idFecha))

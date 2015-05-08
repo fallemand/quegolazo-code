@@ -33,7 +33,7 @@ namespace quegolazo_code.torneo
                 gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-                gestorEstadistica = new GestorEstadisticas();
+                gestorEstadistica = new GestorEstadisticas(gestorEdicion.edicion);
                 gestorEstadistica.edicion = gestorEdicion.edicion;
                 gestorJugador = new GestorJugador();
                 if (!Page.IsPostBack)
