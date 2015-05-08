@@ -52,8 +52,12 @@ namespace Entidades
             // Remove all Sr, Jr, I, II, III, IV, V, VI, VII, VIII, IX at the end of names
             initials = Regex.Replace(initials.Trim(), @"\s+(?:DE|LA|LAS|DEL|)$", "", RegexOptions.IgnoreCase);
 
+            //Obtener la primera letra de cada palabra
+            Regex regex = new Regex(@"(\b[a-zA-Z])[a-zA-Z]* ?");
+            initials = regex.Replace(initials, "$1");
+
             // Extract up to 2 initials from the remaining cleaned name.
-            initials = Regex.Replace(initials, @"^(\p{L})[^\s]*(?:\s+(?:\p{L}+\s+(?=\p{L}))?(?:(\p{L})\p{L}*)?)?$", "$1$2").Trim();
+            //initials = Regex.Replace(initials, @"^(\p{L})[^\s]*(?:\s+(?:\p{L}+\s+(?=\p{L}))?(?:(\p{L})\p{L}*)?)?$", "$1$2").Trim();
 
             if (initials.Length > 3)
             {

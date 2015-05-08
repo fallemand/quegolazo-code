@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Logica
 {
@@ -37,6 +39,7 @@ namespace Logica
         public const string uMODIFICAR = "/usuario/modificar.aspx";
 
         //Forms en carpeta Torneo
+        public const string t404 = "/torneo/404.aspx";
         public static string urlPartido(string nickTorneo,int idEdicion, string idPartido)
         {
             return "/"+nickTorneo+"/edicion-"+idEdicion+"/partido-"+idPartido;

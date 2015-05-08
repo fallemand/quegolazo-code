@@ -34,7 +34,7 @@ namespace quegolazo_code.torneo
                 //TODO falta agregarle el try/catch y que redirija a una pagina de error...
                 gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
                 gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-                serializador = new JavaScriptSerializer();
+                
                 gestorEstadistica = new GestorEstadisticas();
                 gestorPartido = Sesion.getGestorPartido();
                 gestorEquipo = Sesion.getGestorEquipo();

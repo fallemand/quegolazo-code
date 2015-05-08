@@ -21,20 +21,30 @@ namespace quegolazo_code.torneo
         private List<Jugador> goleadoresDelEquipo;
         private DataTable datosPrincipalesEquipo;
         GestorEstadisticas gestorEstadistica;
-        protected int idEdicion, idEquipo;
+        protected int idEquipo, idEdicion;
         protected string nickTorneo;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                gestorTorneo = Sesion.getGestorTorneo();
-                gestorEdicion = Sesion.getGestorEdicion();
-                //TODO falta agregarle el try/catch y que redirija a una pagina de error...
-                idEdicion = int.Parse(Request["idEdicion"]);
                 nickTorneo = Request["nickTorneo"];
+                if(nickTorneo == null)
+                    Response.Redirect(GestorUrl.t404);
+                gestorTorneo = new GestorTorneo();
+                gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
+                if(gestorTorneo.torneo.nombre == null)
+                    Response.Redirect(GestorUrl.t404);
+                if (Request["idEdicion"] == null)
+                    Response.Redirect(GestorUrl.t404);
+                idEdicion = int.Parse(Request["idEdicion"]);
+                gestorEdicion = new GestorEdicion();
+                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
+                if (gestorEdicion.edicion.nombre ==null)
+                    Response.Redirect(GestorUrl.t404);
+
                 idEquipo = int.Parse(Request["idEquipo"]);
-                gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
+                
                 gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                 gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
                 gestorEquipo = Sesion.getGestorEquipo();
