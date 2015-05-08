@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Utils;
 using Logica;
+using Entidades;
 
 namespace quegolazo_code.torneo
 {
@@ -21,21 +22,21 @@ namespace quegolazo_code.torneo
         {
             if (!Page.IsPostBack)
             {
-                idEdicion = int.Parse(Request["idEdicion"]);
-                nickTorneo = Request["nickTorneo"];
-                gestorEdicion = Sesion.getGestorEdicion();
-                gestorTorneo = Sesion.getGestorTorneo();
-                gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo); 
-                obtenerEdiciónSeleccionada();
+                Torneo torneo = GestorUrl.validarTorneo();
+                Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
+
+                gestorTorneo = new GestorTorneo();
+                gestorTorneo.torneo = torneo;
+                nickTorneo = torneo.nick;
+
+                gestorEdicion = new GestorEdicion();
+                gestorEdicion.edicion = edicion;
+                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
+                idEdicion = edicion.idEdicion;
+
                 cargarEquipos();
             }
-        }
-
-        private void obtenerEdiciónSeleccionada()
-        {
-            gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
-            gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-            gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
         }
 
         public void cargarEquipos()

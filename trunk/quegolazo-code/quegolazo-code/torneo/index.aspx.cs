@@ -21,35 +21,29 @@ namespace quegolazo_code.torneo
         {
             try
             {
-                if (Request["idEdicion"] == null)
-                   // Response.Redirect(GestorUrl.tEDICIONES);
-                idEdicion = int.Parse(Request["idEdicion"]);
-                nickTorneo = Request["nickTorneo"];
-
-                if (!IsPostBack) {
+                if (!IsPostBack) 
+                {
+                    Torneo torneo = GestorUrl.validarTorneo();
+                    Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
 
                     gestorTorneo = new GestorTorneo();
+                    gestorTorneo.torneo = torneo;
+                    nickTorneo = torneo.nick;
+
                     gestorEdicion = new GestorEdicion();
-                    gestorTorneo.torneo = gestorTorneo.obtenerTorneoPorNick(nickTorneo);
-                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
-                    gestorEdicion.edicion.fases= gestorEdicion.obtenerFases();
-                    gestorEdicion.edicion.preferencias = gestorEdicion.obtenerPreferencias();
-                    gestorEdicion.edicion.equipos= gestorEdicion.obtenerEquipos();
+                    gestorEdicion.edicion = edicion;
+                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                     gestorEdicion.getFaseActual();
                     gestorEdicion.faseActual.getFechaActual();
-                    otrosPartidosDeLaFecha(); // Carga Otros Partidos de la Fecha
+                    gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
+                    idEdicion = edicion.idEdicion;
+
+                    // Carga Otros Partidos de la Fecha
+                    otrosPartidosDeLaFecha(); 
                     cargarNoticias();
                 }
-
             }
-            catch (ArgumentNullException)
-            {
-                //TODO redireccionar a pagina de error
-                throw;
-            }
-            catch(Exception){
-                throw;
-            }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         private void otrosPartidosDeLaFecha()
@@ -80,11 +74,10 @@ namespace quegolazo_code.torneo
         {
             return GestorExtra.nombreMes(numeroMes);
         }
+
         public string nombreDia(DateTime date)
         {
             return GestorExtra.nombreDia(date);
         }
-
-
     }
 }

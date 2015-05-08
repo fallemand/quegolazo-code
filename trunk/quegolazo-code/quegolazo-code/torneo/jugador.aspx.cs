@@ -50,7 +50,7 @@ namespace quegolazo_code.torneo
                     gestorJugador = Sesion.getGestorJugador();
 
                     GestorControles.cargarRepeaterList(rptOtroseJugadores, gestorEquipo.equipo.jugadores);
-                    gestorEstadisticas = new GestorEstadisticas();
+                    gestorEstadisticas = new GestorEstadisticas(edicion);
 
                     cargarDatosJugador();
                     cargarPartidosJugador();

@@ -11,7 +11,7 @@ using Utils;
 
 namespace quegolazo_code.torneo
 {
-    public partial class Formulario_web1 : System.Web.UI.Page
+    public partial class goleadores : System.Web.UI.Page
     {
         protected GestorTorneo gestorTorneo;
         protected GestorEdicion gestorEdicion;
@@ -40,7 +40,7 @@ namespace quegolazo_code.torneo
                     idEdicion = edicion.idEdicion;
                     gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
 
-                    gestorEstadistica = new GestorEstadisticas();
+                    gestorEstadistica = new GestorEstadisticas(edicion);
                     gestorEstadistica.edicion = edicion;
 
                     gestorJugador = new GestorJugador();
