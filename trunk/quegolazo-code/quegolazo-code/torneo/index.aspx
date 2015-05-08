@@ -76,10 +76,10 @@
                                                         <li>
                                                             <div class="header-post">
                                                                 <div class="date">
-                                                                    <span><%# ((DateTime)Eval("fecha")).ToString("dd/MM/yyyy") %></span>
+                                                                    <span><%# ((DateTime)((Entidades.Noticia)Container.DataItem).fecha).ToString("dd/MM/yyyy") %></span>
                                                                    <%# ((DateTime)Eval("fecha")).Year %> 
                                                                 </div>
-                                                                <a href="single-news.html"><img src="/torneo/img/blog/1.jpg" alt=""></a>
+                                                                <a href="single-news.html"><img src="<%# ((Entidades.Noticia)Container.DataItem).obtenerImagenMediana() %>" alt=""></a>
                                                                 <div class="meta-tag">
                                                                     <ul>
                                                                         <%--<li><i class="fa fa-user"></i><a href="#">Admin</a></li>--%>
