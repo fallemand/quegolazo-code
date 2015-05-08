@@ -20,30 +20,21 @@ namespace quegolazo_code.torneo
         {
             try
             {               
-                
                 if (!IsPostBack) {
+                    torneo = GestorUrl.validarTorneo();
+                    edicion = GestorUrl.validarEdicion(torneo.nick);
+
                     gestorTorneo = new GestorTorneo();
-                    torneo = new GestorTorneo().obtenerTorneoPorNick(Request["nickTorneo"]);
+                    gestorTorneo.torneo = torneo;
+
                     serializador = new JavaScriptSerializer();
                     string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(torneo.idTorneo));
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "var configuracion = " + estilos + ";", true);
-                    edicion = new GestorEdicion().obtenerEdicionPorId(int.Parse(Request["idEdicion"]));
+
                     Utils.GestorControles.cargarRepeaterList(rptEdicionesMaster, new GestorEdicion().obtenerEdicionesPorTorneo(torneo.idTorneo));
                 }
-
-                
             }
-            catch (ArgumentNullException ex)
-            {
-                //TODO redireccionar a pagina de error                
-                throw;
-            }
-            catch (FormatException ex)
-            {
-                //TODO redireccionar a pagina de error                
-                throw;
-            }
-            
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
     }
 }

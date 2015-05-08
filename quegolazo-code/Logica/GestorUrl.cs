@@ -194,6 +194,24 @@ namespace Logica
             return equipo;
         }
 
+        //Validar Partido
+        public static Partido validarPartido(string nickTorneo, int idEdicion)
+        {
+            Partido partido = null;
+            try
+            {
+                int idPartido = int.Parse(HttpContext.Current.Request["idPartido"]);
+                GestorPartido gestorPartido = new GestorPartido();
+                gestorPartido.obtenerPartidoporId(idPartido.ToString());
+                partido = gestorPartido.partido;
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Redirect(GestorUrl.urlFixture(nickTorneo, idEdicion));
+            }
+            return partido;
+        }
+
         //Validar Jugador
         public static Jugador validarJugador(string nickTorneo, int idEdicion, int idEquipo)
         {

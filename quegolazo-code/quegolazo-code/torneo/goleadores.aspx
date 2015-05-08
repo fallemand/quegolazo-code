@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/torneo/torneoMaster.Master" AutoEventWireup="true" CodeBehind="goleadores.aspx.cs" Inherits="quegolazo_code.torneo.Formulario_web1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/torneo/torneoMaster.Master" AutoEventWireup="true" CodeBehind="goleadores.aspx.cs" Inherits="quegolazo_code.torneo.goleadores" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headTorneoMasterContent" runat="server">
         <!-- Charts.js-->
     <script type="text/javascript" src="/torneo/js/charts/Chart.min.js"></script>

@@ -46,7 +46,7 @@ namespace quegolazo_code.torneo
                     gestorEquipo.equipo = equipo;
 
                     gestorPartido = new GestorPartido();
-                    gestorEstadistica = new GestorEstadisticas();
+                    gestorEstadistica = new GestorEstadisticas(edicion);
 
                     cargarDatosPrincipalesEquipo();
                     cargarHistorialDePartidos();

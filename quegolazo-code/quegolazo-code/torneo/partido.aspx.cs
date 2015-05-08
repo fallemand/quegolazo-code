@@ -1,4 +1,5 @@
-﻿using Logica;
+﻿using Entidades;
+using Logica;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,20 +27,28 @@ namespace quegolazo_code.torneo
         {
             try
             {
-                nickTorneo = Request["nickTorneo"].ToString();
-                idEdicion = int.Parse(Request["idEdicion"]);
-                idPartido =Request["idPartido"];
-                gestorTorneo = Sesion.getGestorTorneo();
-                gestorEdicion = Sesion.getGestorEdicion();
-                //TODO falta agregarle el try/catch y que redirija a una pagina de error...
-                gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
-                gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-
-                gestorEstadistica = new GestorEstadisticas(gestorEdicion.edicion);
-                gestorPartido = Sesion.getGestorPartido();
-                gestorEquipo = Sesion.getGestorEquipo();
                 if (!Page.IsPostBack)
                 {
+                    Torneo torneo = GestorUrl.validarTorneo();
+                    Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
+                    Partido partido = GestorUrl.validarPartido(torneo.nick, edicion.idEdicion);
+
+                    gestorTorneo = new GestorTorneo();
+                    gestorTorneo.torneo = torneo;
+                    nickTorneo = torneo.nick;
+
+                    gestorEdicion = new GestorEdicion();
+                    gestorEdicion.edicion = edicion;
+                    idEdicion = edicion.idEdicion;
+
+                    gestorPartido = new GestorPartido();
+                    gestorPartido.partido = partido;
+                    idPartido = partido.idPartido.ToString();
+
+                    gestorEstadistica = new GestorEstadisticas(edicion);
+
+                    gestorEquipo = Sesion.getGestorEquipo();
+
                     gestorPartido.obtenerPartidoporId(idPartido);
                     otrosPartidosDeLaFecha(); // Carga Otros Partidos de la Fecha
                     cargarDatosDePartido(); // Carga Resumen y Estadísticas del Partido
@@ -47,10 +56,7 @@ namespace quegolazo_code.torneo
                     cargarComparativo(); //Carga widget Comparativo                
                 }
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         [System.Web.Services.WebMethod(enableSession: true)]

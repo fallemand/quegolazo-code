@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Utils;
 using Logica;
+using Entidades;
 
 namespace quegolazo_code.torneo
 {
@@ -20,19 +21,26 @@ namespace quegolazo_code.torneo
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            idEdicion = int.Parse(Request["idEdicion"]);
-            nickTorneo = Request["nickTorneo"];
-            gestorEdicion = new GestorEdicion();
-            gestorTorneo = new GestorTorneo();
-
-            if (!Page.IsPostBack)
+            try
             {
-                gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-                obtenerEdicionSeleccionada();
-                cargarRepeaterSanciones(idEdicion);
-                cargarRepeaterTarjetas();
+                if (!Page.IsPostBack)
+                {
+                    Torneo torneo = GestorUrl.validarTorneo();
+                    Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
+
+                    gestorTorneo = new GestorTorneo();
+                    gestorTorneo.torneo = torneo;
+                    nickTorneo = torneo.nick;
+
+                    gestorEdicion = new GestorEdicion();
+                    gestorEdicion.edicion = edicion;
+                    idEdicion = edicion.idEdicion;
+
+                    cargarRepeaterSanciones(idEdicion);
+                    cargarRepeaterTarjetas();
+                }
             }
-    
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         private void cargarRepeaterSanciones(int idEdicion)
@@ -46,15 +54,5 @@ namespace quegolazo_code.torneo
             GestorEstadisticas gestorEstadisticas = new GestorEstadisticas(gestorEdicion.edicion);
             sinTarjetas.Visible = !GestorControles.cargarRepeaterTable(rptTarjetas, gestorEstadisticas.obtenerTablaTarjetas());
         }
-        
-
-         protected  void obtenerEdicionSeleccionada()
-        {
-            gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
-            gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-            gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
-        }
-
-
     }
 }
