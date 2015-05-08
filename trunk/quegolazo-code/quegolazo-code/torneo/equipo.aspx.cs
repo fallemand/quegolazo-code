@@ -40,10 +40,12 @@ namespace quegolazo_code.torneo
 
                     gestorEdicion = new GestorEdicion();
                     gestorEdicion.edicion = edicion;
+                    idEdicion = edicion.idEdicion;
                     gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
 
                     gestorEquipo = new GestorEquipo();
                     gestorEquipo.equipo = equipo;
+                    idEquipo = equipo.idEquipo;
 
                     gestorPartido = new GestorPartido();
                     gestorEstadistica = new GestorEstadisticas(edicion);
@@ -70,7 +72,6 @@ namespace quegolazo_code.torneo
             }
         
         }
-
 
         public void cargarDatosPrincipalesEquipo()
         {

@@ -9,7 +9,6 @@
 // Website: http://www.iwthemes.com
 // Email: support@iwthemes.com
 // Copyright: (C) 2014
-
 function showPanelMessage(idPanel, idMensaje, mensaje) {
     setTimeout(function () {
         $('#' + idMensaje).text(mensaje);

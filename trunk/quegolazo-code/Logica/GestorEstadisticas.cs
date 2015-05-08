@@ -19,10 +19,9 @@ namespace Logica
 
        public GestorEstadisticas(Edicion edicion)
        {
-           edicion = Sesion.getGestorEdicion().edicion;
-           if(edicion == null || edicion.idEdicion==0)
-           edicion = buscarUltimaEdicionTorneo();
-           Sesion.setEdicion(edicion);
+            this.edicion = edicion;
+            if(edicion == null || edicion.idEdicion==0)
+                edicion = buscarUltimaEdicionTorneo();
        }
 
        public DataTable obtenerTablaPosiciones(int idFase, int idGrupo)
