@@ -18,7 +18,7 @@ namespace quegolazo_code.torneo
         {
             if (!Page.IsPostBack)
             {
-                Torneo torneo = GestorUrl.validarTorneo();
+                torneo = GestorUrl.validarTorneo();
                 gestorEdicion = new GestorEdicion();
                 GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(torneo.idTorneo));
             }
