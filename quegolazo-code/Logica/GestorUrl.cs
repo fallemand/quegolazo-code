@@ -40,10 +40,13 @@ namespace Logica
 
         //Forms en carpeta Torneo
         public const string t404 = "/torneo/404.aspx";
-        public const string tEDICIONES = "/torneo/ediciones.aspx";
         public static string urlPartido(string nickTorneo,int idEdicion, string idPartido)
         {
             return "/"+nickTorneo+"/edicion-"+idEdicion+"/partido-"+idPartido;
+        }
+        public static string urlEdiciones(string nickTorneo)
+        {
+            return "/" + nickTorneo + "/ediciones";
         }
         public static string urlTorneo(string nickTorneo)
         {
@@ -106,5 +109,109 @@ namespace Logica
         public const string rCSS = "/resources/css";
         public const string rJS = "/resources/js";
         public const string rIMG = "/resources/img";
+
+        //==================================================================
+        //-------------------------Validaciones---------------------------
+        //==================================================================
+
+        //Validar Torneo
+        public static Torneo validarTorneo() 
+        {
+            String nickTorneo = HttpContext.Current.Request["nickTorneo"];
+            if (nickTorneo == null)
+                HttpContext.Current.Response.Redirect(GestorUrl.t404);
+            GestorTorneo gestorTorneo = new GestorTorneo();
+            Torneo torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
+            if (torneo == null)
+                HttpContext.Current.Response.Redirect(GestorUrl.t404);
+            return torneo;
+        }
+
+        //Validar Edicion
+        public static Edicion validarEdicion(string nickTorneo)
+        {
+            int idEdicion=-1;
+            try { 
+                idEdicion = int.Parse(HttpContext.Current.Request["idEdicion"]); 
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Redirect(GestorUrl.urlEdiciones(nickTorneo));
+            }
+            GestorEdicion gestorEdicion = new GestorEdicion();
+            Edicion edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
+            if (edicion == null)
+                HttpContext.Current.Response.Redirect(GestorUrl.urlEdiciones(nickTorneo));
+            return edicion;
+        }
+
+        //Validar Fase
+        public static int validarFase(string nickTorneo, int idEdicion)
+        {
+            int idFase = -1;
+            try
+            {
+                idFase = int.Parse(HttpContext.Current.Request["idFase"]);
+                return idFase;
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Redirect(GestorUrl.urlEdicion(nickTorneo, idEdicion));
+            }
+            return idFase;
+        }
+
+        //Validar Fase
+        public static int validarFecha(string nickTorneo, int idEdicion, int idFase)
+        {
+            try
+            {
+                int idFecha = int.Parse(HttpContext.Current.Request["idFecha"]);
+                return idFecha;
+            }
+            catch (Exception ex)
+            {
+                return 1;
+            }
+        }
+
+        //Validar Equipo
+        public static Equipo validarEquipo(string nickTorneo, int idEdicion)
+        {
+            int idEquipo = -1;
+            try
+            {
+                idEquipo = int.Parse(HttpContext.Current.Request["idEquipo"]);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Redirect(GestorUrl.urlEquipos(nickTorneo, idEdicion));
+            }
+            GestorEquipo gestorEquipo = new GestorEquipo();
+            Equipo equipo = gestorEquipo.obtenerEquipoPorId(idEquipo);
+            if (equipo == null)
+                HttpContext.Current.Response.Redirect(GestorUrl.urlEquipos(nickTorneo, idEdicion));
+            return equipo;
+        }
+
+        //Validar Jugador
+        public static Jugador validarJugador(string nickTorneo, int idEdicion, int idEquipo)
+        {
+            int idJugador = -1;
+            try
+            {
+                idJugador = int.Parse(HttpContext.Current.Request["idJugador"]);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Redirect(GestorUrl.urlEquipo(nickTorneo, idEdicion, idEquipo));
+            }
+            GestorJugador gestorJugador = new GestorJugador();
+            Jugador jugador = gestorJugador.obtenerJugadorPorId(idJugador);
+            if (jugador == null)
+                HttpContext.Current.Response.Redirect(GestorUrl.urlEquipo(nickTorneo, idEdicion, idEquipo));
+            return jugador;
+        }
+        
     }
 }

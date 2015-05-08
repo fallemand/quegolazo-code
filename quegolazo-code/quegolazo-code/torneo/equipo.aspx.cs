@@ -28,31 +28,26 @@ namespace quegolazo_code.torneo
         {
             try
             {
-                nickTorneo = Request["nickTorneo"];
-                if(nickTorneo == null)
-                    Response.Redirect(GestorUrl.t404);
-                gestorTorneo = new GestorTorneo();
-                gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-                if(gestorTorneo.torneo.nombre == null)
-                    Response.Redirect(GestorUrl.t404);
-                if (Request["idEdicion"] == null)
-                    Response.Redirect(GestorUrl.t404);
-                idEdicion = int.Parse(Request["idEdicion"]);
-                gestorEdicion = new GestorEdicion();
-                gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);
-                if (gestorEdicion.edicion.nombre ==null)
-                    Response.Redirect(GestorUrl.t404);
-
-                idEquipo = int.Parse(Request["idEquipo"]);
-                
-                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-                gestorEquipo = Sesion.getGestorEquipo();
-                gestorPartido = Sesion.getGestorPartido();
-                gestorEstadistica = new GestorEstadisticas(gestorEdicion.edicion);
                 if (!Page.IsPostBack)
                 {
-                    gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(idEquipo);
+                    Torneo torneo = GestorUrl.validarTorneo();
+                    Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
+                    Equipo equipo = GestorUrl.validarEquipo(torneo.nick, edicion.idEdicion);
+
+                    gestorTorneo = new GestorTorneo();
+                    gestorTorneo.torneo = torneo;
+                    nickTorneo = torneo.nick;
+
+                    gestorEdicion = new GestorEdicion();
+                    gestorEdicion.edicion = edicion;
+                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+
+                    gestorEquipo = new GestorEquipo();
+                    gestorEquipo.equipo = equipo;
+
+                    gestorPartido = new GestorPartido();
+                    gestorEstadistica = new GestorEstadisticas();
+
                     cargarDatosPrincipalesEquipo();
                     cargarHistorialDePartidos();
                     cargarGoleadores();
@@ -60,14 +55,8 @@ namespace quegolazo_code.torneo
                     cargarRepeaterJugadores();
                     cargarGraficos();
                 }
-                
             }
-            catch (Exception)
-            {
-                //TODO redireccionar a pagina de error
-                throw;
-            }
-          
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         private void cargarGraficos()

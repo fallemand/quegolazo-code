@@ -101,7 +101,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody class="tablaFiltro">
-                                                                    <asp:Repeater ID="rptPartidos" runat="server" OnItemCommand="rptPartidos_ItemCommand" OnItemDataBound="rptPartidos_ItemDataBound">
+                                                                    <asp:Repeater ID="rptPartidos" runat="server" OnItemDataBound="rptPartidos_ItemDataBound">
                                                                         <ItemTemplate>
                                                                             <asp:Panel ID="panelPartidoNormal" runat="server" Visible="false">
                                                                                 <tr class="grupo-<%# Eval("idGrupo") %>">
