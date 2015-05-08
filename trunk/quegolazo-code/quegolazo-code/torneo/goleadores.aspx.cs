@@ -26,18 +26,24 @@ namespace quegolazo_code.torneo
         {
             try
             {
-                gestorTorneo = Sesion.getGestorTorneo();
-                gestorEdicion = Sesion.getGestorEdicion();                
-                idEdicion = int.Parse(Request["idEdicion"]);
-                nickTorneo = Request["nickTorneo"];
-                gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);
-                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo);
-                gestorEstadistica = new GestorEstadisticas(gestorEdicion.edicion);
-                gestorEstadistica.edicion = gestorEdicion.edicion;
-                gestorJugador = new GestorJugador();
                 if (!Page.IsPostBack)
                 {
+                    Torneo torneo = GestorUrl.validarTorneo();
+                    Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
+
+                    gestorTorneo = new GestorTorneo();
+                    gestorTorneo.torneo = torneo;
+                    nickTorneo = torneo.nick;
+
+                    gestorEdicion = new GestorEdicion();
+                    gestorEdicion.edicion = edicion;
+                    idEdicion = edicion.idEdicion;
+                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+
+                    gestorEstadistica = new GestorEstadisticas();
+                    gestorEstadistica.edicion = edicion;
+
+                    gestorJugador = new GestorJugador();
                     GestorControles.cargarRepeaterList(rptGoleadores, gestorJugador.obtenerJugadoresGoleadores(gestorEdicion.edicion.idEdicion));
                     cargarGoleadoresFases();
                     sinGoleadoresTodas.Visible = !GestorControles.cargarRepeaterTable(rptGoleadoresTodasLasFases, gestorEstadistica.obtenerTablaGoleadores());                                                             
@@ -46,15 +52,7 @@ namespace quegolazo_code.torneo
                     cargarGraficos();
                 }
             }
-            catch (ArgumentNullException)
-            {
-                //TODO redireccionar a pagina de error
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         private void cargarGoleadoresFases()

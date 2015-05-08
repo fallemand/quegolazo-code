@@ -22,48 +22,51 @@ namespace quegolazo_code.torneo
         {
             try
             {
-                gestorTorneo = Sesion.getGestorTorneo();
-                gestorEdicion = Sesion.getGestorEdicion();
-                idEdicion = gestorEdicion.edicion.idEdicion;
-                nickTorneo = gestorTorneo.torneo.nick;
                 if (!Page.IsPostBack)
                 {
-                    idEdicion = int.Parse(Request["idEdicion"]);
-                    nickTorneo = Request["nickTorneo"].ToString();
-                    idFase = (Request["idFase"] != null) ? int.Parse(Request["idFase"]) : 1;
-                    idFecha = (Request["idFecha"] != null) ? int.Parse(Request["idFecha"]) : 1;
+                    Torneo torneo = GestorUrl.validarTorneo();
+                    Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
+                    idFase = GestorUrl.validarFase(torneo.nick, edicion.idEdicion);
+                    idFecha = GestorUrl.validarFecha(torneo.nick, edicion.idEdicion, idFase);
+
+                    gestorTorneo = new GestorTorneo();
+                    gestorTorneo.torneo = torneo;
+
+                    gestorEdicion = new GestorEdicion();
+                    gestorEdicion.edicion = edicion;
+                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                    idEdicion = edicion.idEdicion;
+
                     ViewState["idFecha"] = idFecha;
                     ViewState["idFase"] = idFase;
                     litFase.Text=idFase.ToString();
                     litFecha.Text= idFecha.ToString();
                     litLnkFase.Text=idFase.ToString();
                     litLnkFecha.Text = idFecha.ToString();
-                    gestorEdicion.edicion = gestorEdicion.obtenerEdicionPorId(idEdicion);//2010
-                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                    gestorTorneo.torneo = gestorTorneo.obtenerTorneoPorNick(nickTorneo); //jockeyClub
+
                     GestorControles.cargarRepeaterList(rptFases, gestorEdicion.edicion.fases);
                 }
             }
-            catch (Exception)
-            {
-                //TODO redireccionar a pagina de error
-                throw;
-            }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
 
         protected void rptFechas_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName == "SeleccionarFecha")
+            try
             {
-                ViewState["idFecha"] = e.CommandArgument.ToString();
-                litFecha.Text = e.CommandArgument.ToString();
-                litLnkFecha.Text = e.CommandArgument.ToString();
-                if (gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos[0].fechas[int.Parse(ViewState["idFecha"].ToString()) - 1].estado.idEstado != Estado.fechaREGISTRADA)
+                if (e.CommandName == "SeleccionarFecha")
                 {
-                   sinGrupos.Visible=!GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
+                    ViewState["idFecha"] = e.CommandArgument.ToString();
+                    litFecha.Text = e.CommandArgument.ToString();
+                    litLnkFecha.Text = e.CommandArgument.ToString();
+                    if (gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos[0].fechas[int.Parse(ViewState["idFecha"].ToString()) - 1].estado.idEstado != Estado.fechaREGISTRADA)
+                    {
+                        sinGrupos.Visible = !GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
+                    }
                 }
             }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }  
         }
 
         protected void rptFases_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -91,29 +94,35 @@ namespace quegolazo_code.torneo
                     }
                 }
             }
-            catch (Exception ex) {  }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }  
         }
 
         protected void rptGrupos_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+            try
+            {
                 Repeater rptPartidos = (Repeater)e.Item.FindControl("rptPartidos");
                 Literal sinPartidos = (Literal)e.Item.FindControl("sinPartidos");
                 sinPartidos.Visible = !GestorControles.cargarRepeaterList(rptPartidos, ((Grupo)e.Item.DataItem).fechas[int.Parse(ViewState["idFecha"].ToString()) - 1].partidos);
+            }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }  
         }
 
         protected void rptFases_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName == "SeleccionarFase")
+            try
             {
-                ViewState["idFase"] = int.Parse(e.CommandArgument.ToString());
-                gestorEdicion.faseActual = gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1];
-                litFase.Text = e.CommandArgument.ToString();
-                litLnkFase.Text = e.CommandArgument.ToString();
-                sinFechas.Visible = !GestorControles.cargarRepeaterList(rptFechas, gestorEdicion.faseActual.obtenerFechas());
-                sinGrupos.Visible = !GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
-                
+                if (e.CommandName == "SeleccionarFase")
+                {
+                    ViewState["idFase"] = int.Parse(e.CommandArgument.ToString());
+                    gestorEdicion.faseActual = gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1];
+                    litFase.Text = e.CommandArgument.ToString();
+                    litLnkFase.Text = e.CommandArgument.ToString();
+                    sinFechas.Visible = !GestorControles.cargarRepeaterList(rptFechas, gestorEdicion.faseActual.obtenerFechas());
+                    sinGrupos.Visible = !GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
+                }
             }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }    
         }
-
     }
 }

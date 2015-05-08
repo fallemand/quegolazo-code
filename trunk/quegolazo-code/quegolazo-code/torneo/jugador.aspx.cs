@@ -25,26 +25,33 @@ namespace quegolazo_code.torneo
         {
             try
             {
-                
-                gestorEquipo = Sesion.getGestorEquipo();
-                gestorJugador = Sesion.getGestorJugador();
-
-                idJugador = int.Parse(Request["idJugador"]);
-                nickTorneo = Request["nickTorneo"].ToString();
-                idEdicion = int.Parse(Request["idEdicion"]);
-                idEquipo = (int.Parse(Request["idEquipo"]) != 0) ? int.Parse(Request["idEquipo"]) : gestorJugador.obtenerIdEquipo(idJugador);
-                gestorTorneo = Sesion.getGestorTorneo();
-                gestorEdicion = Sesion.getGestorEdicion();
-
                 if (!Page.IsPostBack)
                 {
-                    gestorEdicion.edicion = new GestorEdicion().obtenerEdicionPorId(idEdicion);//2010
-                    gestorTorneo.torneo = new GestorTorneo().obtenerTorneoPorNick(nickTorneo); //jockeyClub
-                    Sesion.setTorneo(gestorTorneo.torneo);
-                    gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(idEquipo);//1
+                    Torneo torneo = GestorUrl.validarTorneo();
+                    Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
+                    Equipo equipo = GestorUrl.validarEquipo(torneo.nick, edicion.idEdicion);
+                    Jugador jugador = GestorUrl.validarJugador(torneo.nick, edicion.idEdicion, equipo.idEquipo);
+
+                    gestorTorneo = new GestorTorneo();
+                    gestorTorneo.torneo = torneo;
+                    nickTorneo = torneo.nick;
+
+                    gestorEdicion = new GestorEdicion();
+                    gestorEdicion.edicion = edicion;
+                    idEdicion = edicion.idEdicion;
+
+                    gestorEquipo = new GestorEquipo();
+                    gestorEquipo.equipo = equipo;
+
+                    gestorJugador = new GestorJugador();
+                    gestorJugador.jugador = jugador;
+                    idJugador = jugador.idJugador;
+
+                    gestorJugador = Sesion.getGestorJugador();
+
                     GestorControles.cargarRepeaterList(rptOtroseJugadores, gestorEquipo.equipo.jugadores);
-                    gestorJugador.jugador = gestorJugador.obtenerJugadorPorId(idJugador);//2068
-                    gestorEstadisticas = Sesion.getGestorEstadisticas();
+                    gestorEstadisticas = new GestorEstadisticas();
+
                     cargarDatosJugador();
                     cargarPartidosJugador();
                     cargarGolesJugador();
@@ -52,13 +59,7 @@ namespace quegolazo_code.torneo
                 }
                 
             }
-            catch (Exception)
-            {
-                //TODO redireccionar a pagina de error
-                throw;
-            }
-            
-           
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         private void cargarGraficoGoles()
