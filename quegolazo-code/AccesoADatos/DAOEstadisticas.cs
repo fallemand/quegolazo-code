@@ -1267,6 +1267,53 @@ namespace AccesoADatos
                 if (con != null && con.State == ConnectionState.Open)
                     con.Close();
             }
-        }  
+        }
+
+        public DataTable tablaPosicionesEdicion(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"select e.idEquipo AS 'Id Equipo', e.nombre AS 'Equipo', 
+                                COUNT(CASE p.idEstado WHEN @partidoJugado THEN 1 ELSE NULL END) AS 'PJ',  
+                                COUNT(CASE p.idGanador WHEN e.idEquipo THEN 1 ELSE NULL END) AS 'PG',
+                                COUNT(CASE p.empate WHEN 1 THEN 1 ELSE NULL END) AS 'PE',
+                                COUNT(CASE p.idPerdedor WHEN e.idEquipo THEN 1 ELSE NULL END) AS 'PP',
+                                SUM(CASE WHEN p.idEquipoLocal = e.idEquipo AND p.golesLocal IS NOT NULL THEN p.golesLocal ELSE 0 END) + SUM(CASE WHEN p.idEquipoVisitante = e.idEquipo AND p.golesVisitante IS NOT NULL THEN p.golesVisitante ELSE 0 END) AS 'GF',
+                                SUM(CASE WHEN p.idEquipoLocal = e.idEquipo AND p.golesVisitante IS NOT NULL THEN p.golesVisitante ELSE 0 END)+ SUM(CASE WHEN p.idEquipoVisitante = e.idEquipo AND p.golesLocal IS NOT NULL THEN p.golesLocal ELSE 0 END) AS 'GC',
+                                COUNT(CASE p.idGanador WHEN e.idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE p.idPerdedor WHEN e.idEquipo THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
+                                from Equipos e
+                                inner join EquipoXEdicion exe ON exe.idEquipo = e.idEquipo
+                                inner join Ediciones ed ON exe.idEdicion = ed.idEdicion
+                                left join Partidos p on (e.idEquipo = p.idEquipoLocal OR e.idEquipo = p.idEquipoVisitante)
+                                where p.idEdicion = @idEdicion
+                                GROUP BY e.nombre, e.idEquipo, ed.idEdicion, puntosGanado, puntosPerdido, puntosEmpatado
+                                ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@partidoJugado", Estado.partidoJUGADO));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

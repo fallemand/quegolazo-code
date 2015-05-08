@@ -137,6 +137,11 @@ namespace Logica
            return DaoEstadisticas.cantidadGolesPorEquipo(edicion.idEdicion, paraGrafico); 
        }
 
+       public DataTable tablaPosicionesEdicion()
+       {
+           return DaoEstadisticas.tablaPosicionesEdicion(edicion.idEdicion);
+       }
+       
        public DataTable cantidadGolesPorTipoGol(bool paraGrafico)
        {
            DataTable datosTiposGol = DaoEstadisticas.cantidadGolesPorTipoGol(edicion.idEdicion, paraGrafico);
