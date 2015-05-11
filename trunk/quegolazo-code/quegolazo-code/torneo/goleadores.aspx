@@ -244,10 +244,10 @@
                                 </div>
                                  <div class="tab-pane fade active in" id="graficoEquipos" ClientIDMode="Static" runat="server">
                                      <asp:Panel ID="pnlGraficoEquipos" runat="server">
-                                        <canvas id="graficoGolesEquipos" style="margin-top:10px" class="canvas-lg" ></canvas></asp:Panel>
+                                        <canvas id="graficoGolesEquipos" style="margin-top:10px" class="canvas-lg" ></canvas>
+                                     </asp:Panel>
                                      <div id="noGraphicsEquipos" class="alert alert-info col-md-10 col-md-offset-1 msobile-margin-top" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
                                  </div>  
-                                 <div id="noGraphicsEquipos" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top" runat="server" visible="false" ><span>No hay información para mostrar</span></div>
                                </div>
                         </div>
                     </div>

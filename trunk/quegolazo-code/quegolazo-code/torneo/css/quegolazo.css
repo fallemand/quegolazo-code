@@ -1076,7 +1076,7 @@ a.avatar-jugador:hover {
 }
 
 .panel-maxheight {
-    max-height : 150px;
+    max-height : 180px;
 }
 
 div.panel-maxheight {
@@ -1150,7 +1150,7 @@ a.torneo-default:hover {
    z-index: 1050;
    transition: left 0.3s ease-out 0s;
 }
- 
+
 .flyover-centered {
    top: 50%;
    transform: translate(-50%, -50%);

@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 
 /* ==============================
     - Template Name: Sports Cup- Responsive HTML5  soccer and sports Template
@@ -671,10 +671,10 @@ header{
 /* Footer ----------------------------------------------------------------*/
 
 footer{
-    background: #222 url("../img/img-theme/bgfooter.jpg");
+    background: #222 url("/torneo/img/img-theme/bgfooter.jpg");
     color: #888;
-    padding-top: 30px;
-    padding-bottom: 0px;
+    padding-top: 25px;
+    padding-bottom: 15px;
     font-size: 13px;
     line-height: 20px;
     -webkit-background-size: cover !Important;
