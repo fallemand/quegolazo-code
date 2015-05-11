@@ -39,9 +39,6 @@
             <script src="js/responsive/respond.js"></script>
         <![endif]-->
 
-    <!-- Skins Changer-->
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-
     <!-- Content Head-->
     <asp:ContentPlaceHolder ID="headTorneoMasterContent" runat="server">
     </asp:ContentPlaceHolder>
@@ -182,21 +179,6 @@
                 </div>
             </div>
             <!-- footer Down-->
-
-            <!-- Panel Fracaso-->
-            <div id="panelFracaso" class="alert alert-danger alert-dismissible flyover flyover-bottom" role="alert">
-                <button type="button" class="close" onclick="hidePanelMessage('panelFracaso');"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <b>Error:</b> <span id="mensajeFracaso" class="panel-text"></span>
-            </div>
-            <!-- END Panel Fracaso-->
-
-            <!-- Panel Exito-->
-            <div id="panelExito" class="alert alert-success alert-dismissible flyover flyover-bottom" role="alert">
-                <button type="button" class="close" onclick="hidePanelMessage('panelExito');"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-                <b>Éxito:</b> <span id="mensajeExito" class="panel-text"></span>
-            </div>
-            <!-- END Panel Exito-->
-
         </div>
         <!-- End layout-->
 
@@ -348,13 +330,26 @@
         <script type='text/javascript' src="/torneo/js/jquery.slimscroll.min.js"></script>
         <!-- Theme-->
         <script type="text/javascript" src="/torneo/js/theme-options/jquery.colorPicker.min.js"></script>
-        <script type="text/javascript" src="/torneo/js/theme-options/jquery.cookies.js"></script>
         <script type="text/javascript" src="/torneo/js/theme-options/theme-options.js"></script>
         <!-- Bootstrap.js-->
         <script type="text/javascript" src="/torneo/js/bootstrap/bootstrap.js"></script>
         <!--MAIN FUNCTIONS-->
         <script type="text/javascript" src="/torneo/js/main.js"></script>
         <!-- ======================= End JQuery libs =========================== -->
+ 
+        <!-- Panel Fracaso-->
+        <div id="panelFracaso" class="alert alert-danger alert-dismissible flyover flyover-bottom" role="alert">
+            <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+            <b>Error:</b> <span id="mensajeFracaso" class="panel-text"></span>
+        </div>
+        <!-- END Panel Fracaso-->
+
+        <!-- Panel Exito-->
+        <div id="panelExito" class="alert alert-success alert-dismissible flyover flyover-bottom" role="alert">
+            <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+            <b>Éxito:</b> <span id="mensajeExito" class="panel-text"></span>
+        </div>
+        <!-- END Panel Exito-->
     </form>
 </body>
 </html>

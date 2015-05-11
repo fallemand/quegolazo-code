@@ -20,7 +20,7 @@ namespace Logica
         {
             mensaje = mensaje.Replace("'", "\"");
             mensaje = mensaje.Replace(System.Environment.NewLine, " - ");
-            String funcionJS = "showPanelMessage('" + idPanelExito + "', '" + idMensajeExito + "', '" + mensaje + "');";
+            String funcionJS = "$(document).ready(function ($) { showPanelMessage('" + idPanelExito + "', '" + idMensajeExito + "', '" + mensaje + "');}); ";
 
             if (HttpContext.Current.CurrentHandler is Page)
             {
@@ -41,7 +41,7 @@ namespace Logica
         {
             mensaje = mensaje.Replace("'", "\"");
             mensaje = mensaje.Replace(System.Environment.NewLine, " - ");
-            String funcionJS = "showPanelMessage('" + idPanelError + "', '" + idMensajeError + "', '" + mensaje + "');";
+            String funcionJS = "$(document).ready(function ($) { showPanelMessage('" + idPanelError + "', '" + idMensajeError + "', '" + mensaje + "');});";
 
             if (HttpContext.Current.CurrentHandler is Page)
             {
@@ -60,8 +60,8 @@ namespace Logica
 
         public static void hidePanels()
         {
-            String funcionJS_hideExito = "hidePanelMessage('" + idPanelExito + "');";
-            String funcionJS_hideError = "hidePanelMessage('" + idPanelError + "');";
+            String funcionJS_hideExito = "$(document).ready(function ($) { hidePanelMessage('" + idPanelExito + "');});";
+            String funcionJS_hideError = "$(document).ready(function ($) { hidePanelMessage('" + idPanelError + "');});";
 
             if (HttpContext.Current.CurrentHandler is Page)
             {
