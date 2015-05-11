@@ -9,6 +9,8 @@
 // Website: http://www.iwthemes.com
 // Email: support@iwthemes.com
 // Copyright: (C) 2014
+
+//================================== Funciones Principales=================================//
 function showPanelMessage(idPanel, idMensaje, mensaje) {
     setTimeout(function () {
         $('#' + idMensaje).text(mensaje);
@@ -25,9 +27,62 @@ function hidePanelMessage(idPanel) {
     }
 };
 
+function cargarEstilosVisuales(estilos) {
+    $('#layout').removeClass().addClass(estilos.estiloPagina);
+    $('body').css('background-image', estilos.patronDeFondo);
+    $('body').css('background-color', estilos.colorDeFondo);
+    $('#colorFondo .colorPicker-picker').css('background-color', estilos.colorDeFondo);
+    $('.headerbox').css('background-image', estilos.patronHeader);
+    $('#colorHeader .colorPicker-picker').css('background-color', estilos.colorHeader);
+    $('.headerbox').css('background-color', estilos.colorHeader);
+    $('#theme-options ul.backgrounds li').css('background-color', estilos.colorDeFondo);
+    $('#theme-options ul.backgrounds-h li').css('background-color', estilos.colorHeader);
+    $(".skin").attr("href", estilos.colorDestacado);
+    $('.wide').removeClass('active');
+    $('.boxed').removeClass('active');
+    $('.boxed-margin').removeClass('active');
+    $('.semiboxed').removeClass('active');
+    $('.' + estilos.estiloPagina.replace("layout-", "")).addClass('active');
+    $("#theme").attr("href", estilos.theme);
+    $('body').attr('class', estilos.bodyClass);
+}
+
+//Si no hay estilos cargar el tema por defecto
+try {
+    if (configuracion == null)
+        setDefaultTheme();
+} catch (ReferenceError) {
+    setDefaultTheme();
+}
+
+//si tiene estilos guardados, los cargamos
+cargarEstilosVisuales(configuracion);
+
+function setDefaultTheme() {
+    configuracion = {
+
+        bodyClass: "none fixed",
+        colorDeFondo: "rgb(95, 165, 78)",
+        colorDestacado: "/torneo/css/skins/red-dark.css",
+        colorHeader: "rgb(185, 61, 72)",
+        estiloPagina: "layout-boxed-margin",
+        patronDeFondo: "url(/torneo/img/bg-theme/c6.png)",
+        patronHeader: "url(/torneo/img/bg-theme/8.png)",
+        theme: "/torneo/css/bootstrap/bootstrap.css"
+    };
+}
+
 $(document).ready(function ($) {
 
     'use strict';
+
+    //================================== Paneles de Error =================================//
+    $('#panelFracaso .close').bind("click", function(e) {
+        hidePanelMessage('panelFracaso');
+    });
+    $('#panelExito .close').bind("click", function(e) {
+        hidePanelMessage('panelExito');
+    });
 
     //================================== Tooltip y Link Tablas=================================//
     $('.table-fecha tr:not(:has(th))').tooltip({
