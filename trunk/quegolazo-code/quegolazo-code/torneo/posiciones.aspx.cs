@@ -20,23 +20,27 @@ namespace quegolazo_code.torneo
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            try
             {
-                Torneo torneo = GestorUrl.validarTorneo();
-                Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
+                if (!Page.IsPostBack)
+                {
+                    Torneo torneo = GestorUrl.validarTorneo();
+                    Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
 
-                gestorTorneo = new GestorTorneo();
-                gestorTorneo.torneo = torneo;
-                nickTorneo = torneo.nick;
+                    gestorTorneo = new GestorTorneo();
+                    gestorTorneo.torneo = torneo;
+                    nickTorneo = torneo.nick;
 
-                gestorEdicion = new GestorEdicion();
-                gestorEdicion.edicion = edicion;
-                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
-                idEdicion = edicion.idEdicion;
+                    gestorEdicion = new GestorEdicion();
+                    gestorEdicion.edicion = edicion;
+                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                    gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
+                    idEdicion = edicion.idEdicion;
 
-                cargarEquipos();
+                    cargarEquipos();
+                }
             }
+            catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
         public void cargarEquipos()
