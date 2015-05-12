@@ -23,7 +23,7 @@
                     <li>/</li>
                     <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion) %>" ><%=gestorEdicion.edicion.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion) %>">Equipos</a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEquipos(nickTorneo,idEdicion) %>">Equipos</a></li>
                     <li>/</li>
                     <li><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,idEquipo) %>" "><%=gestorEquipo.equipo.nombre %></a></li>
                 </ul>
@@ -179,7 +179,7 @@
                                                     <div class="col-md-7">
                                                         <div class="row">
                                                           <div class="col-xs-6 widget widget-xs">
-                                                            <h1><span class="flaticon-football68"><%#((Entidades.Jugador)Container.DataItem).PJ %></h1>
+                                                            <h1><span class="flaticon-football68"></span><%#((Entidades.Jugador)Container.DataItem).PJ %></h1>
                                                             <span>Partidos</span>
                                                           </div>
                                                           <div class="col-xs-6 widget widget-xs">
@@ -322,52 +322,55 @@
                                 <!-- Tab Historial de Partidos -->
                                 <div class="tab-pane active fade in" id="historial-partidos">
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" colspan="5">VS</th>
-                                                    <th class="text-center">Resultado</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rptHistorialPartidos" runat="server" OnItemDataBound="rptHistorialPartidos_ItemDataBound">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td class="col-xs-2 col-md-1">
-                                                                <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen()%>">
-                                                                <div class="camiseta-equipo" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen()==false%>">
-                                                                    <div>
-                                                                        <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local.colorCamisetaPrimario %>"></i>
-                                                                    </div><!--
-                                                                    --><div class="segunda-mitad">
-                                                                        <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).local.colorCamisetaSecundario%>"></i>
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped table-hover table-partidos">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" colspan="5">VS</th>
+                                                        <th class="text-center">Resultado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="rptHistorialPartidos" runat="server" OnItemDataBound="rptHistorialPartidos_ItemDataBound">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td>
+                                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen()%>">
+                                                                    <div class="camiseta-equipo" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen()==false%>">
+                                                                        <div>
+                                                                            <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local.colorCamisetaPrimario %>"></i>
+                                                                        </div><!--
+                                                                        --><div class="segunda-mitad">
+                                                                            <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).local.colorCamisetaSecundario%>"></i>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="col-xs-6 col-md-3"><%# Eval("local.nombre") %></td>
-                                                            <td class="col-xs-6 col-md-3"><%# Eval("golesLocal") %><small><asp:Literal ID="ltPenalesLocal" runat="server" Visible="false"/></small> - <%# Eval("golesVisitante") %><small><asp:Literal ID="ltPenalesVisitante" runat="server" Visible="false"/></small></td>
-                                                            <td class="col-xs-6 col-md-3"><%# Eval("visitante.nombre") %></td>
-                                                            <td class="col-xs-2 col-md-1">
-                                                                <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen()%>">
-                                                                <div class="camiseta-equipo" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen()==false%>">
-                                                                    <div>
-                                                                        <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).visitante.colorCamisetaPrimario %>"></i>
-                                                                    </div><!--
-                                                                    --><div class="segunda-mitad">
-                                                                        <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).visitante.colorCamisetaSecundario%>"></i>
+                                                                </td>
+                                                                <td><%# Eval("local.nombre") %></td>
+                                                                <td><%# Eval("golesLocal") %><small><asp:Literal ID="ltPenalesLocal" runat="server" Visible="false"/></small> - <%# Eval("golesVisitante") %><small><asp:Literal ID="ltPenalesVisitante" runat="server" Visible="false"/></small></td>
+                                                                <td><%# Eval("visitante.nombre") %></td>
+                                                                <td>
+                                                                    <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen()%>">
+                                                                    <div class="camiseta-equipo" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen()==false%>">
+                                                                        <div>
+                                                                            <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).visitante.colorCamisetaPrimario %>"></i>
+                                                                        </div><!--
+                                                                        --><div class="segunda-mitad">
+                                                                            <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).visitante.colorCamisetaSecundario%>"></i>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
 
-                                                            </td>
-                                                            <td class="col-xs-3 col-md-2"><span class="label label-success"><%# Eval("resultadoParaUnEquipo") %></span></td>
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                                <tr id="sinHistorialDePartido" runat="server" visible="false">
-                                                    <td colspan="6">No hay información de partidos anteriores jugados</td>
-                                                </tr>    
-                                            </tbody>
-                                        </table>
+                                                                </td>
+                                                                <td><span class="label partido-<%# Eval("resultadoParaUnEquipo") %>"><%# Eval("resultadoParaUnEquipo") %></span></td>
+                                                                <td class="hidden"><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).idPartido.ToString()) %>"></a></td>
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                    <tr id="sinHistorialDePartido" runat="server" visible="false">
+                                                        <td colspan="6">No hay información de partidos anteriores jugados</td>
+                                                    </tr>    
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
                                         <h5 class="col-title">Evolución de Puntos</h5>
@@ -379,33 +382,35 @@
                                 <!-- Tab de Goleadores -->
                                 <div class="tab-pane fade active in " id="goleadores">
                                     <div class="col-sm-5 col-xs-12">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" colspan="2">Jugador</th>
-                                                    <th class="text-center" colspan="2">Goles</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>                                                
-                                                <asp:Repeater ID="rptGoleadores" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td class="col-xs-1">
-                                                                <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="<%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
-                                                                    <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="avatar-xs img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
-                                                                    <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
-                                                                </a>
-                                                            </td>
-                                                            <td class="col-xs-9"><%# Eval("nombre") %></td>
-                                                            <td class="col-xs-2"><%# Eval("cantidadGoles") %></td>
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                </asp:Repeater> 
-                                                <tr id="sinGoleadores" runat="server" visible="false">
-                                                    <td colspan="3">No hay información de goleadores</td>
-                                                </tr>  
-                                            </tbody>
-                                        </table>
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped table-hover table-jugadores">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" colspan="2">Jugador</th>
+                                                        <th class="text-center" colspan="2">Goles</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>                                                
+                                                    <asp:Repeater ID="rptGoleadores" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="col-xs-1">
+                                                                    <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="<%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
+                                                                        <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenChicha() %>" class="avatar-xs img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
+                                                                        <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
+                                                                    </a>
+                                                                </td>
+                                                                <td class="col-xs-9"><%# Eval("nombre") %></td>
+                                                                <td class="col-xs-2"><%# Eval("cantidadGoles") %></td>
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater> 
+                                                    <tr id="sinGoleadores" runat="server" visible="false">
+                                                        <td colspan="3">No hay información de goleadores</td>
+                                                    </tr>  
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="col-sm-7 col-xs-12">
                                         <h5 class="col-title">Goleadores</h5>

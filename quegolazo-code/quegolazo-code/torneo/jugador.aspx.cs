@@ -42,12 +42,11 @@ namespace quegolazo_code.torneo
 
                     gestorEquipo = new GestorEquipo();
                     gestorEquipo.equipo = equipo;
+                    idEquipo = equipo.idEquipo;
 
                     gestorJugador = new GestorJugador();
                     gestorJugador.jugador = jugador;
                     idJugador = jugador.idJugador;
-
-                    gestorJugador = Sesion.getGestorJugador();
 
                     GestorControles.cargarRepeaterList(rptOtroseJugadores, gestorEquipo.equipo.jugadores);
                     gestorEstadisticas = new GestorEstadisticas(edicion);

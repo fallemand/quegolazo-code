@@ -291,7 +291,8 @@
                                 <!-- Tab de Jugadores -->
                                 <div class="tab-pane fade" id="titulares">
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped">
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped table-hover table-jugadores">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
@@ -305,7 +306,11 @@
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td class="col-xs-1">
-                                                                <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                                <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="<%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,gestorPartido.partido.local.idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
+                                                                    <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenChicha() %>" class="avatar-xs img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
+                                                                    <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
+                                                                </a>
+                                                            </td>
                                                             <td class="col-xs-9"><%# Eval("nombre") %></td>
                                                             <td class="col-xs-2"><%# Eval("numeroCamiseta") %></td>
                                                         </tr>
@@ -316,9 +321,11 @@
                                                 </tr>                                              
                                             </tbody>
                                         </table>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped">
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped table-hover table-jugadores">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
@@ -332,7 +339,11 @@
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td class="col-xs-1">
-                                                                <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                                <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="<%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,gestorPartido.partido.visitante.idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
+                                                                    <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenChicha() %>" class="avatar-xs img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
+                                                                    <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
+                                                                </a>
+                                                            </td>
                                                             <td class="col-xs-9"><%# Eval("nombre") %></td>
                                                             <td class="col-xs-2"><%# Eval("numeroCamiseta") %></td>
                                                         </tr>
@@ -343,6 +354,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -364,7 +376,7 @@
                                                         <tr>
                                                             <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto != null ? ((Entidades.Gol)Container.DataItem).minuto+"'": "-" %></span></td>
                                                             <td class="col-xs-7">
-                                                                <img src="<%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() : "/torneo/img/img-theme/jugador-mediano.jpg" %>" class="img-circle avatar-sm" alt="">
+                                                                <img src="<%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() : "" %>" class="img-circle avatar-sm" >
                                                                 <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "" %></td>
                                                             <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol != null ? ((Entidades.Gol)Container.DataItem).tipoGol.nombre : "-"%></td>
                                                         </tr>
@@ -392,7 +404,7 @@
                                                         <tr>
                                                             <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto != null ? ((Entidades.Gol)Container.DataItem).minuto+"'": "-" %></span></td>
                                                             <td class="col-xs-7">
-                                                                <img src="<%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() : "/torneo/img/img-theme/jugador-mediano.jpg" %>" class="img-circle avatar-sm" alt="">
+                                                                <img src="<%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() : "" %>" class="img-circle avatar-sm" ">
                                                                 <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "" %></td>
                                                             <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol != null ? ((Entidades.Gol)Container.DataItem).tipoGol.nombre : "-"%></td>
                                                         </tr>
