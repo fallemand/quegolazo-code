@@ -42,7 +42,7 @@
         <script src="js/responsive/respond.js"></script>
     <![endif]-->
 </head>
-<body class="fixed" style="background-image: url(/torneo/img/bg-theme/c11.png); margin-top:70px;">
+<body class="fixed">
     <form id="form1" runat="server">
         <!-- layout-->
         <div id="layout-small">
