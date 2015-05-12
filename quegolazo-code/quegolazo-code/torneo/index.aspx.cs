@@ -68,6 +68,7 @@ namespace quegolazo_code.torneo
          private void cargarNoticias()
          {
             GestorControles.cargarRepeaterList(rptEventos, (new GestorNoticia()).obtenerNoticiasXCategoria(gestorEdicion.edicion.idEdicion, CategoriaNoticia.noticiaEVENTOS));
+            GestorControles.cargarRepeaterList(rptUltimasNoticias, (new GestorNoticia()).obtenerNoticiasXCategoria(gestorEdicion.edicion.idEdicion, CategoriaNoticia.noticiaBOLETIN));
         }
 
         [System.Web.Services.WebMethod(enableSession: true)]
