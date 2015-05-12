@@ -435,5 +435,10 @@ namespace Logica
                     tarjetaAEliminar = tarjeta;
             partido.tarjetas.Remove(tarjetaAEliminar);
         }
+
+        public Partido proximoPartidoDeEdicion(int idEdicion, int idFase, int idFecha)
+        {
+            return daoPartido.proximoPartidoDeEdicion(idEdicion, idFase, idFecha);
+        }
     }
 }

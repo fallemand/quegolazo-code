@@ -1315,5 +1315,127 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public DataTable ultimosGolesDeEdicion(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT equipo.idEquipo AS 'Id Equipo', equipo.nombre AS 'Equipo', jugador.idJugador AS 'Id Jugador',
+                                jugador.nombre AS 'Jugador', tipoGol.nombre AS 'Tipo Gol', partido.idPartido AS 'Id Partido'
+                                FROM Goles gol INNER JOIN Jugadores jugador ON jugador.idJugador = gol.idJugador
+                                INNER JOIN Equipos equipo ON jugador.idEquipo = equipo.idEquipo
+                                INNER JOIN TiposGol tipoGol ON gol.idTipoGol = tipoGol.idTipoGol
+                                INNER JOIN Partidos partido ON gol.idPartido = partido.idPartido
+                                WHERE partido.idEdicion = @idEdicion
+                                ORDER BY partido.fecha DESC, gol.idGol DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public DataTable ultimosTarjetasDeEdicion(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT equipo.idEquipo AS 'Id Equipo', equipo.nombre AS 'Equipo', jugador.idJugador AS 'Id Jugador',
+                                jugador.nombre AS 'Jugador', 
+                                CASE  
+	                                WHEN tarjeta.tipoTarjeta = 'R' THEN 'roja' 
+	                                WHEN tarjeta.tipoTarjeta = 'A' THEN 'amarilla'
+                                END AS 'Tipo Tarjeta',
+                                partido.idPartido AS 'Id Partido'
+                                FROM Tarjetas tarjeta INNER JOIN Jugadores jugador ON jugador.idJugador = tarjeta.idJugador
+                                INNER JOIN Equipos equipo ON jugador.idEquipo = equipo.idEquipo
+                                INNER JOIN Partidos partido ON tarjeta.idPartido = partido.idPartido
+                                WHERE partido.idEdicion = @idEdicion
+                                ORDER BY partido.fecha DESC, tarjeta.idTarjeta DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public DataTable estadisticasDeEdicion(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT 
+                                COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END) AS 'PJ',
+                                SUM(CASE WHEN p.golesLocal IS NOT NULL THEN p.golesLocal ELSE 0 END) + SUM(CASE WHEN p.golesVisitante IS NOT NULL THEN p.golesVisitante ELSE 0 END) AS 'Goles Convertidos',
+                                (SELECT COUNT(CASE WHEN t.tipoTarjeta = 'A' THEN 1 ELSE NULL END) FROM Tarjetas t WHERE t.idPartido IN (SELECT p1.idPartido FROM Partidos p1 WHERE p1.idEdicion = @idEdicion)) AS 'TA',
+                                (SELECT COUNT(CASE WHEN t.tipoTarjeta = 'R' THEN 1 ELSE NULL END) FROM Tarjetas t WHERE t.idPartido IN (SELECT p1.idPartido FROM Partidos p1 WHERE p1.idEdicion = @idEdicion)) AS 'TR' 
+                                FROM Partidos p
+                                INNER JOIN Ediciones edicionActual ON p.idEdicion = edicionActual.idEdicion	
+                                WHERE edicionActual.idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }

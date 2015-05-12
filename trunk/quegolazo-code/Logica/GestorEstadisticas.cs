@@ -140,6 +140,21 @@ namespace Logica
        {
            return DaoEstadisticas.tablaPosicionesEdicion(edicion.idEdicion);
        }
+
+       public DataTable ultimosGolesDeEdicion()
+       {
+           return DaoEstadisticas.ultimosGolesDeEdicion(edicion.idEdicion);
+       }
+
+       public DataTable ultimosTarjetasDeEdicion()
+       {
+           return DaoEstadisticas.ultimosTarjetasDeEdicion(edicion.idEdicion);
+       }
+
+       public DataTable estadisticasDeEdicion()
+       {
+           return DaoEstadisticas.estadisticasDeEdicion(edicion.idEdicion);
+       }
        
        public DataTable cantidadGolesPorTipoGol(bool paraGrafico)
        {

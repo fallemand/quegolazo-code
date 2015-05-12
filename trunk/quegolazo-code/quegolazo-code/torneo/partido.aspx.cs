@@ -11,7 +11,7 @@ using Utils;
 
 namespace quegolazo_code.torneo
 {
-    public partial class partido : System.Web.UI.Page
+    public partial class proximoPartido : System.Web.UI.Page
     {
         protected GestorTorneo gestorTorneo;
         protected GestorEdicion gestorEdicion;

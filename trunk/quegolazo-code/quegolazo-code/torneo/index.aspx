@@ -58,7 +58,7 @@
                                     <!-- Nav Tabs -->
                                     <ul class="nav nav-tabs" id="myTab">
                                         <li class="active"><a href="#ultimos-partidos" data-toggle="tab">EVENTOS</a></li>
-                                        <li><a href="#estadisticas" data-toggle="tab">ESTADISTICAS</a></li>
+                                        <li><a href="#estadisticas" data-toggle="tab">ESTADÍSTICAS</a></li>
                                     </ul>
                                     <!-- End Nav Tabs -->
 
@@ -201,7 +201,7 @@
                                                             <div class="panel nopadding panel-default">
                                                                 <div class="panel-body widget widget-md">
                                                                     <h1>
-                                                                        <span class="flaticon-football68" aria-hidden="true"></span>12
+                                                                        <span class="flaticon-football68" aria-hidden="true"></span><asp:Literal ID="ltPJ" runat="server"/>
                                                                     </h1>
                                                                     <span>Partidos Jugados</span>
                                                                 </div>
@@ -211,7 +211,7 @@
                                                             <div class="panel nopadding panel-default">
                                                                 <div class="panel-body widget widget-md text-success">
                                                                     <h1 class="text-success">
-                                                                        <span class="flaticon-football28" aria-hidden="true"></span>15
+                                                                        <span class="flaticon-football28" aria-hidden="true"></span><asp:Literal ID="ltGolesConvertidos" runat="server"/>
                                                                     </h1>
                                                                     <span class="text-success">Goles Convertidos</span>
                                                                 </div>
@@ -221,7 +221,7 @@
                                                             <div class="panel nopadding panel-default">
                                                                 <div class="panel-body widget widget-md">
                                                                     <h1 class="text-danger">
-                                                                        <span class="flaticon-football103" aria-hidden="true"></span>34
+                                                                        <span class="flaticon-football103" aria-hidden="true"></span><asp:Literal ID="ltTR" runat="server"/>
                                                                     </h1>
                                                                     <span class="text-danger">Tarjetas Rojas</span>
                                                                 </div>
@@ -231,7 +231,7 @@
                                                             <div class="panel nopadding panel-default">
                                                                 <div class="panel-body widget widget-md">
                                                                     <h1 class="text-yellow">
-                                                                        <span class="flaticon-football103" aria-hidden="true"></span>34
+                                                                        <span class="flaticon-football103" aria-hidden="true"></span><asp:Literal ID="ltTA" runat="server"/>
                                                                     </h1>
                                                                     <span class="text-yellow">Tarjetas Amarillas</span>
                                                                 </div>
@@ -252,46 +252,21 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <td><img src="/torneo/img/img-theme/equipo.png" class=" avatar-xs"></td>
-                                                                                <td>
-                                                                                    <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-xs" alt="">
-                                                                                    Fernando Gago</td>
-                                                                                <td>Tiro Libre</td>
-                                                                                <td><a href="">Ver Partido</a></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><img src="/torneo/img/img-theme/equipo.png" class=" avatar-xs"></td>
-                                                                                <td>
-                                                                                    <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-xs" alt="">
-                                                                                    Fernando Gago</td>
-                                                                                <td>Tiro Libre</td>
-                                                                                <td><a href="">Ver Partido</a></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><img src="/torneo/img/img-theme/equipo.png" class=" avatar-xs"></td>
-                                                                                <td>
-                                                                                    <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-xs" alt="">
-                                                                                    Fernando Gago</td>
-                                                                                <td>Tiro Libre</td>
-                                                                                <td><a href="">Ver Partido</a></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><img src="/torneo/img/img-theme/equipo.png" class=" avatar-xs"></td>
-                                                                                <td>
-                                                                                    <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-xs" alt="">
-                                                                                    Fernando Gago</td>
-                                                                                <td>Tiro Libre</td>
-                                                                                <td><a href="">Ver Partido</a></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><img src="/torneo/img/img-theme/equipo.png" class=" avatar-xs"></td>
-                                                                                <td>
-                                                                                    <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-xs" alt="">
-                                                                                    Fernando Gago</td>
-                                                                                <td>Tiro Libre</td>
-                                                                                <td><a href="">Ver Partido</a></td>
-                                                                            </tr>
+                                                                            <asp:Repeater ID="rptUltimosGoles" runat="server">
+                                                                                <ItemTemplate>
+                                                                                    <tr>
+                                                                                        <td><img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Equipo").ToString())}).obtenerImagenChicha()%>" class=" avatar-xs"></td>
+                                                                                        <td>
+                                                                                            <img src="<%# (new Entidades.Jugador() { idJugador=int.Parse(Eval("Id Jugador").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt="">
+                                                                                            <%# Eval("Jugador") %></td>
+                                                                                        <td><%# Eval("Tipo Gol") %></td>
+                                                                                        <td><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("Id Partido").ToString()) %>">Ver Partido</a></td>
+                                                                                    </tr>
+                                                                                </ItemTemplate>
+                                                                            </asp:Repeater>                                                                            
+                                                                            <tr id="sinUltimosGoles" runat="server" visible="false">
+                                                                                <td colspan="4">No hay información registrada de últimos goles</td>
+                                                                            </tr>                                                                            
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -310,46 +285,21 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <td><img src="/torneo/img/img-theme/equipo.png" class=" avatar-xs"></td>
-                                                                                <td>
-                                                                                    <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-xs" alt="">
-                                                                                    Fernando Gago</td>
-                                                                                <td><img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-xs" alt=""></td>
-                                                                                <td><a href="">Ver Partido</a></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><img src="/torneo/img/img-theme/equipo.png" class=" avatar-xs"></td>
-                                                                                <td>
-                                                                                    <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-xs" alt="">
-                                                                                    Fernando Gago</td>
-                                                                                <td><img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-xs" alt=""></td>
-                                                                                <td><a href="">Ver Partido</a></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><img src="/torneo/img/img-theme/equipo.png" class=" avatar-xs"></td>
-                                                                                <td>
-                                                                                    <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-xs" alt="">
-                                                                                    Fernando Gago</td>
-                                                                                <td><img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-xs" alt=""></td>
-                                                                                <td><a href="">Ver Partido</a></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><img src="/torneo/img/img-theme/equipo.png" class=" avatar-xs"></td>
-                                                                                <td>
-                                                                                    <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-xs" alt="">
-                                                                                    Fernando Gago</td>
-                                                                                <td><img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-xs" alt=""></td>
-                                                                                <td><a href="">Ver Partido</a></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td><img src="/torneo/img/img-theme/equipo.png" class=" avatar-xs"></td>
-                                                                                <td>
-                                                                                    <img src="/torneo/img/img-theme/jugador-mediano.jpg" class="img-circle avatar-xs" alt="">
-                                                                                    Fernando Gago</td>
-                                                                                <td><img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-xs" alt=""></td>
-                                                                                <td><a href="">Ver Partido</a></td>
-                                                                            </tr>
+                                                                            <asp:Repeater ID="rptUltimasTarjetas" runat="server">
+                                                                                <ItemTemplate>
+                                                                                    <tr>
+                                                                                        <td><img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Equipo").ToString())}).obtenerImagenChicha()%>" class=" avatar-xs"></td>
+                                                                                        <td>
+                                                                                            <img src="<%# (new Entidades.Jugador() { idJugador=int.Parse(Eval("Id Jugador").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt="">
+                                                                                            <%# Eval("Jugador") %></td>
+                                                                                        <td><img src="/torneo/img/img-theme/tarjeta-<%# Eval("Tipo Tarjeta") %>.png" class="img-circle avatar-xs" alt=""></td>
+                                                                                        <td><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("Id Partido").ToString()) %>">Ver Partido</a></td>
+                                                                                    </tr>
+                                                                                </ItemTemplate>
+                                                                            </asp:Repeater>
+                                                                            <tr id="sinUltimasTarjetas" runat="server" visible="false">
+                                                                                <td colspan="4">No hay información registrada de últimas tarjetas</td>
+                                                                            </tr>   
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -369,7 +319,7 @@
                                 <div class="col-md-3">
                                     <aside>
                                         <div class="title-color text-center">
-                                            <h4>Proximo Partido</h4>
+                                            <h4>Próximo Partido</h4>
                                         </div>
 
                                         <div class="content-counter content-counter-home">
@@ -379,25 +329,40 @@
                                             </p>
                                             <div id="counter-proximo-partido" class="counter"></div>
                                             <ul class="post-options">
-                                                <li><i class="fa fa-calendar"></i>Sab 14/05/2015</li>
-                                                <li><i class="fa fa-clock-o"></i>16:00 hs</li>
+                                                <li><i class="fa fa-calendar"></i><asp:Literal ID="ltDiaDePartido" runat="server"/> <asp:Literal ID="ltFechaPartido" runat="server"/></li>
+                                                <li><i class="fa fa-clock-o"></i><asp:Literal ID="ltHoraPartido" runat="server"/> hs</li>
                                             </ul>
                                             <div class="widget-partido">
                                                 <div class="col-xs-6">
-                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
-                                                </div>
-
-                                                <div class="col-xs-6">
-                                                    <div class="camiseta-equipo">
+                                                    <asp:Panel ID="tieneFotoLocal" runat="server">
+                                                    <img src="<%# (new Entidades.Equipo() { idEquipo= proximoPartido.local.idEquipo}).obtenerImagenMediana()%>" class="img-responsive center-block"></asp:Panel>
+                                                    <asp:Panel ID="noTieneFotoLocal" runat="server">
+                                                        <div class="camiseta-equipo">
                                                         <div>
                                                             <i class="flaticon-football114" style="color: #005A96"></i>
                                                         </div><!--
 --><div class="segunda-mitad">
                                                         <i class="flaticon-football114" style="color: #FAD201"></i>
                                                         </div>
-                                                    </div>
-                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
+                                                        </div>
+                                                        </asp:Panel>
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoLocal" runat="server"/></a></h5>
+                                                </div>
+
+                                                <div class="col-xs-6">
+                                                    <asp:Panel ID="tieneFotoVisitante" runat="server">
+                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block"></asp:Panel>
+                                                    <asp:Panel ID="noTieneFotoVisitante" runat="server">
+                                                        <div class="camiseta-equipo">
+                                                        <div>
+                                                            <i class="flaticon-football114" style="color: #005A96"></i>
+                                                        </div><!--
+--><div class="segunda-mitad">
+                                                        <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                        </div>
+                                                        </div>
+                                                        </asp:Panel>
+                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoVisitante" runat="server"/></a></h5>
                                                 </div>
                                             </div>
                                             <a class="btn btn-primary" href="#">
