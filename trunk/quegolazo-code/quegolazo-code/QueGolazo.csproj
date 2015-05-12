@@ -193,11 +193,13 @@
     <Content Include="torneo\fonts\glyphicon\glyphicons-halflings-regular.svg" />
     <Content Include="torneo\fechas.aspx" />
     <Content Include="torneo\goleadores.aspx" />
+    <Content Include="torneo\img\img-theme\favicon.ico" />
     <Content Include="torneo\img\img-theme\logo-big.png" />
     <Content Include="torneo\img\img-theme\tarjetas.png" />
     <Content Include="torneo\index.html" />
     <Content Include="torneo\js\charts\charts-jugador.js" />
     <Content Include="torneo\js\charts\charts-goleador.js" />
+    <Content Include="torneo\js\ediciones.js" />
     <Content Include="torneo\js\fechas.js" />
     <Content Include="torneo\js\jquery-ui.min.js" />
     <Content Include="torneo\js\jquery.bracket.min.js" />

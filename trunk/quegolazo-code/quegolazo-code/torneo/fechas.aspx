@@ -7,8 +7,7 @@
     <asp:UpdatePanel ID="upListadoFases" runat="server">
         <ContentTemplate>
             <!-- Titulo Sección -->
-            <section class="section-title img-about">
-                <div class="overlay-bg"></div>
+            <section class="section-title overlay-bg">
                 <div class="container">
                     <h1>Fase
                         <asp:Literal ID="litFase" runat="server"></asp:Literal><small>|</small> Fecha

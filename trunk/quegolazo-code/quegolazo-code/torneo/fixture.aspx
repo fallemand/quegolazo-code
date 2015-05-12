@@ -10,8 +10,7 @@
 
     <!-- contentPages-->
     <!-- Titulo Sección -->
-    <section class="section-title img-about">
-        <div class="overlay-bg"></div>
+    <section class="section-title overlay-bg">
         <div class="container">
             <h1><%= gestorEdicion.edicion.nombre %> - Fixture</h1>
         </div>

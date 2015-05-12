@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
     <!-- Section Area - Content Central -->
-        <section class="content-info home">
+        <section class="content-info">
 
             <!-- Content Central -->
             <div class="container padding-top">

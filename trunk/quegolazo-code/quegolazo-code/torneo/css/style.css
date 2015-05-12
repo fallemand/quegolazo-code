@@ -525,14 +525,7 @@ header{
 /* Section Title ---------------------------------------------*/
 
 .section-title{
-    height: 250px;
-    position: relative;
-}
-.section-sports{
-    height: 350px;
-}
-.section-contact{
-    height: 400px;
+    height: 90px;
 }
 .section-title h1{
     color: #fff;
@@ -545,12 +538,6 @@ header{
     z-index: 1;
 }
 .overlay-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 1;
     background: rgba(0, 0, 0, 0.5);
     /*background: -webkit-radial-gradient(50% 55%, ellipse closest-corner, rgba(0, 0, 0, 0.27) 1%, rgba(0, 0, 0, 0.5) 100%);
     background: -moz-radial-gradient(50% 55%, ellipse closest-corner, rgba(0, 0, 0, 0.27) 1%, rgba(0, 0, 0, 0.5) 100%);
@@ -558,49 +545,6 @@ header{
     background: radial-gradient(50% 55%, ellipse closest-corner, rgba(0, 0, 0, 0.27) 1%, rgba(0, 0, 0, 0.5) 100%);*/
     z-index: 0;
 }
-.img-about{
-    /*background: url("../img/section-titles/1.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    background-position: center center;*/
-}
-.img-sports{
-    background: url("/torneo/img/section-titles/2.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-}
-.img-gallery{
-    background: url("/torneo/img/section-titles/3.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-}
-.img-feature{
-    background: url("/torneo/img/section-titles/4.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-}
-.img-news{
-    background: url("/torneo/img/section-titles/5.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-}
-.img-contact{
-    background: url("/torneo/img/section-titles/6.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-}
-
 
 /* ---------------------------------------------------------------------- */
 /*	04 General Structure
