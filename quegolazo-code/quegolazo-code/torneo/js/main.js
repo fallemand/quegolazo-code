@@ -130,14 +130,6 @@ $(document).ready(function ($) {
         topSpacing: 0
     });
 
-    //=================================== Counter  ==============================//
-    $('#counter-proximo-partido').countdown('2015/05/12', function (event) {
-        var $this = $(this).html(event.strftime('' +
-            '<span>%D <br> <small>días</small></span>  ' +
-            '<span>%H <br> <small>horas</small> </span>  ' +
-            '<span>%M <br> <small>min</small> </span>  ' +
-            '<span>%S <br> <small>seg</small></span> '));
-    });
 
     //=================================== Widget Partido  ==============================//
     $(".single-carousel").owlCarousel({
@@ -332,4 +324,44 @@ $(document).ready(function ($) {
             container: "body"
         });
     };
+
+    //=================================== Portfolio Filters  ==============================//
+
+    $(window).load(function () {
+        var $container = $('.portfolioContainer');
+        $container.isotope({
+            filter: '*',
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+        });
+
+        $('.portfolioFilter a').click(function () {
+            $('.portfolioFilter .current').removeClass('current');
+            $(this).addClass('current');
+            var selector = $(this).attr('data-filter');
+            $container.isotope({
+                filter: selector,
+                animationOptions: {
+                    duration: 750,
+                    easing: 'linear',
+                    queue: false
+                }
+            });
+            return false;
+        });
+    });
 });
+
+//=================================== Counter  ==============================//
+function cargarCounter(fechaPartido){
+    $('#counter-proximo-partido').countdown(fechaPartido , function (event) {
+        var $this = $(this).html(event.strftime('' +
+            '<span>%D <br> <small>días</small></span>  ' +
+            '<span>%H <br> <small>horas</small> </span>  ' +
+            '<span>%M <br> <small>min</small> </span>  ' +
+            '<span>%S <br> <small>seg</small></span> '));
+});
+}   

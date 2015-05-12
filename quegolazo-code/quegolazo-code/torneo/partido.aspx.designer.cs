@@ -10,7 +10,7 @@
 namespace quegolazo_code.torneo {
     
     
-    public partial class partido {
+    public partial class proximoPartido {
         
         /// <summary>
         /// Control rptOtrosPartidosDeLaFecha.

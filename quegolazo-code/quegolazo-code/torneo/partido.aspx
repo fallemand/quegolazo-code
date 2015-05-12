@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/torneo/torneoMaster.Master" AutoEventWireup="true" CodeBehind="partido.aspx.cs" Inherits="quegolazo_code.torneo.partido" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/torneo/torneoMaster.Master" AutoEventWireup="true" CodeBehind="partido.aspx.cs" Inherits="quegolazo_code.torneo.proximoPartido" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="headTorneoMasterContent" runat="server">
 

@@ -1354,5 +1354,95 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        public Partido proximoPartidoDeEdicion(int idEdicion, int idFase, int idFecha)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            Partido partido = null;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT TOP 1 partido.fecha AS 'Fecha', equipoLocal.idEquipo AS 'Id Equipo Local', 
+                                equipoLocal.nombre AS 'Equipo Local', equipoVisitante.idEquipo AS 'Id Equipo Visitante',
+                                equipoVisitante.nombre AS 'Equipo Visitante',
+                                partido.idPartido AS 'Id Partido'
+                                FROM Partidos partido
+                                INNER JOIN Equipos equipoLocal ON partido.idEquipoLocal = equipoLocal.idEquipo
+                                INNER JOIN Equipos equipoVisitante ON partido.idEquipoVisitante = equipoVisitante.idEquipo
+                                WHERE partido.idEstado = @estadoProgramado
+                                AND partido.idEdicion = @idEdicion
+                                AND partido.fecha >= GETDATE()
+                                AND partido.idFase = @idFase
+                                AND partido.idFecha = @idFecha
+                                ORDER BY partido.fecha ASC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idFecha", idFecha));
+                cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
+                cmd.Parameters.Add(new SqlParameter("@estadoProgramado", Estado.partidoPROGRAMADO));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                DAOEquipo daoEquipo = new DAOEquipo();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        partido = new Partido();
+                        partido.idPartido = int.Parse(dr["Id Partido"].ToString());
+                        partido.fecha = DateTime.Parse(dr["Fecha"].ToString());
+                        partido.local = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Local"].ToString()));
+                        partido.visitante = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Visitante"].ToString()));
+                    }
+                }
+                else
+                {
+                    if (dr != null)
+                        dr.Close();
+                    string sql2 = @"SELECT TOP 1 equipoLocal.idEquipo AS 'Id Equipo Local', 
+                                equipoLocal.nombre AS 'Equipo Local', equipoVisitante.idEquipo AS 'Id Equipo Visitante',
+                                equipoVisitante.nombre AS 'Equipo Visitante',
+                                partido.idPartido AS 'Id Partido'
+                                FROM Partidos partido
+                                INNER JOIN Equipos equipoLocal ON partido.idEquipoLocal = equipoLocal.idEquipo
+                                INNER JOIN Equipos equipoVisitante ON partido.idEquipoVisitante = equipoVisitante.idEquipo
+                                WHERE partido.idEstado = @estadoDiagramado
+                                AND partido.idEdicion = @idEdicion
+                                AND partido.fecha >= GETDATE()
+                                AND partido.idFase = @idFase
+                                AND partido.idFecha = @idFecha
+                                ORDER BY partido.fecha ASC";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                    cmd.Parameters.Add(new SqlParameter("@idFecha", idFecha));
+                    cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
+                    cmd.Parameters.Add(new SqlParameter("@estadoDiagramado", Estado.partidoDIAGRAMADO));
+                    cmd.CommandText = sql2;
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        partido = new Partido();
+                        partido.idPartido = int.Parse(dr["Id Partido"].ToString());
+                        partido.local = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Local"].ToString()));
+                        partido.visitante = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Visitante"].ToString()));
+                    }
+                }
+                if (dr != null)
+                    dr.Close();
+                return partido;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
