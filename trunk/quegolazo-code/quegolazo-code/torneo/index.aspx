@@ -76,7 +76,7 @@
                                                         <li>
                                                             <div class="header-post">
                                                                 <div class="date">
-                                                                    <span><%# ((DateTime)((Entidades.Noticia)Container.DataItem).fecha).ToString("dd/MM/yyyy") %></span>
+                                                                    <span><%# ((DateTime)((Entidades.Noticia)Container.DataItem).fecha).ToString("dd/MM") %></span>
                                                                    <%#  ((DateTime)Eval("fecha")).Year %> 
                                                                 </div>
                                                                 <a href="single-news.html"><img src="<%# ((Entidades.Noticia)Container.DataItem).obtenerImagenMediana() %>" alt=""></a>
@@ -386,77 +386,27 @@
                                 <h3 class="panel-title">Ultimas Noticias</h3>
                             </div>
                             <div class="panel-body">
+                               <asp:Repeater ID="rptUltimasNoticias" runat="server">
+                                   <ItemTemplate>
                                 <!-- Post Item -->
                                 <div class="post-item">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="img-hover">
-                                                <img src="/torneo/img/blog/1.jpg" alt="" class="img-responsive">
+                                                <img src="<%# ((Entidades.Noticia)Container.DataItem).obtenerImagenMediana() %>" alt="" class="img-responsive">
                                                 <div class="overlay"><a href="single-news.html">+</a></div>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h4><a href="single-news.html">Porto Alegre and Cuiabá to welcome Valcke</a></h4>
-                                            <p class="data-info">January 3, 2014  / <i class="fa fa-comments"></i><a href="#">0</a></p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rutrum, libero id imperdiet elementum, nunc... <a href="single-news.html">Read More [+]</a></p>
+                                            <h4><a href="single-news.html"><%# Eval("titulo") %></a></h4>
+                                            <p class="data-info"><%# nombreMes(DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Year.ToString() %></p><!-- <i class="fa fa-comments"></i><a href="#">0</a> --> 
+                                            <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0,110)  %>... <a href="single-news.html">Leer Más [+]</a></p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- End Post Item -->
-
-                                <!-- Post Item -->
-                                <div class="post-item">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="img-hover">
-                                                <img src="/torneo/img/blog/3.jpg" alt="" class="img-responsive">
-                                                <div class="overlay"><a href="single-news.html">+</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h4><a href="single-news.html">Porto Alegre and Cuiabá to welcome Valcke</a></h4>
-                                            <p class="data-info">January  4, 2014  / <i class="fa fa-comments"></i><a href="#">3</a></p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rutrum, libero id imperdiet elementum, nunc... <a href="single-news.html">Read More [+]</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Post Item -->
-
-                                <!-- Post Item -->
-                                <div class="post-item">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="img-hover">
-                                                <img src="/torneo/img/blog/3.jpg" alt="" class="img-responsive">
-                                                <div class="overlay"><a href="single-news.html">+</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h4><a href="single-news.html">Porto Alegre and Cuiabá to welcome Valcke</a></h4>
-                                            <p class="data-info">January  4, 2014  / <i class="fa fa-comments"></i><a href="#">3</a></p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rutrum, libero id imperdiet elementum, nunc... <a href="single-news.html">Read More [+]</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Post Item -->
-
-                                <!-- Post Item -->
-                                <div class="post-item">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="img-hover">
-                                                <img src="/torneo/img/blog/4.jpg" alt="" class="img-responsive">
-                                                <div class="overlay"><a href="single-news.html">+</a></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h4><a href="single-news.html">Porto Alegre and Cuiabá to welcome Valcke</a></h4>
-                                            <p class="data-info">January 8, 2014  / <i class="fa fa-comments"></i><a href="#">2</a></p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rutrum, libero id imperdiet elementum, nunc... <a href="single-news.html">Read More [+]</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Post Item -->
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </div>
                         </div>
                         <!-- End Recent Post -->
