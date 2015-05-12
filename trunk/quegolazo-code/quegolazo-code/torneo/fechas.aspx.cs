@@ -39,9 +39,9 @@ namespace quegolazo_code.torneo
 
                     ViewState["idFecha"] = idFecha;
                     ViewState["idFase"] = idFase;
-                    litFase.Text=idFase.ToString();
-                    litFecha.Text= idFecha.ToString();
-                    litLnkFase.Text=idFase.ToString();
+                    litFase.Text = idFase.ToString();
+                    litFecha.Text = idFecha.ToString();
+                    litLnkFase.Text = idFase.ToString();
                     litLnkFecha.Text = idFecha.ToString();
 
                     GestorControles.cargarRepeaterList(rptFases, gestorEdicion.edicion.fases);

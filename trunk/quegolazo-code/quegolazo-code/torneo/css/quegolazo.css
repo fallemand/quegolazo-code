@@ -416,6 +416,7 @@ img.img-principal {
 .widget-partido {
     padding-top:5px;
     text-align: center;
+    height: 140px;
 }
 
 @media (max-width: 1199px) and (min-width:992px) {

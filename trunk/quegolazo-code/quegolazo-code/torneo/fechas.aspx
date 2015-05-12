@@ -22,14 +22,14 @@
                 <div class="crumbs">
                     <div class="container">
                         <ul>
-                            <li><a href="index-2.html"><%= gestorTorneo.torneo.nombre %></a></li>
+                            <li><a href="<%= Logica.GestorUrl.urlTorneo(nickTorneo) %>"><%= gestorTorneo.torneo.nombre %></a></li>
                             <li>/</li>
-                            <li><a href="index-2.html"><%= gestorEdicion.edicion.nombre %></a></li>
+                            <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion) %>"><%= gestorEdicion.edicion.nombre %></a></li>
                             <li>/</li>
-                            <li><a href="index-2.html">Fase
+                            <li><a href="<%= Logica.GestorUrl.urlFechasFase(nickTorneo,idEdicion,idFase) %>">Fase
                                 <asp:Literal ID="litLnkFase" runat="server"></asp:Literal></a></li>
                             <li>/</li>
-                            <li><a href="index-2.html">Fecha
+                            <li><a href="<%= Logica.GestorUrl.urlFechas(nickTorneo,idEdicion,idFase, idFecha) %>">Fecha
                                 <asp:Literal ID="litLnkFecha" runat="server"></asp:Literal></a></li>
                         </ul>
                     </div>
