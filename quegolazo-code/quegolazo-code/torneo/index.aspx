@@ -77,7 +77,7 @@
                                                             <div class="header-post">
                                                                 <div class="date">
                                                                     <span><%# ((DateTime)((Entidades.Noticia)Container.DataItem).fecha).ToString("dd/MM/yyyy") %></span>
-                                                                   <%# ((DateTime)Eval("fecha")).Year %> 
+                                                                   <%#  ((DateTime)Eval("fecha")).Year %> 
                                                                 </div>
                                                                 <a href="single-news.html"><img src="<%# ((Entidades.Noticia)Container.DataItem).obtenerImagenMediana() %>" alt=""></a>
                                                                 <div class="meta-tag">
@@ -90,7 +90,7 @@
                                                             </div>
                                                             <div class="info-post">
                                                                 <h4><a href="single-news.html"><%# Eval("titulo") %></a></h4>
-                                                                <p><%# Eval("descripcion") %></p>
+                                                                <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0,60)  %>...</p>
                                                             </div>
                                                         </li>
                                                         </ItemTemplate>

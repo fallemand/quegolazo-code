@@ -23,6 +23,7 @@ namespace quegolazo_code.torneo
             {
                 if (!IsPostBack) 
                 {
+                    
                     Torneo torneo = GestorUrl.validarTorneo();
                     Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
 
