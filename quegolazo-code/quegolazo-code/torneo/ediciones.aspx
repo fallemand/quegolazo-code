@@ -5,7 +5,7 @@
 <head id="Head1" runat="server">
     <!-- Basic -->
     <meta charset="utf-8">
-    <title>Error 404 - Torneo no encontrado - QueGolazo!</title>
+    <title><%= torneo.nombre %> | Ediciones</title>
     <meta name="keywords" content="futbol, torneo, partido, campeonato, goles, gol, goleadores" />
     <meta name="description" content="Sitio web del torneo en donde encontrarás toda la información necesaria">
     <meta name="author" content="quegolazo.org">
@@ -25,14 +25,12 @@
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="/torneo/img/icons/favicon.ico">
-
-    <!-- Head Libs -->
-    <script src="/torneo/js/modernizr.js"></script>
     <!-- jQuery local-->
     <script src="/torneo/js/jquery.js"></script>
-
     <!-- Boostrap-->
     <script src="/torneo/js/bootstrap/bootstrap.js"></script>
+    <!-- Ediciones-->
+    <script src="/torneo/js/ediciones.js"></script>
     <!-- carousel.js-->
     <script type='text/javascript' src="/torneo/js/carousel/carousel.js"></script>
     <!--[if IE]>
@@ -46,7 +44,7 @@
 <body class="fixed" style="background-image: url(/torneo/img/bg-theme/c11.png); margin-top:70px;">
     <form id="form1" runat="server">
         <!-- layout-->
-        <div id="layout">
+        <div id="layout-small">
 
             <!-- Section Area - Content Central -->
             <section class="content-info error">
@@ -101,36 +99,10 @@
                     </div>
                 </div>
                 <!-- End Sponsors -->
-
-                <div class="semiboxshadow text-center">
-                    <img src="/torneo/img/img-theme/shp.png" class="img-responsive" alt="" />
-                </div>
-
             </section>
             <!-- End Section Area - Content Central -->
         </div>
         <!-- End layout-->
-
-        <script>
-            $(document).ready(function ($) {
-                $(".torneos-slide").owlCarousel({
-                    autoPlay: 3200,
-                    items: 7,
-                    navigation: false,
-                    itemsDesktop: [1199, 5],
-                    itemsDesktopSmall: [1024, 4],
-                    itemsTablet: [768, 3],
-                    itemsMobile: [500, 2],
-                    pagination: true,
-                    rewindNav: false,
-                });
-                //=============================  tooltip demo ===========================================//
-                $('.tooltip-hover').tooltip({
-                    selector: "[data-toggle=tooltip]",
-                    container: "body"
-                });
-            });
-        </script>
     </form>
 </body>
 </html>

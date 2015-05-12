@@ -5,8 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
  
         <!-- Titulo Sección -->
-    <section class="section-title img-about">
-        <div class="overlay-bg"></div>
+    <section class="section-title overlay-bg">
         <div class="container">
             <h1> <span class="flaticon-football31" aria-hidden="true"></span> Posiciones </h1>
         </div>

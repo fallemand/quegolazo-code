@@ -2,8 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="headTorneoMasterContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
-    <section class="section-title img-about">
-        <div class="overlay-bg"></div>
+    <section class="section-title overlay-bg">
         <div class="container">
             <h1>Sanciones</h1>
         </div>

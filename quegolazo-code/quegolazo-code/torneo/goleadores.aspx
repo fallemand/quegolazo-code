@@ -7,8 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
         <!-- contentPages-->
     <!-- Titulo Sección -->
-    <section class="section-title img-about">
-        <div class="overlay-bg"></div>
+    <section class="section-title overlay-bg">
         <div class="container">
             <h1>Goleadores - <%= gestorEdicion.edicion.nombre %></h1>
         </div>

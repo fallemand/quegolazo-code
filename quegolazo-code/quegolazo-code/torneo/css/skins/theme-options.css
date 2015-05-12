@@ -14,7 +14,6 @@
     max-width: 1230px;
     margin: 0px auto;
     background: #F4F4F4;
-    margin-top: -160px;
     -webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
     -moz-box-shadow: 0 1px 10px rgba(0,0,0,0.3);
     box-shadow: 0 1px 10px rgba(0,0,0,0.3);
@@ -22,15 +21,7 @@
     position: relative;
     border-bottom: medium double #ccc;
 }
-.content-info.home{
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-.content-info.error{
-    max-width: 1000px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
+
 .layout-wide .content-info,
 .layout-wide .dark-home{
     max-width: 100%;
@@ -77,6 +68,11 @@
     -o-transition: 0.5s all ease;
     -ms-transition: 0.5s all ease;
     transition: 0.5s all ease;
+}
+
+#layout-small{
+    max-width: 1000px;
+    margin: 50px auto;
 }
 .layout-boxed header,
 .layout-boxed-margin header{

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Logica;
 using Entidades;
 using Utils;
+using System.Web.Script.Serialization;
 
 namespace quegolazo_code.torneo
 {
@@ -21,6 +22,10 @@ namespace quegolazo_code.torneo
                 torneo = GestorUrl.validarTorneo();
                 gestorEdicion = new GestorEdicion();
                 GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(torneo.idTorneo));
+                JavaScriptSerializer serializador = new JavaScriptSerializer();
+                GestorTorneo gestorTorneo = new GestorTorneo();
+                string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(torneo.idTorneo));
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "cargarEstilosVisuales(" + estilos + ");", true);
             }
         }
     }
