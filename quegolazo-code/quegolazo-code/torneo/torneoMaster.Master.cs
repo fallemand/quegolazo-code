@@ -31,7 +31,7 @@ namespace quegolazo_code.torneo
 
                     serializador = new JavaScriptSerializer();
                     string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(torneo.idTorneo));
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "var configuracion = " + estilos + ";", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "cargarEstilosVisuales(" + estilos + ");", true);
 
                     Utils.GestorControles.cargarRepeaterList(rptEdicionesMaster, new GestorEdicion().obtenerEdicionesPorTorneo(torneo.idTorneo));
                 }

@@ -12,7 +12,6 @@
         $(this).addClass('active');
         $('.patterns').css('display' , 'none');
         $('#layout').removeClass('layout-semiboxed').removeClass('layout-boxed').removeClass('layout-boxed-margin').addClass('layout-wide');
-        configuracion.estiloPagina = "layout-wide";
     });
     $('.semiboxed').click(function() {
         $('.wide').removeClass('active');
@@ -21,7 +20,6 @@
         $(this).addClass('active');
         $('.patterns').css('display' , 'block');
         $('#layout').removeClass('layout-wide').removeClass('layout-boxed').removeClass('layout-boxed-margin').addClass('layout-semiboxed');
-        configuracion.estiloPagina = "layout-semiboxed";
     });
     $('.boxed').click(function() {
         $('.wide').removeClass('active');
@@ -30,7 +28,6 @@
         $(this).addClass('active');
         $('.patterns').css('display' , 'block');
         $('#layout').removeClass('layout-semiboxed').removeClass('layout-boxed-margin').removeClass('layout-wide').addClass('layout-boxed');
-        configuracion.estiloPagina = "layout-boxed";
     });
     $('.boxed-margin').click(function() {
         $('.boxed').removeClass('active');
@@ -39,7 +36,6 @@
         $(this).addClass('active');
         $('.patterns').css('display' , 'block');
         $('#layout').removeClass('layout-semiboxed').removeClass('layout-wide').removeClass('layout-boxed').addClass('layout-boxed-margin');
-        configuracion.estiloPagina = "layout-boxed-margin";
     });
 
 
@@ -157,7 +153,6 @@
             $('body').removeClass('fixed');
         $('body').css('background-image', $bgSrc);
         $(this).addClass('active').siblings().removeClass('active');
-        configuracion.patronDeFondo = $bgSrc;
     });
     $('#theme-options ul.backgrounds-h li').click(function () {
         var $bgSrc = $(this).css('background-image');
@@ -165,15 +160,18 @@
             $bgSrc = "none";
         $('.headerbox').css('background-image', $bgSrc);
         $(this).addClass('active').siblings().removeClass('active');
-        configuracion.patronHeader = $bgSrc;
     });
     //=================================== Panel Options ====================================//
     $('.openclose').click(function(){
-        cerrarPanel();
+        togglePanel();
     });
-    function cerrarPanel() {
+    function togglePanel() {
         if ($('#theme-options').css('left') == "-220px") {
             $left = "0px";
+            $('#theme-options ul.backgrounds li').css('background-color', $('body').css('background-color'));
+            $('#theme-options ul.backgrounds-h li').css('background-color', $('body').css('background-color'));
+            $('#colorFondo .colorPicker-picker').css('background-color', $('body').css('background-color'));
+            $('#colorHeader .colorPicker-picker').css('background-color', $('.headerbox').css('background-color'));
         } else {
             $left = "-220px";
         }
@@ -185,7 +183,7 @@
         $("#msjeAjax").hide();
     }
     $('#cerrarConfig').click(function () {
-        cerrarPanel();
+        togglePanel();
     });
     $("#colorPicker_palette-0 div").click(function () {
         var $bgSrc = $(this).css('background-color');
@@ -193,7 +191,6 @@
             $bgSrc = "none";
         $('body').css('background-color', $bgSrc);
         $('#theme-options ul.backgrounds li').css('background-color', $bgSrc);
-        configuracion.colorDeFondo = $bgSrc;
     });
     $("#colorPicker_palette-1 div").click(function () {
         var $bgSrc = $(this).css('background-color');
@@ -201,20 +198,21 @@
             $bgSrc = "none";
         $('.headerbox').css('background-color', $bgSrc);
         $('#theme-options ul.backgrounds-h li').css('background-color', $bgSrc);
-        configuracion.colorHeader = $bgSrc;
     });
 
   });
 
  function guardarConfiguracion() {
-     configuracion.patronDeFondo = $('body').css('background-image').replace('http://' + window.location.hostname, '');
-     configuracion.colorHeader = $('.headerbox').css('background-color');
-     configuracion.patronHeader = $('.headerbox').css('background-image').replace('http://' + window.location.hostname, '');
-     configuracion.colorDeFondo = $('body').css('background-color');
-     configuracion.colorDestacado = $(".skin").attr("href").replace('http://' + window.location.hostname, '');
-     configuracion.estiloPagina = $('#layout').attr("class");
-     configuracion.theme = $("#theme").attr("href").replace('http://' + window.location.hostname, '');
-     configuracion.bodyClass = $('body').attr('class');
+     var configuracion = {
+         patronDeFondo : $('body').css('background-image').replace('http://' + window.location.hostname, ''),
+         colorHeader : $('.headerbox').css('background-color'),
+         patronHeader : $('.headerbox').css('background-image').replace('http://' + window.location.hostname, ''),
+         colorDeFondo : $('body').css('background-color'),
+         colorDestacado : $(".skin").attr("href").replace('http://' + window.location.hostname, ''),
+         estiloPagina : $('#layout').attr("class"),
+         theme : $("#theme").attr("href").replace('http://' + window.location.hostname, ''),
+         bodyClass : $('body').attr('class'),
+     }
       $.ajax({
           type: "POST",
           url: "/torneo/index.aspx/guardarConfiguracion",
