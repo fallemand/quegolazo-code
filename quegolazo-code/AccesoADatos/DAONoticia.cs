@@ -302,10 +302,11 @@ namespace AccesoADatos
                 while (dr.Read())
                 {
                     Noticia noticia = new Noticia();
-                    noticia.categoria = new CategoriaNoticia { idCategoriaNoticia = Int32.Parse(dr["idCategorieNoticia"].ToString()), nombre = dr["nombre"].ToString() };
+                    noticia.categoria = new CategoriaNoticia { idCategoriaNoticia = Int32.Parse(dr["idCategoriaNoticia"].ToString()), nombre = dr["nombre"].ToString() };
                     noticia.descripcion = dr["descripcion"].ToString();
                     noticia.titulo = dr["titulo"].ToString();
                     noticia.fecha = DateTime.Parse(dr["fecha"].ToString());
+                    noticia.idNoticia = int.Parse(dr["idNoticia"].ToString());
                     noticias.Add(noticia);
                 }
                 con.Close();
