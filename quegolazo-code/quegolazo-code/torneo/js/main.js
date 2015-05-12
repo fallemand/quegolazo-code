@@ -139,6 +139,17 @@ $(document).ready(function ($) {
             '<span>%S <br> <small>seg</small></span> '));
     });
 
+    //=================================== Widget Partido  ==============================//
+    $(".single-carousel").owlCarousel({
+        items: 1,
+        autoPlay: true,
+        navigation: true,
+        autoHeight: true,
+        slideSpeed: 200,
+        singleItem: true,
+        pagination: false
+    });
+
     //=================================== Slide Proximos Partidos  ==============================//
     $(".proximos-partidos").owlCarousel({
         items: 8,
