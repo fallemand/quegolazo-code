@@ -13,15 +13,6 @@ namespace quegolazo_code.torneo {
     public partial class Formulario_web13 {
         
         /// <summary>
-        /// Control upListadoFases.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upListadoFases;
-        
-        /// <summary>
         /// Control litFase.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptFases;
+        
+        /// <summary>
+        /// Control upListadoFases.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upListadoFases;
         
         /// <summary>
         /// Control rptFechas.
