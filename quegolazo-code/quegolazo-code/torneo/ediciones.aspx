@@ -24,7 +24,8 @@
     <link href="/torneo/css/skins/green.css" rel="stylesheet" media="screen" class="skin">
 
     <!-- Favicons -->
-    <link rel="shortcut icon" href="/torneo/img/icons/favicon.ico">
+    <asp:Literal ID="litFavicon" runat="server" />  
+
     <!-- jQuery local-->
     <script src="/torneo/js/jquery.js"></script>
     <!-- Boostrap-->

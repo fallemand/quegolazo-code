@@ -31,6 +31,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.HtmlControls.HtmlLink theme;
         
         /// <summary>
+        /// Control litFavicon.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litFavicon;
+        
+        /// <summary>
         /// Control form1.
         /// </summary>
         /// <remarks>
