@@ -1,16 +1,15 @@
 // THEME OPTIONS.JS
-//--------------------------------------------------------------------------------------------------------------------------------
-//This is JS file that contains principal fuctions of theme */
-// -------------------------------------------------------------------------------------------------------------------------------
-// Template Name: Sports Cup- Responsive HTML5  soccer and sports Template.
-// Author: Iwthemes.
+//-------------------------------------------------------------------------------------
+//This file contains the inicializations of the plugins, and some principal functions.
+//-------------------------------------------------------------------------------------
+// Author: QueGolazo.
 // Name File: main.js
-// Version 1.0 - Created on 20 May 2014
-// Website: http://www.iwthemes.com
-// Email: support@iwthemes.com
-// Copyright: (C) 2014
+// Website: http://www.quegolazo.com.ar
 
 //================================== Funciones Principales=================================//
+
+//Mostrar Panel de Error
+//-------------------------------------------------------------
 function showPanelMessage(idPanel, idMensaje, mensaje) {
     setTimeout(function () {
         $('#' + idMensaje).text(mensaje);
@@ -18,6 +17,8 @@ function showPanelMessage(idPanel, idMensaje, mensaje) {
     }, 1);
 };
 
+//Ocultar Panel de Error
+//-------------------------------------------------------------
 function hidePanelMessage(idPanel) {
     if ($('#' + idPanel).hasClass('in')) {
         setTimeout(function () {
@@ -27,16 +28,27 @@ function hidePanelMessage(idPanel) {
     }
 };
 
+//Cargar Estilos Visuales
+//-------------------------------------------------------------
 function cargarEstilosVisuales(estilos) {
+    if(estilos==null) {
+        //Estilo por Defecto
+        var estilos = {
+            bodyClass: "none fixed",
+            colorDeFondo: "rgb(95, 165, 78)",
+            colorDestacado: "/torneo/css/skins/red-dark.css",
+            colorHeader: "rgb(185, 61, 72)",
+            estiloPagina: "layout-boxed-margin",
+            patronDeFondo: "url(/torneo/img/bg-theme/c6.png)",
+            patronHeader: "url(/torneo/img/bg-theme/8.png)",
+            theme: "/torneo/css/bootstrap/bootstrap.css"
+        };
+    }
     $('#layout').removeClass().addClass(estilos.estiloPagina);
     $('body').css('background-image', estilos.patronDeFondo);
     $('body').css('background-color', estilos.colorDeFondo);
-    $('#colorFondo .colorPicker-picker').css('background-color', estilos.colorDeFondo);
     $('.headerbox').css('background-image', estilos.patronHeader);
-    $('#colorHeader .colorPicker-picker').css('background-color', estilos.colorHeader);
     $('.headerbox').css('background-color', estilos.colorHeader);
-    $('#theme-options ul.backgrounds li').css('background-color', estilos.colorDeFondo);
-    $('#theme-options ul.backgrounds-h li').css('background-color', estilos.colorHeader);
     $(".skin").attr("href", estilos.colorDestacado);
     $('.wide').removeClass('active');
     $('.boxed').removeClass('active');
@@ -47,36 +59,12 @@ function cargarEstilosVisuales(estilos) {
     $('body').attr('class', estilos.bodyClass);
 }
 
-//Si no hay estilos cargar el tema por defecto
-try {
-    if (configuracion == null)
-        setDefaultTheme();
-} catch (ReferenceError) {
-    setDefaultTheme();
-}
-
-//si tiene estilos guardados, los cargamos
-cargarEstilosVisuales(configuracion);
-
-function setDefaultTheme() {
-    configuracion = {
-
-        bodyClass: "none fixed",
-        colorDeFondo: "rgb(95, 165, 78)",
-        colorDestacado: "/torneo/css/skins/red-dark.css",
-        colorHeader: "rgb(185, 61, 72)",
-        estiloPagina: "layout-boxed-margin",
-        patronDeFondo: "url(/torneo/img/bg-theme/c6.png)",
-        patronHeader: "url(/torneo/img/bg-theme/8.png)",
-        theme: "/torneo/css/bootstrap/bootstrap.css"
-    };
-}
 
 $(document).ready(function ($) {
 
     'use strict';
 
-    //================================== Paneles de Error =================================//
+    //================================== Paneles de Error Close Button=================================//
     $('#panelFracaso .close').bind("click", function(e) {
         hidePanelMessage('panelFracaso');
     });
@@ -84,7 +72,7 @@ $(document).ready(function ($) {
         hidePanelMessage('panelExito');
     });
 
-    //================================== Tooltip y Link Tablas=================================//
+    //================================== Tooltip y Link en Tablas=================================//
     $('.table-fecha tr:not(:has(th))').tooltip({
         title: 'Ver Partido',
         placement: 'right',
@@ -138,13 +126,11 @@ $(document).ready(function ($) {
     });
 
     //=================================== Sticky nav ===================================//
-
     $(".mainmenu").sticky({
         topSpacing: 0
     });
 
     //=================================== Counter  ==============================//
-
     $('#counter-proximo-partido').countdown('2015/05/12', function (event) {
         var $this = $(this).html(event.strftime('' +
             '<span>%D <br> <small>días</small></span>  ' +
@@ -153,20 +139,7 @@ $(document).ready(function ($) {
             '<span>%S <br> <small>seg</small></span> '));
     });
 
-    //=================================== Slide Services  ==============================//
-
-    $(".single-carousel").owlCarousel({
-        items: 1,
-        autoPlay: true,
-        navigation: true,
-        autoHeight: true,
-        slideSpeed: 200,
-        singleItem: true,
-        pagination: false
-    });
-
     //=================================== Slide Proximos Partidos  ==============================//
-
     $(".proximos-partidos").owlCarousel({
         items: 8,
         autoPlay: true,
@@ -178,7 +151,6 @@ $(document).ready(function ($) {
     });
 
     //=================================== Slide Partidos Fecha Actual  ==============================//
-
     $(".partidos-fecha-actual").owlCarousel({
         items: 8,
         autoPlay: false,
@@ -189,10 +161,7 @@ $(document).ready(function ($) {
         itemsCustom: [[0, 1], [350, 2], [500, 3], [600, 4], [800, 5], [1000, 6], [1100, 7], [1200, 8]]
     });
 
-
-
     //=================================== Slide Otros Equipos  ==============================//
-
     $(".otros-equipos").owlCarousel({
         items: 12,
         autoPlay: true,
@@ -203,7 +172,6 @@ $(document).ready(function ($) {
     });
 
     //=================================== Slide Otros Judaores  ==============================//
-
     $(".otros-jugadores").owlCarousel({
         items: 13,
         autoPlay: true,
@@ -215,7 +183,6 @@ $(document).ready(function ($) {
     });
 
     //=================================== Slide Otros Judaores  ==============================//
-
     $(".fases").owlCarousel({
         autoPlay: true,
         items: 3,
@@ -227,7 +194,6 @@ $(document).ready(function ($) {
     });
 
     //=================================== Carousel Blog  ==================================//
-
     $("#events-carousel").owlCarousel({
         autoPlay: 3200,
         items: 3,
@@ -240,7 +206,6 @@ $(document).ready(function ($) {
     });
 
     //=================================== Slide Otros Judaores  ==============================//
-
     $(".fechas").owlCarousel({
         autoPlay: true,
         items: 8,
@@ -251,30 +216,7 @@ $(document).ready(function ($) {
         pagination: false,
     });
 
-    //=================================== Carousel Players  ==================================//
-
-    $("#players-carousel").owlCarousel({
-        autoPlay: 3200,
-        items: 4,
-        navigation: false,
-        itemsDesktopSmall: [1024, 3],
-        itemsTablet: [768, 3],
-        itemsMobile: [600, 2],
-        pagination: true
-    });
-
-    //=================================== Carousel Clubs  ==================================//
-
-    $("#clubs-carousel").owlCarousel({
-        autoPlay: 3200,
-        items: 1,
-        navigation: false,
-        singleItem: true,
-        pagination: true
-    });
-
-    //=================================== Carousel Sponsor  ==================================//
-
+    //=================================== Slide de Equipos eh Home  ==================================//
     $(".equipos-home").owlCarousel({
         autoPlay: 3200,
         items: 8,
@@ -286,8 +228,7 @@ $(document).ready(function ($) {
         pagination: true
     });
 
-    //=================================== Carousel Sponsor  ==================================//
-
+    //=================================== Torneos de QueGolazo 404  ==================================//
     $(".torneos-slide").owlCarousel({
         autoPlay: 3200,
         items: 8,
@@ -300,7 +241,7 @@ $(document).ready(function ($) {
         rewindNav: false,
     });
 
-    //=================================== PopOvers  ==================================//
+    //=================================== PopOvers ==================================//
     $(".popover-jugador").popover({
             trigger: "manual",
             html: true,
@@ -328,59 +269,11 @@ $(document).ready(function ($) {
                 }
             }, 50);
         });
-    //=================================== Carousel Testimonials  ============================//
-
-    $("#testimonials").owlCarousel({
-        autoPlay: 3200,
-        items: 3,
-        navigation: false,
-        itemsDesktop: [1199, 3],
-        itemsDesktopSmall: [1024, 3],
-        itemsTablet: [1000, 2],
-        itemsMobile: [600, 1],
-        pagination: true
-    });
-
-    //=================================== Carousel Twitter  ===============================//
-
-    $(".tweet_list").owlCarousel({
-        items: 1,
-        autoPlay: 3200,
-        navigation: false,
-        autoHeight: true,
-        slideSpeed: 400,
-        singleItem: true,
-        pagination: true
-    });
-
-    //=================================== Subtmit Form  ===================================//
-
-    $('.form-theme').submit(function (event) {
-        event.preventDefault();
-        var url = $(this).attr('action');
-        var datos = $(this).serialize();
-        $.get(url, datos, function (resultado) {
-            $('.result').html(resultado);
-        });
-    });
-
-    //=================================== Form Newslleter  =================================//
-
-    $('#newsletterForm').submit(function (event) {
-        event.preventDefault();
-        var url = $(this).attr('action');
-        var datos = $(this).serialize();
-        $.get(url, datos, function (resultado) {
-            $('#result-newsletter').html(resultado);
-        });
-    });
 
     //=================================== Ligbox  ===========================================//
-
     $(".fancybox").fancybox({
         openEffect: 'elastic',
         closeEffect: 'elastic',
-
         helpers: {
             title: {
                 type: 'inside'
@@ -389,26 +282,21 @@ $(document).ready(function ($) {
     });
 
     //=============================  tooltip demo ===========================================//
-
     $('.tooltip-hover').tooltip({
         selector: "[data-toggle=tooltip]",
         container: "body"
     });
 
     //=================================== Totop  ============================================//
-
     $().UItoTop({
         scrollSpeed: 500,
         easingType: 'linear'
     });
 
-    //=================================== Reload Jquery Plugins  ==============================//
-
+    //=================================== Reload Jquery Plugins after PostBack  ==============================//
     Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
-
     function EndRequestHandler(sender, args) {
         $(".fechas").owlCarousel({
-            autoPlay: true,
             items: 8,
             responsive: true,
             navigation: true,
@@ -417,9 +305,7 @@ $(document).ready(function ($) {
             pagination: false,
         });
 
-
         $(".fases").owlCarousel({
-            autoPlay: true,
             items: 3,
             responsive: true,
             navigation: true,
@@ -435,33 +321,4 @@ $(document).ready(function ($) {
             container: "body"
         });
     };
-
-    //=================================== Portfolio Filters  ==============================//
-
-    $(window).load(function () {
-        var $container = $('.portfolioContainer');
-        $container.isotope({
-            filter: '*',
-            animationOptions: {
-                duration: 750,
-                easing: 'linear',
-                queue: false
-            }
-        });
-
-        $('.portfolioFilter a').click(function () {
-            $('.portfolioFilter .current').removeClass('current');
-            $(this).addClass('current');
-            var selector = $(this).attr('data-filter');
-            $container.isotope({
-                filter: selector,
-                animationOptions: {
-                    duration: 750,
-                    easing: 'linear',
-                    queue: false
-                }
-            });
-            return false;
-        });
-    });
 });
