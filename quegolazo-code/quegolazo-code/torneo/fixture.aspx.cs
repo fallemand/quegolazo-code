@@ -19,7 +19,7 @@ namespace quegolazo_code.torneo
         protected void Page_Load(object sender, EventArgs e)
         {
             try
-            {         
+            {        
                 if (!Page.IsPostBack)
                 {
                     Torneo torneo = GestorUrl.validarTorneo();

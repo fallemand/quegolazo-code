@@ -27,6 +27,8 @@ namespace quegolazo_code.torneo
                     gestorTorneo = new GestorTorneo();
                     gestorTorneo.torneo = torneo;
 
+                    litFavicon.Text = "<link rel='shortcut icon' href='" + torneo.obtenerImagenChicha() +"'>";
+
                     serializador = new JavaScriptSerializer();
                     string estilos = serializador.Serialize(gestorTorneo.obtenerConfiguracionVisual(torneo.idTorneo));
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "var configuracion = " + estilos + ";", true);
