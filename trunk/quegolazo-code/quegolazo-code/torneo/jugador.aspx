@@ -24,7 +24,7 @@
                     <li>/</li>
                     <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion)%>"><%= gestorEdicion.edicion.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion)%>">Equipos</a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEquipos(nickTorneo,idEdicion)%>">Equipos</a></li>
                     <li>/</li>
                     <li><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,idEquipo)%>"><%= gestorEquipo.equipo.nombre %></a></li>
                     <li>/</li>
@@ -51,7 +51,7 @@
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre")%>">
                                             <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador <%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-slider avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
-                                                <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
+                                                <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle center-block img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
                                                 <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
                                                 <p runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>" class="text-thin"><%# ((Entidades.Jugador)Container.DataItem).nombre %></p>
                                             </a>
@@ -79,7 +79,20 @@
                             <div class="col-xs-12">
                                 <ul class="list-group tooltip-hover">
                                     <li class="list-group-item">
-                                        <img src="<%= gestorEquipo.equipo.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt=""><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorEquipo.equipo.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"> <%= gestorEquipo.equipo.nombre %></a></li>
+                                        <%if(gestorEquipo.equipo.tieneImagen()) {%>
+                                            <img src="<%= gestorEquipo.equipo.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt="">
+                                        <%} else {%>
+                                            <div class="camiseta-equipo camiseta-equipo-xs">
+                                                <div>
+                                                    <i class="flaticon-football114" style="color: <%= gestorEquipo.equipo.colorCamisetaPrimario %>"></i>
+                                                </div><!--
+                                                --><div class="segunda-mitad">
+                                                    <i class="flaticon-football114" style="color: <%= gestorEquipo.equipo.colorCamisetaSecundario %>"></i>
+                                                </div>
+                                            </div>
+                                        <%}%>
+                                        <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorEquipo.equipo.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"> <%= gestorEquipo.equipo.nombre %></a>
+                                    </li>
                                     <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs"></span>Nac: <%= ((DateTime)gestorJugador.jugador.fechaNacimiento).ToString("dd/MM/yyyy") %></li>
                                     <li class="list-group-item center-block">
                                         <a href="<%= gestorJugador.jugador.email %>" class="icon mail" data-toggle="tooltip" title="Copiar Mail"><i class="glyphicon glyphicon-envelope"></i></a>
@@ -228,39 +241,39 @@
                                         <div class="tab-pane fade in" id="historial-partidos">
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <table class="table table-striped">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="col-xs-2 col-md-1"></th>
-                                                                <th class="col-xs-6 col-md-2">Local</th>
-                                                                <th class="col-xs-6 col-md-2">Resultado</th>
-                                                                <th class="col-xs-6 col-md-2">Visitante</th>
-                                                                <th class="col-xs-2 col-md-1"></th>
-                                                                <th class="col-xs-2 col-md-4"></th>
-                                                                <%--<th class="text-center"></th>--%>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <asp:Repeater ID="rptHistorialPartidos" runat="server">
-                                                                <ItemTemplate>
-                                                                    <tr>
-                                                                        <td class="col-xs-2 col-md-1">
-                                                                            <img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoLocal").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt=""></td>
-                                                                        <td class="col-xs-6 col-md-2"><%# Eval("Equipo Local") %></td>
-                                                                        <td class="col-xs-6 col-md-2"><%# Eval("Goles Local") %> - <%# Eval("Goles Visitante") %></td>
-                                                                        <td class="col-xs-6 col-md-2"><%# Eval("Equipo Visitante") %></td>
-                                                                        <td class="col-xs-2 col-md-1">
-                                                                            <img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoVisitante").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt=""></td>
-                                                                        <td class="col-xs-6 col-md-4"><span class="label <%# Eval("Resultado") %>"><%# Eval("Resultado") %></span></td>
-                                                                        <%-- <td class="col-xs-3 col-md-2"><span class="label label-success"><%# Eval("resultadoParaUnEquipo") %></span></td>--%>
-                                                                    </tr>
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-                                                            <tr id="sinHistorialDePartido" runat="server" visible="false">
-                                                                <td colspan="6">No hay información de partidos anteriores jugados</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <div class="panel-maxheight maxheight-md">
+                                                        <table class="table table-striped table-hover table-partidos">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="text-center" colspan="2">Local</th>
+                                                                    <th>Resultado</th>
+                                                                    <th class="text-center" colspan="2">Visitante</th>
+                                                                    <th>Partido</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <asp:Repeater ID="rptHistorialPartidos" runat="server">
+                                                                    <ItemTemplate>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoLocal").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt="">
+                                                                            </td>
+                                                                            <td><%# Eval("Equipo Local") %></td>
+                                                                            <td><%# Eval("Goles Local") %> - <%# Eval("Goles Visitante") %></td>
+                                                                            <td><%# Eval("Equipo Visitante") %></td>
+                                                                            <td>
+                                                                                <img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoVisitante").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt=""></td>
+                                                                            <td><span class="label partido-<%# Eval("Resultado") %>"><%# Eval("Resultado") %></span></td>
+                                                                            <td class="hidden"><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo, idEdicion, Eval("idPartido").ToString()) %>"></a></td>
+                                                                        </tr>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                                <tr id="sinHistorialDePartido" runat="server" visible="false">
+                                                                    <td colspan="6">No hay información de partidos anteriores jugados</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

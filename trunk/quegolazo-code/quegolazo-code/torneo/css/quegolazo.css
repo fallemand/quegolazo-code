@@ -276,23 +276,24 @@ img.img-principal {
 .camiseta-equipo .segunda-mitad i {
   margin-left:-75px;
 }
+.camiseta-equipo.camiseta-equipo-xs {
+    display: inline;
+}
 
-
-
-.table .camiseta-equipo {
+.table .camiseta-equipo,.camiseta-equipo.camiseta-equipo-xs {
     font-size:20px;
     line-height: 20px;
     margin-top: 0px;
 }
 
-.table .camiseta-equipo i {
+.table .camiseta-equipo i, .camiseta-equipo.camiseta-equipo-xs i {
     text-shadow: -1px 0 rgba(100, 100, 100, 0.40), 0 1px rgba(100, 100, 100, 0.40), 1px 0 rgba(100, 100, 100, 0.40), 0 -1px rgba(100, 100, 100, 0.40);
 }
-.table .camiseta-equipo div {
+.table .camiseta-equipo div, .camiseta-equipo.camiseta-equipo-xs div {
     width:9px;
 }
 
-.table .camiseta-equipo .segunda-mitad i {
+.table .camiseta-equipo .segunda-mitad i, .camiseta-equipo.camiseta-equipo-xs .segunda-mitad i{
     margin-left:-10px;
 }
 
@@ -1059,7 +1060,7 @@ a.avatar-jugador:hover {
 }
 /*----------------------- END: Widget Podio -----------------------------*/
 /*----------------------- Estilos ficture -----------------------------*/
-.table-fecha tbody tr {
+.table-hover tbody tr {
     cursor:pointer;
 }
 
@@ -1078,6 +1079,10 @@ a.avatar-jugador:hover {
 
 .panel-maxheight {
     max-height : 180px;
+}
+
+.panel-maxheight.maxheight-md {
+    max-height : 300px;
 }
 
 div.panel-maxheight {

@@ -4,7 +4,6 @@
     <script src="/torneo/js/jquery.bracket.min.js"></script>
     <link href="/torneo/css/jquery.bracket.min.css" rel="stylesheet" />
     <script src="/torneo/js/widgetLlaves.js"></script>
-    <script src="/torneo/js/jquery.stickytableheaders.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
 
