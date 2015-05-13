@@ -1,7 +1,6 @@
 /* jQuery Bracket | Copyright (c) Teijo Laine 2011-2013 | Licenced under the MIT licence */
 div.jQBracket {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 17px;
+    font-size: 13px;
     position: relative;
 }
 
@@ -59,17 +58,18 @@ div.jQBracket .editable {
 }
 
 div.jQBracket .team {
+    cursor: default;
     position: relative;
     z-index: 1;
     float: left;
-    background-color: #eee;
+    background-color: #FCFCFC;
     width: 180px;    
-    border-radius:3px;
-    border: 1px solid #c2c2c2;
+    border-radius:2px;
+    border: 1px solid #E0E0E0;
 }
 
 div.jQBracket .team:first-child {
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #E7E7E7;
 }
 
 div.jQBracket .team input {
@@ -80,24 +80,25 @@ div.jQBracket .team input {
     margin: 0;
 }
 
-div.jQBracket .team div.label {
-    padding: 3px;
-    position: absolute;
-    width: 150px;
-    height: 22px;
-    line-height: 23px;
-    white-space: nowrap;
-    overflow: hidden;
-    color:black;    
+div.jQBracket .team div.labelEquipo {
+  padding: 3px;
+  position: absolute;
+  width: 150px;
+  height: 100%;
+  line-height: 23px;
+  white-space: nowrap;
+  text-align: center;
+  overflow: hidden;
+  color: rgb(89, 89, 89);  
 }
 
-div.jQBracket .team div.label[disabled] {
+div.jQBracket .team div.labelEquipo[disabled] {
     cursor: default;
 }
 
 div.jQBracket .team div.score {
     float: right;
-    padding: 3px;
+    padding: 2px;
     background-color: rgba(255,255,255,.3);
     text-align: center;
     width: 20px;
@@ -108,7 +109,7 @@ div.jQBracket .team div.score[disabled] {
     cursor: default;
 }
 
-div.jQBracket .team div.label input.error,div.jQBracket .team div.score input.error {
+div.jQBracket .team div.labelEquipo input.error,div.jQBracket .team div.score input.error {
     background-color: #fcc;
 }
 
@@ -149,12 +150,12 @@ div.jQBracket .team.highlightWinner {
 }
 
 div.jQBracket .team.highlightLoser {
-    background-color: #ccc;
+    background-color: #F4F4F4;
     color: #000;
 }
 
 div.jQBracket .team.highlight {
-    background-color: #60A64F;
+    background-color: #E3F4E0;
     color: #000;
     z-index: -1;
 }
@@ -166,7 +167,7 @@ div.jQBracket .teamContainer {
 }
 
 div.jQBracket .connector {
-    border: 2px solid #666;
+    border: 1px solid #666;
     border-left-style: none;
     position: absolute;
     z-index: 1;
@@ -174,7 +175,7 @@ div.jQBracket .connector {
 
 div.jQBracket .connector div.connector {
     border: 0;
-    border-bottom: 2px solid #666;
+    border-bottom: 1px solid #666;
     height: 0;
     position: absolute;
 }
@@ -192,7 +193,7 @@ div.jQBracket .connector.highlight,div.jQBracket .connector div.connector.highli
 }
 
 div.jQBracket .np .connector,div.jQBracket .np .connector div.connector {
-    border-color: #222;
+    border-color: #CDCDCD;
 }
 
 div.jQBracket .bubble {
@@ -284,7 +285,7 @@ div.jQBracket.rl .team {
     float: right;
 }
 
-div.jQBracket.rl .team div.label {
+div.jQBracket.rl .team div.labelEquipo {
     right: 0;
 }
 
