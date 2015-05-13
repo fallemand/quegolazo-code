@@ -104,8 +104,6 @@
                                                 <li><a href="<%#Logica.GestorUrl.urlEdicion(torneo.nick, ((Entidades.Edicion)Container.DataItem).idEdicion)%>"><%#Eval("nombre")%></a></li>
                                                 </ItemTemplate>                                             
                                            </asp:Repeater> 
-                                        <li><a href="#">Edicion 2014</a></li>
-                                        <li><a href="#">Edicion 2013</a></li>
                                     </ul>
                                     <li><a href="#contact">Contacto</a></li>
                                 </li>
