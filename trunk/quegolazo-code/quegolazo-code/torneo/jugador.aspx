@@ -282,31 +282,33 @@
                                         <!-- Tab de Goleadores -->
                                         <div class="tab-pane fade active in" id="goleadores">
                                             <div class="col-sm-7">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="text-center" colspan="2">VS</th>
-                                                            <th>Fecha</th>
-                                                            <th>Tipo</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <asp:Repeater ID="rptGolesJugador" runat="server">
-                                                            <ItemTemplate>
-                                                                <tr>
-                                                                    <td>
-                                                                        <img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Otro equipo").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt=""></td>
-                                                                    <td><%# Eval("Otro Equipo") %></td>
-                                                                    <td>Fecha <%# Eval("Fecha") %></td>
-                                                                    <td><%# Eval("Tipo Gol") %></td>
-                                                                </tr>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-                                                         <tr id="sinGolesJugador" runat="server" visible="false">
-                                                                <td colspan="6">No hay información de goles convertidos</td>
+                                                <div class="panel-maxheight maxheight-md">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-center" colspan="2">VS</th>
+                                                                <th>Fecha</th>
+                                                                <th>Tipo</th>
                                                             </tr>
-                                                    </tbody>
-                                                </table>
+                                                        </thead>
+                                                        <tbody>
+                                                            <asp:Repeater ID="rptGolesJugador" runat="server">
+                                                                <ItemTemplate>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Otro equipo").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt=""></td>
+                                                                        <td><%# Eval("Otro Equipo") %></td>
+                                                                        <td>Fecha <%# Eval("Fecha") %></td>
+                                                                        <td><%# Eval("Tipo Gol") %></td>
+                                                                    </tr>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                             <tr id="sinGolesJugador" runat="server" visible="false">
+                                                                    <td colspan="6">No hay información de goles convertidos</td>
+                                                                </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                             <div class="col-sm-5">
                                                 <h5 class="col-title">Tipos de Goles</h5>
