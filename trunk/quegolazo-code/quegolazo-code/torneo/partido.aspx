@@ -17,15 +17,15 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="index-2.html"><%=gestorTorneo.torneo.nombre%></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlTorneo(nickTorneo) %>"><%=gestorTorneo.torneo.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/"><%=gestorEdicion.edicion.nombre%></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo, idEdicion) %>"><%=gestorEdicion.edicion.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/">Fase <%=gestorPartido.partido.faseAsociada.idFase%></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlFechasFase(nickTorneo, idEdicion, gestorPartido.partido.faseAsociada.idFase) %>">Fase <%=gestorPartido.partido.faseAsociada.idFase%></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html">Fecha <%=gestorPartido.partido.idFecha %></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlFechas(nickTorneo, idEdicion, gestorPartido.partido.faseAsociada.idFase, gestorPartido.partido.idFecha) %>">Fecha <%=gestorPartido.partido.idFecha %></a></li>
                     <li>/</li>
-                    <li><a href="index-2.html"><%=gestorPartido.partido.nombreCompleto %></a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlPartido(nickTorneo, idEdicion, gestorPartido.partido.idPartido.ToString()) %>"><%=gestorPartido.partido.nombreCompleto %></a></li>
                 </ul>
             </div>
         </div>
@@ -679,7 +679,7 @@
                                                             </div>
                                                         </div>
                                                     </asp:Panel>
-                                                    <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                    <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
                                                 </div>
                                                 <div class="col-xs-4 resultado">
                                                     <div class="thumbnail">
@@ -706,7 +706,7 @@
                                                             </div>
                                                         </div>
                                                     </asp:Panel>
-                                                    <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
+                                                    <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>
                                         </li>
@@ -733,7 +733,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltPuntosEL" runat="server"/></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <span class="flaticon-football31" aria-hidden="true"></span><br />
@@ -743,7 +743,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltPuntosEV" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
@@ -755,7 +755,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltPartGanadosEL" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <img src="/torneo/img/img-theme/ganador.png" class="img-circle avatar-md" alt=""><br />
@@ -765,7 +765,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltPartGanadosEV" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
@@ -777,7 +777,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltPartEmpatadosEL" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <img src="/torneo/img/img-theme/ganador.png" class="img-circle avatar-md" alt=""><br />
@@ -787,7 +787,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltPartEmpatadosEV" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
@@ -799,7 +799,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltPartPerdidosEL" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <img src="/torneo/img/img-theme/ganador.png" class="img-circle avatar-md" alt=""><br />
@@ -809,7 +809,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltPartPerdidosEV" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
@@ -822,7 +822,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltComparativoTarjRojasEL" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-md" alt=""><br />
@@ -832,7 +832,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltComparativoTarjRojasEV" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
@@ -844,7 +844,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltComparativoTarjAmarillasEL" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-md" alt=""><br />
@@ -854,7 +854,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltComparativoTarjAmarillasEV" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
@@ -866,7 +866,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltComparativoGolesEL" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a></h5>
                                         </div>
                                         <div class="col-xs-4 resultado">
                                             <span class="flaticon-flaming" aria-hidden="true" style="color: #E00C0C;"></span><br />
@@ -876,7 +876,7 @@
                                             <div class="thumbnail resultado">
                                                 <h2><asp:Literal ID="ltComparativoGolesEV" runat="server" /></h2>
                                             </div>
-                                            <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
+                                            <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h5>
                                         </div>
                                     </div>
                                 </li>
@@ -913,7 +913,7 @@
                                                             </div>
                                                         </div>
                                                     </asp:Panel>
-                                                    <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
+                                                    <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
                                                 </div>
                                                 <div class="col-xs-4 resultado">
                                                     <div class="thumbnail">
@@ -940,7 +940,7 @@
                                                             </div>
                                                         </div>
                                                     </asp:Panel>
-                                                    <h5><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
+                                                    <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>
                                         </li>
