@@ -1055,8 +1055,8 @@ namespace AccesoADatos
                     con.Open();
                 cmd.Connection = con;
                 string sql = @"SELECT TOP 5 jugador.idJugador AS 'Id Jugador', jugador.nombre AS 'Nombre Jugador', 
-                                partido.idFase AS 'Fase', partido.idFecha AS 'Fecha', gol.minuto AS 'Minuto',
-                                tipoGol.nombre AS 'Tipo Gol', otroEquipo.nombre AS 'Otro Equipo',
+                                partido.idFase AS 'Fase', partido.idFecha AS 'Fecha', partido.idPartido AS 'idPartido',
+                                gol.minuto AS 'Minuto', tipoGol.nombre AS 'Tipo Gol', otroEquipo.nombre AS 'Otro Equipo',
                                 otroEquipo.idEquipo AS 'Id Otro equipo'
                                 FROM Goles gol
                                 INNER JOIN Jugadores jugador ON gol.idJugador = jugador.idJugador

@@ -283,7 +283,7 @@
                                         <div class="tab-pane fade active in" id="goleadores">
                                             <div class="col-sm-7">
                                                 <div class="panel-maxheight maxheight-md">
-                                                    <table class="table table-striped">
+                                                    <table class="table table-striped table-hover table-partidos">
                                                         <thead>
                                                             <tr>
                                                                 <th class="text-center" colspan="2">VS</th>
@@ -300,6 +300,7 @@
                                                                         <td><%# Eval("Otro Equipo") %></td>
                                                                         <td>Fecha <%# Eval("Fecha") %></td>
                                                                         <td><%# Eval("Tipo Gol") %></td>
+                                                                        <td class="hidden"><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo, idEdicion, Eval("idPartido").ToString()) %>"></a></td>
                                                                     </tr>
                                                                 </ItemTemplate>
                                                             </asp:Repeater>
