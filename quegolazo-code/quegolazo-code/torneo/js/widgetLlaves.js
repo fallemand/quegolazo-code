@@ -74,6 +74,7 @@
                         if (!data.idEquipo || !data.nombre)
                         return
                     //container es el label, el parent es el div que lo contiene
+                    container.append('<img src="/resources/img/equipos/' + data.idEquipo + '-sm.png" class="avatar-xs" /> ');
                     container.append(data.nombre);
                     if (!widget.options.generica) //si no es generica le asigno el idEquipo al div.
                         container.parent().attr("data-idequipo", data.idEquipo);
