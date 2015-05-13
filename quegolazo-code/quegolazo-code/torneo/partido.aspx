@@ -361,7 +361,8 @@
                                 <!-- Tab de Goles -->
                                 <div class="tab-pane fade" id="goles">
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped text-middle">
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped text-middle">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
@@ -387,246 +388,261 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped text-middle">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" colspan="3">
-                                                        <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
-                                                        <%= gestorPartido.partido.visitante.nombre %>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rptTabGolesVisitante" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto != null ? ((Entidades.Gol)Container.DataItem).minuto+"'": "-" %></span></td>
-                                                            <td class="col-xs-7">
-                                                                <img src="<%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() : "" %>" class="img-circle avatar-sm" ">
-                                                                <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "" %></td>
-                                                            <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol != null ? ((Entidades.Gol)Container.DataItem).tipoGol.nombre : "-"%></td>
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                 </asp:Repeater>
-                                                <tr id="sinGolesTabVisitante" runat="server" visible="false">
-                                                    <td colspan="3">No hay información de goles registrada</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped text-middle">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" colspan="3">
+                                                            <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.visitante.nombre %>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="rptTabGolesVisitante" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto != null ? ((Entidades.Gol)Container.DataItem).minuto+"'": "-" %></span></td>
+                                                                <td class="col-xs-7">
+                                                                    <img src="<%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() : "" %>" class="img-circle avatar-sm" ">
+                                                                    <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "" %></td>
+                                                                <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol != null ? ((Entidades.Gol)Container.DataItem).tipoGol.nombre : "-"%></td>
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                     </asp:Repeater>
+                                                    <tr id="sinGolesTabVisitante" runat="server" visible="false">
+                                                        <td colspan="3">No hay información de goles registrada</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <!-- Tab de Cambios -->
                                 <div class="tab-pane fade" id="cambios">
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped text-middle">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" colspan="3">
-                                                        <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
-                                                        <%= gestorPartido.partido.local.nombre %>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rptTabCambiosLocal" runat="server">
-                                                    <ItemTemplate>
-                                                       <tr>
-                                                        <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto != null ? ((Entidades.Cambio)Container.DataItem).minuto+"'" : "-" %></span></td>
-                                                        <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
-                                                        <td class="col-xs-4">
-                                                            <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
-                                                            <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %></td>
-                                                        <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
-                                                        <td class="col-xs-4">
-                                                            <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorSale.obtenerImagenMediana() %>"  class="img-circle avatar-sm" alt="">
-                                                            <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %></td>
-                                                       </tr>
-                                                    </ItemTemplate>
-                                                 </asp:Repeater>  
-                                                <tr id="sinCambiosTabLocal" runat="server" visible="false">
-                                                    <td colspan="5">No hay información de cambios registrada</td>
-                                                </tr>                                             
-                                            </tbody>
-                                        </table>
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped text-middle">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" colspan="3">
+                                                            <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.local.nombre %>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="rptTabCambiosLocal" runat="server">
+                                                        <ItemTemplate>
+                                                           <tr>
+                                                            <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto != null ? ((Entidades.Cambio)Container.DataItem).minuto+"'" : "-" %></span></td>
+                                                            <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
+                                                            <td class="col-xs-4">
+                                                                <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %></td>
+                                                            <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
+                                                            <td class="col-xs-4">
+                                                                <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorSale.obtenerImagenMediana() %>"  class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %></td>
+                                                           </tr>
+                                                        </ItemTemplate>
+                                                     </asp:Repeater>  
+                                                    <tr id="sinCambiosTabLocal" runat="server" visible="false">
+                                                        <td colspan="5">No hay información de cambios registrada</td>
+                                                    </tr>                                             
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped text-middle">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" colspan="3">
-                                                        <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
-                                                        <%= gestorPartido.partido.visitante.nombre %>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rptTabCambiosVisitante" runat="server">
-                                                    <ItemTemplate>
-                                                       <tr>
-                                                        <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto != null ? ((Entidades.Cambio)Container.DataItem).minuto+"'" : "-" %></span></td>
-                                                        <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
-                                                        <td class="col-xs-4">
-                                                            <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
-                                                            <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %></td>
-                                                        <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
-                                                        <td class="col-xs-4">
-                                                            <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorSale.obtenerImagenMediana() %>"  class="img-circle avatar-sm" alt="">
-                                                            <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %></td>
-                                                       </tr>
-                                                    </ItemTemplate>
-                                                 </asp:Repeater>
-                                                <tr id="sinCambiosTabVisitante" runat="server" visible="false">
-                                                    <td colspan="5">No hay información de cambios registrada</td>
-                                                </tr>   
-                                            </tbody>
-                                        </table>
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped text-middle">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" colspan="3">
+                                                            <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.visitante.nombre %>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="rptTabCambiosVisitante" runat="server">
+                                                        <ItemTemplate>
+                                                           <tr>
+                                                            <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto != null ? ((Entidades.Cambio)Container.DataItem).minuto+"'" : "-" %></span></td>
+                                                            <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
+                                                            <td class="col-xs-4">
+                                                                <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %></td>
+                                                            <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
+                                                            <td class="col-xs-4">
+                                                                <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorSale.obtenerImagenMediana() %>"  class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %></td>
+                                                           </tr>
+                                                        </ItemTemplate>
+                                                     </asp:Repeater>
+                                                    <tr id="sinCambiosTabVisitante" runat="server" visible="false">
+                                                        <td colspan="5">No hay información de cambios registrada</td>
+                                                    </tr>   
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <!-- Tab de Tarjetas -->
                                 <div class="tab-pane fade" id="tarjetas">
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped text-middle">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" colspan="3">
-                                                        <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
-                                                        <%= gestorPartido.partido.local.nombre %>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rptTabTarjetasAmarillasLocal" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto != null ? ((Entidades.Tarjeta)Container.DataItem).minuto+"'" : "-" %></span></td>
-                                                            <td class="col-xs-8">
-                                                                <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
-                                                                <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
-                                                            <td class="colrptTabTarjetasAmarillasLocal-xs-2">
-                                                                <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>                                                           
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                 </asp:Repeater> 
-                                                <asp:Repeater ID="rptTabTarjetasRojasLocal" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto != null ? ((Entidades.Tarjeta)Container.DataItem).minuto+"'" : "-" %></span></td>
-                                                            <td class="col-xs-8">
-                                                                <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
-                                                                <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
-                                                            <td class="col-xs-2">
-                                                                <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>                                                           
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                 </asp:Repeater> 
-                                                <tr id="sinTarjetasTabLocal" runat="server" visible="false">
-                                                    <td colspan="3">No hay información de tarjetas registrada</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped text-middle">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" colspan="3">
+                                                            <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.local.nombre %>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="rptTabTarjetasAmarillasLocal" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto != null ? ((Entidades.Tarjeta)Container.DataItem).minuto+"'" : "-" %></span></td>
+                                                                <td class="col-xs-8">
+                                                                    <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                    <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
+                                                                <td class="colrptTabTarjetasAmarillasLocal-xs-2">
+                                                                    <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>                                                           
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                     </asp:Repeater> 
+                                                    <asp:Repeater ID="rptTabTarjetasRojasLocal" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto != null ? ((Entidades.Tarjeta)Container.DataItem).minuto+"'" : "-" %></span></td>
+                                                                <td class="col-xs-8">
+                                                                    <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                    <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
+                                                                <td class="col-xs-2">
+                                                                    <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>                                                           
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                     </asp:Repeater> 
+                                                    <tr id="sinTarjetasTabLocal" runat="server" visible="false">
+                                                        <td colspan="3">No hay información de tarjetas registrada</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped text-middle">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" colspan="3">
-                                                        <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
-                                                        <%= gestorPartido.partido.visitante.nombre %>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rptTabTarjetasAmarillasVisitante" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
-                                                            <td class="col-xs-8">
-                                                                <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
-                                                                <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
-                                                            <td class="colrptTabTarjetasAmarillasLocal-xs-2">
-                                                                <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>                                                           
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                 </asp:Repeater> 
-                                                <asp:Repeater ID="rptTabTarjetasRojasVisitante" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
-                                                            <td class="col-xs-8">
-                                                                <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
-                                                                <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
-                                                            <td class="col-xs-2">
-                                                                <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>                                                           
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                 </asp:Repeater>
-                                                <tr id="sinTarjetasTabVisitante" runat="server" visible="false">
-                                                    <td colspan="3">No hay información de tarjetas registrada</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped text-middle">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" colspan="3">
+                                                            <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.visitante.nombre %>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="rptTabTarjetasAmarillasVisitante" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
+                                                                <td class="col-xs-8">
+                                                                    <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                    <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
+                                                                <td class="colrptTabTarjetasAmarillasLocal-xs-2">
+                                                                    <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>                                                           
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                     </asp:Repeater> 
+                                                    <asp:Repeater ID="rptTabTarjetasRojasVisitante" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
+                                                                <td class="col-xs-8">
+                                                                    <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                    <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
+                                                                <td class="col-xs-2">
+                                                                    <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>                                                           
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                     </asp:Repeater>
+                                                    <tr id="sinTarjetasTabVisitante" runat="server" visible="false">
+                                                        <td colspan="3">No hay información de tarjetas registrada</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <!-- Tab de Sanciones -->
                                 <div class="tab-pane fade" id="sanciones">
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" colspan="3">
-                                                        <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
-                                                        <%= gestorPartido.partido.local.nombre %>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rptSancionesLocal" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td class="col-xs-1">
-                                                                <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() : "/torneo/img/img-theme/jugador-mediano.jpg"  %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                            <td class="col-xs-4"><%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.nombre : "-" %></td>
-                                                            <td class="col-xs-7">Sancionado por <%# ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas != null ? ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas.ToString() : "-" %> Fechas</td>
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                 </asp:Repeater>
-                                                <tr id="sinSancionesLocal" runat="server" visible="false">
-                                                    <td colspan="3">No hay sanciones registradas</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" colspan="3">
+                                                            <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.local.nombre %>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="rptSancionesLocal" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="col-xs-1">
+                                                                    <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() : "/torneo/img/img-theme/jugador-mediano.jpg"  %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                                <td class="col-xs-4"><%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.nombre : "-" %></td>
+                                                                <td class="col-xs-7">Sancionado por <%# ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas != null ? ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas.ToString() : "-" %> Fechas</td>
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                     </asp:Repeater>
+                                                    <tr id="sinSancionesLocal" runat="server" visible="false">
+                                                        <td colspan="3">No hay sanciones registradas</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center" colspan="3">
-                                                        <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
-                                                        <%= gestorPartido.partido.visitante.nombre %>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <asp:Repeater ID="rptSancionesVisitante" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td class="col-xs-1">
-                                                                    <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() : "/torneo/img/img-theme/jugador-mediano.jpg"  %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
-                                                            <td class="col-xs-4"><%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.nombre : "-" %></td>
-                                                            <td class="col-xs-7"><%# ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas != null ? "Sancionado por "+((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas.ToString()+" Fechas" : "-" %></td>
-                                                        </tr>
-                                                    </ItemTemplate>
-                                                 </asp:Repeater>
-                                                <tr id="sinSancionesVisitante" runat="server" visible="false">
-                                                    <td colspan="3">No hay sanciones registradas</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="panel-maxheight maxheight-md">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" colspan="3">
+                                                            <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.visitante.nombre %>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <asp:Repeater ID="rptSancionesVisitante" runat="server">
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td class="col-xs-1">
+                                                                        <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() : "/torneo/img/img-theme/jugador-mediano.jpg"  %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                                <td class="col-xs-4"><%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.nombre : "-" %></td>
+                                                                <td class="col-xs-7"><%# ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas != null ? "Sancionado por "+((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas.ToString()+" Fechas" : "-" %></td>
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                     </asp:Repeater>
+                                                    <tr id="sinSancionesVisitante" runat="server" visible="false">
+                                                        <td colspan="3">No hay sanciones registradas</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
 
