@@ -1188,3 +1188,10 @@ text-decoration: none;
 .alert .close:hover, .alert .close:focus {
 color: #BEBEBE;
 }
+
+
+/*Imagen , vista de noticia individual*/
+.imagen-noticia {
+float:left;
+padding-right: 20px;
+}
