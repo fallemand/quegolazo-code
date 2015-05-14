@@ -101,6 +101,10 @@ namespace Logica
         {
             return "/" + nickTorneo + "/edicion-" + idEdicion + "/equipos";
         }
+        public static string urlNoticias(string nickTorneo, int idEdicion)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/noticias";
+        }
 
         //Forms en el root 
         public const string rINDEX = "/index.aspx";
@@ -227,6 +231,24 @@ namespace Logica
             if (jugador == null)
                 HttpContext.Current.Response.Redirect(GestorUrl.urlEquipo(nickTorneo, idEdicion, idEquipo));
             return jugador;
+        }
+        //Validar Equipo
+        public static Noticia validarNoticia(string nickTorneo, int idEdicion)
+        {
+            int idNoticia = -1;
+            try
+            {
+                idNoticia = int.Parse(HttpContext.Current.Request["idNoticia"]);
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Current.Response.Redirect(GestorUrl.urlNoticias(nickTorneo, idEdicion));
+            }
+            GestorNoticia gestorNoticia = new GestorNoticia();
+            gestorNoticia.obtenerNoticiaPorId(idNoticia);
+            if (gestorNoticia.noticia == null)
+                HttpContext.Current.Response.Redirect(GestorUrl.urlNoticias(nickTorneo, idEdicion));
+            return gestorNoticia.noticia;
         }
         
     }

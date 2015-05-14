@@ -46,7 +46,7 @@ namespace quegolazo_code.torneo
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 Torneo t = GestorUrl.validarTorneo();
-                if (gestorTorneo.verificarTorneoDeUsuario(t.idTorneo))
+                if (Sesion.getUsuario() != null && gestorTorneo.verificarTorneoDeUsuario(t.idTorneo))
                 {
                     panelConfiguracion.Visible = true;
                     Session["torneoConfigurado"] = t;
