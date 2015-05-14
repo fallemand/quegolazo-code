@@ -18,8 +18,28 @@ namespace Entidades
         public List<Jugador> jugadores { get; set; } 
         public Delegado delegadoPrincipal { get; set; }
         public Delegado delegadoOpcional { get; set; }
-       
-      
+
+        public string obtenerImagen(string tamanioImagen, string clases)
+        {
+            String html = "";
+            if (tieneImagen())
+            {
+                html = "<img src='" + GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, tamanioImagen) + "' class='img-responsive center-block "+ clases +"'>";
+            }
+            else
+            {
+                html = @"
+                    <div class='camiseta-equipo'>
+                        <div>
+                            <i class='flaticon-football114' style='color:" + colorCamisetaPrimario + @"'></i>
+                        </div><!--
+                      --><div class='segunda-mitad'>
+                            <i class='flaticon-football114' style='" + colorCamisetaSecundario + @"'></i>
+                        </div>
+                    </div>";
+            }
+            return html;
+        }
         public string obtenerImagenChicha()
         {
             return GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, GestorImagen.CHICA);
