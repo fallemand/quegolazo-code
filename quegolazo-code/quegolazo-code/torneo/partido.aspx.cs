@@ -58,20 +58,7 @@ namespace quegolazo_code.torneo
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
-
-        [System.Web.Services.WebMethod(enableSession: true)]
-        public static string guardarConfiguracion(object configuracion)
-        {
-            try
-            {
-                new GestorTorneo().registrarConfiguracionVisual(configuracion);
-                return "CAMBIOS GUARDADOS!";
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-        }
+        
 
         //Carga todos los datos del Partido: RESUMEN Y ESTADÍSTICAS
         //autor: Pau Pedrosa

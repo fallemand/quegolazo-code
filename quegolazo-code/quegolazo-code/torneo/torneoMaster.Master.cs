@@ -34,9 +34,24 @@ namespace quegolazo_code.torneo
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "variable", "cargarEstilosVisuales(" + estilos + ");", true);
 
                     Utils.GestorControles.cargarRepeaterList(rptEdicionesMaster, new GestorEdicion().obtenerEdicionesPorTorneo(torneo.idTorneo));
+
+                    validarAdministradorLogueado();
                 }
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
+        }
+
+        private void validarAdministradorLogueado()
+        {
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                Torneo t = GestorUrl.validarTorneo();
+                if (gestorTorneo.verificarTorneoDeUsuario(t.idTorneo))
+                {
+                    panelConfiguracion.Visible = true;
+                    Session["torneoConfigurado"] = t;
+                }
+            }
         }
     }
 }

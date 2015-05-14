@@ -181,6 +181,7 @@
         <!-- End layout-->
 
             <!-- Theme-options -->
+        <asp:Panel ID="panelConfiguracion" runat="server" Visible="false">
         <div id="theme-options" style="z-index: 9999">
             <div class="openclose"></div>
             <div class="title">
@@ -309,6 +310,7 @@
                 <span id="msjeAjax" class="text-center nomargin-bottom"></span>
             </div>
         </div>
+        </asp:Panel>
         <!-- End Theme-options --> 
 
         <!-- ======================= JQuery libs =========================== -->    
