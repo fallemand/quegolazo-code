@@ -108,12 +108,15 @@ namespace Logica
         /// Guarda la configuracion visual que genero un usuario para un torneo en particular.
         /// </summary>
         /// <param name="configuracion"></param>
-        public void registrarConfiguracionVisual(object configuracion) {
+        public void registrarConfiguracionVisual(object configuracion, int idTorneo) {
             JavaScriptSerializer s = new JavaScriptSerializer();
             ConfiguracionVisual conf = s.ConvertToType<ConfiguracionVisual>(configuracion);
             GestorTorneo gestor = Sesion.getGestorTorneo();
+            gestor.torneo.idTorneo = idTorneo;
             gestor.torneo.configuracionVisual = conf;
             new DAOTorneo().registrarConfiguracionVisual(gestor.torneo);
+
+          
         }
 
         public ConfiguracionVisual obtenerConfiguracionVisual(int idTorneo) {
@@ -129,5 +132,20 @@ namespace Logica
             DAOTorneo daoTorneo = new DAOTorneo();
             return daoTorneo.obtenerTorneoPorNick(nick);           
         }
+
+        public bool verificarTorneoDeUsuario(int idTorneo) {
+            int idUsuario = Sesion.getUsuario().idUsuario;
+            List<Torneo> torneos = obtenerTorneosPorUsuario(idUsuario);
+            bool res = false;
+            foreach (Torneo torneo in torneos)
+            {
+                if (torneo.idTorneo == idTorneo) {
+                    res = true;
+                    break;
+                }
+            }
+            return res;
+        }
+        
     }
 }

@@ -76,7 +76,7 @@ namespace quegolazo_code.torneo
         {
             try
             {
-                new GestorTorneo().registrarConfiguracionVisual(configuracion);
+                new GestorTorneo().registrarConfiguracionVisual(configuracion, ((Torneo)HttpContext.Current.Session["torneoConfigurado"]).idTorneo);
                 return "CAMBIOS GUARDADOS!";
             }
             catch (Exception ex)
