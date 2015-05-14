@@ -50,10 +50,8 @@
                                 <asp:Repeater ID="rptOtroseJugadores" runat="server">
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre")%>">
-                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador <%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-slider avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
-                                                <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle center-block img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
-                                                <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
-                                                <p runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>" class="text-thin"><%# ((Entidades.Jugador)Container.DataItem).nombre %></p>
+                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
+                                                <%# ((Entidades.Jugador)Container.DataItem).obtenerImagen(Utils.GestorImagen.GRANDE, "img-circle", "avatar-slider", true) %>
                                             </a>
                                         </li>
                                     </ItemTemplate>
@@ -66,32 +64,19 @@
 
                 <!-- Datos del Jugador -->
                 <div class="col-sm-4">
-                    <div class="panel-box bg-dark score theme-border">
-                        <%if(gestorJugador.jugador.tieneImagen()) {%>
-                        <img src="<%= gestorJugador.jugador.obtenerImagenMediana() %>" class="img-circle img-principal img-responsive" alt="imagen" />
-                        <%} else {%>
-                        <a href="#verJugador" class="avatar-jugador avatar-principal avatar-bg-<%= gestorJugador.jugador.lastNumber() %>" data-toggle="tooltip" title="<%= gestorJugador.jugador.nombre %>">
-                            <h1><%= gestorJugador.jugador.iniciales() %></h1>
+                    <div class="panel-box bg-dark score theme-border tooltip-hover principal">
+                        <a href="<%=Logica.GestorUrl.urlJugador(nickTorneo, idEdicion, idEquipo, idJugador) %>" data-toggle="tooltip" title="<%= gestorJugador.jugador.nombre %>">
+                            <%= gestorJugador.jugador.obtenerImagen(Utils.GestorImagen.GRANDE, "img-circle","avatar-principal", false) %>
                         </a>
-                        <%} %>
                         <h3 class="text-center text-thin"><a href="#"><%= gestorJugador.jugador.nombre %></a></h3>
                         <div class="row text-center">
                             <div class="col-xs-12">
                                 <ul class="list-group tooltip-hover">
                                     <li class="list-group-item">
-                                        <%if(gestorEquipo.equipo.tieneImagen()) {%>
-                                            <img src="<%= gestorEquipo.equipo.obtenerImagenChicha() %>" class="img-circle avatar-xs" alt="">
-                                        <%} else {%>
-                                            <div class="camiseta-equipo camiseta-equipo-xs">
-                                                <div>
-                                                    <i class="flaticon-football114" style="color: <%= gestorEquipo.equipo.colorCamisetaPrimario %>"></i>
-                                                </div><!--
-                                                --><div class="segunda-mitad">
-                                                    <i class="flaticon-football114" style="color: <%= gestorEquipo.equipo.colorCamisetaSecundario %>"></i>
-                                                </div>
-                                            </div>
-                                        <%}%>
-                                        <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorEquipo.equipo.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"> <%= gestorEquipo.equipo.nombre %></a>
+                                        <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorEquipo.equipo.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo">
+                                            <%= gestorEquipo.equipo.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs img-circle") %>
+                                            <%= gestorEquipo.equipo.nombre %>
+                                        </a>
                                     </li>
                                     <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs"></span>Nac: <%= ((DateTime)gestorJugador.jugador.fechaNacimiento).ToString("dd/MM/yyyy") %></li>
                                     <li class="list-group-item center-block">
