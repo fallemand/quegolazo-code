@@ -30,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>C:\Users\Paulita\Downloads\NUnit-2.6.3\NUnit-2.6.3\bin\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Selenium.WebDriverBackedSelenium">
-      <HintPath>C:\Users\Paulita\Downloads\selenium-dotnet-2.42.0\net35\Selenium.WebDriverBackedSelenium.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -45,15 +39,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="ThoughtWorks.Selenium.Core">
-      <HintPath>C:\Users\Paulita\Downloads\selenium-dotnet-2.42.0\net35\ThoughtWorks.Selenium.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver">
-      <HintPath>C:\Users\Paulita\Downloads\selenium-dotnet-2.42.0\net35\WebDriver.dll</HintPath>
-    </Reference>
-    <Reference Include="WebDriver.Support">
-      <HintPath>C:\Users\Paulita\Downloads\selenium-dotnet-2.42.0\net35\WebDriver.Support.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GestorArbitro.cs" />

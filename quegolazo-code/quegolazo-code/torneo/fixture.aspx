@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/torneo/torneoMaster.Master" AutoEventWireup="true" CodeBehind="fixture.aspx.cs" Inherits="quegolazo_code.torneo.fechas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headTorneoMasterContent" runat="server">
-    <script src="/torneo/js/jquery-ui.min.js"></script>
-    <script src="/torneo/js/jquery.bracket.min.js"></script>
+    <script src="/torneo/js/llaves/jquery-ui.min.js"></script>
+    <script src="/torneo/js/llaves/jquery.bracket.min.js"></script>
     <link href="/torneo/css/jquery.bracket.min.css" rel="stylesheet" />
-    <script src="/torneo/js/widgetLlaves.js"></script>
+    <script src="/torneo/js/llaves/widgetLlaves.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
 
