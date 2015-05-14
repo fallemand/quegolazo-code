@@ -63,7 +63,7 @@
                 <div class="col-sm-4">
                     <div class="panel-box bg-dark score theme-border principal">
                         <%= gestorEquipo.equipo.obtenerImagen(Utils.GestorImagen.GRANDE, "") %>
-                        <h3 class="text-center"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%=gestorEquipo.equipo.nombre %></a></h3>
+                        <h3 class="text-center"><a href="" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%=gestorEquipo.equipo.nombre %></a></h3>
                         <div class="row text-center">
                             <div class="col-xs-12">
                             <ul class="list-group">
@@ -130,10 +130,8 @@
                                     <ItemTemplate>
                                         <!-- Jugador -->
                                         <div class="col-md-2 col-xs-3">
-                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador <%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-lg avatar-slider avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
-                                                <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenGrande() %>" class="img-circle img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
-                                                <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
-                                                <p runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>" class="text-thin"><%# ((Entidades.Jugador)Container.DataItem).nombre %></p>
+                                            <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
+                                               <%# ((Entidades.Jugador)Container.DataItem).obtenerImagen(Utils.GestorImagen.GRANDE,"img-circle","avatar-lg avatar-slider",true) %>
                                             </a>
                                             <!-- Popover del Jugador -->
                                             <div id="popover-jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>" style="display:none">

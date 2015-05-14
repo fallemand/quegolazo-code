@@ -72,27 +72,10 @@
 
                 <!-- Tablero de Resultados -->
                 <div class="col-sm-12">
-                    <div class="panel-box score bg-dark theme-border">
+                    <div class="panel-box score bg-dark principal theme-border">
                         <div class="row">
                             <div class="col-md-4 col-xs-3 nopadding-right padding-top">
-                                <!--<div class="camiseta-equipo text-center">
-                                        <span class="primera-mitad glyphicon glyphicon-triangle-left" style="color:#2966B8;"></span>
-                                        <span class="glyphicon glyphicon-triangle-right" style="color:#DFE32D;"></span>
-                                      </div>-->
-                                <% if(gestorPartido.partido.local.tieneImagen()) { %>
-                                <img src="<%= gestorPartido.partido.local.obtenerImagenGrande() %>" class="img-responsive center-block" style="max-height: 150px;">
-                                <%} else { %>
-                                <div class="row">
-                                    <div class="camiseta-equipo">
-                                        <div>
-                                            <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaPrimario %>"></i>
-                                        </div><!--
-                                     --><div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaSecundario%>"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% } %>
+                                <%=  gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
                                 <h3 class="text-center"><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre  %></a></h3>
                             </div>
                             <div class="col-xs-6 col-md-4">
@@ -137,20 +120,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-3 col-md-4 padding-top">
-                                <% if(gestorPartido.partido.visitante.tieneImagen()) { %>
-                                <img src="<%= gestorPartido.partido.visitante.obtenerImagenGrande() %>" class="img-responsive center-block" style="max-height: 150px;">
-                                <%} else { %>
-                                <div class="row">
-                                    <div class="camiseta-equipo">
-                                        <div>
-                                            <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaPrimario%>"></i>
-                                        </div><!--
-                                     --><div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaSecundario%>"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% } %>
+                                 <%=  gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
                                 <h3 class="text-center"><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h3>
                             </div>
                         </div>
@@ -197,12 +167,12 @@
                                         <thead>
                                             <tr>
                                                 <th class="col-xs-2 col-md-4 text-center">
-                                                    <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                    <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                     <%= gestorPartido.partido.local.nombre %>
                                                 </th>
                                                 <th class="col-xs-8 col-md-4 text-center">VS</th>
                                                 <th class="col-xs-2 col-md-4 text-center">
-                                                    <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                    <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                     <%= gestorPartido.partido.visitante.nombre %>
                                                 </th>
                                             </tr>
@@ -296,7 +266,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                         <%= gestorPartido.partido.local.nombre %>
                                                     </th>
                                                 </tr>
@@ -306,9 +276,8 @@
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td class="col-xs-1">
-                                                                <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="<%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,gestorPartido.partido.local.idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
-                                                                    <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenChicha() %>" class="avatar-xs img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
-                                                                    <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
+                                                                <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>'  href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,gestorPartido.partido.local.idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
+                                                                   <%# ((Entidades.Jugador)Container.DataItem).obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs","",false) %>
                                                                 </a>
                                                             </td>
                                                             <td class="col-xs-9"><%# Eval("nombre") %></td>
@@ -329,7 +298,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                         <%= gestorPartido.partido.visitante.nombre %>
                                                     </th>
                                                 </tr>
@@ -339,9 +308,8 @@
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td class="col-xs-1">
-                                                                <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="<%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,gestorPartido.partido.visitante.idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
-                                                                    <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenChicha() %>" class="avatar-xs img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
-                                                                    <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
+                                                                <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,gestorPartido.partido.visitante.idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
+                                                                    <%# ((Entidades.Jugador)Container.DataItem).obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs","",false) %>
                                                                 </a>
                                                             </td>
                                                             <td class="col-xs-9"><%# Eval("nombre") %></td>
@@ -366,7 +334,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                        <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                         <%= gestorPartido.partido.local.nombre %>
                                                     </th>
                                                 </tr>
@@ -377,7 +345,7 @@
                                                         <tr>
                                                             <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto != null ? ((Entidades.Gol)Container.DataItem).minuto+"'": "-" %></span></td>
                                                             <td class="col-xs-7">
-                                                                <img src="<%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() : "" %>" class="img-circle avatar-sm" >
+                                                                <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) :  new Entidades.Jugador().obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false)   %>
                                                                 <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "" %></td>
                                                             <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol != null ? ((Entidades.Gol)Container.DataItem).tipoGol.nombre : "-"%></td>
                                                         </tr>
@@ -396,7 +364,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                             <%= gestorPartido.partido.visitante.nombre %>
                                                         </th>
                                                     </tr>
@@ -407,7 +375,7 @@
                                                             <tr>
                                                                 <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto != null ? ((Entidades.Gol)Container.DataItem).minuto+"'": "-" %></span></td>
                                                                 <td class="col-xs-7">
-                                                                    <img src="<%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagenMediana() : "" %>" class="img-circle avatar-sm" ">
+                                                                    <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false): new Entidades.Jugador().obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false)  %>
                                                                     <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "" %></td>
                                                                 <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol != null ? ((Entidades.Gol)Container.DataItem).tipoGol.nombre : "-"%></td>
                                                             </tr>
@@ -430,7 +398,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                             <%= gestorPartido.partido.local.nombre %>
                                                         </th>
                                                     </tr>
@@ -442,11 +410,11 @@
                                                             <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto != null ? ((Entidades.Cambio)Container.DataItem).minuto+"'" : "-" %></span></td>
                                                             <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
                                                             <td class="col-xs-4">
-                                                                <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) %>
                                                                 <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %></td>
                                                             <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
                                                             <td class="col-xs-4">
-                                                                <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorSale.obtenerImagenMediana() %>"  class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) %>
                                                                 <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %></td>
                                                            </tr>
                                                         </ItemTemplate>
@@ -464,7 +432,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                             <%= gestorPartido.partido.visitante.nombre %>
                                                         </th>
                                                     </tr>
@@ -476,11 +444,11 @@
                                                             <td class="col-xs-1"><span class="text-lg"><%# ((Entidades.Cambio)Container.DataItem).minuto != null ? ((Entidades.Cambio)Container.DataItem).minuto+"'" : "-" %></span></td>
                                                             <td class="col-xs-1"><span class="text-success text-lg glyphicon glyphicon-arrow-up" aria-hidden="true"></span></td>
                                                             <td class="col-xs-4">
-                                                                <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) %>
                                                                 <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.nombre %></td>
                                                             <td class="col-xs-1"><span class="text-danger text-lg glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
                                                             <td class="col-xs-4">
-                                                                <img src="<%# ((Entidades.Cambio)Container.DataItem).jugadorSale.obtenerImagenMediana() %>"  class="img-circle avatar-sm" alt="">
+                                                                <%# ((Entidades.Cambio)Container.DataItem).jugadorEntra.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) %>
                                                                 <%# ((Entidades.Cambio)Container.DataItem).jugadorSale.nombre %></td>
                                                            </tr>
                                                         </ItemTemplate>
@@ -502,7 +470,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                             <%= gestorPartido.partido.local.nombre %>
                                                         </th>
                                                     </tr>
@@ -513,7 +481,7 @@
                                                             <tr>
                                                                 <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto != null ? ((Entidades.Tarjeta)Container.DataItem).minuto+"'" : "-" %></span></td>
                                                                 <td class="col-xs-8">
-                                                                    <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                    <%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) %>
                                                                     <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
                                                                 <td class="colrptTabTarjetasAmarillasLocal-xs-2">
                                                                     <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>                                                           
@@ -525,7 +493,7 @@
                                                             <tr>
                                                                 <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto != null ? ((Entidades.Tarjeta)Container.DataItem).minuto+"'" : "-" %></span></td>
                                                                 <td class="col-xs-8">
-                                                                    <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                    <%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) %>
                                                                     <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
                                                                 <td class="col-xs-2">
                                                                     <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>                                                           
@@ -545,7 +513,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                             <%= gestorPartido.partido.visitante.nombre %>
                                                         </th>
                                                     </tr>
@@ -556,7 +524,7 @@
                                                             <tr>
                                                                 <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
                                                                 <td class="col-xs-8">
-                                                                    <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                    <%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) %>
                                                                     <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
                                                                 <td class="colrptTabTarjetasAmarillasLocal-xs-2">
                                                                     <img src="/torneo/img/img-theme/tarjeta-amarilla.png" class="img-circle avatar-sm" alt=""></td>                                                           
@@ -568,7 +536,7 @@
                                                             <tr>
                                                                 <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Tarjeta)Container.DataItem).minuto %>'</span></td>
                                                                 <td class="col-xs-8">
-                                                                    <img src="<%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagenMediana() %>" class="img-circle avatar-sm" alt="">
+                                                                    <%# ((Entidades.Tarjeta)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) %>
                                                                     <%# ((Entidades.Tarjeta)Container.DataItem).jugador.nombre %></td>
                                                                 <td class="col-xs-2">
                                                                     <img src="/torneo/img/img-theme/tarjeta-roja.png" class="img-circle avatar-sm" alt=""></td>                                                           
@@ -592,7 +560,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <img src="<%= gestorPartido.partido.local.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                             <%= gestorPartido.partido.local.nombre %>
                                                         </th>
                                                     </tr>
@@ -602,7 +570,8 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td class="col-xs-1">
-                                                                    <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() : "/torneo/img/img-theme/jugador-mediano.jpg"  %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                                      <%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs","",false) : ""  %>
+                                                                    <%--<img src="<%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() : "/torneo/img/img-theme/jugador-mediano.jpg"  %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>--%>
                                                                 <td class="col-xs-4"><%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.nombre : "-" %></td>
                                                                 <td class="col-xs-7">Sancionado por <%# ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas != null ? ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas.ToString() : "-" %> Fechas</td>
                                                             </tr>
@@ -621,7 +590,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <img src="<%= gestorPartido.partido.visitante.obtenerImagenChicha() %>" style="max-height: 20px;">
+                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                             <%= gestorPartido.partido.visitante.nombre %>
                                                         </th>
                                                     </tr>
@@ -631,7 +600,8 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td class="col-xs-1">
-                                                                        <img src="<%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() : "/torneo/img/img-theme/jugador-mediano.jpg"  %>" class="img-responsive avatar-xs" alt="" style="height: 22px; max-width: 30px;"></td>
+                                                                    <%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs","",false) : "" %>
+                                                                        <%--<img src="<%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.obtenerImagenChicha() : "/torneo/img/img-theme/jugador-mediano.jpg"  %>" class="img-responsive avatar-xs" alt="" style="/*height: 22px; max-width: 30px;*/"></td>--%>
                                                                 <td class="col-xs-4"><%# ((Entidades.Sancion)Container.DataItem).jugador != null ? ((Entidades.Sancion)Container.DataItem).jugador.nombre : "-" %></td>
                                                                 <td class="col-xs-7"><%# ((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas != null ? "Sancionado por "+((Entidades.Sancion)Container.DataItem).cantidadFechasSuspendidas.ToString()+" Fechas" : "-" %></td>
                                                             </tr>
@@ -666,19 +636,7 @@
                                         <li>
                                             <div class="widget-partido">
                                                 <div class="col-xs-4">
-                                                    <asp:Panel ID="pnlTieneImagenEL1" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? true : false %>">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block">
-                                                    </asp:Panel>
-                                                    <asp:Panel ID="pnlNoTieneImagenEL1" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? false : true %>">
-                                                        <div class="camiseta-equipo">
-                                                            <div>
-                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaPrimario %>"></i>
-                                                            </div><!--
-                                                            --><div class="segunda-mitad">
-                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaSecundario%>"></i>
-                                                            </div>
-                                                        </div>
-                                                    </asp:Panel>
+                                                        <%# ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA,"") %>
                                                     <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
                                                 </div>
                                                 <div class="col-xs-4 resultado">
@@ -693,19 +651,7 @@
                                                     Fecha <%# Eval("idFecha") %>
                                                 </div>
                                                 <div class="col-xs-4">
-                                                    <asp:Panel ID="pnlTieneImagenEV1" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? true : false %>">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block">
-                                                    </asp:Panel>
-                                                    <asp:Panel ID="pnlNoTieneImagenEV1" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? false : true %>">
-                                                        <div class="camiseta-equipo">
-                                                            <div>
-                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaPrimario %>"></i>
-                                                            </div><!--
-                                                            --><div class="segunda-mitad">
-                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaSecundario%>"></i>
-                                                            </div>
-                                                        </div>
-                                                    </asp:Panel>
+                                                     <%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA,"") %>
                                                     <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>
@@ -900,19 +846,7 @@
                                         <li>
                                             <div class="widget-partido">                                                
                                                 <div class="col-xs-4">
-                                                    <asp:Panel ID="pnlTieneImagenEL2" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? true : false %>">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana() %>" class="img-responsive center-block">
-                                                    </asp:Panel>
-                                                    <asp:Panel ID="pnlNoTieneImagenEL2" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen() ? false : true %>">
-                                                        <div class="camiseta-equipo">
-                                                            <div>
-                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaPrimario %>"></i>
-                                                            </div><!--
-                                                            --><div class="segunda-mitad">
-                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.local.colorCamisetaSecundario%>"></i>
-                                                            </div>
-                                                        </div>
-                                                    </asp:Panel>
+                                                    <%# ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA,"") %>
                                                     <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
                                                 </div>
                                                 <div class="col-xs-4 resultado">
@@ -927,19 +861,7 @@
                                                     Fecha <%# Eval("idFecha") %>
                                                 </div>
                                                 <div class="col-xs-4">
-                                                    <asp:Panel ID="pnlTieneImagenEV2" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? true : false %>">
-                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana() %>" class="img-responsive center-block">
-                                                    </asp:Panel>
-                                                    <asp:Panel ID="pnlNoTieneImagenEV2" runat="server" Visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen() ? false : true %>">
-                                                        <div class="camiseta-equipo">
-                                                            <div>
-                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaPrimario %>"></i>
-                                                            </div><!--
-                                                            --><div class="segunda-mitad">
-                                                                <i class="flaticon-football114" style="color: <%= gestorPartido.partido.visitante.colorCamisetaSecundario%>"></i>
-                                                            </div>
-                                                        </div>
-                                                    </asp:Panel>
+                                                    <%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA,"") %>
                                                     <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>

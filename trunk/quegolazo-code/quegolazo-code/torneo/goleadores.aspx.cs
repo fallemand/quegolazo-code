@@ -44,7 +44,7 @@ namespace quegolazo_code.torneo
                     gestorEstadistica.edicion = edicion;
 
                     gestorJugador = new GestorJugador();
-                    GestorControles.cargarRepeaterList(rptGoleadores, gestorJugador.obtenerJugadoresGoleadores(gestorEdicion.edicion.idEdicion));
+                    GestorControles.cargarRepeaterTable(rptGoleadores, gestorEstadistica.obtenerTablaGoleadores());
                     cargarGoleadoresFases();
                     sinGoleadoresTodas.Visible = !GestorControles.cargarRepeaterTable(rptGoleadoresTodasLasFases, gestorEstadistica.obtenerTablaGoleadores());                                                             
                     sinEquipos.Visible = !GestorControles.cargarRepeaterTable(rptEquiposQueConvirtieron, gestorEstadistica.cantidadGolesPorEquipo(false));

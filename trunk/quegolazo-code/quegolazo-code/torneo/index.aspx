@@ -96,98 +96,6 @@
                                                         </ItemTemplate>
                                                     </asp:Repeater>
                                                         <!-- End Item blog post -->
-
-                                                        <!-- Item blog post -->
-                                                       <%-- <li>
-                                                            <div class="header-post">
-                                                                <div class="date">
-                                                                    <span>08/jan</span>
-                                                                    2014
-                                                                </div>
-                                                                <a href="single-news.html"><img src="/torneo/img/blog/2.jpg" alt=""></a>
-                                                                <div class="meta-tag">
-                                                                    <ul>
-                                                                        <li><i class="fa fa-user"></i><a href="#">Admin</a></li>
-                                                                        <li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>
-                                                                        <li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="info-post">
-                                                                <h4><a href="single-news.html">Championship Final</a></h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                            </div>
-                                                        </li>--%>
-                                                        <!-- End Item blog post -->
-
-                                                        <!-- Item blog post -->
-                                                        <%--<li>
-                                                            <div class="header-post">
-                                                                <div class="date">
-                                                                    <span>08/jan</span>
-                                                                    2014
-                                                                </div>
-                                                                <a href="single-news.html"><img src="/torneo/img/blog/3.jpg" alt=""></a>
-                                                                <div class="meta-tag">
-                                                                    <ul>
-                                                                        <li><i class="fa fa-user"></i><a href="#">Admin</a></li>
-                                                                        <li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>
-                                                                        <li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="info-post">
-                                                                <h4><a href="single-news.html">Confidence indicators</a></h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                            </div>
-                                                        </li>--%>
-                                                        <!-- End Item blog post -->
-
-                                                        <!-- Item blog post -->
-                                                      <%--  <li>
-                                                            <div class="header-post">
-                                                                <div class="date">
-                                                                    <span>08/jan</span>
-                                                                    2014
-                                                                </div>
-                                                                <a href="single-news.html"><img src="/torneo/img/blog/4.jpg" alt=""></a>
-                                                                <div class="meta-tag">
-                                                                    <ul>
-                                                                        <li><i class="fa fa-user"></i><a href="#">Admin</a></li>
-                                                                        <li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>
-                                                                        <li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="info-post">
-                                                                <h4><a href="single-news.html">Championship Final.</a></h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                            </div>
-                                                        </li>--%>
-                                                        <!-- End Item blog post -->
-
-                                                        <!-- Item blog post -->
-                                                       <%-- <li>
-                                                            <div class="header-post">
-                                                                <div class="date">
-                                                                    <span>08/jan</span>
-                                                                    2014
-                                                                </div>
-                                                                <a href="single-news.html"><img src="/torneo/img/blog/2.jpg" alt=""></a>
-                                                                <div class="meta-tag">
-                                                                    <ul>
-                                                                        <li><i class="fa fa-user"></i><a href="#">Admin</a></li>
-                                                                        <li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>
-                                                                        <li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="info-post">
-                                                                <h4><a href="single-news.html">Great Prospects.</a></h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                            </div>
-                                                        </li>--%>
-                                                        <!-- End Item blog post -->
                                                     </ul>
                                                     <!-- End blog post-->
                                                 </div>
@@ -346,7 +254,7 @@
                                                         </div>
                                                         </div>
                                                         </asp:Panel>
-                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoLocal" runat="server"/></a></h5>
+                                                    <h5><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,proximoPartido.local.idEquipo)%>" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoLocal" runat="server"/></a></h5>
                                                 </div>
 
                                                 <div class="col-xs-6">
@@ -492,6 +400,7 @@
                         <!-- END Widget Partidos Anteriores -->
 
                         <!-- Widget Podio -->
+                        <asp:Panel ID="pnlPodio" runat="server" visible="false">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Podio</h3>
@@ -523,6 +432,7 @@
                                 </div>
                             </div>
                         </div>
+                       </asp:Panel>
                         <!-- END Widget Podio -->
 
                         <!-- Widget Tabla de Posiciones -->

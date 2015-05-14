@@ -257,7 +257,7 @@ namespace AccesoADatos
                 while (dr.Read())
                 {
                     respuesta = new CategoriaNoticia();
-                    respuesta.idCategoriaNoticia = Int32.Parse(dr["idCategorieNoticia"].ToString());
+                    respuesta.idCategoriaNoticia = Int32.Parse(dr["idCategoriaNoticia"].ToString());
                     respuesta.nombre = dr["nombre"].ToString();
                 }
                 if (dr != null)

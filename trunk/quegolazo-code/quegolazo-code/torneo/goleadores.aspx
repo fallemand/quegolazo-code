@@ -46,16 +46,9 @@
                             <ul class="otros-jugadores slider-multiple tooltip-hover">
                                 <asp:Repeater ID="rptGoleadores" runat="server" OnItemDataBound="rptGoleadores_ItemDataBound" >
                                     <ItemTemplate>
-                                        <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre")%>">
-                                            <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>/jugador-<%# Eval("idJugador")%>">
-                                                <asp:Panel ID="panelFotoJugador" runat="server" Visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen() ? true : false %>">
-                                                    <img src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive img-circle center-block">
-                                                </asp:Panel>
-                                                <asp:Panel ID="panelJugadorSinFoto" runat="server" Visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen() ? false : true %>">
-                                                    <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/equipo-<%=idEquipo%>/jugador-<%# Eval("idJugador")%>" class="avatar-jugador avatar-slider avatar-bg-<%# Eval("idJugador").ToString().Substring(Eval("idJugador").ToString().Length -1 , 1) %>">
-                                                        <h1><asp:Literal ID="litIniciales" runat="server" Text=""></asp:Literal></h1>
-                                                    </a>
-                                                </asp:Panel>
+                                        <li class="li-item" data-toggle="tooltip" title="<%# Eval("JUGADOR")%>">
+                                            <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,int.Parse("IDEQUIPO"),int.Parse("IDJUGADOR"))%>">
+                                                <%# ((Entidades.Jugador)Container.DataItem).obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle","avatar-slider",false)%>
                                             </a>
                                         </li>
                                     </ItemTemplate>
