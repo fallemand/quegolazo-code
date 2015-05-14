@@ -1280,7 +1280,7 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"select e.idEquipo AS 'Id Equipo', e.nombre AS 'Equipo', 
+                string sql = @"select e.idEquipo AS 'idEquipo', e.nombre AS 'equipo', e.directorTecnico, e.colorCamisetaPrimario, e.colorCamisetaSecundario,
                                 COUNT(CASE p.idEstado WHEN @partidoJugado THEN 1 ELSE NULL END) AS 'PJ',  
                                 COUNT(CASE p.idGanador WHEN e.idEquipo THEN 1 ELSE NULL END) AS 'PG',
                                 COUNT(CASE p.empate WHEN 1 THEN 1 ELSE NULL END) AS 'PE',
@@ -1293,7 +1293,7 @@ namespace AccesoADatos
                                 inner join Ediciones ed ON exe.idEdicion = ed.idEdicion
                                 left join Partidos p on (e.idEquipo = p.idEquipoLocal OR e.idEquipo = p.idEquipoVisitante)
                                 where p.idEdicion = @idEdicion
-                                GROUP BY e.nombre, e.idEquipo, ed.idEdicion, puntosGanado, puntosPerdido, puntosEmpatado
+                                GROUP BY e.nombre, e.directorTecnico, e.colorCamisetaPrimario, e.colorCamisetaSecundario, e.idEquipo, ed.idEdicion, puntosGanado, puntosPerdido, puntosEmpatado
                                 ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
