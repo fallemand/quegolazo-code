@@ -25,6 +25,24 @@ namespace Entidades
         public int? cantidadRojas { get; set; }
         public int? PJ { get; set; }
 
+        public string obtenerImagen(string tamanioImagen, string clasesParaImagen, string clasesParaDiv, Boolean mostrarNombre)
+        {
+            String html = "";
+            if (tieneImagen(tamanioImagen))
+            {
+                html = "<img src='" + GestorImagen.obtenerImagen(idJugador, GestorImagen.JUGADOR, tamanioImagen) + "' class='img-responsive center-block " + clasesParaImagen + "' alt='" + nombre + "'>";
+            }
+            else
+            {
+                html = "<div class='avatar-jugador " + clasesParaDiv + " avatar-bg-"+lastNumber()+"'>";
+                html +="<h1>"+this.iniciales()+"</h1>";
+                if(mostrarNombre)
+                    html +="<p class='text-thin'>"+nombre+"</p>";
+                html += "</div>";
+            }
+            return html;
+        }
+
         public string obtenerImagenChicha()
         {
             return GestorImagen.obtenerImagen(idJugador, GestorImagen.JUGADOR, GestorImagen.CHICA);
@@ -40,6 +58,10 @@ namespace Entidades
         public bool tieneImagen()
         {
             return GestorImagen.tieneImagen(idJugador, GestorImagen.JUGADOR, GestorImagen.GRANDE);
+        }
+        public bool tieneImagen(string tamanioImagen)
+        {
+            return GestorImagen.tieneImagen(idJugador, GestorImagen.JUGADOR, tamanioImagen);
         }
         public string iniciales()
         {

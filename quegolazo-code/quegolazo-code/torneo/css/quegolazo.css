@@ -281,24 +281,25 @@ img.img-principal {
 .camiseta-equipo .segunda-mitad i {
   margin-left:-75px;
 }
-.camiseta-equipo.camiseta-equipo-xs {
+.list-group-item .camiseta-equipo {
     display: inline;
 }
 
-.table .camiseta-equipo,.camiseta-equipo.camiseta-equipo-xs {
+.table .camiseta-equipo, .list-group-item .camiseta-equipo {
     font-size:20px;
     line-height: 20px;
     margin-top: 0px;
+    vertical-align: middle;
 }
 
-.table .camiseta-equipo i, .camiseta-equipo.camiseta-equipo-xs i {
+.table .camiseta-equipo i, .list-group-item .camiseta-equipo i {
     text-shadow: -1px 0 rgba(100, 100, 100, 0.40), 0 1px rgba(100, 100, 100, 0.40), 1px 0 rgba(100, 100, 100, 0.40), 0 -1px rgba(100, 100, 100, 0.40);
 }
-.table .camiseta-equipo div, .camiseta-equipo.camiseta-equipo-xs div {
+.table .camiseta-equipo div, .list-group-item .camiseta-equipo div {
     width:9px;
 }
 
-.table .camiseta-equipo .segunda-mitad i, .camiseta-equipo.camiseta-equipo-xs .segunda-mitad i{
+.table .camiseta-equipo .segunda-mitad i, .list-group-item .camiseta-equipo .segunda-mitad i{
     margin-left:-10px;
 }
 

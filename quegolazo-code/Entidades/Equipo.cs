@@ -22,7 +22,7 @@ namespace Entidades
         public string obtenerImagen(string tamanioImagen, string clases)
         {
             String html = "";
-            if (tieneImagen())
+            if (tieneImagen(tamanioImagen))
             {
                 html = "<img src='" + GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, tamanioImagen) + "' class='img-responsive center-block "+ clases +"'>";
             }
@@ -34,7 +34,7 @@ namespace Entidades
                             <i class='flaticon-football114' style='color:" + colorCamisetaPrimario + @"'></i>
                         </div><!--
                       --><div class='segunda-mitad'>
-                            <i class='flaticon-football114' style='" + colorCamisetaSecundario + @"'></i>
+                            <i class='flaticon-football114' style='color:" + colorCamisetaSecundario + @"'></i>
                         </div>
                     </div>";
             }
@@ -55,6 +55,10 @@ namespace Entidades
         public bool tieneImagen()
         {
             return GestorImagen.tieneImagen(idEquipo, GestorImagen.EQUIPO, GestorImagen.GRANDE);
+        }
+        public bool tieneImagen(string tamanioImagen)
+        {
+            return GestorImagen.tieneImagen(idEquipo, GestorImagen.EQUIPO, tamanioImagen);
         }
         public object Clone()
         {
