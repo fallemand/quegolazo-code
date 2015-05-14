@@ -324,6 +324,10 @@ img.img-principal {
   border-right: 7px solid;
 }
 
+.bg-dark.principal img{
+    max-height:150px;
+}
+
 .panel-box.score h3 a, .panel.score h3 a{
   color: #FFF;
 }
