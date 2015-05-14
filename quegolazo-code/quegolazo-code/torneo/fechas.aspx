@@ -109,19 +109,7 @@
                                                             <div class="panel-body nopadding">
                                                                 <div class="widget-partido">
                                                                     <div class="col-xs-4">
-                                                                        <asp:Panel ID="panelLogoEquipo" runat="server" Visible="<%#(((Entidades.Partido)Container.DataItem).local!=null && ((Entidades.Partido)Container.DataItem).local.tieneImagen()) ? true : false %>">
-                                                                            <img src="<%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.obtenerImagenMediana( ) : new Entidades.Equipo().obtenerImagenMediana() %>" class="img-responsive center-block">
-                                                                        </asp:Panel>
-                                                                        <asp:Panel ID="panelCamisetaEquipo" runat="server" Visible="<%#( ((Entidades.Partido)Container.DataItem).local!=null && ((Entidades.Partido)Container.DataItem).local.tieneImagen())? false : true %>">
-                                                                            <div id="Div1" class="camiseta-equipo" runat="server">
-                                                                                <div>
-                                                                                    <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local !=null ? Eval("local.colorCamisetaPrimario"): "#005A96" %>"></i>
-                                                                                </div><!--
-                                                                                --><div class="segunda-mitad">
-                                                                                    <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local !=null ? Eval("local.colorCamisetaSecundario"): "#005A96" %>"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                        </asp:Panel>
+                                                                        <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA, "") : new Entidades.Equipo().obtenerImagenMediana() %>
                                                                         <h5><a href="<%# ((Entidades.Partido)Container.DataItem).visitante!=null ? Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("local.idEquipo").ToString())) :"" %>" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : "-" %> </a></h5>
                                                                     </div>
                                                                     <div class="col-xs-4 resultado">
@@ -137,19 +125,7 @@
                                                                         <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion,Eval("idPartido").ToString()) %>" class="btn btn-primary btn-xs">+ Info</a>
                                                                     </div>
                                                                     <div class="col-xs-4">
-                                                                        <asp:Panel ID="panelLogoVisitante" runat="server" Visible="<%# (((Entidades.Partido)Container.DataItem).visitante!=null &&((Entidades.Partido)Container.DataItem).visitante.tieneImagen()) ? true : false %>">
-                                                                            <img src="<%# ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenMediana( ) : new Entidades.Equipo().obtenerImagenMediana()%>" class="img-responsive center-block">
-                                                                        </asp:Panel>
-                                                                        <asp:Panel ID="panelCamisetaVisitante" runat="server" Visible="<%#(((Entidades.Partido)Container.DataItem).visitante!=null && ((Entidades.Partido)Container.DataItem).visitante.tieneImagen())? false : true %>">
-                                                                            <div id="Div2" class="camiseta-equipo" runat="server">
-                                                                                <div>
-                                                                                    <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).visitante!=null ?  Eval("visitante.colorCamisetaPrimario") : "#005A96"  %>"></i>
-                                                                                </div><!--
-                                                                                --><div class="segunda-mitad">
-                                                                                    <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).visitante!=null ? Eval("visitante.colorCamisetaSecundario") :  "#005A96"%>"></i>
-                                                                                </div>
-                                                                            </div>
-                                                                        </asp:Panel>
+                                                                        <%#  ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA, "") : new Entidades.Equipo().obtenerImagenMediana() %>
                                                                         <h5><a href="<%# ((Entidades.Partido)Container.DataItem).visitante!=null ? Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("visitante.idEquipo").ToString())) :"" %>" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).visitante!=null?((Entidades.Partido)Container.DataItem).visitante.nombre:"-"%></a></h5>
                                                                     </div>
                                                                 </div>
