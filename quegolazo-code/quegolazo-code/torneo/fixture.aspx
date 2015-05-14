@@ -104,15 +104,7 @@
                                                                             <asp:Panel ID="panelPartidoNormal" runat="server" Visible="false">
                                                                                 <tr class="grupo-<%# Eval("idGrupo") %>">
                                                                                     <td>
-                                                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).local.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen()%>">
-                                                                                        <div class="camiseta-equipo" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).local.tieneImagen()==false%>">
-                                                                                            <div>
-                                                                                                <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).local.colorCamisetaPrimario %>"></i>
-                                                                                            </div><!--
-                                                                                            --><div class="segunda-mitad">
-                                                                                                <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).local.colorCamisetaSecundario%>"></i>
-                                                                                            </div>
-                                                                                        </div>
+                                                                                        <%# ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                                                     </td>
                                                                                     <td class="text-left">
                                                                                         <asp:Label Font-Size="17px" ID="lblPrimerPuesto" class="flaticon-football81" runat="server" Visible="false" title="Final" rel="txtTooltip" data-placement="left"></asp:Label><asp:Label Font-Size="16px" ID="lblTercerPuesto" class="flaticon-football78" runat="server" Visible="false" title="Tercer Puesto" rel="txtTooltip" data-placement="left"></asp:Label>
@@ -130,15 +122,7 @@
                                                                                     </td>
                                                                                     <td class="text-right"><%# ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.nombre : "" %></td>
                                                                                     <td>
-                                                                                        <img src="<%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# ((Entidades.Partido)Container.DataItem).visitante.tieneImagen()%>">
-                                                                                        <div class="camiseta-equipo" runat="server" visible="<%# !((Entidades.Partido)Container.DataItem).visitante.tieneImagen()%>">
-                                                                                            <div>
-                                                                                                <i class="flaticon-football114" style="color: <%# ((Entidades.Partido)Container.DataItem).visitante.colorCamisetaPrimario %>"></i>
-                                                                                            </div><!--
-                                                                                            --><div class="segunda-mitad">
-                                                                                                <i class="flaticon-football114" style="color: <%#((Entidades.Partido)Container.DataItem).visitante.colorCamisetaSecundario%>"></i>
-                                                                                            </div>
-                                                                                        </div>
+                                                                                          <%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                                                     </td>
                                                                                 </tr>
                                                                             </asp:Panel>

@@ -19,7 +19,6 @@ namespace quegolazo_code.torneo
         protected GestorEquipo gestorEquipo;
         protected bool hayPartidosPrevios;
         GestorEstadisticas gestorEstadistica;
-        JavaScriptSerializer serializador;
         protected int idEdicion;
         protected string nickTorneo, idPartido;
 
