@@ -148,20 +148,18 @@ namespace Logica
         //Validar Fase
         public static int validarFase(string nickTorneo, int idEdicion)
         {
-            int idFase = -1;
             try
             {
-                idFase = int.Parse(HttpContext.Current.Request["idFase"]);
+                int idFase = int.Parse(HttpContext.Current.Request["idFase"]);
                 return idFase;
             }
             catch (Exception ex)
             {
-                HttpContext.Current.Response.Redirect(GestorUrl.urlEdicion(nickTorneo, idEdicion));
+                return 1;
             }
-            return idFase;
         }
 
-        //Validar Fase
+        //Validar Fecha
         public static int validarFecha(string nickTorneo, int idEdicion, int idFase)
         {
             try
