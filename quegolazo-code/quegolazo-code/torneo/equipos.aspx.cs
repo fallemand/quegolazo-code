@@ -35,7 +35,7 @@ namespace quegolazo_code.torneo
                     Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
                     gestorEstadistica = new GestorEstadisticas(edicion);
                     nickTorneo = torneo.nick;
-                    GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadistica.tablaPosicionesEdicion());
+                    sinEquipos.Visible = !GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadistica.tablaPosicionesEdicion());
                     gestorEdicion = new GestorEdicion();
                     gestorEdicion.edicion = edicion;
                     idEdicion = edicion.idEdicion;

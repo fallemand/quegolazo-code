@@ -50,6 +50,16 @@ namespace Entidades
             arbitro = new Arbitro();
             cancha = new Cancha();
         }
+
+        public bool esLibre()
+        {
+            if (this.faseAsociada.tipoFixture.idTipoFixture != "ELIM" && (this.local == null || this.visitante == null))
+                return true;
+            else
+                return false;
+        }
+
+
     }
 }
 

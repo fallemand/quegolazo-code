@@ -54,7 +54,12 @@ namespace quegolazo_code.torneo
                     litLnkFase.Text = idFase.ToString();
                     litLnkFecha.Text = idFecha.ToString();
 
-                    GestorControles.cargarRepeaterList(rptFases, gestorEdicion.edicion.fases);
+                   sinFases.Visible= !GestorControles.cargarRepeaterList(rptFases, gestorEdicion.edicion.fases);
+                   if (sinFases.Visible == true)
+                   {
+                       sinFechas.Visible = true;
+                   }
+                   else
                     cargarFase();
                 }
                 else {
@@ -83,7 +88,7 @@ namespace quegolazo_code.torneo
             {
                 if (gestorEdicion.edicion.fases[idFase - 1].grupos[0].fechas[idFecha - 1].estado.idEstado != Estado.fechaREGISTRADA)
                 {
-                    sinGrupos.Visible = !GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[idFase - 1].grupos);
+                    GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[idFase - 1].grupos);
                 }
             }
             catch (Exception) { throw new Exception("No existe esa fecha"); }
@@ -100,7 +105,7 @@ namespace quegolazo_code.torneo
                     litLnkFecha.Text = e.CommandArgument.ToString();
                     if (gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos[0].fechas[idFecha - 1].estado.idEstado != Estado.fechaREGISTRADA)
                     {
-                        sinGrupos.Visible = !GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
+                        GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[int.Parse(ViewState["idFase"].ToString()) - 1].grupos);
                     }
                 }
             }
