@@ -86,5 +86,10 @@ namespace Logica
             DAONoticia daoNoticia = new DAONoticia();
             return daoNoticia.obtenerCategoriasNoticia();
         }
+        public List<Noticia> obtenerListaDeNoticiasDeLaEdicion(int idEdicion)
+        {
+            DAONoticia daoNoticia = new DAONoticia();
+            return daoNoticia.obtenerNoticiasList(idEdicion);
+        }
     }
 }

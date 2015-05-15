@@ -193,6 +193,7 @@
     <Content Include="torneo\fonts\glyphicon\glyphicons-halflings-regular.svg" />
     <Content Include="torneo\fechas.aspx" />
     <Content Include="torneo\equipos.aspx" />
+    <Content Include="torneo\noticias.aspx" />
     <Content Include="torneo\noticia.aspx" />
     <Content Include="torneo\goleadores.aspx" />
     <Content Include="torneo\img\img-theme\favicon.ico" />
@@ -517,6 +518,13 @@
     </Compile>
     <Compile Include="torneo\equipos.aspx.designer.cs">
       <DependentUpon>equipos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="torneo\noticias.aspx.cs">
+      <DependentUpon>noticias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="torneo\noticias.aspx.designer.cs">
+      <DependentUpon>noticias.aspx</DependentUpon>
     </Compile>
     <Compile Include="torneo\noticia.aspx.cs">
       <DependentUpon>noticia.aspx</DependentUpon>
