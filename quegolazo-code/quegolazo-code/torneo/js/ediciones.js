@@ -30,6 +30,14 @@ function cargarEstilosVisuales(estilos) {
 }
 
 $(document).ready(function ($) {
+    $(".ediciones-slide").owlCarousel({
+        autoPlay: 3200,
+        items: 1,
+        navigation: true,
+        pagination: false,
+        rewindNav: false,
+    });
+
     $(".torneos-slide").owlCarousel({
         autoPlay: 3200,
         items: 7,
