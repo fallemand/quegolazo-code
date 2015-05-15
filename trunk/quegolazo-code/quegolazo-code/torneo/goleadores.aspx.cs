@@ -66,20 +66,7 @@ namespace quegolazo_code.torneo
             }                 
         }
 
-        protected void rptGoleadores_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                Literal litIniciales = (Literal)e.Item.FindControl("litIniciales");
-                string[] split = ((Jugador)e.Item.DataItem).nombre.Split(new Char[] { ' ' });
-
-                foreach (string s in split)
-                {
-                    if (s.Trim() != "")
-                        litIniciales.Text += s.Substring(0, 1);
-                }
-            }
-        }
+      
 
         protected void rptGoleadoresTodasLasFases_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {

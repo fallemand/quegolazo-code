@@ -19,11 +19,11 @@
         <div class="crumbs">
             <div class="container">
                 <ul>
-                    <li><a href="/<%=nickTorneo%>"><%= gestorTorneo.torneo.nombre %></a></li>
+                    <li><a href="<%# Logica.GestorUrl.urlTorneo(nickTorneo)%>"><%= gestorTorneo.torneo.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>"><%= gestorEdicion.edicion.nombre %></a></li>
+                    <li><a href="<%# Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion)%>"><%= gestorEdicion.edicion.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/goleadores">Goleadores</a></li>
+                    <li><a href="<%# Logica.GestorUrl.urlGoleadores(nickTorneo,idEdicion)%>">Goleadores</a></li>
                 </ul>
             </div>
         </div>
@@ -44,11 +44,16 @@
                         <div class="panel-body">
                             <p class="slider-multiple-title">Goleadores de la Edición</p>
                             <ul class="otros-jugadores slider-multiple tooltip-hover">
-                                <asp:Repeater ID="rptGoleadores" runat="server" OnItemDataBound="rptGoleadores_ItemDataBound" >
+                                <asp:Repeater ID="rptGoleadores" runat="server" >
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("JUGADOR")%>">
+<<<<<<< .mine
+                                            <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,int.Parse(Eval("IDEQUIPO").ToString()),int.Parse(Eval("IDJUGADOR").ToString()))%>">
+                                                <%# new Entidades.Jugador(){idJugador=int.Parse(Eval("IDJUGADOR").ToString())}.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle","avatar-slider",false)%>
+=======
                                             <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,int.Parse(Eval("IDEQUIPO").ToString()),int.Parse(Eval("IDJUGADOR").ToString()))%>">
                                                 <%# new Logica.GestorJugador().obtenerJugadorPorId(int.Parse(Eval("IDJUGADOR").ToString())).obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle","avatar-slider",false)%>
+>>>>>>> .r657
                                             </a>
                                         </li>
                                     </ItemTemplate>
