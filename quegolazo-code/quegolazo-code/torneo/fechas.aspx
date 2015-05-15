@@ -110,7 +110,7 @@
                                                                     <div class="widget-partido">
                                                                         <div class="col-xs-4">
                                                                             <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA, "") : new Entidades.Equipo().obtenerImagenMediana() %>
-                                                                            <h5><a href="<%# ((Entidades.Partido)Container.DataItem).visitante!=null ? Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("local.idEquipo").ToString())) :"" %>" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : "-" %> </a></h5>
+                                                                            <h5><a href="<%# ((Entidades.Partido)Container.DataItem).local!=null ? Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("local.idEquipo").ToString())) :"" %>" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : "-" %> </a></h5>
                                                                         </div>
                                                                         <div class="col-xs-4 resultado">
                                                                             <div class="thumbnail">
