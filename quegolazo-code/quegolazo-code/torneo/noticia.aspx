@@ -35,8 +35,17 @@
                         <!-- Recent Post -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><%= noticia.titulo %></h3>
-                            </div>
+                                 <div class="row">
+                                    <div class="col-sm-9 col-xs-8">
+                                       <h3 class="panel-title"> <%= DateTime.Parse((noticia.fecha.ToString())).Day.ToString()+" de "+Utils.GestorExtra.nombreMes(DateTime.Parse((noticia.fecha.ToString())).Month)+" , "+DateTime.Parse((noticia.fecha.ToString())).Year.ToString() %></h3>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-4">
+                                        <div class="label label-md theme-bg-color">
+                                           <%= noticia.categoria.nombre %>
+                                        </div>
+                                    </div>
+                                </div>
+                                  </div>
                             <div class="panel-body">
                               
                                 <!-- Post Item -->
@@ -46,6 +55,7 @@
                                             <div class="imagen-noticia">
                                                 <img src="<%= noticia.obtenerImagenGrande() %>" alt="" class="img-responsive">                                                
                                             </div>
+                                            <h2><%= noticia.titulo %></h2>
                                             <%= noticia.descripcion %>
                                         </div>
                                        

@@ -1197,3 +1197,10 @@ color: #BEBEBE;
 float:left;
 padding-right: 20px;
 }
+.imagen-noticia-thumb {
+  max-height: 133px;
+  overflow:hidden;
+}
+.box-noticias {
+padding-left:15px !important; padding-bottom: 15px !important;
+}

@@ -322,5 +322,52 @@ namespace AccesoADatos
                     con.Close();
             }
         }
+
+        /// <summary>
+        /// Obtener noticias de un torneo de la BD
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public List<Noticia> obtenerNoticiasList(int idEdicion)
+        {
+            List<Noticia> noticias = new List<Noticia>();
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT n.idNoticia, CONVERT (char(10), n.fecha, 103)  AS 'fecha', n.titulo AS 'titulo', n.descripcion AS 'descripcion', c.idCategoriaNoticia AS 'idCategoriaNoticia', c.nombre AS 'nombre'
+                                FROM Noticias n INNER JOIN CategoriasNoticia c ON n.idCategoriaNoticia = c.idCategoriaNoticia
+                                WHERE n.idEdicion = @idEdicion
+                                ORDER BY fecha DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Noticia noticia = new Noticia();
+                    noticia.categoria = new CategoriaNoticia { idCategoriaNoticia = Int32.Parse(dr["idCategoriaNoticia"].ToString()), nombre = dr["nombre"].ToString() };
+                    noticia.descripcion = dr["descripcion"].ToString();
+                    noticia.titulo = dr["titulo"].ToString();
+                    noticia.fecha = DateTime.Parse(dr["fecha"].ToString());
+                    noticia.idNoticia = int.Parse(dr["idNoticia"].ToString());
+                    noticias.Add(noticia);
+                }
+                con.Close();
+                return noticias;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las noticias:" + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
     }
 }
