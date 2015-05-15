@@ -1136,8 +1136,7 @@ a.torneo-default {
 }
 
 a.torneo-default h1, a.torneo-default p{
-    margin-bottom:5px;
-    padding-bottom:0px;
+    
 }
 
 a.torneo-default p{
@@ -1149,6 +1148,9 @@ a.torneo-default h1, a.torneo-default p{
     font-family: 'Open Sans', sans-serif;
     font-weight: 100;
     color:#FFF !important;
+    margin-bottom:5px;
+    padding-bottom:0px;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 a.torneo-default:hover {

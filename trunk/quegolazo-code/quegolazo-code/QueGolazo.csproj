@@ -48,7 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -338,7 +338,6 @@
     <Content Include="torneo\js\fancybox\jquery.fancybox.css" />
     <Content Include="torneo\js\fancybox\jquery.fancybox.js" />
     <Content Include="torneo\js\filters\jquery.isotope.js" />
-    <Content Include="torneo\js\jquery.js" />
     <Content Include="torneo\js\main.js" />
     <Content Include="torneo\js\modernizr.js" />
     <Content Include="torneo\js\nav\jquery.sticky.js" />

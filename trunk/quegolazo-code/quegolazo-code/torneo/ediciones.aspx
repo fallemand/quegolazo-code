@@ -27,7 +27,7 @@
     <asp:Literal ID="litFavicon" runat="server" />  
 
     <!-- jQuery local-->
-    <script src="/torneo/js/jquery.js"></script>
+    <script src="/torneo/js/jquery.min.js"></script>
     <!-- Boostrap-->
     <script src="/torneo/js/bootstrap/bootstrap.js"></script>
     <!-- Ediciones-->
@@ -66,7 +66,10 @@
                 <div class="">
                     <div class="row">
                         <div class="page-error">
-                            <h1><img src="<%=torneo.obtenerImagenMediana()%>" alt="<%= torneo.nombre%>" class="img-responsive center-block" /></h1>
+                            <h1 class="titulo-torneo">
+                                <img src="<%=torneo.obtenerImagenMediana()%>" alt="<%= torneo.nombre%>" />
+                                <%= torneo.nombre%>
+                            </h1>
                             <hr class="tall">
                             <!-- <p class="lead">Seleccione la edición.</p>
                             <a href="index-2.html" class="btn btn-lg btn-primary">Volver al Inicio</a> -->
@@ -81,15 +84,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <h2>Seleccione una edición: </h2>
+                                    <h3>Seleccione una edición: </h3>
                                 </div>
-                                <ul class="torneos-slide tooltip-hover">
+                                <ul class="ediciones-slide noborder slider-multiple tooltip-hover">
                                     <asp:Repeater ID="rptEdiciones" runat="server">
                                         <ItemTemplate>
-                                            <li class="li-item" data-toggle="tooltip" title="<%# ((Entidades.Edicion)Container.DataItem).nombre %>">
+                                            <li class="li-item">
                                                 <a href="<%# Logica.GestorUrl.urlEdicion(torneo.nick, ((Entidades.Edicion)Container.DataItem).idEdicion )%>" class="torneo-default avatar-bg-<%#((Entidades.Edicion)Container.DataItem).lastNumber() %>">
-                                                    <h1><%# ((Entidades.Edicion)Container.DataItem).iniciales() %></h1>
-                                                    <p><%# ((Entidades.Edicion)Container.DataItem).nombre %></p>
+                                                    <h1><%# ((Entidades.Edicion)Container.DataItem).nombre %></h1>
+                                                    <p data-toggle="tooltip" data-placement="bottom" title="<%# ((Entidades.Edicion)Container.DataItem).estado.descripcion %>"><%# ((Entidades.Edicion)Container.DataItem).estado.nombre %></p>
                                                 </a>
                                             </li>
                                         </ItemTemplate>
