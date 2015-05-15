@@ -1292,7 +1292,7 @@ namespace AccesoADatos
                                 inner join EquipoXEdicion exe ON exe.idEquipo = e.idEquipo
                                 inner join Ediciones ed ON exe.idEdicion = ed.idEdicion
                                 left join Partidos p on (e.idEquipo = p.idEquipoLocal OR e.idEquipo = p.idEquipoVisitante)
-                                where p.idEdicion = @idEdicion
+                                where exe.idEdicion = @idEdicion
                                 GROUP BY e.nombre, e.directorTecnico, e.colorCamisetaPrimario, e.colorCamisetaSecundario, e.idEquipo, ed.idEdicion, puntosGanado, puntosPerdido, puntosEmpatado
                                 ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
                 cmd.Parameters.Clear();
