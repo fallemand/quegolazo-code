@@ -63,6 +63,9 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </ul>
+                                      <div id="sinFases" runat="server"  class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  visible="false">
+                                            <small> No existen Fases Registradas </small>
+                                         </div> 
                                 </div>
                             </div>
                         </div>
@@ -86,8 +89,10 @@
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:Repeater>
-                                        <asp:Literal ID="sinFechas" runat="server" Visible="false" Text="No existe información para mostrar"></asp:Literal>
                                     </ul>
+                                   <div id="sinFechas" runat="server"  class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  visible="false">
+                                           <small>No existen Fechas Registradas</small>  
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -104,12 +109,12 @@
                                                 <asp:Repeater ID="rptPartidos" runat="server">
                                                     <ItemTemplate>
                                                         <!-- Widget Partido -->
-                                                        <div class="col-md-4 col-sm-6">
+                                                        <div class="col-md-4 col-sm-6" runat="server" id="divPartido" visible="<%# !((Entidades.Partido)Container.DataItem).esLibre()%>">
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body nopadding">
-                                                                    <div class="widget-partido">
+                                                                    <div class="widget-partido" >
                                                                         <div class="col-xs-4">
-                                                                            <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA, "") : new Entidades.Equipo().obtenerImagenMediana() %>
+                                                                            <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA, "") : "<img src='"+new Entidades.Equipo().obtenerImagenMediana()+"'/>" %>
                                                                             <h5><a href="<%# ((Entidades.Partido)Container.DataItem).local!=null ? Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("local.idEquipo").ToString())) :"" %>" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : "-" %> </a></h5>
                                                                         </div>
                                                                         <div class="col-xs-4 resultado">
@@ -125,7 +130,7 @@
                                                                             <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion,Eval("idPartido").ToString()) %>" class="btn btn-primary btn-xs">+ Info</a>
                                                                         </div>
                                                                         <div class="col-xs-4">
-                                                                            <%#  ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA, "") : new Entidades.Equipo().obtenerImagenMediana() %>
+                                                                            <%#  ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA, "") : "<img src='"+new Entidades.Equipo().obtenerImagenMediana()+"' />"%>
                                                                             <h5><a href="<%# ((Entidades.Partido)Container.DataItem).visitante!=null ? Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("visitante.idEquipo").ToString())) :"" %>" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).visitante!=null?((Entidades.Partido)Container.DataItem).visitante.nombre:"-"%></a></h5>
                                                                         </div>
                                                                     </div>
@@ -135,13 +140,15 @@
                                                         <!-- End Widget Partido -->
                                                     </ItemTemplate>
                                                 </asp:Repeater>
-                                                <asp:Literal ID="sinPartidos" runat="server" Visible="false" Text="No se registra información de Partidos"></asp:Literal>
+                                                 <div id="sinPartidos" runat="server"  class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  style="display:none;">
+                                                     No se registra información de partidos
+                                                 </div> 
                                             </div>
                                         </div>
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
-                            <asp:Literal ID="sinGrupos" runat="server" Visible="false" Text="No se registra información de Grupos"></asp:Literal>
+                           
                             <!-- END Listado de Partidos -->
                         </div>
                     </div>

@@ -107,6 +107,9 @@
                         <!-- Jugador -->
                     </ItemTemplate>
                 </asp:Repeater>
+                <div id="sinEquipos" runat="server"  class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  visible="false">
+                    <small>No existen equipos registrados para esta edición</small>  
+                 </div>
             </div>
         </div>
         <!-- End Content Central -->
