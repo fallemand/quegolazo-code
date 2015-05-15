@@ -71,10 +71,10 @@
                        </div>
                         </ItemTemplate>
                       </asp:Repeater>
-                     <div id="msjNoticias" runat="server" class="panel panel-default">
-                                            <div class="panel-body">
-                                                <span>Aún no existen noticias registradas para esta edicion...</span>
-                                            </div>
+                     <div id="msjNoticias" runat="server" class="panel panel-default" visible="false">
+                        <div class="panel-body">
+                            <span>Aún no existen noticias registradas para esta edicion...</span>
+                        </div>
                      </div>
                      
                    </div>
