@@ -28,7 +28,7 @@
     <link rel="shortcut icon" href="/torneo/img/img-theme/favicon.ico">
 
     <!-- jQuery local-->
-    <script src="/torneo/js/jquery.js"></script>
+    <script src="/torneo/js/jquery.min.js"></script>
     <!-- Boostrap-->
     <script src="/torneo/js/bootstrap/bootstrap.js"></script>
     <!-- Ediciones-->
