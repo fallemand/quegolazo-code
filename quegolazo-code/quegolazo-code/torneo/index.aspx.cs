@@ -65,24 +65,29 @@ namespace quegolazo_code.torneo
 
         public void habilitarPanelesSegunEstadoEdicion()
         {
-            //hace VISIBLE el Próximo Partido SOLO cuando la edición está CONFIGURADA O INICIADA
-            if (gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA ||
-                gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA)
-                divProximoPartido.Visible = true;
-            //Panel Últimos Partidos -> habilitar cuando está Iniciada, Finalizada y Cancelada
-            if (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA ||
-                gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA)
-                divUtimosPartidos.Visible = false;
-            //Panel de podio -> habilitar solo cuando está finalizada
-            if (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA)
-                pnlPodio.Visible = true;
-            //Panel de Tabla de posiciones y Equipos participantes -> NO habilitado cuadno está registrada la edición
-            if (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA)
-            { 
-                divTablaPosiciones.Visible = false;
-                divEquiposParticipantes.Visible = false;
-                divOtrosPartidosDeFecha.Visible = false;
-            }
+            switch (gestorEdicion.edicion.estado.idEstado)
+            { //Edición Registrada
+                case 2:
+                    divUtimosPartidos.Visible = false;
+                    divTablaPosiciones.Visible = false;
+                    divEquiposParticipantes.Visible = false;
+                    divOtrosPartidosDeFecha.Visible = false;
+                    break;                    
+                case 14: // Edición Configurada
+                    divProximoPartido.Visible = true;
+                    divUtimosPartidos.Visible = false;
+                    break;                    
+                case 16: //Edición Iniciada
+                    divProximoPartido.Visible = true;
+                    break;                    
+                case 17: // Edición Finalizada
+                    pnlPodio.Visible = true;
+                    break;
+                case 18: // Edición Cancelada
+                    break;                    
+                default:
+                    break;
+            } 
         }
 
         private void otrosPartidosDeLaFecha()
