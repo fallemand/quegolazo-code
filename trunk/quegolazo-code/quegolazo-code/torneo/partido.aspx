@@ -168,12 +168,12 @@
                                             <tr>
                                                 <th class="col-xs-2 col-md-4 text-center">
                                                     <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
-                                                    <%= gestorPartido.partido.local.nombre %>
+                                                    <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a>
                                                 </th>
                                                 <th class="col-xs-8 col-md-4 text-center">VS</th>
                                                 <th class="col-xs-2 col-md-4 text-center">
                                                     <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
-                                                    <%= gestorPartido.partido.visitante.nombre %>
+                                                    <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a>
                                                 </th>
                                             </tr>
                                         </thead>

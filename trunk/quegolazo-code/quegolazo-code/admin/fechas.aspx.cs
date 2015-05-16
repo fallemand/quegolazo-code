@@ -34,7 +34,7 @@ namespace quegolazo_code.admin
                     cargarRepeaterFases();
                     cargarComboEdiciones();
                     cargarComboArbitros();
-                    cargarComboCanchas();
+                    cargarComboCanchas();                                       
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -157,6 +157,10 @@ namespace quegolazo_code.admin
                     cargarPartido();
                     btnCancelar.Visible = true;
                     mostrarFechaCollapsablePanel();
+                    for (int i = 0; i < cblJugadoresEquipoLocal.Items.Count; i++)
+                        cblJugadoresEquipoLocal.Items[i].Selected = true;
+                    for (int i = 0; i < cblJugadoresEquipoVisitante.Items.Count; i++)
+                        cblJugadoresEquipoVisitante.Items[i].Selected = true;  
                 }
             }
             catch (Exception ex) { mostrarPanelFracaso(ex.Message); }
@@ -172,10 +176,11 @@ namespace quegolazo_code.admin
             {
                 if (gestorPartido.partido == null)
                     throw new Exception("Debe seleccionar un partido desde la lista de fechas");
+                gestorEdicion.getFaseActual();
                 mostrarFechaCollapsablePanel();
                 gestorPartido.modificarPartido(txtFecha.Value, txtGolesLocal.Value, txtGolesVisitante.Value, cbPenales.Checked, txtPenalesLocal.Value, txtPenalesVisitante.Value, ddlArbitros.SelectedValue, ddlCanchas.SelectedValue, obtenerTitularesLocal(), obtenerTitularesVisitante());                
                 mostrarPanelExito("Partido Modificado con éxito");
-                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();                
                 cargarRepeaterFases();
                 btnCancelar.Visible = false;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "hideOnMobile", "hideOnMobile('administrarPartido');", true);
