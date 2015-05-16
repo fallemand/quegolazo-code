@@ -339,7 +339,7 @@
                                                             <tr>
                                                                 <td class="col-xs-1">
                                                                     <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="<%#(((Entidades.Jugador)Container.DataItem).tieneImagen()==false) ? "avatar-jugador avatar-bg-" + ((Entidades.Jugador)Container.DataItem).lastNumber() : "" %>" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
-                                                                        <img runat="server" src="<%# ((Entidades.Jugador)Container.DataItem).obtenerImagenChicha() %>" class="avatar-xs img-responsive" alt="imagen" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()%>" />
+                                                                        <%# ((Entidades.Jugador)Container.DataItem).obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs","",false) %>
                                                                         <h1 runat="server" visible="<%# ((Entidades.Jugador)Container.DataItem).tieneImagen()==false%>"><%# ((Entidades.Jugador)Container.DataItem).iniciales() %></h1>
                                                                     </a>
                                                                 </td>

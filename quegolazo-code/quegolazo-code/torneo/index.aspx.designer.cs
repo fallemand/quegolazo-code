@@ -40,6 +40,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptEventos;
         
         /// <summary>
+        /// Control sinEventos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinEventos;
+        
+        /// <summary>
         /// Control ltPJ.
         /// </summary>
         /// <remarks>
@@ -182,6 +191,15 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptUltimasNoticias;
+        
+        /// <summary>
+        /// Control sinNoticias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinNoticias;
         
         /// <summary>
         /// Control divUtimosPartidos.

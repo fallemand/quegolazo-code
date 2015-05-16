@@ -67,23 +67,23 @@ namespace quegolazo_code.torneo
         {
             switch (gestorEdicion.edicion.estado.idEstado)
             { //Edición Registrada
-                case 2:
+                case Estado.edicionREGISTRADA:
                     divUtimosPartidos.Visible = false;
                     divTablaPosiciones.Visible = false;
                     divEquiposParticipantes.Visible = false;
                     divOtrosPartidosDeFecha.Visible = false;
                     break;                    
-                case 14: // Edición Configurada
+                case Estado.edicionCONFIGURADA: // Edición Configurada
                     divProximoPartido.Visible = true;
                     divUtimosPartidos.Visible = false;
                     break;                    
-                case 16: //Edición Iniciada
+                case Estado.edicionINICIADA: //Edición Iniciada
                     divProximoPartido.Visible = true;
                     break;                    
-                case 17: // Edición Finalizada
+                case Estado.edicionFINALIZADA: // Edición Finalizada
                     pnlPodio.Visible = true;
                     break;
-                case 18: // Edición Cancelada
+                case Estado.edicionCANCELADA: // Edición Cancelada
                     break;                    
                 default:
                     break;
@@ -96,8 +96,9 @@ namespace quegolazo_code.torneo
         }
          private void cargarNoticias()
          {
-            GestorControles.cargarRepeaterList(rptEventos, (new GestorNoticia()).obtenerNoticiasXCategoria(gestorEdicion.edicion.idEdicion, CategoriaNoticia.noticiaEVENTOS));
-            GestorControles.cargarRepeaterList(rptUltimasNoticias, (new GestorNoticia()).obtenerNoticiasXCategoria(gestorEdicion.edicion.idEdicion, CategoriaNoticia.noticiaBOLETIN));
+             GestorNoticia gestorNoticia = new GestorNoticia();
+             sinNoticias.Visible = !GestorControles.cargarRepeaterList(rptUltimasNoticias, (gestorNoticia.obtenerNoticiasXCategoria(gestorEdicion.edicion.idEdicion, CategoriaNoticia.noticiaBOLETIN).Count > 2) ? gestorNoticia.obtenerNoticiasXCategoria(gestorEdicion.edicion.idEdicion, CategoriaNoticia.noticiaBOLETIN).AsEnumerable().Take(3).ToList() : gestorNoticia.obtenerNoticiasXCategoria(gestorEdicion.edicion.idEdicion, CategoriaNoticia.noticiaBOLETIN));
+             sinEventos.Visible = !GestorControles.cargarRepeaterList(rptEventos, gestorNoticia.obtenerNoticiasXCategoria(gestorEdicion.edicion.idEdicion, CategoriaNoticia.noticiaEVENTOS));
         }
 
         [System.Web.Services.WebMethod(enableSession: true)]
@@ -116,8 +117,8 @@ namespace quegolazo_code.torneo
         public void cargarEstadisticas()
         {
             //Carga Repeater ultimos goles y ultimas tarjetas
-            sinUltimosGoles.Visible = !GestorControles.cargarRepeaterTable(rptUltimosGoles, gestorEstadisticas.ultimosGolesDeEdicion());
-            sinUltimasTarjetas.Visible = !GestorControles.cargarRepeaterTable(rptUltimasTarjetas, gestorEstadisticas.ultimosTarjetasDeEdicion());
+            sinUltimosGoles.Visible = !GestorControles.cargarRepeaterTable(rptUltimosGoles, (gestorEstadisticas.ultimosGolesDeEdicion().Rows.Count > 3) ? (gestorEstadisticas.ultimosGolesDeEdicion()).AsEnumerable().Take(4).CopyToDataTable() : gestorEstadisticas.ultimosGolesDeEdicion());
+            sinUltimasTarjetas.Visible = !GestorControles.cargarRepeaterTable(rptUltimasTarjetas, (gestorEstadisticas.ultimosTarjetasDeEdicion().Rows.Count > 3) ? gestorEstadisticas.ultimosTarjetasDeEdicion().AsEnumerable().Take(4).CopyToDataTable() : gestorEstadisticas.ultimosTarjetasDeEdicion());
             //Carga estadisticas principales
             DataTable datosEstadisticasEdicion = gestorEstadisticas.estadisticasDeEdicion();
             ltPJ.Text = (datosEstadisticasEdicion.Rows.Count > 0) ? datosEstadisticasEdicion.Rows[0]["PJ"].ToString() : "0";

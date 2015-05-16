@@ -30,31 +30,16 @@
         </div>
 
         <!-- Content Central -->
+
         <div class="container padding-top">
             <div class="row mobile-margin-top">
-                <asp:Repeater ID="rptEquipos" runat="server" OnItemDataBound="rptEquipos_ItemDataBound">
+                <asp:Repeater ID="rptEquipos" runat="server" >
                     <ItemTemplate>
                         <!-- Jugador -->
                         <div class="col-md-3 col-xs-3">
                             <!-- Datos del Equipo -->
                             <div class="panel-box bg-dark score theme-border">
-                                <asp:Panel ID="panelImagen" runat="server" Visible="false">
-                                    <img src="<%# new Entidades.Equipo(){idEquipo = int.Parse(Eval("idEquipo").ToString())}.obtenerImagenGrande() %>" class="img-responsive center-block" style="max-height: 150px;">
-                                </asp:Panel>
-                                <asp:Panel ID="panelCamiseta" runat="server" Visible="false">
-                                    <div class="row">
-                                        <div class="camiseta-equipo">
-                                            <div>
-                                                <i class="flaticon-football114" style="color: <%#Eval("colorCamisetaPrimario") %>"></i>
-                                            </div>
-                                            <!--
-                                                -->
-                                            <div class="segunda-mitad">
-                                                <i class="flaticon-football114" style="color: <%# Eval("colorCamisetaSecundario")%>"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </asp:Panel>
+                                <%# new Entidades.Equipo(){idEquipo = int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.GRANDE,"") %>
                                 <h3 class="text-center"><a id='equipo-<%#Eval("idEquipo")%>' class="popover-equipo" href='<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>' data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%#Eval("equipo") %></a></h3>
                                 <div class="row text-center">
                                     <div class="col-xs-12">

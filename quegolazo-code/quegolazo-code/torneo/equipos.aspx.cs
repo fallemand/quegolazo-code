@@ -47,20 +47,6 @@ namespace quegolazo_code.torneo
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
         }
 
-        protected void rptEquipos_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                DataRowView row = (DataRowView)e.Item.DataItem;
-                bool tieneImagen= new GestorEquipo().obtenerEquipoPorId(int.Parse(row["idEquipo"].ToString())).tieneImagen();
-                Panel divCamiseta = (Panel)e.Item.FindControl("panelCamiseta");
-                Panel imgEquipo = (Panel)e.Item.FindControl("panelImagen");
-                divCamiseta.Visible = !tieneImagen;
-                imgEquipo.Visible = tieneImagen;
-                
-                
-            }
-        }
 
     }
 }
