@@ -57,6 +57,9 @@
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </ul>
+                             <div id="sinJugadoresFase" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  runat="server" visible="false">
+                            No existen jugadores registrados
+                        </div>
                         </div>
                     </div>
                 </div>

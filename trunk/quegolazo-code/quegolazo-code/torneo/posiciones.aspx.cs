@@ -37,7 +37,10 @@ namespace quegolazo_code.torneo
                     gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                     idEdicion = edicion.idEdicion;
 
-                    cargarEquipos();
+                    if (gestorEdicion.edicion.fases.Count > 0)
+                        cargarEquipos();
+                    else
+                        sinEquipos.Visible = true;
                 }
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }

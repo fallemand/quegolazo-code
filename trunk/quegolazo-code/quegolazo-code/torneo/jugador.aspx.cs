@@ -48,7 +48,7 @@ namespace quegolazo_code.torneo
                     gestorJugador.jugador = jugador;
                     idJugador = jugador.idJugador;
 
-                    GestorControles.cargarRepeaterList(rptOtroseJugadores, gestorEquipo.equipo.jugadores);
+                    sinJugadoresFase.Visible= !GestorControles.cargarRepeaterList(rptOtroseJugadores, gestorEquipo.equipo.jugadores);
                     gestorEstadisticas = new GestorEstadisticas(edicion);
 
                     cargarDatosJugador();
