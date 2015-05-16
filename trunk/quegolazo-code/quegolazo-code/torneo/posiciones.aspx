@@ -103,7 +103,7 @@
                                                                 </tr>
                                                             </ItemTemplate>
                                                         </asp:Repeater>
-                                                       <tr id="sinEquipos" runat="server" >
+                                                       <tr id="sinEquipos" runat="server" visible="false">
                                                              <td colspan="3">No hay información de la tabla de posiciones</td>
                                                        </tr>
                                                     </tbody>

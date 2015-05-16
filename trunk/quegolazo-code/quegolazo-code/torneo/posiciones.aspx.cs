@@ -48,7 +48,7 @@ namespace quegolazo_code.torneo
             gestorEdicion.getFaseActual();
             GestorEstadisticas gestorEstadisticas = new GestorEstadisticas(gestorEdicion.edicion);
             GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase - 1].grupos);
-            GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
+            sinEquipos.Visible = !GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
             GestorControles.cargarRepeaterList(rptListaEquipos, gestorEdicion.edicion.equipos);
         }
     }

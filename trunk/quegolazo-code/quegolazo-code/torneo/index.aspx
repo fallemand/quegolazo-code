@@ -273,7 +273,7 @@
                         <!-- Recent Post -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Ultimas Noticias</h3>
+                                <h3 class="panel-title">Últimas Noticias</h3>
                             </div>
                             <div class="panel-body">
                                <asp:Repeater ID="rptUltimasNoticias" runat="server">
