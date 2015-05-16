@@ -11,5 +11,14 @@ namespace quegolazo_code.torneo {
     
     
     public partial class Formulario_web14 {
+        
+        /// <summary>
+        /// Control rptUltimasNoticias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptUltimasNoticias;
     }
 }

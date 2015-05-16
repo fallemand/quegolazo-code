@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Utils;
 
 namespace quegolazo_code.torneo
 {
@@ -29,6 +30,9 @@ namespace quegolazo_code.torneo
                     edicion = GestorUrl.validarEdicion(torneo.nick);
                     noticia = GestorUrl.validarNoticia(torneo.nick, edicion.idEdicion);  
                     nickTorneo = torneo.nick;
+                    idEdicion = edicion.idEdicion;
+                    GestorNoticia gestorNoticia = new GestorNoticia();
+                    GestorControles.cargarRepeaterList(rptUltimasNoticias, (gestorNoticia.obtenerNoticiasXCategoria(edicion.idEdicion, noticia.categoria.idCategoriaNoticia).Count > 2) ? gestorNoticia.obtenerNoticiasXCategoria(edicion.idEdicion, noticia.categoria.idCategoriaNoticia).AsEnumerable().Take(3).ToList() : gestorNoticia.obtenerNoticiasXCategoria(edicion.idEdicion, noticia.categoria.idCategoriaNoticia));
                 }
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
