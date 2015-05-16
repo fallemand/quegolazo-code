@@ -396,7 +396,7 @@
                                                 <tr>
                                                     <td><%# (new Entidades.Equipo() { idEquipo = int.Parse(Eval("idEquipo").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "img-circle avatar-xs")%></td>
                                                     <td><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, int.Parse(Eval("idEquipo").ToString()))%>" data-toggle="tab"><%# Eval("Equipo") %></a></td>
-                                                    <td><%# Eval("Puntos")%></td>
+                                                    <td><b><%# Eval("Puntos")%></b></td>
                                                     <td><%# Eval("PJ")%></td>
                                                     <td><%# Eval("PG")%></td>
                                                     <td><%# Eval("PE")%></td>

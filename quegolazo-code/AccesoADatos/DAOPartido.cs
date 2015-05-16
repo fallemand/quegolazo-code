@@ -1378,6 +1378,7 @@ namespace AccesoADatos
                                 AND partido.fecha >= GETDATE()
                                 AND partido.idFase = @idFase
                                 AND partido.idFecha = @idFecha
+                                AND partido.idEquipoLocal IS NOT NULL AND partido.idEquipoVisitante IS NOT NULL
                                 ORDER BY partido.fecha ASC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
@@ -1413,6 +1414,7 @@ namespace AccesoADatos
                                 AND partido.idEdicion = @idEdicion
                                 AND partido.idFase = @idFase
                                 AND partido.idFecha = @idFecha
+                                AND partido.idEquipoLocal IS NOT NULL AND partido.idEquipoVisitante IS NOT NULL
                                 ORDER BY partido.fecha ASC";
                     cmd.Parameters.Clear();
                     cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
@@ -1446,6 +1448,7 @@ namespace AccesoADatos
                                 WHERE (partido.idEstado = @estadoDiagramado OR partido.idEstado = @estadoProgramado)
                                 AND partido.idEdicion = @idEdicion
                                 AND partido.idFase = @idFase
+                                AND partido.idEquipoLocal IS NOT NULL AND partido.idEquipoVisitante IS NOT NULL
                                 ORDER BY partido.fecha ASC";
                         cmd.Parameters.Clear();
                         cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));

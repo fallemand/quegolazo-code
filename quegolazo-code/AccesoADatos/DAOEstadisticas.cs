@@ -1324,7 +1324,8 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"select e.idEquipo AS 'idEquipo', e.nombre AS 'equipo', e.directorTecnico, e.colorCamisetaPrimario, e.colorCamisetaSecundario,
+                string sql = @"select e.idEquipo AS 'idEquipo', e.nombre AS 'equipo', e.directorTecnico,
+                                e.colorCamisetaPrimario, e.colorCamisetaSecundario, del.nombre AS 'delegadoPrincipal',
                                 COUNT(CASE p.idEstado WHEN @partidoJugado THEN 1 ELSE NULL END) AS 'PJ',  
                                 COUNT(CASE p.idGanador WHEN e.idEquipo THEN 1 ELSE NULL END) AS 'PG',
                                 COUNT(CASE p.empate WHEN 1 THEN 1 ELSE NULL END) AS 'PE',
@@ -1335,9 +1336,10 @@ namespace AccesoADatos
                                 from Equipos e
                                 inner join EquipoXEdicion exe ON exe.idEquipo = e.idEquipo
                                 inner join Ediciones ed ON exe.idEdicion = ed.idEdicion
+                                inner join Delegados del ON del.idDelegado = e.idDelegadoPrincipal
                                 left join Partidos p on (e.idEquipo = p.idEquipoLocal OR e.idEquipo = p.idEquipoVisitante)
                                 where exe.idEdicion = @idEdicion and p.idEdicion = @idEdicion
-                                GROUP BY e.nombre, e.directorTecnico, e.colorCamisetaPrimario, e.colorCamisetaSecundario, e.idEquipo, ed.idEdicion, puntosGanado, puntosPerdido, puntosEmpatado
+                                GROUP BY e.nombre, e.directorTecnico, e.colorCamisetaPrimario, e.colorCamisetaSecundario, e.idEquipo, ed.idEdicion, puntosGanado, puntosPerdido, puntosEmpatado, del.nombre
                                 ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));

@@ -41,7 +41,7 @@ namespace quegolazo_code.torneo
                     { 
                         cargarEquipos();
                         gestorEdicion.getFaseActual();
-                        //Oculta las columnas PUNTOS Y PARTIDOS EMPATADOS si la fase es Elimatoria
+                        //Oculta en el encabezado de la tabla posiciones, las columnas PUNTOS Y PARTIDOS EMPATADOS si la fase es Elimatoria
                         if (gestorEdicion.faseActual.tipoFixture.nombre.Equals("Eliminatorio"))
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "ocultar", "ocultarColumnas();", true);
                     }
@@ -66,7 +66,7 @@ namespace quegolazo_code.torneo
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 if (gestorEdicion.faseActual.tipoFixture.nombre.Equals("Eliminatorio"))
-                {
+                {   //Oculta las columnas PUNTOS Y PARTIDOS EMPATADOS si la fase es Elimatoria
                     Panel pnlPuntos = (Panel)e.Item.FindControl("pnlPuntos");
                     Panel pnlPE = (Panel)e.Item.FindControl("pnlPE");
                     pnlPuntos.Visible = false;

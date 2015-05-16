@@ -36,12 +36,12 @@ namespace quegolazo_code.torneo
                     Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
                     gestorEstadistica = new GestorEstadisticas(edicion);
                     nickTorneo = torneo.nick;
-                    sinEquipos.Visible = !GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadistica.tablaPosicionesEdicion());
                     gestorEdicion = new GestorEdicion();
                     gestorEdicion.edicion = edicion;
                     idEdicion = edicion.idEdicion;
                     gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                    gestorPartido = new GestorPartido();    
+                    gestorPartido = new GestorPartido();   
+                    sinEquipos.Visible = !GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadistica.tablaPosicionesEdicion());                     
                 }
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
