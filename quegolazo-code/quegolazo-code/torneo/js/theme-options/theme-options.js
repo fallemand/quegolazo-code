@@ -204,13 +204,13 @@
 
  function guardarConfiguracion() {
      var configuracion = {
-         patronDeFondo : $('body').css('background-image').replace('http://' + window.location.hostname, ''),
+         patronDeFondo: $('body').css('background-image').replace('http://' + window.location.hostname + ':' + window.location.port, ''),
          colorHeader : $('.headerbox').css('background-color'),
-         patronHeader : $('.headerbox').css('background-image').replace('http://' + window.location.hostname, ''),
+         patronHeader: $('.headerbox').css('background-image').replace('http://' + window.location.hostname + ':' + window.location.port, ''),
          colorDeFondo : $('body').css('background-color'),
-         colorDestacado : $(".skin").attr("href").replace('http://' + window.location.hostname, ''),
+         colorDestacado : $(".skin").attr("href").replace('http://' + window.location.hostname+ ':' + window.location.port, ''),
          estiloPagina : $('#layout').attr("class"),
-         theme : $("#theme").attr("href").replace('http://' + window.location.hostname, ''),
+         theme: $("#theme").attr("href").replace('http://' + window.location.hostname + ':' + window.location.port, ''),
          bodyClass : $('body').attr('class'),
      }
       $.ajax({
