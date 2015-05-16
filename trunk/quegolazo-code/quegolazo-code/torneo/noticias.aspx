@@ -34,7 +34,7 @@
                        <ItemTemplate>
                        <div class="col-md-6">
                         <!-- Recent Post -->
-                        <div class="panel panel-default">
+                        <div class="panel panel-default panel-noticias">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-sm-9 col-xs-8">
@@ -50,7 +50,7 @@
                                 </div>
                                 
                             </div>
-                            <div class="panel-body panel-maxheight">                               
+                            <div class="panel-body">                               
                                 <!-- Post Item -->                               
                                 <div class="post-item">
                                     <div class="row box-noticias">
