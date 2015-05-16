@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/torneo/torneoMaster.Master" AutoEventWireup="true" CodeBehind="posiciones.aspx.cs" Inherits="quegolazo_code.torneo.posiciones" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headTorneoMasterContent" runat="server">
-    <script src="js/fechas.js"></script>
+    <script src="/torneo/js/fechas.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMasterTorneo" runat="server">
  
