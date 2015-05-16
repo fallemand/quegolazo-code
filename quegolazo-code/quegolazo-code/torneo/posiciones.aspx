@@ -79,8 +79,6 @@
                                                             <ItemTemplate>
                                                                 <tr>
                                                                     <td>
-                                                                        <%--<input hidden="hidden" <%#  gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(Eval("idEquipo").ToString())) %> />--%>
-                                                                       <%-- <img id="img" src="<%# gestorEquipo.equipo.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# gestorEquipo.equipo.tieneImagen()%>">--%>
                                                                         <%# new Entidades.Equipo(){idEquipo=int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                                     </td>
                                                                     <td><a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>"><%# Eval("Equipo") %></a></td>
@@ -119,25 +117,10 @@
                                 <asp:Repeater ID="rptListaEquipos" runat="server">
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre") %>">
-                                            <a href="#ver equipo">
-                                                <asp:Panel ID="panelLogoEquipo" runat="server" Visible="<%# ((Entidades.Equipo)Container.DataItem).tieneImagen() ? true : false %>">
+                                            <a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
                                                     <a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
-                                                        <img src="<%# ((Entidades.Equipo)Container.DataItem).obtenerImagenMediana() %>" class="img-responsive center-block">
+                                                        <%# ((Entidades.Equipo)Container.DataItem).obtenerImagen(Utils.GestorImagen.MEDIANA,"") %>
                                                     </a>  
-                                                </asp:Panel>  
-                                                <asp:Panel ID="panelCamisetaEquipo" runat="server" Visible="<%# ((Entidades.Equipo)Container.DataItem).tieneImagen() ? false : true %>">
-                                                    <a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
-                                                    <div id="Div1" class="camiseta-equipo" runat="server">
-                                                      <div>
-                                                        <i class="flaticon-football114" style="color:<%# Eval("colorCamisetaPrimario") %>"></i>
-                                                      </div><!--
-                                                   --><div class="segunda-mitad">
-                                                        <i class="flaticon-football114" style="color:<%# Eval("colorCamisetaSecundario") %>"></i>
-                                                      </div>
-                                                    </div>
-                                                        </a>
-                                                </asp:Panel>     
-                                                
                                             </a>
                                         </li>
                                     </ItemTemplate>
