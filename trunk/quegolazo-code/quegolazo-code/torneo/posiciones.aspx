@@ -61,13 +61,13 @@
                                         <div class="row margin-top" style="max-height: 350px !important;overflow: auto;">
                                             <div class="col-md-12">
                                                 <table id="tabla-posiciones" class="table table-condensed table-hover">
-                                                    <thead>
+                                                    <thead id="faseTCT" runat="server" visible="true">
                                                         <tr>
-                                                            <th class="col-md-4 text-center" colspan="2">Equipo</th>
-                                                            <th class="col-md-1 text-center">PTS</th>
+                                                            <th class="col-md-4 text-center" colspan="2">Equipo</th>                                                            
+                                                            <th class="col-md-1 text-center" id="thPTS">PTS</th>
                                                             <th class="col-md-1 text-center">PJ</th>
                                                             <th class="col-md-1 text-center">PG</th>
-                                                            <th class="col-md-1 text-center">PE</th>
+                                                            <th class="col-md-1 text-center" id="tdPE">PE</th>
                                                             <th class="col-md-1 text-center">PP</th>
                                                             <th class="col-md-1 text-center">GF</th>
                                                             <th class="col-md-1 text-center">GC</th>
@@ -75,17 +75,20 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="tablaFiltro">
-                                                        <asp:Repeater ID="rptEquipos" runat="server">
+                                                        <asp:Repeater ID="rptEquipos" runat="server" OnItemDataBound="rptEquipos_ItemDataBound">
                                                             <ItemTemplate>
                                                                 <tr>
                                                                     <td>
-                                                                        <%# new Entidades.Equipo(){idEquipo=int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                                        <a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
+                                                                        <%# new Entidades.Equipo(){idEquipo=int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %></a>
                                                                     </td>
                                                                     <td><a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>"><%# Eval("Equipo") %></a></td>
-                                                                    <td class="active text-center" style="font-size:16px;"><b><%# Eval("Puntos") %></b></td>
+                                                                    <asp:Panel runat="server" id="pnlPuntos">
+                                                                        <td class="active text-center" style="font-size:16px;" ><b><%# Eval("Puntos") %></b></td></asp:Panel>
                                                                     <td class="text-center"><%# Eval("PJ") %></td>
                                                                     <td class="text-center"><%# Eval("PG") %></td>
-                                                                    <td class="text-center"><%# Eval("PE") %></td>
+                                                                    <asp:Panel runat="server" id="pnlPE">
+                                                                        <td class="text-center"><%# Eval("PE") %></td></asp:Panel>
                                                                     <td class="text-center"><%# Eval("PP") %></td>
                                                                     <td class="text-center"><%# Eval("GF") %></td>
                                                                     <td class="text-center"><%# Eval("GC") %></td>

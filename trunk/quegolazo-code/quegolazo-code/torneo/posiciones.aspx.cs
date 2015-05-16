@@ -36,9 +36,15 @@ namespace quegolazo_code.torneo
                     gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
                     gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                     idEdicion = edicion.idEdicion;
-
+                    
                     if (gestorEdicion.edicion.fases.Count > 0)
+                    { 
                         cargarEquipos();
+                        gestorEdicion.getFaseActual();
+                        //Oculta las columnas PUNTOS Y PARTIDOS EMPATADOS si la fase es Elimatoria
+                        if (gestorEdicion.faseActual.tipoFixture.nombre.Equals("Eliminatorio"))
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "ocultar", "ocultarColumnas();", true);
+                    }
                     else
                         sinEquipos.Visible = true;
                 }
@@ -53,6 +59,20 @@ namespace quegolazo_code.torneo
             GestorControles.cargarRepeaterList(rptGrupos, gestorEdicion.edicion.fases[gestorEdicion.faseActual.idFase - 1].grupos);
             sinEquipos.Visible = !GestorControles.cargarRepeaterTable(rptEquipos, gestorEstadisticas.obtenerTablaPosiciones(gestorEdicion.faseActual.idFase));
             GestorControles.cargarRepeaterList(rptListaEquipos, gestorEdicion.edicion.equipos);
+        }
+
+        protected void rptEquipos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (gestorEdicion.faseActual.tipoFixture.nombre.Equals("Eliminatorio"))
+                {
+                    Panel pnlPuntos = (Panel)e.Item.FindControl("pnlPuntos");
+                    Panel pnlPE = (Panel)e.Item.FindControl("pnlPE");
+                    pnlPuntos.Visible = false;
+                    pnlPE.Visible = false;
+                }
+            }
         }
     }
 }
