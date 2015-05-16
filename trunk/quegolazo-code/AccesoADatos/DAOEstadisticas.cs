@@ -1058,7 +1058,7 @@ namespace AccesoADatos
                 string sql = @"SELECT partido.idFecha AS 'Fecha', COUNT(CASE idGanador WHEN @idEquipo THEN 1 ELSE NULL END) * puntosGanado + COUNT(CASE empate WHEN 1 THEN 1 ELSE NULL END)*puntosEmpatado+ COUNT(CASE idPerdedor WHEN @idEquipo  THEN 1 ELSE NULL END)*puntosPerdido as 'Puntos'
                                 FROM Partidos partido
                                 INNER JOIN Ediciones edicion ON partido.idEdicion = edicion.idEdicion
-                                WHERE (partido.idEquipoLocal = @idEquipo  OR partido.idEquipoVisitante = @idEquipo)
+                                WHERE (partido.idEquipoLocal = @idEquipo  OR partido.idEquipoVisitante = @idEquipo) and partido.idEstado=@estadoPartido
                                 AND edicion.idEdicion = @idEdicion
                                 AND partido.idFase = @idFase
                                 GROUP BY partido.idFecha, edicion.puntosGanado, edicion.puntosEmpatado, edicion.puntosPerdido
@@ -1067,6 +1067,7 @@ namespace AccesoADatos
                 cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.Parameters.Add(new SqlParameter("@idEquipo", idEquipo));
+                cmd.Parameters.Add(new SqlParameter("@estadoPartido", Estado.partidoJUGADO));
                 cmd.CommandText = sql;
                 dr = cmd.ExecuteReader();
                 tablaDeDatos.Load(dr);

@@ -166,6 +166,24 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Literal ltResumenTarjetasRojas;
         
         /// <summary>
+        /// Control sinGraficoGoles.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinGraficoGoles;
+        
+        /// <summary>
+        /// Control sinGraficoPartidos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinGraficoPartidos;
+        
+        /// <summary>
         /// Control rptHistorialPartidos.
         /// </summary>
         /// <remarks>
@@ -184,6 +202,15 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinHistorialDePartido;
         
         /// <summary>
+        /// Control sinGraficoPuntos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinGraficoPuntos;
+        
+        /// <summary>
         /// Control rptGoleadores.
         /// </summary>
         /// <remarks>
@@ -200,5 +227,14 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinGoleadores;
+        
+        /// <summary>
+        /// Control sinGraficoGoleadores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sinGraficoGoleadores;
     }
 }
