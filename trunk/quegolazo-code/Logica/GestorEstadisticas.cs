@@ -83,6 +83,21 @@ namespace Logica
            return DaoEstadisticas.obtenerFixtureUltimaFecha(edicion.idEdicion, idFase);
        }
 
+       public DataTable estadisticasDeArbitro(int idTorneo)
+       {
+           return DaoEstadisticas.estadisticasDeArbitro(idTorneo, edicion.idEdicion);
+       }
+
+       public DataTable vallaMenosVencida()
+       {
+           return DaoEstadisticas.vallaMenosVencida(edicion.idEdicion);
+       }
+
+       public DataTable rankingFairPlay()
+       {
+           return DaoEstadisticas.rankingFairPlay(edicion.idEdicion);
+       }
+
        public DataTable obtenerAvanceFecha(int idFase)
        {    
            return DaoEstadisticas.obtenerAvanceFecha(edicion.idEdicion, idFase);

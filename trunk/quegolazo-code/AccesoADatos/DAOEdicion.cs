@@ -279,8 +279,7 @@ namespace AccesoADatos
                     respuesta.puntosGanado = int.Parse(dr["puntosGanado"].ToString());
                     respuesta.generoEdicion = obtenerGeneroEdicionPorId(int.Parse(dr["idGeneroEdicion"].ToString()));
                     respuesta.preferencias = obtenerPreferenciasPorId(int.Parse(dr["idEdicion"].ToString()));
-                    respuesta.estado = daoEstado.obtenerEstadoPorId(int.Parse(dr["idEstado"].ToString()));
-                    //respuesta.estado = new Estado() { ambito = new Ambito() { idAmbito = Ambito.EDICION }, idEstado = int.Parse(dr["idEstado"].ToString()), nombre = dr["nombre"].ToString() };
+                    respuesta.estado = daoEstado.obtenerEstadoPorId(int.Parse(dr["idEstado"].ToString()));                   
                 }
                 if (dr != null)
                     dr.Close();
