@@ -156,7 +156,7 @@
                                                                                 <th class="text-center" colspan="3">
                                                                                     <span class="flaticon-football28"></span>
                                                                                     Últimos Goles
-                                                                                </th>
+                              T                                                  </th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -397,7 +397,7 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td><%# (new Entidades.Equipo() { idEquipo = int.Parse(Eval("idEquipo").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "img-circle avatar-xs")%></td>
-                                                    <td><%# Eval("Equipo")%></td>
+                                                    <td><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, int.Parse(Eval("idEquipo").ToString()))%>" data-toggle="tab"><%# Eval("Equipo") %></a></td>
                                                     <td><%# Eval("Puntos")%></td>
                                                     <td><%# Eval("PJ")%></td>
                                                     <td><%# Eval("PG")%></td>
