@@ -101,7 +101,7 @@ namespace quegolazo_code.admin
         {
             try
             {
-                gestorNoticia.modificarNoticia(gestorNoticia.noticia.idNoticia, txtTituloNoticia.Value, txtDescripcionNoticia.Text);
+                gestorNoticia.modificarNoticia(gestorNoticia.noticia.idNoticia, txtTituloNoticia.Value, txtDescripcionNoticia.Text, ddlCategoriaNoticia.SelectedValue);
                 limpiarCamposNoticias();
                 cargarRepeaterNoticias();
                 gestorNoticia.noticia = null;

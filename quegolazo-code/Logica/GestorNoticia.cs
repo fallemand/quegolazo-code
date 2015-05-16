@@ -62,12 +62,13 @@ namespace Logica
         /// Modifica una noticia de la BD
         /// autor: Pau Pedrosa
         /// </summary>
-        public void modificarNoticia(int idNoticia, string titulo, string descripcion)
+        public void modificarNoticia(int idNoticia, string titulo, string descripcion, string categoria)
         {
             DAONoticia daoNoticia = new DAONoticia();
             noticia.idNoticia = idNoticia;
             noticia.titulo = titulo;
             noticia.descripcion = descripcion;
+            noticia.categoria.idCategoriaNoticia = int.Parse(categoria);
             daoNoticia.modificarNoticia(noticia);
         }
 

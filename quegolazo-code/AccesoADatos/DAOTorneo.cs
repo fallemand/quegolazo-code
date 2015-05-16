@@ -274,14 +274,31 @@ namespace AccesoADatos
             {
                 if (con.State == ConnectionState.Closed)                
                     con.Open();                
-                cmd.Connection = con;
-                string sql = @"INSERT INTO Torneos (nombre, descripcion, nick, idUsuario)
-                                              VALUES (@nombre, @descripcion, @nick, @idUsuario) SELECT SCOPE_IDENTITY()";
+                cmd.Connection = con;                
+                string sql = @"BEGIN TRANSACTION
+                    INSERT INTO Torneos (nombre, descripcion, nick, idUsuario)
+                                 VALUES (@nombre, @descripcion, @nick, @idUsuario)
+                    declare @idGenerado int =  (SELECT SCOPE_IDENTITY());
+                    INSERT INTO ConfiguracionesVisuales (idTorneo,colorDeFondo, patronDeFondo, estiloPagina,colorDestacado,colorHeader,patronHeader,theme,bodyClass)
+                    VALUES (@idGenerado,@colorDeFondo, @patronDeFondo, @estiloPagina, @colorDestacado,@colorHeader,@patronHeader, @theme, @bodyClass)
+                    COMMIT TRANSACTION
+                    SELECT @idGenerado";                
                 cmd.Parameters.Clear();
+                //Parametros del Torneo
                 cmd.Parameters.AddWithValue("@nombre", torneoNuevo.nombre);
                 cmd.Parameters.AddWithValue("@descripcion", torneoNuevo.descripcion);
                 cmd.Parameters.AddWithValue("@nick", torneoNuevo.nick);
                 cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+                //parametros de Configuracion Visual
+                ConfiguracionVisual configuracionPorDefecto = new ConfiguracionVisual(true);
+                cmd.Parameters.AddWithValue("@colorDeFondo", configuracionPorDefecto.colorDeFondo);
+                cmd.Parameters.AddWithValue("@patronDeFondo", configuracionPorDefecto.patronDeFondo);
+                cmd.Parameters.AddWithValue("@estiloPagina", configuracionPorDefecto.estiloPagina);
+                cmd.Parameters.AddWithValue("@colorDestacado", configuracionPorDefecto.colorDestacado);
+                cmd.Parameters.AddWithValue("@colorHeader", configuracionPorDefecto.colorHeader);
+                cmd.Parameters.AddWithValue("@patronHeader", configuracionPorDefecto.patronHeader);
+                cmd.Parameters.AddWithValue("@theme", configuracionPorDefecto.theme);
+                cmd.Parameters.AddWithValue("@bodyClass", configuracionPorDefecto.bodyClass);
                 cmd.CommandText = sql;
                 return int.Parse(cmd.ExecuteScalar().ToString());
             }

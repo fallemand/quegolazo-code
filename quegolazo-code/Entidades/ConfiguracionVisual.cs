@@ -16,5 +16,21 @@ namespace Entidades
         public string patronHeader { get; set; }
         public string theme { get; set; }
         public string bodyClass { get; set; }
+        
+        public ConfiguracionVisual() {         
+        }
+        public ConfiguracionVisual(bool obtenerDefault)
+        {
+            this.bodyClass = "none fixed";
+            this.colorDeFondo = "rgb(95, 165, 78)";
+            this.patronDeFondo = "url(:12434/torneo/img/bg-theme/c10.png)";
+            this.colorDestacado = "/torneo/css/skins/green.css";
+            this.estiloPagina = "layout-boxed-margin";
+            this.colorHeader = "rgb(255, 255, 255)";
+            this.theme = "/torneo/css/bootstrap/sandstone.css";
+            this.patronHeader = "none";            
+        }
+        
     }
+   
 }

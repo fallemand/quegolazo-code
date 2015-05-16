@@ -1201,6 +1201,18 @@ padding-right: 20px;
   max-height: 133px;
   overflow:hidden;
 }
+.header-post img {
+height:180px;
+overflow: hidden;
+}
 .box-noticias {
-padding-left:15px !important; padding-bottom: 15px !important;
+padding-left:15px !important;
+padding-bottom: 15px !important;
+padding-right: 15px;
+}
+.panel-noticias {
+max-height:207px;
+}
+.descripcion-evento {
+height: 135px;
 }

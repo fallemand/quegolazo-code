@@ -17,7 +17,8 @@ namespace quegolazo_code.torneo
     {
         protected GestorTorneo gestorTorneo;
         protected GestorEdicion gestorEdicion;
-        protected GestorPartido gestorPartido;     
+        protected GestorPartido gestorPartido;
+        protected Torneo torneo;
         GestorEstadisticas gestorEstadistica;
         protected int idEquipo, idEdicion;
         protected string nickTorneo;
@@ -31,7 +32,7 @@ namespace quegolazo_code.torneo
                 {
                     gestorTorneo = new GestorTorneo();
                     gestorEdicion = new GestorEdicion();
-                    Torneo torneo = GestorUrl.validarTorneo();
+                    torneo = GestorUrl.validarTorneo();
                     Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
                     gestorEstadistica = new GestorEstadisticas(edicion);
                     nickTorneo = torneo.nick;
@@ -40,12 +41,7 @@ namespace quegolazo_code.torneo
                     gestorEdicion.edicion = edicion;
                     idEdicion = edicion.idEdicion;
                     gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-
-
-                    gestorPartido = new GestorPartido();
-                    
-
-               
+                    gestorPartido = new GestorPartido();    
                 }
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }

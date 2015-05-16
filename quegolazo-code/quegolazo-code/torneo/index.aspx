@@ -75,22 +75,15 @@
                                                               <ItemTemplate>
                                                         <li>
                                                             <div class="header-post">
-                                                                <div class="date">
-                                                                    <span><%# ((DateTime)((Entidades.Noticia)Container.DataItem).fecha).ToString("dd/MM") %></span>
-                                                                   <%#  ((DateTime)Eval("fecha")).Year %> 
+                                                               <div class="date">
+                                                                    <span><%#((DateTime)((Entidades.Noticia)Container.DataItem).fecha).ToString("dd/MM")%></span>
+                                                                     <%#((DateTime)Eval("fecha")).Year %>  
                                                                 </div>
-                                                                <a href="single-news.html"><img src="<%# ((Entidades.Noticia)Container.DataItem).obtenerImagenMediana() %>" alt=""></a>
-                                                                <div class="meta-tag">
-                                                                    <ul>
-                                                                        <%--<li><i class="fa fa-user"></i><a href="#">Admin</a></li>--%>
-                                                                        <%--<li><i class="fa fa-folder-open"></i><a href="#">Design</a></li>--%>
-                                                                        <%--<li class="text-right"><i class="fa fa-comment"></i><a href="#">10</a></li>--%>
-                                                                    </ul>
-                                                                </div>
+                                                                <a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion,((Entidades.Noticia)Container.DataItem).idNoticia)%>"><img src="<%# ((Entidades.Noticia)Container.DataItem).obtenerImagenMediana() %>" alt=""></a>                                                            
                                                             </div>
-                                                            <div class="info-post">
-                                                                <h4><a href="single-news.html"><%# Eval("titulo") %></a></h4>
-                                                                <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0,60)  %>...</p>
+                                                            <div class="info-post descripcion-evento">
+                                                                <h4><a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion,((Entidades.Noticia)Container.DataItem).idNoticia)%>"><%# Eval("titulo").ToString().Substring(0, Eval("titulo").ToString().Length > 22 ? 22 : Eval("titulo").ToString().Length)%> <%#Eval("titulo").ToString().Length > 22 ? "..." : "" %> </a></h4>
+                                                                <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0, Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length > 57  ? 57 : Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length)  %>...</p>
                                                             </div>
                                                         </li>
                                                         </ItemTemplate>
@@ -280,15 +273,15 @@
                                    <ItemTemplate>
                                 <!-- Post Item -->
                                 <div class="post-item">
-                                    <div class="row">
-                                        <div class="col-md-4">
+                                    <div class="row box-noticias">
+                                        <div class="imagen-noticia imagen-noticia-thumb">
                                             <div class="img-hover">
-                                                <img src="<%# ((Entidades.Noticia)Container.DataItem).obtenerImagenMediana() %>" alt="" class="img-responsive">
-                                                <div class="overlay"><a href="single-news.html">+</a></div>
+                                                <img src="<%#((Entidades.Noticia)Container.DataItem).obtenerImagenMediana()%>" alt="" class="img-responsive">
+                                                <div class="overlay"><a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion,((Entidades.Noticia)Container.DataItem).idNoticia)%>">+</a></div>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h4><a href="single-news.html"><%# Eval("titulo") %></a></h4>
+                                            <h4><a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion,((Entidades.Noticia)Container.DataItem).idNoticia)%>"><%# Eval("titulo") %></a></h4>
                                             <p class="data-info"><%# nombreMes(DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Year.ToString() %></p><!-- <i class="fa fa-comments"></i><a href="#">0</a> --> 
                                             <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0,Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length >= 110 ? 110 : Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length)  %>... <a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion, ((Entidades.Noticia)Container.DataItem).idNoticia)%>">Leer Más [+]</a></p>
                                         </div>
