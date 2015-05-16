@@ -1336,7 +1336,7 @@ namespace AccesoADatos
                                 inner join EquipoXEdicion exe ON exe.idEquipo = e.idEquipo
                                 inner join Ediciones ed ON exe.idEdicion = ed.idEdicion
                                 left join Partidos p on (e.idEquipo = p.idEquipoLocal OR e.idEquipo = p.idEquipoVisitante)
-                                where exe.idEdicion = @idEdicion
+                                where exe.idEdicion = @idEdicion and p.idEdicion = @idEdicion
                                 GROUP BY e.nombre, e.directorTecnico, e.colorCamisetaPrimario, e.colorCamisetaSecundario, e.idEquipo, ed.idEdicion, puntosGanado, puntosPerdido, puntosEmpatado
                                 ORDER BY 'Puntos' DESC , 'PG' DESC, 'GF' DESC";
                 cmd.Parameters.Clear();
@@ -1496,6 +1496,128 @@ namespace AccesoADatos
                 string sql = @"SELECT TOP 3 posicion, idEquipo
                                 FROM TablaPosicionesFinal tablaFinal
                                 WHERE tablaFinal.idEdicion = @idEdicion";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public DataTable estadisticasDeArbitro(int idTorneo, int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT a.idArbitro AS 'idArbitro', a.nombre AS 'nombreArbitro', 
+                                a.matricula AS 'matriculaArbitro', 
+                                COUNT(CASE partidosEdicion.idEdicion WHEN @idEdicion THEN 1 ELSE NULL END) AS 'CantPartidosArbitradosEdicion',
+                                (SELECT COUNT(p.idPartido) FROM Partidos p WHERE p.idArbitro = a.idArbitro AND p.idEdicion IN (SELECT e.idEdicion FROM Ediciones e WHERE e.idTorneo = @idTorneo)) AS 'CantPartidosArbitradosTorneo'
+                                FROM Arbitros a 
+                                LEFT JOIN Partidos partidosEdicion ON partidosEdicion.idArbitro = a.idArbitro
+                                GROUP BY a.idArbitro, a.nombre, a.matricula";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@idTorneo", idTorneo));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public DataTable vallaMenosVencida(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT e.idEquipo AS 'idEquipo', e.nombre AS 'equipo', 
+                                COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END) AS 'PJ',  
+                                SUM(CASE WHEN p.idEquipoLocal = e.idEquipo AND p.golesVisitante IS NOT NULL THEN p.golesVisitante ELSE 0 END)+ SUM(CASE WHEN p.idEquipoVisitante = e.idEquipo AND p.golesLocal IS NOT NULL THEN p.golesLocal ELSE 0 END) AS 'GC',
+                                (SUM(CASE WHEN p.idEquipoLocal = e.idEquipo AND p.golesVisitante IS NOT NULL THEN p.golesVisitante ELSE 0 END)+ SUM(CASE WHEN p.idEquipoVisitante = e.idEquipo AND p.golesLocal IS NOT NULL THEN p.golesLocal ELSE 0 END) *1.00)/(COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*1.00) AS 'Promedio GC por Partido'
+                                from Equipos e
+                                inner join EquipoXEdicion exe ON exe.idEquipo = e.idEquipo
+                                left join Partidos p on (e.idEquipo = p.idEquipoLocal OR e.idEquipo = p.idEquipoVisitante)
+                                where exe.idEdicion = @idEdicion and p.idEdicion = @idEdicion
+                                GROUP BY e.nombre, e.idEquipo
+                                ORDER BY 'GC' DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                tablaDeDatos.Load(dr);
+                if (dr != null)
+                    dr.Close();
+                return tablaDeDatos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public DataTable rankingFairPlay(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            DataTable tablaDeDatos = new DataTable();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT e.idEquipo AS 'idEquipo', e.nombre AS 'equipo',
+                                (COUNT(tr.idTarjeta) + COUNT(ta.idTarjeta)) AS  'Cantidad Tarjetas',
+                                COUNT(tr.idTarjeta) AS 'TR', COUNT(ta.idTarjeta) AS 'TA'
+                                FROM Equipos e
+                                INNER JOIN EquipoXEdicion exe ON exe.idEquipo = e.idEquipo
+                                LEFT JOIN Tarjetas tr ON (tr.idEquipo = e.idEquipo AND tr.tipoTarjeta ='R' AND tr.idPartido IN (SELECT p.idPartido FROM Partidos p WHERE p.idEdicion = @idEdicion))
+                                LEFT JOIN Tarjetas ta ON (ta.idEquipo = e.idEquipo AND ta.tipoTarjeta ='A' AND ta.idPartido IN (SELECT p.idPartido FROM Partidos p WHERE p.idEdicion = @idEdicion))
+                                WHERE exe.idEdicion = @idEdicion
+                                GROUP BY e.idEquipo, e.nombre
+                                ORDER BY 'Cantidad Tarjetas' DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.CommandText = sql;

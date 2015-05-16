@@ -149,7 +149,7 @@
                                                                                 <th class="text-center" colspan="3">
                                                                                     <span class="flaticon-football28"></span>
                                                                                     Últimos Goles
-                              T                                                  </th>
+                                                                               </th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
