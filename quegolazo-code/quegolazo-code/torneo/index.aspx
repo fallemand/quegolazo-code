@@ -10,7 +10,7 @@
                 <div class="row mobile-margin-top">
 
 <!-- Otros Partidos de la Fecha -->
-                <div class="col-sm-12">
+                <div class="col-sm-12" runat="server" id="divOtrosPartidosDeFecha" visible="true">
                     <div class="panel nopadding panel-default">
                         <div class="panel-body">
                             <p class="slider-multiple-title">Otros Partidos de la Fecha</p>
@@ -163,9 +163,8 @@
                                                                             <asp:Repeater ID="rptUltimosGoles" runat="server">
                                                                                 <ItemTemplate>
                                                                                     <tr>
-                                                                                        <td><img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Equipo").ToString())}).obtenerImagenChicha()%>" class=" avatar-xs"></td>
-                                                                                        <td>
-                                                                                            <img src="<%# (new Entidades.Jugador() { idJugador=int.Parse(Eval("Id Jugador").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt="">
+                                                                                        <td><%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Equipo").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "avatar-xs")%></td>
+                                                                                        <td><%# (new Entidades.Jugador() { idJugador=int.Parse(Eval("Id Jugador").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "img-circle avatar-xs", "", false)  %>
                                                                                             <%# Eval("Jugador") %></td>
                                                                                         <td><%# Eval("Tipo Gol") %></td>
                                                                                         <td><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("Id Partido").ToString()) %>">Ver Partido</a></td>
@@ -196,9 +195,9 @@
                                                                             <asp:Repeater ID="rptUltimasTarjetas" runat="server">
                                                                                 <ItemTemplate>
                                                                                     <tr>
-                                                                                        <td><img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Equipo").ToString())}).obtenerImagenChicha()%>" class=" avatar-xs"></td>
+                                                                                        <td><%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Equipo").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "avatar-xs")%></td>
                                                                                         <td>
-                                                                                            <img src="<%# (new Entidades.Jugador() { idJugador=int.Parse(Eval("Id Jugador").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt="">
+                                                                                            <%# (new Entidades.Jugador() { idJugador=int.Parse(Eval("Id Jugador").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "img-circle avatar-xs", "", false)  %>
                                                                                             <%# Eval("Jugador") %></td>
                                                                                         <td><img src="/torneo/img/img-theme/tarjeta-<%# Eval("Tipo Tarjeta") %>.png" class="img-circle avatar-xs" alt=""></td>
                                                                                         <td><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("Id Partido").ToString()) %>">Ver Partido</a></td>
@@ -224,56 +223,39 @@
                                 <!-- Left Content - Tabs and Carousel -->
 
                                 <!-- Right Content - Content Counter -->
-                                <div class="col-md-3">
+                                <div class="col-md-3" runat="server" id="divProximoPartido" visible = "false">
                                     <aside>
                                         <div class="title-color text-center">
                                             <h4>Próximo Partido</h4>
                                         </div>
 
                                         <div class="content-counter content-counter-home">
-                                            <p class="text-center">
-                                                <i class="fa fa-clock-o"></i>
-                                                Cuenta Regresiva
-                                            </p>
-                                            <div id="counter-proximo-partido" class="counter"></div>
-                                            <ul class="post-options">
-                                                <li><i class="fa fa-calendar"></i><asp:Literal ID="ltDiaDePartido" runat="server"/> <asp:Literal ID="ltFechaPartido" runat="server"/></li>
-                                                <li><i class="fa fa-clock-o"></i><asp:Literal ID="ltHoraPartido" runat="server"/> hs</li>
-                                            </ul>
+                                            <asp:Panel ID="pnlConProgramacion" runat="server" Visible="false">
+                                                <p class="text-center">
+                                                    <i class="fa fa-clock-o"></i>
+                                                    Cuenta Regresiva
+                                                </p>
+                                                <div id="counter-proximo-partido" class="counter"></div>
+                                                <ul class="post-options">
+                                                    <li><i class="fa fa-calendar"></i><asp:Literal ID="ltDiaDePartido" runat="server"/> <asp:Literal ID="ltFechaPartido" runat="server"/></li>
+                                                    <li><i class="fa fa-clock-o"></i><asp:Literal ID="ltHoraPartido" runat="server"/> hs</li>
+                                                </ul>
+                                            </asp:Panel>
                                             <div class="widget-partido">
                                                 <div class="col-xs-6">
-                                                    <asp:Panel ID="tieneFotoLocal" runat="server">
-                                                    <img src="<%# (new Entidades.Equipo() { idEquipo= proximoPartido.local.idEquipo}).obtenerImagenMediana()%>" class="img-responsive center-block"></asp:Panel>
-                                                    <asp:Panel ID="noTieneFotoLocal" runat="server">
-                                                        <div class="camiseta-equipo">
-                                                        <div>
-                                                            <i class="flaticon-football114" style="color: #005A96"></i>
-                                                        </div><!--
---><div class="segunda-mitad">
-                                                        <i class="flaticon-football114" style="color: #FAD201"></i>
-                                                        </div>
-                                                        </div>
-                                                        </asp:Panel>
-                                                    <h5><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,proximoPartido.local.idEquipo)%>" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoLocal" runat="server"/></a></h5>
+                                                    <% if(gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionCONFIGURADA || gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionINICIADA) {%>
+                                                        <%= (new Entidades.Equipo() { idEquipo= proximoPartido.local.idEquipo}).obtenerImagen(Utils.GestorImagen.MEDIANA, "") %>   
+                                                    <% } %>                                                 
+                                                    <h5><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, proximoPartido.local.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoLocal" runat="server"/></a></h5>
                                                 </div>
-
                                                 <div class="col-xs-6">
-                                                    <asp:Panel ID="tieneFotoVisitante" runat="server">
-                                                    <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block"></asp:Panel>
-                                                    <asp:Panel ID="noTieneFotoVisitante" runat="server">
-                                                        <div class="camiseta-equipo">
-                                                        <div>
-                                                            <i class="flaticon-football114" style="color: #005A96"></i>
-                                                        </div><!--
---><div class="segunda-mitad">
-                                                        <i class="flaticon-football114" style="color: #FAD201"></i>
-                                                        </div>
-                                                        </div>
-                                                        </asp:Panel>
-                                                    <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoVisitante" runat="server"/></a></h5>
+                                                    <% if(gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionCONFIGURADA || gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionINICIADA) {%>
+                                                    <%= (new Entidades.Equipo() { idEquipo= proximoPartido.visitante.idEquipo}).obtenerImagen(Utils.GestorImagen.MEDIANA, "")%> 
+                                                    <% } %>                                                   
+                                                    <h5><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, proximoPartido.visitante.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoVisitante" runat="server"/></a></h5>
                                                 </div>
                                             </div>
-                                            <a class="btn btn-primary" href="#">
+                                            <a class="btn btn-primary" href="<%= Logica.GestorUrl.urlPartido(nickTorneo, idEdicion, proximoPartido.idPartido.ToString()) %>">
                                                 VER FICHA DEL PARTIDO
                                                 <i class="fa fa-trophy"></i>
                                             </a>
@@ -308,7 +290,7 @@
                                         <div class="col-md-8">
                                             <h4><a href="single-news.html"><%# Eval("titulo") %></a></h4>
                                             <p class="data-info"><%# nombreMes(DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Year.ToString() %></p><!-- <i class="fa fa-comments"></i><a href="#">0</a> --> 
-                                            <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0,110)  %>... <a href="single-news.html">Leer Más [+]</a></p>
+                                            <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0,Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length >= 110 ? 110 : Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length)  %>... <a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion, ((Entidades.Noticia)Container.DataItem).idNoticia)%>">Leer Más [+]</a></p>
                                         </div>
                                     </div>
                                 </div>
@@ -324,83 +306,48 @@
                     <!-- Side Bar -->
                     <div class="col-md-4 col-sm-6">
                         <!-- Widget Partidos Anteriores -->
-                        <div class="panel panel-default small-arrows">
+                        <div id="divUtimosPartidos" class="panel panel-default small-arrows" runat="server" visible="true">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Últimos Partidos</h3>
                             </div>
                             <div class="panel-body nopadding tooltip-hover">
                                 <ul class="single-carousel">
-                                    <li>
-                                        <div class="widget-partido">
-                                            <div class="col-xs-4">
-                                                <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                                <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
-                                            </div>
-                                            <div class="col-xs-4 resultado">
-                                                <div class="thumbnail">
-                                                    <h2>2<small><small>3</small></small></h2>
-                                                </div>
-                                                <div class="thumbnail">
-                                                    <h2>2<small><small>5</small></small></h2>
-                                                </div>
-                                                <i class="flaticon-football85" data-toggle="tooltip" title="Árbitro: Gabriel Faballe"></i>
-                                                <span class="glyphicon glyphicon-time" data-toggle="tooltip" title="25 Marzo 2015 22:00"></span>
-                                                <i class="flaticon-football96" data-toggle="tooltip" title="Complejo Tiruyaki"></i>
-                                                <a href="#ruta-al-partido" class="btn btn-primary btn-xs">+ Info</a>
-                                            </div>
+                                    <asp:Repeater ID="rptUltimosPartidos" runat="server">
+                                        <ItemTemplate>
+                                            <li>
+                                                <div class="widget-partido">
+                                                    <div class="col-xs-4">
+                                                        <%# (new Entidades.Equipo() { idEquipo = int.Parse(Eval("local.idEquipo").ToString())}).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                                        <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><%# Eval("local.nombre")%></a></h5>
+                                                    </div>
+                                                    <div class="col-xs-4 resultado">
+                                                        <div class="thumbnail">
+                                                            <h2><%# Eval("golesLocal")%><small><small><%# Eval("penalesLocal")%></small></small></h2>
+                                                        </div>
+                                                        <div class="thumbnail">
+                                                            <h2><%# Eval("golesVisitante")%><small><small><%# Eval("penalesVisitante")%></small></small></h2>
+                                                        </div>
+                                                        <i class="flaticon-football85" data-toggle="tooltip" title=""<%# Eval("arbitro.nombre")%>></i>
+                                                        <span class="glyphicon glyphicon-time" data-toggle="tooltip" title=<%# Eval("fecha")%>></span>
+                                                        <i class="flaticon-football96" data-toggle="tooltip" title=<%# Eval("cancha.nombre")%>></i>
+                                                        <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("idPartido").ToString()) %>" class="btn btn-primary btn-xs">+ Info</a>
+                                                    </div>
 
-                                            <div class="col-xs-4">
-                                                <div class="camiseta-equipo">
-                                                    <div>
-                                                        <i class="flaticon-football114" style="color: #005A96"></i>
-                                                    </div><!--
-        --><div class="segunda-mitad">
-                                                    <i class="flaticon-football114" style="color: #FAD201"></i>
+                                                    <div class="col-xs-4">
+                                                         <%# (new Entidades.Equipo() { idEquipo = int.Parse(Eval("visitante.idEquipo").ToString())}).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                                        <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><%# Eval("visitante.nombre")%></a></h5>
                                                     </div>
                                                 </div>
-                                                <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="widget-partido">
-                                            <div class="col-xs-4">
-                                                <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                                <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
-                                            </div>
-                                            <div class="col-xs-4 resultado">
-                                                <div class="thumbnail">
-                                                    <h2>2<small><small>3</small></small></h2>
-                                                </div>
-                                                <div class="thumbnail">
-                                                    <h2>2<small><small>5</small></small></h2>
-                                                </div>
-                                                <i class="flaticon-football85" data-toggle="tooltip" title="Árbitro: Gabriel Faballe"></i>
-                                                <span class="glyphicon glyphicon-time" data-toggle="tooltip" title="25 Marzo 2015 22:00"></span>
-                                                <i class="flaticon-football96" data-toggle="tooltip" title="Complejo Tiruyaki"></i>
-                                                <a href="#ruta-al-partido" class="btn btn-primary btn-xs">+ Info</a>
-                                            </div>
-
-                                            <div class="col-xs-4">
-                                                <div class="camiseta-equipo">
-                                                    <div>
-                                                        <i class="flaticon-football114" style="color: #005A96"></i>
-                                                    </div><!--
---><div class="segunda-mitad">
-                                                    <i class="flaticon-football114" style="color: #FAD201"></i>
-                                                    </div>
-                                                </div>
-                                                <h5><a href="#" data-toggle="tooltip" title="Ver Equipo">Boca Juniors</a></h5>
-                                            </div>
-                                        </div>
-                                    </li>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </ul>
                             </div>
                         </div>
                         <!-- END Widget Partidos Anteriores -->
 
                         <!-- Widget Podio -->
-                        <asp:Panel ID="pnlPodio" runat="server" visible="false">
+                        <asp:Panel ID="pnlPodio" runat="server" Visible ="false" >
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Podio</h3>
@@ -408,25 +355,18 @@
                             <div class="panel-body nopadding">
                                 <div class="podio podio-md tooltip-hover">
                                     <div class="segundo">
-                                        <a href="#link-equipo" data-toggle="tooltip" title="2do Puesto: Boca Juniors">
-                                            <img src="/torneo/img/img-theme/equipo.png" alt="" />
+                                        <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, podio[1].idEquipo)%>" data-toggle="tooltip" title="2do Puesto: <%= podio[1].nombre %>">
+                                            <%= (new Entidades.Equipo() { idEquipo = podio[1].idEquipo }).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
                                         </a>
                                     </div>
                                     <div class="primero">
-                                        <a href="#link-equipo" data-toggle="tooltip" title="1er Puesto: Boca Juniors">
-                                            <div class="camiseta-equipo">
-                                                <div>
-                                                    <i class="flaticon-football114" style="color: #005A96"></i>
-                                                </div><!---->
-                                                <div class="segunda-mitad">
-                                                <i class="flaticon-football114" style="color: #FAD201"></i>
-                                                </div>
-                                            </div>
+                                        <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, podio[0].idEquipo)%>"" data-toggle="tooltip" title="1er Puesto: <%= podio[0].nombre %>">
+                                            <%= (new Entidades.Equipo() { idEquipo = podio[0].idEquipo }).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
                                         </a>
                                     </div>
                                     <div class="tercero">
-                                        <a href="#link-equipo" data-toggle="tooltip" title="3er Puesto: Boca Juniors">
-                                            <img src="/torneo/img/img-theme/equipo.png" alt="" />
+                                        <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, podio[2].idEquipo)%>" data-toggle="tooltip" title="3er Puesto: <%= podio[2].nombre %>">
+                                            <%= (new Entidades.Equipo() { idEquipo = podio[2].idEquipo }).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
                                         </a>
                                     </div>
                                 </div>
@@ -436,7 +376,7 @@
                         <!-- END Widget Podio -->
 
                         <!-- Widget Tabla de Posiciones -->
-                        <div class="panel panel-default">
+                        <div class="panel panel-default" id="divTablaPosiciones" runat="server" visible="true">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Tabla de Posiciones</h3>
                             </div>
@@ -453,73 +393,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                            <td>River Plate</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>3</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                            <td>River Plate</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>3</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                            <td>River Plate</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                            <td>River Plate</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                            <td>River Plate</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>3</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                            <td>River Plate</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="/torneo/img/img-theme/equipo.png" class="img-circle avatar-xs" alt=""></td>
-                                            <td>River Plate</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td>3</td>
-                                            <td>3</td>
-                                        </tr>
-
+                                        <asp:Repeater ID="rptTablaPosiciones" runat="server">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td><%# (new Entidades.Equipo() { idEquipo = int.Parse(Eval("idEquipo").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "img-circle avatar-xs")%></td>
+                                                    <td><%# Eval("Equipo")%></td>
+                                                    <td><%# Eval("Puntos")%></td>
+                                                    <td><%# Eval("PJ")%></td>
+                                                    <td><%# Eval("PG")%></td>
+                                                    <td><%# Eval("PE")%></td>
+                                                    <td><%# Eval("PP")%></td>
+                                                </tr>
+                                             </ItemTemplate>
+                                        </asp:Repeater>                                        
                                     </tbody>
                                 </table>
-                                <a class="center-block text-center" href="#">
+                                <a class="center-block text-center" href="<%= Logica.GestorUrl.urlPosiciones(nickTorneo,idEdicion) %>">
                                     + MAS INFO
                                 </a>
                             </div>
@@ -533,149 +422,23 @@
             <!-- End Content Central -->
 
             <!-- Sponsors -->
-            <div class="section-wide panel panel-default">
+            <div class="section-wide panel panel-default" id="divEquiposParticipantes" runat="server" visible="true">
                 <div class="container panel-body">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="text-center">
-                                <h2><span class="text-resalt">32</span> equipos participantes <small>Conocelos</small></h2>
+                                <h2><span class="text-resalt"><asp:Literal ID="ltCantidadEquipo" runat="server"/></span> equipos participantes <small>Conocelos</small></h2>
                             </div>
                             <ul class="equipos-home tooltip-hover">
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                            <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                            </div><!----><div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color:#FAD201"></i>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                            <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                            </div><!---->
-                                            <div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color:#FAD201"></i>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                            <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                            </div><!---->
-                                            <div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color:#FAD201"></i>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                            <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                            </div><!---->
-                                            <div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color:#FAD201"></i>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                            <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                            </div><!--
---><div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color:#FAD201"></i>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                            <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                            </div><!--
---><div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color:#FAD201"></i>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                            <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                            </div><!--
---><div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color:#FAD201"></i>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <div class="camiseta-equipo">
-                                            <div>
-                                                <i class="flaticon-football114" style="color:#005A96"></i>
-                                            </div><!--
---><div class="segunda-mitad">
-                                            <i class="flaticon-football114" style="color:#FAD201"></i>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="li-item" data-toggle="tooltip" title="Boca Juniors">
-                                    <a href="#ver equipo">
-                                        <img src="/torneo/img/img-theme/equipo.png" class="img-responsive center-block">
-                                    </a>
-                                </li>
+                                <asp:Repeater ID="rptEquiposParticipantes" runat="server">
+                                    <ItemTemplate>
+                                        <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre")%>">
+                                            <a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, int.Parse(Eval("idEquipo").ToString()))%>">
+                                                <%# (new Entidades.Equipo() { idEquipo = int.Parse(Eval("idEquipo").ToString())}).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                            </a>
+                                        </li>
+                                     </ItemTemplate>
+                                </asp:Repeater>
                             </ul>
                         </div>
                     </div>

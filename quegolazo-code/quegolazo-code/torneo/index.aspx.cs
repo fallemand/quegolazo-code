@@ -22,49 +22,73 @@ namespace quegolazo_code.torneo
         protected GestorPartido gestorPartido;
         protected int idFecha, idFase;
         protected Partido proximoPartido;
+        protected List<Equipo> podio;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 if (!IsPostBack) 
-                {
-                    
+                {                    
                     Torneo torneo = GestorUrl.validarTorneo();
                     Edicion edicion = GestorUrl.validarEdicion(torneo.nick);
-
                     gestorTorneo = new GestorTorneo();
                     gestorTorneo.torneo = torneo;
                     nickTorneo = torneo.nick;
-
                     gestorEdicion = new GestorEdicion();
                     gestorEdicion.edicion = edicion;
-                    gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
-                    gestorEdicion.getFaseActual();
-                    gestorEdicion.faseActual.getFechaActual();
-                    gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
                     idEdicion = edicion.idEdicion;
-                    idFase = gestorEdicion.faseActual.idFase;
-                    idFecha = gestorEdicion.faseActual.fechaActual.idFecha;
-
-                    gestorEstadisticas = new GestorEstadisticas(gestorEdicion.edicion);
                     gestorPartido = new GestorPartido();
-
-                    // Carga Otros Partidos de la Fecha
-                    otrosPartidosDeLaFecha(); 
+                    gestorEstadisticas = new GestorEstadisticas(gestorEdicion.edicion);
+                    if (gestorEdicion.edicion.estado.idEstado != Estado.edicionREGISTRADA)
+                    {
+                        gestorEdicion.edicion.fases = gestorEdicion.obtenerFases();
+                        gestorEdicion.getFaseActual();
+                        gestorEdicion.faseActual.getFechaActual();
+                        gestorEdicion.edicion.equipos = gestorEdicion.obtenerEquipos();
+                        idFase = gestorEdicion.faseActual.idFase;
+                        idFecha = gestorEdicion.faseActual.fechaActual.idFecha;
+                        otrosPartidosDeLaFecha();
+                        cargarProximoPartido();
+                        cargarEquiposParticipantes();
+                        cargarTablaPosiciones();
+                        cargarUltimosPartidos();
+                        cargarPodio();
+                    }
+                    habilitarPanelesSegunEstadoEdicion();                    
                     cargarNoticias();
-                    cargarEstadisticas();
-                    cargarProximoPartido();                    
+                    cargarEstadisticas();  
                 }
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }
+        }
+
+        public void habilitarPanelesSegunEstadoEdicion()
+        {
+            //hace VISIBLE el Próximo Partido SOLO cuando la edición está CONFIGURADA O INICIADA
+            if (gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA ||
+                gestorEdicion.edicion.estado.idEstado == Estado.edicionINICIADA)
+                divProximoPartido.Visible = true;
+            //Panel Últimos Partidos -> habilitar cuando está Iniciada, Finalizada y Cancelada
+            if (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA ||
+                gestorEdicion.edicion.estado.idEstado == Estado.edicionCONFIGURADA)
+                divUtimosPartidos.Visible = false;
+            //Panel de podio -> habilitar solo cuando está finalizada
+            if (gestorEdicion.edicion.estado.idEstado == Estado.edicionFINALIZADA)
+                pnlPodio.Visible = true;
+            //Panel de Tabla de posiciones y Equipos participantes -> NO habilitado cuadno está registrada la edición
+            if (gestorEdicion.edicion.estado.idEstado == Estado.edicionREGISTRADA)
+            { 
+                divTablaPosiciones.Visible = false;
+                divEquiposParticipantes.Visible = false;
+                divOtrosPartidosDeFecha.Visible = false;
+            }
         }
 
         private void otrosPartidosDeLaFecha()
         {
             GestorControles.cargarRepeaterList(rptFechaActual, (new GestorPartido()).otrosPartidosDeLaFecha(gestorEdicion.edicion.idEdicion, gestorEdicion.faseActual.idFase, gestorEdicion.faseActual.fechaActual.idFecha, 0));
         }
-
          private void cargarNoticias()
          {
             GestorControles.cargarRepeaterList(rptEventos, (new GestorNoticia()).obtenerNoticiasXCategoria(gestorEdicion.edicion.idEdicion, CategoriaNoticia.noticiaEVENTOS));
@@ -84,17 +108,6 @@ namespace quegolazo_code.torneo
                 return ex.Message;
             }
         }
-
-        public string nombreMes(int numeroMes)
-        {
-            return GestorExtra.nombreMes(numeroMes);
-        }
-
-        public string nombreDia(DateTime date)
-        {
-            return GestorExtra.nombreDia(date);
-        }
-        
         public void cargarEstadisticas()
         {
             //Carga Repeater ultimos goles y ultimas tarjetas
@@ -109,16 +122,12 @@ namespace quegolazo_code.torneo
         }
 
         public void cargarProximoPartido()
-        {
+        {            
             proximoPartido = gestorPartido.proximoPartidoDeEdicion(gestorEdicion.edicion.idEdicion, gestorEdicion.faseActual.idFase , gestorEdicion.faseActual.fechaActual.idFecha);
             if(proximoPartido != null)
             {
                 ltEquipoLocal.Text = proximoPartido.local.nombre;
                 ltEquipoVisitante.Text = proximoPartido.visitante.nombre;
-                tieneFotoLocal.Visible = proximoPartido.local.tieneImagen() ? true : false;
-                noTieneFotoLocal.Visible = proximoPartido.local.tieneImagen() ? false : true;
-                tieneFotoVisitante.Visible = proximoPartido.visitante.tieneImagen() ? true : false;
-                noTieneFotoVisitante.Visible = proximoPartido.visitante.tieneImagen() ? false : true;
                 if (proximoPartido.fecha != null)
                 {
                     DateTime fecha = DateTime.Parse(((DateTime?)proximoPartido.fecha).ToString());
@@ -127,8 +136,51 @@ namespace quegolazo_code.torneo
                     ltHoraPartido.Text = fecha.Hour.ToString();
                     string fechaDePartido = fecha.ToString("yyyy/MM/dd");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "fechaPartido", "cargarCounter(" + new JavaScriptSerializer().Serialize(fechaDePartido) + ");", true);
+                    pnlConProgramacion.Visible = true;
                 }
             }
+        }
+        public void cargarEquiposParticipantes()
+        {
+            GestorControles.cargarRepeaterList(rptEquiposParticipantes, gestorEdicion.obtenerEquipos());
+            ltCantidadEquipo.Text = rptEquiposParticipantes.Items.Count.ToString();        
+        }
+        public void cargarTablaPosiciones()
+        {            
+            GestorControles.cargarRepeaterTable(rptTablaPosiciones, gestorEstadisticas.obtenerTablaPosicionesAcotada(gestorEdicion.faseActual.idFase, 5));
+        }
+        public void cargarUltimosPartidos()
+        {
+            GestorControles.cargarRepeaterList(rptUltimosPartidos, gestorPartido.ultimosPartidosDeUnaEdicion(gestorEdicion.edicion.idEdicion));
+        }
+        public void cargarPodio()
+        {
+            podio = new List<Equipo>();
+            GestorEquipo gestorEquipo = new GestorEquipo();           
+            for (int i = 0; i < gestorEstadisticas.obtenerTablaPosicionesFinal().Rows.Count; i++)
+            {
+                Equipo equipo1 = new Equipo();
+                equipo1 = gestorEquipo.obtenerEquipoPorId(int.Parse(gestorEstadisticas.obtenerTablaPosicionesFinal().Rows[i]["idEquipo"].ToString()));
+                podio.Add(equipo1);
+            }
+            if(gestorEdicion.edicion.estado.idEstado != Estado.edicionFINALIZADA)
+            {
+                for (int i = 0; i < 3; i++)
+			    { 
+                    Equipo equipo1 = new Equipo();
+                    equipo1.idEquipo = 0;
+                    podio.Add(equipo1);		 
+			    }
+            }
+        }
+        public string nombreMes(int numeroMes)
+        {
+            return GestorExtra.nombreMes(numeroMes);
+        }
+
+        public string nombreDia(DateTime date)
+        {
+            return GestorExtra.nombreDia(date);
         }
     }
 }
