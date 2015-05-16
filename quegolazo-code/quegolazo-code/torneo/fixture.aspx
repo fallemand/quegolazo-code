@@ -104,7 +104,7 @@
                                                                             <asp:Panel ID="panelPartidoNormal" runat="server" Visible="false">
                                                                                 <tr class="grupo-<%# Eval("idGrupo") %>">
                                                                                     <td>
-                                                                                        <%# ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                                                        <%# ((Entidades.Partido)Container.DataItem).local!=null ?  ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") : "<img src='"+new Entidades.Equipo().obtenerImagenMediana()+"'/>"%>
                                                                                     </td>
                                                                                     <td class="text-left">
                                                                                         <asp:Label Font-Size="17px" ID="lblPrimerPuesto" class="flaticon-football81" runat="server" Visible="false" title="Final" rel="txtTooltip" data-placement="left"></asp:Label><asp:Label Font-Size="16px" ID="lblTercerPuesto" class="flaticon-football78" runat="server" Visible="false" title="Tercer Puesto" rel="txtTooltip" data-placement="left"></asp:Label>
@@ -122,17 +122,16 @@
                                                                                     </td>
                                                                                     <td class="text-right"><%# ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.nombre : "" %></td>
                                                                                     <td>
-                                                                                          <%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                                                          <%# ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") : "<img src='"+new Entidades.Equipo().obtenerImagenMediana()+"'/>" %>
                                                                                     </td>
                                                                                 </tr>
                                                                             </asp:Panel>
                                                                             <asp:Panel ID="panelPartidoLibre" runat="server" Visible="false">
                                                                                 <tr class="grupo-<%# Eval("idGrupo") %>">
                                                                                     <td colspan="4">
-                                                                                        <asp:Literal ID="litLibre" runat="server" Text=""></asp:Literal></td>
+                                                                                        <asp:Literal ID="litLibre"  runat="server" Text=""></asp:Literal></td>
                                                                                 </tr>
                                                                             </asp:Panel>
-
                                                                         </ItemTemplate>
                                                                     </asp:Repeater>
                                                                     <asp:Panel ID="panelSinPartidos" runat="server">

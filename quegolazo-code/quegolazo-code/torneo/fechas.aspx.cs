@@ -117,8 +117,7 @@ namespace quegolazo_code.torneo
             try
             {
                 Repeater rptPartidos = (Repeater)e.Item.FindControl("rptPartidos");
-                Literal sinPartidos = (Literal)e.Item.FindControl("sinPartidos");
-                sinPartidos.Visible = !GestorControles.cargarRepeaterList(rptPartidos, ((Grupo)e.Item.DataItem).fechas[idFecha - 1].partidos);
+                GestorControles.cargarRepeaterList(rptPartidos, ((Grupo)e.Item.DataItem).fechas[idFecha - 1].partidos);
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }  
         }

@@ -79,16 +79,9 @@
                                                             <ItemTemplate>
                                                                 <tr>
                                                                     <td>
-                                                                        <input hidden="hidden" <%# gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(Eval("idEquipo").ToString())) %> />
-                                                                        <img id="img" src="<%# gestorEquipo.equipo.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# gestorEquipo.equipo.tieneImagen()%>">
-                                                                        <div id="divCamistea" class="camiseta-equipo" runat="server" visible="<%# gestorEquipo.equipo.tieneImagen()==false%>">
-                                                                                            <div>
-                                                                                                <i class="flaticon-football114" style="color: <%# gestorEquipo.equipo.colorCamisetaPrimario %>"></i>
-                                                                                            </div><!--
-                                                                                            --><div class="segunda-mitad">
-                                                                                                <i class="flaticon-football114" style="color: <%#gestorEquipo.equipo.colorCamisetaSecundario%>"></i>
-                                                                                            </div>
-                                                                       </div>
+                                                                        <%--<input hidden="hidden" <%#  gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(Eval("idEquipo").ToString())) %> />--%>
+                                                                       <%-- <img id="img" src="<%# gestorEquipo.equipo.obtenerImagenChicha() %>" class="img-responsive center-block avatar-xs" runat="server" visible="<%# gestorEquipo.equipo.tieneImagen()%>">--%>
+                                                                        <%# new Entidades.Equipo(){idEquipo=int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
                                                                     </td>
                                                                     <td><a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>"><%# Eval("Equipo") %></a></td>
                                                                     <td class="active text-center" style="font-size:16px;"><b><%# Eval("Puntos") %></b></td>
