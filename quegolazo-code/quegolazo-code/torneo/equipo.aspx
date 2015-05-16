@@ -270,10 +270,16 @@
                                         <div class="col-sm-4">
                                             <h5 class="col-title">Gráfico de Goles</h5>
                                             <canvas id="graficoGoles" class="canvas-md"></canvas>
+                                            <div id="sinGraficoGoles" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top" runat="server"  visible="false">
+                                              No Hay información de goles registrada para este equipo
+                                            </div> 
                                         </div>
                                         <div class="col-sm-4">
                                             <h5 class="col-title">Gráficos de Partidos</h5>
                                             <canvas id="graficoPartidos" class="canvas-md"></canvas>
+                                             <div id="sinGraficoPartidos" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top" runat="server"  visible="false">
+                                              No Hay información de partidos registrada para este equipo
+                                            </div> 
                                         </div>
                                     </div>
                                     
@@ -316,8 +322,14 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
+                                       <div id="divGraficoPuntos">
                                         <h5 class="col-title">Evolución de Puntos</h5>
+                                           <div id="sinGraficoPuntos" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top" runat="server"  visible="false">
+                                              No Hay información de puntos registrada para este equipo
+                                          </div> 
                                         <canvas id="graficoPuntos" class="canvas-lg"></canvas>
+                                        </div>
+                                         
                                     </div>
                                 </div>
                                 <!-- END Tab Historial de Partidos  -->
@@ -356,8 +368,14 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-7 col-xs-12">
+                                         <div id="divGraficoGoleadores">
                                         <h5 class="col-title">Goleadores</h5>
+                                             <div id="sinGraficoGoleadores" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top" runat="server"  visible="false">
+                                              No Hay información de goleadores registrada para este equipo
+                                            </div> 
                                         <canvas id="graficoGoleadores" class="canvas-lg"></canvas>
+                                          </div>
+                                         
                                     </div>
                                 </div>
                                 <!-- END Tab de Goleadores -->

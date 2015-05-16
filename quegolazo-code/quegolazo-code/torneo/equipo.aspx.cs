@@ -70,6 +70,13 @@ namespace quegolazo_code.torneo
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "puntos", "var datosEvolucionPuntos=" + gestorEstadistica.generarDatosParaGraficoEvolucionDePuntos(gestorEquipo.equipo.idEquipo, gestorEdicion.edicion.fases) + ";", true);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "goleadores", "var datosGoleadores=" + gestorEstadistica.generarDatosGoleadores(goleadoresDelEquipo) + ";", true);
             }
+            else
+            {
+                sinGraficoPartidos.Visible = true;
+                sinGraficoGoles.Visible = true;
+                sinGraficoPuntos.Visible = true;
+                sinGraficoGoleadores.Visible = true;
+            }
         
         }
 
@@ -97,11 +104,16 @@ namespace quegolazo_code.torneo
         public void cargarHistorialDePartidos()
         {//Carga el historial de Partido
            sinHistorialDePartido.Visible = !GestorControles.cargarRepeaterList(rptHistorialPartidos, gestorPartido.ultimosPartidosDeUnEquipo(gestorEquipo.equipo.idEquipo, gestorEdicion.edicion.idEdicion));
+           //divGraficoPuntos.Visible = !sinHistorialDePartido.Visible;
+           sinGraficoPuntos.Visible = sinHistorialDePartido.Visible;
         }
         public void cargarGoleadores()
         {//Carga los goleadores de la edición
             goleadoresDelEquipo = gestorEquipo.goleadoresDeUnEquipo(gestorEquipo.equipo.idEquipo, gestorEdicion.edicion.idEdicion);
             sinGoleadores.Visible = !GestorControles.cargarRepeaterList(rptGoleadores, goleadoresDelEquipo);
+            //divGraficoGoleadores.Visible = !sinGoleadores.Visible;//no visualizar grafico cuando no hay goleadores
+            sinGraficoGoleadores.Visible = sinGoleadores.Visible;//visualizar cartel cuando no hay goleadores
+            
         }
         public void cargarRepeaterOtrosEquiposDeEdicion()
         {//Carga el repeater de los otros equipos de la edición
