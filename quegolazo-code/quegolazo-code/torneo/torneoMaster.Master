@@ -167,9 +167,9 @@
                         <div class="col-md-7 hidden-xs">
                             <!-- Nav Footer-->
                             <ul class="nav-footer">
-                                <li><a href="#">INICIO</a> </li>
+                                <li><a href="<%#Logica.GestorUrl.urlEdiciones(torneo.nick)%>">INICIO</a> </li>
                                 <li><a href="#">NOTICIAS</a></li>
-                                <li><a href="#">EDICIONES</a></li>
+                                <li><a href="<%#Logica.GestorUrl.urlEdiciones(torneo.nick)%>">EDICIONES</a></li>
                                 <li><a href="#">CONTACTO</a></li>
                             </ul>
                             <!-- End Nav Footer-->

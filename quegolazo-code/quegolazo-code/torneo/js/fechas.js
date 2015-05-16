@@ -161,3 +161,8 @@ function reiniciarContador() {
     var valor = 0;
     $("#spanSeleccionados").text(valor);
 };
+
+function ocultarColumnas() {
+    $("#thPTS").hide();
+    $("#tdPE").hide();
+};
