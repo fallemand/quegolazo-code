@@ -1411,7 +1411,6 @@ namespace AccesoADatos
                                 INNER JOIN Equipos equipoVisitante ON partido.idEquipoVisitante = equipoVisitante.idEquipo
                                 WHERE partido.idEstado = @estadoDiagramado
                                 AND partido.idEdicion = @idEdicion
-                                AND partido.fecha >= GETDATE()
                                 AND partido.idFase = @idFase
                                 AND partido.idFecha = @idFecha
                                 ORDER BY partido.fecha ASC";
@@ -1422,17 +1421,117 @@ namespace AccesoADatos
                     cmd.Parameters.Add(new SqlParameter("@estadoDiagramado", Estado.partidoDIAGRAMADO));
                     cmd.CommandText = sql2;
                     dr = cmd.ExecuteReader();
-                    while (dr.Read())
+
+                    if (dr.HasRows)
                     {
-                        partido = new Partido();
-                        partido.idPartido = int.Parse(dr["Id Partido"].ToString());
-                        partido.local = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Local"].ToString()));
-                        partido.visitante = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Visitante"].ToString()));
+                        while (dr.Read())
+                        {
+                            partido = new Partido();
+                            partido.idPartido = int.Parse(dr["Id Partido"].ToString());
+                            partido.local = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Local"].ToString()));
+                            partido.visitante = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Visitante"].ToString()));
+                        }
+                    }
+                    else
+                    {
+                        if (dr != null)
+                            dr.Close();
+                        string sql3 = @"SELECT TOP 1 equipoLocal.idEquipo AS 'Id Equipo Local', 
+                                equipoLocal.nombre AS 'Equipo Local', equipoVisitante.idEquipo AS 'Id Equipo Visitante',
+                                equipoVisitante.nombre AS 'Equipo Visitante',
+                                partido.idPartido AS 'Id Partido'
+                                FROM Partidos partido
+                                INNER JOIN Equipos equipoLocal ON partido.idEquipoLocal = equipoLocal.idEquipo
+                                INNER JOIN Equipos equipoVisitante ON partido.idEquipoVisitante = equipoVisitante.idEquipo
+                                WHERE (partido.idEstado = @estadoDiagramado OR partido.idEstado = @estadoProgramado)
+                                AND partido.idEdicion = @idEdicion
+                                AND partido.idFase = @idFase
+                                ORDER BY partido.fecha ASC";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                        cmd.Parameters.Add(new SqlParameter("@idFase", idFase));
+                        cmd.Parameters.Add(new SqlParameter("@estadoDiagramado", Estado.partidoDIAGRAMADO));
+                        cmd.Parameters.Add(new SqlParameter("@estadoProgramado", Estado.partidoPROGRAMADO));
+                        cmd.CommandText = sql3;
+                        dr = cmd.ExecuteReader();
+
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                partido = new Partido();
+                                partido.idPartido = int.Parse(dr["Id Partido"].ToString());
+                                partido.local = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Local"].ToString()));
+                                partido.visitante = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Visitante"].ToString()));
+                            }
+                        } 
                     }
                 }
                 if (dr != null)
                     dr.Close();
                 return partido;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un problema al cargar los datos: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null && con.State == ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public List<Partido> ultimosPartidosDeUnaEdicion(int idEdicion)
+        {
+            SqlConnection con = new SqlConnection(cadenaDeConexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader dr;
+            List<Partido> listaPartidos = new List<Partido>();
+            try
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                cmd.Connection = con;
+                string sql = @"SELECT p.idPartido AS 'idPartido', equipoLocal.idEquipo AS 'idEquipoLocal',
+                                p.golesLocal AS 'golesLocal', p.golesVisitante AS 'golesVisitante',
+                                equipoLocal.nombre AS 'nombreEquipoLocal', equipoVisitante.idEquipo AS 'idEquipoVisitante',
+                                equipoVisitante.nombre AS 'nombreEquipoVisitante', cancha.nombre AS 'cancha',
+                                p.fecha AS 'fechaPartido', p.penalesLocal AS 'penalesLocal', p.penalesVisitante AS 'penalesVisitante',
+                                arbitro.idArbitro AS 'idArbitro', arbitro.nombre AS 'arbitro', cancha.idCancha AS 'idCancha', cancha.nombre AS 'cancha'
+                                FROM Partidos p 
+                                INNER JOIN Equipos equipoLocal ON p.idEquipoLocal = equipoLocal.idEquipo
+                                INNER JOIN Equipos equipoVisitante ON p.idEquipoVisitante = equipoVisitante.idEquipo
+                                LEFT JOIN Arbitros arbitro ON p.idArbitro = arbitro.idArbitro
+                                LEFT JOIN Canchas cancha ON p.idCancha = cancha.idCancha
+                                WHERE p.idEdicion = @idEdicion
+                                AND p.idEstado = @estadoJugado
+                                ORDER BY idPartido DESC";
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
+                cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
+                cmd.CommandText = sql;
+                dr = cmd.ExecuteReader();
+                DAOEquipo daoEquipo = new DAOEquipo();
+                while (dr.Read())
+                {
+                    Partido partido = new Partido();
+                    partido.idPartido = int.Parse(dr["idPartido"].ToString());
+                    partido.golesLocal = (dr["golesLocal"] != DBNull.Value) ? (int?)int.Parse(dr["golesLocal"].ToString()) : null;
+                    partido.golesVisitante = (dr["golesVisitante"] != DBNull.Value) ? (int?)int.Parse(dr["golesVisitante"].ToString()) : null;
+                    partido.penalesLocal = (dr["penalesLocal"] != DBNull.Value) ? (int?)int.Parse(dr["penalesLocal"].ToString()) : null;
+                    partido.penalesVisitante = (dr["penalesVisitante"] != DBNull.Value) ? (int?)int.Parse(dr["penalesVisitante"].ToString()) : null;
+                    partido.local = daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoLocal"].ToString()));
+                    partido.visitante = daoEquipo.obtenerEquipoPorId(int.Parse(dr["idEquipoVisitante"].ToString()));
+                    partido.arbitro.idArbitro = (dr["idArbitro"] != DBNull.Value) ? int.Parse(dr["idArbitro"].ToString()) : 0;
+                    partido.arbitro.nombre = (dr["arbitro"] != DBNull.Value) ? dr["arbitro"].ToString() : "";
+                    partido.cancha.idCancha = (dr["idCancha"] != DBNull.Value) ? int.Parse(dr["idCancha"].ToString()) : 0;
+                    partido.cancha.nombre = (dr["cancha"] != DBNull.Value) ? dr["cancha"].ToString() : "";
+                    listaPartidos.Add(partido);
+                }
+                if (dr != null)
+                    dr.Close();
+                return listaPartidos;
             }
             catch (Exception ex)
             {

@@ -440,5 +440,10 @@ namespace Logica
         {
             return daoPartido.proximoPartidoDeEdicion(idEdicion, idFase, idFecha);
         }
+
+        public List<Partido> ultimosPartidosDeUnaEdicion(int idEdicion)
+        {
+            return daoPartido.ultimosPartidosDeUnaEdicion(idEdicion);
+        }
     }
 }

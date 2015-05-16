@@ -13,6 +13,15 @@ namespace quegolazo_code.torneo {
     public partial class Formulario_web11 {
         
         /// <summary>
+        /// Control divOtrosPartidosDeFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divOtrosPartidosDeFecha;
+        
+        /// <summary>
         /// Control rptFechaActual.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,24 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow sinUltimasTarjetas;
         
         /// <summary>
+        /// Control divProximoPartido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divProximoPartido;
+        
+        /// <summary>
+        /// Control pnlConProgramacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlConProgramacion;
+        
+        /// <summary>
         /// Control ltDiaDePartido.
         /// </summary>
         /// <remarks>
@@ -130,24 +157,6 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Literal ltHoraPartido;
         
         /// <summary>
-        /// Control tieneFotoLocal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel tieneFotoLocal;
-        
-        /// <summary>
-        /// Control noTieneFotoLocal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel noTieneFotoLocal;
-        
-        /// <summary>
         /// Control ltEquipoLocal.
         /// </summary>
         /// <remarks>
@@ -155,24 +164,6 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltEquipoLocal;
-        
-        /// <summary>
-        /// Control tieneFotoVisitante.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel tieneFotoVisitante;
-        
-        /// <summary>
-        /// Control noTieneFotoVisitante.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel noTieneFotoVisitante;
         
         /// <summary>
         /// Control ltEquipoVisitante.
@@ -193,6 +184,24 @@ namespace quegolazo_code.torneo {
         protected global::System.Web.UI.WebControls.Repeater rptUltimasNoticias;
         
         /// <summary>
+        /// Control divUtimosPartidos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUtimosPartidos;
+        
+        /// <summary>
+        /// Control rptUltimosPartidos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptUltimosPartidos;
+        
+        /// <summary>
         /// Control pnlPodio.
         /// </summary>
         /// <remarks>
@@ -200,5 +209,50 @@ namespace quegolazo_code.torneo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlPodio;
+        
+        /// <summary>
+        /// Control divTablaPosiciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTablaPosiciones;
+        
+        /// <summary>
+        /// Control rptTablaPosiciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptTablaPosiciones;
+        
+        /// <summary>
+        /// Control divEquiposParticipantes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEquiposParticipantes;
+        
+        /// <summary>
+        /// Control ltCantidadEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltCantidadEquipo;
+        
+        /// <summary>
+        /// Control rptEquiposParticipantes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptEquiposParticipantes;
     }
 }
