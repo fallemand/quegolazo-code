@@ -39,17 +39,19 @@
                         <div class="col-md-3 col-xs-3">
                             <!-- Datos del Equipo -->
                             <div class="panel-box bg-dark score theme-border">
-                                <%# new Entidades.Equipo(){idEquipo = int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.GRANDE,"") %>
-                                <h3 class="text-center"><a id='equipo-<%#Eval("idEquipo")%>' class="popover-equipo" href='<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>' data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%#Eval("equipo") %></a></h3>
+                                <a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
+                                <%# new Entidades.Equipo(){idEquipo = int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.GRANDE,"") %></a>
+                                <h3 class="text-center"><a id='equipo-<%#Eval("idEquipo")%>' class="popover-equipo" href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%#Eval("equipo") %></a></h3>
                                 <div class="row text-center">
                                     <div class="col-xs-12">
                                         <ul class="list-group">
-                                            <li class="list-group-item"><span class="flaticon-football95" aria-hidden="true"></span>DT: <%# Eval("directorTecnico")%></li>
+                                            <li class="list-group-item"><span class="flaticon-football95" aria-hidden="true"></span> DT: <%# Eval("directorTecnico")%></li>
+                                            <li class="list-group-item"><span class="flaticon-football50" aria-hidden="true"></span> Delegado: <%# Eval("delegadoPrincipal")%></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Popover del Equipo -->
+                            <!-- Popover del Equipo --><%--style="display: none"--%>
                             <div id="popover-equipo-<%#Eval("idEquipo")%>" style="display: none">
                                 <div class="row">
                                     <div class="col-md-12">
