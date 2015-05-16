@@ -47,13 +47,8 @@
                                 <asp:Repeater ID="rptGoleadores" runat="server" >
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("JUGADOR")%>">
-<<<<<<< .mine
                                             <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,int.Parse(Eval("IDEQUIPO").ToString()),int.Parse(Eval("IDJUGADOR").ToString()))%>">
                                                 <%# new Entidades.Jugador(){idJugador=int.Parse(Eval("IDJUGADOR").ToString())}.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle","avatar-slider",false)%>
-=======
-                                            <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,int.Parse(Eval("IDEQUIPO").ToString()),int.Parse(Eval("IDJUGADOR").ToString()))%>">
-                                                <%# new Logica.GestorJugador().obtenerJugadorPorId(int.Parse(Eval("IDJUGADOR").ToString())).obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle","avatar-slider",false)%>
->>>>>>> .r657
                                             </a>
                                         </li>
                                     </ItemTemplate>
