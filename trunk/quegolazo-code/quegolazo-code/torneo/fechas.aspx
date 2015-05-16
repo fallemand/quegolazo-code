@@ -140,9 +140,6 @@
                                                         <!-- End Widget Partido -->
                                                     </ItemTemplate>
                                                 </asp:Repeater>
-                                                 <div id="sinPartidos" runat="server"  class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  style="display:none;">
-                                                     No se registra información de partidos
-                                                 </div> 
                                             </div>
                                         </div>
                                     </div>

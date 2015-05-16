@@ -244,13 +244,13 @@
                                                                     <ItemTemplate>
                                                                         <tr>
                                                                             <td>
-                                                                                <img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoLocal").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt="">
+                                                                                <%#  (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoLocal").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA,"img-circle avatar-xs") %>
                                                                             </td>
                                                                             <td><%# Eval("Equipo Local") %></td>
                                                                             <td><%# Eval("Goles Local") %> - <%# Eval("Goles Visitante") %></td>
                                                                             <td><%# Eval("Equipo Visitante") %></td>
                                                                             <td>
-                                                                                <img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoVisitante").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt=""></td>
+                                                                                <%#  (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoVisitante").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA,"img-circle avatar-xs") %>
                                                                             <td><span class="label partido-<%# Eval("Resultado") %>"><%# Eval("Resultado") %></span></td>
                                                                             <td class="hidden"><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo, idEdicion, Eval("idPartido").ToString()) %>"></a></td>
                                                                         </tr>
@@ -284,7 +284,7 @@
                                                                 <ItemTemplate>
                                                                     <tr>
                                                                         <td>
-                                                                            <img src="<%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Otro equipo").ToString())}).obtenerImagenChicha()%>" class="img-circle avatar-xs" alt=""></td>
+                                                                             <%#  (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Otro equipo").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA,"img-circle avatar-xs") %>
                                                                         <td><%# Eval("Otro Equipo") %></td>
                                                                         <td>Fecha <%# Eval("Fecha") %></td>
                                                                         <td><%# Eval("Tipo Gol") %></td>

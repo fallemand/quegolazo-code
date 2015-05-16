@@ -21,7 +21,6 @@
                                             <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? nombreMes(DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
                                             <div class="text">
                                                 <div class="equipos">
-                                                   <%-- <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/partido-<%# Eval("idPartido") %>">--%>
                                                     <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("idPartido").ToString()) %>">
                                                         <span data-toggle="tooltip" title="<%# Eval("local.nombre") %>"><%# Eval("local.nombreCorto") %></span>
                                                         vs
@@ -57,8 +56,8 @@
                                 <div class="col-md-9">
                                     <!-- Nav Tabs -->
                                     <ul class="nav nav-tabs" id="myTab">
-                                        <li class="active"><a href="#ultimos-partidos" data-toggle="tab">EVENTOS</a></li>
-                                        <li><a href="#estadisticas" data-toggle="tab">ESTADÍSTICAS</a></li>
+                                        <li ><a href="#ultimos-eventos" data-toggle="tab">EVENTOS</a></li>
+                                        <li class="active"><a href="#estadisticas" data-toggle="tab">ESTADÍSTICAS</a></li>
                                     </ul>
                                     <!-- End Nav Tabs -->
 
@@ -67,7 +66,7 @@
                                         <div class="panel-body nopadding-horizontal bg-dark">
                                             <div class="tab-content home">
                                                 <!-- Tab One - Feature News -->
-                                                <div class="tab-pane active" id="ultimos-partidos">
+                                                <div class="tab-pane" id="ultimos-eventos">
                                                     <!-- blog post-->
                                                     <ul id="events-carousel" class="events-carousel padding-top">
                                                         <!-- Item blog post -->
@@ -91,11 +90,14 @@
                                                         <!-- End Item blog post -->
                                                     </ul>
                                                     <!-- End blog post-->
+                                                    <div id="sinEventos" runat="server"  class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  visible="false">
+                                                        <small>No hay eventos para mostrar</small>  
+                                                     </div> 
                                                 </div>
                                                 <!-- Tab One - Feature News -->
 
                                                 <!-- Tab Two - Players Staff -->
-                                                <div class="tab-pane" id="estadisticas">
+                                                <div class="tab-pane active" id="estadisticas">
                                                     <h3>Estadísticas de la Edición</h3>
                                                     <div class="row">
                                                         <div class="col-md-3 col-xs-6">
@@ -149,7 +151,7 @@
                                                                                 <th class="text-center" colspan="3">
                                                                                     <span class="flaticon-football28"></span>
                                                                                     Últimos Goles
-                                                                               </th>
+                                                                                </th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -283,13 +285,16 @@
                                         <div class="col-md-8">
                                             <h4><a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion,((Entidades.Noticia)Container.DataItem).idNoticia)%>"><%# Eval("titulo") %></a></h4>
                                             <p class="data-info"><%# nombreMes(DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Year.ToString() %></p><!-- <i class="fa fa-comments"></i><a href="#">0</a> --> 
-                                            <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0,Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length >= 110 ? 110 : Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length)  %>... <a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion, ((Entidades.Noticia)Container.DataItem).idNoticia)%>">Leer Más [+]</a></p>
+                                            <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0,Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length >= 150 ? 150 : Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length)  %>... <a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion, ((Entidades.Noticia)Container.DataItem).idNoticia)%>">Leer Más [+]</a></p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- End Post Item -->
                                     </ItemTemplate>
                                 </asp:Repeater>
+                                <div id="sinNoticias" runat="server" visible="false">
+                                   <span>No se han cargado noticias</span>
+                                </div>
                             </div>
                         </div>
                         <!-- End Recent Post -->
