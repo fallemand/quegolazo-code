@@ -134,7 +134,7 @@
                                         <!-- Jugador -->
                                         <div class="col-md-2 col-xs-3">
                                             <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
-                                               <%# ((Entidades.Jugador)Container.DataItem).obtenerImagen(Utils.GestorImagen.GRANDE,"img-circle","avatar-lg avatar-slider",true) %>
+                                               <%# ((Entidades.Jugador)Container.DataItem).obtenerImagen(Utils.GestorImagen.GRANDE,"img-circle img-responsive center-block","avatar-lg avatar-slider",true) %>
                                             </a>
                                             <!-- Popover del Jugador -->
                                             <div id="popover-jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>" style="display:none">
