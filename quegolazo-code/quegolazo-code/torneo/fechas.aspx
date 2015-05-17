@@ -76,7 +76,7 @@
                             <div class="panel nopadding panel-default">
                                 <div class="panel-body">
                                     <p class="slider-multiple-title">Seleccione la Fecha</p>
-                                    <ul class="fechas theme-bg-color-2 <%= (gestorEdicion.faseActual != null && gestorEdicion.faseActual.tipoFixture.idTipoFixture=="ELIM")? "eliminatoria" : "" %> slider-multiple tooltip-hover">
+                                    <ul id="ulFechas" runat="server" class="fechas theme-bg-color-2 slider-multiple tooltip-hover">
                                         <asp:Repeater ID="rptFechas" runat="server" OnItemCommand="rptFechas_ItemCommand">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkFecha" CommandName="SeleccionarFecha" ClientIDMode="AutoID" runat="server" CommandArgument='<%# Eval("idFecha") %>'>
@@ -91,7 +91,7 @@
                                         </asp:Repeater>
                                         <li id="sinFechas" class="slider-sin-datos" runat="server" visible="false">
                                             <h1 class="text-thin">No existen fechas</h1>
-                                        </li> 
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

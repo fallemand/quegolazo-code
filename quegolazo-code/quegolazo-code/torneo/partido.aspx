@@ -65,7 +65,7 @@
                                     </ItemTemplate>
                                 </asp:Repeater>
                                 <li id="sinPartidos" class="slider-sin-datos" runat="server" visible="false">
-                                    <h1 class="text-thin">No existen jugadores</h1>
+                                    <h1 class="text-thin">No existen otros partidos en la fecha</h1>
                                 </li>  
                             </ul>
                         </div>

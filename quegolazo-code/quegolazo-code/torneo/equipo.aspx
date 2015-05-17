@@ -38,7 +38,7 @@
         <div class="container padding-top">
             <div class="row mobile-margin-top">
 
-                <!-- Otros Partidos de la Fecha -->
+                <!-- Otros Equipos -->
                 <div class="col-sm-12">
                     <div class="panel nopadding panel-default">
                         <div class="panel-body">
@@ -48,7 +48,7 @@
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre") %>">
                                             <a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
-                                                <%# ((Entidades.Equipo)Container.DataItem).obtenerImagen(Utils.GestorImagen.MEDIANA, "") %>
+                                                <%# ((Entidades.Equipo)Container.DataItem).obtenerImagen(Utils.GestorImagen.MEDIANA, "img-responsive center-block") %>
                                             </a>   
                                         </li>
                                     </ItemTemplate>
