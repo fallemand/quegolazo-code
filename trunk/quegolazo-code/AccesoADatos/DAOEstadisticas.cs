@@ -919,6 +919,7 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 string sql = @"SELECT p.idPartido, eLocal.idEquipo AS 'idEquipoLocal', eLocal.nombre AS 'Equipo Local', p.golesLocal AS 'Goles Local',
                                 p.golesVisitante AS 'Goles Visitante', eVisitante.nombre AS 'Equipo Visitante', eVisitante.idEquipo AS 'idEquipoVisitante',
+                                p.penalesLocal AS 'PenalesLocal', p.penalesVisitante AS 'PenalesVisitante',
                                 CASE  
 					                WHEN p.idGanador = txp.idEquipo THEN 'Ganado' 
 					                WHEN p.idPerdedor = txp.idEquipo THEN 'Perdido'  

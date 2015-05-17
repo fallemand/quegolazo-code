@@ -247,7 +247,7 @@
                                                                                 <%#  (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoLocal").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA,"img-circle avatar-xs") %>
                                                                             </td>
                                                                             <td><%# Eval("Equipo Local") %></td>
-                                                                            <td><%# Eval("Goles Local") %> - <%# Eval("Goles Visitante") %></td>
+                                                                            <td><b><%# Eval("Goles Local") %></b><small><small><%# Eval("PenalesLocal")%></small></small> - <b><%# Eval("Goles Visitante") %></b><small><small><%# Eval("PenalesVisitante")%></small></small></td>
                                                                             <td><%# Eval("Equipo Visitante") %></td>
                                                                             <td>
                                                                                 <%#  (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoVisitante").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA,"img-circle avatar-xs") %>
