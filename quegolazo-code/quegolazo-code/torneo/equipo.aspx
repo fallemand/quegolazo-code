@@ -52,7 +52,10 @@
                                             </a>   
                                         </li>
                                     </ItemTemplate>
-                                </asp:Repeater>                                
+                                </asp:Repeater>   
+                                <li id="sinEquipos" class="slider-sin-datos" runat="server" visible="false">
+                                    <h1 class="text-thin">No existen jugadores</h1>
+                                </li>                              
                             </ul>
                         </div>
                     </div>
@@ -62,7 +65,7 @@
                 <!-- Datos del Equipo -->
                 <div class="col-sm-4">
                     <div class="panel-box bg-dark score theme-border principal">
-                        <%= gestorEquipo.equipo.obtenerImagen(Utils.GestorImagen.GRANDE, "") %>
+                        <%= gestorEquipo.equipo.obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block") %>
                         <h3 class="text-center"><a href="" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%=gestorEquipo.equipo.nombre %></a></h3>
                         <div class="row text-center">
                             <div class="col-xs-12">

@@ -107,7 +107,7 @@ namespace quegolazo_code.torneo
         //autor: Pau Pedrosa
         private void otrosPartidosDeLaFecha()
         {
-            GestorControles.cargarRepeaterList(rptOtrosPartidosDeLaFecha, gestorPartido.otrosPartidosDeLaFecha(gestorEdicion.edicion.idEdicion, gestorPartido.partido.faseAsociada.idFase, gestorPartido.partido.idFecha, gestorPartido.partido.idPartido));
+            sinPartidos.Visible = !GestorControles.cargarRepeaterList(rptOtrosPartidosDeLaFecha, gestorPartido.otrosPartidosDeLaFecha(gestorEdicion.edicion.idEdicion, gestorPartido.partido.faseAsociada.idFase, gestorPartido.partido.idFecha, gestorPartido.partido.idPartido));
         }
         
         //Devuelve true si hay partidos previos y false si no hay partidos previos

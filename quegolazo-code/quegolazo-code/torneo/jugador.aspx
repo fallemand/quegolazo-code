@@ -56,10 +56,10 @@
                                         </li>
                                     </ItemTemplate>
                                 </asp:Repeater>
+                                <li id="sinJugadoresFase" class="slider-sin-datos" runat="server" visible="false">
+                                    <h1 class="text-thin">No existen jugadores</h1>
+                                </li> 
                             </ul>
-                             <div id="sinJugadoresFase" class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  runat="server" visible="false">
-                            No existen jugadores registrados
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                 <div class="col-sm-4">
                     <div class="panel-box bg-dark score theme-border tooltip-hover principal">
                         <a href="<%=Logica.GestorUrl.urlJugador(nickTorneo, idEdicion, idEquipo, idJugador) %>" data-toggle="tooltip" title="<%= gestorJugador.jugador.nombre %>">
-                            <%= gestorJugador.jugador.obtenerImagen(Utils.GestorImagen.GRANDE, "img-circle","avatar-principal", false) %>
+                            <%= gestorJugador.jugador.obtenerImagen(Utils.GestorImagen.GRANDE, "img-circle img-responsive center-block","avatar-principal", false) %>
                         </a>
                         <h3 class="text-center text-thin"><a href="#"><%= gestorJugador.jugador.nombre %></a></h3>
                         <div class="row text-center">

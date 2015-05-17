@@ -117,7 +117,7 @@ namespace quegolazo_code.torneo
         }
         public void cargarRepeaterOtrosEquiposDeEdicion()
         {//Carga el repeater de los otros equipos de la edición
-            GestorControles.cargarRepeaterList(rptOtroseEquiposDeEdicion, gestorEdicion.obtenerEquipos());
+            sinEquipos.Visible = !GestorControles.cargarRepeaterList(rptOtroseEquiposDeEdicion, gestorEdicion.obtenerEquipos());
         }                
         public void cargarRepeaterJugadores()
         {//Carga el repeater con todos los datos del Jugador

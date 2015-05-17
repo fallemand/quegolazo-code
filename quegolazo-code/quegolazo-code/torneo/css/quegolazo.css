@@ -329,6 +329,18 @@ img.img-principal {
     max-height:150px;
 }
 
+.slider-sin-datos {
+  height: 74px;
+  width:300px;
+  padding-left: 20px;
+}
+
+.slider-sin-datos h1{
+  font-size: 20px;
+  line-height: 60px;
+  color: #FFF;
+}
+
 .panel-box.score h3 a, .panel.score h3 a{
   color: #FFF;
 }

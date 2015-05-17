@@ -273,6 +273,35 @@ $(document).ready(function ($) {
             }, 50);
         });
 
+    //=================================== PopOvers ==================================//
+    $(".popover-equipo").popover({
+        trigger: "manual",
+        html: true,
+        animation: true,
+        container: '.content-info',
+        placement: 'left',
+        content: function () {
+            return $('#popover-' + $(this).attr('id')).html();
+        },
+        title: function () {
+            return $('#popover-title-' + $(this).attr('id')).html();
+        }
+    })
+        .on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide");
+                }
+            }, 50);
+        });
+
     //=================================== Ligbox  ===========================================//
     $(".fancybox").fancybox({
         openEffect: 'elastic',

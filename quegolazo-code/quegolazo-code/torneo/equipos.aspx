@@ -38,10 +38,11 @@
                         <!-- Jugador -->
                         <div class="col-md-3 col-xs-3">
                             <!-- Datos del Equipo -->
-                            <div class="panel-box bg-dark score theme-border">
-                                <a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
-                                <%# new Entidades.Equipo(){idEquipo = int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.GRANDE,"") %></a>
-                                <h3 class="text-center"><a id='equipo-<%#Eval("idEquipo")%>' class="popover-equipo" href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%#Eval("equipo") %></a></h3>
+                            <div class="panel-box bg-dark score principal theme-border">
+                                <a id='equipo-<%#Eval("idEquipo")%>' class="popover-equipo" href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
+                                    <%# new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("idEquipo").ToString())).obtenerImagen(Utils.GestorImagen.GRANDE,"img-responsive center-block") %>
+                                    <h3 class="text-center"><%#Eval("equipo") %></h3>
+                                </a>
                                 <div class="row text-center">
                                     <div class="col-xs-12">
                                         <ul class="list-group">

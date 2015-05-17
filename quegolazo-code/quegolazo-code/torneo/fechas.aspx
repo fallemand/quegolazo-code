@@ -62,10 +62,10 @@
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:Repeater>
+                                        <li id="sinFases" class="slider-sin-datos" runat="server" visible="false">
+                                            <h1 class="text-thin">No existen fases</h1>
+                                        </li> 
                                     </ul>
-                                      <div id="sinFases" runat="server"  class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  visible="false">
-                                            <small> No existen Fases Registradas </small>
-                                         </div> 
                                 </div>
                             </div>
                         </div>
@@ -89,10 +89,10 @@
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:Repeater>
+                                        <li id="sinFechas" class="slider-sin-datos" runat="server" visible="false">
+                                            <h1 class="text-thin">No existen fechas</h1>
+                                        </li> 
                                     </ul>
-                                   <div id="sinFechas" runat="server"  class="alert alert-info col-md-10 col-md-offset-1 mobile-margin-top"  visible="false">
-                                           <small>No existen Fechas Registradas</small>  
-                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                                                                 <div class="panel-body nopadding">
                                                                     <div class="widget-partido" >
                                                                         <div class="col-xs-4">
-                                                                            <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA, "") : "<img src='"+new Entidades.Equipo().obtenerImagenMediana()+"'/>" %>
+                                                                            <%# ((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA, "img-responsive center-block") : "<img src='"+new Entidades.Equipo().obtenerImagenMediana()+"'/>" %>
                                                                             <h5><a href="<%# ((Entidades.Partido)Container.DataItem).local!=null ? Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("local.idEquipo").ToString())) :"" %>" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).local!=null ? ((Entidades.Partido)Container.DataItem).local.nombre : "-" %> </a></h5>
                                                                         </div>
                                                                         <div class="col-xs-4 resultado">
@@ -130,7 +130,7 @@
                                                                             <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion,Eval("idPartido").ToString()) %>" class="btn btn-primary btn-xs">+ Info</a>
                                                                         </div>
                                                                         <div class="col-xs-4">
-                                                                            <%#  ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA, "") : "<img src='"+new Entidades.Equipo().obtenerImagenMediana()+"' />"%>
+                                                                            <%#  ((Entidades.Partido)Container.DataItem).visitante!=null ? ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA, "img-responsive center-block") : "<img src='"+new Entidades.Equipo().obtenerImagenMediana()+"' />"%>
                                                                             <h5><a href="<%# ((Entidades.Partido)Container.DataItem).visitante!=null ? Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("visitante.idEquipo").ToString())) :"" %>" data-toggle="tooltip" title="Ver Equipo"><%#((Entidades.Partido)Container.DataItem).visitante!=null?((Entidades.Partido)Container.DataItem).visitante.nombre:"-"%></a></h5>
                                                                         </div>
                                                                     </div>
