@@ -66,11 +66,14 @@
                 <div class="">
                     <div class="row">
                         <div class="page-error">
-                            <h1 class="titulo-torneo">
-                                <img src="<%=torneo.obtenerImagenMediana()%>" alt="<%= torneo.nombre%>" />
-                                <%= torneo.nombre%>
-                            </h1>
-                            <hr class="tall">
+                            <div class="col-xs-3 col-sm-3">
+                                <img src="<%=torneo.obtenerImagenMediana()%>" alt="<%= torneo.nombre%>" class="img-responsive center-block"/>
+                            </div>
+                            <div class="col-xs-9 col-sm-9">
+                                <h1 class="titulo-torneo"><%= torneo.nombre%></h1>
+                            </div>
+                            
+                            <hr class="tall" />
                             <!-- <p class="lead">Seleccione la edición.</p>
                             <a href="index-2.html" class="btn btn-lg btn-primary">Volver al Inicio</a> -->
                         </div>

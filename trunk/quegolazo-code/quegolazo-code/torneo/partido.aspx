@@ -64,6 +64,9 @@
                                         </li>
                                     </ItemTemplate>
                                 </asp:Repeater>
+                                <li id="sinPartidos" class="slider-sin-datos" runat="server" visible="false">
+                                    <h1 class="text-thin">No existen jugadores</h1>
+                                </li>  
                             </ul>
                         </div>
                     </div>
@@ -75,7 +78,7 @@
                     <div class="panel-box score bg-dark principal theme-border">
                         <div class="row">
                             <div class="col-md-4 col-xs-3 nopadding-right padding-top">
-                                <%=  gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                <%=  gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block")%>
                                 <h3 class="text-center"><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre  %></a></h3>
                             </div>
                             <div class="col-xs-6 col-md-4">
@@ -114,13 +117,13 @@
                                             <% if(gestorPartido.partido.arbitro != null) { %>
                                             <li class="list-group-item hidden-xs"><span class="flaticon-black188" aria-hidden="true"></span> <%= gestorPartido.partido.arbitro.nombre %></li>
                                              <% } %>
-                                            <li class="list-group-item hidden-xs"><span class="label label-success"> Partido <%= gestorPartido.partido.estado.nombre %></span></li>
+                                            <li class="list-group-item hidden-xs"><span class="label partido-<%= gestorPartido.partido.estado.nombre %>"> Partido <%= gestorPartido.partido.estado.nombre %></span></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-3 col-md-4 padding-top">
-                                 <%=  gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                 <%=  gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block")%>
                                 <h3 class="text-center"><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorPartido.partido.visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a></h3>
                             </div>
                         </div>
@@ -168,12 +171,13 @@
                                             <tr>
                                                 <th class="col-xs-2 col-md-4 text-center">
                                                     <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
-                                                    <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.local.nombre %></a>
+                                                    <%= gestorPartido.partido.local.nombre %>
+                                                    
                                                 </th>
                                                 <th class="col-xs-8 col-md-4 text-center">VS</th>
                                                 <th class="col-xs-2 col-md-4 text-center">
                                                     <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
-                                                    <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorPartido.partido.local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%= gestorPartido.partido.visitante.nombre %></a>
+                                                    <%= gestorPartido.partido.visitante.nombre %>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -345,8 +349,8 @@
                                                         <tr>
                                                             <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto != null ? ((Entidades.Gol)Container.DataItem).minuto+"'": "-" %></span></td>
                                                             <td class="col-xs-7">
-                                                                <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) :  new Entidades.Jugador().obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false)   %>
-                                                                <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "" %></td>
+                                                                 <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false) :  ""   %>
+                                                                <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "Jugador no asignado" %></td>
                                                             <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol != null ? ((Entidades.Gol)Container.DataItem).tipoGol.nombre : "-"%></td>
                                                         </tr>
                                                     </ItemTemplate>
@@ -375,7 +379,7 @@
                                                             <tr>
                                                                 <td class="col-xs-2"><span class="text-lg"><%# ((Entidades.Gol)Container.DataItem).minuto != null ? ((Entidades.Gol)Container.DataItem).minuto+"'": "-" %></span></td>
                                                                 <td class="col-xs-7">
-                                                                    <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false): new Entidades.Jugador().obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false)  %>
+                                                                    <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle avatar-sm","",false): "Jugador no asignado"  %>
                                                                     <%# ((Entidades.Gol)Container.DataItem).jugador != null ? ((Entidades.Gol)Container.DataItem).jugador.nombre : "" %></td>
                                                                 <td class="col-xs-3"><%# ((Entidades.Gol)Container.DataItem).tipoGol != null ? ((Entidades.Gol)Container.DataItem).tipoGol.nombre : "-"%></td>
                                                             </tr>
@@ -636,7 +640,7 @@
                                         <li>
                                             <div class="widget-partido">
                                                 <div class="col-xs-4">
-                                                        <%# ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA,"") %>
+                                                        <%# ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-responsive center-block") %>
                                                     <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
                                                 </div>
                                                 <div class="col-xs-4 resultado">
@@ -651,7 +655,7 @@
                                                     Fecha <%# Eval("idFecha") %>
                                                 </div>
                                                 <div class="col-xs-4">
-                                                     <%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA,"") %>
+                                                     <%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-responsive center-block") %>
                                                     <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>
@@ -846,7 +850,7 @@
                                         <li>
                                             <div class="widget-partido">                                                
                                                 <div class="col-xs-4">
-                                                    <%# ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA,"") %>
+                                                    <%# ((Entidades.Partido)Container.DataItem).local.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-responsive center-block") %>
                                                     <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).local.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("local.nombre") %></a></h5>
                                                 </div>
                                                 <div class="col-xs-4 resultado">
@@ -861,7 +865,7 @@
                                                     Fecha <%# Eval("idFecha") %>
                                                 </div>
                                                 <div class="col-xs-4">
-                                                    <%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA,"") %>
+                                                    <%# ((Entidades.Partido)Container.DataItem).visitante.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-responsive center-block") %>
                                                     <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, ((Entidades.Partido)Container.DataItem).visitante.idEquipo) %>" data-toggle="tooltip" data-placement="bottom" title="Ver Equipo"><%# Eval("visitante.nombre") %></a></h5>
                                                 </div>
                                             </div>

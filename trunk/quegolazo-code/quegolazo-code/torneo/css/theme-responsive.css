@@ -66,7 +66,9 @@
 /* ---------------------------------------------------------------------- */
 
 @media handheld, only screen and (max-width: 999px) {
-	
+	.page-error h1{
+        line-height: 50px;
+    }
 	header{		
 		position: relative;		
 	}
@@ -178,7 +180,9 @@
 @media handheld, only screen and (max-width: 768px) {
 	
 	/* Slide Responsive---------------------------------------------------*/
-	
+	.page-error h1{
+        line-height: 40px;
+    }
 	.camera_wrap {	
 		height: 400px;
 	}	

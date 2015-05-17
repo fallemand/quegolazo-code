@@ -24,7 +24,7 @@ namespace Entidades
             String html = "";
             if (tieneImagen(tamanioImagen))
             {
-                html = "<img src='" + GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, tamanioImagen) + "' class='img-responsive center-block "+ clases +"'>";
+                html = "<img src='" + GestorImagen.obtenerImagen(idEquipo, GestorImagen.EQUIPO, tamanioImagen) + "' class='"+ clases +"'>";
             }
             else
             {

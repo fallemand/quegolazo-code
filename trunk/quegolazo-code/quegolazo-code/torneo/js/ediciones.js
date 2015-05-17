@@ -33,6 +33,7 @@ $(document).ready(function ($) {
     $(".ediciones-slide").owlCarousel({
         autoPlay: 3200,
         items: 1,
+        itemsMobile: [1199, 1],
         navigation: true,
         pagination: false,
         rewindNav: false,

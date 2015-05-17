@@ -128,7 +128,7 @@
                                                                             </asp:Panel>
                                                                             <asp:Panel ID="panelPartidoLibre" runat="server" Visible="false">
                                                                                 <tr class="grupo-<%# Eval("idGrupo") %>">
-                                                                                    <td colspan="4">
+                                                                                    <td colspan="5">
                                                                                         <asp:Literal ID="litLibre"  runat="server" Text=""></asp:Literal></td>
                                                                                 </tr>
                                                                             </asp:Panel>
