@@ -74,44 +74,53 @@ $(document).ready(function ($) {
     });
 
     //================================== Tooltip y Link en Tablas=================================//
-    $('.table-fecha tr:not(:has(th))').tooltip({
-        title: 'Ver Partido',
-        placement: 'right',
-        container: 'body'
-    }).click(function () {
-        var link = $(this).find('a').attr('href');
-        if(link!=null)
-            window.location = link;
-    }).hover(function () {
-        $(this).toggleClass('hover');
+    var trList = $('.table-fecha tr:not(:has(th))')
+    trList.each(function( index, tr ) {
+        var trLink = $(tr).find('a').attr('href');
+        if(trLink!=null) {
+            $(tr).tooltip({
+                title: 'Ver Partido',
+                placement: 'right',
+                container: 'body'
+            }).click(function () {
+                window.location = trLink;
+            }).hover(function () {
+                $(this).toggleClass('hover');
+            });
+        }
     });
 
-    $('.table-jugadores tr:not(:has(th))').tooltip({
-        title: 'Ver Jugador',
-        placement: 'right',
-        container: 'body'
-    }).click(function () {
-        var link = $(this).find('a').attr('href');
-        if(link!=null)
-            window.location = link;
-    }).hover(function () {
-        $(this).toggleClass('hover');
+    var trList = $('.table-jugadores tr:not(:has(th))')
+    trList.each(function( index, tr ) {
+        var trLink = $(tr).find('a').attr('href');
+        if(trLink!=null) {
+            $(tr).tooltip({
+                title: 'Ver Jugador',
+                placement: 'right',
+                container: 'body'
+            }).click(function () {
+                window.location = trLink;
+            }).hover(function () {
+                $(this).toggleClass('hover');
+            });
+        }
     });
 
-    var trLink = $('.table-partidos tr:not(:has(th))').find('a').attr('href');
-    if(trLink!=null)
-    {
-        $('.table-partidos tr:not(:has(th))').tooltip({
-            title: 'Ver Partido',
-            placement: 'right',
-            container: 'body'
-        }).click(function () {
-            window.location = trLink;
-        }).hover(function () {
-            $(this).toggleClass('hover');
-        });
-    }
-
+    var trList = $('.table-partidos tr:not(:has(th))')
+    trList.each(function( index, tr ) {
+        var trLink = $(tr).find('a').attr('href');
+        if(trLink!=null) {
+            $(tr).tooltip({
+                title: 'Ver Partido',
+                placement: 'right',
+                container: 'body'
+            }).click(function () {
+                window.location = trLink;
+            }).hover(function () {
+                $(this).toggleClass('hover');
+            });
+        }
+    });
 
     //=================================== MaxHeight Tables ===================================//
     //Deja visible el header de todas las tablas
