@@ -296,7 +296,7 @@ $(document).ready(function ($) {
         trigger: "manual",
         html: true,
         animation: true,
-        container: '.content-info',
+        container: 'body',
         placement: 'left',
         content: function () {
             return $('#popover-' + $(this).attr('id')).html();
