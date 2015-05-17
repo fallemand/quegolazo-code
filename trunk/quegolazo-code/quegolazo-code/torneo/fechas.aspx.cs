@@ -82,6 +82,8 @@ namespace quegolazo_code.torneo
                 Fase fase = gestorEdicion.edicion.fases[idFase - 1];
                 gestorEdicion.faseActual = fase;
                 sinFechas.Visible = !GestorControles.cargarRepeaterList(rptFechas, fase.obtenerFechas());
+                if (gestorEdicion.faseActual.tipoFixture.idTipoFixture == "ELIM")
+                    ulFechas.Attributes["class"] = ulFechas.Attributes["class"] + " eliminatoria";
             }
             catch (Exception) { throw new Exception("No existe esa fase"); }
             try
@@ -134,6 +136,10 @@ namespace quegolazo_code.torneo
                     litFase.Text = e.CommandArgument.ToString();
                     litLnkFase.Text = e.CommandArgument.ToString();
                     sinFechas.Visible = !GestorControles.cargarRepeaterList(rptFechas, gestorEdicion.faseActual.obtenerFechas());
+                    if (gestorEdicion.faseActual.tipoFixture.idTipoFixture == "ELIM")
+                        ulFechas.Attributes["class"] = ulFechas.Attributes["class"] + " eliminatoria";
+                    else
+                        ulFechas.Attributes.Add("class", ulFechas.Attributes["class"].ToString().Replace("eliminatoria", ""));
                 }
             }
             catch (Exception ex) { GestorError.mostrarPanelFracaso(ex.Message); }    

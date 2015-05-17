@@ -1,3 +1,4 @@
+/// <reference path="main.js" />
 // THEME OPTIONS.JS
 //-------------------------------------------------------------------------------------
 //This file contains the inicializations of the plugins, and some principal functions.
@@ -78,7 +79,9 @@ $(document).ready(function ($) {
         placement: 'right',
         container: 'body'
     }).click(function () {
-        window.location = $(this).find('a').attr('href');
+        var link = $(this).find('a').attr('href');
+        if(link!=null)
+            window.location = link;
     }).hover(function () {
         $(this).toggleClass('hover');
     });
@@ -88,20 +91,27 @@ $(document).ready(function ($) {
         placement: 'right',
         container: 'body'
     }).click(function () {
-        window.location = $(this).find('a').attr('href');
+        var link = $(this).find('a').attr('href');
+        if(link!=null)
+            window.location = link;
     }).hover(function () {
         $(this).toggleClass('hover');
     });
 
-    $('.table-partidos tr:not(:has(th))').tooltip({
-        title: 'Ver Partido',
-        placement: 'right',
-        container: 'body'
-    }).click(function () {
-        window.location = $(this).find('a').attr('href');
-    }).hover(function () {
-        $(this).toggleClass('hover');
-    });
+    var trLink = $('.table-partidos tr:not(:has(th))').find('a').attr('href');
+    if(trLink!=null)
+    {
+        $('.table-partidos tr:not(:has(th))').tooltip({
+            title: 'Ver Partido',
+            placement: 'right',
+            container: 'body'
+        }).click(function () {
+            window.location = trLink;
+        }).hover(function () {
+            $(this).toggleClass('hover');
+        });
+    }
+
 
     //=================================== MaxHeight Tables ===================================//
     //Deja visible el header de todas las tablas
@@ -210,7 +220,6 @@ $(document).ready(function ($) {
 
     //=================================== Slide Otros Judaores  ==============================//
     $(".fechas").owlCarousel({
-        autoPlay: true,
         items: 8,
         responsive: true,
         navigation: true,
