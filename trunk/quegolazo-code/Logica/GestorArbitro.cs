@@ -49,6 +49,14 @@ namespace Logica
             DAOArbitro daoArbitro = new DAOArbitro();
             arbitro = daoArbitro.obtenerArbitroPorId(idArbitro);
         }
+        /// <summary>
+        /// Obtiene un árbitro por id
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public Arbitro obtenerObjetoArbitroPorId(int idArbitro)
+        {
+            return  new DAOArbitro().obtenerArbitroPorId(idArbitro);
+        }
 
         /// <summary>
         /// Modifica en la BD un árbitro

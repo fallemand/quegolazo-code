@@ -88,7 +88,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="panel-body nopadding panel-maxheight">                                                    
+                                                    <div class="panel-body nopadding panel-maxheight maxheight-sm">                                                    
                                                         <!-- Fecha -->
                                                             <table class="table table-condensed nomargin-bottom table-hover table-fecha">
                                                                 <thead>

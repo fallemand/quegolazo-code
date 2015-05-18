@@ -15,9 +15,7 @@ namespace quegolazo_code.torneo
     {
         protected GestorTorneo gestorTorneo;
         protected GestorEdicion gestorEdicion;
-        private GestorJugador gestorJugador;
-        private List<Jugador> goleadoresDelEquipo;
-        private DataTable datosPrincipalesEquipo;        
+        private GestorJugador gestorJugador;     
         GestorEstadisticas gestorEstadistica;
         protected int idEdicion, idEquipo;
         protected string nickTorneo;

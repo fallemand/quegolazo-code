@@ -10,51 +10,60 @@
 namespace quegolazo_code.torneo {
     
     
-    public partial class posiciones {
+    public partial class Formulario_web16 {
         
         /// <summary>
-        /// Control rptGrupos.
+        /// Control rptAribitros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptGrupos;
+        protected global::System.Web.UI.WebControls.Repeater rptAribitros;
         
         /// <summary>
-        /// Control faseTCT.
+        /// Control rptCanchas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl faseTCT;
+        protected global::System.Web.UI.WebControls.Repeater rptCanchas;
         
         /// <summary>
-        /// Control rptEquipos.
+        /// Control rptVallaMenosVencida.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptEquipos;
+        protected global::System.Web.UI.WebControls.Repeater rptVallaMenosVencida;
         
         /// <summary>
-        /// Control sinEquipos.
+        /// Control msjValla.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow sinEquipos;
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow msjValla;
         
         /// <summary>
-        /// Control rptListaEquipos.
+        /// Control rptFairPlay.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptListaEquipos;
+        protected global::System.Web.UI.WebControls.Repeater rptFairPlay;
+        
+        /// <summary>
+        /// Control msjFairPLay.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow msjFairPLay;
     }
 }

@@ -109,6 +109,10 @@ namespace Logica
         {
             return "/" + nickTorneo + "/edicion-" + idEdicion + "/noticia-" + idNoticia;
         }
+        public static string urlMiscelanea(string nickTorneo, int idEdicion)
+        {
+            return "/" + nickTorneo + "/edicion-" + idEdicion + "/miscelaneas";
+        }
         //Forms en el root 
         public const string rINDEX = "/index.aspx";
 
