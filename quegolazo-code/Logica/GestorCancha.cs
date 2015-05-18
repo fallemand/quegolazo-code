@@ -41,6 +41,16 @@ namespace Logica
         }
 
         /// <summary>
+        /// Obtiene una lista de Canchas de un torneo en particular
+        /// autor: Pau Pedrosa
+        /// </summary>
+        public List<Cancha> obtenerCanchasDeUnTorneoPorId(int idTorneo)
+        {            
+            return new DAOCancha().obtenerCanchasDeUnTorneo(idTorneo);
+           
+        }
+
+        /// <summary>
         /// Obtiene la Cancha a modificar por su Id
         /// autor: Pau Pedrosa
         /// </summary>

@@ -41,11 +41,11 @@
                             </h4>
                         </div>--%>
                         <div class="modal-body">
-                            <asp:Panel ID="panelSeleccionarEquipos" ClientIDMode="Static"  runat="server">
+                           
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-12">                                                
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">                                                                                       
                                                 <div class="btn-group btn-group-sm" role="group" style="margin-right:5px;" aria-label="...">
                                                     <button type="button" class="btn btn-success btn-sm" onclick="$('#tabla-posiciones tr').show('fast');">Todos</button>
                                                 </div>
@@ -55,11 +55,10 @@
                                                                 <button type="button" class="btn btn-success" onclick="filtrarPosiciones('<%# Eval("idGrupo")%>')">Grupo <%# Eval("idGrupo")%></button>
                                                         </ItemTemplate>
                                                     </asp:Repeater>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row margin-top" style="max-height: 350px !important;overflow: auto;">
-                                            <div class="col-md-12">
+                                                </div>                                           
+                                            </div>  
+                                        <div class="panel-body panel-maxheight maxheight-lg">
+                                            
                                                 <table id="tabla-posiciones" class="table table-condensed table-hover">
                                                     <thead id="faseTCT" runat="server" visible="true">
                                                         <tr>
@@ -102,12 +101,10 @@
                                                        </tr>
                                                     </tbody>
                                                 </table>
-                                            </div>
-                                        </div>
+                                            </div>                                        
+                                       </div>
                                     </div>
-                                </div>
-                                
-                            </asp:Panel>
+                                </div>                     
                         </div>
                  </div>
                  </div>  

@@ -85,13 +85,13 @@
                                 <li class="active"><a href="#about">Noticias</a></li>
                                 <li><a href="<%= Logica.GestorUrl.urlFixture(torneo.nick,edicion.idEdicion) %>">Fixture</a></li>
                                 <li><a href="<%= Logica.GestorUrl.urlFechasGenerico(torneo.nick,edicion.idEdicion) %>">Fechas</a></li>
+                                <li><a href="<%= Logica.GestorUrl.urlEquipos(torneo.nick,edicion.idEdicion) %>">Equipos</a></li>
                                 <li><a href="<%= Logica.GestorUrl.urlPosiciones(torneo.nick,edicion.idEdicion) %>">Posiciones</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estadísticas <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="<%= Logica.GestorUrl.urlEquipos(torneo.nick,edicion.idEdicion) %>">Equipos</a></li>
+                                    <ul class="dropdown-menu" role="menu">                                        
                                         <li><a href="<%= Logica.GestorUrl.urlGoleadores(torneo.nick,edicion.idEdicion) %>">Goleadores</a></li>
-                                        <li><a href="#">Misceláneas</a></li>                                        
+                                        <li><a href="<%= Logica.GestorUrl.urlMiscelanea(torneo.nick,edicion.idEdicion) %>">Misceláneas</a></li>                                        
                                     </ul>
                                 </li>
                                 <li><a href="<%= Logica.GestorUrl.urlSanciones(torneo.nick,edicion.idEdicion) %>">Sanciones</a></li>
@@ -105,8 +105,7 @@
                                                 <li><a href="<%#Logica.GestorUrl.urlEdicion(torneo.nick, ((Entidades.Edicion)Container.DataItem).idEdicion)%>"><%#Eval("nombre")%></a></li>
                                                 </ItemTemplate>                                             
                                            </asp:Repeater> 
-                                    </ul>
-                                    <li><a href="#contact">Contacto</a></li>
+                                    </ul>                                   
                                 </li>
                             </ul>
                         </div>
@@ -167,10 +166,9 @@
                         <div class="col-md-7 hidden-xs">
                             <!-- Nav Footer-->
                             <ul class="nav-footer">
-                                <li><a href="<%#Logica.GestorUrl.urlEdiciones(torneo.nick)%>">INICIO</a> </li>
-                                <li><a href="#">NOTICIAS</a></li>
-                                <li><a href="<%#Logica.GestorUrl.urlEdiciones(torneo.nick)%>">EDICIONES</a></li>
-                                <li><a href="#">CONTACTO</a></li>
+                                <li><a href="<%#Logica.GestorUrl.urlEdicion(torneo.nick, edicion.idEdicion)%>">INICIO</a></li>
+                                <li><a href="<%#Logica.GestorUrl.urlNoticias(torneo.nick, edicion.idEdicion)%>">NOTICIAS</a></li>
+                                <li><a href="<%#Logica.GestorUrl.urlEdiciones(torneo.nick)%>">EDICIONES</a></li>                                
                             </ul>
                             <!-- End Nav Footer-->
                         </div>
