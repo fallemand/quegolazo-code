@@ -55,7 +55,7 @@
                                                     <tr>
                                                         <td>
                                                          <%--<input hidden="hidden" <%# gestorEquipo.equipo = gestorEquipo.obtenerEquipoPorId(int.Parse(Eval("IDEQUIPO").ToString())) %> />--%>
-                                                         <%# new Entidades.Equipo(){idEquipo=int.Parse(Eval("IDEQUIPO").ToString())}.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>           
+                                                         <%# new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("IDEQUIPO").ToString())).obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>           
                                                         </td>
                                                         <td><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("IDEQUIPO").ToString())) %>"><%# Eval("EQUIPO") %></a></td>
                                                         <td><a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,int.Parse(Eval("IDEQUIPO").ToString()), int.Parse(Eval("IDJUGADOR").ToString())) %>"><%# Eval("JUGADOR") %></a></td>

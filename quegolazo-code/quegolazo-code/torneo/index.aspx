@@ -158,8 +158,8 @@
                                                                             <asp:Repeater ID="rptUltimosGoles" runat="server">
                                                                                 <ItemTemplate>
                                                                                     <tr>
-                                                                                        <td><%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Equipo").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "avatar-xs")%></td>
-                                                                                        <td><%# (new Entidades.Jugador() { idJugador=int.Parse(Eval("Id Jugador").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "img-circle avatar-xs", "", false)  %>
+                                                                                        <td><%# (new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("Id Equipo").ToString())).obtenerImagen(Utils.GestorImagen.CHICA, "img-responsive center-block avatar-xs"))%></td>
+                                                                                        <td><%# (new Entidades.Jugador() { idJugador=int.Parse(Eval("Id Jugador").ToString()), nombre = Eval("Jugador").ToString()}).obtenerImagen(Utils.GestorImagen.CHICA, "img-circle avatar-xs", "", false)  %>
                                                                                             <%# Eval("Jugador") %></td>
                                                                                         <td><%# Eval("Tipo Gol") %></td>
                                                                                         <td><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("Id Partido").ToString()) %>">Ver Partido</a></td>
@@ -190,9 +190,9 @@
                                                                             <asp:Repeater ID="rptUltimasTarjetas" runat="server">
                                                                                 <ItemTemplate>
                                                                                     <tr>
-                                                                                        <td><%# (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Equipo").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "avatar-xs")%></td>
+                                                                                        <td><%# new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("Id Equipo").ToString())).obtenerImagen(Utils.GestorImagen.CHICA, "img-responsive center-block avatar-xs") %></td>
                                                                                         <td>
-                                                                                            <%# (new Entidades.Jugador() { idJugador=int.Parse(Eval("Id Jugador").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "img-circle avatar-xs", "", false)  %>
+                                                                                            <%# (new Entidades.Jugador() { idJugador=int.Parse(Eval("Id Jugador").ToString()), nombre = Eval("Jugador").ToString()}).obtenerImagen(Utils.GestorImagen.CHICA, "img-circle avatar-xs", "", false)  %>
                                                                                             <%# Eval("Jugador") %></td>
                                                                                         <td><img src="/torneo/img/img-theme/tarjeta-<%# Eval("Tipo Tarjeta") %>.png" class="img-circle avatar-xs" alt=""></td>
                                                                                         <td><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("Id Partido").ToString()) %>">Ver Partido</a></td>
@@ -239,13 +239,13 @@
                                             <div class="widget-partido">
                                                 <div class="col-xs-6">
                                                     <% if(gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionCONFIGURADA || gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionINICIADA) {%>
-                                                        <%= (new Entidades.Equipo() { idEquipo= proximoPartido.local.idEquipo}).obtenerImagen(Utils.GestorImagen.MEDIANA, "") %>   
+                                                        <%= (new Logica.GestorEquipo().obtenerEquipoPorId(proximoPartido.local.idEquipo).obtenerImagen(Utils.GestorImagen.MEDIANA, "img-responsive center-block"))%>   
                                                     <% } %>                                                 
                                                     <h5><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, proximoPartido.local.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoLocal" runat="server"/></a></h5>
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <% if(gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionCONFIGURADA || gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionINICIADA) {%>
-                                                    <%= (new Entidades.Equipo() { idEquipo= proximoPartido.visitante.idEquipo}).obtenerImagen(Utils.GestorImagen.MEDIANA, "")%> 
+                                                    <%= (new Logica.GestorEquipo().obtenerEquipoPorId(proximoPartido.visitante.idEquipo).obtenerImagen(Utils.GestorImagen.MEDIANA, "img-responsive center-block"))%> 
                                                     <% } %>                                                   
                                                     <h5><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, proximoPartido.visitante.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoVisitante" runat="server"/></a></h5>
                                                 </div>
@@ -315,7 +315,7 @@
                                             <li>
                                                 <div class="widget-partido">
                                                     <div class="col-xs-4">
-                                                        <%# (new Entidades.Equipo() { idEquipo = int.Parse(Eval("local.idEquipo").ToString())}).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                                        <%# (new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("local.idEquipo").ToString())).obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block"))%>
                                                         <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><%# Eval("local.nombre")%></a></h5>
                                                     </div>
                                                     <div class="col-xs-4 resultado">
@@ -332,7 +332,7 @@
                                                     </div>
 
                                                     <div class="col-xs-4">
-                                                         <%# (new Entidades.Equipo() { idEquipo = int.Parse(Eval("visitante.idEquipo").ToString())}).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                                         <%# (new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("visitante.idEquipo").ToString())).obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block"))%>
                                                         <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><%# Eval("visitante.nombre")%></a></h5>
                                                     </div>
                                                 </div>
@@ -354,17 +354,17 @@
                                 <div class="podio podio-md tooltip-hover">
                                     <div class="segundo">
                                         <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, podio[1].idEquipo)%>" data-toggle="tooltip" title="2do Puesto: <%= podio[1].nombre %>">
-                                            <%= (new Entidades.Equipo() { idEquipo = podio[1].idEquipo }).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                            <%= (new Logica.GestorEquipo().obtenerEquipoPorId(podio[1].idEquipo).obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block"))%>
                                         </a>
                                     </div>
                                     <div class="primero">
                                         <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, podio[0].idEquipo)%>"" data-toggle="tooltip" title="1er Puesto: <%= podio[0].nombre %>">
-                                            <%= (new Entidades.Equipo() { idEquipo = podio[0].idEquipo }).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                            <%= (new Logica.GestorEquipo().obtenerEquipoPorId(podio[0].idEquipo).obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block"))%>
                                         </a>
                                     </div>
                                     <div class="tercero">
                                         <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, podio[2].idEquipo)%>" data-toggle="tooltip" title="3er Puesto: <%= podio[2].nombre %>">
-                                            <%= (new Entidades.Equipo() { idEquipo = podio[2].idEquipo }).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                            <%= (new Logica.GestorEquipo().obtenerEquipoPorId(podio[2].idEquipo).obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block"))%>
                                         </a>
                                     </div>
                                 </div>
@@ -394,7 +394,7 @@
                                         <asp:Repeater ID="rptTablaPosiciones" runat="server">
                                             <ItemTemplate>
                                                 <tr>
-                                                    <td><%# (new Entidades.Equipo() { idEquipo = int.Parse(Eval("idEquipo").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA, "img-circle avatar-xs")%></td>
+                                                    <td><%# (new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("idEquipo").ToString())).obtenerImagen(Utils.GestorImagen.CHICA, "img-responsive center-block img-circle avatar-xs"))%></td>
                                                     <td><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, int.Parse(Eval("idEquipo").ToString()))%>" data-toggle="tab"><%# Eval("Equipo") %></a></td>
                                                     <td><b><%# Eval("Puntos")%></b></td>
                                                     <td><%# Eval("PJ")%></td>
@@ -432,7 +432,7 @@
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre")%>">
                                             <a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, int.Parse(Eval("idEquipo").ToString()))%>">
-                                                <%# (new Entidades.Equipo() { idEquipo = int.Parse(Eval("idEquipo").ToString())}).obtenerImagen(Utils.GestorImagen.GRANDE, "")%>
+                                                <%# (new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("idEquipo").ToString())).obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block"))%>
                                             </a>
                                         </li>
                                      </ItemTemplate>
