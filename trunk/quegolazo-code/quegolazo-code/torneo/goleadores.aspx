@@ -48,7 +48,7 @@
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("JUGADOR")%>">
                                             <a href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,int.Parse(Eval("IDEQUIPO").ToString()),int.Parse(Eval("IDJUGADOR").ToString()))%>">
-                                                <%# new Entidades.Jugador(){idJugador=int.Parse(Eval("IDJUGADOR").ToString())}.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle","avatar-slider",false)%>
+                                                <%# new Entidades.Jugador(){idJugador=int.Parse(Eval("IDJUGADOR").ToString()), nombre = Eval("JUGADOR").ToString()}.obtenerImagen(Utils.GestorImagen.MEDIANA,"img-circle","avatar-slider",false)%>
                                             </a>
                                         </li>
                                     </ItemTemplate>

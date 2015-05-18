@@ -80,7 +80,7 @@
                                                                 <tr>
                                                                     <td>
                                                                         <a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
-                                                                        <%# new Entidades.Equipo(){idEquipo=int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %></a>
+                                                                        <%# new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("idEquipo").ToString())).obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %></a>
                                                                     </td>
                                                                     <td><a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>"><%# Eval("Equipo") %></a></td>
                                                                     <asp:Panel runat="server" id="pnlPuntos">
@@ -122,7 +122,7 @@
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre") %>">
                                             <a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
                                                     <a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
-                                                        <%# ((Entidades.Equipo)Container.DataItem).obtenerImagen(Utils.GestorImagen.MEDIANA,"") %>
+                                                        <%# ((Entidades.Equipo)Container.DataItem).obtenerImagen(Utils.GestorImagen.MEDIANA,"img-responsive center-block") %>
                                                     </a>  
                                             </a>
                                         </li>

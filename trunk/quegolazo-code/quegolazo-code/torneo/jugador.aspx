@@ -77,7 +77,7 @@
                                 <ul class="list-group tooltip-hover">
                                     <li class="list-group-item">
                                         <a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,gestorEquipo.equipo.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo">
-                                            <%= gestorEquipo.equipo.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs img-circle") %>
+                                            <%= gestorEquipo.equipo.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs img-circle") %>
                                             <%= gestorEquipo.equipo.nombre %>
                                         </a>
                                     </li>
@@ -244,13 +244,13 @@
                                                                     <ItemTemplate>
                                                                         <tr>
                                                                             <td>
-                                                                                <%#  (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoLocal").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA,"img-circle avatar-xs") %>
+                                                                                <%#  (new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("idEquipoLocal").ToString())).obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block img-circle avatar-xs")) %>
                                                                             </td>
                                                                             <td><%# Eval("Equipo Local") %></td>
                                                                             <td><b><%# Eval("Goles Local") %></b><small><small><%# Eval("PenalesLocal")%></small></small> - <b><%# Eval("Goles Visitante") %></b><small><small><%# Eval("PenalesVisitante")%></small></small></td>
                                                                             <td><%# Eval("Equipo Visitante") %></td>
                                                                             <td>
-                                                                                <%#  (new Entidades.Equipo() { idEquipo=int.Parse(Eval("idEquipoVisitante").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA,"img-circle avatar-xs") %>
+                                                                                <%#  (new Logica.GestorEquipo().obtenerEquipoPorId(idEquipo=int.Parse(Eval("idEquipoVisitante").ToString())).obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block img-circle avatar-xs")) %>
                                                                             <td><span class="label partido-<%# Eval("Resultado") %>"><%# Eval("Resultado") %></span></td>
                                                                             <td class="hidden"><a href="<%# Logica.GestorUrl.urlPartido(nickTorneo, idEdicion, Eval("idPartido").ToString()) %>"></a></td>
                                                                         </tr>
@@ -284,7 +284,7 @@
                                                                 <ItemTemplate>
                                                                     <tr>
                                                                         <td>
-                                                                             <%#  (new Entidades.Equipo() { idEquipo=int.Parse(Eval("Id Otro equipo").ToString())}).obtenerImagen(Utils.GestorImagen.CHICA,"img-circle avatar-xs") %>
+                                                                             <%#  (new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("Id Otro equipo").ToString())).obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block img-circle avatar-xs")) %>
                                                                         <td><%# Eval("Otro Equipo") %></td>
                                                                         <td>Fecha <%# Eval("Fecha") %></td>
                                                                         <td><%# Eval("Tipo Gol") %></td>

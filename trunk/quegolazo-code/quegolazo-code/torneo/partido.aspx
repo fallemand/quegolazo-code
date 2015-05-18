@@ -170,13 +170,13 @@
                                         <thead>
                                             <tr>
                                                 <th class="col-xs-2 col-md-4 text-center">
-                                                    <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                    <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                     <%= gestorPartido.partido.local.nombre %>
                                                     
                                                 </th>
                                                 <th class="col-xs-8 col-md-4 text-center">VS</th>
                                                 <th class="col-xs-2 col-md-4 text-center">
-                                                    <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                    <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                     <%= gestorPartido.partido.visitante.nombre %>
                                                 </th>
                                             </tr>
@@ -270,7 +270,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                        <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                         <%= gestorPartido.partido.local.nombre %>
                                                     </th>
                                                 </tr>
@@ -302,7 +302,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                        <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                         <%= gestorPartido.partido.visitante.nombre %>
                                                     </th>
                                                 </tr>
@@ -338,7 +338,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center" colspan="3">
-                                                        <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                        <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                         <%= gestorPartido.partido.local.nombre %>
                                                     </th>
                                                 </tr>
@@ -368,7 +368,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                             <%= gestorPartido.partido.visitante.nombre %>
                                                         </th>
                                                     </tr>
@@ -402,7 +402,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                            <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                             <%= gestorPartido.partido.local.nombre %>
                                                         </th>
                                                     </tr>
@@ -436,7 +436,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                             <%= gestorPartido.partido.visitante.nombre %>
                                                         </th>
                                                     </tr>
@@ -474,7 +474,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                            <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                             <%= gestorPartido.partido.local.nombre %>
                                                         </th>
                                                     </tr>
@@ -517,7 +517,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                             <%= gestorPartido.partido.visitante.nombre %>
                                                         </th>
                                                     </tr>
@@ -564,7 +564,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                            <%= gestorPartido.partido.local.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                             <%= gestorPartido.partido.local.nombre %>
                                                         </th>
                                                     </tr>
@@ -594,7 +594,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center" colspan="3">
-                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %>
+                                                            <%= gestorPartido.partido.visitante.obtenerImagen(Utils.GestorImagen.CHICA,"img-responsive center-block avatar-xs") %>
                                                             <%= gestorPartido.partido.visitante.nombre %>
                                                         </th>
                                                     </tr>

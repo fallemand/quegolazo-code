@@ -54,7 +54,7 @@
                                     </ItemTemplate>
                                 </asp:Repeater>   
                                 <li id="sinEquipos" class="slider-sin-datos" runat="server" visible="false">
-                                    <h1 class="text-thin">No existen jugadores</h1>
+                                    <h1 class="text-thin">No existen equipos</h1>
                                 </li>                              
                             </ul>
                         </div>
