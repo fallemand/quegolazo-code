@@ -7,7 +7,7 @@
     <!-- Titulo Sección -->
     <section class="section-title overlay-bg">
         <div class="container">
-            <h1>Goleadores - <%= gestorEdicion.edicion.nombre %></h1>
+            <h1>Misceláneas - <%= gestorEdicion.edicion.nombre %></h1>
         </div>
     </section>
     <!-- End Titulo Sección -->
@@ -21,7 +21,7 @@
                     <li>/</li>
                     <li><a href="<%# Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion)%>"><%= gestorEdicion.edicion.nombre %></a></li>
                     <li>/</li>
-                    <li><a href="<%# Logica.GestorUrl.urlMiscelanea(nickTorneo,idEdicion)%>">Goleadores</a></li>
+                    <li><a href="<%# Logica.GestorUrl.urlMiscelanea(nickTorneo,idEdicion)%>">Misceláneas</a></li>
                 </ul>
             </div>
         </div>
@@ -49,7 +49,7 @@
                           <ul class="list-group">
                             <li class="list-group-item"><i class="flaticon-football65"></i>&nbsp;&nbsp;Cancha: <%= gestorEdicion.edicion.tamanioCancha.nombre %></li>
                             <li class="list-group-item"><i class="glyphicon glyphicon-picture"></i>&nbsp;&nbsp;Superficie: <%= gestorEdicion.edicion.tipoSuperficie.nombre %></li>
-                            <li class="list-group-item"><i class="glyphicon glyphicon-info-sign"></i>&nbsp;&nbsp;Puntos: G:<%= gestorEdicion.edicion.puntosGanado %> - P:<%= gestorEdicion.edicion.puntosPerdido %> - E: <%= gestorEdicion.edicion.puntosEmpatado %>   </li>
+                            <li class="list-group-item"><i class="glyphicon glyphicon-info-sign"></i>&nbsp;&nbsp;Puntos: G: <%= gestorEdicion.edicion.puntosGanado %> - P: <%= gestorEdicion.edicion.puntosPerdido %> - E: <%= gestorEdicion.edicion.puntosEmpatado %>   </li>
                             <li class="list-group-item"><i class="flaticon-soccer18"></i>&nbsp;&nbsp;<a href="<%= Logica.GestorUrl.urlEquipos(nickTorneo, gestorEdicion.edicion.idEdicion)  %>"><%= gestorEdicion.edicion.equipos.Count %> equipos participantes.</a>  </li>
                             <li class="list-group-item"><i class="glyphicon glyphicon-info-sign"></i>&nbsp;&nbsp;Fútbol <%= gestorEdicion.edicion.generoEdicion.nombre  %> </li>
                           </ul>
@@ -61,7 +61,7 @@
                 <div class="col-md-4 col-sm-4" style="margin-bottom: 10px;">
                     <div class="panel panel-default small-arrows">
                         <div class="panel-heading">
-                            <h3 class="panel-title text-center"><span class="flaticon-football85"></span>&nbsp;&nbsp; Arbitros</h3>
+                            <h3 class="panel-title text-center"><span class="flaticon-football85"></span>&nbsp;&nbsp; Árbitros</h3>
                         </div>
                         <div class="panel-body onlypadding-top">
                             <ul class="single-carousel">
@@ -135,7 +135,8 @@
                         <table class="table table-condensed table-hover">
                             <thead>
                                 <tr>
-                                    <th class="col-md-6 text-center" colspan="2">Equipo</th>                                                            
+                                    <th class="col-md-4 text-center" colspan="2">Equipo</th>  
+                                    <th class="col-md-2 text-center">PJ</th>                                                                                              
                                     <th class="col-md-3 text-center">Goles en contra</th>
                                     <th class="col-md-3 text-center">Promedio</th>                                                              
                                 </tr>
@@ -149,6 +150,7 @@
                                                 <%# new Entidades.Equipo(){idEquipo=int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %></a>
                                             </td>
                                             <td><a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>"><%# Eval("equipo") %></a></td>                                                                    
+                                            <td class="text-center"><%# Eval("PJ") %></td>
                                             <td class="text-center"><%# Eval("GC") %></td>
                                             <td class="text-center"><%# Math.Round(double.Parse(Eval("promedio").ToString()), 2) %></td>                                                           
                                         </tr>
@@ -171,9 +173,9 @@
                                         <thead>
                                             <tr>
                                                 <th class="col-md-4 text-center" colspan="2">Equipo</th> 
-                                                <th class="col-md-3 text-center">Cant. Tarjetas</th>    
-                                                <th class="col-md-1 text-center">Roj</th>  
-                                                 <th class="col-md-1 text-center">Am</th>                                                            
+                                                <th class="col-md-2 text-center">Total Tarjetas</th>    
+                                                <th class="col-md-1 text-center">Rojas</th>  
+                                                 <th class="col-md-1 text-center">Amarillas</th>                                                            
                                             </tr>
                                         </thead>
                                         <tbody class="tablaFiltro">

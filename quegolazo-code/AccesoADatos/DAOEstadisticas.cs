@@ -1573,13 +1573,16 @@ namespace AccesoADatos
                 string sql = @"SELECT e.idEquipo AS 'idEquipo', e.nombre AS 'equipo', 
                                 COUNT(CASE p.idEstado WHEN @estadoJugado THEN 1 ELSE NULL END) AS 'PJ',  
                                 SUM(CASE WHEN p.idEquipoLocal = e.idEquipo AND p.golesVisitante IS NOT NULL THEN p.golesVisitante ELSE 0 END)+ SUM(CASE WHEN p.idEquipoVisitante = e.idEquipo AND p.golesLocal IS NOT NULL THEN p.golesLocal ELSE 0 END) AS 'GC',
-                                (SUM(CASE WHEN p.idEquipoLocal = e.idEquipo AND p.golesVisitante IS NOT NULL THEN p.golesVisitante ELSE 0 END)+ SUM(CASE WHEN p.idEquipoVisitante = e.idEquipo AND p.golesLocal IS NOT NULL THEN p.golesLocal ELSE 0 END) *1.00)/(COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*1.00) AS 'promedio'
+                                CASE  
+	                                WHEN COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END) = 0 THEN 0   
+	                                ELSE (SUM(CASE WHEN p.idEquipoLocal = e.idEquipo AND p.golesVisitante IS NOT NULL THEN p.golesVisitante ELSE 0 END)+ SUM(CASE WHEN p.idEquipoVisitante = e.idEquipo AND p.golesLocal IS NOT NULL THEN p.golesLocal ELSE 0 END) *1.00)/(COUNT(CASE p.idEstado WHEN 13 THEN 1 ELSE NULL END)*1.00) 
+                                END AS 'promedio' 
                                 from Equipos e
                                 inner join EquipoXEdicion exe ON exe.idEquipo = e.idEquipo
                                 left join Partidos p on (e.idEquipo = p.idEquipoLocal OR e.idEquipo = p.idEquipoVisitante)
                                 where exe.idEdicion = @idEdicion and p.idEdicion = @idEdicion
                                 GROUP BY e.nombre, e.idEquipo
-                                ORDER BY 'GC' DESC";
+                                ORDER BY 'GC' ASC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.Parameters.Add(new SqlParameter("@estadoJugado", Estado.partidoJUGADO));
@@ -1621,7 +1624,7 @@ namespace AccesoADatos
                                 LEFT JOIN Tarjetas ta ON (ta.idEquipo = e.idEquipo AND ta.tipoTarjeta ='A' AND ta.idPartido IN (SELECT p.idPartido FROM Partidos p WHERE p.idEdicion = @idEdicion))
                                 WHERE exe.idEdicion = @idEdicion
                                 GROUP BY e.idEquipo, e.nombre
-                                ORDER BY 'cantidad' DESC";
+                                ORDER BY 'cantidad' ASC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.CommandText = sql;
