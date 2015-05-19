@@ -51,15 +51,7 @@ namespace quegolazo_code.torneo
             }
             catch (Exception ex) { 
                 GestorError.mostrarPanelFracaso(ex.Message);
-            }
-        
-
+            }  
         }
-
-
-
-
-
-
     }
  }
