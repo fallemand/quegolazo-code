@@ -1499,7 +1499,7 @@ namespace AccesoADatos
                 cmd.Connection = con;
                 string sql = @"SELECT TOP 3 posicion, idEquipo
                                 FROM TablaPosicionesFinal tablaFinal
-                                WHERE tablaFinal.idEdicion = @idEdicion";
+                                WHERE tablaFinal.idEdicion = @idEdicion ORDER BY posicion";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.CommandText = sql;

@@ -13,7 +13,7 @@
                 <div class="col-sm-12" runat="server" id="divOtrosPartidosDeFecha" visible="true">
                     <div class="panel nopadding panel-default">
                         <div class="panel-body">
-                            <p class="slider-multiple-title">Otros Partidos de la Fecha</p>
+                            <p class="slider-multiple-title"> Partidos de la Fecha</p>
                             <ul class="proximos-partidos slider-multiple tooltip-hover">
                                 <asp:Repeater ID="rptFechaActual" runat="server">
                                     <ItemTemplate>
