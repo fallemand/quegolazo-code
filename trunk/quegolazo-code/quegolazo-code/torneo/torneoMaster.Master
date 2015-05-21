@@ -94,7 +94,7 @@
                                         <li class="miscelaneas"><a href="<%= Logica.GestorUrl.urlMiscelanea(torneo.nick,edicion.idEdicion) %>">Misceláneas</a></li>                                        
                                     </ul>
                                 </li>
-                                <li><a href="<%= Logica.GestorUrl.urlSanciones(torneo.nick,edicion.idEdicion) %>">Sanciones</a></li>
+                                <li class="sanciones"><a href="<%= Logica.GestorUrl.urlSanciones(torneo.nick,edicion.idEdicion) %>">Sanciones</a></li>
                             </ul>
                             <ul class="hidden-sm nav navbar-nav navbar-right">
                                 <li class="dropdown">
