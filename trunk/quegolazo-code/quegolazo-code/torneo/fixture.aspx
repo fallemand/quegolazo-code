@@ -11,7 +11,7 @@
     <!-- Titulo Sección -->
     <section class="section-title overlay-bg">
         <div class="container">
-            <h1>      Fixture</h1>
+            <h1>Fixture</h1>
         </div>
     </section>
     <!-- End Titulo Sección -->
@@ -161,7 +161,9 @@
                             </div>
                         </asp:Panel>
                         <asp:Panel ID="panelLlaves" runat="server">
-                            <div id="divLlaves<%# Eval("idFase") %>">
+                            <div id='fase-<%# Eval("idFase") %>' class="panel-collapse collapse <%# (Container.ItemIndex==0) ? "in" : ""%>">
+                                <div id='divLlaves<%# Eval("idFase") %>'>
+                                </div>
                             </div>
                         </asp:Panel>
                     </div>
