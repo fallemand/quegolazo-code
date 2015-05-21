@@ -310,12 +310,20 @@ $(document).ready(function ($) {
         });
 
     //=================================== PopOvers ==================================//
+
+    function get_popover_placement(pop, dom_el) {
+        var width = window.innerWidth;
+        if (width<500) return 'bottom';
+        var left_pos = $(dom_el).offset().left;
+        if (width - left_pos > 400) return 'right';
+        return 'left';
+    }
     $(".popover-equipo").popover({
         trigger: "manual",
         html: true,
         animation: true,
         container: 'body',
-        placement: 'left',
+        placement: get_popover_placement,
         content: function () {
             return $('#popover-' + $(this).attr('id')).html();
         },
