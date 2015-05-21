@@ -13,5 +13,3 @@ Buscar 12434:localhost (Puede haber más de uno)
 Cambiarlo por: 80:quegolazo.com.ar
 
 3-Cerrar el Visual y Ejecutarlo de ahora en adelante como administrador.
-
-
