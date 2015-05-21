@@ -20,6 +20,10 @@ body {
   height: 100%;
 }
 
+li a i.text-success, li a span.text-success {
+  color: #60A64F;
+}
+
 .wrapper {
   min-height: 100%;
   height: auto !important;
