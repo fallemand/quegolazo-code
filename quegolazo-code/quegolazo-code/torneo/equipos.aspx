@@ -20,7 +20,7 @@
                     <li>/</li>
                     <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion) %>" ><%=gestorEdicion.edicion.nombre%></a></li>
                     <li>/</li>
-                    <li><a href="<%= Logica.GestorUrl.urlEdicion(nickTorneo,idEdicion) %>">Equipos</a></li>
+                    <li><a href="<%= Logica.GestorUrl.urlEquipos(nickTorneo,idEdicion) %>">Equipos</a></li>
                 </ul>
             </div>
         </div>
@@ -36,7 +36,7 @@
                 <asp:Repeater ID="rptEquipos" runat="server" >
                     <ItemTemplate>
                         <!-- Jugador -->
-                        <div class="col-md-3 col-xs-3">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <!-- Datos del Equipo -->
                             <div class="panel-box bg-dark score principal theme-border" style="max-height: 350px;">
                                 <a id='equipo-<%#Eval("idEquipo")%>' class="popover-equipo" href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
@@ -58,28 +58,28 @@
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-xs-4 widget widget-xs">
-                                                <h1><span class="flaticon-football68"></span><%# Eval("Puntos") %></h1>
-                                                <span>PTS</span>
+                                                <h1><span class="flaticon-football31"></span><%# Eval("Puntos") %></h1>
+                                                <span>Puntos</span>
                                             </div>
-                                            <div class="col-xs-4 widget widget-xs">
-                                                <h1><span class="flaticon-football28"></span><%# Eval("PG") %></h1>
-                                                <span>PG</span>
-                                            </div>
-                                            <div class="col-xs-4 widget widget-xs">
-                                                <h1><span style="color: #c41a1a;" class="flaticon-football103"></span><%# Eval("PP") %></h1>
-                                                <span>PP</span>
-                                            </div>
-                                            <div class="col-xs-4 widget widget-xs">
-                                                <h1><span style="color: #e5e520;" class="flaticon-football103"></span><%# Eval("GF") %></h1>
+                                            <div class="col-xs-4 widget widget-xs text-success">
+                                                <h1><span class="flaticon-football28"></span><%# Eval("GF") %></h1>
                                                 <span>GF</span>
                                             </div>
-                                            <div class="col-xs-4 widget widget-xs">
-                                                <h1><span style="color: #e5e520;" class="flaticon-football103"></span><%# Eval("GC") %></h1>
+                                            <div class="col-xs-4 widget widget-xs text-danger">
+                                                <h1><span class="flaticon-football28"></span><%# Eval("GC") %></h1>
                                                 <span>GC</span>
                                             </div>
                                             <div class="col-xs-4 widget widget-xs">
-                                                <h1><span style="color: #e5e520;" class="flaticon-football103"></span><%# int.Parse(Eval("GF").ToString())-int.Parse(Eval("GC").ToString()) %></h1>
-                                                <span>DIF</span>
+                                                <h1><span class="flaticon-football68"></span><%# Eval("PG") %></h1>
+                                                <span>Ganados</span>
+                                            </div>
+                                            <div class="col-xs-4 widget widget-xs">
+                                                <h1><span class="flaticon-football68"></span><%# Eval("PE") %></h1>
+                                                <span>Empatados</span>
+                                            </div>
+                                            <div class="col-xs-4 widget widget-xs">
+                                                <h1><span class="flaticon-football68"></span><%# Eval("PP") %></h1>
+                                                <span>Perdidos</spa>
                                             </div>
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@
                             </div>
                             <div id="popover-title-equipo-<%# Eval("idEquipo")%>" style="display: none">
                                 <%#Eval("equipo") %>
-                                <a href="#" class="icon pull-right mail"><i data-toggle="tooltip" title="Ver Equipo!" class="glyphicon glyphicon-eye-open"></i></a>
+                                <a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, int.Parse(Eval("idEquipo").ToString())) %>" class="icon pull-right mail"><i data-toggle="tooltip" title="Ver Equipo!" class="glyphicon glyphicon-eye-open"></i></a>
                             </div>
                             <!-- END Popover del Equipo -->
                         </div>
