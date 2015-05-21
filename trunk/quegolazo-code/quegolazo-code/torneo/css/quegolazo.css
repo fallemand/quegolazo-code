@@ -1264,8 +1264,6 @@ height: 135px;
 .card {
   overflow: hidden;
   position: relative;
-  border: 1px solid #CCC;
-  border-radius: 8px;
   text-align: center;
   padding: 0;
   color: rgb(136, 172, 217);
@@ -1277,7 +1275,8 @@ height: 135px;
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  background-color: #FFF;
+  height: 43%;
   border-bottom: 1px #FFF solid;
   /* This positions the canvas under the text */
   z-index: 1;
@@ -1287,13 +1286,15 @@ height: 135px;
   margin-top: 15px;
   z-index: 100;
 }
-
+.card .content p {
+    color:#FFF;
+}
 .card .avatar img {
   width: 100px;
   height: 100px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  border: 5px solid rgba(0,0,30,0.8);
+  border: 2px solid rgba(0, 0, 30, 0.33);
 }
 
