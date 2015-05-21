@@ -62,7 +62,7 @@
                                     <!-- End Nav Tabs -->
 
                                     <!-- Content Tabs -->
-                                    <div class="panel">
+                                    <div class="panel noborder">
                                         <div class="panel-body nopadding-horizontal bg-dark">
                                             <div class="tab-content home">
                                                 <!-- Tab One - Feature News -->

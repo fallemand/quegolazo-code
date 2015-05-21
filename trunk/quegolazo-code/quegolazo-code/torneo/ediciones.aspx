@@ -93,7 +93,7 @@
                                     <asp:Repeater ID="rptEdiciones" runat="server">
                                         <ItemTemplate>
                                             <li class="li-item">
-                                                <a href="<%# Logica.GestorUrl.urlEdicion(torneo.nick, ((Entidades.Edicion)Container.DataItem).idEdicion )%>" class="torneo-default avatar-bg-<%#((Entidades.Edicion)Container.DataItem).lastNumber() %>">
+                                                <a href="<%# Logica.GestorUrl.urlEdicion(torneo.nick, ((Entidades.Edicion)Container.DataItem).idEdicion )%>" class="torneo-default full-width avatar-bg-<%#((Entidades.Edicion)Container.DataItem).lastNumber() %>">
                                                     <h1><%# ((Entidades.Edicion)Container.DataItem).nombre %></h1>
                                                     <p data-toggle="tooltip" data-placement="bottom" title="<%# ((Entidades.Edicion)Container.DataItem).estado.descripcion %>"><%# ((Entidades.Edicion)Container.DataItem).estado.nombre %></p>
                                                 </a>

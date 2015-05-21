@@ -1150,6 +1150,10 @@ a.torneo-default {
     padding: 5px;
 }
 
+a.torneo-default.full-width{
+    width: 100%;
+}
+
 a.torneo-default h1, a.torneo-default p{
     
 }
