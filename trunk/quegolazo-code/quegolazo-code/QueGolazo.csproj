@@ -70,6 +70,7 @@
     <Content Include="admin\equipos.aspx" />
     <Content Include="admin\noticias.aspx" />
     <Content Include="admin\sanciones.aspx" />
+    <Content Include="Configurar-Dominio.txt" />
     <Content Include="resources\css\colorPicker.css" />
     <Content Include="resources\css\jquery-customselect-1.9.1.css" />
     <Content Include="resources\css\jquery.bracket.min.css" />

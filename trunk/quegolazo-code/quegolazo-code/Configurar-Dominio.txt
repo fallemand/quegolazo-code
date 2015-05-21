@@ -1,0 +1,17 @@
+---------------------------------------------------------
+Correr la aplicaciòn de forma local en quegolazo.com.ar
+---------------------------------------------------------
+
+1-Abrir el Bloc de Notas: Botòn Derecho -> Abrir como Administrador
+Abrir el archivo C:/Windows/System32/drivers/etc/hotst
+Al final de todo, agregar esta entrada:
+127.0.0.1 quegolazo.com.ar
+
+2-Ir a %UserName%\Documents\IISExpress\config (Usuario -> Mis Documentos -> IISExpress -> config)
+Editar el archivo applicationhost.config
+Buscar 12434:localhost (Puede haber más de uno)
+Cambiarlo por: 80:quegolazo.com.ar
+
+3-Cerrar el Visual y Ejecutarlo de ahora en adelante como administrador.
+
+
