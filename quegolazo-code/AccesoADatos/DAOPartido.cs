@@ -1520,6 +1520,7 @@ namespace AccesoADatos
                 {
                     Partido partido = new Partido();
                     partido.idPartido = int.Parse(dr["idPartido"].ToString());
+                    partido.fecha = (dr["fechaPartido"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fechaPartido"].ToString()) : null;
                     partido.golesLocal = (dr["golesLocal"] != DBNull.Value) ? (int?)int.Parse(dr["golesLocal"].ToString()) : null;
                     partido.golesVisitante = (dr["golesVisitante"] != DBNull.Value) ? (int?)int.Parse(dr["golesVisitante"].ToString()) : null;
                     partido.penalesLocal = (dr["penalesLocal"] != DBNull.Value) ? (int?)int.Parse(dr["penalesLocal"].ToString()) : null;
