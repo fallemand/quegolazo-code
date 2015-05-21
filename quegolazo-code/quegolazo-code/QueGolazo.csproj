@@ -136,8 +136,8 @@
     <Content Include="torneo\404.aspx" />
     <Content Include="torneo\ediciones.aspx" />
     <Content Include="torneo\css\jquery.bracket.min.css" />
-    <Content Include="torneo\equipo.html" />
-    <Content Include="torneo\fechas.html" />
+    <Content Include="torneo\interfaces\equipo.html" />
+    <Content Include="torneo\interfaces\fechas.html" />
     <Content Include="torneo\css\animations\animate.css" />
     <Content Include="torneo\css\bootstrap\bootstrap-theme.css" />
     <Content Include="torneo\css\bootstrap\bootstrap.css" />
@@ -201,7 +201,7 @@
     <Content Include="torneo\img\img-theme\favicon.ico" />
     <Content Include="torneo\img\img-theme\logo-big.png" />
     <Content Include="torneo\img\img-theme\tarjetas.png" />
-    <Content Include="torneo\index.html" />
+    <Content Include="torneo\interfaces\index.html" />
     <Content Include="torneo\js\charts\charts-jugador.js" />
     <Content Include="torneo\js\charts\charts-goleador.js" />
     <Content Include="torneo\js\ediciones.js" />
@@ -347,9 +347,9 @@
     <Content Include="torneo\js\theme-options\jquery.colorPicker.min.js" />
     <Content Include="torneo\js\theme-options\theme-options.js" />
     <Content Include="torneo\js\totop\jquery.ui.totop.js" />
-    <Content Include="torneo\jugador.html" />
+    <Content Include="torneo\interfaces\jugador.html" />
     <Content Include="torneo\partido.aspx" />
-    <Content Include="torneo\partido.html" />
+    <Content Include="torneo\interfaces\partido.html" />
     <Content Include="torneo\posiciones.aspx" />
     <Content Include="torneo\sanciones.aspx" />
     <Content Include="usuario\activar.aspx" />
@@ -762,8 +762,7 @@
           <IISUrl>http://localhost:12434/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://quegolazo.com.ar</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
