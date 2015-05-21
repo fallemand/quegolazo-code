@@ -349,7 +349,7 @@ img.img-principal {
   color: #FFF;
 }
 
-.panel-box.score h3 a:hover, .panel.score h3 a:hover{
+.panel-box.score h3 a:hover, .panel.score h3 a:hover, .panel-box.score a:hover{
   color: #f4f4f4;
   text-decoration: none;
 }

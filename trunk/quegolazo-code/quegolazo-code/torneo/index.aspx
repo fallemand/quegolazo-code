@@ -316,7 +316,7 @@
                                                 <div class="widget-partido">
                                                     <div class="col-xs-4">
                                                         <%# (new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("local.idEquipo").ToString())).obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block"))%>
-                                                        <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><%# Eval("local.nombre")%></a></h5>
+                                                        <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, int.Parse(Eval("local.idEquipo").ToString())) %>" data-toggle="tooltip" title="Ver Equipo"><%# Eval("local.nombre")%></a></h5>
                                                     </div>
                                                     <div class="col-xs-4 resultado">
                                                         <div class="thumbnail">
@@ -325,15 +325,15 @@
                                                         <div class="thumbnail">
                                                             <h2><%# Eval("golesVisitante")%><small><small><%# Eval("penalesVisitante")%></small></small></h2>
                                                         </div>
-                                                        <i class="flaticon-football85" data-toggle="tooltip" title=""<%# Eval("arbitro.nombre")%>></i>
-                                                        <span class="glyphicon glyphicon-time" data-toggle="tooltip" title=<%# Eval("fecha")%>></span>
-                                                        <i class="flaticon-football96" data-toggle="tooltip" title=<%# Eval("cancha.nombre")%>></i>
+                                                        <i class="flaticon-football85" data-toggle="tooltip" title="<%# Eval("arbitro.nombre")%>"></i>
+                                                        <span class="glyphicon glyphicon-time" data-toggle="tooltip" title="<%# Eval("fecha")%>"></span>
+                                                        <i class="flaticon-football96" data-toggle="tooltip" title="<%# Eval("cancha.nombre")%>"></i>
                                                         <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("idPartido").ToString()) %>" class="btn btn-primary btn-xs">+ Info</a>
                                                     </div>
 
                                                     <div class="col-xs-4">
                                                          <%# (new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("visitante.idEquipo").ToString())).obtenerImagen(Utils.GestorImagen.GRANDE, "img-responsive center-block"))%>
-                                                        <h5><a href="#" data-toggle="tooltip" title="Ver Equipo"><%# Eval("visitante.nombre")%></a></h5>
+                                                        <h5><a href="<%# Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, int.Parse(Eval("visitante.idEquipo").ToString())) %>" data-toggle="tooltip" title="Ver Equipo"><%# Eval("visitante.nombre")%></a></h5>
                                                     </div>
                                                 </div>
                                             </li>
