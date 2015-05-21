@@ -73,6 +73,24 @@ $(document).ready(function ($) {
         hidePanelMessage('panelExito');
     });
 
+    //================================== Set Active Menu =================================//
+    var url = $(location).attr('pathname'); 
+    var liClass = url.split('/').pop().replace(/\d+/g, '').replace('-','');
+    $('#navbar ul li').each(function(index, li) {
+        if($(this).hasClass(liClass))
+            $(this).addClass('active');
+    });
+    $('#panelFracaso .close').bind("click", function(e) {
+        hidePanelMessage('panelFracaso');
+    });
+    $('#panelExito .close').bind("click", function(e) {
+        hidePanelMessage('panelExito');
+    });
+
+
+    $(location).attr('pathname');   
+
+
     //================================== Tooltip y Link en Tablas=================================//
     var trList = $('.table-fecha tr:not(:has(th))')
     trList.each(function( index, tr ) {
@@ -205,7 +223,7 @@ $(document).ready(function ($) {
     });
 
     //=================================== Slide Otros Judaores  ==============================//
-    $(".fases").owlCarousel({
+    $(".fases-slide").owlCarousel({
         autoPlay: true,
         items: 3,
         responsive: true,
@@ -228,7 +246,7 @@ $(document).ready(function ($) {
     });
 
     //=================================== Slide Otros Judaores  ==============================//
-    $(".fechas").owlCarousel({
+    $(".fechas-slide").owlCarousel({
         items: 8,
         responsive: true,
         navigation: true,
@@ -346,7 +364,7 @@ $(document).ready(function ($) {
     //=================================== Reload Jquery Plugins after PostBack  ==============================//
     Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);
     function EndRequestHandler(sender, args) {
-        $(".fechas").owlCarousel({
+        $(".fechas-slide").owlCarousel({
             items: 8,
             responsive: true,
             navigation: true,
@@ -355,7 +373,7 @@ $(document).ready(function ($) {
             pagination: false,
         });
 
-        $(".fases").owlCarousel({
+        $(".fases-slide").owlCarousel({
             items: 3,
             responsive: true,
             navigation: true,

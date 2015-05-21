@@ -38,7 +38,7 @@
                         <!-- Jugador -->
                         <div class="col-md-3 col-xs-3">
                             <!-- Datos del Equipo -->
-                            <div class="panel-box bg-dark score principal theme-border">
+                            <div class="panel-box bg-dark score principal theme-border" style="max-height: 350px;">
                                 <a id='equipo-<%#Eval("idEquipo")%>' class="popover-equipo" href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
                                     <%# new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("idEquipo").ToString())).obtenerImagen(Utils.GestorImagen.GRANDE,"img-responsive center-block") %>
                                     <h3 class="text-center"><%#Eval("equipo") %></h3>
@@ -46,8 +46,8 @@
                                 <div class="row text-center">
                                     <div class="col-xs-12">
                                         <ul class="list-group">
-                                            <li class="list-group-item"><span class="flaticon-football95" aria-hidden="true"></span> DT: <%# Eval("directorTecnico")%></li>
-                                            <li class="list-group-item"><span class="flaticon-football50" aria-hidden="true"></span> Delegado: <%# Eval("delegadoPrincipal")%></li>
+                                            <li class="list-group-item nopadding-vertical"><span class="flaticon-football95" aria-hidden="true"></span> DT: <%# Eval("directorTecnico")%></li>
+                                            <li class="list-group-item nopadding-vertical"><span class="flaticon-football50" aria-hidden="true"></span> Delegado: <%# Eval("delegadoPrincipal")%></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-xs-4 widget widget-xs">
-                                                <h1><span class="flaticon-football68"><%# Eval("Puntos") %></h1>
+                                                <h1><span class="flaticon-football68"></span><%# Eval("Puntos") %></h1>
                                                 <span>PTS</span>
                                             </div>
                                             <div class="col-xs-4 widget widget-xs">

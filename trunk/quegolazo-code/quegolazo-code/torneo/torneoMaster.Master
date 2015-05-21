@@ -82,16 +82,16 @@
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="#about">Noticias</a></li>
-                                <li><a href="<%= Logica.GestorUrl.urlFixture(torneo.nick,edicion.idEdicion) %>">Fixture</a></li>
-                                <li><a href="<%= Logica.GestorUrl.urlFechasGenerico(torneo.nick,edicion.idEdicion) %>">Fechas</a></li>
-                                <li><a href="<%= Logica.GestorUrl.urlEquipos(torneo.nick,edicion.idEdicion) %>">Equipos</a></li>
-                                <li><a href="<%= Logica.GestorUrl.urlPosiciones(torneo.nick,edicion.idEdicion) %>">Posiciones</a></li>
-                                <li class="dropdown">
+                                <li class="noticias"><a href="<%= Logica.GestorUrl.urlNoticias(torneo.nick,edicion.idEdicion) %>">Noticias</a></li>
+                                <li class="fixture"><a href="<%= Logica.GestorUrl.urlFixture(torneo.nick,edicion.idEdicion) %>">Fixture</a></li>
+                                <li class="fechas fecha fase"><a href="<%= Logica.GestorUrl.urlFechasGenerico(torneo.nick,edicion.idEdicion) %>">Fechas</a></li>
+                                <li class="posiciones"><a href="<%= Logica.GestorUrl.urlPosiciones(torneo.nick,edicion.idEdicion) %>">Posiciones</a></li>
+                                <li class="dropdown goleadores equipos miscelaneas">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Estadísticas <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">                                        
-                                        <li><a href="<%= Logica.GestorUrl.urlGoleadores(torneo.nick,edicion.idEdicion) %>">Goleadores</a></li>
-                                        <li><a href="<%= Logica.GestorUrl.urlMiscelanea(torneo.nick,edicion.idEdicion) %>">Misceláneas</a></li>                                        
+                                    <ul class="dropdown-menu" role="menu">   
+                                        <li class="equipos"><a href="<%= Logica.GestorUrl.urlEquipos(torneo.nick,edicion.idEdicion) %>">Equipos</a></li>                                     
+                                        <li class="goleadores"><a href="<%= Logica.GestorUrl.urlGoleadores(torneo.nick,edicion.idEdicion) %>">Goleadores</a></li>
+                                        <li class="miscelaneas"><a href="<%= Logica.GestorUrl.urlMiscelanea(torneo.nick,edicion.idEdicion) %>">Misceláneas</a></li>                                        
                                     </ul>
                                 </li>
                                 <li><a href="<%= Logica.GestorUrl.urlSanciones(torneo.nick,edicion.idEdicion) %>">Sanciones</a></li>
