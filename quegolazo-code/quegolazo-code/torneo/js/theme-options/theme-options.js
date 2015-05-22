@@ -204,13 +204,13 @@
 
  function guardarConfiguracion() {
      var configuracion = {
-         patronDeFondo: $('body').css('background-image').replace('http://' + window.location.hostname + ':' + window.location.port, ''),
+         patronDeFondo: $('body').css('background-image').replace('http://', '').replace(window.location.hostname, '').replace(':' + window.location.port, ''),
          colorHeader : $('.headerbox').css('background-color'),
-         patronHeader: $('.headerbox').css('background-image').replace('http://' + window.location.hostname + ':' + window.location.port, ''),
+         patronHeader: $('.headerbox').css('background-image').replace('http://', '').replace(window.location.hostname, '').replace(':' + window.location.port, ''),
          colorDeFondo : $('body').css('background-color'),
-         colorDestacado : $(".skin").attr("href").replace('http://' + window.location.hostname+ ':' + window.location.port, ''),
+         colorDestacado: $(".skin").attr("href").replace('http://', '').replace(window.location.hostname, '').replace(':' + window.location.port, ''),
          estiloPagina : $('#layout').attr("class"),
-         theme: $("#theme").attr("href").replace('http://' + window.location.hostname + ':' + window.location.port, ''),
+         theme: $("#theme").attr("href").replace('http://', '').replace(window.location.hostname, '').replace(':' + window.location.port, ''),
          bodyClass : $('body').attr('class'),
      }
       $.ajax({
