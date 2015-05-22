@@ -130,7 +130,7 @@
                 <div class="col-md-6">
                     <div class="panel panel-default small-arrows">
                         <div class="panel-heading">
-                            <h3 class="panel-title text-center"><span class="flaticon-black188"></span> Valla menos vencida</h3>
+                            <h3 class="panel-title text-center"><span class="flaticon-football124"></span> Valla menos vencida</h3>
                         </div>
                         <div class="panel-body nopadding-horizontal panel-maxheight maxheight-md">
                             <table class="table table-condensed table-hover">
