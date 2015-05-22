@@ -238,22 +238,28 @@
                                             </asp:Panel>
                                             <div class="widget-partido">
                                                 <div class="col-xs-6">
-                                                    <% if(gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionCONFIGURADA || gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionINICIADA) {%>
+                                                    <% if((gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionCONFIGURADA || gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionINICIADA) && proximoPartido != null) {%>
                                                         <%= (new Logica.GestorEquipo().obtenerEquipoPorId(proximoPartido.local.idEquipo).obtenerImagen(Utils.GestorImagen.MEDIANA, "img-responsive center-block"))%>   
-                                                    <% } %>                                                 
-                                                    <h5><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, proximoPartido.local.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoLocal" runat="server"/></a></h5>
+                                                    <% } %>     
+                                                    <% if(proximoPartido != null) {%>
+                                                       <h5><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, proximoPartido.local.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoLocal" runat="server"/></a></h5>
+                                                    <% } %>
                                                 </div>
                                                 <div class="col-xs-6">
-                                                    <% if(gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionCONFIGURADA || gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionINICIADA) {%>
+                                                    <% if((gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionCONFIGURADA || gestorEdicion.edicion.estado.idEstado == Entidades.Estado.edicionINICIADA)&& proximoPartido != null) {%>
                                                     <%= (new Logica.GestorEquipo().obtenerEquipoPorId(proximoPartido.visitante.idEquipo).obtenerImagen(Utils.GestorImagen.MEDIANA, "img-responsive center-block"))%> 
-                                                    <% } %>                                                   
+                                                    <% } %>  
+                                                    <% if(proximoPartido != null) {%>                                                 
                                                     <h5><a href="<%= Logica.GestorUrl.urlEquipo(nickTorneo, idEdicion, proximoPartido.visitante.idEquipo) %>" data-toggle="tooltip" title="Ver Equipo"><asp:Literal ID="ltEquipoVisitante" runat="server"/></a></h5>
+                                                     <% } %>
                                                 </div>
                                             </div>
+                                            <% if(proximoPartido != null) {%> 
                                             <a class="btn btn-primary" href="<%= Logica.GestorUrl.urlPartido(nickTorneo, idEdicion, proximoPartido.idPartido.ToString()) %>">
                                                 VER FICHA DEL PARTIDO
                                                 <i class="fa fa-trophy"></i>
                                             </a>
+                                             <% } %>
                                         </div>
                                     </aside>
                                     <!-- Content Counter -->

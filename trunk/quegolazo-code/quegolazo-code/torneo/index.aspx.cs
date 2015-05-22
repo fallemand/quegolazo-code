@@ -78,7 +78,8 @@ namespace quegolazo_code.torneo
                     divUtimosPartidos.Visible = false;
                     break;                    
                 case Estado.edicionINICIADA: //Edición Iniciada
-                    divProximoPartido.Visible = true;
+                    if(proximoPartido != null)
+                        divProximoPartido.Visible = true;
                     break;                    
                 case Estado.edicionFINALIZADA: // Edición Finalizada
                     pnlPodio.Visible = true;
