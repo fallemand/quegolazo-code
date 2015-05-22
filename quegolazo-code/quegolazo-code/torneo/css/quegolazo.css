@@ -330,7 +330,7 @@ img.img-principal {
 }
 
 .bg-dark.principal img{
-    max-height:150px;
+    height:150px;
 }
 
 .slider-sin-datos {
@@ -1242,7 +1242,7 @@ height: 135px;
 
 /*Equipos*/
 .box-equipos {
- height: 270px;
+ height: 320px;
 }
     .box-equipos li {
     white-space:nowrap;

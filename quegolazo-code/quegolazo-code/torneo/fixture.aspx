@@ -51,7 +51,7 @@
                                     </a>
                                 </div>
                                 <div class="col-md-3 col-xs-5">
-                                    <input type="text" id="filtro" class="form-control filtroFixture" placeholder="Filtrar por Equipo" />
+                                    <input type="text" id="filtro" class="form-control filtroFixture" data-idFase="<%#(Container.ItemIndex+1)%>" placeholder="Filtrar por Equipo" />
                                 </div>
                                 <div class="col-md-2 col-xs-3" style="padding-top:10px;">
                                     <asp:Panel ID="panelEstadoFase" runat="server">
@@ -98,7 +98,7 @@
                                                                         <th class="col-md-5 text-center" colspan="2">Visitante</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody class="tablaFiltro">
+                                                                <tbody class="tablaFiltro<%#((Entidades.Fase)((RepeaterItem)Container.Parent.Parent.Parent).DataItem).idFase%>" >
                                                                     <asp:Repeater ID="rptPartidos" runat="server" OnItemDataBound="rptPartidos_ItemDataBound">
                                                                         <ItemTemplate>
                                                                             <asp:Panel ID="panelPartidoNormal" runat="server" Visible="false">
@@ -187,7 +187,7 @@
     <!-- END contentPages-->
 
     <script type="text/javascript">
-        $('body').on('keyup', '#filtro', function () {
+        $('body').on('keyup', '.filtroFixture', function () {
             if ($(this).val().length > 0) {
                 $('.panel-collapse').collapse('show');
                 $('.panel-title').attr('data-toggle', '');
@@ -197,8 +197,8 @@
                 $('.panel-title').attr('data-toggle', 'collapse');
             }
             var rex = new RegExp($(this).val(), 'i');
-            $('.tablaFiltro tr').hide();
-            $('.tablaFiltro tr').filter(function () {
+            $('.tablaFiltro' + $(this).attr('data-idFase') + ' tr').hide();
+            $('.tablaFiltro' + $(this).attr('data-idFase') + ' tr').filter(function () {
                 return rex.test($(this).text());
             }).show();
         });

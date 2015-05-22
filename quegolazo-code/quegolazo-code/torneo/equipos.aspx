@@ -38,7 +38,7 @@
                         <!-- Jugador -->
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <!-- Datos del Equipo -->
-                            <div class="panel-box bg-dark score principal theme-border" style="max-height: 350px;">
+                            <div class="panel-box bg-dark score principal theme-border box-equipos">
                                 <a id='equipo-<%#Eval("idEquipo")%>' class="popover-equipo" href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
                                     <%# new Logica.GestorEquipo().obtenerEquipoPorId(int.Parse(Eval("idEquipo").ToString())).obtenerImagen(Utils.GestorImagen.GRANDE,"img-responsive center-block") %>
                                     <h3 class="text-center"><%#Eval("equipo") %></h3>
@@ -70,15 +70,15 @@
                                                 <span>GC</span>
                                             </div>
                                             <div class="col-xs-4 widget widget-xs">
-                                                <h1><span class="flaticon-football68"></span><%# Eval("PG") %></h1>
+                                                <h1><span class="flaticon-football86"></span><%# Eval("PG") %></h1>
                                                 <span>Ganados</span>
                                             </div>
                                             <div class="col-xs-4 widget widget-xs">
-                                                <h1><span class="flaticon-football68"></span><%# Eval("PE") %></h1>
+                                                <h1><span class="flaticon-up23"></span><%# Eval("PE") %></h1>
                                                 <span>Empatados</span>
                                             </div>
                                             <div class="col-xs-4 widget widget-xs">
-                                                <h1><span class="flaticon-football68"></span><%# Eval("PP") %></h1>
+                                                <h1><span class="flaticon-football53"></span><%# Eval("PP") %></h1>
                                                 <span>Perdidos</spa>
                                             </div>
                                         </div>
