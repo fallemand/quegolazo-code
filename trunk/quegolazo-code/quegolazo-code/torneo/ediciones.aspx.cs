@@ -21,7 +21,7 @@ namespace quegolazo_code.torneo
             {
                 torneo = GestorUrl.validarTorneo();
                 gestorEdicion = new GestorEdicion();
-                GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(torneo.idTorneo));
+                litSinEdiciones.Visible = !GestorControles.cargarRepeaterList(rptEdiciones, gestorEdicion.obtenerEdicionesPorTorneo(torneo.idTorneo));
                 litFavicon.Text = "<link rel='shortcut icon' href='" + torneo.obtenerImagenChicha() + "'>";
                 JavaScriptSerializer serializador = new JavaScriptSerializer();
                 GestorTorneo gestorTorneo = new GestorTorneo();

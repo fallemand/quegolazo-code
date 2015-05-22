@@ -72,10 +72,9 @@
                             <div class="col-xs-9 col-sm-9">
                                 <h1 class="titulo-torneo"><%= torneo.nombre%></h1>
                             </div>
-                            
-                            <hr class="tall" />
-                            <!-- <p class="lead">Seleccione la edición.</p>
-                            <a href="index-2.html" class="btn btn-lg btn-primary">Volver al Inicio</a> -->
+                            <div class="col-xs-12">
+                                <hr class="tall" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,7 +86,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <h3>Seleccione una edición: </h3>
+                                    <h3>Seleccione una edición: <small><asp:Literal ID="litSinEdiciones" runat="server" Visible="false">No existen ediciones registradas</asp:Literal></small></h3>
                                 </div>
                                 <ul class="ediciones-slide noborder slider-multiple tooltip-hover">
                                     <asp:Repeater ID="rptEdiciones" runat="server">
