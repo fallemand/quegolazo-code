@@ -293,6 +293,12 @@ namespace Logica
                           resultado = new int[2];
                           resultado[0] = (int)partido.golesLocal;
                           resultado[1] = (int)partido.golesVisitante;
+                          // si hubo penales, los agregamos al resultado para que siempre defina un ganador
+                          if (partido.huboPenales != null && (bool)partido.huboPenales) {
+                              resultado[0] += (int)partido.penalesLocal;
+                              resultado[1] += (int)partido.penalesVisitante;
+                          }
+
                           resultados.Add(resultado);
                       }
                   }
