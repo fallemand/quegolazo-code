@@ -60,7 +60,6 @@ function cargarEstilosVisuales(estilos) {
     $('body').attr('class', estilos.bodyClass);
 }
 
-
 $(document).ready(function ($) {
 
     'use strict';
@@ -310,14 +309,8 @@ $(document).ready(function ($) {
         });
 
     //=================================== PopOvers ==================================//
-
-    function get_popover_placement(pop, dom_el) {
-        var width = window.innerWidth;
-        if (width<500) return 'bottom';
-        var left_pos = $(dom_el).offset().left;
-        if (width - left_pos > 400) return 'right';
-        return 'left';
-    }
+    function get_popover_placement(pop, dom_el) { var width = window.innerWidth; var height = window.innerHeight; var top_pos = $(dom_el).offset().top; if (height - top_pos < 400) { return 'top'; } if (width < 500) { return 'bottom'; } var left_pos = $(dom_el).offset().left; if (width - left_pos > 400) { return 'left'; } return 'left'; }
+    
     $(".popover-equipo").popover({
         trigger: "manual",
         html: true,

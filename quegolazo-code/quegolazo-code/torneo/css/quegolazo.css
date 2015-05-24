@@ -391,6 +391,7 @@ img.img-principal {
 
 .widget-partido img {
   max-height:95px;
+  max-width: 100px;
 }
 
 .widget-partido .col-xs-4 {
@@ -482,6 +483,7 @@ img.img-principal {
 
 .li-item img {
     max-height: 55px;
+    max-width: 77px;
 }
 
 .equipos-home .camiseta-equipo {
@@ -499,6 +501,7 @@ img.img-principal {
 
 .equipos-home .li-item img {
     max-height: 82px;
+    max-width: 120px;
 }
 
 
