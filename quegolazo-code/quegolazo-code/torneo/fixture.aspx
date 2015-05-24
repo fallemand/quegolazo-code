@@ -161,7 +161,7 @@
                             </div>
                         </asp:Panel>
                         <asp:Panel ID="panelLlaves" runat="server">
-                            <div id='fase-<%# Eval("idFase") %>' class="panel-collapse collapse <%# (Container.ItemIndex==0) ? "in" : ""%>">
+                            <div id='fase-<%# Eval("idFase") %>' class="panel-collapse collapse  <%# (Container.ItemIndex==0) ? "in" : "in remove-in"%>">
                                 <div id='divLlaves<%# Eval("idFase") %>'>
                                 </div>
                             </div>
@@ -187,6 +187,9 @@
     <!-- END contentPages-->
 
     <script type="text/javascript">
+        $(document).ready(function ($) {
+            $('.remove-in').removeClass('in remove-in');
+        });
         $('body').on('keyup', '.filtroFixture', function () {
             if ($(this).val().length > 0) {
                 $('.panel-collapse').collapse('show');

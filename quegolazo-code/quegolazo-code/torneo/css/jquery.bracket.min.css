@@ -129,14 +129,16 @@ div.jQBracket .team.win {
 
 div.jQBracket .team.win div.score {
     color: #060;
+    font-size: 16px;
 }
 
 div.jQBracket .team.lose div.score {
     color: #900;
+    font-size: 16px;
 }
 
 div.jQBracket .team.lose {
-    background-color: #ddd;
+    background-color: #ECECEC;
     color: #999;
 }
 
@@ -189,7 +191,7 @@ div.jQBracket .connector.highlightLoser,div.jQBracket .connector div.connector.h
 }
 
 div.jQBracket .connector.highlight,div.jQBracket .connector div.connector.highlight {
-    border-color: #0c0;
+    border-color: #42A642;
 }
 
 div.jQBracket .np .connector,div.jQBracket .np .connector div.connector {
