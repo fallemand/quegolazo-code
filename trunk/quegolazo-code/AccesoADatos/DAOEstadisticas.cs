@@ -1249,7 +1249,8 @@ namespace AccesoADatos
                             COUNT(CASE gol.idTipoGol WHEN tipoGol.idTipoGol THEN 1 ELSE NULL END) AS 'Goles'
                             FROM TiposGol tipoGol
                             LEFT JOIN Goles gol ON (gol.idTipoGol = tipoGol.idTipoGol AND gol.idPartido IN (SELECT p.idPartido FROM Partidos p WHERE p.idEdicion = @idEdicion AND p.idEstado = @partidoJugado))
-                            GROUP BY tipoGol.idTipoGol, tipoGol.nombre";
+                            GROUP BY tipoGol.idTipoGol, tipoGol.nombre
+                            ORDER BY Goles DESC";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
                 cmd.Parameters.Add(new SqlParameter("@partidoJugado", Estado.partidoJUGADO));
