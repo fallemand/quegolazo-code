@@ -214,10 +214,6 @@ width:300px;
   text-shadow: 1px 1px 0px rgba(68, 68, 68, 0.38);
 }
 
-.height-jugador {
-    height:110px;
-}
-
 .text-middle > tbody > tr > td {
   vertical-align: middle !important;
 }
@@ -841,8 +837,14 @@ h5.page-title {
     text-decoration: none;
 }
 
+@media (min-width: 992px) {
+    .height-jugador {
+        height:110px;
+    }
+}
 
 @media (min-width: 768px) {
+
     .navbar {
         border-radius: 0px;
     }
