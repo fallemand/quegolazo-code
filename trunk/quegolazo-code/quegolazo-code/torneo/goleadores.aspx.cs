@@ -120,5 +120,14 @@ namespace quegolazo_code.torneo
             }            
             ScriptManager.RegisterStartupScript(this, this.GetType(), "datosFases","var datosFases = " + gestorEstadistica.generarJsonParaGraficoBarraGoleadores() + ";", true); 
         }
+
+        protected void rptEquiposQueConvirtieron_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Literal litPosicionJugador = (Literal)e.Item.FindControl("litPosicionJugador");
+                litPosicionJugador.Text = (e.Item.ItemIndex + 1).ToString();
+            }
+        }
     }
 }

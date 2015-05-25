@@ -53,5 +53,23 @@ namespace quegolazo_code.torneo
                 GestorError.mostrarPanelFracaso(ex.Message);
             }  
         }
+
+        protected void rptVallaMenosVencida_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Literal litPosicion = (Literal)e.Item.FindControl("litPosicion");
+                litPosicion.Text = (e.Item.ItemIndex + 1).ToString();
+            }      
+        }
+
+        protected void rptFairPlay_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Literal litPosicion = (Literal)e.Item.FindControl("litPosicion");
+                litPosicion.Text = (e.Item.ItemIndex + 1).ToString();
+            }  
+        }
     }
  }

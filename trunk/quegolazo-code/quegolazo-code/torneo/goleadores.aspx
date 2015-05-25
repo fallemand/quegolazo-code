@@ -110,8 +110,8 @@
                                                 <ItemTemplate>
                                                     <tr>
                                                         <td><asp:Literal ID="litPosicionJugador" runat="server" Text=""></asp:Literal></td>
-                                                        <td><%# Eval("JUGADOR") %></td>
-                                                        <td><%# Eval("EQUIPO") %></td>
+                                                        <td><a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("IDJUGADOR").ToString())) %>"><%# Eval("JUGADOR") %></a></td>
+                                                        <td><a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("IDEQUIPO").ToString())) %>"><%# Eval("EQUIPO") %></td>
                                                         <td><%# Eval("GOLES") %></td>
                                                     </tr>
                                                 </ItemTemplate>
@@ -139,8 +139,8 @@
                                                         <ItemTemplate>
                                                             <tr>
                                                                 <td><asp:Literal ID="litPosicionJugador" runat="server" Text=""></asp:Literal></td>
-                                                                <td><%# Eval("JUGADOR") %></td>
-                                                                <td><%# Eval("EQUIPO") %></td>
+                                                                <td><a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("IDJUGADOR").ToString())) %>"><%# Eval("JUGADOR") %></a></td>
+                                                                <td><a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("IDEQUIPO").ToString())) %>"><%# Eval("EQUIPO") %></a></td>
                                                                 <td><%# Eval("GOLES") %></td>
                                                             </tr>
                                                         </ItemTemplate>
@@ -213,17 +213,19 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th class="col-xs-1 col-md-1 text-center">#</th>
                                                 <th class="col-xs-1 col-md-1 text-center"></th>
                                                 <th class="col-xs-1 col-md-1 text-center">Equipo</th>
                                                 <th class="col-xs-8 col-md-4 text-center">Cantidad</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
-                                            <asp:Repeater ID="rptEquiposQueConvirtieron" runat="server">
+                                            <asp:Repeater ID="rptEquiposQueConvirtieron" runat="server" OnItemDataBound="rptEquiposQueConvirtieron_ItemDataBound">
                                                 <ItemTemplate>
                                                     <tr>
+                                                        <td><asp:Literal ID="litPosicionJugador" runat="server" Text=""></asp:Literal></td>
                                                         <td><img src="<%# Utils.GestorImagen.obtenerImagen(Utils.Validador.castInt(Eval("Id equipo").ToString()), Utils.GestorImagen.EQUIPO, Utils.GestorImagen.CHICA) %>" class="img-responsive" alt="" style="height: 22px; max-width: 30px;" /></td>
-                                                        <td><%# Eval("Equipo") %></td>
+                                                        <td><a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("Id equipo").ToString())) %>"><%# Eval("Equipo") %></a></td>
                                                         <td><%# Eval("Goles") %></td>
                                                     </tr>
                                                 </ItemTemplate>
