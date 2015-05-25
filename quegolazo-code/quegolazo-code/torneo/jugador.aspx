@@ -51,7 +51,7 @@
                                     <ItemTemplate>
                                         <li class="li-item" data-toggle="tooltip" title="<%# Eval("nombre")%>">
                                             <a id='jugador-<%# ((Entidades.Jugador)Container.DataItem).idJugador.ToString() %>' class="popover-jugador" href="<%# Logica.GestorUrl.urlJugador(nickTorneo,idEdicion,idEquipo,int.Parse(Eval("idJugador").ToString())) %>" >
-                                                <%# ((Entidades.Jugador)Container.DataItem).obtenerImagen(Utils.GestorImagen.GRANDE, "img-circle", "avatar-slider", true) %>
+                                                <%# ((Entidades.Jugador)Container.DataItem).obtenerImagen(Utils.GestorImagen.GRANDE, "img-circle center-block img-responsive", "avatar-slider", true) %>
                                             </a>
                                         </li>
                                     </ItemTemplate>

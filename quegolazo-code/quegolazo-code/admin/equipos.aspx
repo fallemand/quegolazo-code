@@ -29,7 +29,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="text" class="col-md-2 control-label">Color °1</label>
+                                                <label for="text" class="col-md-2 control-label">Color 1°</label>
                                                 <div class="col-md-2">
                                                     <div class="colorpick">
                                                         <input type="text" class="form-control" rel="txtTooltip" title="Color primario de la camiseta" id="txtColorPrimario" runat="server" value="#E1E1E1" required="true">
