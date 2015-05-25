@@ -1,20 +1,4 @@
 ﻿
-$('body').on('keyup', '#filtro', function () {
-    if ($(this).val().length > 0) {
-        $('.panel-collapse').collapse('show');
-        $('.panel-title').attr('data-toggle', '');
-    }
-    else {
-        $('.panel-collapse').collapse('hide');
-        $('.panel-title').attr('data-toggle', 'collapse');
-    }
-    var rex = new RegExp($(this).val(), 'i');
-    $('.tablaFiltro tr').hide();
-    $('.tablaFiltro tr').filter(function () {
-        return rex.test($(this).text());
-    }).show();
-});
-
 function filtrarPosiciones(idGrupo) {
     $('#tabla-posiciones tbody tr').hide();
     $('#tabla-posiciones tbody tr').filter(function () {
@@ -40,7 +24,23 @@ $(document).ready(function () {
             $('#hfEquiposSeleccionados').val($('#hfEquiposSeleccionados').val().replace($(this).val() + ',', ''));
         }
         actualizarCantidades();
-    });    
+    });
+
+    $('body').on('keyup', '#filtro', function () {
+        if ($(this).val().length > 0) {
+            $('.panel-collapse').collapse('show');
+            $('.panel-title').attr('data-toggle', '');
+        }
+        else {
+            $('.panel-collapse').collapse('hide');
+            $('.panel-title').attr('data-toggle', 'collapse');
+        }
+        var rex = new RegExp($(this).val(), 'i');
+        $('.tablaFiltro tr').hide();
+        $('.tablaFiltro tr').filter(function () {
+            return rex.test($(this).text());
+        }).show();
+    });
 });
 
 function actualizarCantidades() {
