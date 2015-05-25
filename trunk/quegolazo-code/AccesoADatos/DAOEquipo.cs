@@ -459,10 +459,11 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT j.idJugador AS 'Id Jugador', j.nombre AS 'Nombre Jugador', COUNT(g.idGol) AS 'Cantidad Goles', 
-                                COUNT(tarjetasAmarillas.idTarjeta) AS 'Cantidad Tarjetas Amarillas',
-                                COUNT(tarjetasRojas.idTarjeta) AS 'Cantidad Tarjetas Rojas', 
-                                COUNT(txp.idJugador) AS 'Cantidad Partidos Jugados'
+                string sql = @"SELECT j.idJugador AS 'Id Jugador', j.nombre AS 'Nombre Jugador',
+                                COUNT(DISTINCT g.idGol) AS 'Cantidad Goles',
+                                COUNT(DISTINCT tarjetasAmarillas.idTarjeta) AS 'Cantidad Tarjetas Amarillas',
+                                COUNT(DISTINCT tarjetasRojas.idTarjeta) AS 'Cantidad Tarjetas Rojas', 
+                                COUNT(DISTINCT txp.idPartido) AS 'Cantidad Partidos Jugados'
                                 FROM Jugadores j
                                 LEFT JOIN Goles g ON (g.idJugador = j.idJugador AND g.idPartido IN (select idPartido from Partidos where idEdicion = @idEdicion))
                                 LEFT JOIN Tarjetas tarjetasAmarillas ON (tarjetasAmarillas.idJugador = j.idJugador AND tarjetasAmarillas.tipoTarjeta = 'A'
