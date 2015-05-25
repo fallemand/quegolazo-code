@@ -353,7 +353,6 @@ img.img-principal {
 }
 
 .panel-box.score h3 a:hover, .panel.score h3 a:hover, .panel-box.score a:hover{
-  color: #f4f4f4;
   text-decoration: none;
 }
 
@@ -860,7 +859,7 @@ h5.page-title {
     line-height: 35px;
 }
 
-.fechas.eliminatoria .widget-md h1{
+.fechas-slide.eliminatoria .widget-md h1{
     font-size: 15px;
     font-weight: normal;
     line-height: 15px;
