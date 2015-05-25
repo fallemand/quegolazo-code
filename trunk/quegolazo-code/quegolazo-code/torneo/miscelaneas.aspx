@@ -64,7 +64,7 @@
                                     <ItemTemplate>
                                         <li>
                                             <div class="card theme-bg-color">
-                                                <div class="header-bg"></div>
+                                                <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
                                                 <div class="avatar">
                                                     <img src="" alt="" />
                                                 </div>
@@ -101,7 +101,7 @@
                                     <ItemTemplate>
                                         <li>
                                             <div class="card theme-bg-color">
-                                                <div class="header-bg"></div>
+                                                 <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
                                                 <div class="avatar">
                                                     <img src="" alt="" />
                                                 </div>
