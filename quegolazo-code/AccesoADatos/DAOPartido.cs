@@ -1301,7 +1301,7 @@ namespace AccesoADatos
                 if (con.State == ConnectionState.Closed)
                     con.Open();
                 cmd.Connection = con;
-                string sql = @"SELECT TOP 5 p.idPartido AS 'Id Partido', equipoLocal.idEquipo AS 'Id Equipo Local',
+                string sql = @"SELECT TOP 10 p.idPartido AS 'Id Partido', equipoLocal.idEquipo AS 'Id Equipo Local',
                                 equipoLocal.nombre AS 'Equipo Local', 
                                 p.golesLocal AS 'Goles Local', p.golesVisitante AS 'Goles Visitante',
                                 equipoVisitante.idEquipo AS 'Id Equipo Visitante', equipoVisitante.nombre AS 'Equipo Visitante', 

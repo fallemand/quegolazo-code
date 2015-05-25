@@ -1538,6 +1538,7 @@ namespace AccesoADatos
                                 (SELECT COUNT(p.idPartido) FROM Partidos p WHERE p.idArbitro = a.idArbitro AND p.idEdicion IN (SELECT e.idEdicion FROM Ediciones e WHERE e.idTorneo = @idTorneo)) AS 'CantPartidosArbitradosTorneo'
                                 FROM Arbitros a 
                                 LEFT JOIN Partidos partidosEdicion ON partidosEdicion.idArbitro = a.idArbitro
+                                WHERE idTorneo = @idTorneo
                                 GROUP BY a.idArbitro, a.nombre, a.matricula";
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@idEdicion", idEdicion));
