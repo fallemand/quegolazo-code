@@ -136,16 +136,18 @@
                             <table class="table table-condensed table-hover">
                                 <thead>
                                     <tr>
+                                        <th class="col-xs-1 col-md-1 text-center">#</th>
                                         <th class="col-md-4 text-center" colspan="2">Equipo</th>
                                         <th class="col-md-2 text-center">PJ</th>
                                         <th class="col-md-3 text-center">Goles en contra</th>
-                                        <th class="col-md-3 text-center">Promedio</th>
+                                        <th class="col-md-2 text-center">Promedio</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tablaFiltro">
-                                    <asp:Repeater ID="rptVallaMenosVencida" runat="server">
+                                    <asp:Repeater ID="rptVallaMenosVencida" runat="server" OnItemDataBound="rptVallaMenosVencida_ItemDataBound">
                                         <ItemTemplate>
                                             <tr>
+                                                <td><asp:Literal ID="litPosicion" runat="server" Text=""></asp:Literal></td>
                                                 <td>
                                                     <a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
                                                         <%# new Entidades.Equipo(){idEquipo=int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %></a>
@@ -174,6 +176,7 @@
                             <table class="table table-condensed table-hover">
                                 <thead>
                                     <tr>
+                                        <th class="col-xs-1 col-md-1 text-center">#</th>
                                         <th class="col-md-4 text-center" colspan="2">Equipo</th>
                                         <th class="col-md-2 text-center">Total Tarjetas</th>
                                         <th class="col-md-1 text-center">Rojas</th>
@@ -181,9 +184,10 @@
                                     </tr>
                                 </thead>
                                 <tbody class="tablaFiltro">
-                                    <asp:Repeater ID="rptFairPlay" runat="server">
+                                    <asp:Repeater ID="rptFairPlay" runat="server" OnItemDataBound="rptFairPlay_ItemDataBound">
                                         <ItemTemplate>
                                             <tr>
+                                                <td><asp:Literal ID="litPosicion" runat="server" Text=""></asp:Literal></td>
                                                 <td>
                                                     <a href="<%#Logica.GestorUrl.urlEquipo(nickTorneo,idEdicion,int.Parse(Eval("idEquipo").ToString())) %>">
                                                         <%# new Entidades.Equipo(){idEquipo=int.Parse(Eval("idEquipo").ToString())}.obtenerImagen(Utils.GestorImagen.CHICA,"avatar-xs") %></a>
