@@ -332,6 +332,9 @@ img.img-principal {
 .bg-dark.principal img{
     height:150px;
 }
+.bg-dark.principal li img{
+    height:auto;
+}
 
 .slider-sin-datos {
   height: 74px;
