@@ -87,12 +87,6 @@
     <Content Include="resources\img\complejos\default-nm.png" />
     <Content Include="resources\img\complejos\default-sm.jpg" />
     <Content Include="resources\img\complejos\default-sm.png" />
-    <Content Include="resources\img\equipos\default-bg.jpg" />
-    <Content Include="resources\img\equipos\default-bg.png" />
-    <Content Include="resources\img\equipos\default-nm.jpg" />
-    <Content Include="resources\img\equipos\default-nm.png" />
-    <Content Include="resources\img\equipos\default-sm.jpg" />
-    <Content Include="resources\img\equipos\default-sm.png" />
     <Content Include="resources\img\jugadores\default-bg.jpg" />
     <Content Include="resources\img\jugadores\default-bg.png" />
     <Content Include="resources\img\jugadores\default-nm.jpg" />
