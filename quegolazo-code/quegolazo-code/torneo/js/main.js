@@ -308,6 +308,12 @@ $(document).ready(function ($) {
             }, 50);
         });
 
+    //================================= Avatar Jugador CSS ===========================//
+    $(".avatar-jugador").closest('a').on('mouseover', function() {
+        $(this).css('text-decoration', 'none');
+        $(this).css('color', '#FFF');
+    })
+
     //=================================== PopOvers ==================================//
     function get_popover_placement(pop, dom_el) { var width = window.innerWidth; var height = window.innerHeight; var top_pos = $(dom_el).offset().top; if (height - top_pos < 400) { return 'top'; } if (width < 500) { return 'bottom'; } var left_pos = $(dom_el).offset().left; if (width - left_pos > 400) { return 'left'; } return 'left'; }
     
