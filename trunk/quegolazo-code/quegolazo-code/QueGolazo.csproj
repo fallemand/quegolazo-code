@@ -280,14 +280,6 @@
     <Content Include="torneo\img\bg-theme\c2.png" />
     <Content Include="torneo\img\bg-theme\c3.png" />
     <Content Include="torneo\img\bg-theme\footer-down.png" />
-    <Content Include="torneo\img\bg-theme\header\1.png" />
-    <Content Include="torneo\img\bg-theme\header\2.png" />
-    <Content Include="torneo\img\bg-theme\header\3.png" />
-    <Content Include="torneo\img\bg-theme\header\4.png" />
-    <Content Include="torneo\img\bg-theme\header\5.png" />
-    <Content Include="torneo\img\bg-theme\header\6.png" />
-    <Content Include="torneo\img\bg-theme\header\7.png" />
-    <Content Include="torneo\img\bg-theme\header\none.jpg" />
     <Content Include="torneo\img\bg-theme\none.jpg" />
     <Content Include="torneo\img\gallery\1.jpg" />
     <Content Include="torneo\img\gallery\2.jpg" />
@@ -672,6 +664,7 @@
     <Content Include="admin\admin.torneo.master" />
     <Content Include="admin\AjaxFileUploader.ashx" />
     <Content Include="admin\edicion\edicion.master" />
+    <None Include="Properties\PublishProfiles\quegolazo local.pubxml" />
     <None Include="Properties\PublishProfiles\QueGolazo Online.pubxml" />
     <None Include="Properties\PublishProfiles\QueGolazo.pubxml" />
     <Content Include="torneo\torneoMaster.Master" />
