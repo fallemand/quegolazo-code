@@ -51,10 +51,10 @@ namespace quegolazo_code.usuario
                     string ActivationUrl = string.Empty;
                     string mail = txtEmailModif.Value;
                     string cuerpo = string.Empty;
-                    ActivationUrl = Server.HtmlEncode("http://localhost:12434/usuario/activar.aspx?UserCode=" + codigo);
+                    ActivationUrl = Server.HtmlEncode("/usuario/activar.aspx?UserCode=" + codigo);
 
                     GestorMails gestorMail = new GestorMails();
-                    gestorMail.mandarMailActivacion(mail, "Activación de Cuenta", ActivationUrl);
+                    gestorMail.mandarMailActivacion(mail, "Modificar Cuenta", ActivationUrl);
                     panExito.Visible = true;
                     litMensaje.Text = "<strong>Se modificaron exitosamente sus datos.</strong><br />Revise su casilla de correo para activar su cuenta";
                 }
