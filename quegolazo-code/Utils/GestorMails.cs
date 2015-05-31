@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net.Security;
+using System.Web;
 
 
 namespace Utils
@@ -17,6 +18,7 @@ namespace Utils
         /// </summary>
         public void mandarMailActivacion(string destinatario, string asunto, string urlActivación)
         {
+            urlActivación = "http://" + HttpContext.Current.Request.Url.Authority + urlActivación;
             MailMessage msg;
             msg = new MailMessage();
             SmtpClient smtp = new SmtpClient("smtp.gmail.com");
