@@ -19,7 +19,9 @@ body {
   overflow: auto;
   height: 100%;
 }
-
+.sub-login {
+    max-width: 250px;
+}
 li a i.text-success, li a span.text-success {
   color: #60A64F;
 }

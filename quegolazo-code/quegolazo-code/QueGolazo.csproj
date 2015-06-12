@@ -685,6 +685,7 @@
     <Content Include="torneo\img\section-titles\Descr.WD3" />
     <Content Include="torneo\img\section-titles\Thumbs.db" />
     <Content Include="torneo\fonts\glyphicon\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\QueGolazoLocal.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
