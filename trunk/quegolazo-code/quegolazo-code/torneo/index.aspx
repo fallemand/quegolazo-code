@@ -9,7 +9,7 @@
             <div class="container padding-top">
                 <div class="row mobile-margin-top">
 
-<!-- Otros Partidos de la Fecha -->
+                <!-- Otros Partidos de la Fecha -->
                 <div class="col-sm-12" runat="server" id="divOtrosPartidosDeFecha" visible="true">
                     <div class="panel nopadding panel-default">
                         <div class="panel-body">
