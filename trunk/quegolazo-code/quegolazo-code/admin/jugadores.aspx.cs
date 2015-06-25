@@ -71,7 +71,7 @@ namespace quegolazo_code.admin.edicion
                 {                        
                     txtNombreJugador.Value = gestorJugador.jugador.nombre;
                     txtDni.Value = gestorJugador.jugador.dni;
-                    txtFechaNacimiento.Value = (gestorJugador.jugador.fechaNacimiento == null)? "" : DateTime.Parse(gestorJugador.jugador.fechaNacimiento.ToString()).ToShortDateString();
+                    txtFechaNacimiento.Value = (gestorJugador.jugador.fechaNacimiento == null)? "" : Utils.Validador.castDate(gestorJugador.jugador.fechaNacimiento.ToString()).ToShortDateString();
                     txtNumeroCamiseta.Value = (gestorJugador.jugador.numeroCamiseta == null) ? "" : Int32.Parse(gestorJugador.jugador.numeroCamiseta.ToString()).ToString();
                     txtTelefono.Value = gestorJugador.jugador.telefono;
                     txtFacebook.Value = gestorJugador.jugador.facebook;

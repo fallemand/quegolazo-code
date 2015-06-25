@@ -130,7 +130,7 @@ namespace Logica
                 puntosAQuitar = null;
             if (cantidadFechasSuspendidas.Equals(""))
                 cantidadFechasSuspendidas = null;
-            sancion.fechaSancion = (fechaSancion != null) ? (DateTime?)DateTime.Parse(fechaSancion) : null;
+            sancion.fechaSancion = (fechaSancion != null) ? (DateTime?)Utils.Validador.castDate(fechaSancion) : null;
             sancion.motivoSancion.idMotivoSancion = (idMotivoSancion != null) ? (int?)int.Parse(idMotivoSancion) : null;
             sancion.observacion = observacion;
             sancion.puntosAQuitar = (puntosAQuitar != null) ? (int?)int.Parse(puntosAQuitar) : null;

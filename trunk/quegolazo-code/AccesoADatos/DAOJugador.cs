@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using Entidades;
+using Utils;
 
 namespace AccesoADatos
 {
@@ -88,7 +89,7 @@ namespace AccesoADatos
                     jugador.idJugador = Int32.Parse(dr["idJugador"].ToString());
                     jugador.nombre = dr["nombre"].ToString();
                     jugador.dni = dr["dni"].ToString();
-                    jugador.fechaNacimiento = (dr["fechaNacimiento"] != DBNull.Value) ? (DateTime?) DateTime.Parse(dr["fechaNacimiento"].ToString()) : null;
+                    jugador.fechaNacimiento = (dr["fechaNacimiento"] != DBNull.Value) ? (DateTime?) Validador.castDate(dr["fechaNacimiento"].ToString()) : null;
                     jugador.numeroCamiseta = (dr["numeroCamiseta"] != DBNull.Value) ? (Int32?) Int32.Parse(dr["numeroCamiseta"].ToString()) : null;                   
                     jugador.email = dr["email"].ToString();
                     jugador.facebook = dr["facebook"].ToString();
@@ -139,7 +140,7 @@ namespace AccesoADatos
                     respuesta.idJugador = Int32.Parse(dr["idJugador"].ToString());
                     respuesta.nombre = dr["nombre"].ToString();
                     respuesta.dni = dr["dni"].ToString();
-                    respuesta.fechaNacimiento = (dr["fechaNacimiento"] != DBNull.Value) ? (DateTime?) DateTime.Parse(dr["fechaNacimiento"].ToString()) : null;
+                    respuesta.fechaNacimiento = (dr["fechaNacimiento"] != DBNull.Value) ? (DateTime?) Utils.Validador.castDate(dr["fechaNacimiento"].ToString()) : null;
                     respuesta.numeroCamiseta = (dr["numeroCamiseta"] != DBNull.Value) ? (Int32?) Int32.Parse(dr["numeroCamiseta"].ToString()) : null;
                     respuesta.telefono = (dr["telefono"] != DBNull.Value) ? dr["telefono"].ToString() : null;
                     respuesta.email = (dr["email"] != DBNull.Value) ? dr["email"].ToString() : null;
