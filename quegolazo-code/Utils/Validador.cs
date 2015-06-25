@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -49,12 +50,17 @@ namespace Utils
         {
             try
             {
-                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-ES"); //dd/MM/yyyy
-                return DateTime.Parse(fecha);
+                //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-ES"); //dd/MM/yyyy
+                DateTime date;
+                var formatStrings = new string[] { "MM/dd/yyyy hh:mm:ss tt", "M/d/yyyy h:m:ss tt", "M/d/yyyy hh:mm:ss tt", "MM/dd/yyyy h:mm:ss tt", "MM/dd/yyyy h:m:ss tt", "yyyy-MM-dd hh:mm:ss", "m/d/yyyy h:m:ss tt", "m/d/yyyy", "dd/MM/yyyy", "dd/MM/yyyy", "dd/MM/yyyy H:mm:ss", "dd/MM/yyyy" };
+                if (!DateTime.TryParseExact(fecha, formatStrings, CultureInfo.InvariantCulture, DateTimeStyles.None, out date)) {
+                    throw new Exception("Error al parsear la fecha");
+                }
+                return date;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("El valor ingresado no es una fecha");
+                throw new Exception(fecha + ex.Message);
             }
         }
 
@@ -110,7 +116,7 @@ namespace Utils
             {
                 try
                 {
-                    return DateTime.Parse(cadena);
+                    return Utils.Validador.castDate(cadena);
                 }
                 catch (Exception)
                 {

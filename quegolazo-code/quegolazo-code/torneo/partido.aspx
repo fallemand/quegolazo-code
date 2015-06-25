@@ -47,7 +47,7 @@
                                 <asp:Repeater ID="rptOtrosPartidosDeLaFecha" runat="server">
                                     <ItemTemplate>
                                         <li class="li-partido" style="width: 120px">
-                                            <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? nombreMes(DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
+                                            <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? nombreMes(Utils.Validador.castDate(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+Utils.Validador.castDate(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+Utils.Validador.castDate(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
                                             <div class="text">
                                                 <div class="equipos">
                                                    <%-- <a href="/<%=nickTorneo%>/edicion-<%=idEdicion%>/partido-<%# Eval("idPartido") %>">--%>
@@ -109,7 +109,7 @@
                                     <div class="col-xs-12">
                                         <ul class="list-group">
                                             <% if(gestorPartido.partido.fecha != null) { %>
-                                            <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs"> <%= nombreDia(DateTime.Parse(gestorPartido.partido.fecha.ToString())) %> </span><%= gestorPartido.partido.fecha %></li>
+                                            <li class="list-group-item"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span><span class="hidden-xs"> <%= nombreDia(Utils.Validador.castDate(gestorPartido.partido.fecha.ToString())) %> </span><%= gestorPartido.partido.fecha %></li>
                                             <% } %>
                                             <% if(gestorPartido.partido.cancha != null) { %>
                                             <li class="list-group-item hidden-xs"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <%= gestorPartido.partido.cancha.nombre %></li>

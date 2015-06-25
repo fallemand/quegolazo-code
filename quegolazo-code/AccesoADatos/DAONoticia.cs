@@ -113,7 +113,7 @@ namespace AccesoADatos
                     respuesta.idNoticia = Int32.Parse(dr["idNoticia"].ToString());
                     respuesta.titulo = dr["titulo"].ToString();
                     respuesta.idEdicion = Int32.Parse(dr["idEdicion"].ToString());
-                    respuesta.fecha = DateTime.Parse(dr["fecha"].ToString());
+                    respuesta.fecha = Utils.Validador.castDate(dr["fecha"].ToString());
                     respuesta.descripcion = (dr["descripcion"] != System.DBNull.Value) ? dr["descripcion"].ToString() : null;
                     respuesta.categoria = obtenerCategoriaNoticiaPorId(Int32.Parse(dr["idCategoriaNoticia"].ToString()));
                 }
@@ -305,7 +305,7 @@ namespace AccesoADatos
                     noticia.categoria = new CategoriaNoticia { idCategoriaNoticia = Int32.Parse(dr["idCategoriaNoticia"].ToString()), nombre = dr["nombre"].ToString() };
                     noticia.descripcion = dr["descripcion"].ToString();
                     noticia.titulo = dr["titulo"].ToString();
-                    noticia.fecha = DateTime.Parse(dr["fecha"].ToString());
+                    noticia.fecha = Utils.Validador.castDate(dr["fecha"].ToString());
                     noticia.idNoticia = int.Parse(dr["idNoticia"].ToString());
                     noticias.Add(noticia);
                 }
@@ -352,7 +352,7 @@ namespace AccesoADatos
                     noticia.categoria = new CategoriaNoticia { idCategoriaNoticia = Int32.Parse(dr["idCategoriaNoticia"].ToString()), nombre = dr["nombre"].ToString() };
                     noticia.descripcion = dr["descripcion"].ToString();
                     noticia.titulo = dr["titulo"].ToString();
-                    noticia.fecha = DateTime.Parse(dr["fecha"].ToString());
+                    noticia.fecha = Utils.Validador.castDate(dr["fecha"].ToString());
                     noticia.idNoticia = int.Parse(dr["idNoticia"].ToString());
                     noticias.Add(noticia);
                 }

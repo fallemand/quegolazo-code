@@ -37,7 +37,7 @@
                             <div class="panel-heading">
                                  <div class="row">
                                     <div class="col-sm-9 col-xs-8">
-                                       <h3 class="panel-title"> <%= DateTime.Parse((noticia.fecha.ToString())).Day.ToString()+" de "+Utils.GestorExtra.nombreMes(DateTime.Parse((noticia.fecha.ToString())).Month)+" , "+DateTime.Parse((noticia.fecha.ToString())).Year.ToString() %></h3>
+                                       <h3 class="panel-title"> <%= Utils.Validador.castDate((noticia.fecha.ToString())).Day.ToString()+" de "+Utils.GestorExtra.nombreMes(Utils.Validador.castDate((noticia.fecha.ToString())).Month)+" , "+Utils.Validador.castDate((noticia.fecha.ToString())).Year.ToString() %></h3>
                                     </div>
                                     <div class="col-sm-3 col-xs-4">
                                         <div class="label label-md theme-bg-color">
@@ -95,7 +95,7 @@
                                                 <div class="overlay"><a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion, ((Entidades.Noticia)Container.DataItem).idNoticia)%>">+</a></div>
                                             </div>
                                         </div>                                                                                  
-                                            <p class="data-info"><%# DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Day.ToString()+" de "+Utils.GestorExtra.nombreMes(DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Month)+" , "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Year.ToString() %></p><!-- <i class="fa fa-comments"></i><a href="#">0</a> --> 
+                                            <p class="data-info"><%# Utils.Validador.castDate(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Day.ToString()+" de "+Utils.GestorExtra.nombreMes(Utils.Validador.castDate(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Month)+" , "+Utils.Validador.castDate(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Year.ToString() %></p><!-- <i class="fa fa-comments"></i><a href="#">0</a> --> 
                                             <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0,Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length >= 50 ? 50 : Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length)  %>... <a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion, ((Entidades.Noticia)Container.DataItem).idNoticia)%>">Leer Más [+]</a></p>                                        
                                     </div>
                                 </div>                               

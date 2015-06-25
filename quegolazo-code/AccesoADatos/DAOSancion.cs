@@ -130,7 +130,7 @@ namespace AccesoADatos
                         idPartido = (dr["idPartido"] != DBNull.Value) ? (int?)int.Parse(dr["idPartido"].ToString()) : null,
                         idEquipo = Int32.Parse(dr["idEquipo"].ToString()),
                         idJugador = (dr["idJugador"] != DBNull.Value) ? (int?)int.Parse(dr["idJugador"].ToString()) : null,
-                        fechaSancion = (dr["fechaSancion"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fechaSancion"].ToString()) : null,
+                        fechaSancion = (dr["fechaSancion"] != DBNull.Value) ? (DateTime?)Utils.Validador.castDate(dr["fechaSancion"].ToString()) : null,
                         motivoSancion = obtenerMotivoSancionPorId(int.Parse(dr["idMotivoSancion"].ToString())),
                         observacion = dr["observacion"].ToString(),
                         puntosAQuitar = (dr["puntosAQuitar"] != DBNull.Value) ? (int?)int.Parse(dr["puntosAQuitar"].ToString()) : null,
@@ -187,7 +187,7 @@ namespace AccesoADatos
                         idPartido = (dr["idPartido"] != DBNull.Value) ? (int?)int.Parse(dr["idPartido"].ToString()) : null,
                         equipo = daoEquipo.obtenerEquipoPorId(Int32.Parse(dr["idEquipo"].ToString())),
                         jugador = (dr["idJugador"] != DBNull.Value) ? daoJugador.obtenerJugadorPorId(int.Parse(dr["idJugador"].ToString())) : null,
-                        fechaSancion = (dr["fechaSancion"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fechaSancion"].ToString()) : null,
+                        fechaSancion = (dr["fechaSancion"] != DBNull.Value) ? (DateTime?)Utils.Validador.castDate(dr["fechaSancion"].ToString()) : null,
                         motivoSancion = obtenerMotivoSancionPorId(int.Parse(dr["idMotivoSancion"].ToString())),
                         observacion = dr["observacion"].ToString(),
                         puntosAQuitar = (dr["puntosAQuitar"] != DBNull.Value) ? (int?)int.Parse(dr["puntosAQuitar"].ToString()) : null,
@@ -320,7 +320,7 @@ namespace AccesoADatos
                     respuesta.idPartido = (dr["idPartido"] != DBNull.Value) ? (int?)int.Parse(dr["idPartido"].ToString()) : null;
                     respuesta.idEquipo = int.Parse(dr["idEquipo"].ToString());
                     respuesta.idJugador = (dr["idJugador"] != DBNull.Value) ? (int?)int.Parse(dr["idJugador"].ToString()) : null;
-                    respuesta.fechaSancion = (dr["fechaSancion"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fechaSancion"].ToString()) : null;
+                    respuesta.fechaSancion = (dr["fechaSancion"] != DBNull.Value) ? (DateTime?)Utils.Validador.castDate(dr["fechaSancion"].ToString()) : null;
                     respuesta.motivoSancion.idMotivoSancion = (dr["idMotivoSancion"] != DBNull.Value) ? (int?)int.Parse(dr["idMotivoSancion"].ToString()) : null;
                     respuesta.observacion = dr["observacion"].ToString();
                     respuesta.puntosAQuitar = (dr["puntosAQuitar"] != DBNull.Value) ? (int?)int.Parse(dr["puntosAQuitar"].ToString()) : null;

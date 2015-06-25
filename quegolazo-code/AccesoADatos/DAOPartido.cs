@@ -102,7 +102,7 @@ namespace AccesoADatos
                              DAOFase daoFase = new DAOFase();
                              Partido partido = new Partido();
                              partido.idPartido = int.Parse(dr["idPartido"].ToString());
-                             partido.fecha = (dr["fecha"] != DBNull.Value) ? (DateTime?) DateTime.Parse( dr["fecha"].ToString()) : null;
+                             partido.fecha = (dr["fecha"] != DBNull.Value) ? (DateTime?) Utils.Validador.castDate( dr["fecha"].ToString()) : null;
                              partido.golesLocal = (dr["golesLocal"] != DBNull.Value) ? (int?) int.Parse(dr["golesLocal"].ToString()) : null;
                              partido.golesVisitante = (dr["golesVisitante"] != DBNull.Value) ? (int?) int.Parse(dr["golesVisitante"].ToString()) : null;
                              partido.empate = (dr["empate"] != DBNull.Value) ? (bool?)bool.Parse(dr["empate"].ToString()) : null;
@@ -380,7 +380,7 @@ namespace AccesoADatos
                     DAOCancha daoCancha = new DAOCancha();
                     DAOFase daoFase = new DAOFase();
                     partido.idPartido = int.Parse(dr["idPartido"].ToString());
-                    partido.fecha = (dr["fecha"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fecha"].ToString()) : null;
+                    partido.fecha = (dr["fecha"] != DBNull.Value) ? (DateTime?)Utils.Validador.castDate(dr["fecha"].ToString()) : null;
                     partido.golesLocal = (dr["golesLocal"] != DBNull.Value) ? (int?)int.Parse(dr["golesLocal"].ToString()) : null;
                     partido.golesVisitante = (dr["golesVisitante"] != DBNull.Value) ? (int?)int.Parse(dr["golesVisitante"].ToString()) : null;
                     partido.empate = (dr["empate"] != DBNull.Value) ? (bool?)bool.Parse(dr["empate"].ToString()) : null;
@@ -1133,7 +1133,7 @@ namespace AccesoADatos
                 {
                     Partido partido = new Partido();
                     partido.idPartido = int.Parse(dr["Id Partido"].ToString());
-                    partido.fecha = (dr["Fecha Partido"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["Fecha Partido"].ToString()) : null;
+                    partido.fecha = (dr["Fecha Partido"] != DBNull.Value) ? (DateTime?)Utils.Validador.castDate(dr["Fecha Partido"].ToString()) : null;
                     partido.golesLocal = (dr["Goles Local"] != DBNull.Value) ? (int?)int.Parse(dr["Goles Local"].ToString()) : null;
                     partido.golesVisitante = (dr["Goles Visitante"] != DBNull.Value) ? (int?)int.Parse(dr["Goles Visitante"].ToString()) : null;
                     partido.huboPenales = (dr["Hubo Penales"] != DBNull.Value) ? (bool?)bool.Parse(dr["Hubo Penales"].ToString()) : null;
@@ -1395,7 +1395,7 @@ namespace AccesoADatos
                     {
                         partido = new Partido();
                         partido.idPartido = int.Parse(dr["Id Partido"].ToString());
-                        partido.fecha = DateTime.Parse(dr["Fecha"].ToString());
+                        partido.fecha = Utils.Validador.castDate(dr["Fecha"].ToString());
                         partido.local = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Local"].ToString()));
                         partido.visitante = daoEquipo.obtenerEquipoPorId(int.Parse(dr["Id Equipo Visitante"].ToString()));
                     }
@@ -1521,7 +1521,7 @@ namespace AccesoADatos
                 {
                     Partido partido = new Partido();
                     partido.idPartido = int.Parse(dr["idPartido"].ToString());
-                    partido.fecha = (dr["fechaPartido"] != DBNull.Value) ? (DateTime?)DateTime.Parse(dr["fechaPartido"].ToString()) : null;
+                    partido.fecha = (dr["fechaPartido"] != DBNull.Value) ? (DateTime?)Utils.Validador.castDate(dr["fechaPartido"].ToString()) : null;
                     partido.golesLocal = (dr["golesLocal"] != DBNull.Value) ? (int?)int.Parse(dr["golesLocal"].ToString()) : null;
                     partido.golesVisitante = (dr["golesVisitante"] != DBNull.Value) ? (int?)int.Parse(dr["golesVisitante"].ToString()) : null;
                     partido.penalesLocal = (dr["penalesLocal"] != DBNull.Value) ? (int?)int.Parse(dr["penalesLocal"].ToString()) : null;

@@ -18,7 +18,7 @@
                                 <asp:Repeater ID="rptFechaActual" runat="server">
                                     <ItemTemplate>
                                         <li class="li-partido" style="width: 120px">
-                                            <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? nombreMes(DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
+                                            <span class="fecha theme-bg-color"> <%#((Entidades.Partido)Container.DataItem).fecha != null ? nombreMes(Utils.Validador.castDate(((Entidades.Partido)Container.DataItem).fecha.ToString()).Month)+" "+Utils.Validador.castDate(((Entidades.Partido)Container.DataItem).fecha.ToString()).Day.ToString()+", "+Utils.Validador.castDate(((Entidades.Partido)Container.DataItem).fecha.ToString()).Year.ToString() : "Sin fecha asignada" %></span>
                                             <div class="text">
                                                 <div class="equipos">
                                                     <a href="<%# Logica.GestorUrl.urlPartido(nickTorneo,idEdicion, Eval("idPartido").ToString()) %>">
@@ -290,7 +290,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h4><a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion,((Entidades.Noticia)Container.DataItem).idNoticia)%>"><%# Eval("titulo") %></a></h4>
-                                            <p class="data-info"><%# nombreMes(DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Month)+" "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Day.ToString()+", "+DateTime.Parse(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Year.ToString() %></p><!-- <i class="fa fa-comments"></i><a href="#">0</a> --> 
+                                            <p class="data-info"><%# nombreMes(Utils.Validador.castDate(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Month)+" "+Utils.Validador.castDate(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Day.ToString()+", "+Utils.Validador.castDate(((Entidades.Noticia)Container.DataItem).fecha.ToString()).Year.ToString() %></p><!-- <i class="fa fa-comments"></i><a href="#">0</a> --> 
                                             <p><%# Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Substring(0,Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length >= 150 ? 150 : Utils.HtmlRemoval.StripTagsRegexCompiled(Eval("descripcion").ToString()).Length)  %>... <a href="<%# Logica.GestorUrl.urlNoticia(nickTorneo, idEdicion, ((Entidades.Noticia)Container.DataItem).idNoticia)%>">Leer Más [+]</a></p>
                                         </div>
                                     </div>

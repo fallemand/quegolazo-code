@@ -137,7 +137,7 @@ namespace quegolazo_code.torneo
                 ltEquipoVisitante.Text = proximoPartido.visitante.nombre;
                 if (proximoPartido.fecha != null)
                 {
-                    DateTime fecha = DateTime.Parse(((DateTime?)proximoPartido.fecha).ToString());
+                    DateTime fecha = Utils.Validador.castDate(((DateTime?)proximoPartido.fecha).ToString());
                     ltDiaDePartido.Text = GestorExtra.nombreDia(fecha);
                     ltFechaPartido.Text = fecha.ToString("dd/MM/yyyy");
                     ltHoraPartido.Text = fecha.Hour.ToString();
